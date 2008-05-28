@@ -1,0 +1,149 @@
+<html><head><title>Upper tolerance bounds on normal quantiles</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>toleranceBound(TailRank)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   toleranceBound">
+<param name="keyword" value=" Upper tolerance bounds on normal quantiles">
+</object>
+
+
+<h2>Upper tolerance bounds on normal quantiles</h2>
+
+
+<h3>Description</h3>
+
+<p>
+The function <code>toleranceBound</code> computes theoretical upper tolerance
+bounds on the quantiles of the standard normal distribution. These can
+be used to produce reliable data-driven estimates of the quantiles in
+any normal distribution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+toleranceBound(psi, gamma, N)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>psi</code></td>
+<td>
+A real number between 0 and 1 giving the desired quantile </td></tr>
+<tr valign="top"><td><code>gamma</code></td>
+<td>
+A real number between 0 and 1 giving the desired
+tolerance bound</td></tr>
+<tr valign="top"><td><code>N</code></td>
+<td>
+An integer giving the number of observations used to estimate
+the quantile</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+Suppose that we collect <i>N</i> observations from a normal distribution
+with unknown mean and variance, and wish to estimate the <i>95</i>th
+percentile of the distribution. A simple point estimate is given by
+<i>tau = bar{X} + 1.68s</i>. However, only the mean of the distribution is
+less than this value <i>95%</i> of the time.  When <i>N=40</i>, for example,
+almost half of the time (<i>43.5%</i>), fewer than <i>95%</i> of the
+observed values will be less than <i>tau</i>. This problem is addressed by
+constructing a statistical tolerance interval (more precisely, a one-sided
+tolerance bound) that contains a given fraction, <i>psi</i>, of the
+population with a given confidence level, <i>gamma</i> [Hahn and Meeker,
+1991]. With enough samples, one can obtain distribution-free tolerance
+bounds [op. cit., Chapter 5]. For instance, one can use bootstrap or
+jackknife methods to estimate these bounds empirically.
+</p>
+<p>
+Here, however, we assume that the measurements are normally distributed. We
+let <i>bar{X}</i> denote the sample mean and let <i>s</i> denote the sample
+standard deviation. The upper tolerance bound that, <i>100 gamma%</i> of
+the time, exceeds <i>100 psi%</i> of <i>G</i> values from a normal
+distribution is approximated by <i>X_U = bar{X} + k_{gamma,psi}s</i>,
+where
+</p><p align="center"><i>
+k_{gamma, psi} = {z_{psi} + sqrt{z_{psi}^2 - ab} over a},
+</i></p><p align="center"><i>
+a = 1-{z_{1-gamma}^2over 2N-2},
+</i></p><p align="center"><i>
+b = z_{psi}^2 - {z_{1-gamma}^2over N},
+</i></p><p>
+and, for any <i>&pi;</i>, <i>z_&pi;</i> is the critical value of the normal
+distribution that is exceeded with probability <i>&pi;</i> [Natrella, 1963].
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+Returns the value of <i>k_{gamma, psi}</i> with the property that the
+<i>psi</i>th quantile will be less than the estimate <i>X_U =
+bar{X} + k_{gamma,psi}s</i> (based on <i>N</i> data points) at least
+<i>100 gamma%</i> of the time.</p>
+
+<h3>Note</h3>
+
+<p>
+Lower tolerance bounds on quantiles with <code>psi</code> less than
+one-half can be obtained as <i>X_U = bar{X} - k_{gamma,1-psi}s</i>,
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Kevin R. Coombes &lt;kcoombes@mdanderson.org&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Natrella, M.G. (1963) <EM>Experimental Statistics</EM>.
+NBS Handbook 91, National Bureau of Standards, Washington DC.
+</p>
+<p>
+Hahn, G.J. and Meeker, W.Q. (1991)
+<EM>Statistical Intervals: A Guide for Practitioners</EM>.
+John Wiley and Sons, Inc., New York.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+N &lt;- 50
+x &lt;- rnorm(N)
+tolerance &lt;- 0.90
+quant &lt;- 0.95
+tolerance.factor &lt;- toleranceBound(quant, tolerance, N)
+
+# upper 90
+tau &lt;- mean(x) + sd(x)*tolerance.factor
+
+# lower 90
+rho &lt;- mean(x) - sd(x)*tolerance.factor
+
+# behavior of the tolerance bound as N increases
+nn &lt;- 10:100
+plot(nn, toleranceBound(quant, tolerance, nn))
+
+# behavior of the bound as the tolerance varies
+xx &lt;- seq(0.5, 0.99, by=0.01)
+plot(xx, toleranceBound(quant, xx, N))
+</pre>
+
+
+
+<hr><div align="center">[Package <em>TailRank</em> version 2.7.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

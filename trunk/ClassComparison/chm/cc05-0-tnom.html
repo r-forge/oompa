@@ -1,0 +1,251 @@
+<html><head><title>The TNoM and fullTNoM Classes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>TNoM-class(ClassComparison)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   TNoM">
+<param name="keyword" value="R:   TNoM-class">
+<param name="keyword" value="R:   countSignificant,TNoM-method">
+<param name="keyword" value="R:   selectSignificant,TNoM-method">
+<param name="keyword" value="R:   summary,TNoM-method">
+<param name="keyword" value="R:   update,TNoM-method">
+<param name="keyword" value="R:   fullTNoM-class">
+<param name="keyword" value="R:   hist,fullTNoM-method">
+<param name="keyword" value="R:   plot,fullTNoM,missing-method">
+<param name="keyword" value=" The TNoM and fullTNoM Classes">
+</object>
+
+
+<h2>The TNoM and fullTNoM Classes</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Implements the "Total Number of Misclassifications" method for finding
+differentially expressed genes.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+TNoM(data, classes, verbose = TRUE)
+## S4 method for signature 'TNoM':
+summary(object, ...)
+## S4 method for signature 'TNoM':
+update(object, nPerm, verbose=FALSE, ...)
+## S4 method for signature 'TNoM':
+selectSignificant(object, cutoff, ...)
+## S4 method for signature 'TNoM':
+countSignificant(object, cutoff, ...)
+
+## S4 method for signature 'fullTNoM, missing':
+plot(x, ...)
+## S4 method for signature 'fullTNoM':
+hist(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+Either a data frame or matrix with numeric values or an
+<code><a onclick="findlink('Biobase', 'class.ExpressionSet.html')" style="text-decoration: underline; color: blue; cursor: hand">ExpressionSet</a></code> as defined
+in the BioConductor tools for analyzing microarray data.</td></tr>
+<tr valign="top"><td><code>classes</code></td>
+<td>
+If <code>data</code> is a data frame or matrix, then classes
+must be either a logical vector or a factor. If <code>data</code> is an
+<code>ExpressionSet</code>, then <code>classes</code> can be a character string that
+names one of the factor columns in the associated
+<code><a onclick="findlink('Biobase', 'phenoData.html')" style="text-decoration: underline; color: blue; cursor: hand">phenoData</a></code> subobject.</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+A logical flag; whether to print out intermediate results</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+A <code>TNoM</code> object</td></tr>
+<tr valign="top"><td><code>nPerm</code></td>
+<td>
+An integer; the number of permutations to perform</td></tr>
+<tr valign="top"><td><code>cutoff</code></td>
+<td>
+An integer</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+A <code>fullTNoM</code> object</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Additional plotting or other arguments.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The TNoM method was developed by Yakhini and Ben-Dor and first
+applied in the melanoma microarray study by Bittner and colleagues
+(see references).  The goal of the method is to detect genes that are
+differentially expressed between two groups of samples.  The idea is
+that each gene serves as a potential classifier to distinguish the two
+groups.  One starts by determining an optimal cutoff on the expression
+of each gene and counting the number of misclassifications that gene
+makes.  Next, we bin genes based on the total number of
+misclassifications. This distribution can be compared with the expected
+value (by simulating normal data sets of the same size).
+Alternatively, one can estimate the null distribution directly by
+scrambling the sample labels to perform a permutation test.
+</p>
+<p>
+The <code>TNoM</code> constructor computes the optimal cutoffs and the
+misclassification rates.  The <code>update</code> method performs the
+simulations and permutation tests, producing an object of the
+<code>fullTNoM</code> class.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+<code>summary</code> returns a <code><a href="cc05-1-tnom-summary.html">TNoMSummary</a></code> object.
+<br>
+<code>update</code> returns a <code>fullTNoM</code> object.
+<br>
+<code>selectSignificant</code> returns a vector of logical values.
+<br>
+<code>countSignificant</code> returns an integer.</p>
+
+<h3>Creating Objects</h3>
+
+<p>
+As usual, objects can be created by <code>new</code>, but better methods are
+available in the form of the <code>TNoM</code> function. The
+inputs to this function are the same as those used for row-by-row
+statistical tests throughout the ClassComparison package; a detailed
+description can be found in the <code>MultiTtest</code> class.
+</p>
+
+
+<h3>Slots</h3>
+
+<p>
+Objects of the <code>TNoM</code> class have the following slots:
+<dl>
+<dt><code>data</code>:</dt><dd>The data matrix used to contruct the object</dd>
+<dt><code>tnomData</code>:</dt><dd>A numeric vector, whose length is the number
+of rows in <code>data</code>, recording the minimum number of
+misclassification  acheived using this data row.</dd> 
+<dt><code>nCol</code>:</dt><dd>The number of columns in <code>data</code></dd>
+<dt><code>nRow</code>:</dt><dd>The number of rows in <code>data</code></dd>
+<dt><code>classifier</code>:</dt><dd>The classification vector used to create
+the object.</dd>
+<dt><code>call</code>:</dt><dd>The function <code>call</code> that created the object </dd>
+</dl>
+
+<p>
+Objects of the <code>fullTNoM</code> class have the following slots:  
+<dl>
+<dt><code>dex</code>:</dt><dd>Numeric vector of the different possible numbers
+of misclassifications</dd>
+<dt><code>fakir</code>:</dt><dd>Numeric vector of expected values based on simulations</dd>
+<dt><code>obs</code>:</dt><dd>Numeric vector of observed values</dd>
+<dt><code>scr</code>:</dt><dd>Numeric vector of values based on a permutation test</dd>
+<dt><code>name</code>:</dt><dd>A character string with a name for the object</dd>
+</dl>
+
+<h3>Methods</h3>
+
+<p>
+Objects of the <code>TNoM</code> class have the following methods:
+<dl>
+<dt>summary(object, ...)</dt><dd>Write out a summary of the object,
+including the number of genes acheiving each possible number of
+misclassifications.</dd>
+<dt>countSignificant(object, cutoff, ...)</dt><dd>Count the number of
+significant genes at the given <code>cutoff</code>.</dd>
+<dt>selectSignificant(object, cutoff, ...)</dt><dd>Get a vector for
+selecting the number of significant genes at the given
+<code>cutoff</code>.</dd>
+<dt>update(object, nPerm, verbose=FALSE, ...)</dt><dd>Perform
+simulation and permutation tests on the <code>TNoM</code> object.</dd>
+</dl>
+
+<p>
+Objects of the <code>fullTNoM</code> class have the following methods:
+<dl>
+<dt>plot(x, ...)</dt><dd>Plot a summary of the TNoM object. This consists
+of three curves: the observed cumulative number of genes at each
+misclassification level, along with the corresponding numbers
+expected based on simulations or permutation tests. The colors of
+the curves are controlled by the values of
+<code><a onclick="findlink('PreProcess', 'semanticColors.html')" style="text-decoration: underline; color: blue; cursor: hand">COLOR.OBSERVED</a></code>, 
+<code><a onclick="findlink('PreProcess', 'semanticColors.html')" style="text-decoration: underline; color: blue; cursor: hand">COLOR.EXPECTED</a></code>, and
+<code><a onclick="findlink('PreProcess', 'semanticColors.html')" style="text-decoration: underline; color: blue; cursor: hand">COLOR.PERMTEST</a></code> </dd>
+<dt>hist(x, ...)</dt><dd>Plot a not terribly useful nor informative
+histogram of the results.</dd>
+</dl>
+
+<h3>Author(s)</h3>
+
+<p>
+Kevin R. Coombes &lt;kcoombes@mdanderson.org&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Bittner M, Meltzer P, Chen Y, Jiang Y, Seftor E, Hendrix M, Radmacher M,
+Simon R, Yakhini Z, Ben-Dor A, Sampas N, Dougherty E, Wang E, Marincola
+F, Gooden C, Lueders J, Glatfelter A, Pollock P, Carpten J, Gillanders
+E, Leja D, Dietrich K, Beaudry C, Berens M, Alberts D, Sondak V.
+Molecular classification of cutaneous malignant melanoma by gene expression profiling.
+Nature. 2000 Aug 3;406(6795):536-40.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="cc01-0-multiT.html">MultiTtest</a></code>, <code><a href="cc02-0-multiWil.html">MultiWilcoxonTest</a></code>, <code><a href="cc00-0-bum.html">Bum</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+n.genes &lt;- 200
+n.samples &lt;- 10
+
+bogus &lt;- matrix(rnorm(n.samples*n.genes, 0, 3), ncol=n.samples)
+splitter &lt;- rep(FALSE, n.samples)
+splitter[sample(1:n.samples, trunc(n.samples/2))] &lt;- TRUE
+
+tn &lt;- TNoM(bogus, splitter)
+summary(tn)
+
+tnf &lt;- update(tn)
+plot(tnf)
+hist(tnf)
+
+rm(bogus, splitter, n.genes, n.samples, tn, tnf)
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>ClassComparison</em> version 2.5.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

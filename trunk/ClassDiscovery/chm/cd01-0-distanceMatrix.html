@@ -1,0 +1,132 @@
+<html><head><title>Distance Matrix Computation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>distanceMatrix(ClassDiscovery)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   distanceMatrix">
+<param name="keyword" value=" Distance Matrix Computation">
+</object>
+
+
+<h2>Distance Matrix Computation</h2>
+
+
+<h3>Description</h3>
+
+<p>
+This function computes and returns the distance matrix determined by
+using the specified distance metric to compute the distances between
+the columns fo a data matrix.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+distanceMatrix(dataset, metric, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dataset</code></td>
+<td>
+A numeric matrix or an <code><a onclick="findlink('Biobase', 'ExpressionSet.html')" style="text-decoration: underline; color: blue; cursor: hand">ExpressionSet</a></code></td></tr>
+<tr valign="top"><td><code>metric</code></td>
+<td>
+A character string defining the distance metric. This
+can be <code>pearson</code>, <code>sqrt pearson</code>, <code>spearman</code>,
+<code>absolute pearson</code>, <code>weird</code> or any of the metrics accepted by the
+<code><a onclick="findlink('stats', 'dist.html')" style="text-decoration: underline; color: blue; cursor: hand">dist</a></code> function. At present, the latter function accepts
+<code>euclidean</code>, <code>maximum</code>, <code>manhattan</code>, <code>canberra</code>,
+<code>binary</code>, or <code>minkowski</code>. Any initial substring that uniquely
+defines one of the metrics will work.</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Additional parameters to be passed on to
+<code><a onclick="findlink('stats', 'dist.html')" style="text-decoration: underline; color: blue; cursor: hand">dist</a></code>. </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This function differs from <code><a onclick="findlink('stats', 'dist.html')" style="text-decoration: underline; color: blue; cursor: hand">dist</a></code> in two ways, both of
+which are motivated by common practice in the analysis of microarray
+or proteomics data. First, it computes distances between column vectors
+instead of between row vectors. In a typical microarray experiment,
+the data is organized so the rows represent genes and the columns
+represent different biological samples. In many applications,
+relations between the biological samples are more interesting than
+relationships between genes. Second, <code>distanceMatrix</code> adds
+additional distance metrics based on correlation.
+<ul>
+<dt><code>pearson</code></dt><dd>The most common metric used in the microarray literature is
+the <code>pearson</code> distance, which can be computed in terms of the
+Pearson correlation coefficient as <code>(1-cor(dataset))/2</code>.</dd>
+<dt><code>spearman</code></dt><dd>The <code>spearman</code> metric used the same formula, but
+substitutes the Spearman rank correlation for the Pearson
+correlation.</dd>
+<dt><code>absolute pearson</code></dt><dd>The <code>absolute pearson</code> metric used the absolute
+correlation coefficient; i.e., <code>(1-abs(cor(dataset)))</code>.</dd>
+<dt><code>sqrt pearson</code></dt><dd>The <code>sqrt pearson</code> metric used the square root of the
+pearson distance metric; i.e., <code>sqrt(1-cor(dataset))</code>.</dd>
+<dt><code>weird</code></dt><dd>The <code>weird</code> metric uses the Euclidean distance between
+the vectors of correlation coefficients; i.e., dist(cor(dataset)).</dd>
+</ul>
+
+<h3>Value</h3>
+
+<p>
+A distance matrix in the form of an object of class <code>dist</code>, of
+the sort returned by the <code>dist</code> function or the <code>as.dist</code>
+function.</p>
+
+<h3>BUGS</h3>
+
+<p>
+It would be good to have a better name for the <code>weird</code> metric.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Kevin R. Coombes &lt;kcoombes@mdanderson.org&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a onclick="findlink('stats', 'dist.html')" style="text-decoration: underline; color: blue; cursor: hand">dist</a></code>, <code><a onclick="findlink('stats', 'dist.html')" style="text-decoration: underline; color: blue; cursor: hand">as.dist</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+dd &lt;- matrix(rnorm(100*5, rnorm(100)), nrow=100, ncol=5)
+distanceMatrix(dd, 'pearson')
+distanceMatrix(dd, 'euclid')
+distanceMatrix(dd, 'sqrt')
+distanceMatrix(dd, 'weird')
+rm(dd) # cleanup
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>ClassDiscovery</em> version 2.7.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

@@ -1,0 +1,283 @@
+<html><head><title>The PCanova Class</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>PCanova(ClassDiscovery)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   PCanova">
+<param name="keyword" value="R:   PCanova-class">
+<param name="keyword" value="R:   plot,PCanova,missing-method">
+<param name="keyword" value="R:   pltree,PCanova-method">
+<param name="keyword" value="R:   summary,PCanova-method">
+<param name="keyword" value=" The PCanova Class">
+</object>
+
+
+<h2>The PCanova Class</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Implements the PCANOVA method for determining whether a putative group
+structure is truly reflected in  multivariate data set.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+PCanova(data, classes, labels, colors, usecor = TRUE)
+
+## S4 method for signature 'PCanova, missing':
+plot(x, tag='', mscale=1, cex=1, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+Either a data frame or matrix with numeric values or an
+<code><a onclick="findlink('Biobase', 'class.ExpressionSet.html')" style="text-decoration: underline; color: blue; cursor: hand">ExpressionSet</a></code> as defined
+in the BioConductor tools for analyzing microarray data.</td></tr>
+<tr valign="top"><td><code>labels</code></td>
+<td>
+A character vector used to label points in plots. The
+length of the <code>labels</code> vector should equal the number of
+columns (samples) in the <code>data</code> matrix. Since only the first
+character of each label is used in the plots, these should be unique.</td></tr>
+<tr valign="top"><td><code>classes</code></td>
+<td>
+A subset of the <code>labels</code> used to indicate
+distinct classes. Again, the method truncates each class indicator
+to a single letter.</td></tr>
+<tr valign="top"><td><code>colors</code></td>
+<td>
+A character vector containing color names; this should
+be the same length as the vector of <code>labels</code>.</td></tr>
+<tr valign="top"><td><code>usecor</code></td>
+<td>
+A logical flag; should the rows of the data matrix be
+standardized before use?</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+A <code>PCanova</code> object.</td></tr>
+<tr valign="top"><td><code>tag</code></td>
+<td>
+A character string to name the object, used as part of the
+plot title.</td></tr>
+<tr valign="top"><td><code>mscale</code></td>
+<td>
+A real number. This is a hack; for some reason, the
+projection of the sample vectors into the principal component space
+computed from the matrix of group means seems to be off by a factor
+approximately equal to the square root of the average number of
+samples per group. Until we sort out the corect formula, this term
+can be adjusted until the group means appear to be in the correct
+place in the plots.</td></tr>
+<tr valign="top"><td><code>cex</code></td>
+<td>
+Character expansion factor used only in the plot legend on
+the plot of PC correlations.</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Additional graphical parameters passed on to <code>plot</code>
+when displaying the principal components plots.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The PCANOVA method was developed as part of the submission that won
+the award for best presentation at the 2001 conference on the Critical
+ASsessment of Microarray Data Analaysis (CAMDA;
+<a href="http://www.camda.duke.edu">http://www.camda.duke.edu</a>).  The idea is to perform the
+equivalent of an analysis of variance (ANOVA) in principal component
+(PC) space. Let X(i,j) denote the jth column vector belonging to the
+ith group of samples. We can model this as X(i,j) = mu + tau(i) +
+E(i,j), where mu is the overall mean vector, tau(i) is the
+&ldquo;effects&rdquo; vector for the ith group, and E(i,j) is the vector of
+residual errors. We can perform principal components analysis on the
+full matrix X containing all the columns X(i,j), on the matrix
+containing all the group mean vectors mu + tau(i), and on the residual
+matrix containing all the E(i,j) vectors. PCANOVA develops a measure
+(&ldquo;PC correlation&rdquo;) for comparing these three sets of principal
+components. If the PC correlation is close to 1, then two principal
+component bases are close together; if the PC correlation is close to
+zero, then two principal components bases are dissimilar. Strong group
+structures are recognizable because the PC correlation between the
+total-matrix PC space and the group-means PC space is much larger than
+the PC correlation between the total-matrix PC space and the residual
+PC space.  Weak or nonexistent group structures are recognizable
+because the relative sizes of the PC correlations is reversed.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+The <code>PCanova</code> function returns an object of the <code>PCanova</code> class.</p>
+
+<h3>Objects from the Class</h3>
+
+<p>
+Objects should be created by calling the <code>PCanova</code> function.
+</p>
+
+
+<h3>Slots</h3>
+
+<dl>
+<dt><code>orig.pca</code>:</dt><dd>A <code>matrix</code> containing the <code>scores</code>
+component from PCA performed on the total matrix.  All principal
+components analyses are performed using the <code>SamplePCA</code> class.</dd>
+<dt><code>class.pca</code>:</dt><dd>A <code>matrix</code> containing the
+<code>scores</code> component fromm PCA performed on the matrix of
+group-mean vectors. </dd>
+<dt><code>resid.pca</code>:</dt><dd>A <code>matrix</code> containing the
+<code>scores</code> component rom PCA performed on the matrix of
+residuals. </dd> 
+<dt><code>mixed.pca</code>:</dt><dd>A <code>matrix</code> containing the projections
+of all the original vectoprs into the principal component space
+computed from the matrix of group mean vectors. </dd>
+<dt><code>xc</code>:</dt><dd>An object produced by performing hierarchical
+clustering on the total data matrix, using <code>hclust</code> with
+pearson distance and average linkage.  </dd>
+<dt><code>hc</code>:</dt><dd>An object produced by performing hierarchical
+clustering on the matrix of group means, using <code>hclust</code> with
+pearson distance and average linkage.</dd>
+<dt><code>rc</code>:</dt><dd>An object produced by performing hierarchical
+clustering on the matrix of residuals, using <code>hclust</code> with
+pearson distance and average linkage.</dd>
+<dt><code>n</code>:</dt><dd>An integer; the number of samples.</dd>
+<dt><code>class2orig</code>:</dt><dd>The <code>numeric</code> vector of PC
+correlations relating the total-matrix PCA to the group-means PCA.</dd> 
+<dt><code>class2resid</code>:</dt><dd>The <code>numeric</code> vector of PC
+correlations relating the residual PCA to the group-means PCA.</dd>
+<dt><code>orig2resid</code>:</dt><dd>The <code>numeric</code> vector of PC
+correlations relating the total-matrix PCA to the residual PCA.</dd>
+<dt><code>labels</code>:</dt><dd>A <code>character</code> vector of plot labels to
+indicate the group membership of samples.</dd>
+<dt><code>classes</code>:</dt><dd>A <code>character</code> vector of labels
+identifying the distinct groups. </dd>
+<dt><code>colors</code>:</dt><dd>A character vector of color names used to
+indicate the group membership fo samples in plots.</dd>
+<dt><code>call</code>:</dt><dd>An object of class <code>call</code> that records hwo
+the object was constructed.</dd>
+</dl>
+
+<h3>Methods</h3>
+
+<dl>
+<dt>plot</dt><dd><code>signature(x = PCanova, y = missing)</code>: Plot the
+results of the PCANOVA test on the data. This uses <code>par</code> to
+set up a 2x2 layout of plots. The first three plots show the
+sample vectors (color-coded and labeled) in the space spanned by
+the first two principal components for each of the there PCAs. The
+final plot shows the three sets of PC correlations.  Colors in the
+first three plots are determined by the <code>colors</code> slot of the
+object, which was set when the object was created. Colors in the
+PC correlation plot are determined by the current values of
+<code><a onclick="findlink('PreProcess', 'semanticColors.html')" style="text-decoration: underline; color: blue; cursor: hand">COLOR.OBSERVED</a></code>,
+<code><a onclick="findlink('PreProcess', 'semanticColors.html')" style="text-decoration: underline; color: blue; cursor: hand">COLOR.EXPECTED</a></code>, and
+<code><a onclick="findlink('PreProcess', 'semanticColors.html')" style="text-decoration: underline; color: blue; cursor: hand">COLOR.PERMTEST</a></code>
+</dd>
+<dt>pltree</dt><dd><code>signature(x = PCanova)</code>: Produce dendrograms of
+the three hierarchical clusters of the samples, based on all the
+data, the group means, and the residuals. Since this method uses
+<code>par</code> to put all three dendrograms in the same window, it
+cannot be combined with other plots. </dd>
+<dt>summary</dt><dd><code>signature(object = PCanova)</code>: Write out a
+summary of the object. </dd>
+</dl>
+
+<h3>BUGS</h3>
+
+<p>
+[1] The projection of the sample vectors into the principal component
+space of the group-means is off by a scale factor.  The <code>mscale</code>
+parameter provides a work-around.
+</p>
+<p>
+[2] The pltree method fails if you only supply two groups; this may be
+a failure in <code>hclust</code> if you only provide two objects to cluster.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Kevin R. Coombes &lt;kcoombes@mdanderson.org&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Examples of the output of PCANOVA applied to the NCI60 data
+set can be found at
+<a href="http://bioinformatics.mdanderson.org/camda01.html">http://bioinformatics.mdanderson.org/camda01.html</a>. The full
+description has not been published (out of laziness on the part of the
+author of this code). The only description that has appeared in print
+is an extremely brief description that can be found in the proceedings of
+the CAMDA 2001 conference.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="cd05-0-SamplePCA.html">SamplePCA</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# simulate data from three groups
+d1 &lt;- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
+d2 &lt;- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
+d3 &lt;- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
+dd &lt;- cbind(d1, d2, d3)
+# colors that match the groups
+cols &lt;- rep(c('red', 'green', 'blue'), each=10)
+
+# compute the PCanova object
+pan &lt;- PCanova(dd, c('red', 'green', 'blue'), cols, cols)
+summary(pan)
+
+# view the PC plots
+plot(pan)
+
+# view the dendrograms
+pltree(pan, line=-0.5)
+
+# compare the results when there is no underlying group structure
+dd &lt;- matrix(rnorm(100*50, rnorm(100, 0.5)), nrow=100, ncol=50, byrow=FALSE)
+cols &lt;- rep(c('red', 'green', 'blue', 'orange', 'cyan'), each=10)
+pan &lt;- PCanova(dd, unique(cols), cols, cols)
+plot(pan, mscale=1/sqrt(10))
+
+pltree(pan, line=-0.5)
+
+# cleanup
+rm(d1, d2, d3, dd, cols, pan)
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>ClassDiscovery</em> version 2.7.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

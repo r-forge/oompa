@@ -1,0 +1,135 @@
+<html><head><title>Color Schemes for Images and Heat Maps</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>colorschemes(ClassDiscovery)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   redscale">
+<param name="keyword" value="R:   greenscale">
+<param name="keyword" value="R:   bluescale">
+<param name="keyword" value="R:   blueyellow">
+<param name="keyword" value="R:   redgreen">
+<param name="keyword" value="R:   jetColors">
+<param name="keyword" value=" Color Schemes for Images and Heat Maps">
+</object>
+
+
+<h2>Color Schemes for Images and Heat Maps</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Create a vector of <code>N</code> contiguous colors.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+redscale(N)
+greenscale(N)
+bluescale(N)
+blueyellow(N)
+redgreen(N)
+jetColors(N)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>N</code></td>
+<td>
+an integer; the number of distinct levels in the color map </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The color maps that ship with R (see, for example,
+<code><a onclick="findlink('grDevices', 'palettes.html')" style="text-decoration: underline; color: blue; cursor: hand">terrain.colors</a></code>) do not include the most common colors
+maps used in publications in the microarray literature. This
+collection of color maps expands the available options.  The functions
+<code>redscale</code>, <code>greenscale</code>, and <code>bluescale</code> each range
+from pure black for low values to a pure primary color for high
+values.
+</p>
+<p>
+The <code>redgreen</code> color map ranges from pure green at the low end,
+through black in the middle, to pure red at the high end. Although
+this is the most common color map used in the microarray literature,
+it will prove problematic for individuals with red-green color-blindness. 
+</p>
+<p>
+The <code>blueyellow</code> color map ranges from pure blue at the low end,
+through gray in the middle, to pure yellow at the high end.
+</p>
+<p>
+The <code>jetColors</code> map tries to reproduce the default "jet" color map
+from MATLAB.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A character vector '<code>cv</code>' of color names. This can be used to
+create a user-defined color palette for subsequent graphics by
+'<code>palette(cv)</code>' or directly in a '<code>col=</code>' specification in
+'<code>par</code>' or in graphics functions such as '<code>image</code>' or
+'<code>heatmap</code>'.</p>
+
+<h3>BUGS</h3>
+
+<p>
+The names <code>redgreen</code> and <code>blueyellow</code> are inconsistent with
+respect to which color represents low values and which color
+represents high values. It is too late to fix this.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Kevin R. Coombes &lt;kcoombes@mdanderson.org&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a onclick="findlink('grDevices', 'palettes.html')" style="text-decoration: underline; color: blue; cursor: hand">rainbow</a></code>, <code><a onclick="findlink('grDevices', 'palettes.html')" style="text-decoration: underline; color: blue; cursor: hand">topo.colors</a></code>,
+<code><a onclick="findlink('grDevices', 'palettes.html')" style="text-decoration: underline; color: blue; cursor: hand">terrain.colors</a></code>, <code><a onclick="findlink('grDevices', 'palettes.html')" style="text-decoration: underline; color: blue; cursor: hand">heat.colors</a></code>,
+<code><a onclick="findlink('grDevices', 'rgb.html')" style="text-decoration: underline; color: blue; cursor: hand">rgb</a></code>, <code><a onclick="findlink('graphics', 'image.html')" style="text-decoration: underline; color: blue; cursor: hand">image</a></code>, <code><a onclick="findlink('stats', 'heatmap.html')" style="text-decoration: underline; color: blue; cursor: hand">heatmap</a></code>,
+<code><a onclick="findlink('grDevices', 'palette.html')" style="text-decoration: underline; color: blue; cursor: hand">palette</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data &lt;- matrix(1:1024, nrow=1024)
+image(data, col=bluescale(64))
+image(data, col=redgreen(32))
+image(data, col=redscale(128))
+image(data, col=blueyellow(64))
+image(data, col=jetColors(64))
+rm(data) # cleanup
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>ClassDiscovery</em> version 2.7.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

@@ -1,0 +1,219 @@
+<html><head><title>The Pipeline class</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>Pipeline-class(PreProcess)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   Pipeline">
+<param name="keyword" value="R:   Pipeline-class">
+<param name="keyword" value="R:   process,ANY,Pipeline-method">
+<param name="keyword" value="R:   summary,Pipeline-method">
+<param name="keyword" value="R:   PIPELINE.STANDARD">
+<param name="keyword" value="R:   PIPELINE.MDACC.DEFAULT">
+<param name="keyword" value="R:   makeDefaultPipeline">
+<param name="keyword" value=" The Pipeline class">
+</object>
+
+
+<h2>The Pipeline class</h2>
+
+
+<h3>Description</h3>
+
+<p>
+A <code>Pipeline</code> represents a standard multi-step procedure for
+processing microarray data.  A <code>Pipeline</code> represents a series of
+<code><a href="b05-0-Processor.html">Processor</a></code>s that should be applied in order. You can
+think of a pipeline as a completely defined (and reusable) set of
+transformations that is applied uniformly to every microarray in a
+data set.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S4 method for signature 'ANY, Pipeline':
+process(object, action, parameter=NULL)
+## S4 method for signature 'Pipeline':
+summary(object, ...)
+makeDefaultPipeline(ef = PROC.SIGNAL, ep = 0,
+                    nf = PROC.GLOBAL.NORMALIZATION, np = 0,
+                    tf = PROC.THRESHOLD, tp = 25,
+                    lf = PROC.LOG.TRANSFORM, lp = 2,
+                    name = "standard pipe",
+                    description = "my method")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+In the <code>process</code> method, any object appropriate for
+the input to the <code>Pipeline</code>. In the <code>summary</code> method, a
+<code>Pipeline</code> object. </td></tr>
+<tr valign="top"><td><code>action</code></td>
+<td>
+A <code>Pipeline</code> object used to process an object. </td></tr>
+<tr valign="top"><td><code>parameter</code></td>
+<td>
+Irrelevant, since the <code>Pipline</code> ignores the
+parameter when <code>process</code> is invoked.</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Additional arguments are as in the underlying generic methods.</td></tr>
+<tr valign="top"><td><code>ef</code></td>
+<td>
+``Extractor function'': First <code><a href="b05-0-Processor.html">Processor</a></code> in
+the <code>Pipeline</code>, typically a method that extracts a single kind
+of raw measurement from a microarray</td></tr>
+<tr valign="top"><td><code>ep</code></td>
+<td>
+Default parameter value for <code>ef</code></td></tr>
+<tr valign="top"><td><code>nf</code></td>
+<td>
+``Normalization function'' : Second <code><a href="b05-0-Processor.html">Processor</a></code> in
+the <code>Pipeline</code>, typically a normalization step. </td></tr>
+<tr valign="top"><td><code>np</code></td>
+<td>
+Default parameter value for <code>nf</code></td></tr>
+<tr valign="top"><td><code>tf</code></td>
+<td>
+``Threshold function'' : Third <code><a href="b05-0-Processor.html">Processor</a></code> in
+the <code>Pipeline</code>, typically a step that truncates data below at
+some threshold. </td></tr>
+<tr valign="top"><td><code>tp</code></td>
+<td>
+Default parameter value for <code>tf</code></td></tr>
+<tr valign="top"><td><code>lf</code></td>
+<td>
+``Log function'' : Fourth <code><a href="b05-0-Processor.html">Processor</a></code> in
+the <code>Pipeline</code>, typically a log transformation. </td></tr>
+<tr valign="top"><td><code>lp</code></td>
+<td>
+Default parameter value for <code>lf</code></td></tr>
+<tr valign="top"><td><code>name</code></td>
+<td>
+A string; the name of the pipeline</td></tr>
+<tr valign="top"><td><code>description</code></td>
+<td>
+A string; a longer description of the pipeline</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+A key feature of a <code>Pipeline</code> is that it is supposed to represent
+a standard algorithm that is applied to all objects when processing a
+microarray data set. For that reason, the <code>parameter</code> that can be
+passed to the <code>process</code> function is ignored, ensuring that the
+same parameter values are used to process all objects. By contrast,
+each <code><a href="b05-0-Processor.html">Processor</a></code> that is inserted into a <code>Pipeline</code>
+allows the user to supply a parameter that overrides its default
+value.
+</p>
+<p>
+We provide a single constructor, <code>makeDefaultPipeline</code> to build a
+specialized kind of <code>Pipeline</code>, tailored to the analysis of
+fluorescently labeled single channels in a microarray experiment. More
+general <code>Pipeline</code>s can be constructed using <code>new</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+The return value of the generic function <code>process</code> is always
+an object related to its input, which keeps a record of its
+history. The precise class of the result depends on the functions used
+to create the <code>Pipeline</code>.</p>
+
+<h3>Slots</h3>
+
+<dl>
+<dt><code>proclist</code>:</dt><dd>A list of <code><a href="b05-0-Processor.html">Processor</a></code> objects.</dd>
+<dt><code>name</code>:</dt><dd>A string containing the name of the object</dd>
+<dt><code>description</code>:</dt><dd>A string containing a longer description
+of the object</dd>
+</dl>
+
+<h3>Methods</h3>
+
+<dl>
+<dt>process(object, action, parameter)</dt><dd>Apply the series of
+functions represented by the <code>Pipeline</code> <code>action</code> to the
+object, updating its history appropriately. The <code>parameter</code>
+is ignored, since the <code>Pipeline</code> always uses its default
+values.
+</dd>
+<dt>summary(object, ...)</dt><dd>Write out a summary of the object.</dd>
+</dl>
+
+<h3>Pre-defined Pipelines</h3>
+
+<p>
+The library comes with two <code>Pipeline</code> objects already defined
+<dl>
+<dt><code>PIPELINE.STANDARD</code></dt><dd>Takes a <code><a href="b04-0-Channel.html">Channel</a></code> object
+as input. Performs global normalization by rescaling the 75th
+percentile to 1000, truncates below at 25, then performs log
+(base-two) transformation.
+</dd>
+<dt><code>PIPELINE.MDACC.DEFAULT</code></dt><dd>Takes a
+<code><a href="b07-0-CompleteChannel.html">CompleteChannel</a></code> as input, extracts the raw signal
+intensity, and then performs the same processing as
+<code>PIPELINE.STANDARD</code>. 
+</dd>
+</dl>
+
+<h3>Author(s)</h3>
+
+<p>
+Kevin R. Coombes &lt;kcoombes@mdanderson.org&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="b04-0-Channel.html">Channel</a></code>, <code><a href="b00-0-generics.html">process</a></code>,
+<code><a href="b07-0-CompleteChannel.html">CompleteChannel</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# simulate a moderately realistic looking microarray
+nc &lt;- 100
+nr &lt;- 100
+v &lt;- rexp(nc*nr, 1/1000)
+b &lt;- rnorm(nc*nr, 80, 10)
+s &lt;- sapply(v-b, max, 1)
+ct &lt;- ChannelType('user', 'random', nc, nr,  'fake')
+subbed &lt;- Channel(name='fraud', parent='', type=ct, x=s)
+rm(ct, nc, nr, v, b, s)         # clean some stuff
+
+# example of standard data processing
+processed &lt;- process(subbed, PIPELINE.STANDARD)
+
+summary(processed)
+
+par(mfrow=c(2,1))
+plot(processed)
+hist(processed)
+
+par(mfrow=c(1,1))
+image(processed)
+
+rm(subbed, processed)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>PreProcess</em> version 2.7.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

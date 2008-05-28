@@ -1,0 +1,43 @@
+%\VignetteIndexEntry{OOMPA}
+%\VignetteKeywords{OOMPA}
+%\VignetteDepends{oompaBase}
+%\VignettePackage{oompaBase}
+\documentclass{article}
+
+\usepackage{hyperref}
+\usepackage{Sweave}
+
+\newcommand{\Rfunction}[1]{{\texttt{#1}}}
+\newcommand{\Robject}[1]{{\texttt{#1}}}
+\newcommand{\Rpackage}[1]{{\textit{#1}}}
+
+\title{Object Oriented Microarray and Proteomics Analysis (OOMPA)}
+\author{Kevin R. Coombes}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Introduction}
+
+OOMPA is a suite of object-oriented tools for processing and analyzing
+large biological data sets, such as those arising from mRNA expression
+microarrays or mass spectrometry proteomics.
+
+This vignette documents the base package, \Rpackage{oompaBase}.
+Frankly, it is only here because the BioConductor coding standards
+require it.  The \Rpackage{oompaBase} package only defines one thing,
+a \Robject{class union} allowing you to use ``numeric'' or ``NULL''
+objects in the design of an S4 class.  At least as recently as R 1.9,
+you could not declare a class union and instantiate it in the same
+package. As a consequence, this base package was created.
+
+End users should never need to invoke this package directly.
+Developers might want to \Rfunction{require} it if they have their own
+need for the class union.
+
+The real action starts with the \Rpackage{PreProcess} package, which
+you should read about next.
+
+\end{document}

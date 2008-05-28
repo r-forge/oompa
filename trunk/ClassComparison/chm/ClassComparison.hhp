@@ -1,0 +1,32 @@
+[OPTIONS]
+Auto Index=Yes
+Contents file=ClassComparison.toc
+Compatibility=1.1 or later
+Compiled file=ClassComparison.chm
+Default topic=00Index.html
+Display compile progress=No
+Full-text search=Yes
+Full text search stop list file=..\..\..\gnuwin32\help\R.stp
+Title=R Help for package ClassComparison
+
+
+[FILES]
+00Index.html
+cc00-0-bum.html
+cc00-1-bumsum.html
+cc00-2-significant.html
+cc01-0-multiT.html
+cc01-1-variantT.html
+cc01-2-matrixT.html
+cc02-0-multiWil.html
+cc02-1-dwil.html
+cc02-2-rankSum.html
+cc03-0-multiLM.html
+cc04-0-Dudoit-class.html
+cc05-0-tnom.html
+cc05-1-tnom-summary.html
+cc06-0-Sam-class.html
+cc06-1-sam-summary.html
+cc07-0-TwoGroupStats-class.html
+cc08-0-SingleGroup-class.html
+cc09-0-smoothT.html

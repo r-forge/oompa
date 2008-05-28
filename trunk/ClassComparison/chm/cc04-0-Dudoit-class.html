@@ -1,0 +1,221 @@
+<html><head><title>The Dudoit Class</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>Dudoit-class(ClassComparison)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   Dudoit">
+<param name="keyword" value="R:   Dudoit-class">
+<param name="keyword" value="R:   plot,Dudoit,missing-method">
+<param name="keyword" value="R:   cutoffSignificant,Dudoit-method">
+<param name="keyword" value="R:   selectSignificant,Dudoit-method">
+<param name="keyword" value="R:   countSignificant,Dudoit-method">
+<param name="keyword" value=" The Dudoit Class">
+</object>
+
+
+<h2>The Dudoit Class</h2>
+
+
+<h3>Description</h3>
+
+<p>
+An implementation of the method of Dudoit and colleagues to apply the
+Westfall-Young adjustment to p-values to control the family-wise error
+rate when analyzing microarray data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+Dudoit(data, classes, nPerm = 1000, verbose = TRUE)
+## S4 method for signature 'Dudoit, missing':
+plot(x, ylab='T statistics', ...)
+## S4 method for signature 'Dudoit':
+cutoffSignificant(object, alpha, ...)
+## S4 method for signature 'Dudoit':
+selectSignificant(object, alpha, ...)
+## S4 method for signature 'Dudoit':
+countSignificant(object, alpha, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+Either a data frame or matrix with numeric values or an
+<code><a onclick="findlink('Biobase', 'class.ExpressionSet.html')" style="text-decoration: underline; color: blue; cursor: hand">ExpressionSet</a></code> as defined
+in the BioConductor tools for analyzing microarray data.</td></tr>
+<tr valign="top"><td><code>classes</code></td>
+<td>
+If <code>data</code> is a data frame or matrix, then classes
+must be either a logical vector or a factor. If <code>data</code> is an
+<code>ExpressionSet</code>, then <code>classes</code> can be a character string that
+names one of the factor columns in the associated
+<code><a onclick="findlink('Biobase', 'phenoData.html')" style="text-decoration: underline; color: blue; cursor: hand">phenoData</a></code> subobject.</td></tr>
+<tr valign="top"><td><code>nPerm</code></td>
+<td>
+An integer; the number of permutations to perform</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+A logical flag</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+A <code>Dudoit</code> object</td></tr>
+<tr valign="top"><td><code>alpha</code></td>
+<td>
+A real number; the target family-wise error rate</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+A <code>Dudoit</code> object</td></tr>
+<tr valign="top"><td><code>ylab</code></td>
+<td>
+Label for the y axis</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+The usual extra arguments for generic or plotting routines.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+In 2002, Dudoit and colleagues introduced a method to adjust the
+p-values when performing gene-by-gene tests for differential
+expression.  The adjustment was based on the method of Westfall and
+Young, with the goal of controlling the family-wise error rate.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+The standard method for <code>plot</code> returns what you would expect.
+<br>
+The <code>cutoffSignificant</code> method returns a real number (its input
+value <code>alpha</code>).  The <code>selectSignficant</code> method returns a
+vector of logical values identifying the significant test results, and
+<code>countSignificant</code> returns an integer counting the number of
+significant test results.</p>
+
+<h3>Objects from the Class</h3>
+
+<p>
+As usual, objects can be created by <code>new</code>, but better methods are
+available in the form of the <code>Dudoit</code> function. The basic
+inputs to this function are the same as those used for row-by-row
+statistical tests throughout the ClassComparison package; a detailed
+description can be found in the <code><a href="cc01-0-multiT.html">MultiTtest</a></code> class.
+</p>
+<p>
+The additional input determines the number, <code>nPerm</code>, of
+permutations to perform. The accuracy of the p-value adjustment
+depends on this value.  Since the implementation is in R (and does not
+call out to something compiled like C or FORTRAN), however, the
+computations are slow. The default value of 1000 can take a long
+time with modern microarrays that contain 40,000 spots.
+</p>
+
+
+<h3>Slots</h3>
+
+<dl>
+<dt><code>adjusted.p</code>:</dt><dd>The numeric vector of adjusted p-values.</dd>
+<dt><code>t.statistics</code>:</dt><dd>Object of class <code>numeric</code>
+containing the computed t-statistics. </dd>
+<dt><code>p.values</code>:</dt><dd>Object of class <code>numeric</code> containing
+the computed p-values. </dd>
+<dt><code>groups</code>:</dt><dd>Object of class <code>character</code> containing
+the names of the classes being compared. </dd>
+<dt><code>call</code>:</dt><dd>Object of class <code>call</code> containing the
+function call that created the object. </dd>
+</dl>
+
+<h3>Extends</h3>
+
+<p>
+Class <code>MultiTtest</code>, directly.  In particular, objects of this class
+inherit methods for <code>summary</code>, <code>hist</code>, and <code>plot</code> from
+the base class.
+</p>
+
+
+<h3>Methods</h3>
+
+<dl>
+<dt>cutoffSignificant(object, alpha, ...)</dt><dd>Determine cutoffs on
+the adjusted p-values at the desired significance level.  In other
+words, this function simplyt returns <code>alpha</code>.</dd>
+<dt>selectSignificant(object, alpha, ...)</dt><dd>Compute a logical
+vector for selecting significant test results.</dd>
+<dt>countSignificant(object, alpha, ...)</dt><dd>Count the number of
+significant test results.</dd>
+<dt>plot</dt><dd><code>signature(x = Dudoit, y = missing)</code>: ... </dd>
+</dl>
+
+<h3>Author(s)</h3>
+
+<p>
+Kevin R. Coombes &lt;kcoombes@mdanderson.org&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Dudoit, S., Y.H. Yang, M.J. Callow, and T.P. Speed. 2002. Statistical
+Methods for Identifying Differentially Expressed Genes in Replicated
+cDNA Microarray Experiments, Statistica Sinica, 12(1): 111-139.
+</p>
+<p>
+Westfall, P.H., Young, S.S. Resampling-based multiple testing: examples
+and methods for p-value adjustment.  Wiley series in probability and
+mathematics statistics. John Wiley and Sons, 1993.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="cc01-0-multiT.html">MultiTtest</a></code>, <code><a href="cc00-0-bum.html">Bum</a></code>, <code><a href="cc09-0-smoothT.html">SmoothTtest</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ng &lt;- 10000
+ns &lt;- 15
+nd &lt;- 200
+fake.class &lt;- factor(rep(c('A', 'B'), each=ns))
+fake.data &lt;- matrix(rnorm(ng*ns*2), nrow=ng, ncol=2*ns)
+fake.data[1:nd, 1:ns] &lt;- fake.data[1:nd, 1:ns] + 2
+fake.data[(nd+1):(2*nd), 1:ns] &lt;- fake.data[(nd+1):(2*nd), 1:ns] - 2
+
+# the permutation test is slow. it really needs more than
+# 100 permutations, but this is just an example...
+dud &lt;- Dudoit(fake.data, fake.class, nPerm=100)
+summary(dud)
+plot(dud)
+countSignificant(dud, 0.05)
+
+rm(ng, ns, nd, fake.class, fake.data, dud)
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>ClassComparison</em> version 2.5.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

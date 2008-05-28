@@ -1,0 +1,39 @@
+\name{SamSummary-class}
+\docType{class}
+\alias{SamSummary}
+\alias{SamSummary-class}
+\alias{show,SamSummary-method}
+
+\title{The SamSummary Class}
+\description{
+  An implementation class. Users are not expected to create these objects directly;
+  they are produced as return objects from the summary method for \code{Sam}.
+}
+\section{Slots}{
+  \describe{
+    \item{\code{fdr}:}{A number between 0 and 1; the expected false
+      discovery rate}
+    \item{\code{hi}:}{Upper threshold for significance}
+    \item{\code{lo}:}{Lower threshold for significance}
+    \item{\code{cutoff}:}{A numeric value specified in the call to the
+      \code{Sam} \code{summary} method.}
+    \item{\code{significant.calls}:}{vector of logical values}
+    \item{\code{average.false.count}:}{The average number of false
+      positives in the permuted data at this cutoff level.}
+  }
+}
+\section{Methods}{
+  \describe{
+    \item{show}{\code{signature(object = SamSummary)}:  Print the
+      object, which contains a summary of the underlying \code{Sam}
+      object.}
+  }
+}
+\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
+\seealso{
+ \code{\link{Sam}}
+}
+\examples{
+# See the examples for the Sam class.
+}
+\keyword{classes}

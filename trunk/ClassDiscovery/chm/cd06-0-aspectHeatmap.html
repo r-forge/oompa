@@ -1,0 +1,184 @@
+<html><head><title>Heatmap with control over the aspect ratio</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>aspectHeatmap(ClassDiscovery)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   aspectHeatmap">
+<param name="keyword" value=" Heatmap with control over the aspect ratio">
+</object>
+
+
+<h2>Heatmap with control over the aspect ratio</h2>
+
+
+<h3>Description</h3>
+
+<p>
+This function replaces the heatmap function in the stats package with
+a function with additional features.  First, the user can specify an
+aspect ratio instead of being forced to accept a square image even
+when the matrix is not square. Second, the user can overlay horizontal
+or vertical lines to mark out important regions.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+aspectHeatmap(x, Rowv = NULL, Colv = if (symm) "Rowv" else NULL, distfun = dist, hclustfun = hclust, reorderfun = function(d, w) reorder(d, w), add.expr, symm = FALSE, revC = identical(Colv, "Rowv"), scale = c("row", "column", "none"), na.rm = TRUE, margins = c(5, 5), ColSideColors, RowSideColors, cexRow = 0.2 + 1/log10(nr), cexCol = 0.2 + 1/log10(nc), labRow = NULL, labCol = NULL, main = NULL, xlab = NULL, ylab = NULL, keep.dendro = FALSE, verbose = getOption("verbose"), hExp = 1, wExp = 1, vlines = NULL, hlines = NULL, lasCol = 2, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+See documentation for <a href="onclick="findlink('stats', 'heatmap.html')" style="text-decoration: underline; color: blue; cursor: hand"">heatmap</a>.</td></tr>
+<tr valign="top"><td><code>Rowv</code></td>
+<td>
+See documentation for <a href="onclick="findlink('stats', 'heatmap.html')" style="text-decoration: underline; color: blue; cursor: hand"">heatmap</a>.</td></tr>
+<tr valign="top"><td><code>Colv</code></td>
+<td>
+See documentation for <a href="onclick="findlink('stats', 'heatmap.html')" style="text-decoration: underline; color: blue; cursor: hand"">heatmap</a>.</td></tr>
+<tr valign="top"><td><code>distfun</code></td>
+<td>
+See documentation for <a href="onclick="findlink('stats', 'heatmap.html')" style="text-decoration: underline; color: blue; cursor: hand"">heatmap</a>.</td></tr>
+<tr valign="top"><td><code>hclustfun</code></td>
+<td>
+See documentation for <a href="onclick="findlink('stats', 'heatmap.html')" style="text-decoration: underline; color: blue; cursor: hand"">heatmap</a>.</td></tr>
+<tr valign="top"><td><code>reorderfun</code></td>
+<td>
+See documentation for <a href="onclick="findlink('stats', 'heatmap.html')" style="text-decoration: underline; color: blue; cursor: hand"">heatmap</a>.</td></tr>
+<tr valign="top"><td><code>add.expr</code></td>
+<td>
+See documentation for <a href="onclick="findlink('stats', 'heatmap.html')" style="text-decoration: underline; color: blue; cursor: hand"">heatmap</a>.</td></tr>
+<tr valign="top"><td><code>symm</code></td>
+<td>
+See documentation for <a href="onclick="findlink('stats', 'heatmap.html')" style="text-decoration: underline; color: blue; cursor: hand"">heatmap</a>.</td></tr>
+<tr valign="top"><td><code>revC</code></td>
+<td>
+See documentation for <a href="onclick="findlink('stats', 'heatmap.html')" style="text-decoration: underline; color: blue; cursor: hand"">heatmap</a>.</td></tr>
+<tr valign="top"><td><code>scale</code></td>
+<td>
+See documentation for <a href="onclick="findlink('stats', 'heatmap.html')" style="text-decoration: underline; color: blue; cursor: hand"">heatmap</a>.</td></tr>
+<tr valign="top"><td><code>na.rm</code></td>
+<td>
+See documentation for <a href="onclick="findlink('stats', 'heatmap.html')" style="text-decoration: underline; color: blue; cursor: hand"">heatmap</a>.</td></tr>
+<tr valign="top"><td><code>margins</code></td>
+<td>
+See documentation for <a href="onclick="findlink('stats', 'heatmap.html')" style="text-decoration: underline; color: blue; cursor: hand"">heatmap</a>.</td></tr>
+<tr valign="top"><td><code>ColSideColors</code></td>
+<td>
+See documentation for <a href="onclick="findlink('stats', 'heatmap.html')" style="text-decoration: underline; color: blue; cursor: hand"">heatmap</a>.</td></tr>
+<tr valign="top"><td><code>RowSideColors</code></td>
+<td>
+See documentation for <a href="onclick="findlink('stats', 'heatmap.html')" style="text-decoration: underline; color: blue; cursor: hand"">heatmap</a>.</td></tr>
+<tr valign="top"><td><code>cexRow</code></td>
+<td>
+See documentation for <a href="onclick="findlink('stats', 'heatmap.html')" style="text-decoration: underline; color: blue; cursor: hand"">heatmap</a>.</td></tr>
+<tr valign="top"><td><code>cexCol</code></td>
+<td>
+See documentation for <a href="onclick="findlink('stats', 'heatmap.html')" style="text-decoration: underline; color: blue; cursor: hand"">heatmap</a>.</td></tr>
+<tr valign="top"><td><code>labRow</code></td>
+<td>
+See documentation for <a href="onclick="findlink('stats', 'heatmap.html')" style="text-decoration: underline; color: blue; cursor: hand"">heatmap</a>.</td></tr>
+<tr valign="top"><td><code>labCol</code></td>
+<td>
+See documentation for <a href="onclick="findlink('stats', 'heatmap.html')" style="text-decoration: underline; color: blue; cursor: hand"">heatmap</a>.</td></tr>
+<tr valign="top"><td><code>main</code></td>
+<td>
+See documentation for <a href="onclick="findlink('stats', 'heatmap.html')" style="text-decoration: underline; color: blue; cursor: hand"">heatmap</a>.</td></tr>
+<tr valign="top"><td><code>xlab</code></td>
+<td>
+See documentation for <a href="onclick="findlink('stats', 'heatmap.html')" style="text-decoration: underline; color: blue; cursor: hand"">heatmap</a>.</td></tr>
+<tr valign="top"><td><code>ylab</code></td>
+<td>
+See documentation for <a href="onclick="findlink('stats', 'heatmap.html')" style="text-decoration: underline; color: blue; cursor: hand"">heatmap</a>.</td></tr>
+<tr valign="top"><td><code>keep.dendro</code></td>
+<td>
+See documentation for <a href="onclick="findlink('stats', 'heatmap.html')" style="text-decoration: underline; color: blue; cursor: hand"">heatmap</a>.</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+See documentation for <a href="onclick="findlink('stats', 'heatmap.html')" style="text-decoration: underline; color: blue; cursor: hand"">heatmap</a>.</td></tr>
+<tr valign="top"><td><code>hExp</code></td>
+<td>
+Height expansion factor; default = 1. </td></tr>
+<tr valign="top"><td><code>wExp</code></td>
+<td>
+Width expansion factor; default = 1.</td></tr>
+<tr valign="top"><td><code>vlines</code></td>
+<td>
+Vector of positions at which to draw vertical lines. </td></tr>
+<tr valign="top"><td><code>hlines</code></td>
+<td>
+Vector of positions at which to draw horizontal lines. </td></tr>
+<tr valign="top"><td><code>lasCol</code></td>
+<td>
+Axis label style (las) for columns. </td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Additional arguments passed along to the image
+command. </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The new arguments <code>hExp</code> and <code>wExp</code> are "expansion factors"
+for the height and width of the figure, respectively.  They are used
+to alter the arguments passed to the layout function internally to
+heatmap.
+</p>
+<p>
+The new arguments <code>hlines</code> and <code>vlines</code> are used to specify
+points at which horizontal or vertical lines, respectively, should be
+overlaid on the image.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+The same as the <a href="onclick="findlink('stats', 'heatmap.html')" style="text-decoration: underline; color: blue; cursor: hand"">heatmap</a> function.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Kevin R. Coombes &lt;kcoombes@mdanderson.org&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a onclick="findlink('stats', 'heatmap.html')" style="text-decoration: underline; color: blue; cursor: hand">heatmap</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+nC &lt;- 30
+nR &lt;- 1000
+fakeData &lt;- matrix(rnorm(nC*nR), ncol=nC, nrow=nR)
+aspectHeatmap(fakeData, scale='none', hExp=2, wExp=1.4, margins=c(6,3))
+aspectHeatmap(fakeData, scale='none', hExp=2, wExp=1.4, margins=c(6,3), vlines=15.5, hlines=c(100, 300))
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>ClassDiscovery</em> version 2.7.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

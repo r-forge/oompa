@@ -1,0 +1,107 @@
+<html><head><title>OOMPA Statistical Utility Functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>stat.utility(PreProcess)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   f.above.thresh">
+<param name="keyword" value="R:   f.cord">
+<param name="keyword" value="R:   f.oneway.rankings">
+<param name="keyword" value="R:   stdize">
+<param name="keyword" value=" OOMPA Statistical Utility Functions">
+</object>
+
+
+<h2>OOMPA Statistical Utility Functions</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Utility functions for statistical computations.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+f.above.thresh(a, t)
+f.cord(x, y, inf.rm)
+f.oneway.rankings(r, s)
+stdize(x, center=TRUE, scale=TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>a</code></td>
+<td>
+a vector</td></tr>
+<tr valign="top"><td><code>t</code></td>
+<td>
+a real number</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+a vector</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+a vector</td></tr>
+<tr valign="top"><td><code>inf.rm</code></td>
+<td>
+a logical value</td></tr>
+<tr valign="top"><td><code>r</code></td>
+<td>
+</td></tr>
+<tr valign="top"><td><code>s</code></td>
+<td>
+</td></tr>
+<tr valign="top"><td><code>center</code></td>
+<td>
+</td></tr>
+<tr valign="top"><td><code>scale</code></td>
+<td>
+</td></tr>
+</table>
+
+<h3>Value</h3>
+
+<p>
+<code>f.above.thresh</code> returns the fraction of elements in the vector
+<code>a</code> that are greater than the threshold <code>t</code>.
+<br>
+<code>f.cord</code> returns the concordance coefficient between the two
+input vectors <code>x</code> and <code>y</code>. If <code>inf.rm</code> is true, then
+infinite values are removed before computing the concordance; missing
+values are always removed.
+<br>
+<code>stdize</code> is a synonym for <code>scale</code>.
+<br>
+<code>f.oneway.rankings</code> is implemented as <code>order(s)[r]</code> and I
+cannot recall why we defined it or where we used it.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Kevin R. Coombes &lt;kcoombes@mdanderson.org&gt;
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+x &lt;- rnorm(1000, 1, 2)
+y &lt;- rnorm(1000, 1, 2)
+f.above.thresh(x, 0)
+f.above.thresh(y, 0)
+f.cord(x, y)
+z &lt;- stdize(x)
+f.cord(x, z)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>PreProcess</em> version 2.7.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

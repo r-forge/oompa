@@ -1,0 +1,183 @@
+<html><head><title>The Channel class</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>Channel-class(PreProcess)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   Channel-class">
+<param name="keyword" value="R:   Channel">
+<param name="keyword" value="R:   plot,Channel,missing-method">
+<param name="keyword" value="R:   hist,Channel-method">
+<param name="keyword" value="R:   summary,Channel-method">
+<param name="keyword" value="R:   print,Channel-method">
+<param name="keyword" value="R:   image,Channel-method">
+<param name="keyword" value=" The Channel class">
+</object>
+
+
+<h2>The Channel class</h2>
+
+
+<h3>Description</h3>
+
+<p>
+An object of the <code>Channel</code> class represents a single kind of
+measurement performed at all spots of a microarray channel. These
+objects are essentially just vectors of data, with length equal to the
+number of spots on the microarray, with some extra metadata attached.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+Channel(parent, name, type, x)
+## S4 method for signature 'Channel, missing':
+plot(object, ...)
+## S4 method for signature 'Channel':
+hist(object, ...)
+## S4 method for signature 'Channel':
+summary(object, ...)
+## S4 method for signature 'Channel':
+print(object, ...)
+## S4 method for signature 'Channel':
+image(object, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>parent</code></td>
+<td>
+A string representing the name of a parent object from
+which this object was derived </td></tr>
+<tr valign="top"><td><code>name</code></td>
+<td>
+A string with a displayable name for this object </td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+A <code><a href="b03-0-ChannelType.html">ChannelType</a></code> object </td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+A numeric vector </td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+A <code>Channel</code> object </td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Additional arguments are as in the underlying generic methods.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+As described in the help pages for <code><a href="b03-0-ChannelType.html">ChannelType</a></code>, each
+microarray hybridization experiment produces one or more channels of
+data. <code>Channel</code> objects represent a single measurement performed
+at spots in one microarray channel. The raw data from a full
+experiment typically contains multiple measurements in mutliple
+channels.
+</p>
+<p>
+The full set of measurements is often highly processed (by, for
+example, background subtraction, normalization, log transformation,
+etc.) before it becomes useful. We have added a <code>history</code> slot
+that keeps track of how a <code>Channel</code> was produced. By allowing
+each object to maintain a record of its history, it becomes easier to
+document the processing when writing up the methods for reports or
+papers. The <code>history</code> slot of the object is updated using the
+generic function <code><a href="b00-0-generics.html">process</a></code> together with a
+<code><a href="b05-0-Processor.html">Processor</a></code> object.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+The <code>print</code>, <code>hist</code>, and <code>image</code> methods all invisibly
+return the <code>Channel</code> object on which they were invoked. The
+<code>print</code> and <code>summary</code> methods return nothing.</p>
+
+<h3>Slots</h3>
+
+<dl>
+<dt><code>parent</code>:</dt><dd>A string representing the name of a parent
+object from which this object was derived.
+</dd>
+<dt><code>name</code>:</dt><dd>A string with a displayable name for this object</dd>
+<dt><code>type</code>:</dt><dd>A <code><a href="b03-0-ChannelType.html">ChannelType</a></code> object</dd>
+<dt><code>x</code>:</dt><dd>A numeric vector</dd>
+<dt><code>history</code>:</dt><dd>A list that keeps a record of the calls used
+to produce this object </dd>
+</dl>
+
+<h3>Methods</h3>
+
+<dl>
+<dt>print(object, ...)</dt><dd>Print all the data on the object. Since
+this includes the entire data vector, you rarely want to do this. </dd>
+<dt>summary(object, ...)</dt><dd>Write out a summary of the object.</dd>
+<dt>plot(object, ...)</dt><dd>Produce a scatter plot of the measurement
+values in the slot <code>x</code> of the <code>object</code> against their
+index , which serves as a surrogate for the position on the
+microarray. Additional graphical parameters are passed along.</dd>
+<dt>hist(object, ...)</dt><dd>Produce a histogram of the data values in slot
+<code>x</code> of the <code>object</code>. Additional graphical parameters are
+passed along.</dd>
+<dt>image(object, ...)</dt><dd>This method produces a two-dimensional
+"cartoon" image of the measurement values, with the position in
+the cartoon corresponding to the two-dimensional arrangement of
+spots on the actual microarray. Additional graphical parameters
+are passed along.</dd>
+</dl>
+
+<h3>Author(s)</h3>
+
+<p>
+Kevin R. Coombes &lt;kcoombes@mdanderson.org&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="b03-0-ChannelType.html">ChannelType</a></code>, <code><a href="b00-0-generics.html">process</a></code>,
+<code><a href="b05-0-Processor.html">Processor</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# simulate a moderately realistic looking microarray
+nc &lt;- 100                       # number of rows
+nr &lt;- 100                       # number of columns
+v &lt;- rexp(nc*nr, 1/1000)        # "true" signal intensity (vol)
+b &lt;- rnorm(nc*nr, 80, 10)       # background noise
+s &lt;- sapply(v-b, max, 1)        # corrected signal instensity (svol)
+ct &lt;- ChannelType('user', 'random', nc, nr,  'fake')
+raw &lt;- Channel(name='fraud', type=ct, parent='', x=v)
+subbed &lt;- Channel(name='fraud', parent='', type=ct, x=s)
+rm(nc, nr, v, b, s)             # clean some stuff
+
+summary(subbed)
+summary(raw)
+
+par(mfrow=c(2,1))
+plot(raw)
+hist(raw)
+
+par(mfrow=c(1,1))
+image(raw)
+
+# finish the cleanup
+rm(ct, raw, subbed)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>PreProcess</em> version 2.7.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

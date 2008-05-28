@@ -1,0 +1,154 @@
+<html><head><title>Get the List of Classes From A Clustering Algorithm</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>justClusters(ClassDiscovery)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   cutHclust">
+<param name="keyword" value="R:   cutPam">
+<param name="keyword" value="R:   cutKmeans">
+<param name="keyword" value="R:   repeatedKmeans">
+<param name="keyword" value="R:   cutRepeatedKmeans">
+<param name="keyword" value=" Get the List of Classes From A Clustering Algorithm">
+</object>
+
+
+<h2>Get the List of Classes From A Clustering Algorithm</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Unsupervised clustering algorithms, such as partitioning around medoids
+(<code><a onclick="findlink('cluster', 'pam.html')" style="text-decoration: underline; color: blue; cursor: hand">pam</a></code>), K-means (<code><a onclick="findlink('stats', 'kmeans.html')" style="text-decoration: underline; color: blue; cursor: hand">kmeans</a></code>), or
+hierarchical clustering (<code><a onclick="findlink('stats', 'hclust.html')" style="text-decoration: underline; color: blue; cursor: hand">hclust</a></code>) after cutting the tree,
+produce a list of class assignments along with other structure. To
+simplify the interface for the <code><a href="cd03-1-BootstrapClusterTest.html">BootstrapClusterTest</a></code>  and
+<code><a href="cd04-0-PerturbationClusterTest.html">PerturbationClusterTest</a></code>, we have written these routines
+that simply extract these cluster assignments.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+cutHclust(data, k, method = "average", metric = "pearson")
+cutPam(data, k)
+cutKmeans(data, k)
+cutRepeatedKmeans(data, k, nTimes)
+
+repeatedKmeans(data, k, nTimes)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+A numerical data matrix</td></tr>
+<tr valign="top"><td><code>k</code></td>
+<td>
+The number of classes desired from the algorithm</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+Any valid linkage method that can be passed to the
+<code><a onclick="findlink('stats', 'hclust.html')" style="text-decoration: underline; color: blue; cursor: hand">hclust</a></code> function</td></tr>
+<tr valign="top"><td><code>metric</code></td>
+<td>
+Any valid distance metric that can be passed to the
+<code><a href="cd01-0-distanceMatrix.html">distanceMatrix</a></code> function</td></tr>
+<tr valign="top"><td><code>nTimes</code></td>
+<td>
+An integer; the number of times to repeat the K-means
+algorithm with a different random starting point</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+Each of the clustering routines used here has a different
+structure for storing cluster assignments. The <code><a onclick="findlink('stats', 'kmeans.html')" style="text-decoration: underline; color: blue; cursor: hand">kmeans</a></code>
+function stores the assignments in a &lsquo;cluster&rsquo; attribute.  The
+<code><a onclick="findlink('cluster', 'pam.html')" style="text-decoration: underline; color: blue; cursor: hand">pam</a></code> function uses a &lsquo;clustering&rsquo; attribute.  For
+<code><a onclick="findlink('stats', 'hclust.html')" style="text-decoration: underline; color: blue; cursor: hand">hclust</a></code>, the assigments are produced by a call to the
+<code><a onclick="findlink('stats', 'cutree.html')" style="text-decoration: underline; color: blue; cursor: hand">cutree</a></code> function.
+</p>
+<p>
+It has been observed that the K-means algorithm can converge to
+different solutions depending on the starting values of the group
+centers. We also include a routine (<code>repeatedKmeans</code>) that runs
+the K-means algorithm repeatedly, using different randomly generated
+staring points each time, saving the best results.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+Each of the <code>cut...</code> functions returns a vector of integer values
+representing the cluster assignments found by the algorithm.
+<br>
+The <code>repeatedKmeans</code> function returns a list <code>x</code> with three
+components.  The component <code>x$kmeans</code> is the result of the call
+to the <code>kmeans</code> function that produced the best fit to the
+data. The component <code>x$centers</code> is a matrix containing the list
+of group centers that were used in the best call to <code>kmeans</code>.
+The component <code>x$withinss</code> contains the sum of the within-group
+sums of squares, which is used as the measure of fitness.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Kevin R. Coombes &lt;kcoombes@mdanderson.org&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a onclick="findlink('cluster', 'pam.html')" style="text-decoration: underline; color: blue; cursor: hand">pam</a></code>, <code><a onclick="findlink('stats', 'hclust.html')" style="text-decoration: underline; color: blue; cursor: hand">hclust</a></code>,
+<code><a onclick="findlink('stats', 'cutree.html')" style="text-decoration: underline; color: blue; cursor: hand">cutree</a></code>, <code><a onclick="findlink('stats', 'kmeans.html')" style="text-decoration: underline; color: blue; cursor: hand">kmeans</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# simulate data from three different groups
+d1 &lt;- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
+d2 &lt;- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
+d3 &lt;- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
+dd &lt;- cbind(d1, d2, d3)
+
+cutKmeans(dd, k=3)
+cutKmeans(dd, k=4)
+
+cutHclust(dd, k=3)
+cutHclust(dd, k=4)
+
+cutPam(dd, k=3)
+cutPam(dd, k=4)
+
+cutRepeatedKmeans(dd, k=3, nTimes=10)
+cutRepeatedKmeans(dd, k=4, nTimes=10)
+
+# cleanup
+rm(d1, d2, d3, dd)
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>ClassDiscovery</em> version 2.7.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

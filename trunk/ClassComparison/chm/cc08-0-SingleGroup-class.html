@@ -1,0 +1,229 @@
+<html><head><title>The SingleGroup Class</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>SingleGroup-class(ClassComparison)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   SingleGroup">
+<param name="keyword" value="R:   SingleGroup-class">
+<param name="keyword" value="R:   as.data.frame,SingleGroup-method">
+<param name="keyword" value="R:   plot,SingleGroup,missing-method">
+<param name="keyword" value="R:   print,SingleGroup-method">
+<param name="keyword" value="R:   summary,SingleGroup-method">
+<param name="keyword" value=" The SingleGroup Class">
+</object>
+
+
+<h2>The SingleGroup Class</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Preliminary analysis of one group of samples for use in
+the <code><a href="cc09-0-smoothT.html">SmoothTtest</a></code> class. A key feature is the standard
+quality control plot.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+SingleGroup(avg, sd, span = 0.5, name = '')
+## S4 method for signature 'SingleGroup':
+as.data.frame(x, row.names=NULL, optional=FALSE)
+## S4 method for signature 'SingleGroup':
+summary(object, ...)
+## S4 method for signature 'SingleGroup':
+print(x, ...)
+## S4 method for signature 'SingleGroup, missing':
+plot(x, multiple=3, ccl=0, main=x@name,
+ xlab='Mean', ylab='Std Dev', xlim=0, ylim=0, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>avg</code></td>
+<td>
+A numeric vector of mean values</td></tr>
+<tr valign="top"><td><code>sd</code></td>
+<td>
+A numeric vector of standard deviations</td></tr>
+<tr valign="top"><td><code>span</code></td>
+<td>
+The <code>span</code> parameter is passed onto <code><a onclick="findlink('stats', 'loess.html')" style="text-decoration: underline; color: blue; cursor: hand">loess</a></code>.</td></tr>
+<tr valign="top"><td><code>name</code></td>
+<td>
+A character string; the name of this object</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+A <code>SingleGroup</code> object</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+A <code>SingleGroup</code> object</td></tr>
+<tr valign="top"><td><code>multiple</code></td>
+<td>
+A real number; the multiple of the smoothed standard
+deviation to call significant.</td></tr>
+<tr valign="top"><td><code>ccl</code></td>
+<td>
+A list containing objects of the
+<code><a onclick="findlink('PreProcess', 'ColorCoding.html')" style="text-decoration: underline; color: blue; cursor: hand">ColorCoding</a></code> class. If left at its default
+value of zero, colors are chosen automatically.</td></tr>
+<tr valign="top"><td><code>main</code></td>
+<td>
+Plot title</td></tr>
+<tr valign="top"><td><code>xlab</code></td>
+<td>
+Label for the x axis</td></tr>
+<tr valign="top"><td><code>ylab</code></td>
+<td>
+Label for the y axis</td></tr>
+<tr valign="top"><td><code>xlim</code></td>
+<td>
+Plotting limits for the x axis. If left at the default
+value of zero, then the limits are automatically generated</td></tr>
+<tr valign="top"><td><code>ylim</code></td>
+<td>
+Plotting limits for the y axis. If left at the default
+value of zero, then the limits are automatically generated</td></tr>
+<tr valign="top"><td><code>row.names</code></td>
+<td>
+See the base version of <code><a onclick="findlink('base', 'as.data.frame.html')" style="text-decoration: underline; color: blue; cursor: hand">as.data.frame.default</a></code></td></tr>
+<tr valign="top"><td><code>optional</code></td>
+<td>
+See the base version of <code><a onclick="findlink('base', 'as.data.frame.html')" style="text-decoration: underline; color: blue; cursor: hand">as.data.frame.default</a></code></td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+</td></tr>
+</table>
+<p>
+ {The usual extra parameters to generic or plotting routines}</p>
+
+<h3>Details</h3>
+
+<p>
+In 2001 and 2002, Baggerly and Coombes developed the smooth t-test for
+finding differentially expressed genes in microarray data.  Along with
+many others, they began by log-transforming the data as a reasonable
+step in the direction of variance stabilization.  They observed,
+however, that the gene-by-gene standard deviations still seemed to
+vary in a systematic way as a function of the mean log intensity.  By
+borrowing strenght across genes and using <code><a onclick="findlink('stats', 'loess.html')" style="text-decoration: underline; color: blue; cursor: hand">loess</a></code> to fit
+the observed standard deviations as a function of the mean, one
+presumably got a better estimate of the true standard deviation.
+</p>
+
+
+<h3>Creating Objects</h3>
+
+<p>
+Objects can be created by calls to the <code>SingleGroup</code> constructor.
+Users rarely have need to create these objects directly; they are
+usually created as a consequence of the construction of an object of
+the <code><a href="cc09-0-smoothT.html">SmoothTtest</a></code> class.
+</p>
+
+
+<h3>Slots</h3>
+
+<dl>
+<dt><code>name</code>:</dt><dd>A character string; the name of this object</dd>
+<dt><code>avg</code>:</dt><dd>The numeric vector of mean values</dd>
+<dt><code>sd</code>:</dt><dd>The numeric vector of standard deviations</dd>
+<dt><code>span</code>:</dt><dd>The <code>span</code> parameter used in the
+<code><a onclick="findlink('stats', 'loess.html')" style="text-decoration: underline; color: blue; cursor: hand">loess</a></code> function to fit <code>sd</code> as a function of
+<code>avg</code>.</dd>
+<dt><code>fit</code>:</dt><dd>A list containing components <code>x</code> and
+<code>y</code> resulting from the <code>loess</code> fit.</dd>
+<dt><code>score</code>:</dt><dd>A numeric vector; the ratio of the pointwise
+standard deviations to their smooth (loess) estimates.</dd>
+</dl>
+
+<h3>Methods</h3>
+
+<dl>
+<dt>as.data.frame(x, row.names=NULL, optional=FALSE)</dt><dd>Combine the
+slots containing numeric vectors into a data frame, suitable for
+printing or exporting.</dd>
+<dt>summary(object, ...)</dt><dd>Write out a summary of the object.</dd>
+<dt>print(x, ...)</dt><dd>Print the entire object. You never want to do
+this.</dd>
+<dt>plot(x, multiple=3, ccl=0, main=x@name, xlab='Mean', ylab='Std
+Dev', xlim=0, ylim=0, ...)</dt><dd>Produce a scatter plot of the standard
+deviations (<code>x@sd</code>) as a function of the means (<code>x@avg</code>).
+The appropriate mutliple of the <code>loess</code> fit is overlaid, and
+points that exceed this multiple are flaged in a different
+color. Colors in the plotare controlled by the current values of
+<code><a onclick="findlink('PreProcess', 'semanticColors.html')" style="text-decoration: underline; color: blue; cursor: hand">COLOR.CENTRAL.LINE</a></code>,
+<code><a onclick="findlink('PreProcess', 'semanticColors.html')" style="text-decoration: underline; color: blue; cursor: hand">COLOR.CONFIDENCE.CURVE</a></code>,
+<code><a onclick="findlink('PreProcess', 'semanticColors.html')" style="text-decoration: underline; color: blue; cursor: hand">COLOR.BORING</a></code>,
+<code><a onclick="findlink('PreProcess', 'semanticColors.html')" style="text-decoration: underline; color: blue; cursor: hand">COLOR.BAD.REPLICATE</a></code>, and
+<code><a onclick="findlink('PreProcess', 'semanticColors.html')" style="text-decoration: underline; color: blue; cursor: hand">COLOR.WORST.REPLICATE</a></code>.
+</dd>
+</dl>
+
+<h3>Author(s)</h3>
+
+<p>
+Kevin R. Coombes &lt;kcoombes@mdanderson.org&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Baggerly, K.A., Coombes, K.R., Hess, K.R., Stivers, D.N., Abruzzo,
+L.V., Zhang, W.  Identifying differentially expressed genes in cDNA
+microarray experiments.  J Comp Biol. 8:639-659, 2001.
+</p>
+<p>
+Coombes, K.R., Highsmith, W.E., Krogmann, T.A., Baggerly, K.A.,
+Stivers, D.N., Abruzzo, L.V.   Identifying and quantifying sources of
+variation in microarray data using high-density cDNA membrane arrays.
+J Comp Biol. 9:655-669, 2002.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="cc09-0-smoothT.html">SmoothTtest</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+m &lt;- rnorm(1000, 8, 2.5)
+v &lt;- rnorm(1000, 0.7)
+plot(m, v)
+
+x &lt;- SingleGroup(m, v, name='bogus')
+
+summary(x)
+
+plot(x)
+plot(x, multiple=2)
+
+# cleanup
+rm(m, v, x)
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>ClassComparison</em> version 2.5.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

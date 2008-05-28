@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HEAD></HEAD><HTML><BODY>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Package TailRank:  Contents">
+<param name="Local" value="00Index.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Package TailRank:  R objects">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="as.logical,TailRankTest-method">
+<param name="Local" value="tr01-TailTankTest-methods.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="biomarkerPowerTable">
+<param name="Local" value="tr04-biomarkerPowerTable.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="BMPT">
+<param name="Local" value="tr05-BMPT.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="BMPT-class">
+<param name="Local" value="tr05-BMPT.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="clinical.info">
+<param name="Local" value="tr10-clinical.info.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="dbb">
+<param name="Local" value="tr06-beta-binomial.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="expression.data">
+<param name="Local" value="tr09-expression.data.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="gene.info">
+<param name="Local" value="tr11-gene.info.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="getStatistic">
+<param name="Local" value="tr00-TailRankTest-class.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="getStatistic,TailRankTest-method">
+<param name="Local" value="tr01-TailTankTest-methods.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="hist,TailRankTest-method">
+<param name="Local" value="tr01-TailTankTest-methods.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="matrixMean">
+<param name="Local" value="tr08-matrixMean.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="matrixVar">
+<param name="Local" value="tr08-matrixMean.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="pbb">
+<param name="Local" value="tr06-beta-binomial.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="print,BMPT-method">
+<param name="Local" value="tr05-BMPT.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="qbb">
+<param name="Local" value="tr06-beta-binomial.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="rbb">
+<param name="Local" value="tr06-beta-binomial.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="summary,BMPT-method">
+<param name="Local" value="tr05-BMPT.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="summary,TailRankTest-method">
+<param name="Local" value="tr01-TailTankTest-methods.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="tailRankCutoff">
+<param name="Local" value="tr03-tailRankPower.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="tailRankPower">
+<param name="Local" value="tr03-tailRankPower.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="TailRankTest">
+<param name="Local" value="tr02-TailRankTest.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="TailRankTest-class">
+<param name="Local" value="tr00-TailRankTest-class.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="toleranceBound">
+<param name="Local" value="tr07-toleranceBound.html">
+</OBJECT>
+</UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Package TailRank:  Titles">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Compute row-wise mean and variance using matrix operations">
+<param name="Local" value="tr08-matrixMean.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Experimental info for the prostate cancer data set">
+<param name="Local" value="tr10-clinical.info.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Gene information for the prostate cancer data set">
+<param name="Local" value="tr11-gene.info.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Methods for TailRankTest objects">
+<param name="Local" value="tr01-TailTankTest-methods.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Microarray expression data on prostate cancer">
+<param name="Local" value="tr09-expression.data.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Power of the tail-rank test">
+<param name="Local" value="tr03-tailRankPower.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Power tables for the tail-rank test">
+<param name="Local" value="tr04-biomarkerPowerTable.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="The Beta-Binomial Distribution">
+<param name="Local" value="tr06-beta-binomial.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="The BMPT Class">
+<param name="Local" value="tr05-BMPT.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="The Tail-Rank Test">
+<param name="Local" value="tr02-TailRankTest.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="The TailRankTest Class">
+<param name="Local" value="tr00-TailRankTest-class.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Upper tolerance bounds on normal quantiles">
+<param name="Local" value="tr07-toleranceBound.html">
+</OBJECT>
+</UL>
+</UL>
+</BODY></HTML>

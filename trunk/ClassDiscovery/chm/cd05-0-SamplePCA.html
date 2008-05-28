@@ -1,0 +1,231 @@
+<html><head><title>The SamplePCA Class</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>SamplePCA(ClassDiscovery)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   SamplePCA">
+<param name="keyword" value="R:   SamplePCA-class">
+<param name="keyword" value="R:   plot,SamplePCA,missing-method">
+<param name="keyword" value="R:   predict,SamplePCA-method">
+<param name="keyword" value="R:   screeplot,SamplePCA-method">
+<param name="keyword" value="R:   summary,SamplePCA-method">
+<param name="keyword" value=" The SamplePCA Class">
+</object>
+
+
+<h2>The SamplePCA Class</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Perform principal components analysis on the samples (columns) from a
+microarray or proteomics experiment.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+SamplePCA(data, splitter = 0, usecor = FALSE, center = TRUE)
+## S4 method for signature 'SamplePCA, missing':
+plot(x, splitter=x@splitter, col, main='', which=1:2, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+Either a data frame or matrix with numeric values or an
+<code><a onclick="findlink('Biobase', 'class.ExpressionSet.html')" style="text-decoration: underline; color: blue; cursor: hand">ExpressionSet</a></code> as defined
+in the BioConductor tools for analyzing microarray data.</td></tr>
+<tr valign="top"><td><code>splitter</code></td>
+<td>
+If <code>data</code> is a data frame or matrix, then splitter
+must be either a logical vector or a factor. If <code>data</code> is an
+<code>ExpressionSet</code>, then <code>splitter</code> can be a character string that
+names one of the factor columns in the associated
+<code><a onclick="findlink('Biobase', 'phenoData.html')" style="text-decoration: underline; color: blue; cursor: hand">phenoData</a></code> subobject.</td></tr>
+<tr valign="top"><td><code>center</code></td>
+<td>
+A logical value; should the rows of the data matrix be
+centered first?</td></tr>
+<tr valign="top"><td><code>usecor</code></td>
+<td>
+A logical value; should the rows of the data matrix be
+scaled to have standard deviation 1?</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+A <code>SamplePCA</code> object</td></tr>
+<tr valign="top"><td><code>col</code></td>
+<td>
+A list of colors to represent each level of the
+<code>splitter</code> in the plot. If this parameter is missing, the
+function will select colors automatically.</td></tr>
+<tr valign="top"><td><code>main</code></td>
+<td>
+A character string; the plot title</td></tr>
+<tr valign="top"><td><code>which</code></td>
+<td>
+A numeric vector of length two specifying which two principal
+components should be included in the plot.</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Additional graphical parameters for <code>plot</code></td></tr>
+</table>
+<p>
+.</p>
+
+<h3>Details</h3>
+
+<p>
+The main reason for developing the <code>SamplePCA</code> class is that the
+<code><a onclick="findlink('stats', 'princomp.html')" style="text-decoration: underline; color: blue; cursor: hand">princomp</a></code> function is very inefficient when the number of
+variables (in the microarray setting, genes) far exceeds the number of
+observations (in the microarray setting, biological samples).  The
+<code>princomp</code> function begins by computing the full covariance
+matrix, which gets rather large in a study involving tens of thousands
+of genes.  The <code>SamplePCA</code> class, by contrast, uses singular
+value decomposition (<code><a onclick="findlink('base', 'svd.html')" style="text-decoration: underline; color: blue; cursor: hand">svd</a></code>) on the original data matrix to
+compute the principal components.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+The <code>SamplePCA</code> function constructs and returns an object of the
+<code>SamplePCA</code> class.  We assume that the input data matrix has N
+columns (of biological samples) and P rows (of genes). 
+<br>
+The predict method returns a matrix whose size is the number of
+columns in the input by the number of principal components.</p>
+
+<h3>Objects from the Class</h3>
+
+<p>
+Objects should be created using the <code>SamplePCA</code> function. In the
+simplest case, you simply pass in a data matrix and a logical vector,
+<code>splitter</code>, assigning classes to the columns, and the constructor
+performs principal components analysis on the column.  The
+<code>splitter</code> is ignored by the constructor and is simply saved to
+be used by the plotting routines.  If you omit the <code>splitter</code>,
+then no grouping structure is used in the plots.
+</p>
+<p>
+If you pass <code>splitter</code> as a factor instead of a logical vector,
+then the plotting routine will distinguish all levels of the factor.
+The code is likely to fail, however, if one of the levels of the
+factor has zero representatives among the data columns.
+</p>
+<p>
+As with the class comparison functions (see, for example,
+<code><a onclick="findlink('ClassComparison', 'MultiTtest.html')" style="text-decoration: underline; color: blue; cursor: hand">MultiTtest</a></code>) that are part of OOMPA,
+we can also perform PCA on
+<code><a onclick="findlink('Biobase', 'class.ExpressionSet.html')" style="text-decoration: underline; color: blue; cursor: hand">ExpressionSet</a></code> objects 
+from the BioConductor libraries. In this case, we pass in an
+<code>ExpressionSet</code> object along with a character string containing the
+name of a factor to use for splitting the data.
+</p>
+
+
+<h3>Slots</h3>
+
+<dl>
+<dt><code>scores</code>:</dt><dd>A <code>matrix</code> of size NxN, where N is the
+number of columns in the input, representing the projections of
+the input columns onto the first N principal components. </dd>
+<dt><code>variances</code>:</dt><dd>A <code>numeric</code> vector of length N; the
+amount of the total variance explained by each principal component.</dd>
+<dt><code>components</code>:</dt><dd>A <code>matrix</code> of size PxN (the same size
+as the input matrix) containing each of the first P principal
+components as columns.</dd>
+<dt><code>splitter</code>:</dt><dd>A logical vector or factor of length N
+classifying the coluimns into known groups.</dd>
+<dt><code>usecor</code>:</dt><dd>A <code>logical</code> value; was the data standardized?</dd>
+<dt><code>shift</code>:</dt><dd>A <code>numeric</code> vector of length P; the mean
+vector of the input data, which is used for centering by the
+<code>predict</code> method.</dd>
+<dt><code>scale</code>:</dt><dd>A <code>numeric</code> vector of length P; the
+standard deviation of the input data, which is used for scaling by
+the <code>predict</code> method.</dd>
+<dt><code>call</code>:</dt><dd>An object of class <code>call</code> that records
+how the object was created. </dd>
+</dl>
+
+<h3>Methods</h3>
+
+<dl>
+<dt>plot</dt><dd><code>signature(x = SamplePCA, y = missing)</code>: Plot the
+samples in a two-dimensional principal component space. </dd>
+<dt>predict</dt><dd><code>signature(object = SamplePCA)</code>: Project new
+data into the principal component space. </dd>
+<dt>screeplot</dt><dd><code>signature(x = SamplePCA)</code>: Produce a bar
+chart of the variances explained by each principal component. </dd>
+<dt>summary</dt><dd><code>signature(object = SamplePCA)</code>: Write out a
+summary of the object.</dd>
+</dl>
+
+<h3>Author(s)</h3>
+
+<p>
+Kevin R. Coombes &lt;kcoombes@mdanderson.org&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a onclick="findlink('stats', 'princomp.html')" style="text-decoration: underline; color: blue; cursor: hand">princomp</a></code>, <code><a href="cd05-1-GenePCA.html">GenePCA</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# simulate datda from three different groups
+d1 &lt;- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
+d2 &lt;- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
+d3 &lt;- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
+dd &lt;- cbind(d1, d2, d3)
+kind &lt;- factor(rep(c('red', 'green', 'blue'), each=10))
+
+# perform PCA
+spc &lt;- SamplePCA(dd, splitter=kind)
+
+# plot the results
+plot(spc, col=levels(kind))
+
+# mark the group centers
+x1 &lt;- predict(spc, matrix(apply(d1, 1, mean), ncol=1))
+points(x1[1], x1[2], col='red', cex=2)
+x2 &lt;- predict(spc, matrix(apply(d2, 1, mean), ncol=1))
+points(x2[1], x2[2], col='green', cex=2)
+x3 &lt;- predict(spc, matrix(apply(d3, 1, mean), ncol=1))
+points(x3[1], x3[2], col='blue', cex=2)
+
+# check out the variances
+screeplot(spc)
+
+# cleanup
+rm(d1, d2, d3, dd,kind, spc, x1, x2, x3)
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>ClassDiscovery</em> version 2.7.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

@@ -1,0 +1,113 @@
+<html><head><title>Power tables for the tail-rank test</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>biomarkerPowerTable(TailRank)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   biomarkerPowerTable">
+<param name="keyword" value=" Power tables for the tail-rank test">
+</object>
+
+
+<h2>Power tables for the tail-rank test</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Compute an array of power tables for the tail-rank.test.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+biomarkerPowerTable(G, N1=20, N2=seq(25, 250, by=25), psi = c(0.95, 0.99), conf=0.99, phi = seq(0.10, 0.50, by = 0.05), model="bb")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>G</code></td>
+<td>
+An integer; the number of genes being assessed as potential
+biomarkers. Statistically, the number of hypotheses being tested.</td></tr>
+<tr valign="top"><td><code>N1</code></td>
+<td>
+An integer; the number of "train" or "healthy" samples used.</td></tr>
+<tr valign="top"><td><code>N2</code></td>
+<td>
+An integer; the number of "test" or "cancer" samples used.</td></tr>
+<tr valign="top"><td><code>psi</code></td>
+<td>
+A real number between 0 and 1; the desired specificity of
+the test.</td></tr>
+<tr valign="top"><td><code>conf</code></td>
+<td>
+A real number between 0 and 1; the confidence level of the
+results. Can be obtained by subtracting the family-wise Type I error
+from 1.</td></tr>
+<tr valign="top"><td><code>phi</code></td>
+<td>
+A real number between 0 and 1; the sensitivity that one
+would like to be able to detect, conditional on the specificity.</td></tr>
+<tr valign="top"><td><code>model</code></td>
+<td>
+A character string that determines whether power and
+significance are computed from abinomial or a beta-binomial (bb)
+model.</td></tr>
+</table>
+
+<h3>Value</h3>
+
+<p>
+Returns a list of objects of the <code><a href="tr05-BMPT.html">BMPT</a></code> class. Each item
+in the list consists of a two-dimensional table (indexed by the sample
+sizes <code>N</code> and the sensitivities <code>phi</code>) with scalars
+recording the values of <code>G</code>, <code>conf</code>, and <code>psi</code> that
+were used to generate it.</p>
+
+<h3>Note</h3>
+
+<p>
+Default values of the optional arguments (<code>N</code>, <code>psi</code>,
+<code>conf</code>, <code>phi</code>)are included in the usage examples.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Kevin R. Coombes &lt;kcoombes@mdanderson.org&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="tr02-TailRankTest.html">TailRankTest</a></code>,
+<code><a href="tr03-tailRankPower.html">tailRankPower</a></code>,
+<code><a href="tr04-biomarkerPowerTable.html">biomarkerPowerTable</a></code>,
+<code><a href="tr08-matrixMean.html">matrixMean</a></code>,
+<code><a href="tr07-toleranceBound.html">toleranceBound</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+stuff &lt;- biomarkerPowerTable(10000, 20,
+                               c(10, 20, 50, 100, 250, 500),
+                               c(0.95, 0.99),
+                               c(0.99, 0.95),
+                               seq(0.1, 0.7, by=0.1))
+lapply(stuff, summary)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>TailRank</em> version 2.7.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

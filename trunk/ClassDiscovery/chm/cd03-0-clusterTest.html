@@ -1,0 +1,165 @@
+<html><head><title>The ClusterTest Class</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>ClusterTest-class(ClassDiscovery)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   ClusterTest">
+<param name="keyword" value="R:   ClusterTest-class">
+<param name="keyword" value="R:   hist,ClusterTest-method">
+<param name="keyword" value="R:   image,ClusterTest-method">
+<param name="keyword" value="R:   summary,ClusterTest-method">
+<param name="keyword" value=" The ClusterTest Class">
+</object>
+
+
+<h2>The ClusterTest Class</h2>
+
+
+<h3>Description</h3>
+
+<p>
+This is a base class for tests that attempt to determine
+whether the groups found by an unsupervised clustering method are
+statistically significant.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S4 method for signature 'ClusterTest':
+image(x, dendrogram, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+An object of the <code>ClusterTest</code> class.</td></tr>
+<tr valign="top"><td><code>dendrogram</code></td>
+<td>
+An object with S3 class <code>hclust</code>, as returned
+by the <code><a onclick="findlink('stats', 'hclust.html')" style="text-decoration: underline; color: blue; cursor: hand">hclust</a></code> function.</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Additional graphical parameters to be passed to the
+standard <code>image</code> function.</td></tr>
+</table>
+
+<h3>Objects from the Class</h3>
+
+<p>
+Objects can be created by calls of the form <code>new("ClusterTest",  ...)</code>. 
+Most users, however, will only create objects from one of the derived
+classes such as <code><a href="cd03-1-BootstrapClusterTest.html">BootstrapClusterTest</a></code> or
+<code><a href="cd04-0-PerturbationClusterTest.html">PerturbationClusterTest</a></code>.
+</p>
+
+
+<h3>Slots</h3>
+
+<dl>
+<dt><code>call</code>:</dt><dd>An object of class <code>call</code>, which shows
+how the object was constructed.</dd>
+<dt><code>result</code>:</dt><dd>A symmetric <code>matrix</code> containing the
+results of the cluster reproducibility test.  The size of the
+matrix corresponds to the number of samples (columns) in the data
+set on which the test was performed.  The <code>result</code> matrix
+should contain "agreement" values between 0 and 1, representing for
+each pair of samples the fraction of times that they were
+collected into the same cluster.</dd> 
+</dl>
+
+<h3>Methods</h3>
+
+<dl>
+<dt>hist</dt><dd><code>signature(x = "ClusterTest")</code>: Produces a
+histogram of the agreement fractions.  When a true group structure
+exists, one expects a multimodal distribution,with one group of
+agreements near 0 (for pairs belonging to different clusters) and
+one group of agreements near 1 (for pairs belonging to the same
+cluster).</dd> 
+<dt>image</dt><dd><code>signature(x = "ClusterTest")</code>: Uses the
+<code>heatmap</code> function to display the agreement matrix. The
+optional <code>dendrogram</code> argument should be used to display the
+extent to which the ageement matrix matches the results of
+hierarchical clustering using the full data set.</dd>
+</dl>
+<dt>summary</dt><dd><code>signature(object = "ClusterTest")</code>: Write out a
+summary of the object.</dd>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Kevin R. Coombes &lt;kcoombes@mdanderson.org&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Kerr MK, Churchill GJ. Boostrapping cluster analysis: Assessing the
+reliability of conclusions from microarray experiments. PNAS 2001;
+98:8961-8965.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="cd03-1-BootstrapClusterTest.html">BootstrapClusterTest</a></code>,
+<code><a href="cd04-0-PerturbationClusterTest.html">PerturbationClusterTest</a></code>, <code><a onclick="findlink('stats', 'heatmap.html')" style="text-decoration: underline; color: blue; cursor: hand">heatmap</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# simulate data from two different classes
+d1 &lt;- matrix(rnorm(100*30, rnorm(100, 0.5)), nrow=100, ncol=30, byrow=FALSE)
+d2 &lt;- matrix(rnorm(100*20, rnorm(100, 0.5)), nrow=100, ncol=20, byrow=FALSE)
+dd &lt;- cbind(d1, d2)
+
+# cluster the data
+hc &lt;- hclust(distanceMatrix(dd, 'pearson'), method='average')
+
+# make a fake reproducibility matrix
+fraud &lt;- function(x) {
+  new('ClusterTest', result=abs(cor(x)), call=match.call())
+}
+
+fake &lt;- fraud(dd)
+summary(fake)
+
+hist(fake)
+
+image(fake) # let heatmap compute a new dendrogram from the agreements
+
+image(fake, dendrogram=hc) # use the actual dendrogram from the data
+
+image(fake, dendrogram=hc, col=blueyellow(64)) # change the colors
+
+#cleanup
+rm(fake, fraud, hc, dd, d1, d2)
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>ClassDiscovery</em> version 2.7.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

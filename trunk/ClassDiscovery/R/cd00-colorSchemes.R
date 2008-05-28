@@ -1,0 +1,60 @@
+require("stats")
+require("cluster")
+
+if (!isGeneric("predict"))
+  setGeneric("predict", function(object, ...) standardGeneric("predict"))
+
+if (!isGeneric("pltree"))
+  setGeneric("pltree", function(x, ...) standardGeneric("pltree"))
+
+if (!isGeneric("screeplot"))
+  setGeneric("screeplot", function(x, ...)
+             standardGeneric("screeplot"))
+
+
+redscale <- function(N) {
+  rgb((1:N)-1, 0, 0, maxColorValue=N)
+}
+
+greenscale <- function(N) {
+  rgb(0, (1:N)-1, 0, maxColorValue=N)
+}
+
+bluescale <- function(N) {
+  rgb(0, 0, (1:N)-1, maxColorValue=N)
+}
+
+blueyellow <- function(N) {
+  x <- (1:N)-1
+  rgb(x, x, rev(x), maxColorValue=N)
+}
+
+## Fix to redgreen contributed by Karl Kashofer
+redgreen <- function(N) {
+  if (( N %% 2 ) == 0) { # even
+    A <- N/2
+    B <- (N/2)+1
+  } else { # odd
+    A <- B <- N/2
+  }
+  r <- c(rep(0, B), 0:A)
+  g <- -c(-B:0, rep(0, A))
+  rgb(r,g, rep(0, N), maxColorValue=N)
+}
+
+
+## jet Colors from Keith Baggerly, based on MATLAB default color map
+jetColors <- function(N){
+  k <- ceiling(N/4)
+  temp.red <- c(rep(0,2*k), 1:k, rep(k,k-1), k:1)
+  temp.green <- c(rep(0,k), 1:k, rep(k,k-1), k:1, rep(0,k))
+  temp.blue <- c(1:k, rep(k,k-1), k:1, rep(0,2*k))
+  temp.rgb <- cbind(temp.red, temp.green, temp.blue)
+  delta <- 5*k-1 - N
+  delta <- ceiling(delta/2)
+  temp.rgb <- temp.rgb[delta:(delta+N-1),]/k
+
+  ## assemble everything last value is returned
+  rgb(temp.rgb[,1], temp.rgb[,2], temp.rgb[,3])
+
+}

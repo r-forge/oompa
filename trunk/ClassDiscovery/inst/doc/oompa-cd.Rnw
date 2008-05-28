@@ -1,0 +1,376 @@
+%\VignetteIndexEntry{OOMPA ClassDiscovery}
+%\VignetteKeywords{OOMPA, Class Discovery, Clustering}
+%\VignetteDepends{oompaBase,PreProcess,ClassDiscovery}
+%\VignettePackage{ClassDiscovery}
+\documentclass{article}
+
+\usepackage{hyperref}
+
+\newcommand{\Rfunction}[1]{{\texttt{#1}}}
+\newcommand{\Robject}[1]{{\texttt{#1}}}
+\newcommand{\Rclass}[1]{{\texttt{#1}}}
+\newcommand{\Rpackage}[1]{{\textit{#1}}}
+
+\title{Class Discovery with OOMPA}
+\author{Kevin R. Coombes}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Introduction}
+
+OOMPA is a suite of object-oriented tools for processing and analyzing
+large biological data sets, such as those arising from mRNA expression
+microarrays or mass spectrometry proteomics.  The
+\Rpackage{ClassDiscovery} package in OOMPA provides tools to work on
+the ``class discovery'' problem.  Class discovery is one of the three
+primary types of applictions of microarrays described by Richard Simon
+and colleagues.  These are unsupervised methods that are intended to
+uncover the underlying structure in a data set.
+
+\section{Getting Started}
+
+No one will be surprised to learn that we start by loading the package
+into the current R session:
+<<lib>>=
+library(ClassDiscovery)
+@ 
+
+The main functions and classes in the ClassDiscovery package work
+either with data matrices or with \Robject{ExpressionSet} objects from
+the BioConductor \Rpackage{Biobase} package.  For the first set of
+examples in this vignette, we will use simulated data that represents
+three different groups of samples:
+<<simu>>=
+d1 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
+d2 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
+d3 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
+dd <- cbind(d1, d2, d3)
+rm(d1,d2,d3)
+@ 
+Because the ``raw data'' is small by microarray standards, we can use
+the image command to take a look at it.  The \Rpackage{ClassDiscovery}
+package includes several color maps that are more common in the
+microarray literature than the color maps that ship with R.  These
+include a green-black-red colormap (obtained via the
+\Rfunction{redgreen} function), a blue-gray-yellow colormap (from
+\Rfunction{blueyellow}), shades of red, green, or blue (from
+\Rfunction{redscale}, \Rfunction{greenscale}, or
+\Rfunction{bluescale}, respectively) and a ``jet'' color map (from
+\Rfunction{jetColors}) that recapitulates the standard MATLAB color
+map.  Two examples are shown in Figure~\ref{fig:im}.
+\begin{figure}
+<<im,fig=TRUE,width=6,height=8>>=
+par(mfrow=c(2,1))
+image(1:nrow(dd), 1:ncol(dd), dd, xlab="genes", ylab="samples", col=redgreen(64))
+image(1:nrow(dd), 1:ncol(dd), dd, xlab="genes", ylab="samples", col=jetColors(64))
+par(mfrow=c(1,1))
+@ 
+\caption{Images of the simulated data using two different color maps.}
+\label{fig:im}
+\end{figure}
+
+\section{Distances and Clustering}
+
+The \Rfunction{dist} function includes a variety of distance metrics
+commonly used by statisticians.  However, it does \textbf{not} include
+the most commonly used metric in the microarray literature, which is
+based on the Pearson correlation coefficient.  In addition,
+\Rfunction{dist} wants to compute distances between rows, not columns.
+In most microarray applications, the convention is to store the
+samples as columns and the genes as rows, and we are typically more
+interested in clustering the samples. So, we have written a function
+called \Rfunction{distanceMatrix} that solves both these problems. All
+the existing distance metrics in \Rfunction{dist} are available
+through \Rfunction{distanceMatrix}, but some new ones are added. The
+first example clusters the samples using Pearson correlation
+(Figure~\ref{fig:pear}).  As you can see, the imposed three-group
+structuire is visible in the dendrogram.  Similar results are obtained
+using Spearman rank correlation instead of the Pearson correlation
+(Figure~\ref{fig:spear}).
+
+\begin{figure}
+<<pear,fig=TRUE>>=
+pearson <- hclust(distanceMatrix(dd, "pearson"), "average")
+plclust(pearson)
+@ 
+\caption{Hierarchical clustering using Pearson correlation to define distances.}
+\label{fig:pear}
+\end{figure}
+
+\begin{figure}
+<<spear,fig=TRUE>>=
+spear <- hclust(distanceMatrix(dd, "spearman"), "average")
+plclust(spear)
+@ 
+\caption{Hierarchical clustering using Spearman rank correlation to
+  define distances.}
+\label{fig:spear}
+\end{figure}
+
+\subsection{Colored Clusters}
+
+Sometimes we want the known group structure to stand out clearly in a
+dendrogram, indicated perhaps by color.  In our example, we have ten
+samples from each of three groups, in order.  Using
+\Rfunction{plotColoredClusters}, we can plot the dendrogram with each
+group indicated using a different color (Figure~\ref{fig:col}).
+
+\begin{figure}
+<<mycol,fig=TRUE>>=
+myColors <- rep(c("red", "blue", "purple"), each=10)
+myLabels <- paste("Sample", 1:30)
+plotColoredClusters(pearson, myLabels, myColors)
+@ 
+\caption{Clustering by Pearson correlation, with the true group
+  structure coded by color.}
+\label{fig:col}
+\end{figure}
+
+\section{Checking the Robustness of Clusters}
+
+One important factor about clustering routines is that they always
+produce clusters, whether or not clusters are truly present in the
+data.  Thus, it is important to have some tools available to try to
+determine if the clusters are believable.  One way to approach this
+problem, as decribed by Kerr and Churchill, is to repeat the
+clustering using a bootstrap.  If we are trying to cluster samples,
+for example, we can use a bootstrap to repeatedly resample the genes
+used for the clustering, and count how many times each pair of
+samples ends up in the same branch of the dendrogram.  Here is an
+example, using hierarchical clustering with Pearson correlation and
+average linkage.  Figure~\ref{fig:boot} displays the results, using a
+color map that ranges from pure blue (the samples are in the same
+branch $0\%$ of the time) to pure yellow (the samples are in the same
+branch $100\%$ of the time).
+
+<<boot>>=
+boot <- BootstrapClusterTest(dd, cutHclust, nTimes=200, k=4, 
+                             metric="pearson", method="average", 
+                             verbose=FALSE)
+summary(boot)
+@ 
+
+\begin{figure}
+<<bootf,fig=TRUE>>=
+image(boot, col=blueyellow(64))
+@ 
+\caption{Heatmap of the results of a bootstrap cluster test.}
+\label{fig:boot}
+\end{figure}
+
+The default \Rfunction{image} display calls the \Rfunction{heatmap}
+function, which reclusters the samples based on the bootstrap distance
+results.  You can override this by supplying a starting dendrogram,
+as in Figure~\ref{fig:boot2}.
+
+\begin{figure}
+<<boot2,fig=TRUE>>=
+image(boot, dendrogram=pearson,col=blueyellow(64))
+@ 
+\caption{Heatmap of the results of a bootstrap cluster test of the
+  significance of hierarchical clustering using Pearson correlation
+  and average linkage.}
+\label{fig:boot2}
+\end{figure}
+
+Because the cluster test requires you to cut the dendrogram at a
+prespecified level to produce $k$ clusters, the results may be
+different for different values of $k$.  They can also be different if
+you change the metric or linkage method.  You can also use other
+clustering methods; the functions \Rfunction{cutPam},
+\Rfunction{cutKmeans}, and \Rfunction{cutRepeatedKmeans} can be used
+instead of \Rfunction{cutHclust}.  If you want to write your own
+version of these functions, they should take an argument
+\Robject{data} to specify the data matrix and an argument \Robject{k}
+to specify the number of desired clusters, and should return a
+numeric vector containing the class labels (in the range $1$ to $k$)
+for the samples.  Additional optional arguments to control the
+clustering algorithm can be added as desired, as long as they are
+given sensible default values.
+
+In some cases, there are not enough rows for a bootstrap resample to
+adequately reflect the distribution.  To deal with this case, we can
+perform a similar reclustering process, where we add Gaussian white
+noise to the data matrix instead of using a bootstrap.  Here is an
+example, using k-means to do the clustering (Figure~\ref{fig:kper}).
+
+<<kpert>>=
+kper <- PerturbationClusterTest(dd, cutKmeans, k=4, nTimes=100, noise=1, verbose=FALSE)
+summary(kper)
+@ 
+
+\begin{figure}
+<<kperf,fig=TRUE>>=
+image(kper, col=redgreen(128))
+@ 
+\caption{Heatmap of the reproducibility of clustering using k-means
+  under repeated perturbations of the data.}
+\label{fig:kper}
+\end{figure}
+
+\section{Principal Components Analysis}
+
+Principal components analysis (PCA) provides an alternative way to see
+which samples are close to one another.  One has to be careful when
+performing PCA on large data sets, since the default behavior of the
+\Rfunction{princomp} function is to start by constructing a possibly
+gigantic covariance matrix.  We have implemented the algorithm using a
+singular value decomposition (SVD) on the original data matrix, which
+is computationally much more efficient. When there are known classes
+(as in our example) we can easily display them in color
+(Figure~\ref{fig:spca}).  
+
+\begin{figure}
+<<spca,fig=TRUE>>=
+trueClasses <- factor(rep(c("A", "B", "C"), each=10))
+spca <- SamplePCA(dd, trueClasses)
+plot(spca, col=c("red", "blue", "purple"))
+@ 
+\caption{PCA plot of the first two principal components.}
+\label{fig:spca}
+\end{figure}
+
+We can also select the pairs of principal components (PCs) that we
+want to display (Figure~\ref{fig:spca2}), although the default display
+of the first two is the one you usually want.  In order to figure out
+how many PCs are important, we can use a ``screeplot''
+(Figure~\ref{fig:scree}).  In our example, the first two components
+appear to carry almost all of the information in the data set.
+
+\begin{figure}
+<<spca2,fig=TRUE>>=
+plot(spca, col=c("red", "blue", "purple"), which=c(1,3))
+@ 
+\caption{PCA plot of the first and third principal components.}
+\label{fig:spca2}
+\end{figure}
+
+\begin{figure}
+<<scree,fig=TRUE>>=
+screeplot(spca)
+@ 
+\caption{ A ``screeplot'' of the PCA, which shows the percentage of
+  variance explained by each component.}
+\label{fig:scree}
+\end{figure}
+
+PCA is fundamentally a geometric procedure based on linear algebra,
+since it works by choosing a convenient set of directions to serve as
+axes in a high dimensional space.  In some applications, the PCs are
+used as features (sometimes called ``metagenes'') to build a
+classification model.  In order to apply these kinds of classifiers to
+new data sets, you have to be able to project new samples into the
+same principal component space. To illustrate how this works, we
+simulate some new data that does not really belong to any of the three
+classes, and we use the \Rfunction{predict} method to project it into
+the principal component space.  We can then plot the resultsd of the
+PCA and overlay the projected points (Figure~\ref{fig:proj}).
+
+<<nd>>=
+newdata <- matrix(rnorm(10*100), ncol=10)
+projected <- predict(spca, newdata)
+@ 
+
+\begin{figure}
+<<ndf,fig=TRUE>>=
+plot(spca, col=c("red", "blue", "purple"))
+points(projected[,1], projected[,2], pch=16)
+@ 
+\caption{PCA plot, along with projections of a new data set.}
+\label{fig:proj}
+\end{figure}
+
+\section{Mosaics: red-green heatmaps}
+
+$<$Sarcasm$>$
+When Mike Eisen and colleagues invented clustering, they also
+introduced the now-ubiquitous red-green heatmaps beloved by
+color-blind researchers around the world. As a result, everyone
+working with microarrays has to be able to produce the same kinds of
+pictures in order to be taken seriously. 
+$<$/Sarcasm$>$
+
+Our answer to this challenge is the \Rfunction{Mosaic}
+class.  We can use our simulated data as an example, following the
+usual R convention in which we first construct an object and then
+print it or display it (Figure~\ref{fig:mose}).  The summary tells us
+which distance metrics and linkage methods were used to contruct the
+object.  The plot command then gives a simple interface to get the
+desired figure.
+
+<<mose>>=
+mose <- Mosaic(dd, sampleMetric="spearman", geneMetric="pearson")
+summary(mose)
+@ 
+
+\begin{figure}
+<<fmose,fig=TRUE,width=6, height=8>>=
+plot(mose, hExp=3, col=redgreen(64))
+@ 
+\caption{Red-green heatmap based on two-way clustering of the data.}
+\label{fig:mose}
+\end{figure}
+
+\textbf{Implementation Note:} The hardest part of this whole thing was
+being able to control the aspect ratio of the heatmap.  This feature
+is not part of the \Rfunction{heatmap} function in the
+\Rpackage{stats} package.  Our solution was to modify the code from
+that function to produce a new function that we call
+\Rfunction{aspectHeatmap}.  This modification added even more
+parameters to a function that was already almost unusable in the hands
+of novice R users. (This claim is based on three years experience
+teaching a course on the analysis of microarray data to a mixture of
+statisticians and biologists.)  The \Rpackage{Mosaic} class hides most
+of this complexity; the only things you really neeed to know about are
+the \Robject{hExp} and \Robject{wExp} parameters that act as expansion
+factors for the height and width of the figure, respectively.
+
+\section{Class discovery with ExpressionSets}
+
+As we mentioned earlier, the main functions in the
+\Rpackage{ClassDiscovery} work with ExpressionSets as well as with
+plain old data matrices.  For example, we can load a sample data set
+from the \Rpackage{Biobase} package.
+
+<<bb>>=
+library(Biobase)
+data(sample.ExpressionSet)
+s <- sample.ExpressionSet
+s
+@ 
+
+\begin{figure}
+<<eclu,fig=TRUE>>=
+plclust(hclust(distanceMatrix(s, "pearson"), "average"))
+@ 
+\caption{Hierarchical clustering of a sample ExpressionSet.}
+\label{fig:eclu}
+\end{figure}
+
+\begin{figure}
+<<epca,fig=TRUE>>=
+plot(SamplePCA(s))
+@ 
+\caption{Plot of the first two principal components of a sample
+  ExpressionSet.}
+\label{fig:epca}
+\end{figure}
+
+
+\begin{figure}
+<<emos,fig=TRUE,width=6,height=8>>=
+plot(Mosaic(s), hExp=3, col=blueyellow(64))
+@ 
+\caption{Plot of the first two principal components of a sample
+  ExpressionSet.}
+\label{fig:emos}
+\end{figure}
+
+
+
+\end{document}
+
+

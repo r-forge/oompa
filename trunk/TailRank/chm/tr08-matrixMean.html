@@ -1,0 +1,103 @@
+<html><head><title>Compute row-wise mean and variance using matrix operations</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>matrixMean(TailRank)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   matrixMean">
+<param name="keyword" value="R:   matrixVar">
+<param name="keyword" value=" Compute row-wise mean and variance using matrix operations">
+</object>
+
+
+<h2>Compute row-wise mean and variance using matrix operations</h2>
+
+
+<h3>Description</h3>
+
+<p>
+In large data sets, like those arising from microarray or proteomics
+experiments, it is often necessary to compute the mean and variance
+for each row among many thousands. The computations can be
+significantly faster if vectorized instead of using the inherent loop
+in an <code>apply</code> statement.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+matrixMean(x)
+matrixVar(x, xmean)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+A matrix or data.frame containing numeric values.</td></tr>
+<tr valign="top"><td><code>xmean</code></td>
+<td>
+A vector containing the means of the rows in <code>x</code>.</td></tr>
+</table>
+
+<h3>Value</h3>
+
+<p>
+A vector containing a number of entries equal to the number of rows of
+<code>x</code>, where each entry is either the mean or the variance of the
+corresponding row.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Kevin R. Coombes &lt;kcoombes@mdanderson.org&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a onclick="findlink('base', 'apply.html')" style="text-decoration: underline; color: blue; cursor: hand">apply</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+nr &lt;- 10000
+nc &lt;- 40
+fake.data &lt;- matrix(rnorm(nr*nc), nrow=nr)
+fake.class &lt;- rep(c('H', 'C'), each=20)
+
+H.n &lt;- sum(fake.class=='H')
+C.n &lt;- sum(fake.class=='C')
+
+H.mean &lt;- matrixMean(fake.data[, fake.class=='H'])
+H.var &lt;- matrixVar(fake.data[, fake.class=='H'], H.mean)
+
+C.mean &lt;- matrixMean(fake.data[, fake.class=='C'])
+C.var &lt;- matrixVar(fake.data[, fake.class=='C'], C.mean)
+
+pooled.sd &lt;- sqrt( (H.var*(H.n - 1) + C.var*(C.n - 1))/(H.n + C.n - 2) ) 
+
+t.statistics &lt;- (C.mean - H.mean)/pooled.sd/sqrt(1/H.n + 1/C.n)
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>TailRank</em> version 2.7.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

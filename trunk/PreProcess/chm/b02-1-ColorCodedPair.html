@@ -1,0 +1,130 @@
+<html><head><title>The ColorCodedPair class</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>ColorCodedPair-class(PreProcess)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   ColorCodedPair-class">
+<param name="keyword" value="R:   ColorCodedPair">
+<param name="keyword" value="R:   plot,ColorCodedPair,missing-method">
+<param name="keyword" value=" The ColorCodedPair class">
+</object>
+
+
+<h2>The ColorCodedPair class</h2>
+
+
+<h3>Description</h3>
+
+<p>
+This class represents a vector of (x,y) pairs, each of which should be
+plotted in a specific color with a specific symbol.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ColorCodedPair(x, y, ccl)
+## S4 method for signature 'ColorCodedPair, missing':
+plot(object, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+A numeric vector </td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+A numeric vector </td></tr>
+<tr valign="top"><td><code>ccl</code></td>
+<td>
+A list of <code><a href="b02-0-ColorCoding.html">ColorCoding</a></code> objects </td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+A <code>ColorCodedPair</code> object</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Additional arguments are as in the underlying generic methods.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+It is often necessary with microarray data to produce multiple plots,
+where each point on the plot corresponds to a gene or a spot on the
+microarray.  Across multiple plots, we often want to use symbols or
+colors to mark subsets of he genes with certain properties.  The
+<code>ColorCodedPair</code> class works in tandem with the
+<code><a href="b02-0-ColorCoding.html">ColorCoding</a></code> class to make it easier to maintain
+consistent plotting conventions across multiple graphs.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+The constructor returns a valid <code>ColorCodedPair</code> object.
+<br>
+The <code>plot</code> method invisibly returns the object being plotted.</p>
+
+<h3>Slots</h3>
+
+<dl>
+<dt><code>x</code></dt><dd>A numeric vector </dd>
+<dt><code>y</code></dt><dd>A numeric vector </dd>
+<dt><code>colorCodingList</code></dt><dd>A list of <code><a href="b02-0-ColorCoding.html">ColorCoding</a></code>
+objects </dd>
+</dl>
+
+<h3>Methods</h3>
+
+<dl>
+<dt>plot(object, ...)</dt><dd>Plot the <code>ColorCodedPair</code> object, with
+appropriate colors and symbols (of course).</dd>
+</dl>
+
+<h3>Author(s)</h3>
+
+<p>
+Kevin R. Coombes &lt;kcoombes@mdanderson.org&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+The <code><a href="b02-0-ColorCoding.html">ColorCoding</a></code> class, <code><a href="b02-0-ColorCoding.html">colorCode</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+theta &lt;- (0:360)*pi/180
+x &lt;- cos(theta)
+y &lt;- sin(theta)
+xp &lt;- x &gt; 0
+yp &lt;- y &gt; 0
+colors &lt;- list(ColorCoding(xp&amp;yp, COLOR.EXPECTED),
+               ColorCoding(xp&amp;!yp, COLOR.OBSERVED),
+               ColorCoding(!xp&amp;yp, COLOR.PERMTEST),
+               ColorCoding(!xp&amp;!yp, COLOR.FITTED))
+plot(ColorCodedPair(x, y, colors))
+
+plot(ColorCodedPair(theta, x, colors))
+
+plot(ColorCodedPair(theta, y, colors),
+     xlab='angle in radians', ylab='sine', main='colored sine')
+
+</pre>
+
+
+
+<hr><div align="center">[Package <em>PreProcess</em> version 2.7.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

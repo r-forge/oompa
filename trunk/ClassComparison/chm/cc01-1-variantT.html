@@ -1,0 +1,176 @@
+<html><head><title>Classes for Variant T-tests</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>variantT(ClassComparison)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   MultiTtestPaired">
+<param name="keyword" value="R:   MultiTtestUnequal">
+<param name="keyword" value="R:   MultiTtestPaired-class">
+<param name="keyword" value="R:   MultiTtestUnequal-class">
+<param name="keyword" value="R:   summary,MultiTtestPaired-method">
+<param name="keyword" value="R:   summary,MultiTtestUnequal-method">
+<param name="keyword" value=" Classes for Variant T-tests">
+</object>
+
+
+<h2>Classes for Variant T-tests</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Class to perform row-by-row paired or unequal variance t-tests on
+microarray or proteomics data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+MultiTtestPaired(data, classes, pairing)
+MultiTtestUnequal(data, classes)
+## S4 method for signature 'MultiTtestPaired':
+summary(object, ...)
+## S4 method for signature 'MultiTtestUnequal':
+summary(object, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+Either a data frame or matrix with numeric values or an
+<code><a onclick="findlink('Biobase', 'class.ExpressionSet.html')" style="text-decoration: underline; color: blue; cursor: hand">ExpressionSet</a></code> as defined
+in the BioConductor tools for analyzing microarray data.</td></tr>
+<tr valign="top"><td><code>classes</code></td>
+<td>
+If <code>data</code> is a data frame or matrix, then classes
+must be either a logical vector or a factor. If <code>data</code> is an
+<code>ExpressionSet</code>, then <code>classes</code> can be a character string that
+names one of the factor columns in the associated
+<code><a onclick="findlink('Biobase', 'phenoData.html')" style="text-decoration: underline; color: blue; cursor: hand">phenoData</a></code> subobject.</td></tr>
+<tr valign="top"><td><code>pairing</code></td>
+<td>
+A numerical vector indicating which samples are
+paired.</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+A <code>MultiTtest</code> object</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Unused; optional extra parameters for <code>summary</code>.</td></tr>
+</table>
+
+<h3>Creating objects</h3>
+
+<p>
+Although objects can be created using <code>new</code>, the better method is
+to use the <code>MultiTtestPaired</code> or <code>MultiTtestUnequal</code>
+functions. In the simplest case, you simply pass in a data matrix
+and a logical vector assigning classes to the columns (and, in the
+case of a paired t-test, a numeric vector describing the pairing), and
+the constructor performs row-by-row two-sample t-tests and computes
+the associated (single test) p-values.  To adjust for multiple
+testing, you can pass the p-values on to the <code><a href="cc00-0-bum.html">Bum</a></code> class.
+</p>
+<p>
+If you use a factor instead of a logical vector, then the t-test
+compares the first level of the factor to everything else.  To handle
+the case of multiple classes, see the <code><a href="cc03-0-multiLM.html">MultiLinearModel</a></code>
+class.
+</p>
+<p>
+As with other class comparison functions that are part of the OOMPA,
+we can also perform statistical tests on
+<code><a onclick="findlink('Biobase', 'class.ExpressionSet.html')" style="text-decoration: underline; color: blue; cursor: hand">ExpressionSet</a></code> objects from
+the BioConductor libraries. In this case, we pass in an
+<code>ExpressionSet</code> object along with the name of a factor to use for
+splitting the data.
+</p>
+
+
+<h3>Extends</h3>
+
+<p>
+Both classes extend class <code><a href="cc01-0-multiT.html">MultiTtest</a></code>, directly. See that
+class for descriptions of the inherited methods and slots.
+</p>
+
+
+<h3>Slots</h3>
+
+<dl>
+<dt><code>df</code>:</dt><dd>The <code>MultiTtestUnequal</code> class adds a slot to
+record e gene-by-gene degrees of freedom, which can change along
+with the variances.</dd>
+</dl>
+
+<h3>Methods</h3>
+
+<dl>
+<dt>summary</dt><dd><code>signature(object = MultiTtestPaired)</code>:
+Write out a summary of the object. </dd>
+<dt>summary</dt><dd><code>signature(object = MultiTtestUnequal)</code>:
+Write out a summary of the object. </dd>
+</dl>
+
+<h3>Author(s)</h3>
+
+<p>
+Kevin R. Coombes &lt;kcoombes@mdanderson.org&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>
+None.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="cc01-0-multiT.html">MultiTtest</a></code>, <code><a href="cc00-0-bum.html">Bum</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ng &lt;- 10000
+ns &lt;- 50
+dat &lt;- matrix(rnorm(ng*ns), ncol=ns)
+cla &lt;- factor(rep(c('A', 'B'), each=25))
+res &lt;- MultiTtestUnequal(dat, cla)
+summary(res)
+hist(res, breaks=101)
+plot(res, res@p.values)
+
+pairing &lt;- rep(1:25, 2)
+res &lt;- MultiTtestPaired(dat, cla, pairing)
+summary(res)
+plot(res)
+hist(res@p.values, breaks=101)
+
+rm(ng, ns, dat, cla, res, pairing)
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>ClassComparison</em> version 2.7.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

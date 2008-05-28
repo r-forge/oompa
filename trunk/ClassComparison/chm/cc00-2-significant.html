@@ -1,0 +1,97 @@
+<html><head><title>Generic Functions for Significance</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>significant(ClassComparison)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   cutoffSignificant">
+<param name="keyword" value="R:   selectSignificant">
+<param name="keyword" value="R:   countSignificant">
+<param name="keyword" value=" Generic Functions for Significance">
+</object>
+
+
+<h2>Generic Functions for Significance</h2>
+
+
+<h3>Description</h3>
+
+<p>
+In the world of multiple testing that is inhabited by most microarray
+or protein profiling experiments, analysts frequently perform separate
+statistical tests for each gene or protein in the experiment.
+Determining cutoffs that achieve statistical significance (in a
+meaningful way) is an inherent part of the procedure.  It is then
+common to select the significant items for further processing or for
+preparing reports, or at least to count the number of significant
+items.  These generic functions provide a standard set of tools for
+selecting and counting the significant items, which can be used with
+various statistical tests and various ways to account for multiple
+testing.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+cutoffSignificant(object, ...)
+selectSignificant(object, ...)
+countSignificant(object, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+Typically, an object that performs multiple statistical
+tests on microarray or proteomics data.</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+All generic methods are designed to take optional
+additional arguments for flexibility in creating derived classes.</td></tr>
+</table>
+
+<h3>Value</h3>
+
+<p>
+<code>cutoffSignificant</code> returns appropriate cutoff values that achieve
+specified signficance criteria.
+<br>
+<code>selectSignificant</code> returns a logical vector, with true values
+indicating items that satisfy the cutoff making them statistically
+significant.
+<br>
+<code>countSignificant</code> returns an integer, representing the number of
+significant items.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Kevin R. Coombes &lt;kcoombes@mdanderson.org&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+Classes that implement these methods include
+<code><a href="cc00-0-bum.html">Bum</a></code>, <code><a href="cc06-0-Sam-class.html">Sam</a></code>, <code><a href="cc04-0-Dudoit-class.html">Dudoit</a></code>,
+<code><a href="cc02-0-multiWil.html">MultiWilcoxonTest</a></code>, and <code><a href="cc05-0-tnom.html">TNoM</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Since these are generic methods, there are no examples. See the
+# classes that implement specific instances.
+</pre>
+
+
+
+<hr><div align="center">[Package <em>ClassComparison</em> version 2.5.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

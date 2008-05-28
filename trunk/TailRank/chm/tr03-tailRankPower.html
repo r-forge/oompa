@@ -1,0 +1,169 @@
+<html><head><title>Power of the tail-rank test</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>tailRankPower(TailRank)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   tailRankPower">
+<param name="keyword" value="R:   tailRankCutoff">
+<param name="keyword" value=" Power of the tail-rank test">
+</object>
+
+
+<h2>Power of the tail-rank test</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Compute the significance level and the power of a tail-rank test.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+tailRankPower(G, N1, N2, psi, phi, conf = 0.95, model=c("bb", "betabinom", "binomial"))
+tailRankCutoff(G, N1, N2, psi, conf, model=c("bb", "betabinom", "binomial"), method=c('approx', 'exact'))
+                           
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>G</code></td>
+<td>
+An integer; the number of genes being assessed as potnetial
+biomarkers. Statistically, the number of hypotheses being tested.</td></tr>
+<tr valign="top"><td><code>N1</code></td>
+<td>
+An integer; the number of "train" or "healthy" samples used.</td></tr>
+<tr valign="top"><td><code>N2</code></td>
+<td>
+An integer; the number of "test" or "cancer" samples used.</td></tr>
+<tr valign="top"><td><code>psi</code></td>
+<td>
+A real number between 0 and 1; the desired specificity of
+the test.</td></tr>
+<tr valign="top"><td><code>phi</code></td>
+<td>
+A real number between 0 and 1; the sensitivity that one
+would like to be able to detect, conditional on the specificity.</td></tr>
+<tr valign="top"><td><code>conf</code></td>
+<td>
+A real number between 0 and 1; the confidence level of the
+results. Can be obtained by subtracting the family-wise Type I error
+from 1.</td></tr>
+<tr valign="top"><td><code>model</code></td>
+<td>
+A character string that determines whether significance
+and power are computed based on a binomial or a beta-binomial (bb)
+model.</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+A character string; either "exact" or "approx". The
+deafult is to use a Bonferroni approximation.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+A power estimate for the tail-rank test can be obtained as follows.
+First, let X ~ Binom(N,p) denote a binomial random variable. Under the
+null hypotheis that cancer is not different from normal, we let
+<i>p = 1 - psi</i> be the expected  proportion of successes in a test of
+whether the value exceeds the psi-th quantile.  Now let
+</p><p align="center"><i>&alpha; = P(X &gt; x,| N, p)</i></p><p>
+be one such binomial measurement.  When we make <i>G</i> independent
+binomial measurements, we take
+</p><p align="center"><i>conf = P(all G of the X's &lt;= x | N, p).</i></p><p>
+(In our paper on the tail-rank statistic, we write everything in terms
+of <i>gamma = 1 - conf</i>.) Then we have
+</p><p align="center"><i>conf = P(X &lt;= x | N, p)^G = (1 - alpha)^G.</i></p><p>
+Using a Bonferroni-like approximation, we can take
+</p><p align="center"><i>conf ~= 1 - &alpha;*G.</i></p><p>
+Solving for <i>&alpha;</i>, we find that
+</p><p align="center"><i>&alpha; ~= (1-conf)/G.</i></p><p>
+So, the cutoff that ensures that in multiple experiments, each looking
+at <i>G</i> genes in <i>N</i> samples, we have confidence level <i>conf</i>
+(or significance level <i>gamma = 1 - conf</i>) of no false positives is
+computed by the function <code>tailRankCutoff</code>.
+</p>
+<p>
+The final point to note is that the quantiles are also defined
+in terms of <i>q = 1 - &alpha;</i>, so there are lots of disfiguring "1's"
+in the implementation.
+</p>
+<p>
+Now we set <i>M</i> to be the significance cutoff using the procedure
+detailed above.  A gene with sensitivity <i>phi</i> gets detected if the
+observed number of cases above the threshold is greater than or equal to
+<i>M</i>. The <code>tailRankPower</code> function implements formula (1.3) of
+our paper on the tail-rank test.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+<code>tailRankCutoff</code> returns an integer that is the
+maximum expected value of the tail rank statistic under the null
+hypothesis.
+<br>
+<code>tailRankPower</code> returns a real numbe between 0 and 1
+that is the power of the tail-rank test to detect a marker with
+true sensitivity equal to <i>phi</i>.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Kevin R. Coombes &lt;kcoombes@mdanderson.org&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="tr02-TailRankTest.html">TailRankTest</a></code>,
+<code><a href="tr03-tailRankPower.html">tailRankPower</a></code>,
+<code><a href="tr04-biomarkerPowerTable.html">biomarkerPowerTable</a></code>,
+<code><a href="tr08-matrixMean.html">matrixMean</a></code>,
+<code><a href="tr07-toleranceBound.html">toleranceBound</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+psi.0 &lt;- 0.99
+confide &lt;- rev(c(0.8, 0.95, 0.99))
+nh &lt;- 20
+ng &lt;- c(100, 1000, 10000, 100000)
+ns &lt;- c(10, 20, 50, 100, 250, 500)
+formal.cut &lt;- array(0, c(length(ns), length(ng), length(confide)))
+for (i in 1:length(ng)) {
+  for (j in 1:length(ns)) {
+    formal.cut[j, i, ] &lt;- tailRankCutoff(ng[i], nh, ns[j], psi.0, confide)
+  }
+}
+dimnames(formal.cut) &lt;- list(ns, ng, confide)
+formal.cut
+
+phi &lt;- seq(0.1, 0.7, by=0.1)
+N &lt;- c(10, 20, 50, 100, 250, 500)
+pows &lt;- matrix(0, ncol=length(phi), nrow=length(N))
+for (ph in 1:length(phi)) {
+  pows[, ph] &lt;-  tailRankPower(10000, nh, N, 0.95, phi[ph], 0.9)
+}
+pows &lt;- data.frame(pows)
+dimnames(pows) &lt;- list(as.character(N), as.character(round(100*phi)))
+pows
+</pre>
+
+
+
+<hr><div align="center">[Package <em>TailRank</em> version 2.7.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

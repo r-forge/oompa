@@ -1,0 +1,176 @@
+<html><head><title>Basic functions for microarray pre-processing</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head><body>
+<h1>Basic functions for microarray pre-processing
+<img class="toplogo" src="logo.jpg" alt="[R logo]"></h1>
+
+<hr>
+
+<object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value=".. contents">
+</object>
+
+<h2>Help pages for package &lsquo;PreProcess&rsquo; version 2.7.0</h2>
+
+
+<table width="100%">
+<tr><td width="25%"><a href="b00-0-generics.html">analyze</a></td>
+<td>OOMPA Generic Functions </td></tr>
+<tr><td width="25%"><a href="b07-0-CompleteChannel.html">analyze,CompleteChannel-method</a></td>
+<td>The CompleteChannel class </td></tr>
+<tr><td width="25%"><a href="b07-0-CompleteChannel.html">as.data.frame,CompleteChannel-method</a></td>
+<td>The CompleteChannel class </td></tr>
+<tr><td width="25%"><a href="b04-0-Channel.html">Channel</a></td>
+<td>The Channel class </td></tr>
+<tr><td width="25%"><a href="b04-0-Channel.html">Channel-class</a></td>
+<td>The Channel class </td></tr>
+<tr><td width="25%"><a href="b07-1-channelize.html">channelize</a></td>
+<td>Object-oriented conversion from CompleteChannel to Channel</td></tr>
+<tr><td width="25%"><a href="b07-0-CompleteChannel.html">channelize,CompleteChannel-method</a></td>
+<td>The CompleteChannel class </td></tr>
+<tr><td width="25%"><a href="b03-0-ChannelType.html">ChannelType</a></td>
+<td>The ChannelType class </td></tr>
+<tr><td width="25%"><a href="b03-0-ChannelType.html">ChannelType-class</a></td>
+<td>The ChannelType class </td></tr>
+<tr><td width="25%"><a href="b02-2-semanticColors.html">COLOR.BAD.REPLICATE</a></td>
+<td>Pre-defined colors for microarray plots </td></tr>
+<tr><td width="25%"><a href="b02-2-semanticColors.html">COLOR.BORING</a></td>
+<td>Pre-defined colors for microarray plots </td></tr>
+<tr><td width="25%"><a href="b02-2-semanticColors.html">COLOR.BOTTOM.TEN</a></td>
+<td>Pre-defined colors for microarray plots </td></tr>
+<tr><td width="25%"><a href="b02-2-semanticColors.html">COLOR.CENTRAL.LINE</a></td>
+<td>Pre-defined colors for microarray plots </td></tr>
+<tr><td width="25%"><a href="b02-2-semanticColors.html">COLOR.CONFIDENCE.CURVE</a></td>
+<td>Pre-defined colors for microarray plots </td></tr>
+<tr><td width="25%"><a href="b02-2-semanticColors.html">COLOR.EXPECTED</a></td>
+<td>Pre-defined colors for microarray plots </td></tr>
+<tr><td width="25%"><a href="b02-2-semanticColors.html">COLOR.FITTED</a></td>
+<td>Pre-defined colors for microarray plots </td></tr>
+<tr><td width="25%"><a href="b02-2-semanticColors.html">COLOR.FOLD.DIFFERENCE</a></td>
+<td>Pre-defined colors for microarray plots </td></tr>
+<tr><td width="25%"><a href="b02-2-semanticColors.html">COLOR.OBSERVED</a></td>
+<td>Pre-defined colors for microarray plots </td></tr>
+<tr><td width="25%"><a href="b02-2-semanticColors.html">COLOR.PERMTEST</a></td>
+<td>Pre-defined colors for microarray plots </td></tr>
+<tr><td width="25%"><a href="b02-2-semanticColors.html">COLOR.SIGNIFICANT</a></td>
+<td>Pre-defined colors for microarray plots </td></tr>
+<tr><td width="25%"><a href="b02-2-semanticColors.html">COLOR.TOP.TEN</a></td>
+<td>Pre-defined colors for microarray plots </td></tr>
+<tr><td width="25%"><a href="b02-2-semanticColors.html">COLOR.WORST.REPLICATE</a></td>
+<td>Pre-defined colors for microarray plots </td></tr>
+<tr><td width="25%"><a href="b02-0-ColorCoding.html">colorCode</a></td>
+<td>The ColorCoding class </td></tr>
+<tr><td width="25%"><a href="b02-1-ColorCodedPair.html">ColorCodedPair</a></td>
+<td>The ColorCodedPair class </td></tr>
+<tr><td width="25%"><a href="b02-1-ColorCodedPair.html">ColorCodedPair-class</a></td>
+<td>The ColorCodedPair class </td></tr>
+<tr><td width="25%"><a href="b02-0-ColorCoding.html">ColorCoding</a></td>
+<td>The ColorCoding class </td></tr>
+<tr><td width="25%"><a href="b02-0-ColorCoding.html">ColorCoding-class</a></td>
+<td>The ColorCoding class </td></tr>
+<tr><td width="25%"><a href="b07-0-CompleteChannel.html">CompleteChannel</a></td>
+<td>The CompleteChannel class </td></tr>
+<tr><td width="25%"><a href="b07-0-CompleteChannel.html">CompleteChannel-class</a></td>
+<td>The CompleteChannel class </td></tr>
+<tr><td width="25%"><a href="b01-0-graph-utility.html">ellipse</a></td>
+<td>OOMPA graphical utility functions</td></tr>
+<tr><td width="25%"><a href="b01-2-stat-utility.html">f.above.thresh</a></td>
+<td>OOMPA Statistical Utility Functions</td></tr>
+<tr><td width="25%"><a href="b01-2-stat-utility.html">f.cord</a></td>
+<td>OOMPA Statistical Utility Functions</td></tr>
+<tr><td width="25%"><a href="b01-2-stat-utility.html">f.oneway.rankings</a></td>
+<td>OOMPA Statistical Utility Functions</td></tr>
+<tr><td width="25%"><a href="b01-0-graph-utility.html">f.qq</a></td>
+<td>OOMPA graphical utility functions</td></tr>
+<tr><td width="25%"><a href="b01-0-graph-utility.html">f.qt</a></td>
+<td>OOMPA graphical utility functions</td></tr>
+<tr><td width="25%"><a href="b01-1-matrix-utility.html">fliplr</a></td>
+<td>OOMPA Matrix Utility Functions</td></tr>
+<tr><td width="25%"><a href="b01-1-matrix-utility.html">flipud</a></td>
+<td>OOMPA Matrix Utility Functions</td></tr>
+<tr><td width="25%"><a href="b03-0-ChannelType.html">getDesign</a></td>
+<td>The ChannelType class </td></tr>
+<tr><td width="25%"><a href="b04-0-Channel.html">hist,Channel-method</a></td>
+<td>The Channel class </td></tr>
+<tr><td width="25%"><a href="b04-0-Channel.html">image,Channel-method</a></td>
+<td>The Channel class </td></tr>
+<tr><td width="25%"><a href="b07-0-CompleteChannel.html">image,CompleteChannel-method</a></td>
+<td>The CompleteChannel class </td></tr>
+<tr><td width="25%"><a href="b06-0-Pipeline.html">makeDefaultPipeline</a></td>
+<td>The Pipeline class </td></tr>
+<tr><td width="25%"><a href="b06-0-Pipeline.html">Pipeline</a></td>
+<td>The Pipeline class </td></tr>
+<tr><td width="25%"><a href="b06-0-Pipeline.html">Pipeline-class</a></td>
+<td>The Pipeline class </td></tr>
+<tr><td width="25%"><a href="b06-0-Pipeline.html">PIPELINE.MDACC.DEFAULT</a></td>
+<td>The Pipeline class </td></tr>
+<tr><td width="25%"><a href="b06-0-Pipeline.html">PIPELINE.STANDARD</a></td>
+<td>The Pipeline class </td></tr>
+<tr><td width="25%"><a href="b04-0-Channel.html">plot,Channel,missing-method</a></td>
+<td>The Channel class </td></tr>
+<tr><td width="25%"><a href="b02-1-ColorCodedPair.html">plot,ColorCodedPair,missing-method</a></td>
+<td>The ColorCodedPair class </td></tr>
+<tr><td width="25%"><a href="b07-0-CompleteChannel.html">plot,CompleteChannel,missing-method</a></td>
+<td>The CompleteChannel class </td></tr>
+<tr><td width="25%"><a href="b04-0-Channel.html">print,Channel-method</a></td>
+<td>The Channel class </td></tr>
+<tr><td width="25%"><a href="b03-0-ChannelType.html">print,ChannelType-method</a></td>
+<td>The ChannelType class </td></tr>
+<tr><td width="25%"><a href="b07-0-CompleteChannel.html">print,CompleteChannel-method</a></td>
+<td>The CompleteChannel class </td></tr>
+<tr><td width="25%"><a href="b07-0-CompleteChannel.html">PROC.BACKGROUND</a></td>
+<td>The CompleteChannel class </td></tr>
+<tr><td width="25%"><a href="b07-0-CompleteChannel.html">PROC.CORRECTED.SIGNAL</a></td>
+<td>The CompleteChannel class </td></tr>
+<tr><td width="25%"><a href="b05-0-Processor.html">PROC.GLOBAL.NORMALIZATION</a></td>
+<td>The Processor class </td></tr>
+<tr><td width="25%"><a href="b05-0-Processor.html">PROC.LOG.TRANSFORM</a></td>
+<td>The Processor class </td></tr>
+<tr><td width="25%"><a href="b05-0-Processor.html">PROC.MEDIAN.EXPRESSED.NORMALIZATION</a></td>
+<td>The Processor class </td></tr>
+<tr><td width="25%"><a href="b07-0-CompleteChannel.html">PROC.NEG.CORRECTED.SIGNAL</a></td>
+<td>The CompleteChannel class </td></tr>
+<tr><td width="25%"><a href="b07-0-CompleteChannel.html">PROC.SD.SIGNAL</a></td>
+<td>The CompleteChannel class </td></tr>
+<tr><td width="25%"><a href="b07-0-CompleteChannel.html">PROC.SIGNAL</a></td>
+<td>The CompleteChannel class </td></tr>
+<tr><td width="25%"><a href="b07-0-CompleteChannel.html">PROC.SIGNAL.TO.NOISE</a></td>
+<td>The CompleteChannel class </td></tr>
+<tr><td width="25%"><a href="b05-0-Processor.html">PROC.SUBSET.MEAN.NORMALIZATION</a></td>
+<td>The Processor class </td></tr>
+<tr><td width="25%"><a href="b05-0-Processor.html">PROC.SUBSET.NORMALIZATION</a></td>
+<td>The Processor class </td></tr>
+<tr><td width="25%"><a href="b05-0-Processor.html">PROC.SUBTRACTOR</a></td>
+<td>The Processor class </td></tr>
+<tr><td width="25%"><a href="b05-0-Processor.html">PROC.THRESHOLD</a></td>
+<td>The Processor class </td></tr>
+<tr><td width="25%"><a href="b00-0-generics.html">process</a></td>
+<td>OOMPA Generic Functions </td></tr>
+<tr><td width="25%"><a href="b06-0-Pipeline.html">process,ANY,Pipeline-method</a></td>
+<td>The Pipeline class </td></tr>
+<tr><td width="25%"><a href="b05-0-Processor.html">process,Channel,Processor-method</a></td>
+<td>The Processor class </td></tr>
+<tr><td width="25%"><a href="b07-0-CompleteChannel.html">process,CompleteChannel,Processor-method</a></td>
+<td>The CompleteChannel class </td></tr>
+<tr><td width="25%"><a href="b05-0-Processor.html">process,Processor-method</a></td>
+<td>The Processor class </td></tr>
+<tr><td width="25%"><a href="b05-0-Processor.html">Processor</a></td>
+<td>The Processor class </td></tr>
+<tr><td width="25%"><a href="b05-0-Processor.html">Processor-class</a></td>
+<td>The Processor class </td></tr>
+<tr><td width="25%"><a href="b03-0-ChannelType.html">setDesign</a></td>
+<td>The ChannelType class </td></tr>
+<tr><td width="25%"><a href="b01-2-stat-utility.html">stdize</a></td>
+<td>OOMPA Statistical Utility Functions</td></tr>
+<tr><td width="25%"><a href="b04-0-Channel.html">summary,Channel-method</a></td>
+<td>The Channel class </td></tr>
+<tr><td width="25%"><a href="b03-0-ChannelType.html">summary,ChannelType-method</a></td>
+<td>The ChannelType class </td></tr>
+<tr><td width="25%"><a href="b07-0-CompleteChannel.html">summary,CompleteChannel-method</a></td>
+<td>The CompleteChannel class </td></tr>
+<tr><td width="25%"><a href="b06-0-Pipeline.html">summary,Pipeline-method</a></td>
+<td>The Pipeline class </td></tr>
+<tr><td width="25%"><a href="b05-0-Processor.html">summary,Processor-method</a></td>
+<td>The Processor class </td></tr>
+</table>
+</body></html>

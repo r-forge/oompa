@@ -1,0 +1,84 @@
+<html><head><title>Object-oriented conversion from CompleteChannel to Channel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>channelize(PreProcess)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   channelize">
+<param name="keyword" value=" Object-oriented conversion from CompleteChannel to Channel">
+</object>
+
+
+<h2>Object-oriented conversion from CompleteChannel to Channel</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Provide a generic function for propagating the class of derived
+objects through a processing pipeline.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+channelize(object)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+An object of a clas derived from <code><a href="b07-0-CompleteChannel.html">CompleteChannel</a></code>.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+Having abstracted away the notion of extracting a particular
+measurement from a <code><a href="b07-0-CompleteChannel.html">CompleteChannel</a></code> object and producing 
+a simple <code>Channel</code>, we need a way to allow object-oriented
+programming and derived classes to work with our
+<code><a href="b05-0-Processor.html">Processor</a></code> and <code><a href="b06-0-Pipeline.html">Pipeline</a></code> routines. The
+underlying idea is that specific kinds of microarrays or specific
+software to quantify microarrays might have special properties that
+should be exploited in processing. For example, the first few
+generations of miroarrays printed at M.D. Anderson spotted every cDNA
+clone in duplicate. The analysis of such arrays should exploit this
+additional structure.  In order to do so, we must derive classes from
+<code>CompleteChannel</code> and <code>Channel</code> and ensure that the classes
+of extracted objects are propagated correctly through the processing
+pipeline. The <code>channelize</code> methods achieves this goal.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+Returns a string, which represents the name of a class (suitable for
+passing to the <code>new</code> constructor) extracted from an object
+belonging to a class derived from <code><a href="b07-0-CompleteChannel.html">CompleteChannel</a></code>.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Kevin R. Coombes &lt;kcoombes@mdanderson.org&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="b05-0-Processor.html">Processor</a></code>, <code><a href="b06-0-Pipeline.html">Pipeline</a></code>,
+<code><a href="b04-0-Channel.html">Channel</a></code>, <code><a href="b07-0-CompleteChannel.html">CompleteChannel</a></code>
+</p>
+
+
+
+<hr><div align="center">[Package <em>PreProcess</em> version 2.7.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

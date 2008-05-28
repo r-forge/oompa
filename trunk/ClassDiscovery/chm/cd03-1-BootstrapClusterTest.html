@@ -1,0 +1,186 @@
+<html><head><title>The BootstrapClusterTest Class</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>BootstrapClusterTest(ClassDiscovery)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   BootstrapClusterTest">
+<param name="keyword" value="R:   BootstrapClusterTest-class">
+<param name="keyword" value="R:   summary,BootstrapClusterTest-method">
+<param name="keyword" value=" The BootstrapClusterTest Class">
+</object>
+
+
+<h2>The BootstrapClusterTest Class</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Performs a nonparametric bootstrap (sampling with replacement) test to
+determine whether the clusters found by an unsupervised method appear
+to be robust in a given data set.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+BootstrapClusterTest(data, FUN, subsetSize, nTimes = 100, verbose = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+A data matrix, numerical data frame, or
+<code><a onclick="findlink('Biobase', 'class.ExpressionSet.html')" style="text-decoration: underline; color: blue; cursor: hand">ExpressionSet</a></code> object.</td></tr>
+<tr valign="top"><td><code>FUN</code></td>
+<td>
+A <code>function</code> that, given a data matrix,
+returns a vector of cluster assignments.  Examples of functions
+with this behavior are <code><a href="cd03-3-justClusters.html">cutHclust</a></code>,
+<code><a href="cd03-3-justClusters.html">cutKmeans</a></code>, <code><a href="cd03-3-justClusters.html">cutPam</a></code>, and
+<code><a href="cd03-3-justClusters.html">cutRepeatedKmeans</a></code>.</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Additional arguments passed to the classifying function, <code>FUN</code>.</td></tr>
+<tr valign="top"><td><code>subsetSize</code></td>
+<td>
+An optional integer argument. If present,
+each iteration of the bootstrap selects <code>subsetSize</code> rows
+from the original data matrix. If missing, each bootstrap contains
+the same number of rows as the original data matrix.</td></tr>
+<tr valign="top"><td><code>nTimes</code></td>
+<td>
+The number of bootstrap samples to collect.</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+A logical flag</td></tr>
+</table>
+
+<h3>Objects from the Class</h3>
+
+<p>
+Objects should be created using the  <code>BootstrapClusterTest</code>
+function, which performs the requested bootstrap on the
+clusters. Following the standard R paradigm, the resulting object can be
+summarized and plotted to determine the results of the test.
+</p>
+
+
+<h3>Slots</h3>
+
+<dl>
+<dt><code>f</code>:</dt><dd>A <code>function</code> that, given a data matrix,
+returns a vector of cluster assignments.  Examples of functions
+with this behavior are <code><a href="cd03-3-justClusters.html">cutHclust</a></code>,
+<code><a href="cd03-3-justClusters.html">cutKmeans</a></code>, <code><a href="cd03-3-justClusters.html">cutPam</a></code>, and
+<code><a href="cd03-3-justClusters.html">cutRepeatedKmeans</a></code>. 
+</dd>
+<dt><code>subsetSize</code>:</dt><dd>The number of rows to be included in each
+bootstrap sample.</dd>
+<dt><code>nTimes</code>:</dt><dd>An integer, the number of bootstrap samples
+that were collected.</dd>
+<dt><code>call</code>:</dt><dd>An object of class <code>call</code>, which records
+how the object was produced. </dd>
+<dt><code>result</code>:</dt><dd>Object of class <code>matrix</code> containing, for
+each pair of columns in the original data, the number of times
+they belonged to the same cluster of a bootstrap sample. </dd>
+</dl>
+
+<h3>Extends</h3>
+
+<p>
+Class <code><a href="cd03-0-clusterTest.html">ClusterTest</a></code>, directly. See that class for
+descriptions of the inherited methods <code>image</code> and <code>hist</code>.
+</p>
+
+
+<h3>Methods</h3>
+
+<dl>
+<dt>summary</dt><dd><code>signature(object = BootstrapClusterTest)</code>:
+Write out a summary of the object. </dd>
+</dl>
+
+<h3>Author(s)</h3>
+
+<p>
+Kevin R. Coombes &lt;kcoombes@mdanderson.org&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Kerr MK, Churchill GJ. Boostrapping cluster analysis: Assessing the
+reliability of conclusions from microarray experiments. PNAS 2001;
+98:8961-8965.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="cd03-0-clusterTest.html">ClusterTest</a></code>,
+<code><a href="cd04-0-PerturbationClusterTest.html">PerturbationClusterTest</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# simulate data from two different groups
+d1 &lt;- matrix(rnorm(100*30, rnorm(100, 0.5)), nrow=100, ncol=30, byrow=FALSE)
+d2 &lt;- matrix(rnorm(100*20, rnorm(100, 0.5)), nrow=100, ncol=20, byrow=FALSE)
+dd &lt;- cbind(d1, d2)
+cols &lt;- rep(c('red', 'green'), times=c(30,20))
+# peform your basic hierarchical clustering...
+hc &lt;- hclust(distanceMatrix(dd, 'pearson'), method='complete')
+
+# bootstrap the clusters arising from hclust
+bc &lt;- BootstrapClusterTest(dd, cutHclust, nTimes=200, k=3, metric='pearson')
+summary(bc)
+
+# look at the distribution of agreement scores
+hist(bc, breaks=101)
+
+# let heatmap compute a new dendrogram from the agreement
+image(bc, col=blueyellow(64), RowSideColors=cols, ColSideColors=cols)
+
+# plot the agreement matrix with the original dendrogram
+image(bc, dendrogram=hc, col=blueyellow(64), RowSideColors=cols, ColSideColors=cols)
+
+# bootstrap the results of PAM
+pamc &lt;- BootstrapClusterTest(dd, cutPam, nTimes=200, k=3)
+image(pamc, dendrogram=hc, col=blueyellow(64), RowSideColors=cols, ColSideColors=cols)
+
+# contrast the behavior when all the data comes from the same group
+xx &lt;- matrix(rnorm(100*50, rnorm(100, 0.5)), nrow=100, ncol=50, byrow=FALSE)
+hct &lt;- hclust(distanceMatrix(xx, 'pearson'), method='complete')
+bct &lt;- BootstrapClusterTest(xx, cutHclust, nTimes=200, k=4, metric='pearson')
+summary(bct)
+image(bct, dendrogram=hct, col=blueyellow(64), RowSideColors=cols, ColSideColors=cols)
+
+# cleanup
+rm(d1, d2, dd, cols, hc, bc, pamc, xx, hct, bct)
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>ClassDiscovery</em> version 2.7.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>
