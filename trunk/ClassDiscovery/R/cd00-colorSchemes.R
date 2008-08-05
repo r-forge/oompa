@@ -30,16 +30,19 @@ blueyellow <- function(N) {
 }
 
 ## Fix to redgreen contributed by Karl Kashofer
-redgreen <- function(N) {
-  if (( N %% 2 ) == 0) { # even
-    A <- N/2
-    B <- (N/2)+1
-  } else { # odd
-    A <- B <- N/2
+## Fixed yet again, since it got the maxcolorvalue wrong
+## and thus washed everything out.
+redgreen <- function (N) {
+  if (N%%2 == 0) {
+    A  <- N/2
+    r <- c(rep(0, A), 0:A)[-A]
+    g <- -c(-A:0, rep(0, A))[-A-1]
+  } else {
+    A  <- (N-1)/2
+    r <- c(rep(0, A), 0:A)
+    g <- -c(-A:0, rep(0, A))
   }
-  r <- c(rep(0, B), 0:A)
-  g <- -c(-B:0, rep(0, A))
-  rgb(r,g, rep(0, N), maxColorValue=N)
+  rgb(r, g, rep(0, N), maxColorValue = A)
 }
 
 
