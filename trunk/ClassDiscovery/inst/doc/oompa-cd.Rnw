@@ -87,7 +87,7 @@ the existing distance metrics in \Rfunction{dist} are available
 through \Rfunction{distanceMatrix}, but some new ones are added. The
 first example clusters the samples using Pearson correlation
 (Figure~\ref{fig:pear}).  As you can see, the imposed three-group
-structuire is visible in the dendrogram.  Similar results are obtained
+structure is visible in the dendrogram.  Similar results are obtained
 using Spearman rank correlation instead of the Pearson correlation
 (Figure~\ref{fig:spear}).
 
@@ -107,6 +107,16 @@ plclust(spear)
 @ 
 \caption{Hierarchical clustering using Spearman rank correlation to
   define distances.}
+\label{fig:spear}
+\end{figure}
+
+\begin{figure}
+<<spear,fig=TRUE>>=
+unc <- hclust(distanceMatrix(dd, "uncent"), "average")
+plclust(unc)
+@ 
+\caption{Hierarchical clustering using Eisen's uncentered correlation to
+  define distances.} %'
 \label{fig:spear}
 \end{figure}
 
@@ -311,6 +321,16 @@ summary(mose)
 plot(mose, hExp=3, col=redgreen(64))
 @ 
 \caption{Red-green heatmap based on two-way clustering of the data.}
+\label{fig:mose}
+\end{figure}
+
+\begin{figure}
+<<fmose2,fig=TRUE,width=6, height=8>>=
+plot(mose, hExp=3, col=redgreen(64), scale='row', limits=2)
+@ 
+\caption{Red-green heatmap based on two-way clustering of the data,
+  with standardized rows (genes) and a symmetrically bounded
+  colormap.}
 \label{fig:mose}
 \end{figure}
 

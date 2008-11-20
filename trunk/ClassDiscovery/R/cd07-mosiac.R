@@ -54,7 +54,7 @@ setMethod('summary', 'Mosaic', function(object, ...) {
 })
 
 setMethod('plot', signature('Mosaic', 'missing'), function(x, main=x@name,
-                        center=FALSE, limits=NULL,
+                        center=FALSE, scale=c('none', 'row', 'column'), limits=NULL,
                         sampleColors=NULL, sampleClasses=NULL,
                         geneColors=NULL, geneClasses=NULL, ...) {
   data <- x@data
@@ -62,7 +62,16 @@ setMethod('plot', signature('Mosaic', 'missing'), function(x, main=x@name,
     geneMean <- apply(data, 1, mean)
     data <- sweep(data, 1, geneMean, "-")
   }
+  scale <- match.arg(scale)
+  if (scale == 'row') {
+    data <- t(scale(t(data)))
+  } else if (scale == 'column') {
+    data <- scale(data)
+  }
   if (!is.null(limits)) {
+    if (length(limits) < 2) {
+      limits <- c(-limits, limits)
+    }
     data[data > max(limits)] <- max(limits)
     data[data < min(limits)] <- min(limits)
   }

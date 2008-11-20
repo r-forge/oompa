@@ -53,7 +53,6 @@ classes such as \code{\link{BootstrapClusterTest}} or
       optional \code{dendrogram} argument should be used to display the
       extent to which the ageement matrix matches the results of
       hierarchical clustering using the full data set.}
-    }
     \item{summary}{\code{signature(object = "ClusterTest")}: Write out a
     summary of the object.}
   }

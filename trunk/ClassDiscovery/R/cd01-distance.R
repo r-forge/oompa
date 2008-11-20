@@ -3,18 +3,26 @@ distanceMatrix <- function(dataset, metric, ...) {
   if(inherits(dataset, "ExpressionSet")) {
     dataset <- exprs(dataset)
   }
-  METRICS <- c('pearson', 'sqrt pearson', 'spearman', 'weird', 'absolute pearson')
+  METRICS <- c('pearson', 'sqrt pearson', 'spearman', 'weird',
+               'absolute pearson', 'uncentered correlation')
   m <- pmatch(metric, METRICS, nomatch=NA)
   if (is.na(m)) {
     distance <- dist(t(dataset), method=metric, ...)
   } else {
     metric <- METRICS[m]
+    uncent <- function(dataset) {
+      temp <- sqrt(apply(dataset^2, 2, mean))
+      dataset <- sweep(dataset, 2, temp, '/')
+      temp <- t(dataset) %*% dataset/nrow(dataset)
+      as.dist(1 - temp)
+    }
     distance <- switch(metric,
                        pearson = as.dist((1-cor(dataset))/2),
                        'sqrt pearson' = as.dist(sqrt(1-cor(dataset))),
                        weird = dist(cor(dataset)),
                        'absolute pearson' = as.dist((1-abs(cor(dataset)))),
-                       spearman = as.dist((1-cor(apply(dataset, 2, rank)))/2))
+                       spearman = as.dist((1-cor(apply(dataset, 2, rank)))/2),
+                       'uncentered correlation' = uncent(dataset))
   }
   distance
 }

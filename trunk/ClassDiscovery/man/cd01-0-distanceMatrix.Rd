@@ -4,7 +4,7 @@
 \description{
   This function computes and returns the distance matrix determined by
   using the specified distance metric to compute the distances between
-  the columns fo a data matrix.
+  the columns of a data matrix.
 }
 \usage{
 distanceMatrix(dataset, metric, ...)
@@ -13,11 +13,12 @@ distanceMatrix(dataset, metric, ...)
   \item{dataset}{A numeric matrix or an \code{\link[Biobase]{ExpressionSet}}}
   \item{metric}{ A character string defining the distance metric. This
     can be \code{pearson}, \code{sqrt pearson}, \code{spearman},
-    \code{absolute pearson}, \code{weird} or any of the metrics accepted by the
-    \code{\link{dist}} function. At present, the latter function accepts
+    \code{absolute pearson}, \code{uncentered correlation}, \code{weird}
+    or any of the metrics accepted by the     \code{\link{dist}}
+    function. At present, the latter function accepts
     \code{euclidean}, \code{maximum}, \code{manhattan}, \code{canberra},
-    \code{binary}, or \code{minkowski}. Any initial substring that uniquely
-    defines one of the metrics will work.}
+    \code{binary}, or \code{minkowski}. Any initial substring that
+    uniquely defines one of the metrics will work.}
   \item{\dots}{Additional parameters to be passed on to
     \code{\link{dist}}. }
 }
@@ -35,6 +36,10 @@ distanceMatrix(dataset, metric, ...)
     \item{\code{pearson}}{The most common metric used in the microarray literature is
       the \code{pearson} distance, which can be computed in terms of the
       Pearson correlation coefficient as \code{(1-cor(dataset))/2}.}
+    \item{\code{uncentered correlation}}{This metric was introduced in
+      the Cluster and TreeView software from the Eisen lab at
+      Stanford. It is computed using the formulas for Pearson
+      correlation, but assuming that both vectors have mean zero.}
     \item{\code{spearman}}{The \code{spearman} metric used the same formula, but
       substitutes the Spearman rank correlation for the Pearson
       correlation.}

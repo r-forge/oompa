@@ -1,12 +1,12 @@
 Package: TailRank
 Title: The Tail-Rank Statistic
-Version: 2.7.0
-Date: 2009-05-25
+Version: 2.8.0
+Date: 2009-11-18
 Author: Kevin R. Coombes
 Description: Implements the tail-rank statistic for selecting biomarkers
  from a microarray data set, an efficient nonparametric test focused
  on the distributional tails.
 Maintainer: Kevin R. Coombes <kcoombes@mdanderson.org>
 License: GPL Version 2 or newer
-Depends: R (>= 2.7), methods, stats, PreProcess, Biobase
+Depends: R (>= 2.8), methods, stats, PreProcess, Biobase
 URL: htpp://bioinformatics.mdanderson.org/tailrank.html, http://bioinformatics.mdanderson.org/Software/OOMPA

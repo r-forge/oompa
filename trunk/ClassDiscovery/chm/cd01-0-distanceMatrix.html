@@ -18,7 +18,7 @@
 <p>
 This function computes and returns the distance matrix determined by
 using the specified distance metric to compute the distances between
-the columns fo a data matrix.
+the columns of a data matrix.
 </p>
 
 
@@ -39,11 +39,12 @@ A numeric matrix or an <code><a onclick="findlink('Biobase', 'ExpressionSet.html
 <td>
 A character string defining the distance metric. This
 can be <code>pearson</code>, <code>sqrt pearson</code>, <code>spearman</code>,
-<code>absolute pearson</code>, <code>weird</code> or any of the metrics accepted by the
-<code><a onclick="findlink('stats', 'dist.html')" style="text-decoration: underline; color: blue; cursor: hand">dist</a></code> function. At present, the latter function accepts
+<code>absolute pearson</code>, <code>uncentered correlation</code>, <code>weird</code>
+or any of the metrics accepted by the     <code><a onclick="findlink('stats', 'dist.html')" style="text-decoration: underline; color: blue; cursor: hand">dist</a></code>
+function. At present, the latter function accepts
 <code>euclidean</code>, <code>maximum</code>, <code>manhattan</code>, <code>canberra</code>,
-<code>binary</code>, or <code>minkowski</code>. Any initial substring that uniquely
-defines one of the metrics will work.</td></tr>
+<code>binary</code>, or <code>minkowski</code>. Any initial substring that
+uniquely defines one of the metrics will work.</td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
 Additional parameters to be passed on to
@@ -66,6 +67,10 @@ additional distance metrics based on correlation.
 <dt><code>pearson</code></dt><dd>The most common metric used in the microarray literature is
 the <code>pearson</code> distance, which can be computed in terms of the
 Pearson correlation coefficient as <code>(1-cor(dataset))/2</code>.</dd>
+<dt><code>uncentered correlation</code></dt><dd>This metric was introduced in
+the Cluster and TreeView software from the Eisen lab at
+Stanford. It is computed using the formulas for Pearson
+correlation, but assuming that both vectors have mean zero.</dd>
 <dt><code>spearman</code></dt><dd>The <code>spearman</code> metric used the same formula, but
 substitutes the Spearman rank correlation for the Pearson
 correlation.</dd>
@@ -127,6 +132,6 @@ location.href = link;
 </script>
 
 
-<hr><div align="center">[Package <em>ClassDiscovery</em> version 2.7.1 <a href="00Index.html">Index]</a></div>
+<hr><div align="center">[Package <em>ClassDiscovery</em> version 2.8.0 <a href="00Index.html">Index]</a></div>
 
 </body></html>
