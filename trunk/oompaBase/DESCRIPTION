@@ -10,4 +10,5 @@ Description: This package defines the class unions that must be
  preloaded in order for the basic tools in the OOMPA (object-oriented 
  microarray and proteomics analysis) project to be defined and loaded.
 License: Artistic
+LazyLoad: yes
 URL: http://bioinformatics.mdanderson.org/Software/OOMPA, htpp://bioinformatics.mdanderson.org/OOMPA
