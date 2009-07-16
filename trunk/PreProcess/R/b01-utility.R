@@ -93,5 +93,7 @@ function(x, y, inf.rm=FALSE)
 f.oneway.rankings <- function(r, s) { order(s)[r] }
 
 ### use scale(x) instead!!
-stdize <- scale
-
+stdize <- function(x, ...) {
+  .Deprecated("scale")
+  scale(x, ...)
+}

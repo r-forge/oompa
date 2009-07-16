@@ -39,9 +39,11 @@ colorCode(fac, colorScheme = 1:length(levels(fac)), mark = 1)
   consistent plotting conventions across multiple graphs.
 }
 \section{Slots}{
-  \item{v}{ a logical vector }
-  \item{color}{ a string or interger representing a color }
-  \item{mark}{ an integer representing a plotting symbol }  
+  \itemize{
+    \item{v}{ a logical vector }
+    \item{color}{ a string or integer representing a color }
+    \item{mark}{ an integer representing a plotting symbol }
+  }
 }
 \section{Methods}{
   There are no specialized methods for objects of this class; all
