@@ -9,4 +9,5 @@ biocViews: Microarray,PreProcessing
 Description: This package defines the basic classes used for the
  OOMPA (object-oriented microarray and proteomics analysis) project.
 License: Artistic
+LazyLoad: yes
 URL: http://bioinformatics.mdanderson.org/Software/OOMPA, htpp://bioinformatics.mdanderson.org/OOMPA
