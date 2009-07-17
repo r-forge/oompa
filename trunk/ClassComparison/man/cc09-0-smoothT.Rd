@@ -44,7 +44,7 @@ SmoothTtest(stats, aname = 'Group One', bname = 'Group Two',
   \item{pch}{Default plotting character}
   \item{xlab}{Label for the x axis}
   \item{ylab}{Label for the y axis}
-  \item{\dots} {The usual extra parameters to generic or plotting routines}
+  \item{\dots}{The usual extra parameters to generic or plotting routines}
 }
 \details{
   In 2001 and 2002, Baggerly and Coombes developed the smooth t-test for

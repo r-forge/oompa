@@ -40,7 +40,7 @@ SingleGroup(avg, sd, span = 0.5, name = '')
     value of zero, then the limits are automatically generated}
   \item{row.names}{See the base version of \code{\link{as.data.frame.default}}}
   \item{optional}{See the base version of \code{\link{as.data.frame.default}}}
-  \item{\dots} {The usual extra parameters to generic or plotting routines}
+  \item{\dots}{The usual extra parameters to generic or plotting routines}
 }
 \details{
   In 2001 and 2002, Baggerly and Coombes developed the smooth t-test for
