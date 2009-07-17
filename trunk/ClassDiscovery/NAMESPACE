@@ -1,0 +1,57 @@
+# various generics
+importMethodsFrom(PreProcess,
+                  "hist", "image", "plot")
+importMethodsFrom(PreProcess,
+                  "print", "summary", "as.data.frame")
+
+exportMethods("hist", "image", "plot")
+exportMethods("summary", "as.data.frame")
+
+# cd00-colorScheme
+
+importFrom(stats, "predict")
+exportMethods("predict")
+
+importFrom(stats, "screeplot")
+exportMethods("screeplot")
+
+importFrom(cluster, "pltree")
+exportMethods("pltree")
+
+export("redscale", "bluescale", "greenscale",
+       "blueyellow","redgreen", "jetColors")
+
+# cd01-distance
+export("distanceMatrix")
+export("plotColoredClusters")
+export("cluster3")
+
+# cd02-cluster
+exportClasses("ClusterTest")
+
+# cd03-bootclust
+export("cutHclust", "cutPam", "cutKmeans",
+       "repeatedKmeans", "cutRepeatedKmeans")
+exportClasses("BootstrapClusterTest")
+export("BootstrapClusterTest")
+
+# cd04-perclust
+exportClasses("PerturbationClusterTest")
+export("PerturbationClusterTest")
+
+# cd05-gene-sample-pca
+exportClasses("GenePCA", "SamplePCA")
+export("GenePCA", "SamplePCA")
+
+# cd06-heatmap
+export("aspectHeatmap")
+
+# cd07-mosiac
+#?# exportClasses("hclust")
+exportClasses("Mosaic")
+export("Mosaic")
+
+# cd08-pcanova
+exportClasses("PCanova")
+export("PCanova")
+
