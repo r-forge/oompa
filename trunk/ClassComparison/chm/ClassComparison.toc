@@ -130,7 +130,7 @@
 <param name="Local" value="cc01-2-matrixT.html">
 </OBJECT>
 <LI> <OBJECT type="text/sitemap">
-<param name="Name" value="matrixpairedT">
+<param name="Name" value="matrixPairedT">
 <param name="Local" value="cc01-2-matrixT.html">
 </OBJECT>
 <LI> <OBJECT type="text/sitemap">
@@ -138,7 +138,7 @@
 <param name="Local" value="cc01-2-matrixT.html">
 </OBJECT>
 <LI> <OBJECT type="text/sitemap">
-<param name="Name" value="matrixunequalT">
+<param name="Name" value="matrixUnequalT">
 <param name="Local" value="cc01-2-matrixT.html">
 </OBJECT>
 <LI> <OBJECT type="text/sitemap">

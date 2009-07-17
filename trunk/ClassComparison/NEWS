@@ -1,0 +1,29 @@
+			Dear Emacs, please make this -*-Text-*- mode!
+	**************************************************
+	*						 *
+	*	       2.9 SERIES NEWS			 *
+	*						 *
+	**************************************************
+
+
+		CHANGES IN ClassComparison VERSION 2.9.0
+
+
+NEW FEATURES
+
+    o	Added support for namespaces
+
+BUG FIXES
+
+    o	Changed 'matrixMean', 'matrixVar', 'matrixT', and 'MultiTtest'
+        to allow them to give sensible results in the face of  missing
+        data.  Each function now has an additional argument, 'na.rm'
+        which defaults to 'FALSE' for the matrix functions and to
+        'TRUE' for the 'MultiTtest' function.
+
+    o   Changed the names of matrix functions for t-test variants to
+        conform to capitalization conventions. Specifically, changed
+        from 'matrixpairedT' to 'matrixPairedT' and from
+        'matrixunequalT' to 'matrixUnequalT'.
+
+

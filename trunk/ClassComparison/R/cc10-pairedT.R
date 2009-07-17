@@ -2,7 +2,7 @@
 ## basic code for the paired t-0test was contributed by Roland Bassett.
 
 ## utility function
-matrixpairedT <- function (m, v, pf)
+matrixPairedT <- function (m, v, pf)
 {
   v <- v == levels(v)[1]
   m <- m[,order(pf,v)]
@@ -30,7 +30,7 @@ MultiTtestPaired <- function (data, classes, pairing)
     }
     data <- exprs(data)
   }
-  t.statistics <- as.vector(matrixpairedT(data, classes, pairing))
+  t.statistics <- as.vector(matrixPairedT(data, classes, pairing))
   p.values <- sapply(t.statistics, function(tv, df) {
     2 * (1 - pt(abs(tv), df))
   }, length(unique(pairing)) - 1)
@@ -47,7 +47,7 @@ setMethod('summary', 'MultiTtestPaired', function(object,...) {
 ## unequal variance t tests
 
 ## utility function
-matrixunequalT <- function (m, v) {
+matrixUnequalT <- function (m, v) {
   v <- v==levels(v)[1]
   am <- matrixMean(m[,v])
   an <- sum(v)
@@ -78,7 +78,7 @@ MultiTtestUnequal <- function (data, classes)
     }
     data <- exprs(data)
   }
-  temp <- matrixunequalT(data,classes)
+  temp <- matrixUnequalT(data,classes)
   t.statistics <- as.vector(temp$tt)
   df <- as.vector(temp$df)
   p.values <- 2 * (1 - pt(abs(t.statistics), df))

@@ -1,37 +1,51 @@
 ############################
 # vectorized functions to compute row-wise mean and variance quickly
-matrixMean <- function(x) {
+matrixMean <- function(x, na.rm=FALSE) {
   x <- as.matrix(x)
-  n <- ncol(x)
-  x %*% matrix(rep(1, n), nrow=n)/n
+  Nper <- n <- ncol(x)
+  if (na.rm) {
+    Nper <- apply(x, 1, function(y) sum(!is.na(y)))
+    x[is.na(x)] <- 0
+  }
+  x %*% matrix(rep(1, n), nrow=n)/Nper
 }
 
-matrixVar <- function(x, xmean) {
+matrixVar <- function(x, xmean, na.rm=FALSE) {
   x <- as.matrix(x)
-  n <- ncol(x)
-  v <- (((x * x) %*% matrix(rep(1, n), nrow=n)) - n * xmean * xmean)/(n - 1)
+  Nper <- n <- ncol(x)
+  if (na.rm) {
+    Nper <- apply(x, 1, function(y) sum(!is.na(y)))
+    x[is.na(x)] <- 0
+  }
+  v <- (((x * x) %*% matrix(rep(1, n), nrow=n)) - Nper * xmean * xmean)/(Nper - 1)
   v[v < 0] <- 0
   v
 }
 
-matrixT <- function(m,v) {
+matrixT <- function(m, v, na.rm=FALSE) {
   v <- v==levels(v)[1]
-  am <- matrixMean(m[,v])
-  an <- sum(v)
-  av <- matrixVar(m[,v], am)
-  bm <- matrixMean(m[,!v])
-  bn <- sum(!v)
-  bv <- matrixVar(m[,!v], bm)
+  if (na.rm) {
+    an <- apply(m[,v], 1, function(y) sum(!is.na(y)))
+    bn <- apply(m[,!v], 1, function(y) sum(!is.na(y)))
+  } else {
+    an <- sum(v)
+    bn <- sum(!v)
+  }
+  am <- matrixMean(m[,v],     na.rm=na.rm)
+  av <- matrixVar(m[,v],  am, na.rm=na.rm)
+  bm <- matrixMean(m[,!v],    na.rm=na.rm)
+  bv <- matrixVar(m[,!v], bm, na.rm=na.rm)
   (am-bm)/sqrt(((an-1)*av + (bn-1)*bv)/(an+bn-2))/sqrt(1/an+1/bn)
 }
 
 setClass('MultiTtest',
          representation(t.statistics='numeric',
                         p.values='numeric',
+                        df='numeric',
                         groups='character',
                         call='call'))
 
-MultiTtest <- function(data, classes) {
+MultiTtest <- function(data, classes, na.rm=TRUE) {
   call <- match.call()
   if(is.logical(classes)) classes <- factor(classes)
   if(inherits(data, 'ExpressionSet')) {
@@ -40,13 +54,16 @@ MultiTtest <- function(data, classes) {
     }
     data <- exprs(data)
   }
-  t.statistics <- as.vector(matrixT(data, classes))
-  p.values <- sapply(t.statistics, function(tv, df){
-    2*(1-pt(abs(tv), df))
-  }, length(classes)-2)
+  t.statistics <- as.vector(matrixT(data, classes, na.rm=na.rm))
+  df <- apply(data, 1, function(x) sum(!is.na(x))-2)
+#  p.values <- sapply(t.statistics, function(tv, df){
+#    2*(1-pt(abs(tv), df))
+#  }, length(classes)-2)
+  p.values <- 2*(1-pt(abs(t.statistics), df))
   new('MultiTtest',
       t.statistics=t.statistics,
       p.values=p.values,
+      df=df,
       groups=levels(classes),
       call=call)
 }
@@ -78,3 +95,9 @@ setMethod('plot', signature('MultiTtest', 'ANY'), function(x, y,
   plot(x@t.statistics, y, xlab=xlab, ylab=ylab, ...)
 })
 
+setMethod("as.data.frame", "MultiTtest", function (x, row.names = NULL,
+                                                   optional = FALSE, ...) {
+  data.frame(Tstats=x@t.statistics,
+             Pvalues=x@p.values,
+             DF=x@df)
+})

@@ -1,0 +1,74 @@
+# cc00-bum
+
+importFrom(stats, "anova")
+importFrom(stats, "update")
+
+importMethodsFrom(PreProcess,
+                  "hist", "image", "plot")
+importMethodsFrom(PreProcess,
+                  "print", "summary", "as.data.frame")
+
+exportMethods("show")
+exportMethods("anova")
+exportMethods("update")
+exportMethods("hist", "image", "plot")
+exportMethods("summary", "as.data.frame")
+
+exportMethods("countSignificant")
+exportMethods("selectSignificant")
+exportMethods("cutoffSignificant")
+
+exportClasses("Bum")
+export("Bum")
+exportClasses("BumSummary")
+export("likelihoodBum")
+
+# cc01-ttest
+export("matrixMean", "matrixVar", "matrixT")
+exportClasses("MultiTtest")
+export("MultiTtest")
+
+# cc02-EfronTibshirani
+export("rankSum", "dwil")
+exportClasses("MultiWilcoxonTest")
+export("MultiWilcoxonTest")
+
+# cc03-fastlm
+exportClasses("MultiLinearModel")
+export("MultiLinearModel")
+export("multiTukey")
+
+# cc04-Dudoit
+exportClasses("Dudoit")
+export("Dudoit")
+
+# cc05-tnom
+exportClasses("TNoM")
+export("TNoM")
+exportClasses("TNoMSummary")
+exportClasses("fullTNoM")
+
+# cc06-Sam
+exportClasses("Sam")
+export("Sam")
+exportClasses("SamSummary")
+
+# cc07-twoGroupStats
+exportClasses("TwoGroupStats")
+export("TwoGroupStats")
+
+# cc08-singleGroup
+exportClasses("SingleGroup")
+export("SingleGroup")
+
+# cc09-smoothT
+exportClasses("SmoothTtest")
+export("SmoothTtest")
+
+# cc10-pairedT
+export("matrixPairedT", "matrixUnequalT")
+exportClasses("MultiTtestPaired")
+export("MultiTtestPaired")
+exportClasses("MultiTtestUnequal")
+export("MultiTtestUnequal")
+

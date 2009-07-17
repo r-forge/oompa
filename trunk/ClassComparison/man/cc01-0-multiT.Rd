@@ -6,14 +6,16 @@
 \alias{plot,MultiTtest,missing-method}
 \alias{plot,MultiTtest,ANY-method}
 \alias{summary,MultiTtest-method}
+\alias{as.data.frame,MultiTtest-method}
 
 \title{The MultiTtest Class }
 \description{
   Class to perform row-by-row t-tests on microarray or proteomics data.
 }
 \usage{
-MultiTtest(data, classes)
+MultiTtest(data, classes, na.rm=TRUE)
 \S4method{summary}{MultiTtest}(object, ...)
+\S4method{as.data.frame}{MultiTtest}(x, row.names = NULL, optional = FALSE, ...)
 \S4method{hist}{MultiTtest}(x, xlab='T Statistics', main=NULL, ...)
 \S4method{plot}{MultiTtest,missing}(x, ylab='T statistics', ...)
 \S4method{plot}{MultiTtest,ANY}(x, y, xlab='T Statistics', ylab=deparse(substitute(y)), ...)
@@ -27,12 +29,17 @@ MultiTtest(data, classes)
     \code{ExpressionSet}, then \code{classes} can be a character string that
     names one of the factor columns in the associated
     \code{\link[Biobase]{phenoData}} subobject.}
+  \item{na.rm}{ a logical value indicating whether t-statistics should
+    be computed after omitting NA values from individual rows of the
+    data matrix.} 
   \item{object}{A \code{MultiTtest} object}
   \item{x}{A \code{MultiTtest} object}
   \item{y}{A numeric vector}
   \item{xlab}{Label for the x axis}
   \item{ylab}{Label for the y axis}
   \item{main}{Plot title}
+  \item{row.names}{see the base version}
+  \item{optional}{see the base version}
   \item{\dots}{The usual graphical parameters can by supplied to
     \code{hist} and \code{plot} methods.}
 }
@@ -100,6 +107,12 @@ hist(res, breaks=101)
 plot(res)
 plot(res, res@p.values)
 hist(res@p.values, breaks=101)
+
+dat[1,1] <- NA
+mm <- matrixMean(dat, na.rm=TRUE)
+vv <- matrixVar(dat, mm, na.rm=TRUE)
+tt <- matrixT(dat, cla, na.rm=TRUE)
+mtt <- MultiTtest(dat,cla)
 
 rm(ng, ns, dat, cla, res)
 }
