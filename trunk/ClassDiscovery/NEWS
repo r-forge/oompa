@@ -14,5 +14,10 @@ NEW FEATURES
     o	Added support for computing the "bimodalityIndex" as 
     	defined by Wang et al.  in Cancer Informatics.
 
-    o   Added support for namespaces
+    o   Added a subset of the Nature Medicine lung cancer dataset to
+        the package in order to provide meaningful examples for the
+        computation of the bimodality index.
+
+    o   Added support for namespaces.
+
 

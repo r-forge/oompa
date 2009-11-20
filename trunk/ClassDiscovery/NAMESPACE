@@ -1,4 +1,5 @@
 # various generics
+import(methods)
 importMethodsFrom(PreProcess,
                   "hist", "image", "plot")
 importMethodsFrom(PreProcess,
@@ -55,3 +56,5 @@ export("Mosaic")
 exportClasses("PCanova")
 export("PCanova")
 
+# cd09-bimIndex
+export("bimodalIndex")
