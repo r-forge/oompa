@@ -11,13 +11,14 @@ bimodalIndex <- function(dataset, verbose=TRUE) {
     mc <- Mclust(x, G = 2, modelNames = "E")
     sigma <- sqrt(mc$parameters$variance$sigmasq)
     delta <- abs(diff(mc$parameters$mean))/sigma
-    pi <- max(mc$parameters$pro)
+#    pi <- max(mc$parameters$pro)
+    pi <- mc$parameters$pro[1]
     bi <- delta * sqrt(pi*(1-pi))
     bim[i,] <-  c(mc$parameters$mean, sigma=sigma, delta=delta, pi=pi, bim=bi)
   }
   if(verbose) cat("\n")
   bim <- as.data.frame(bim)
   dimnames(bim) <- list(rownames(dataset),
-                        c("mu1", "mu2", "sigma", "pi", "delta", "BI"))
+                        c("mu1", "mu2", "sigma", "delta", "pi", "BI"))
   bim
 }
