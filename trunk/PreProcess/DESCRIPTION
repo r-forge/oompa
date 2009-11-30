@@ -1,6 +1,6 @@
 Package: PreProcess
-Version: 2.9.0
-Date: 2009-07-16
+Version: 2.10.0
+Date: 2009-11-30
 Title: Basic functions for microarray pre-processing
 Author: Kevin R. Coombes <kcoombes@mdanderson.org>
 Maintainer: Kevin R. Coombes <kcoombes@mdanderson.org>
@@ -8,6 +8,6 @@ Depends: R (>= 2.9),methods,graphics,oompaBase
 biocViews: Microarray,PreProcessing
 Description: This package defines the basic classes used for the
  OOMPA (object-oriented microarray and proteomics analysis) project.
-License: Artistic
+License: Artistic-2.0
 LazyLoad: yes
 URL: http://bioinformatics.mdanderson.org/Software/OOMPA, htpp://bioinformatics.mdanderson.org/OOMPA

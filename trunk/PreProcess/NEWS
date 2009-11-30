@@ -1,13 +1,20 @@
 			Dear Emacs, please make this -*-Text-*- mode!
 	**************************************************
 	*						 *
-	*	       2.9 SERIES NEWS			 *
+	*	       2.10 SERIES NEWS			 *
 	*						 *
 	**************************************************
 
 
-		CHANGES IN PreProcess VERSION 2.9.0
+		CHANGES IN PreProcess VERSION 2.10.0
 
+NEW FEATURES
+
+    o	Removed the deprecated fuinction 'stdize'. use 'scale'
+        instead.
+
+
+		CHANGES IN PreProcess VERSION 2.9.0
 
 NEW FEATURES
 

@@ -2,7 +2,6 @@
 \alias{f.above.thresh}
 \alias{f.cord}
 \alias{f.oneway.rankings}
-\alias{stdize}
 
 \title{OOMPA Statistical Utility Functions}
 \description{
@@ -12,7 +11,6 @@
 f.above.thresh(a, t)
 f.cord(x, y, inf.rm)
 f.oneway.rankings(r, s)
-stdize(x, ...)
 }
 \arguments{
   \item{a}{a vector}
@@ -22,7 +20,6 @@ stdize(x, ...)
   \item{inf.rm}{a logical value}
   \item{r}{}
   \item{s}{}
-  \item{...}{Extra arguments to the 'stdize' function}
 }
 \value{
   \code{f.above.thresh} returns the fraction of elements in the vector
@@ -32,10 +29,6 @@ stdize(x, ...)
   input vectors \code{x} and \code{y}. If \code{inf.rm} is true, then
   infinite values are removed before computing the concordance; missing
   values are always removed.
-
-  \code{stdize} is a synonym for \code{scale}. this function was
-  leftover from an earlier S-Plus version; it is deprecated in favor of
-  \code{scale}.
 
   \code{f.oneway.rankings} is implemented as \code{order(s)[r]} and I
   cannot recall why we defined it or where we used it.

@@ -31,7 +31,7 @@ CompleteChannel(name, type, data)
 \S4method{print}{CompleteChannel}(x, ...)
 \S4method{summary}{CompleteChannel}(object, ...)
 \S4method{as.data.frame}{CompleteChannel}(x, row.names=NULL, optional=FALSE)
-\S4method{plot}{CompleteChannel,missing}(x, useLog=FALSE, ...)
+\S4method{plot}{CompleteChannel,missing}(x, main = x@name, useLog=FALSE, ...)
 \S4method{image}{CompleteChannel}(x, ...)
 \S4method{analyze}{CompleteChannel}(object, useLog=FALSE, ...)
 \S4method{process}{CompleteChannel,Processor}(object, action, parameter)
@@ -46,6 +46,7 @@ CompleteChannel(name, type, data)
     \code{vol}, \code{bkgd}, \code{svol}, \code{SD}, and \code{SN}.}
   \item{x}{A \code{CompleteChannel} object}
   \item{object}{A \code{CompleteChannel} object}
+  \item{main}{A character string}
   \item{useLog}{A logical value}
   \item{action}{ A \code{Processor} object used to process a
     \code{CompleteChannel}. }

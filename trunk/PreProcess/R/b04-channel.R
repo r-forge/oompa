@@ -17,9 +17,9 @@ setClass('Channel',
 
 # The history object is used to keep a record of the calls that did the
 # data processing.
-Channel <- function(parent, name, type, x) {
+Channel <- function(parent, name, type, vec) {
   cl <- as.character(list(match.call())) # i wish i knew why this works
-  new('Channel', parent=parent, name=name, type=type, x=x,
+  new('Channel', parent=parent, name=name, type=type, x=vec,
       history=list(cl))
 }
 

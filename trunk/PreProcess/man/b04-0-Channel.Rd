@@ -16,12 +16,12 @@
   number of spots on the microarray, with some extra metadata attached.
 }
 \usage{
-Channel(parent, name, type, x)
-\S4method{plot}{Channel,missing}(object, ...)
-\S4method{hist}{Channel}(object, ...)
+Channel(parent, name, type, vec)
+\S4method{plot}{Channel,missing}(x, y, ...)
+\S4method{hist}{Channel}(x, breaks=67, xlab = x@name, main = x@parent, ...)
 \S4method{summary}{Channel}(object, ...)
-\S4method{print}{Channel}(object, ...)
-\S4method{image}{Channel}(object, ...)
+\S4method{print}{Channel}(x, ...)
+\S4method{image}{Channel}(x, main = x@name, sub = NULL, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -29,7 +29,13 @@ Channel(parent, name, type, x)
     which this object was derived }
   \item{name}{ A string with a displayable name for this object }
   \item{type}{ A \code{\link{ChannelType}} object }
-  \item{x}{ A numeric vector }
+  \item{vec}{ A numeric vector }
+  \item{x}{ A \code{Channel} object }
+  \item{y}{ Nothing; this is a requirement of the new Rd format }
+  \item{breaks}{see the documentation for the default \code{\link[graphics]{hist}}}
+  \item{xlab}{A character string}
+  \item{main}{A character string}
+  \item{sub}{A character string}
   \item{object}{ A \code{Channel} object }
   \item{\dots}{Additional arguments are as in the underlying generic methods.}
 }
@@ -98,8 +104,8 @@ v <- rexp(nc*nr, 1/1000)	# "true" signal intensity (vol)
 b <- rnorm(nc*nr, 80, 10)	# background noise
 s <- sapply(v-b, max, 1)	# corrected signal instensity (svol)
 ct <- ChannelType('user', 'random', nc, nr,  'fake')
-raw <- Channel(name='fraud', type=ct, parent='', x=v)
-subbed <- Channel(name='fraud', parent='', type=ct, x=s)
+raw <- Channel(name='fraud', type=ct, parent='', vec=v)
+subbed <- Channel(name='fraud', parent='', type=ct, vec=s)
 rm(nc, nr, v, b, s)		# clean some stuff
 
 summary(subbed)

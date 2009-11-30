@@ -10,13 +10,13 @@
 }
 \usage{
 ColorCodedPair(x, y, ccl)
-\S4method{plot}{ColorCodedPair,missing}(object, ...)
+\S4method{plot}{ColorCodedPair,missing}(x, y, ...)
 }
 \arguments{
-  \item{x}{ A numeric vector }
+  \item{x}{ A numeric vector (for \code{ColorCodedPair}) or a
+    ColorCodedPair object (for \code{plot})}
   \item{y}{ A numeric vector }
   \item{ccl}{ A list of \code{\link{ColorCoding}} objects }
-  \item{object}{A \code{ColorCodedPair} object}
   \item{\dots}{Additional arguments are as in the underlying generic methods.}
 }
 \details{

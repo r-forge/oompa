@@ -14,7 +14,7 @@ exportMethods("summary")
 exportMethods("as.data.frame")
 
 # b01-utility
-export("fliplr", "flipud", "ellipse", "stdize")
+export("fliplr", "flipud", "ellipse")
 export("f.qq", "f.qt", "f.above.thresh", "f.cord", "f.oneway.rankings")
 
 # b02-colors
