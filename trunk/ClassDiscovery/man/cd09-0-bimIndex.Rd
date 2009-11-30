@@ -65,8 +65,8 @@ bimodalIndex(dataset, verbose = TRUE)
 \references{
   Wang J, Wen S, Symmans WF, Pusztai L, Coombes KR. The bimodality
   index: A criterion for discovering and ranking bimodal signatures from
-  cancer gene expression profiling data. Cancer Informatics, to appear
-  (2009).
+  cancer gene expression profiling data. Cancer Informatics, 2009 Aug 5;
+  7:199--216.
 }
 \author{Kevin R. Coombes <kcoombes@mdanderson.org>}
 \seealso{
