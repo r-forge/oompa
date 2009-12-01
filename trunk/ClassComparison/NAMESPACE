@@ -18,13 +18,13 @@ exportMethods("countSignificant")
 exportMethods("selectSignificant")
 exportMethods("cutoffSignificant")
 
+# cc00-bum
 exportClasses("Bum")
 export("Bum")
 exportClasses("BumSummary")
 export("likelihoodBum")
 
 # cc01-ttest
-export("matrixMean", "matrixVar", "matrixT")
 exportClasses("MultiTtest")
 export("MultiTtest")
 
@@ -66,7 +66,6 @@ exportClasses("SmoothTtest")
 export("SmoothTtest")
 
 # cc10-pairedT
-export("matrixPairedT", "matrixUnequalT")
 exportClasses("MultiTtestPaired")
 export("MultiTtestPaired")
 exportClasses("MultiTtestUnequal")

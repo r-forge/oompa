@@ -6,6 +6,15 @@
 	**************************************************
 
 
+		CHANGES IN ClassComparison VERSION 2.10.1
+
+NEW FEATURES
+
+    o	Moved matrix operations into oompaBase package to simplify
+        other package dependencies.
+
+
+
 		CHANGES IN ClassComparison VERSION 2.10.0
 
 NEW FEATURES

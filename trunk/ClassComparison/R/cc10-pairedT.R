@@ -1,19 +1,5 @@
 ## paired t-tests, vectorized
-## basic code for the paired t-0test was contributed by Roland Bassett.
-
-## utility function
-matrixPairedT <- function (m, v, pf)
-{
-  v <- v == levels(v)[1]
-  m <- m[,order(pf,v)]
-  am <- m[,v]
-  bm <- m[,!v]
-  pd <- am-bm                   ## paired difference
-  pdm <- matrixMean(pd)         ## mean and...
-  pdv <- matrixVar(pd,pdm)      ## variance of paired diffs
-  n <- ncol(am)
-  pdm/(sqrt(pdv/(n)))
-}
+## basic code for the paired t-test was contributed by Roland Bassett.
 
 ## class definition
 setClass('MultiTtestPaired',
@@ -45,22 +31,6 @@ setMethod('summary', 'MultiTtestPaired', function(object,...) {
 
 ##########################################
 ## unequal variance t tests
-
-## utility function
-matrixUnequalT <- function (m, v) {
-  v <- v==levels(v)[1]
-  am <- matrixMean(m[,v])
-  an <- sum(v)
-  av <- matrixVar(m[,v], am)
-  bm <- matrixMean(m[,!v])
-  bn <- sum(!v)
-  bv <- matrixVar(m[,!v], bm)
-  tt <- (am-bm)/sqrt(av/an + bv/bn)
-  u <- bv/av
-  df <- trunc((1/an + u/bn)^2/(1/(an^2*(an-1)) + u^2/(bn^2*(bn-1))))
-  list(tt=tt, df=df)
-}
-
 
 ## class definition
 setClass('MultiTtestUnequal',
