@@ -13,6 +13,10 @@ NEW FEATURES
     o	Moved (duplicated) matrix mean and variance code from the
         ClassComparison and TailRank packages into this package.
 
+    o	Moved the color functions (e..g, redgreen, jetColors) from
+    	the ClassDiscovery pacakge into this package, in order to
+    	simlpify dependencies.
+
 
 	**************************************************
 		CHANGES IN oompaBase VERSION 2.10.0

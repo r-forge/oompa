@@ -13,6 +13,8 @@ NEW FEATURES
     o	Modified 'bimodalIndex' function to return proportion of
         samples in group 1 rather than proportion in larger group.
 
+    o	Moved redgreen, jetColors, etc. into the oompaBase package.
+
 BUG FIXES
 
     o	Fixed labeling error in 'bimodalIndex' function.

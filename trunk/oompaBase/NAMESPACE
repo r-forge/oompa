@@ -2,3 +2,7 @@ exportClasses("numeric or NULL")
 
 export("matrixMean", "matrixVar", "matrixT")
 export("matrixPairedT", "matrixUnequalT")
+
+export("redscale", "bluescale", "greenscale",
+       "blueyellow","redgreen", "jetColors")
+

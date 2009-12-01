@@ -19,9 +19,6 @@ exportMethods("screeplot")
 importFrom(cluster, "pltree")
 exportMethods("pltree")
 
-export("redscale", "bluescale", "greenscale",
-       "blueyellow","redgreen", "jetColors")
-
 # cd01-distance
 export("distanceMatrix")
 export("plotColoredClusters")
