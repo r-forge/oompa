@@ -1,1 +1,4 @@
 exportClasses("numeric or NULL")
+
+export("matrixMean", "matrixVar", "matrixT")
+export("matrixPairedT", "matrixUnequalT")

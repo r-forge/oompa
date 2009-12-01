@@ -6,15 +6,23 @@
 	**************************************************
 
 
-		CHANGES IN oompaBase VERSION 2.9.0
+		CHANGES IN oompaBase VERSION 2.10.1
+
+NEW FEATURES
+
+    o	Moved (duplicated) matrix mean and variance code from the
+        ClassComparison and TailRank packages into this package.
+
+
+	**************************************************
+		CHANGES IN oompaBase VERSION 2.10.0
 
 NEW FEATURES
 
     o	Verified compatibility with R 2.10.0
 
 
-
-
+	**************************************************
 		CHANGES IN oompaBase VERSION 2.9.0
 
 NEW FEATURES
