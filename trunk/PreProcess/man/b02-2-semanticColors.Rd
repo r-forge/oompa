@@ -1,4 +1,5 @@
 \name{semantic colors}
+\alias{semanticColors}
 \alias{COLOR.BORING}
 \alias{COLOR.SIGNIFICANT}
 \alias{COLOR.EXPECTED}

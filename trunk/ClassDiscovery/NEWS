@@ -1,17 +1,27 @@
 			Dear Emacs, please make this -*-Text-*- mode!
 	**************************************************
 	*						 *
-	*	       2.9 SERIES NEWS			 *
+	*	       2.10 SERIES NEWS			 *
 	*						 *
 	**************************************************
 
 
-		CHANGES IN ClassDiscovery VERSION 2.9.0
-
+		CHANGES IN ClassDiscovery VERSION 2.10.0
 
 NEW FEATURES
 
-    o	Added support for computing the "bimodalityIndex" as 
+    o	Modified 'bimodalIndex' function to return proportion of
+        samples in group 1 rather than proportion in larger group.
+
+BUG FIXES
+
+    o	Fixed labeling error in 'bimodalIndex' function.
+
+		CHANGES IN ClassDiscovery VERSION 2.9.0
+
+NEW FEATURES
+
+    o	Added support for computing the "bimodalIndex" as 
     	defined by Wang et al.  in Cancer Informatics.
 
     o   Added a subset of the Nature Medicine lung cancer dataset to

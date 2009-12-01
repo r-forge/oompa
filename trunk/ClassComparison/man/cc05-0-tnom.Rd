@@ -22,7 +22,7 @@ TNoM(data, classes, verbose = TRUE)
 \S4method{selectSignificant}{TNoM}(object, cutoff, ...)
 \S4method{countSignificant}{TNoM}(object, cutoff, ...)
 
-\S4method{plot}{fullTNoM,missing}(x, ...)
+\S4method{plot}{fullTNoM,missing}(x, y, ...)
 \S4method{hist}{fullTNoM}(x, ...)
 }
 \arguments{
@@ -39,6 +39,8 @@ TNoM(data, classes, verbose = TRUE)
   \item{nPerm}{An integer; the number of permutations to perform}
   \item{cutoff}{An integer}
   \item{x}{A \code{fullTNoM} object}
+  \item{y}{Nothing, since it is supposed to be mssing. Changes to the Rd
+    processor require docuemnting the missing entry.}
   \item{\dots}{Additional plotting or other arguments.}
 }
 \details{

@@ -15,7 +15,8 @@ Mosaic(data, sampleMetric = "pearson", sampleLinkage = "average", geneMetric = "
 
 \S4method{pltree}{Mosaic}(x, colors, labels, ...)
 
-\S4method{plot}{Mosaic,missing}(x, main=x@name, center=FALSE, limits=NULL,
+\S4method{plot}{Mosaic,missing}(x, main=x@name, center=FALSE,
+ scale=c("none", "row", "column"), limits=NULL,
  sampleColors=NULL, sampleClasses=NULL, geneColors=NULL, geneClasses=NULL, ...)
 }
 \arguments{
@@ -35,6 +36,7 @@ Mosaic(data, sampleMetric = "pearson", sampleLinkage = "average", geneMetric = "
     standard deviation one?}
   \item{name}{A character string; the name of this object.}
   \item{x}{A \code{Mosaic} object.}
+  \item{scale}{Same as in \code{\link{heatmap}}.}
   \item{colors}{An optional vector of character strings containing color
     names to be used when labeling the trees in the dendrogram. If
     provided, then the length should equal the number of columns in the

@@ -8,18 +8,21 @@
 \title{Methods for TailRankTest objects}
 \description{
   This file describes the methods for an object of the class
-  \code{\link[TailRankTest-class]{TailRankTest}} class.
+  \code{\link[=TailRankTest-class]{TailRankTest}} class.
 }
 \usage{
 \S4method{summary}{TailRankTest}(object, ...)
-\S4method{hist}{TailRankTest}(x, overlay, ...)
+\S4method{hist}{TailRankTest}(x, overlay = FALSE,
+  xlab = "tail-rank statistic", main = "", ...)
 \S4method{as.logical}{TailRankTest}(x, ...)
 \S4method{getStatistic}{TailRankTest}(object,...)
 }
 \arguments{
-  \item{x}{A \code{\link[TailRankTest-class]{TailRankTest} object}}
-  \item{object}{A \code{\link[TailRankTest-class]{TailRankTest} object}}
+  \item{x}{A \code{\link[=TailRankTest-class]{TailRankTest} object}}
+  \item{object}{A \code{\link[=TailRankTest-class]{TailRankTest} object}}
   \item{overlay}{An optional logical flag; defaults to \code{FALSE}.}
+  \item{xlab}{A character string}
+  \item{main}{A character string}
   \item{\dots}{Extra graphical parameters}
 }
 \value{

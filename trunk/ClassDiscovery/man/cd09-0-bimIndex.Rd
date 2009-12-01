@@ -38,9 +38,9 @@ bimodalIndex(dataset, verbose = TRUE)
   We then define the bimodality index as
   \deqn{BI = \delta\sqrt{\pi(1-\pi)}.}
   The bimodality index can be computed by first using either a mixture
-  model-based algorithm such as \link[pkg]{mclust} or by using Markov chain
+  model-based algorithm such as \link[mclust]{Mclust} or by using Markov chain
   Monte Carlo (MCMC) techniques to estimate the model parameters.  In
-  this package, we rely on the \link[pkg]{mclust} implementation.
+  this package, we rely on the \link[mclust]{Mclust} implementation.
 
   In the paper by Wang et al. referenced below, we provide a staistical
   justification for the definition of the bimodality index, based on

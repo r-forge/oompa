@@ -1,6 +1,6 @@
 Package: ClassComparison
-Version: 2.9.0
-Date: 2009-07-16
+Version: 2.10.0
+Date: 2009-11-30
 Title: Classes and methods for "class comparison" problems on microarrays
 Author: Kevin R. Coombes <kcoombes@mdanderson.org>
 Maintainer: Kevin R. Coombes <kcoombes@mdanderson.org>
@@ -10,6 +10,6 @@ Description: This package defines the classes used for "class
  comparison" problems in the OOMPA project. Class comparison includes
  tests for differential expression; see Simon's book for details on
  typical problem types.
-License: Artistic
+License: Artistic-2.0
 LazyLoad: yes
 URL: http://bioinformatics.mdanderson.org/Software/OOMPA, htpp://bioinformatics.mdanderson.org/OOMPA

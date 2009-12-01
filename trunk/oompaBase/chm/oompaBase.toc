@@ -19,7 +19,7 @@
 </OBJECT>
 <UL>
 <LI> <OBJECT type="text/sitemap">
-<param name="Name" value="Class "numeric or NULL" ">
+<param name="Name" value="Class "numeric or NULL"">
 <param name="Local" value="numnull.html">
 </OBJECT>
 </UL>

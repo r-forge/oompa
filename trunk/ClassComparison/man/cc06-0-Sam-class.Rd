@@ -14,8 +14,8 @@
 }
 \usage{
 Sam(data, classes, nPerm = 100, verbose = TRUE)
-\S4method{plot}{Sam,missing}(x, tracks=NULL, xlab='Expected T Statistics (Empirical)',
- ylab='Observed t Statistics', ...)
+\S4method{plot}{Sam,missing}(x, y, tracks=NULL, xlab='Expected T Statistics (Empirical)',
+ ylab='Observed T Statistics', ...)
 \S4method{summary}{Sam}(object, cutoff=1, ...)
 \S4method{selectSignificant}{Sam}(object, cutoff=1, ...)
 \S4method{countSignificant}{Sam}(object, cutoff=1, ...)
@@ -32,6 +32,8 @@ Sam(data, classes, nPerm = 100, verbose = TRUE)
   \item{nPerm}{An integer; the number of permutations}
   \item{verbose}{A logical flag}
   \item{x}{A \code{Sam} object}
+  \item{y}{Nothing, since it is supposed to be mssing. Changes to the Rd
+    processor require docuemnting the missing entry.}
   \item{tracks}{a numeric vector}
   \item{xlab}{Label for the x axis}
   \item{ylab}{Label for the y axis}
@@ -81,8 +83,8 @@ Sam(data, classes, nPerm = 100, verbose = TRUE)
       t-statistics. The \code{tracks} argument causes parallel lines to be
       drawn on either side of the quantile-quantile central line, at the
       specified offsets. Colors in the plot are controlled by the current
-      values of \code{\link[PreProcess:semanticColor]{COLOR.CENTRAL.LINE}} and
-	\code{\link[PreProcess:semanticColor]{COLOR.CONFIDENCE.CURVE}} }
+      values of \code{\link[PreProcess:semanticColors]{COLOR.CENTRAL.LINE}} and
+	\code{\link[PreProcess:semanticColors]{COLOR.CONFIDENCE.CURVE}} }
     \item{selectSignificant(object, cutoff=1, ...)}{Compute a vector
       that selects significant values}
     \item{countSignificant(object, cutoff=1, ...)}{Count the number of

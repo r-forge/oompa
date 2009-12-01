@@ -15,7 +15,7 @@
 }
 \usage{
 Dudoit(data, classes, nPerm = 1000, verbose = TRUE)
-\S4method{plot}{Dudoit,missing}(x, ylab='T statistics', ...)
+\S4method{plot}{Dudoit,missing}(x, y, xlab='T-Statistic', ylab='P-Value', ...)
 \S4method{cutoffSignificant}{Dudoit}(object, alpha, ...)
 \S4method{selectSignificant}{Dudoit}(object, alpha, ...)
 \S4method{countSignificant}{Dudoit}(object, alpha, ...)
@@ -35,6 +35,9 @@ Dudoit(data, classes, nPerm = 1000, verbose = TRUE)
   \item{object}{A \code{Dudoit} object}
   \item{alpha}{A real number; the target family-wise error rate}
   \item{x}{A \code{Dudoit} object}
+  \item{y}{Nothing, since it is supposed to be mssing. Changes to the Rd
+    processor require docuemnting the missing entry.}
+  \item{xlab}{Label for the x axis}
   \item{ylab}{Label for the y axis}
   \item{\dots}{The usual extra arguments for generic or plotting routines.}
 }

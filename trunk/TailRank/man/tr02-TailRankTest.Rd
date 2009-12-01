@@ -45,7 +45,7 @@ desired family-wise error rate.
 }
 \value{
   The return value is an object of class
-  \link[TailRankTest-class]{TailRankTest}.
+  \link[=TailRankTest-class]{TailRankTest}.
 }
 \references{http://bioinformatics.mdanderson.org}
 \author{Kevin R. Coombes <kcoombes@mdanderson.org>}

@@ -1,6 +1,6 @@
 Package: oompaBase
-Version: 2.9.0
-Date: 2009-07-16
+Version: 2.10.0
+Date: 2009-11-30
 Title: Class unions for OOMPA
 Author: Kevin R. Coombes <kcoombes@mdanderson.org>
 Maintainer: Kevin R. Coombes <kcoombes@mdanderson.org>
@@ -9,6 +9,6 @@ biocViews: Infrastructure
 Description: This package defines the class unions that must be
  preloaded in order for the basic tools in the OOMPA (object-oriented 
  microarray and proteomics analysis) project to be defined and loaded.
-License: Artistic
+License: Artistic-2.0
 LazyLoad: yes
 URL: http://bioinformatics.mdanderson.org/Software/OOMPA, htpp://bioinformatics.mdanderson.org/OOMPA

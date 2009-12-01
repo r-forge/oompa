@@ -15,7 +15,7 @@ PerturbationClusterTest(data, FUN, nTimes = 100, noise = 1, verbose = TRUE, ...)
 }
 \arguments{
   \item{data}{A data matrix, numerical data frame, or
-    \code{\link[BioBase]{ExpressionSet}} object.}
+    \code{\link[Biobase]{ExpressionSet}} object.}
   \item{FUN}{A \code{function} that, given a data matrix,
     returns a vector of cluster assignments.  Examples of functions
     with this behavior are \code{\link{cutHclust}},

@@ -17,12 +17,12 @@ MultiTtest(data, classes, na.rm=TRUE)
 \S4method{summary}{MultiTtest}(object, ...)
 \S4method{as.data.frame}{MultiTtest}(x, row.names = NULL, optional = FALSE, ...)
 \S4method{hist}{MultiTtest}(x, xlab='T Statistics', main=NULL, ...)
-\S4method{plot}{MultiTtest,missing}(x, ylab='T statistics', ...)
+\S4method{plot}{MultiTtest,missing}(x, y, ylab='T Statistics', ...)
 \S4method{plot}{MultiTtest,ANY}(x, y, xlab='T Statistics', ylab=deparse(substitute(y)), ...)
 }
 \arguments{
   \item{data}{ Either a data frame or matrix with numeric values or an
-    \code{\link[Biobase:class.ExpressionSet]{ExpressionSet}} as defined
+    \code{\link[=ExpressionSet-class]{ExpressionSet}} as defined
     in the BioConductor tools for analyzing microarray data.} 
   \item{classes}{ If \code{data} is a data frame or matrix, then classes
     must be either a logical vector or a factor. If \code{data} is an
@@ -70,6 +70,8 @@ MultiTtest(data, classes, na.rm=TRUE)
       containing the computed t-statistics. }
     \item{\code{p.values}:}{Object of class \code{numeric} containing
       the computed p-values. }
+    \item{\code{df}:}{Numeric vector of the degrees of freedom per
+  gene. Introduced to allow for missing data.}
     \item{\code{groups}:}{Object of class \code{character} containing
       the names of the classes being compared. }
     \item{\code{call}:}{Object of class \code{call} containing the

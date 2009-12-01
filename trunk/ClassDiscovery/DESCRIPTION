@@ -1,5 +1,5 @@
 Package: ClassDiscovery
-Version: 2.9.1
+Version: 2.10.0
 Date: 2009-11-30
 Title: Classes and methods for "class discovery" with microarrays or proteomics
 Author: Kevin R. Coombes <kcoombes@mdanderson.org>
@@ -11,6 +11,6 @@ Description: This package defines the classes used for "class
  discovery" problems in the OOMPA project. Class discovery primarily
  consists of unsupervised clustering methods with attempts to assess
  their statistical significance.
-License: Artistic
+License: Artistic-2.0
 URL: http://bioinformatics.mdanderson.org/Software/OOMPA, htpp://bioinformatics.mdanderson.org/OOMPA
 Packaged: 2009-07-20 17:17:40 UTC; KRCoombes

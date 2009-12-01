@@ -18,7 +18,7 @@
 MultiLinearModel(form, clindata, arraydata)
 \S4method{summary}{MultiLinearModel}(object, ...)
 \S4method{hist}{MultiLinearModel}(x, xlab='F Statistics', main=NULL, ...)
-\S4method{plot}{MultiLinearModel,missing}(x, ylab='F Statistics', ...)
+\S4method{plot}{MultiLinearModel,missing}(x, y, ylab='F Statistics', ...)
 \S4method{plot}{MultiLinearModel,ANY}(x, y, xlab='F Statistics',
  ylab=deparse(substitute(y)), ...)
 \S4method{anova}{MultiLinearModel}(object, ob2, ...)
@@ -35,7 +35,7 @@ multiTukey(object, alpha)
   \item{object}{A \code{MultiLinearModel} object}
   \item{ob2}{Another \code{MultiLinearModel} object}
   \item{x}{A \code{MultiLinearModel} object}
-  \item{y}{A numeric vector}
+  \item{y}{An optional numeric vector}
   \item{xlab}{Label for the x-axis}
   \item{ylab}{Label for the y-axis}
   \item{main}{Graph title}
