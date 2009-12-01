@@ -75,7 +75,7 @@ our paper on the tail-rank test.
 \seealso{\code{\link{TailRankTest}},
   \code{\link{tailRankPower}},
   \code{\link{biomarkerPowerTable}},
-  \code{\link{matrixMean}},
+  \code{\link[oompaBase]{matrixMean}},
   \code{\link{toleranceBound}}
 }
 \examples{

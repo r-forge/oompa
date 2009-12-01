@@ -38,7 +38,7 @@ biomarkerPowerTable(G, N1=20, N2=seq(25, 250, by=25), psi = c(0.95, 0.99), conf=
 \seealso{\code{\link{TailRankTest}},
   \code{\link{tailRankPower}},
   \code{\link{biomarkerPowerTable}},
-  \code{\link{matrixMean}},
+  \code{\link[oompaBase]{matrixMean}},
   \code{\link{toleranceBound}}
 }
 \examples{
