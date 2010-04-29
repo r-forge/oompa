@@ -2,9 +2,9 @@ Package: oompaBase
 Version: 2.10.1
 Date: 2009-12-01
 Title: Class unions and matrix operations for OOMPA
-Author: Kevin R. Coombes <kcoombes@mdanderson.org>
+Author: Kevin R. Coombes
 Maintainer: Kevin R. Coombes <kcoombes@mdanderson.org>
-Depends: R (>= 2.9), methods
+Depends: R (>= 2.10), methods
 biocViews: Infrastructure
 Description: This package defines the class unions that must be
  preloaded in order for the basic tools in the OOMPA (object-oriented 
@@ -13,4 +13,5 @@ Description: This package defines the class unions that must be
  variances, and t-tests.
 License: Artistic-2.0
 LazyLoad: yes
-URL: http://bioinformatics.mdanderson.org/Software/OOMPA, htpp://bioinformatics.mdanderson.org/OOMPA
+URL: http://bioinformatics.mdanderson.org/Software/OOMPA, http://bioinformatics.mdanderson.org/OOMPA
+
