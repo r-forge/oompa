@@ -18,8 +18,8 @@ f.oneway.rankings(r, s)
   \item{x}{a vector}
   \item{y}{a vector}
   \item{inf.rm}{a logical value}
-  \item{r}{}
-  \item{s}{}
+  \item{r}{vector}
+  \item{s}{vector}
 }
 \value{
   \code{f.above.thresh} returns the fraction of elements in the vector
