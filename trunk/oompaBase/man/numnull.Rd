@@ -16,6 +16,4 @@
 \seealso{\code{\link[PreProcess]{Processor}} uses the \code{numeric or NULL} class
   to represent the default values of its parameters.
 }
-\examples{
-}
 \keyword{classes}
