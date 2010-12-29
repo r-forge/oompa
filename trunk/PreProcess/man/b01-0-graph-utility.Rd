@@ -35,8 +35,6 @@ f.qt(x, df, main = "", cut = 0, ...)
   The function \code{f.qt} is a wrapper that produces quantile-quantile
   plots comparing the observed vector \code{x} with a T-distribution.
 }
-\value{
-}
 \author{Kevin R. Coombes <kcoombes@mdanderson.org>}
 
 \seealso{ See also \code{\link{points}}}

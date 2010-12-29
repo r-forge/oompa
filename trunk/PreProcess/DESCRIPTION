@@ -1,6 +1,6 @@
 Package: PreProcess
-Version: 2.10.0
-Date: 2009-11-30
+Version: 2.10.1
+Date: 2010-12-29
 Title: Basic functions for microarray pre-processing
 Author: Kevin R. Coombes
 Maintainer: Kevin R. Coombes <kcoombes@mdanderson.org>

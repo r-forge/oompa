@@ -10,7 +10,7 @@
 
 NEW FEATURES
 
-    o	Removed the deprecated fuinction 'stdize'. use 'scale'
+    o	Removed the deprecated function 'stdize'. use 'scale'
         instead.
 
 

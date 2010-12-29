@@ -37,7 +37,5 @@ channelize(object)
 \seealso{\code{\link{Processor}}, \code{\link{Pipeline}},
   \code{\link{Channel}}, \code{\link{CompleteChannel}}
 }
-\examples{
-}
 \keyword{manip}
 \keyword{classes}
