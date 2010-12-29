@@ -1,10 +1,18 @@
 			Dear Emacs, please make this -*-Text-*- mode!
 	**************************************************
 	*						 *
-	*	       2.10 SERIES NEWS			 *
+	*	       2.12 SERIES NEWS			 *
 	*						 *
 	**************************************************
 
+
+		CHANGES IN oompaBase VERSION 2.12.0
+
+BUG FIXES
+
+    o	Fixed an erreor in matrixpairedT that usually resulted in
+        getting the pairing mixed up.  Added a formal test suite to
+        make sure the same bug does not recur.
 
 		CHANGES IN oompaBase VERSION 2.10.1
 
