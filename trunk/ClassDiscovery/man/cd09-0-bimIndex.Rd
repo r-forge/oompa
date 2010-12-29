@@ -69,8 +69,6 @@ bimodalIndex(dataset, verbose = TRUE)
   7:199--216.
 }
 \author{Kevin R. Coombes <kcoombes@mdanderson.org>}
-\seealso{
-}
 \examples{
 data(lungData)
 bi <- bimodalIndex(lung.dataset, verbose=FALSE)
