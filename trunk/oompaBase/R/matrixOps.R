@@ -44,7 +44,7 @@ matrixT <- function(m, v, na.rm=FALSE) {
 matrixPairedT <- function (m, v, pf)
 {
   v <- v == levels(v)[1]
-  m <- m[,order(pf,v)]
+  m <- m[,order(v,pf)] # fix according to Hui Yao
   am <- m[,v]
   bm <- m[,!v]
   pd <- am-bm                   ## paired difference
