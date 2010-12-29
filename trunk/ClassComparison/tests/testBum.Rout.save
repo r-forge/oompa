@@ -1,0 +1,59 @@
+
+R version 2.12.0 (2010-10-15)
+Copyright (C) 2010 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: x86_64-pc-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(ClassComparison)
+Loading required package: splines
+Loading required package: Biobase
+
+Welcome to Bioconductor
+
+  Vignettes contain introductory material. To view, type
+  'openVignette()'. To cite Bioconductor, see
+  'citation("Biobase")' and for packages 'citation(pkgname)'.
+
+Loading required package: oompaBase
+Loading required package: PreProcess
+> 
+> set.seed(782562)
+> betaPerc <- 0.10
+> nGenes <- 1000
+> alpha <- 0.2
+> nUnif <- trunc(nGenes*(1-betaPerc))
+> pvals <- c(runif(nUnif), rbeta(nGenes-nUnif, alpha, 1))
+> fit <- Bum(pvals)
+> 
+> fit@ahat
+[1] 0.1645129
+> fit@lhat
+[1] 0.9184144
+> fit@pihat
+[1] 0.9318363
+> 
+> fdr <- 0.2
+> countSignificant(fit, alpha=fdr, by="FDR")
+[1] 46
+> picked <- selectSignificant(fit, alpha=fdr, by="FDR")
+> 
+> truth <- rep(c("Null", "Real"), times=c(nUnif, nGenes-nUnif))
+> 
+> table(truth, picked)
+      picked
+truth  FALSE TRUE
+  Null   895    5
+  Real    59   41
+> 

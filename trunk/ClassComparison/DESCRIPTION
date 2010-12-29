@@ -1,6 +1,6 @@
 Package: ClassComparison
-Version: 2.10.1
-Date: 2009-12-01
+Version: 2.12.0
+Date: 2010-12-29
 Title: Classes and methods for "class comparison" problems on microarrays
 Author: Kevin R. Coombes
 Maintainer: Kevin R. Coombes <kcoombes@mdanderson.org>
