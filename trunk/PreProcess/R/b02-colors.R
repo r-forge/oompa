@@ -50,18 +50,21 @@ setMethod('plot',
           signature(x='ColorCodedPair', y='missing'),
           function(x, ...) {
   ob <- x
+  myargs <- list(...)
+  cex <- myargs$cex
+  if(is.null(cex)) cex <- par('cex')
   plot(ob@x, ob@y, type='n', ...)
   if (is.list(ob@colorCodingList)) {
     lapply(ob@colorCodingList, function(cc, x, y) {
       if (sum(cc@v) > 0) {
-        points(x[cc@v], y[cc@v], col=cc@color, pch=cc@mark)
+        points(x[cc@v], y[cc@v], col=cc@color, pch=cc@mark, cex=cex)
       }
     }, ob@x, ob@y)
   } else if (is(ob@colorCodingList, 'ColorCoding')) {
     v <- ob@colorCodingList@v
     if (sum(v) > 0) {
       points(ob@x[v], ob@y[v], col=ob@colorCodingList@color,
-             pch=ob@colorCodingList@mark)
+             pch=ob@colorCodingList@mark, cex=cex)
     }
   }
   invisible(ob)
