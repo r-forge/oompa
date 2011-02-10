@@ -4,13 +4,14 @@ Date: 2009-12-01
 Title: Classes and methods for "class discovery" with microarrays or proteomics
 Author: Kevin R. Coombes
 Maintainer: Kevin R. Coombes <kcoombes@mdanderson.org>
-biocViews: Microarray, Clustering
 Depends: R (>= 2.10), methods, cluster, mclust, oompaBase (>= 2.10), PreProcess (>= 2.10)
 Suggests: Biobase
 Description: This package defines the classes used for "class
- discovery" problems in the OOMPA project. Class discovery primarily
- consists of unsupervised clustering methods with attempts to assess
- their statistical significance.
+  discovery" problems in the OOMPA project. Class discovery primarily
+  consists of unsupervised clustering methods with attempts to assess
+  their statistical significance.
 License: Artistic-2.0
-URL: http://bioinformatics.mdanderson.org/Software/OOMPA, http://bioinformatics.mdanderson.org/OOMPA
+LazyLoad: yes
+biocViews: Microarray, Clustering
+URL: http://bioinformatics.mdanderson.org/Software/OOMPA
 
