@@ -1,5 +1,4 @@
 # b00-generics
-
 importFrom(graphics, "plot")
 importFrom(graphics, "hist")
 importFrom(graphics, "image")
@@ -18,9 +17,9 @@ export("fliplr", "flipud", "ellipse")
 export("f.qq", "f.qt", "f.above.thresh", "f.cord", "f.oneway.rankings")
 
 # b02-colors
-exportClass("ColorCoding")
+exportClasses("ColorCoding")
 export("ColorCoding")
-exportClass("ColorCodedPair")
+exportClasses("ColorCodedPair")
 export("ColorCodedPair", "colorCode")
 export("COLOR.BORING", "COLOR.SIGNIFICANT",
        "COLOR.EXPECTED", "COLOR.OBSERVED",
@@ -32,28 +31,29 @@ export("COLOR.BORING", "COLOR.SIGNIFICANT",
        "COLOR.TOP.TEN.SOLO", "COLOR.BOTTOM.TEN.SOLO")
 
 # b03-channelType
-exportClass("ChannelType")
+exportClasses("ChannelType")
 export("ChannelType")
 export("getDesign", "setDesign")
 
 # b04-channel
-exportClass("Channel")
+exportClasses("Channel")
 export("Channel")
 
 # b05-processor
-exportClass("Processor")
+exportClasses("Processor")
 export("PROC.SUBTRACTOR", "PROC.THRESHOLD", "PROC.GLOBAL.NORMALIZATION",
        "PROC.LOG.TRANSFORM", "PROC.MEDIAN.EXPRESSED.NORMALIZATION",
        "PROC.SUBSET.NORMALIZATION", "PROC.SUBSET.MEAN.NORMALIZATION")
        
 # b06-pipeline
-exportClass("Pipeline")
+exportClasses("Pipeline")
 export("PIPELINE.STANDARD")
 
 # b07-complete-channel
-exportClass("CompleteChannel")
+exportClasses("CompleteChannel")
 export("CompleteChannel")
-exportMethod("channelize")
+exportMethods("channelize")
 export("PROC.BACKGROUND", "PROC.SIGNAL", "PROC.CORRECTED.SIGNAL",
        "PROC.NEG.CORRECTED.SIGNAL", "PROC.SD.SIGNAL", "PROC.SIGNAL.TO.NOISE")
 export("makeDefaultPipeline", "PIPELINE.MDACC.DEFAULT")
+
