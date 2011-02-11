@@ -1,4 +1,19 @@
 			Dear Emacs, please make this -*-Text-*- mode!
+        **************************************************
+        *                                                *
+        *              2.12 SERIES NEWS                  *
+        *                                                *
+        **************************************************
+
+
+                CHANGES IN SUPERCURVE VERSION 2.12.1
+
+
+BUG FIXES
+
+    o   Corrected export of 'channelize' method.
+
+
 	**************************************************
 	*						 *
 	*	       2.10 SERIES NEWS			 *
@@ -6,15 +21,22 @@
 	**************************************************
 
 
-		CHANGES IN PreProcess VERSION 2.10.0
+		CHANGES IN R VERSION 2.10.0
 
 NEW FEATURES
 
-    o	Removed the deprecated function 'stdize'. use 'scale'
+    o	Removed the deprecated function 'stdize'. Use 'scale'
         instead.
 
 
-		CHANGES IN PreProcess VERSION 2.9.0
+	**************************************************
+	*						 *
+	*	        2.9 SERIES NEWS			 *
+	*						 *
+	**************************************************
+
+
+		CHANGES IN R VERSION 2.9.0
 
 NEW FEATURES
 
@@ -23,3 +45,4 @@ NEW FEATURES
     o	Deprecated the 'stdize' function in favor of 'scale'. (This
         function was leftover from an early S-Plus version of the
         library.)
+
