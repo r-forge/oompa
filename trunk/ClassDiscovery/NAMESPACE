@@ -21,7 +21,7 @@ exportMethods("pltree")
 
 # cd01-distance
 export("distanceMatrix")
-export("plotColoredClusters")
+export("plotColoredClusters", "pcc")
 export("cluster3")
 
 # cd02-cluster
