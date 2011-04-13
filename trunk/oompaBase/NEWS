@@ -1,6 +1,19 @@
 			Dear Emacs, please make this -*-Text-*- mode!
 	**************************************************
 	*						 *
+	*	       2.13 SERIES NEWS			 *
+	*						 *
+	**************************************************
+
+		CHANGES IN oompaBase VERSION 2.13.0
+
+NEW FEATURES
+
+    o	Released in conjunction with new version of R.
+
+
+	**************************************************
+	*						 *
 	*	       2.12 SERIES NEWS			 *
 	*						 *
 	**************************************************
@@ -14,6 +27,14 @@ BUG FIXES
         getting the pairing mixed up.  Added a formal test suite to
         make sure the same bug does not recur.
 
+
+	**************************************************
+	*						 *
+	*	       2.10 SERIES NEWS			 *
+	*						 *
+	**************************************************
+
+
 		CHANGES IN oompaBase VERSION 2.10.1
 
 NEW FEATURES
@@ -26,7 +47,6 @@ NEW FEATURES
     	simlpify dependencies.
 
 
-	**************************************************
 		CHANGES IN oompaBase VERSION 2.10.0
 
 NEW FEATURES
@@ -35,6 +55,12 @@ NEW FEATURES
 
 
 	**************************************************
+	*						 *
+	*	       2.9 SERIES NEWS			 *
+	*						 *
+	**************************************************
+
+
 		CHANGES IN oompaBase VERSION 2.9.0
 
 NEW FEATURES
