@@ -19,7 +19,8 @@
   \item{dendrogram}{An object with S3 class \code{hclust}, as returned
     by the \code{\link{hclust}} function.}
   \item{\dots}{Additional graphical parameters to be passed to the
-    standard \code{image} function.}
+    standard \code{heatmap} function that is used to implement the
+    \code{image} method.}
 }
 \section{Objects from the Class}{
 Objects can be created by calls of the form \code{new("ClusterTest",  ...)}. 
@@ -52,7 +53,10 @@ classes such as \code{\link{BootstrapClusterTest}} or
       \code{heatmap} function to display the agreement matrix. The
       optional \code{dendrogram} argument should be used to display the
       extent to which the ageement matrix matches the results of
-      hierarchical clustering using the full data set.}
+      hierarchical clustering using the full data set.  This method
+      invisbly returns the result of a call to \code{heatmap}; thus, you
+      can use \code{keep.dendro=TRUE} to recover the cluster assignments
+      from the dendrograms.}
     \item{summary}{\code{signature(object = "ClusterTest")}: Write out a
     summary of the object.}
   }

@@ -28,10 +28,11 @@ setMethod('hist', 'ClusterTest', function(x, ...) {
 
 setMethod('image', 'ClusterTest', function(x, dendrogram, ...) {
   if(missing(dendrogram)) {
-    heatmap(x@result, symm=TRUE, revC=FALSE, scale='none', ...)
+    h <- heatmap(x@result, symm=TRUE, revC=FALSE, scale='none', ...)
   } else {
     dendrogram <- as.dendrogram(dendrogram)
-    heatmap(x@result, Rowv=dendrogram, symm=TRUE, revC=FALSE, scale='none', ...)
+    h <- heatmap(x@result, Rowv=dendrogram, symm=TRUE, revC=FALSE, scale='none', ...)
   }
+  invisible(h)
 })
 
