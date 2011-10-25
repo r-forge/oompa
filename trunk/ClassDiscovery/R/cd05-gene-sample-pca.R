@@ -70,6 +70,9 @@ SamplePCA <- function(data, splitter = 0, usecor = FALSE, center = TRUE)
   variances <- decomp$d^2/nSample
   components <- decomp$u
   scores <- t(decomp$d * t(decomp$v))
+  rownames(scores) <- colnames(data)
+  colnames(components) <- colnames(scores) <- paste("PC", 1:ncol(scores), sep='')
+  rownames(components) <- rownames(data)
   new('SamplePCA', scores=scores, variances=variances, components=components,
       splitter=splitter, usecor=usecor, shift=geneMean, scale=geneSD, call=call)
 }
