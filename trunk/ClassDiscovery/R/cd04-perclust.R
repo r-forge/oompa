@@ -26,6 +26,7 @@ PerturbationClusterTest <- function(data, FUN, nTimes=100, noise=1, verbose=TRUE
     }
     bootMatch <- bootMatch + tempMatch; 
   }
+  dimnames(bootMatch) <- list(colnames(data), colnames(data))
   if(verbose) cat('\n')
   testResult <- new('ClusterTest', call = call, result = bootMatch/nTimes)
   new('PerturbationClusterTest', testResult,

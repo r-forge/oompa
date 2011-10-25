@@ -126,6 +126,7 @@ d2 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
 d3 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
 dd <- cbind(d1, d2, d3)
 kind <- factor(rep(c('red', 'green', 'blue'), each=10))
+colnames(dd) <- paste(kind, rep(1:10, 3), sep='')
 
 # perform PCA
 spc <- SamplePCA(dd, splitter=kind)

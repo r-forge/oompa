@@ -72,6 +72,7 @@ BootstrapClusterTest <- function(data, FUN, subsetSize, nTimes=100, verbose=TRUE
     }
     bootMatch <- bootMatch + tempMatch; 
   }
+  dimnames(bootMatch) <- list(colnames(data), colnames(data))
   if(verbose) cat('\n')
   testResult <- new('ClusterTest', call = call, result = bootMatch/nTimes)
   new('BootstrapClusterTest', testResult,

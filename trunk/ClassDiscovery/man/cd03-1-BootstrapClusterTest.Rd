@@ -80,6 +80,7 @@ d1 <- matrix(rnorm(100*30, rnorm(100, 0.5)), nrow=100, ncol=30, byrow=FALSE)
 d2 <- matrix(rnorm(100*20, rnorm(100, 0.5)), nrow=100, ncol=20, byrow=FALSE)
 dd <- cbind(d1, d2)
 cols <- rep(c('red', 'green'), times=c(30,20))
+colnames(dd) <- paste(cols, c(1:30, 1:20), sep='')
 # peform your basic hierarchical clustering...
 hc <- hclust(distanceMatrix(dd, 'pearson'), method='complete')
 
