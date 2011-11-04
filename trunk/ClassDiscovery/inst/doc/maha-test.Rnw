@@ -1,0 +1,199 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{cite}
+\pagestyle{myheadings}
+\markright{maha-test}
+
+\setlength{\topmargin}{0in}
+\setlength{\textheight}{8in}
+\setlength{\textwidth}{6.5in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+
+\def\rcode#1{\texttt{#1}}
+\def\fref#1{\textbf{Figure~\ref{#1}}}
+\def\tref#1{\textbf{Table~\ref{#1}}}
+\def\sref#1{\textbf{Section~\ref{#1}}}
+
+\title{PCA, Mahalnobis Distance, and Outliers}
+\author{Kevin R. Coombes}
+\date{4 November 2011}
+
+\begin{document}
+
+<<echo=FALSE>>=
+options(width=88)
+options(SweaveHooks = list(fig = function() par(bg='white')))
+#if (!file.exists("Figures")) dir.create("Figures")
+@ 
+%\SweaveOpts{prefix.string=Figures/02-AML-27plex, eps=FALSE}
+
+\maketitle
+\tableofcontents
+
+\section{Simulated Data}
+
+We simulate a dataset.
+<<simdata>>=
+set.seed(564684)
+nSamples <- 30
+nGenes <- 3000
+dataset <- matrix(rnorm(nSamples*nGenes), ncol=nSamples, nrow=nGenes)
+dimnames(dataset) <- list(paste("G", 1:nGenes, sep=''),
+                          paste("S", 1:nSamples, sep=''))
+@ 
+Now we make two of the entries into distinct outliers.
+<<liars>>=
+nShift <- 300
+affected <- sample(nGenes, nShift)
+dataset[affected,1] <- dataset[affected,1] + rnorm(nShift, 1, 1)
+dataset[affected,2] <- dataset[affected,2] + rnorm(nShift, 1, 1)
+@ 
+
+\section{PCA}
+We start with a principal components analysis (PCA) of this dataset. A
+plot of the samples against the first two principal components (PCs)
+shows two very clear outliers (\fref{spca1}).
+<<spca>>=
+library(ClassDiscovery)
+spca <- SamplePCA(dataset)
+@ 
+
+\begin{figure}
+<<fig=TRUE,echo=FALSE>>=
+plot(spca)
+@ 
+\caption{Principal components plot of the samples.}
+\label{spca1}
+\end{figure}
+
+We want to explore the possibility of an outlier more formally. First,
+we look at the cumulative amount of variance explained by the PCs:
+<<pc>>=
+round(cumsum(spca@variances)/sum(spca@variances), digits=2)
+@ 
+We see that we need $20$ components in order to explain $70\%$ of the
+variation in the data.  Next, we compute the Mahalanobis distance of
+each sample from the center of an $N$-dimensional principal component
+space.   We apply the \texttt{mahalanobisQC} function using different
+numbers of components between 
+$2$ and $20$.
+<<maah20>>=
+maha2 <- mahalanobisQC(spca, 2)
+maha5 <- mahalanobisQC(spca, 5)
+maha10 <- mahalanobisQC(spca, 10)
+maha20 <- mahalanobisQC(spca, 20)
+myd <- data.frame(maha2, maha5, maha10, maha20)
+colnames(myd) <- paste("N", rep(c(2, 5, 10, 20), each=2),
+                      rep(c(".statistic", ".p.value"), 4), sep='')
+@ 
+The theory says that, under the null hypothesis that all samples
+arise from the same multivariate normal distribution,  the distance
+from the center of a $d$-dimensional PC space should follow a
+chi-squared distribution with $d$ degrees of freedom. This theory lets
+us compute $p$-values associated with the Mahalanobis distances for
+each sample (\tref{maha}).
+<<results=tex, echo=FALSE>>=
+library(xtable)
+xtable(myd, digits=c(0, rep(c(1, 4),4)), 
+       align=paste("|l|",paste(rep("r",8), collapse=''),"|",sep=''), 
+       label="maha", 
+       caption=paste("Mahalanobis distance (with unadjusted p-values)",
+         "of each sample from the center of",
+         "N-dimensional principal component space."))
+       
+@ 
+
+We see that the samples S1 and S2 are outliers, at least when we look
+at the first $2$, $5$, or, $10$ components.  However, sample S2 is
+not quite significant (at the $5\%$ level) when we get out to $20$
+components.  This can occur when there are multiple outliers because
+of the ``inflated'' variance estimates coming from the outliers
+themselves. 
+
+\clearpage
+\section{A Second Round}
+Now we repeat the PCA after removing the one definite outlier.  Sample
+S2 still stands out as ``not like the others'' (\fref{spca2}).
+<<spca>>=
+reduced <- dataset[,-1]
+dim(reduced)
+spca <- SamplePCA(reduced)
+round(cumsum(spca@variances)/sum(spca@variances), digits=2)
+@ 
+
+\begin{figure}
+<<fig=TRUE,echo=FALSE>>=
+plot(spca)
+@ 
+\caption{Principal components plot of the normal control samples,
+  after omitting an extreme outlier.}
+\label{spca2}
+\end{figure}
+
+And we can recompute the mahalanobis distances (\tref{maha2}).  Here
+we see that evne out at the level of $20$ components, this sample
+remains an outlier.
+<<redmaha>>=
+maha20 <- mahalanobisQC(spca, 20)
+@ 
+<<echo=FALSE,results=tex>>=
+xtable(maha20, digits=c(0, 1, 4), 
+       align="|l|rr|",
+       label="maha2", 
+       caption=paste("Mahalanobis distance (with unadjusted p-values)",
+         "of each sample from the center of",
+         "20-dimensional principal component space."))
+@ 
+
+\clearpage
+\section{A Final Round}
+We repeat the analysis after removing one more outlier.
+<<spca>>=
+red2 <- reduced[,-1]
+dim(red2)
+spca <- SamplePCA(red2)
+round(cumsum(spca@variances)/sum(spca@variances), digits=2)
+@ 
+
+\begin{figure}
+<<fig=TRUE,echo=FALSE>>=
+plot(spca)
+@ 
+\caption{Principal components plot of the normal control samples,
+  after omitting an extreme outlier.}
+\label{spca3}
+\end{figure}
+
+And we can recompute the mahalanobis distances (\tref{maha3}).  At
+this point, there are no outliers.
+<<redmaha>>=
+maha20 <- mahalanobisQC(spca, 20)
+@ 
+<<echo=FALSE,results=tex>>=
+xtable(maha20, digits=c(0, 1, 4), 
+       align="|l|rr|",
+       label="maha3", 
+       caption=paste("Mahalanobis distance (with unadjusted p-values)",
+         "of each sample from the center of",
+         "20-dimensional principal component space."))
+@ 
+
+
+
+\section{Appendix}
+
+This analysis was performed in the following directory:
+<<getwd>>=
+getwd()
+@ 
+This analysis was performed in the following software environment:
+<<si>>=
+sessionInfo()
+@ 
+
+\end{document}
+
+
+

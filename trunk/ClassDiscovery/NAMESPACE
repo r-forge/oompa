@@ -40,6 +40,7 @@ export("PerturbationClusterTest")
 # cd05-gene-sample-pca
 exportClasses("GenePCA", "SamplePCA")
 export("GenePCA", "SamplePCA")
+export("mahalanobisQC")
 
 # cd06-heatmap
 export("aspectHeatmap")

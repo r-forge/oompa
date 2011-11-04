@@ -164,3 +164,13 @@ setMethod('screeplot', 'SamplePCA', function(x, ...) {
   barplot(x@variances/sum(x@variances), ...)
 })
 
+mahalanobisQC <- function(spca, N) {
+  ss <- spca@scores[, 1:N]
+  maha <- sapply(1:nrow(ss), function(i) {
+    v <- matrix(1/apply(ss[-i,], 2, var), ncol=1)
+    as.vector(ss[i,]^2 %*% v)
+  })
+  names(maha) <- rownames(spca@scores)
+  pmaha <- 1-pchisq(maha, N)
+  data.frame(statistic=maha, p.value=pmaha)
+}
