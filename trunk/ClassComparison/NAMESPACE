@@ -1,3 +1,7 @@
+###
+### NAMESPACE
+###
+
 # cc00-bum
 
 importFrom(stats, "anova")
@@ -18,54 +22,54 @@ exportMethods("countSignificant")
 exportMethods("selectSignificant")
 exportMethods("cutoffSignificant")
 
-# cc00-bum
+## cc00-bum
 exportClasses("Bum")
 export("Bum")
 exportClasses("BumSummary")
 export("likelihoodBum")
 
-# cc01-ttest
+## cc01-ttest
 exportClasses("MultiTtest")
 export("MultiTtest")
 
-# cc02-EfronTibshirani
+## cc02-EfronTibshirani
 export("rankSum", "dwil")
 exportClasses("MultiWilcoxonTest")
 export("MultiWilcoxonTest")
 
-# cc03-fastlm
+## cc03-fastlm
 exportClasses("MultiLinearModel")
 export("MultiLinearModel")
 export("multiTukey")
 
-# cc04-Dudoit
+## cc04-Dudoit
 exportClasses("Dudoit")
 export("Dudoit")
 
-# cc05-tnom
+## cc05-tnom
 exportClasses("TNoM")
 export("TNoM")
 exportClasses("TNoMSummary")
 exportClasses("fullTNoM")
 
-# cc06-Sam
+## cc06-Sam
 exportClasses("Sam")
 export("Sam")
 exportClasses("SamSummary")
 
-# cc07-twoGroupStats
+## cc07-twoGroupStats
 exportClasses("TwoGroupStats")
 export("TwoGroupStats")
 
-# cc08-singleGroup
+## cc08-singleGroup
 exportClasses("SingleGroup")
 export("SingleGroup")
 
-# cc09-smoothT
+## cc09-smoothT
 exportClasses("SmoothTtest")
 export("SmoothTtest")
 
-# cc10-pairedT
+## cc10-pairedT
 exportClasses("MultiTtestPaired")
 export("MultiTtestPaired")
 exportClasses("MultiTtestUnequal")
