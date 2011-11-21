@@ -1,4 +1,8 @@
-# various generics
+###
+### NAMESPACE
+###
+
+## various generics
 import(methods)
 importMethodsFrom(PreProcess,
                   "hist", "image", "plot")
@@ -8,7 +12,7 @@ importMethodsFrom(PreProcess,
 exportMethods("hist", "image", "plot")
 exportMethods("summary", "as.data.frame")
 
-# cd00-colorScheme
+## cd00-colorScheme
 
 importFrom(stats, "predict")
 exportMethods("predict")
@@ -19,40 +23,41 @@ exportMethods("screeplot")
 importFrom(cluster, "pltree")
 exportMethods("pltree")
 
-# cd01-distance
+## cd01-distance
 export("distanceMatrix")
 export("plotColoredClusters", "pcc")
 export("cluster3")
 
-# cd02-cluster
+## cd02-cluster
 exportClasses("ClusterTest")
 
-# cd03-bootclust
+## cd03-bootclust
 export("cutHclust", "cutPam", "cutKmeans",
        "repeatedKmeans", "cutRepeatedKmeans")
 exportClasses("BootstrapClusterTest")
 export("BootstrapClusterTest")
 
-# cd04-perclust
+## cd04-perclust
 exportClasses("PerturbationClusterTest")
 export("PerturbationClusterTest")
 
-# cd05-gene-sample-pca
+## cd05-gene-sample-pca
 exportClasses("GenePCA", "SamplePCA")
 export("GenePCA", "SamplePCA")
 export("mahalanobisQC")
 
-# cd06-heatmap
+## cd06-heatmap
 export("aspectHeatmap")
 
-# cd07-mosiac
+## cd07-mosiac
 #?# exportClasses("hclust")
 exportClasses("Mosaic")
 export("Mosaic")
 
-# cd08-pcanova
+## cd08-pcanova
 exportClasses("PCanova")
 export("PCanova")
 
-# cd09-bimIndex
+## cd09-bimIndex
 export("bimodalIndex")
+
