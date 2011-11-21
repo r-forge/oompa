@@ -6,14 +6,22 @@
 	**************************************************
 
 
-		CHANGES IN ClassComparison VERSION 2.12.0
+		CHANGES IN R VERSION 2.12.0
 
 NEW FEATURES
 
     o	Added regression tests to support code maintenance; no
         user-visible changes.
 
-		CHANGES IN ClassComparison VERSION 2.10.1
+
+	**************************************************
+	*						 *
+	*	       2.10 SERIES NEWS			 *
+	*						 *
+	**************************************************
+
+
+		CHANGES IN R VERSION 2.10.1
 
 NEW FEATURES
 
@@ -21,16 +29,21 @@ NEW FEATURES
         other package dependencies.
 
 
-
-		CHANGES IN ClassComparison VERSION 2.10.0
+		CHANGES IN R VERSION 2.10.0
 
 NEW FEATURES
 
     o	Checked compatibility with R 2.10.0.
 
 
+	**************************************************
+	*						 *
+	*	       2.9 SERIES NEWS			 *
+	*						 *
+	**************************************************
 
-		CHANGES IN ClassComparison VERSION 2.9.0
+
+		CHANGES IN R VERSION 2.9.0
 
 NEW FEATURES
 
@@ -48,5 +61,4 @@ BUG FIXES
         conform to capitalization conventions. Specifically, changed
         from 'matrixpairedT' to 'matrixPairedT' and from
         'matrixunequalT' to 'matrixUnequalT'.
-
 
