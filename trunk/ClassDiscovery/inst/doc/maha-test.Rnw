@@ -1,3 +1,7 @@
+%\VignetteIndexEntry{OOMPA Mahalnobis Distance}
+%\VignetteKeywords{OOMPA, PCA, Mahalnobis Distance, Outliers}
+%\VignetteDepends{oompaBase,PreProcess,ClassDiscovery}
+%\VignettePackage{ClassDiscovery}
 \documentclass{article}
 \usepackage{graphicx}
 \usepackage{hyperref}
@@ -194,6 +198,4 @@ sessionInfo()
 @ 
 
 \end{document}
-
-
 
