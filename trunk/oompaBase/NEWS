@@ -1,11 +1,24 @@
 			Dear Emacs, please make this -*-Text-*- mode!
 	**************************************************
 	*						 *
+	*	       2.14 SERIES NEWS			 *
+	*						 *
+	**************************************************
+
+		CHANGES IN R VERSION 2.14.0
+
+NEW FEATURES
+
+    o	Released in conjunction with new version of R.
+
+
+	**************************************************
+	*						 *
 	*	       2.13 SERIES NEWS			 *
 	*						 *
 	**************************************************
 
-		CHANGES IN oompaBase VERSION 2.13.0
+		CHANGES IN R VERSION 2.13.0
 
 NEW FEATURES
 
@@ -19,7 +32,7 @@ NEW FEATURES
 	**************************************************
 
 
-		CHANGES IN oompaBase VERSION 2.12.0
+		CHANGES IN R VERSION 2.12.0
 
 BUG FIXES
 
@@ -35,7 +48,7 @@ BUG FIXES
 	**************************************************
 
 
-		CHANGES IN oompaBase VERSION 2.10.1
+		CHANGES IN R VERSION 2.10.1
 
 NEW FEATURES
 
@@ -44,10 +57,10 @@ NEW FEATURES
 
     o	Moved the color functions (e..g, redgreen, jetColors) from
     	the ClassDiscovery pacakge into this package, in order to
-    	simlpify dependencies.
+    	simplify dependencies.
 
 
-		CHANGES IN oompaBase VERSION 2.10.0
+		CHANGES IN R VERSION 2.10.0
 
 NEW FEATURES
 
@@ -61,7 +74,7 @@ NEW FEATURES
 	**************************************************
 
 
-		CHANGES IN oompaBase VERSION 2.9.0
+		CHANGES IN R VERSION 2.9.0
 
 NEW FEATURES
 
