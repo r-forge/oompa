@@ -36,8 +36,8 @@ NEW FEATURES
 
 BUG FIXES
 
-    o	Fixed an erreor in matrixpairedT that usually resulted in
-        getting the pairing mixed up.  Added a formal test suite to
+    o	Fixed an error in matrixpairedT that usually resulted in
+        getting the pairing mixed up. Added a formal test suite to
         make sure the same bug does not recur.
 
 
