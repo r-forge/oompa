@@ -7,53 +7,50 @@
 \alias{plot,MultiTtest,ANY-method}
 \alias{summary,MultiTtest-method}
 \alias{as.data.frame,MultiTtest-method}
-
-\title{The MultiTtest Class }
+\title{Class "MultiTtest"}
 \description{
   Class to perform row-by-row t-tests on microarray or proteomics data.
 }
 \usage{
 MultiTtest(data, classes, na.rm=TRUE)
-\S4method{summary}{MultiTtest}(object, ...)
-\S4method{as.data.frame}{MultiTtest}(x, row.names = NULL, optional = FALSE, ...)
-\S4method{hist}{MultiTtest}(x, xlab='T Statistics', main=NULL, ...)
-\S4method{plot}{MultiTtest,missing}(x, y, ylab='T Statistics', ...)
-\S4method{plot}{MultiTtest,ANY}(x, y, xlab='T Statistics', ylab=deparse(substitute(y)), ...)
+\S4method{summary}{MultiTtest}(object, \dots)
+\S4method{as.data.frame}{MultiTtest}(x, row.names=NULL, optional=FALSE, \dots)
+\S4method{hist}{MultiTtest}(x, xlab='T Statistics', main=NULL, \dots)
+\S4method{plot}{MultiTtest,missing}(x, y, ylab='T Statistics', \dots)
+\S4method{plot}{MultiTtest,ANY}(x, y, xlab='T Statistics', ylab=deparse(substitute(y)), \dots)
 }
 \arguments{
-  \item{data}{ Either a data frame or matrix with numeric values or an
+  \item{data}{either a data frame or matrix with numeric values, or an
     \code{\link[=ExpressionSet-class]{ExpressionSet}} as defined
-    in the BioConductor tools for analyzing microarray data.} 
-  \item{classes}{ If \code{data} is a data frame or matrix, then classes
+    in the BioConductor tools for analyzing microarray data} 
+  \item{classes}{If \code{data} is a data frame or matrix, then classes
     must be either a logical vector or a factor. If \code{data} is an
     \code{ExpressionSet}, then \code{classes} can be a character string that
     names one of the factor columns in the associated
     \code{\link[Biobase]{phenoData}} subobject.}
-  \item{na.rm}{ a logical value indicating whether t-statistics should
-    be computed after omitting NA values from individual rows of the
-    data matrix.} 
-  \item{object}{A \code{MultiTtest} object}
-  \item{x}{A \code{MultiTtest} object}
-  \item{y}{A numeric vector}
-  \item{xlab}{Label for the x axis}
-  \item{ylab}{Label for the y axis}
-  \item{main}{Plot title}
+  \item{na.rm}{logical scalar. If \code{TRUE}, compute t-statistics after
+    omitting \code{NA} values from individual rows of the data matrix} 
+  \item{object}{object of class \code{MultiTtest}}
+  \item{x}{object of class \code{MultiTtest}}
+  \item{y}{numeric vector}
+  \item{xlab}{character string specifying the label for the x axis}
+  \item{ylab}{character string specifying the label for the y axis}
+  \item{main}{character string specifying the plot title}
   \item{row.names}{see the base version}
   \item{optional}{see the base version}
-  \item{\dots}{The usual graphical parameters can by supplied to
-    \code{hist} and \code{plot} methods.}
+  \item{\dots}{extra arguments for generic or plotting routines}
 }
 \section{Creating objects}{
-  Although objects can be created using \code{new}, the better method is
-  to use the \code{MultiTtest} function. In the simplest case, you
+  Although objects can be created using \code{new}, the preferred method is
+  to use the \code{MultiTtest} generator. In the simplest case, you
   simply pass in a data matrix and a logical vector assigning classes to
   the columns, and the constructor performs row-by-row two-sample
-  t-tests and computes the associated (single test) p-values.  To adjust
+  t-tests and computes the associated (single test) p-values. To adjust
   for multiple testing, you can pass the p-values on to the
   \code{\link{Bum}} class.
 
   If you use a factor instead of a logical vector, then the t-test
-  compares the first level of trhe factor to everything else.  To handle
+  compares the first level of the factor to everything else. To handle
   the case of multiple classes, see the \code{\link{MultiLinearModel}}
   class.
 
@@ -71,11 +68,11 @@ MultiTtest(data, classes, na.rm=TRUE)
     \item{\code{p.values}:}{Object of class \code{numeric} containing
       the computed p-values. }
     \item{\code{df}:}{Numeric vector of the degrees of freedom per
-  gene. Introduced to allow for missing data.}
+      gene. Introduced to allow for missing data.}
     \item{\code{groups}:}{Object of class \code{character} containing
       the names of the classes being compared. }
     \item{\code{call}:}{Object of class \code{call} containing the
-      function call that created the object. }
+      function call that created the object.}
   }
 }
 \section{Methods}{
@@ -84,7 +81,7 @@ MultiTtest(data, classes, na.rm=TRUE)
     \item{hist(x, xlab='T Statistics', main=NULL, ...)}{Produce a
       histogram of the t-statistics.}
     \item{plot(x)}{Produces a scatter plot of the t-statistics against
-      their index. }
+      their index.}
     \item{plot(x,y)}{Produces a scatter plot of the t-statistics in the
       object \code{x} against the numeric vector \code{y}.}
   }
@@ -93,10 +90,14 @@ MultiTtest(data, classes, na.rm=TRUE)
   The graphical routines invisibly return the object against which
   they were invoked.
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+}
 \seealso{
-  \code{\link{matrixT}}, \code{\link{Bum}},
-  \code{\link{MultiLinearModel}}, \code{\link{Dudoit}}
+  \code{\link{matrixT}},
+  \code{\link{Bum}},
+  \code{\link{MultiLinearModel}},
+  \code{\link{Dudoit}}
 }
 \examples{
 ng <- 10000
@@ -121,3 +122,4 @@ rm(ng, ns, dat, cla, res)
 \keyword{classes}
 \keyword{multivariate}
 \keyword{htest}
+
