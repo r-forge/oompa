@@ -190,3 +190,4 @@ rm(a, b, be, alpha, GAMMA, sens, spec, fake.data)
 \keyword{multivariate}
 \keyword{htest}
 \keyword{classes}
+
