@@ -1,6 +1,19 @@
 			Dear Emacs, please make this -*-Text-*- mode!
 	**************************************************
 	*						 *
+	*	       2.15 SERIES NEWS			 *
+	*						 *
+	**************************************************
+
+		CHANGES IN R VERSION 2.15.0
+
+NEW FEATURES
+
+    o	Released in conjunction with new version of R.
+
+
+	**************************************************
+	*						 *
 	*	       2.14 SERIES NEWS			 *
 	*						 *
 	**************************************************
