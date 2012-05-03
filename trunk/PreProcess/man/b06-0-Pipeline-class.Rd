@@ -7,7 +7,7 @@
 \alias{PIPELINE.MDACC.DEFAULT}
 \alias{makeDefaultPipeline}
 \docType{class}
-\title{ The Pipeline class }
+\title{Class "Pipeline"}
 \description{
   A \code{Pipeline} represents a standard multi-step procedure for
   processing microarray data.  A \code{Pipeline} represents a series of
@@ -18,7 +18,7 @@
 }
 \usage{
 \S4method{process}{ANY,Pipeline}(object, action, parameter=NULL)
-\S4method{summary}{Pipeline}(object, ...)
+\S4method{summary}{Pipeline}(object, \dots)
 makeDefaultPipeline(ef = PROC.SIGNAL, ep = 0,
                     nf = PROC.GLOBAL.NORMALIZATION, np = 0,
                     tf = PROC.THRESHOLD, tp = 25,
@@ -82,7 +82,7 @@ makeDefaultPipeline(ef = PROC.SIGNAL, ep = 0,
       is ignored, since the \code{Pipeline} always uses its default
       values.
     }
-    \item{summary(object, ...)}{Write out a summary of the object.}
+    \item{summary(object, \dots)}{Write out a summary of the object.}
   }
 }
 \value{
@@ -115,7 +115,9 @@ makeDefaultPipeline(ef = PROC.SIGNAL, ep = 0,
   \code{\link{process}}
 }
 \examples{
-# simulate a moderately realistic looking microarray
+showClass("Pipeline")
+
+## simulate a moderately realistic looking microarray
 nc <- 100
 nr <- 100
 v <- rexp(nc*nr, 1/1000)
@@ -125,7 +127,7 @@ ct <- ChannelType('user', 'random', nc, nr,  'fake')
 subbed <- Channel(name='fraud', parent='', type=ct, vec=s)
 rm(ct, nc, nr, v, b, s)		# clean some stuff
 
-# example of standard data processing
+## example of standard data processing
 processed <- process(subbed, PIPELINE.STANDARD)
 
 summary(processed)
@@ -139,5 +141,6 @@ image(processed)
 
 rm(subbed, processed)
 }
+\keyword{classes}
 \keyword{manip}
 

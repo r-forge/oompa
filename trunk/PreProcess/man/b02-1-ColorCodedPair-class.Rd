@@ -10,35 +10,34 @@
 }
 \usage{
 ColorCodedPair(x, y, ccl)
-\S4method{plot}{ColorCodedPair,missing}(x, y, ...)
+\S4method{plot}{ColorCodedPair,missing}(x, y, \dots)
 }
 \arguments{
-  \item{x}{ A numeric vector (for \code{ColorCodedPair}) or a
-    ColorCodedPair object (for \code{plot})}
-  \item{y}{ A numeric vector }
-  \item{ccl}{ A list of \code{\link{ColorCoding}} objects }
-  \item{\dots}{Additional arguments are as in the underlying generic methods.}
+  \item{x}{numeric vector (for \code{ColorCodedPair}) or an
+    object of class \code{ColorCodedPair} (for \code{plot})}
+  \item{y}{numeric vector}
+  \item{ccl}{list of \code{\link{ColorCoding}} objects }
+  \item{\dots}{additional arguments are as in the underlying generic methods.}
 }
 \details{
   It is often necessary with microarray data to produce multiple plots,
   where each point on the plot corresponds to a gene or a spot on the
-  microarray.  Across multiple plots, we often want to use symbols or
-  colors to mark subsets of he genes with certain properties.  The
+  microarray. Across multiple plots, we often want to use symbols or colors
+  to mark subsets of he genes with certain properties. The
   \code{ColorCodedPair} class works in tandem with the
-  \code{\link{ColorCoding}} class to make it easier to maintain
-  consistent plotting conventions across multiple graphs.
+  \code{\link{ColorCoding}} class to make it easier to maintain consistent
+  plotting conventions across multiple graphs.
 }
 \section{Slots}{
   \describe{
-    \item{\code{x}}{ A numeric vector }
-    \item{\code{y}}{ A numeric vector }
-    \item{\code{colorCodingList}}{ A list of \code{\link{ColorCoding}}
-      objects }
+    \item{\code{x}}{numeric vector}
+    \item{\code{y}}{numeric vector}
+    \item{\code{colorCodingList}}{list of \code{\link{ColorCoding}} objects}
   }
 }
 \section{Methods}{
   \describe{
-    \item{plot(object, ...)}{Plot the \code{ColorCodedPair} object, with
+    \item{plot(object, \dots)}{Plot the \code{ColorCodedPair} object, with
       appropriate colors and symbols (of course).}
   }
 }
@@ -48,13 +47,16 @@ ColorCodedPair(x, y, ccl)
   The \code{plot} method invisibly returns the object being plotted.
 }
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+  Kevin R. Coombes \email{kcoombes@mdanderson.org},
+  P. Roebuck \email{proebuck@mdanderson.org}
 }
 \seealso{
   \code{\link{colorCode}},
   \code{\link{ColorCoding}}
 }
 \examples{
+showClass("ColorCodedPair")
+
 theta <- (0:360)*pi/180
 x <- cos(theta)
 y <- sin(theta)
@@ -72,5 +74,6 @@ plot(ColorCodedPair(theta, y, colors),
      xlab='angle in radians', ylab='sine', main='colored sine')
 
 }
+\keyword{classes}
 \keyword{color}
 

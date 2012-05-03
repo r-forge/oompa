@@ -7,9 +7,9 @@
   Utility functions for graphics.
 }
 \usage{
-ellipse(a, b, x0=0, y0=0, ...)
-f.qq(x, main = "", cut = 0, ...)
-f.qt(x, df, main = "", cut = 0, ...)
+ellipse(a, b, x0=0, y0=0, \dots)
+f.qq(x, main="", cut=0, \dots)
+f.qt(x, df, main="", cut=0, \dots)
 }
 \arguments{
   \item{a}{ Half the length of the elliptical axis in the x-direction }
@@ -48,9 +48,9 @@ plot(x,y)
 ellipse(1, 1, col=6, type='l', lwd=2)
 ellipse(3, 2, col=6, type='l', lwd=2)
 f.qq(x, main='Demo', col='blue')
-f.qq(x, cut = 3)
-f.qt(x, df = 3)
-f.qt(x, df = 40)
+f.qq(x, cut=3)
+f.qt(x, df=3)
+f.qt(x, df=40)
 }
 \keyword{aplot}
 

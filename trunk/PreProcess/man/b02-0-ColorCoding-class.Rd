@@ -8,12 +8,6 @@
   A class for associating plotting symbols and colors with a logical
   vector or with levels of a factor.
 }
-\section{Creating Objects}{
-  Although objects can be created using \code{new}, the preferred method
-  is to use the constructor function, \code{ColorCoding}.  To create a
-  set of colors and symbols associated with different levels of a
-  factor, use the \code{\link{colorCode}} function.
-}
 \usage{
 ColorCoding(v, color, mark = 1)
 colorCode(fac, colorScheme = 1:length(levels(fac)), mark = 1)
@@ -37,6 +31,12 @@ colorCode(fac, colorScheme = 1:length(levels(fac)), mark = 1)
   \code{\link{ColorCodedPair}} class to make it easier to maintain
   consistent plotting conventions across multiple graphs.
 }
+\section{Objects from the Class}{
+  Although objects can be created using \code{new}, the preferred method
+  is to use the constructor function, \code{ColorCoding}.  To create a
+  set of colors and symbols associated with different levels of a
+  factor, use the \code{\link{colorCode}} function.
+}
 \section{Slots}{
   \describe{
     \item{\code{v}}{ a logical vector }
@@ -58,12 +58,15 @@ colorCode(fac, colorScheme = 1:length(levels(fac)), mark = 1)
   constructor of a \code{\link{ColorCodedPair}} object.
 }
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+  Kevin R. Coombes \email{kcoombes@mdanderson.org},
+  P. Roebuck \email{proebuck@mdanderson.org}
+
 }
 \seealso{
   \code{\link{ColorCodedPair}}
 }
 \examples{
+showClass("ColorCoding")
 
 theta <- (0:360)*pi/180
 x <- cos(theta)
@@ -85,7 +88,7 @@ fac <- factor(rep(c('left', 'right'), c(180, 181)))
 colors <- colorCode(fac, c('blue', 'red'))
 plot(ColorCodedPair(x, y, colors))
 
-# cleanup
+## cleanup
 rm(x, y, xp, yp, theta, colors, fac)
 
 colorList <- c(COLOR.BORING, COLOR.SIGNIFICANT,
@@ -105,5 +108,6 @@ for (i in 1:4) {
 }
 rm(colorList, i, j)
 }
+\keyword{classes}
 \keyword{color}
 

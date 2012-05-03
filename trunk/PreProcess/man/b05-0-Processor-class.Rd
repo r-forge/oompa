@@ -14,10 +14,9 @@
 \docType{class}
 \title{Class "Processor"}
 \description{
-  A \code{Processor} represents a function that acts on the data of a
-  some object to process it in some way. The result is always
-  another related object, which should record some history about
-  exactly how it was processed.
+  A \code{Processor} represents a function that acts on the data of a some
+  object to process it in some way. The result is always another related
+  object, which should record some history about exactly how it was processed.
 }
 \usage{
 \S4method{process}{Channel,Processor}(object, action, parameter=NULL)
@@ -108,7 +107,9 @@
   \code{\link{Pipeline}}
 }
 \examples{
-# simulate a moderately realistic looking microarray
+showClass("Processor")
+
+## simulate a moderately realistic looking microarray
 nc <- 100
 nr <- 100
 v <- rexp(nc*nr, 1/1000)
@@ -118,7 +119,7 @@ ct <- ChannelType('user', 'random', nc, nr,  'fake')
 subbed <- Channel(name='fraud', parent='', type=ct, vec=s)
 rm(ct, nc, nr, v, b, s)		# clean some stuff
 
-# example of standard data processing
+## example of standard data processing
 nor <- process(subbed, PROC.GLOBAL.NORMALIZATION)
 thr <- process(nor, PROC.THRESHOLD, 25)
 processed <- process(thr, PROC.LOG.TRANSFORM, 2)
@@ -134,4 +135,6 @@ image(processed)
 
 rm(nor, thr, subbed, processed)
 }
+\keyword{classes}
 \keyword{manip}
+

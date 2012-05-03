@@ -16,43 +16,42 @@
 \alias{PROC.SD.SIGNAL}
 \alias{PROC.SIGNAL.TO.NOISE}
 \docType{class}
-\title{ The CompleteChannel class }
+\title{Class "CompleteChannel"}
 \description{
-  An object of the CompleteChannel class represents one channel (red or
-  green) of a two-color fluorescence microarray experiment.
-  Alternatively, it can also represent the entirety of a radioactive
-  microarray experiment.  Affymetrix experiments produce data with a
-  somewhat different structure because they use multiple probes for each
-  target gene.
+  An object of the \code{CompleteChannel} class represents one channel (red or
+  green) of a two-color fluorescence microarray experiment. Alternatively,
+  it can also represent the entirety of a radioactive microarray experiment.
+  Affymetrix experiments produce data with a somewhat different structure
+  because they use multiple probes for each target gene.
 }
 \usage{
 CompleteChannel(name, type, data)
-\S4method{print}{CompleteChannel}(x, ...)
-\S4method{summary}{CompleteChannel}(object, ...)
+\S4method{print}{CompleteChannel}(x, \dots)
+\S4method{summary}{CompleteChannel}(object, \dots)
 \S4method{as.data.frame}{CompleteChannel}(x, row.names=NULL, optional=FALSE)
-\S4method{plot}{CompleteChannel,missing}(x, main = x@name, useLog=FALSE, ...)
-\S4method{image}{CompleteChannel}(x, ...)
-\S4method{analyze}{CompleteChannel}(object, useLog=FALSE, ...)
+\S4method{plot}{CompleteChannel,missing}(x, main=x@name, useLog=FALSE, \dots)
+\S4method{image}{CompleteChannel}(x, \dots)
+\S4method{analyze}{CompleteChannel}(object, useLog=FALSE, \dots)
 \S4method{process}{CompleteChannel,Processor}(object, action, parameter)
-\S4method{channelize}{CompleteChannel}(object)
+\S4method{channelize}{CompleteChannel}(object, \dots)
 }
 \arguments{
-  \item{name}{A string containing the name of the object}
-  \item{type}{A \code{\link{ChannelType}} object}
-  \item{data}{A data frame. For the pre-defined ``extraction''
+  \item{name}{character string specifying the name of the object}
+  \item{type}{object of class \code{\link{ChannelType}}}
+  \item{data}{data frame. For the pre-defined ``extraction''
     processors to work correctly, this should include columns called
     \code{vol}, \code{bkgd}, \code{svol}, \code{SD}, and \code{SN}.}
-  \item{x}{A \code{CompleteChannel} object}
-  \item{object}{A \code{CompleteChannel} object}
-  \item{main}{A character string}
-  \item{useLog}{A logical value}
-  \item{action}{ A \code{Processor} object used to process a
-    \code{CompleteChannel}. }
-  \item{parameter}{ Any object that makes sense as a parameter to the
+  \item{x}{object of class \code{CompleteChannel}}
+  \item{object}{object of class \code{CompleteChannel}}
+  \item{main}{character string specifying the title for the plot}
+  \item{useLog}{logical scalar. If \code{TRUE}, convert to logarithmic values.}
+  \item{action}{object of class \code{Processor} used to process a
+    \code{CompleteChannel}}
+  \item{parameter}{any object that makes sense as a parameter to the
     function represented by the \code{Processor} \code{action}}
   \item{row.names}{See \code{\link{as.data.frame}}}
   \item{optional}{See \code{\link{as.data.frame}}}
-  \item{\dots}{Additional arguments are as in the underlying generic methods.}
+  \item{\dots}{extra arguments for generic or plotting routines}
 }
 \details{
   The names come from the default column names in the ArrayVision software
@@ -61,38 +60,38 @@ CompleteChannel(name, type, data)
 }
 \section{Slots}{
   \describe{
-    \item{\code{name}:}{A string containing the name of the object}
-    \item{\code{type}:}{A \code{\link{ChannelType}} object}
-    \item{\code{data}:}{A data frame}
-    \item{\code{history}:}{A list that keeps a record of the calls used
-      to produce this object }
+    \item{\code{name}:}{character string containing the name of the object}
+    \item{\code{type}:}{object of class \code{\link{ChannelType}}}
+    \item{\code{data}:}{data frame}
+    \item{\code{history}:}{list that keeps a record of the calls used
+      to produce this object}
   }
 }
 \section{Methods}{
   \describe{
-    \item{print(x, ...)}{Print all the data on the object. Since
+    \item{print(x, \dots)}{Print all the data on the object. Since
       this includes the data frame, you rarely want to do this.}
-    \item{summary(object, ...)}{Write out a summary of the object.}
+    \item{summary(object, \dots)}{Write out a summary of the object.}
     \item{as.data.frame(x,row.names=NULL, optional=FALSE)}{Convert the
       \code{CompleteChannel} object into a data frame. As you might
       expect, this simply returns the data frame in the \code{data} slot
       of the object.}
-    \item{plot(x, useLog=FALSE, ...)}{Produces three estimated density
+    \item{plot(x, useLog=FALSE, \dots)}{Produces three estimated density
       plots: one for the signal, one for the background, and one for
       the background-corrected signal. Additional graphical parameters
       are passed along. The logical flag \code{useLog} determines
       whether the data are log-transformed before estimating and
       plotting densities.} 
-    \item{analyze(object, useLog=FALSE, ...)}{This method computes the
+    \item{analyze(object, useLog=FALSE, \dots)}{This method computes the
       estimated probability density functions for the three data
       components (signal, background, and background-corrected signal),
       and returns them as a list. }
-    \item{image(object, ...)}{Uses the image method for
+    \item{image(object, \dots)}{Uses the image method for
       \code{\link{Channel}} objects to produce geographically aligned
       images of the log-transformed intensity and background estimates.}
-    \item{channelize(object)}{A string giving the name of the class of a
-      channel that is produced when you process a \code{CompleteChannel}
-      object.}
+    \item{channelize(object, \dots)}{character string giving the name of the
+      class of a channel that is produced when you process a
+      \code{CompleteChannel} object.}
     \item{process(object, action, parameter=NULL)}{Use the
       \code{Processor} \code{action} to process the
       \code{CompleteChannel} \code{object}. Returns an object of the
@@ -100,7 +99,6 @@ CompleteChannel(name, type, data)
       \code{Channel}.}
   }
 }
-
 \value{
   The \code{analyze} method returns a list of three density functions.
 
@@ -135,7 +133,8 @@ CompleteChannel(name, type, data)
   }
 }
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+  Kevin R. Coombes \email{kcoombes@mdanderson.org},
+  P. Roebuck \email{proebuck@mdanderson.org}
 }
 \seealso{
   \code{\link{process}},
@@ -145,8 +144,9 @@ CompleteChannel(name, type, data)
   \code{\link{as.data.frame}}
 }
 \examples{
-# simulate a complete channel object
+showClass("CompleteChannel")
 
+## simulate a complete channel object
 v <- rexp(10000, 1/1000)
 b <- rnorm(10000, 60, 6)
 s <- sapply(v-b, function(x) {max(0, x)})
@@ -175,8 +175,9 @@ summary(q)
 q <- process(x, PIPELINE.MDACC.DEFAULT)
 summary(q)
 
-# cleanup
+## cleanup
 rm(x, b, q, opar)
 }
+\keyword{classes}
 \keyword{manip}
 

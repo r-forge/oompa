@@ -16,7 +16,6 @@
 \alias{COLOR.BOTTOM.TEN}
 \alias{COLOR.BOTTOM.TEN.SOLO}
 \alias{COLOR.TOP.TEN.SOLO}
-\docType{data}
 \title{ Pre-defined colors for microarray plots }
 \description{
   A collection of predefined color names to help ensure consistency in
@@ -59,5 +58,5 @@
 x <- seq(0, 2*pi, by=0.1)
 plot(x, sin(x), col=COLOR.BORING)
 }
-\keyword{datasets}
+\keyword{color}
 

@@ -23,54 +23,53 @@ Channel(parent, name, type, vec)
 \S4method{image}{Channel}(x, main=x@name, sub=NULL, \dots)
 }
 \arguments{
-  \item{parent}{ A string representing the name of a parent object from
-    which this object was derived }
-  \item{name}{ A string with a displayable name for this object }
-  \item{type}{ A \code{\link{ChannelType}} object }
-  \item{vec}{ A numeric vector }
-  \item{x}{ A \code{Channel} object }
-  \item{y}{ Nothing; this is a requirement of the new Rd format }
+  \item{parent}{character string representing the name of a parent object from
+    which this object was derived}
+  \item{name}{character string with a displayable name for this object}
+  \item{type}{object of class \code{\link{ChannelType}}}
+  \item{vec}{numeric vector}
+  \item{x}{object of class \code{Channel}}
+  \item{y}{nothing; the new Rd format requires documenting missing parameters}
   \item{breaks}{see the documentation for the default \code{\link[graphics]{hist}}}
-  \item{xlab}{A character string}
-  \item{main}{A character string}
-  \item{sub}{A character string}
-  \item{object}{ A \code{Channel} object }
-  \item{\dots}{Additional arguments are as in the underlying generic methods.}
+  \item{xlab}{character string specifying the label for x axis}
+  \item{main}{character string specifying the main title for the plot}
+  \item{sub}{character string specifying subtitle for the plot}
+  \item{object}{object of class \code{Channel}}
+  \item{\dots}{extra arguments for generic or plotting routines}
 }
 \details{
   As described in the help pages for \code{\link{ChannelType}}, each
   microarray hybridization experiment produces one or more channels of
   data. \code{Channel} objects represent a single measurement performed
-  at spots in one microarray channel. The raw data from a full
-  experiment typically contains multiple measurements in multiple
-  channels.
+  at spots in one microarray channel. The raw data from a full experiment
+  typically contains multiple measurements in multiple channels.
 
-  The full set of measurements is often highly processed (by, for
-  example, background subtraction, normalization, log transformation,
-  etc.) before it becomes useful. We have added a \code{history} slot
-  that keeps track of how a \code{Channel} was produced. By allowing
-  each object to maintain a record of its history, it becomes easier to
-  document the processing when writing up the methods for reports or
-  papers. The \code{history} slot of the object is updated using the
-  generic function \code{\link{process}} together with a
+  The full set of measurements is often highly processed (by, for example,
+  background subtraction, normalization, log transformation, etc.) before it
+  becomes useful. We have added a \code{history} slot that keeps track of how
+  a \code{Channel} was produced. By allowing each object to maintain a record
+  of its history, it becomes easier to document the processing when writing up
+  the methods for reports or papers. The \code{history} slot of the object is
+  updated using the generic function \code{\link{process}} together with a
   \code{\link{Processor}} object.
 }
 \section{Slots}{
   \describe{
-    \item{\code{parent}:}{A string representing the name of a parent
+    \item{\code{parent}:}{character string representing the name of a parent
       object from which this object was derived.
     }
-    \item{\code{name}:}{A string with a displayable name for this object}
-    \item{\code{type}:}{A \code{\link{ChannelType}} object}
-    \item{\code{x}:}{A numeric vector}
-    \item{\code{history}:}{A list that keeps a record of the calls used
-      to produce this object }
+    \item{\code{name}:}{character string with a displayable name for this
+      object}
+    \item{\code{type}:}{object of class \code{\link{ChannelType}}}
+    \item{\code{x}:}{numeric vector}
+    \item{\code{history}:}{list that keeps a record of the calls used
+      to produce this object}
   }
 }
 \section{Methods}{
   \describe{
     \item{print(object, \dots)}{Print all the data on the object. Since
-      this includes the entire data vector, you rarely want to do this. }
+      this includes the entire data vector, you rarely want to do this.}
     \item{summary(object, \dots)}{Write out a summary of the object.}
     \item{plot(object, \dots)}{Produce a scatter plot of the measurement
       values in the slot \code{x} of the \code{object} against their
@@ -88,11 +87,13 @@ Channel(parent, name, type, vec)
 }
 \value{
   The \code{print}, \code{hist}, and \code{image} methods all invisibly
-  return the \code{Channel} object on which they were invoked. The
-  \code{print} and \code{summary} methods return nothing.
+  return the \code{Channel} object on which they were invoked.
+
+  The \code{print} and \code{summary} methods return nothing.
 }
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+  Kevin R. Coombes \email{kcoombes@mdanderson.org},
+  P. Roebuck \email{proebuck@mdanderson.org}
 }
 \seealso{
   \code{\link{ChannelType}},
@@ -100,7 +101,9 @@ Channel(parent, name, type, vec)
   \code{\link{Processor}}
 }
 \examples{
-# simulate a moderately realistic looking microarray
+showClass("Channel")
+
+## simulate a moderately realistic looking microarray
 nc <- 100			# number of rows
 nr <- 100			# number of columns
 v <- rexp(nc*nr, 1/1000)	# "true" signal intensity (vol)
@@ -121,8 +124,9 @@ hist(raw)
 par(mfrow=c(1,1))
 image(raw)
 
-# finish the cleanup
+## finish the cleanup
 rm(ct, raw, subbed)
 }
+\keyword{classes}
 \keyword{manip}
 
