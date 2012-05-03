@@ -1,12 +1,26 @@
 			Dear Emacs, please make this -*-Text-*- mode!
 	**************************************************
 	*						 *
+	*	       2.13 SERIES NEWS			 *
+	*						 *
+	**************************************************
+
+
+		CHANGES IN R VERSION 2.13.4
+
+BUG FIXES
+
+    o	Corrected spelling in documentation.
+
+
+	**************************************************
+	*						 *
 	*	       2.10 SERIES NEWS			 *
 	*						 *
 	**************************************************
 
 
-		CHANGES IN ClassDiscovery VERSION 2.10.0
+		CHANGES IN R VERSION 2.10.0
 
 NEW FEATURES
 
@@ -19,7 +33,14 @@ BUG FIXES
 
     o	Fixed labeling error in 'bimodalIndex' function.
 
-		CHANGES IN ClassDiscovery VERSION 2.9.0
+
+	**************************************************
+	*						 *
+	*	       2.9 SERIES NEWS			 *
+	*						 *
+	**************************************************
+
+		CHANGES IN R VERSION 2.9.0
 
 NEW FEATURES
 
@@ -31,5 +52,4 @@ NEW FEATURES
         computation of the bimodality index.
 
     o   Added support for namespaces.
-
 
