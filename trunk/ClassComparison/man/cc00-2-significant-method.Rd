@@ -35,7 +35,7 @@
 }
 \value{
   \code{cutoffSignificant} returns appropriate cutoff values that achieve
-  specified signficance criteria.
+  specified significance criteria.
 
   \code{selectSignificant} returns a logical vector, with \code{TRUE} values
   indicating items that satisfy the cutoff making them statistically

@@ -20,7 +20,7 @@
     \item{show}{\code{signature(object = TNoMSummary)}:  Print the
       object, which contains a summary of the underlying \code{TNoM}
       object. In particular, the summary reports the number of genes
-      acheiving each possible number of misclassifications.}
+      achieving each possible number of misclassifications.}
   }
 }
 \author{

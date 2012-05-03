@@ -15,7 +15,7 @@ rankSum(data, selector)
   This is an efficient function to compute the value of the Wilcoxon
   rank-sum statistic without the extra overhead of the full
   \code{wilcox.test} function. It is used internally by the
-  \code{\link{MultiWilcoxonTest}} class to perform rwo-by-row Wilcoxon
+  \code{\link{MultiWilcoxonTest}} class to perform row-by-row Wilcoxon
   tests.
 }
 \value{

@@ -96,7 +96,7 @@ MultiWilcoxonTest(data, classes, histsize=NULL)
       the cutoffs and number of items in both tails of the distribution.}
     \item{hist(x, xlab='Rank Sum', ylab='Prob(Different|Y)', main='', \dots)}{
       Plot a histogram of the rank-sum statistics, with overlaid curves
-      represnting the expected and observed distributions.  Colors of
+      representing the expected and observed distributions.  Colors of
       the curves are controlled by
       \code{\link[PreProcess:semanticColors]{COLOR.EXPECTED}} and 
       \code{\link[PreProcess:semanticColors]{COLOR.OBSERVED}}.
@@ -104,7 +104,7 @@ MultiWilcoxonTest(data, classes, histsize=NULL)
     \item{plot(x, prior=1, significance=0.9, ylim=c(-0.5, 1), xlab='Rank
       Sum', ylab='Prob(Different | Y)', \dots)}{
       Plots the posterior probability of being differentially expressed
-      for given values of the \code{prior}.  Horixontal lines are added
+      for given values of the \code{prior}.  Horizontal lines are added
       at each specified \code{significance} level for the posterior
       probability.
     } 
@@ -121,7 +121,7 @@ MultiWilcoxonTest(data, classes, histsize=NULL)
   return what you would expect.
 
   The \code{cutoffSignificant} method returns a list of two
-  integers. Rank-sum values msaller than the first value or larger than
+  integers. Rank-sum values smaller than the first value or larger than
   the second value are statistically significant in the sense that their
   posterior probability exceeds the specified \code{significance} level
   given the assumptions about the \code{prior} probability of not being

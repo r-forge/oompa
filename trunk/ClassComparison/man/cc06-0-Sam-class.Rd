@@ -31,8 +31,8 @@ Sam(data, classes, nPerm=100, verbose=TRUE)
   \item{nPerm}{An integer; the number of permutations}
   \item{verbose}{A logical flag}
   \item{x}{A \code{Sam} object}
-  \item{y}{Nothing, since it is supposed to be mssing. Changes to the Rd
-    processor require docuemnting the missing entry.}
+  \item{y}{Nothing, since it is supposed to be missing. Changes to the Rd
+    processor require documenting the missing entry.}
   \item{tracks}{a numeric vector}
   \item{xlab}{Label for the x axis}
   \item{ylab}{Label for the y axis}
@@ -43,7 +43,7 @@ Sam(data, classes, nPerm=100, verbose=TRUE)
 \details{
   The SAM approach to analyzing microarray data was developed by Tusher
   and colleagues; their implementation is widely available.  This is an
-  independent implementaiton based on the description in their original
+  independent implementation based on the description in their original
   paper, customized to use the same interface (and thus work with
   \code{\link[Biobase:class.ExpressionSet]{ExpressionSet}} objects) used
   by the rest of the ClassComparison package. The fundamental idea

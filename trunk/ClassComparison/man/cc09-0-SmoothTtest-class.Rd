@@ -50,7 +50,7 @@ SmoothTtest(stats, aname='Group One', bname='Group Two',
   step in the direction of variance stabilization. They observed,
   however, that the gene-by-gene standard deviations still seemed to
   vary in a systematic way as a function of the mean log intensity. By
-  borrowing strenght across genes and using \code{\link{loess}} to fit
+  borrowing strength across genes and using \code{\link{loess}} to fit
   the observed standard deviations as a function of the mean, one
   presumably got a better estimate of the true standard deviation.
 
@@ -63,7 +63,7 @@ SmoothTtest(stats, aname='Group One', bname='Group Two',
   The interesting question then arises of how to compute and interpret
   p-values associated to these individual tests. The liberal
   argument asserts that, because smoothing uses data from hundreds
-  of measurements to estiamte the standard deviation, it can effectively
+  of measurements to estimate the standard deviation, it can effectively
   be treated as "known" in the t-tests, which should thus be compared
   against the normal distribution. A conservative argument claims
   that the null distribution should still be the t-distribution with the
@@ -124,7 +124,7 @@ SmoothTtest(stats, aname='Group One', bname='Group Two',
       as an M-vs-A plot). The fifth plot is a histogram of the smooth
       t-statistics. The final plot is a scatter plot of the smooth
       t-statistics as a function of the mean intensity.
-      Colors in the plots are controlled by the curent values of
+      Colors in the plots are controlled by the current values of
       \code{\link[PreProcess:semanticColors]{COLOR.BORING}},
       \code{\link[PreProcess:semanticColors]{COLOR.SIGNIFICANT}},
       \code{\link[PreProcess:semanticColors]{COLOR.BAD.REPLICATE}},

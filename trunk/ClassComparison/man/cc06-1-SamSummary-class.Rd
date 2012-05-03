@@ -11,11 +11,11 @@
 }
 \section{Slots}{
   \describe{
-    \item{\code{fdr}:}{A number between 0 and 1; the expected false
-      discovery rate}
+    \item{\code{fdr}:}{numeric scalar between \code{0} and \code{1} specifying
+      the expected false discovery rate}
     \item{\code{hi}:}{Upper threshold for significance}
     \item{\code{lo}:}{Lower threshold for significance}
-    \item{\code{cutoff}:}{A numeric value specified in the call to the
+    \item{\code{cutoff}:}{numeric scalar specified in the call to the
       \code{Sam} \code{summary} method.}
     \item{\code{significant.calls}:}{vector of logical values}
     \item{\code{average.false.count}:}{The average number of false

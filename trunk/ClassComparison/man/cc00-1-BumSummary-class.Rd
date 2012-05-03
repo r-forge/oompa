@@ -21,7 +21,7 @@
     \item{show}{\code{signature(object = "BumSummary")}: Print the
       object, which contains a summary of the underlying \code{Bum}
       object. The summary contains a data frame with estimates of the
-      fraction of true positives (TP), false postives (FP), true negatives
+      fraction of true positives (TP), false positives (FP), true negatives
       (TN) and false negatives (FN) at the set of p-value cutoffs
       specified in the call to the summary method.}
   }

@@ -33,12 +33,12 @@ TNoM(data, classes, verbose=TRUE)
     names one of the factor columns in the associated
     \code{\link[Biobase]{phenoData}} subobject.}
   \item{verbose}{logical scalar. If \code{TRUE}, print out intermediate results}
-  \item{object}{object opf class \code{TNoM}}
+  \item{object}{object of class \code{TNoM}}
   \item{nPerm}{integer scalar specifying the number of permutations to perform}
   \item{cutoff}{integer scalar}
   \item{x}{object of class \code{fullTNoM}}
   \item{y}{Nothing, since it is supposed to be missing. Changes to the Rd
-    processor require docuemnting the missing entry.}
+    processor require documenting the missing entry.}
   \item{\dots}{extra arguments to generic or plotting routines}
 }
 \details{
@@ -79,10 +79,10 @@ TNoM(data, classes, verbose=TRUE)
 \section{Slots}{
   Objects of the \code{TNoM} class have the following slots:
   \describe{
-    \item{\code{data}:}{The data matrix used to contruct the object}
+    \item{\code{data}:}{The data matrix used to construct the object}
     \item{\code{tnomData}:}{numeric vector, whose length is the number
       of rows in \code{data}, recording the minimum number of
-      misclassification  acheived using this data row.} 
+      misclassification  achieved using this data row.} 
     \item{\code{nCol}:}{The number of columns in \code{data}}
     \item{\code{nRow}:}{The number of rows in \code{data}}
     \item{\code{classifier}:}{The classification vector used to create
@@ -104,7 +104,7 @@ TNoM(data, classes, verbose=TRUE)
   Objects of the \code{TNoM} class have the following methods:
   \describe{
     \item{summary(object, \dots)}{Write out a summary of the object,
-      including the number of genes acheiving each possible number of
+      including the number of genes achieving each possible number of
       misclassifications.}
     \item{countSignificant(object, cutoff, \dots)}{Count the number of
       significant genes at the given \code{cutoff}.}

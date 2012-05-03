@@ -49,7 +49,7 @@ SingleGroup(avg, sd, span=0.5, name='')
   step in the direction of variance stabilization. They observed,
   however, that the gene-by-gene standard deviations still seemed to
   vary in a systematic way as a function of the mean log intensity. By
-  borrowing strenght across genes and using \code{\link{loess}} to fit
+  borrowing strength across genes and using \code{\link{loess}} to fit
   the observed standard deviations as a function of the mean, one
   presumably got a better estimate of the true standard deviation.
 }
@@ -83,9 +83,9 @@ SingleGroup(avg, sd, span=0.5, name='')
     \item{plot(x, multiple=3, ccl=0, main=x@name, xlab='Mean', ylab='Std
     Dev', xlim=0, ylim=0, \dots)}{Produce a scatter plot of the standard
     deviations (\code{x@sd}) as a function of the means (\code{x@avg}).
-    The appropriate mutliple of the \code{loess} fit is overlaid, and
-    points that exceed this multiple are flaged in a different
-    color. Colors in the plotare controlled by the current values of
+    The appropriate multiple of the \code{loess} fit is overlaid, and
+    points that exceed this multiple are flagged in a different
+    color. Colors in the plot are controlled by the current values of
     \code{\link[PreProcess:semanticColors]{COLOR.CENTRAL.LINE}},
     \code{\link[PreProcess:semanticColors]{COLOR.CONFIDENCE.CURVE}},
     \code{\link[PreProcess:semanticColors]{COLOR.BORING}},

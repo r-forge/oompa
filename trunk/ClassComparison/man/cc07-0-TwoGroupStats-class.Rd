@@ -47,8 +47,9 @@ TwoGroupStats(data, classes, name=comparison, name1=A, name2=B)
   used for quality control.
 }
 \section{Creating Objects}{
-  As usual, objects can be created by \code{new}, but better methods are
-  available in the form of the \code{TwoGroupStats} function. The inputs to this
+  Although objects of the class can be created by a direct call to
+  \link[methods]{new}, the preferred method is to use the
+  \code{TwoGroupStats} generator. The inputs to this
   function are the same as those used for row-by-row statistical tests
   throughout the ClassComparison package; a detailed description can be
   found in the \code{MultiTtest} class.
@@ -61,23 +62,22 @@ TwoGroupStats(data, classes, name=comparison, name1=A, name2=B)
 }
 \section{Slots}{
   \describe{
-    \item{\code{mean1}:}{The numeric vector of means in the first group }
-    \item{\code{mean2}:}{The numeric vector of means in the second group }
-    \item{\code{overallMean}:}{The numeric vector of overall row means }
-    \item{\code{var1}:}{The numeric vector of variances in the first
-      group }
-    \item{\code{var2}:}{The numeric vector of variances in teh second
-      group }
-    \item{\code{overallVar}:}{The numeric vector of variances assuming
+    \item{\code{mean1}:}{numeric vector of means in the first group}
+    \item{\code{mean2}:}{numeric vector of means in the second group}
+    \item{\code{overallMean}:}{numeric vector of overall row means}
+    \item{\code{var1}:}{numeric vector of variances in the first group}
+    \item{\code{var2}:}{numeric vector of variances in the second group}
+    \item{\code{overallVar}:}{numeric vector of variances assuming
       the two groups have the same mean}
-    \item{\code{pooledVar}:}{The numeric vector of row-by-row pooled
-      variances, assuming the two groups have the same variance but
-      different means}
-    \item{\code{n1}:}{ The number of items in the first group}
-    \item{\code{n2}:}{ The number of items in the first group}
-    \item{\code{name1}:}{ The name of the first group}
-    \item{\code{name2}:}{ The name of the second group }
-    \item{\code{name}:}{ The name of the object }
+    \item{\code{pooledVar}:}{numeric vector of row-by-row pooled variances,
+      assuming the two groups have the same variance but different means}
+    \item{\code{n1}:}{numeric scalar specifying number of items in the
+      first group}
+    \item{\code{n2}:}{numeric scalar specifying number of items in the
+      second group}
+    \item{\code{name1}:}{character string specifying name of the first group}
+    \item{\code{name2}:}{character string specifying name of the second group}
+    \item{\code{name}:}{character string specifying name of the object}
   }
 }
 \section{Methods}{

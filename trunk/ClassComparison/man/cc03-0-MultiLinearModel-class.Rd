@@ -102,7 +102,7 @@ multiTukey(object, alpha)
   comparing each linear model to the null model Y ~ 1.  In many
   instances, one wishes to use an F-test to compare two different linear
   models. For instance, many standard applications of analysis of
-  variance (ANOVA) can be described using sucha compoarison between two
+  variance (ANOVA) can be described using such a comparison between two
   different linear models. The \code{anova} method for the
   \code{MultiLinearModel} class performs row-by-row F-tests comparing
   two competing linear models.
@@ -118,12 +118,12 @@ multiTukey(object, alpha)
 }
 \value{
   The \code{anova} method returns a data frame.  The rows in the data
-  frame correpsonds to the rows in the \code{arraydata} object that was
+  frame corresponds to the rows in the \code{arraydata} object that was
   used to construct the \code{MultiLinearModel} objects.  The first
   column contains the F-statistics and the second column contains the
   p-values.
 
-  The \code{multiTukey} function returns a vector whosem length equals
+  The \code{multiTukey} function returns a vector whose length equals
   the number of rows in the \code{arraydata} object used to construct
   the \code{MultiLinearModel}. Assuming that the overall F-test was
   significant, differences in group means (in each data row) larger than

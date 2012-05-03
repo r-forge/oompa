@@ -80,7 +80,7 @@ likelihoodBum(object)
       (4) an \acronym{ROC} curve.}
     \item{cutoffSignificant(object, alpha, by='FDR', \dots)}{Computes the
       cutoff needed for significance, which in this case means arising
-      from the beta component rarther than the uniform component of the
+      from the beta component rather than the uniform component of the
       mixture. Significance is specified either by the false discovery
       rate (when \code{by = 'FDR'} or \code{by = 'FalseDiscovery'}) or
       by the posterior probability (when \code{by = 'EmpiricalBayes'})}
@@ -96,15 +96,15 @@ likelihoodBum(object)
   Graphical functions (\code{hist} and \code{image}) invisibly return the
   object on which they were invoked.
 
-  The \code{cutoffSignficant} method returns a real number between zero
+  The \code{cutoffSignificant} method returns a real number between zero
   and one. P-values below this cutoff are considered statistically
   significant at either the specified false discovery rate or at the
   specified posterior probability.
 
-  The \code{selectSignficant} method returns a vector of logical values
+  The \code{selectSignificant} method returns a vector of logical values
   whose length is equal to the length of the vector of p-values that was
   used to construct the \code{Bum} object.  True values in the return
-  vector mark the statistically signficant p-values.
+  vector mark the statistically significant p-values.
 
   The \code{countSignificant} method returns an integer, the number of
   statistically significant p-values.
@@ -136,7 +136,7 @@ likelihoodBum(object)
   original Pounds and Morris paper shows that their results can be
   reinterpreted to recover the empirical Bayes method introduced by
   Efron and Tibshirani. Thus, one can also determine cutoffs by
-  specifying a desired posterior probability of signficance.
+  specifying a desired posterior probability of significance.
 }
 \references{
   Pounds S, Morris SW.\cr

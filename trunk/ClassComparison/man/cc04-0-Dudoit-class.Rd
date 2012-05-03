@@ -81,7 +81,7 @@ Dudoit(data, classes, nPerm=1000, verbose=TRUE)
   \describe{
     \item{cutoffSignificant(object, alpha, \dots)}{Determine cutoffs on
       the adjusted p-values at the desired significance level.  In other
-      words, this function simplyt returns \code{alpha}.}
+      words, this function simply returns \code{alpha}.}
     \item{selectSignificant(object, alpha, \dots)}{Compute a logical
       vector for selecting significant test results.}
     \item{countSignificant(object, alpha, \dots)}{Count the number of
@@ -93,7 +93,7 @@ Dudoit(data, classes, nPerm=1000, verbose=TRUE)
   The standard method for \code{plot} returns what you would expect.
 
   The \code{cutoffSignificant} method returns a real number (its input
-  value \code{alpha}).  The \code{selectSignficant} method returns a
+  value \code{alpha}).  The \code{selectSignificant} method returns a
   vector of logical values identifying the significant test results, and
   \code{countSignificant} returns an integer counting the number of
   significant test results.
