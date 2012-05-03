@@ -1,9 +1,9 @@
 \name{ColorCodedPair-class}
-\docType{class}
 \alias{ColorCodedPair-class}
 \alias{ColorCodedPair}
 \alias{plot,ColorCodedPair,missing-method}
-\title{ The ColorCodedPair class }
+\docType{class}
+\title{Class "ColorCodedPair"}
 \description{
   This class represents a vector of (x,y) pairs, each of which should be
   plotted in a specific color with a specific symbol.

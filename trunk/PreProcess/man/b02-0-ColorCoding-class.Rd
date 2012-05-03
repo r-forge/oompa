@@ -1,8 +1,8 @@
 \name{ColorCoding-class}
-\docType{class}
 \alias{ColorCoding-class}
 \alias{ColorCoding}
 \alias{colorCode}
+\docType{class}
 \title{Class "ColorCoding"}
 \description{
   A class for associating plotting symbols and colors with a logical
