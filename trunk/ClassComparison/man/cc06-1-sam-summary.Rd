@@ -1,13 +1,13 @@
 \name{SamSummary-class}
-\docType{class}
 \alias{SamSummary}
 \alias{SamSummary-class}
 \alias{show,SamSummary-method}
-
-\title{The SamSummary Class}
+\docType{class}
+\title{Class "SamSummary"}
 \description{
-  An implementation class. Users are not expected to create these objects directly;
-  they are produced as return objects from the summary method for \code{Sam}.
+  An implementation class. Users are not expected to create these objects
+  directly; they are produced as return objects from the summary method
+  for \code{Sam}.
 }
 \section{Slots}{
   \describe{
@@ -29,11 +29,15 @@
       object.}
   }
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org},
+  P. Roebuck \email{proebuck@mdanderson.org}
+}
 \seealso{
  \code{\link{Sam}}
 }
 \examples{
-# See the examples for the Sam class.
+showClass("SamSummary")
 }
 \keyword{classes}
+

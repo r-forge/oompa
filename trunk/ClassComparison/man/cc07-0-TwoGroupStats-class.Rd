@@ -1,21 +1,22 @@
 \name{TwoGroupStats-class}
-\docType{class}
 \alias{TwoGroupStats}
 \alias{TwoGroupStats-class}
 \alias{as.data.frame,TwoGroupStats-method}
 \alias{plot,TwoGroupStats,missing-method}
 \alias{print,TwoGroupStats-method}
 \alias{summary,TwoGroupStats-method}
-
-\title{The TwoGroupStats Class}
-\description{  Compute row-by-row means and variances for a data matrix
-  whose columns belong to two different groups of interest. }
+\docType{class}
+\title{Class "TwoGroupStats"}
+\description{
+  Compute row-by-row means and variances for a data matrix
+  whose columns belong to two different groups of interest.
+}
 \usage{
-TwoGroupStats(data, classes, name = comparison, name1 = A, name2 = B)
+TwoGroupStats(data, classes, name=comparison, name1=A, name2=B)
 \S4method{as.data.frame}{TwoGroupStats}(x, row.names=NULL, optional=FALSE)
-\S4method{summary}{TwoGroupStats}(object, ...)
-\S4method{print}{TwoGroupStats}(x, ...)
-\S4method{plot}{TwoGroupStats,missing}(x, main=x@name, useLog=FALSE, ...)
+\S4method{summary}{TwoGroupStats}(object, \dots)
+\S4method{print}{TwoGroupStats}(x, \dots)
+\S4method{plot}{TwoGroupStats,missing}(x, main=x@name, useLog=FALSE, \dots)
 }
 \arguments{
   \item{data}{ Either a data frame or matrix with numeric values or an
@@ -84,12 +85,12 @@ TwoGroupStats(data, classes, name = comparison, name1 = A, name2 = B)
     \item{as.data.frame(x, row.names=NULL, optional=FALSE)}{Collect the
       numeric vectors from the object into a single dat fame, suitable
       for printing or exporting.}
-    \item{summary(object, ...)}{Write out a summary of the object.}
-    \item{print(x, ...)}{Print the object. (Actually, it only prints a
+    \item{summary(object, \dots)}{Write out a summary of the object.}
+    \item{print(x, \dots)}{Print the object. (Actually, it only prints a
       summary, since the whole object is almost always more than you
       really want to see. If you insist on printing everything, use
       \code{as.data.frame}.)}
-    \item{plot(x, main=x@name, useLog=FALSE, ...)}{This function
+    \item{plot(x, main=x@name, useLog=FALSE, \dots)}{This function
       actually produces six different plots of the data, so it is
       usually wrapped by a graphical layout command like
       \code{par(mfrow=c(2,3))}. The first two plots show the relation
@@ -109,14 +110,20 @@ TwoGroupStats(data, classes, name = comparison, name1 = A, name2 = B)
   }
 }
 \references{
-  Altman DG, Bland JM. Measurement in Medicine: the Analysis of Method
-  Comparison Studies. The Statistician, 1983; 32: 307-317. 
+  Altman DG, Bland JM.\cr
+  "Measurement in Medicine: the Analysis of Method Comparison Studies."\cr
+  The Statistician, 1983; 32: 307-317. 
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org},
+  P. Roebuck \email{proebuck@mdanderson.org}
+}
 \seealso{
-  \code{\link{SmoothTtest}}, \code{\link{MultiTtest}}
+  \code{\link{MultiTtest}},
+  \code{\link{SmoothTtest}}
 }
 \examples{
+showClass("TwoGroupStats")
 bogus <- matrix(rnorm(30*1000, 8, 3), ncol=30, nrow=1000)
 splitter <- rep(FALSE, 30)
 splitter[16:30] <- TRUE
@@ -127,10 +134,8 @@ summary(x)
 opar<-par(mfrow=c(2,3), pch='.')
 plot(x)
 par(opar)
-
-# cleanup
-rm(bogus, splitter, x, opar)
 }
 \keyword{classes}
 \keyword{hplot}
 \keyword{univar}
+

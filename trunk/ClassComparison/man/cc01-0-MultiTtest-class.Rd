@@ -1,5 +1,4 @@
 \name{MultiTtest-class}
-\docType{class}
 \alias{MultiTtest}
 \alias{MultiTtest-class}
 \alias{hist,MultiTtest-method}
@@ -7,6 +6,7 @@
 \alias{plot,MultiTtest,ANY-method}
 \alias{summary,MultiTtest-method}
 \alias{as.data.frame,MultiTtest-method}
+\docType{class}
 \title{Class "MultiTtest"}
 \description{
   Class to perform row-by-row t-tests on microarray or proteomics data.
@@ -77,8 +77,8 @@ MultiTtest(data, classes, na.rm=TRUE)
 }
 \section{Methods}{
   \describe{
-    \item{summary(object, ...)}{Write out a summary of the object.}
-    \item{hist(x, xlab='T Statistics', main=NULL, ...)}{Produce a
+    \item{summary(object, \dots)}{Write out a summary of the object.}
+    \item{hist(x, xlab='T Statistics', main=NULL, \dots)}{Produce a
       histogram of the t-statistics.}
     \item{plot(x)}{Produces a scatter plot of the t-statistics against
       their index.}
@@ -91,15 +91,17 @@ MultiTtest(data, classes, na.rm=TRUE)
   they were invoked.
 }
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+  Kevin R. Coombes \email{kcoombes@mdanderson.org},
+  P. Roebuck \email{proebuck@mdanderson.org}
 }
 \seealso{
   \code{\link{matrixT}},
   \code{\link{Bum}},
-  \code{\link{MultiLinearModel}},
-  \code{\link{Dudoit}}
+  \code{\link{Dudoit}},
+  \code{\link{MultiLinearModel}}
 }
 \examples{
+showClass("MultiTtest")
 ng <- 10000
 ns <- 50
 dat <- matrix(rnorm(ng*ns), ncol=ns)
@@ -116,8 +118,6 @@ mm <- matrixMean(dat, na.rm=TRUE)
 vv <- matrixVar(dat, mm, na.rm=TRUE)
 tt <- matrixT(dat, cla, na.rm=TRUE)
 mtt <- MultiTtest(dat,cla)
-
-rm(ng, ns, dat, cla, res)
 }
 \keyword{classes}
 \keyword{multivariate}

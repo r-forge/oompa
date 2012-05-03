@@ -1,5 +1,4 @@
 \name{MultiLinearModel-class}
-\docType{class}
 \alias{MultiLinearModel}
 \alias{multiTukey}
 \alias{MultiLinearModel-class}
@@ -8,59 +7,57 @@
 \alias{plot,MultiLinearModel,missing-method}
 \alias{plot,MultiLinearModel,ANY-method}
 \alias{summary,MultiLinearModel-method}
-
-\title{The MultiLinearModel Class }
+\docType{class}
+\title{Class "MultiLinearModel"}
 \description{
   Class to fit multiple (row-by-row) linear (fixed-effects) models on
   microarray or proteomics data.
 }
 \usage{
 MultiLinearModel(form, clindata, arraydata)
-\S4method{summary}{MultiLinearModel}(object, ...)
-\S4method{hist}{MultiLinearModel}(x, xlab='F Statistics', main=NULL, ...)
-\S4method{plot}{MultiLinearModel,missing}(x, y, ylab='F Statistics', ...)
+\S4method{summary}{MultiLinearModel}(object, \dots)
+\S4method{hist}{MultiLinearModel}(x, xlab='F Statistics', main=NULL, \dots)
+\S4method{plot}{MultiLinearModel,missing}(x, y, ylab='F Statistics', \dots)
 \S4method{plot}{MultiLinearModel,ANY}(x, y, xlab='F Statistics',
- ylab=deparse(substitute(y)), ...)
-\S4method{anova}{MultiLinearModel}(object, ob2, ...)
+ ylab=deparse(substitute(y)), \dots)
+\S4method{anova}{MultiLinearModel}(object, ob2, \dots)
 multiTukey(object, alpha)
 }
 \arguments{
-  \item{form}{ A \code{formula} object specifying the linear model}
-  \item{clindata}{ Either a data frame of "clinical" or other
-    covariates or an \code{\link[Biobase:class.ExpressionSet]{ExpressionSet}}. }
-  \item{arraydata}{ A matrix or data frame of values to be explained by
-    the model.  If \code{clindata} is an \code{ExpressionSet}, then
-    \code{arraydata} can be omitted, since it is assumed to be part of
-    the \code{ExpressionSet}.}
-  \item{object}{A \code{MultiLinearModel} object}
-  \item{ob2}{Another \code{MultiLinearModel} object}
-  \item{x}{A \code{MultiLinearModel} object}
-  \item{y}{An optional numeric vector}
-  \item{xlab}{Label for the x-axis}
-  \item{ylab}{Label for the y-axis}
-  \item{main}{Graph title}
-  \item{\dots}{Optional graphical or other parameters to generic functions}
-  \item{alpha}{A real number between 0 and 1; the significance level for
-  the Tukey test.}
+  \item{form}{\code{formula} object specifying the linear model}
+  \item{clindata}{either a data frame of "clinical" or other
+    covariates, or an \code{\link[Biobase:class.ExpressionSet]{ExpressionSet}}.}
+  \item{arraydata}{matrix or data frame of values to be explained by the model.
+    If \code{clindata} is an \code{ExpressionSet}, then \code{arraydata} can be
+    omitted, since it is assumed to be part of the \code{ExpressionSet}.}
+  \item{object}{object of class \code{MultiLinearModel}}
+  \item{ob2}{object of class \code{MultiLinearModel}}
+  \item{x}{object of class \code{MultiLinearModel}}
+  \item{y}{optional numeric vector}
+  \item{xlab}{character string specifying label for the x-axis}
+  \item{ylab}{character string specifying label for the y-axis}
+  \item{main}{character string specifying graph title}
+  \item{\dots}{extra arguments for generic or plotting functions}
+  \item{alpha}{numeric scalar between \code{0} and \code{1} specifying
+   the significance level for the Tukey test.}
 }
 \section{Creating Objects}{
   Objects should be created by calling the \code{MultiLinearModel}
-  function.  The first argument is a \code{\link{formula}} specifying
+  function. The first argument is a \code{\link{formula}} specifying
   the linear model, in the same manner that it would be passed to
-  \code{\link{lm}}.  We will fit the linear model separately for each
-  row in the \code{arraydata} matrix.  Rows of \code{arraydata} are
+  \code{\link{lm}}. We will fit the linear model separately for each
+  row in the \code{arraydata} matrix. Rows of \code{arraydata} are
   attached to the \code{clindata} data frame and are always referred to
   as "Y" in the formulas. In particular, this implies that
-  \code{clindata} can not include a column already called "Y".  Further,
-  the implementation only works if "Y" is the response variable in the
-  model.
+  \code{clindata} can not include a column already called "Y". Further,
+  the implementation only works if "Y" is the response variable in the model.
 }
 \section{Multiple linear models with "ExpressionSet" objects}{
   The BioConductor packages uses an \code{ExpressionSet} to combine microarray
   data and clinical covariates (known in their context as
   \code{\link[Biobase]{phenoData}} objects) into a single structure.
   You can call \code{MultiLinearModel} using an \code{ExpressionSet} object
-  for the \code{clindata} argument.  In this case, the function extracts
+  for the \code{clindata} argument. In this case, the function extracts
   the \code{phenoData} slot of the \code{ExpressionSet} to use for the
   clinical covariates, and extracts the \code{exprs} slot of the
   \code{ExpressionSet} object to use for the array data.
@@ -89,14 +86,14 @@ multiTukey(object, alpha)
 }
 \section{Methods}{
   \describe{
-    \item{summary(object, ...)}{Write out a summary of the object.}
-    \item{hist(x, xlab='F Statistics', main=NULL, ...)}{Create a
+    \item{summary(object, \dots)}{Write out a summary of the object.}
+    \item{hist(x, xlab='F Statistics', main=NULL, \dots)}{Create a
       histogram of the F-statistics.}
-    \item{plot(x, ylab='F Statistics', ...)}{Plot the F-statistics as a
+    \item{plot(x, ylab='F Statistics', \dots)}{Plot the F-statistics as a
       function of the row index.}
     \item{plot(x, y, xlab='F Statistics', ylab=deparse(substitute(y)),
-      ...)}{Plot the F-statistics against the numeric vector \code{y}.}
-    \item{anova(object, ob2, ...)}{Perform row-by-row F-tests comparing
+      \dots)}{Plot the F-statistics against the numeric vector \code{y}.}
+    \item{anova(object, ob2, \dots)}{Perform row-by-row F-tests comparing
       two different linear models.}
   }
 }
@@ -139,12 +136,19 @@ multiTukey(object, alpha)
   cutoff, we simply use the Tukey HSD values without further
   modification.)
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org},
+  P. Roebuck \email{proebuck@mdanderson.org}
+}
 \seealso{
-  \code{\link{MultiTtest}}, \code{\link{MultiWilcoxonTest}},
-  \code{\link{Bum}}, \code{\link{lm}}, \code{\link{anova}}.
+  \code{\link{anova}},
+  \code{\link{lm}},
+  \code{\link{Bum}},
+  \code{\link{MultiTtest}},
+  \code{\link{MultiWilcoxonTest}}
 }
 \examples{
+showClass("MultiLinearModel")
 ng <- 10000
 ns <- 50
 dat <- matrix(rnorm(ng*ns), ncol=ns)
@@ -165,10 +169,8 @@ hist(res@p.values, breaks=101)
 
 oop <- anova(res, graded)
 hist(oop$p.values, breaks=101)
-
-# cleanup
-rm(ng, ns, dat, cla, cla2, covars, res, graded, oop)
 }
 \keyword{classes}
 \keyword{multivariate}
 \keyword{htest}
+

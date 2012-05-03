@@ -8,6 +8,7 @@
 \alias{countSignificant}
 \alias{countSignificant-method}
 \alias{countSignificant,ANY-method}
+\docType{methods}
 \title{Generic Methods for Significance}
 \description{
   In the world of multiple testing that is inhabited by most microarray

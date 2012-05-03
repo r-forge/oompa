@@ -1,18 +1,18 @@
 \name{TNoMSummary-class}
-\docType{class}
 \alias{TNoMSummary}
 \alias{TNoMSummary-class}
 \alias{show,TNoMSummary-method}
-
-\title{The TNoMSummary Class}
+\docType{class}
+\title{Class "TNoMSummary"}
 \description{
-  An implementation class. Users are not expected to create these objects directly;
-  they are produced as return objects from the summary method for \code{TNoM}.
+  An implementation class. Users are not expected to create these objects
+  directly; they are produced as return objects from the summary method for
+  \code{TNoM}.
 }
 \section{Slots}{
   \describe{
-    \item{\code{TNoM}:}{Object of class \code{TNoM} ~~ }
-    \item{\code{counts}:}{Object of class \code{numeric} ~~ }
+    \item{\code{TNoM}:}{object of class \code{TNoM} ~~ }
+    \item{\code{counts}:}{object of class \code{numeric} ~~ }
   }
 }
 \section{Methods}{
@@ -23,11 +23,15 @@
       acheiving each possible number of misclassifications.}
   }
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org},
+  P. Roebuck \email{proebuck@mdanderson.org}
+}
 \seealso{
- \code{\link{TNoM}}
+  \code{\link{TNoM}}
 }
 \examples{
-# See the examples for the TNoM class.
+showClass("TNoMSummary")
 }
 \keyword{classes}
+

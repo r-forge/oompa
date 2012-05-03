@@ -1,5 +1,4 @@
 \name{MultiWilcoxonTest-class}
-\docType{class}
 \alias{MultiWilcoxonTest}
 \alias{MultiWilcoxonTest-class}
 \alias{countSignificant,MultiWilcoxonTest-method}
@@ -8,26 +7,26 @@
 \alias{plot,MultiWilcoxonTest,missing-method}
 \alias{selectSignificant,MultiWilcoxonTest-method}
 \alias{summary,MultiWilcoxonTest-method}
-
-\title{The MultiWilcoxonTest Class }
-\description{ The \code{MultiWilcoxonTest} class is used to perform
-  row-by-row Wilcoxon rank-sum tests on a data matrix.  Significance
-  cutoffs are determined by the empirical Bayes method of Efron and
-  Tibshirani
+\docType{class}
+\title{Class "MultiWilcoxonTest"}
+\description{
+  The \code{MultiWilcoxonTest} class is used to perform row-by-row Wilcoxon
+  rank-sum tests on a data matrix. Significance cutoffs are determined by the
+  empirical Bayes method of Efron and Tibshirani.
 }
 \usage{
-MultiWilcoxonTest(data, classes, histsize = NULL)
-\S4method{summary}{MultiWilcoxonTest}(object, prior=1, significance=0.9, ...)
+MultiWilcoxonTest(data, classes, histsize=NULL)
+\S4method{summary}{MultiWilcoxonTest}(object, prior=1, significance=0.9, \dots)
 \S4method{hist}{MultiWilcoxonTest}(x, xlab='Rank Sum',
- ylab='Prob(Different | Y)', main='', ...)
+ ylab='Prob(Different | Y)', main='', \dots)
 \S4method{plot}{MultiWilcoxonTest,missing}(x, prior=1, significance=0.9,
- ylim=c(-0.5, 1), xlab='Rank Sum', ylab='Prob(Different | Y)', ...)
-\S4method{cutoffSignificant}{MultiWilcoxonTest}(object, prior, significance, ...)
-\S4method{selectSignificant}{MultiWilcoxonTest}(object, prior, significance, ...)
-\S4method{countSignificant}{MultiWilcoxonTest}(object, prior, significance, ...)
+ ylim=c(-0.5, 1), xlab='Rank Sum', ylab='Prob(Different | Y)', \dots)
+\S4method{cutoffSignificant}{MultiWilcoxonTest}(object, prior, significance, \dots)
+\S4method{selectSignificant}{MultiWilcoxonTest}(object, prior, significance, \dots)
+\S4method{countSignificant}{MultiWilcoxonTest}(object, prior, significance, \dots)
 }
 \arguments{
-  \item{data}{ Either a data frame or matrix with numeric values or an
+  \item{data}{either a data frame or matrix with numeric values, or an
     \code{\link[Biobase:class.ExpressionSet]{ExpressionSet}} as defined
     in the BioConductor tools for analyzing microarray data.}
   \item{classes}{ If \code{data} is a data frame or matrix, then classes
@@ -40,15 +39,15 @@ MultiWilcoxonTest(data, classes, histsize = NULL)
     rank-sum value gets its own bin.}
   \item{object}{an object of the \code{MultiWilcoxonTest} class.}
   \item{x}{an object of the \code{MultiWilcoxonTest} class.}
-  \item{xlab}{Label for the x axis}
-  \item{ylab}{Label for the y axis}
+  \item{xlab}{character string specifying label for the x axis}
+  \item{ylab}{character string specifying label for the y axis}
   \item{ylim}{Plotting limits on the y-axis}
-  \item{main}{Graph title}
+  \item{main}{character string specifying graph title}
   \item{prior}{Prior probability that an arbitrary gene is not differentially
     expressed, or that an arbitrary row does not yield a significant
     Wilcoxon rank-sum statistic. }
   \item{significance}{Desired level of posterior probability}
-  \item{\dots}{Additional graphical parameters.}
+  \item{\dots}{extra arguments for generic or plotting routines}
 }
 \section{Creating Objects}{
   As usual, objects can be created by \code{new}, but better methods are
@@ -70,32 +69,32 @@ MultiWilcoxonTest(data, classes, histsize = NULL)
 }
 \section{Slots}{
   \describe{
-    \item{\code{rank.sum.statistics}:}{A numeric vector containing the
+    \item{\code{rank.sum.statistics}:}{numeric vector containing the
       computed rank-sum statistics.}
-    \item{\code{xvals}:}{A numeric vector, best thought of as the vector
+    \item{\code{xvals}:}{numeric vector, best thought of as the vector
       of possible rank-sum statistics given the sizes of the two groups.}
-    \item{\code{theoretical.pdf}:}{A numeric vector containing the
+    \item{\code{theoretical.pdf}:}{numeric vector containing the
       theoretical density function evaluated at the points of
       \code{xvals}.}
-    \item{\code{pdf}:}{A numeric vector containing the empirical density
+    \item{\code{pdf}:}{numeric vector containing the empirical density
       function computed at the points of \code{xvals}.}
-    \item{\code{unravel}:}{A numeric vector containing a smoothed
+    \item{\code{unravel}:}{numeric vector containing a smoothed
       estimate (by Poisson regression using B-splines) of the empirical
       density function evaluated at \code{xvals}.}
     \item{\code{groups}:}{A vector containing the names of the groups
       defined by \code{classes}.}
-    \item{\code{call}:}{An object of class \code{call} representing the
-      function call that created the object. }
+    \item{\code{call}:}{object of class \code{call} representing the
+      function call that created the object.}
   }
 }
 \section{Methods}{
   \describe{
-    \item{summary(object, prior=1, significance=0.9, ...)}{
+    \item{summary(object, prior=1, significance=0.9, \dots)}{
       Write out a summary of the object. For a given value of the
       \code{prior} probability of not being differentially expressed and
       a given significance cutoff on the posterior probability, reports
       the cutoffs and number of items in both tails of the distribution.}
-    \item{hist(x, xlab='Rank Sum', ylab='Prob(Different|Y)', main='', ...)}{
+    \item{hist(x, xlab='Rank Sum', ylab='Prob(Different|Y)', main='', \dots)}{
       Plot a histogram of the rank-sum statistics, with overlaid curves
       represnting the expected and observed distributions.  Colors of
       the curves are controlled by
@@ -103,17 +102,17 @@ MultiWilcoxonTest(data, classes, histsize = NULL)
       \code{\link[PreProcess:semanticColors]{COLOR.OBSERVED}}.
     }
     \item{plot(x, prior=1, significance=0.9, ylim=c(-0.5, 1), xlab='Rank
-      Sum', ylab='Prob(Different | Y)', ...)}{
+      Sum', ylab='Prob(Different | Y)', \dots)}{
       Plots the posterior probability of being differentially expressed
       for given values of the \code{prior}.  Horixontal lines are added
       at each specified \code{significance} level for the posterior
       probability.
     } 
-    \item{cutoffSignificant(object, prior, significance, ...)}{Determine
+    \item{cutoffSignificant(object, prior, significance, \dots)}{Determine
     cutoffs on the rank-sum statistic at the desired significance level.}
-    \item{selectSignificant(object, prior, significance, ...)}{Compute a
+    \item{selectSignificant(object, prior, significance, \dots)}{Compute a
       logical vector for selecting significant test results.}
-    \item{countSignificant(object, prior, significance, ...)}{Count the
+    \item{countSignificant(object, prior, significance, \dots)}{Count the
       number of significant test results.}
   }
 }
@@ -136,22 +135,28 @@ MultiWilcoxonTest(data, classes, histsize = NULL)
   See the paper by Efron and Tibshirani.
 }
 \references{
-  Efron B, Tibshirani R: Empirical bayes methods and false discovery
-  rates for microarrays. Genet Epidemiol 2002, 23: 70-86.
+  Efron B, Tibshirani R\cr
+  "Empirical bayes methods and false discovery rates for microarrays."\cr
+  Genet Epidemiol 2002, 23: 70-86.
 
-  Pounds S, Morris SW. Estimating the occurrence of false
-  positives and false negatives in microarray studies by approximating
-  and partitioning the empirical distribution of
-  p-values. Bioinformatics. 2003 Jul 1;19(10):1236-42. 
+  Pounds S, Morris SW.\cr
+  "Estimating the occurrence of false positives and false negatives in
+  microarray studies by approximating and partitioning the empirical
+  distribution of p-values."\cr
+  Bioinformatics. 2003 Jul 1;19(10):1236-42. 
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org},
+  P. Roebuck \email{proebuck@mdanderson.org}
+}
 \seealso{
   Implementation is handled in part by the functions \code{\link{dwil}}
-  and \code{\link{rankSum}}.  The empirical Bayes results for
+  and \code{\link{rankSum}}. The empirical Bayes results for
   alternative tests (such as \code{\link{MultiTtest}}) can be obtained
   using the beta-uniform mixture model in the \code{\link{Bum}} class.
 }
 \examples{
+showClass("MultiWilcoxonTest")
 ng <- 10000
 ns <- 15
 nd <- 200
@@ -168,10 +173,8 @@ abline(h=0)
 
 cutoffSignificant(a, prior=0.85, signif=0.95)
 countSignificant(a, prior=0.85, signif=0.95)
-
-# cleanup
-rm(ng, ns, nd, fake.class, fake.data, a)
 }
 \keyword{classes}
 \keyword{htest}
 \keyword{multivariate}
+

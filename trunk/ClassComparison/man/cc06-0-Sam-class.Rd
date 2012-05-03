@@ -1,24 +1,23 @@
 \name{Sam-class}
-\docType{class}
 \alias{Sam}
 \alias{Sam-class}
 \alias{countSignificant,Sam-method}
 \alias{plot,Sam,missing-method}
 \alias{selectSignificant,Sam-method}
 \alias{summary,Sam-method}
-
-\title{The Sam Class}
+\docType{class}
+\title{Class "Sam"}
 \description{
   Implements the "Significance Analysis of Microarrays" approach to
   detecting differentially expressed genes.
 }
 \usage{
-Sam(data, classes, nPerm = 100, verbose = TRUE)
+Sam(data, classes, nPerm=100, verbose=TRUE)
 \S4method{plot}{Sam,missing}(x, y, tracks=NULL, xlab='Expected T Statistics (Empirical)',
- ylab='Observed T Statistics', ...)
-\S4method{summary}{Sam}(object, cutoff=1, ...)
-\S4method{selectSignificant}{Sam}(object, cutoff=1, ...)
-\S4method{countSignificant}{Sam}(object, cutoff=1, ...)
+ ylab='Observed T Statistics', \dots)
+\S4method{summary}{Sam}(object, cutoff=1, \dots)
+\S4method{selectSignificant}{Sam}(object, cutoff=1, \dots)
+\S4method{countSignificant}{Sam}(object, cutoff=1, \dots)
 }
 \arguments{
   \item{data}{ Either a data frame or matrix with numeric values or an
@@ -63,51 +62,57 @@ Sam(data, classes, nPerm = 100, verbose = TRUE)
 }
 \section{Slots}{
   \describe{
-    \item{\code{t.statistics}:}{ A numeric vector containing the observed
+    \item{\code{t.statistics}:}{numeric vector containing the observed
       t-statistics.} 
-    \item{\code{observed}:}{ A numeric vector containing the sorted
+    \item{\code{observed}:}{numeric vector containing the sorted
       observed t-statistics.}
-    \item{\code{expected}:}{A numeric vector of the expected
+    \item{\code{expected}:}{numeric vector of the expected
       distribution of t-statistics based on a permutation test.}
-    \item{\code{sim.data}:}{A matrix containing all the t-statistics
+    \item{\code{sim.data}:}{numeric matrix containing all the t-statistics
       from all the permutations.}
-    \item{\code{call}:}{The function \code{call} that created the object.}
+    \item{\code{call}:}{object of class \code{call} specifying the function
+      call that was used to create this object.}
   }
 }
 \section{Methods}{
   \describe{
-    \item{summary(object, cutoff=1, ...)}{Compute a summary of the object. }
+    \item{summary(object, cutoff=1, \dots)}{Compute a summary of the object. }
     \item{plot(x, tracks=NULL, xlab='Expected T Statistics (Empirical)',
-      ylab='Observed t Statistics', ...)}{
-      Plot the observed and expected
+      ylab='Observed t Statistics', \dots)}{Plot the observed and expected
       t-statistics. The \code{tracks} argument causes parallel lines to be
       drawn on either side of the quantile-quantile central line, at the
       specified offsets. Colors in the plot are controlled by the current
       values of \code{\link[PreProcess:semanticColors]{COLOR.CENTRAL.LINE}} and
 	\code{\link[PreProcess:semanticColors]{COLOR.CONFIDENCE.CURVE}} }
-    \item{selectSignificant(object, cutoff=1, ...)}{Compute a vector
+    \item{selectSignificant(object, cutoff=1, \dots)}{Compute a vector
       that selects significant values}
-    \item{countSignificant(object, cutoff=1, ...)}{Count the number of
+    \item{countSignificant(object, cutoff=1, \dots)}{Count the number of
       significant values}
   }
 }
 \value{
-  \code{summary} returns a \code{\link{SamSummary} object.}
+  \code{summary} returns an object of class \code{\link{SamSummary}}.
 
   \code{selectSignificant} returns a vector of logical values.
 
   \code{countSignificant} returns an integer.
 }
 \references{
-  Tusher, V.G., Tibshirani, R., and Chu, G. 2001. Significance analysis
-  of microarrays applied to the ionizing radiation response. Proc Natl
-  Acad Sci U S A 98, 5116-5121.
+  Tusher, V.G., Tibshirani, R., and Chu, G.\cr
+  "Significance analysis of microarrays applied to the ionizing radiation
+  response."\cr
+  Proc Natl Acad Sci U S A (2001) 98, 5116-5121.
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org},
+  P. Roebuck \email{proebuck@mdanderson.org}
+}
 \seealso{
-  \code{\link{MultiTtest}}, \code{\link{Bum}}
+  \code{\link{Bum}},
+  \code{\link{MultiTtest}}
 }
 \examples{
+showClass("Sam")
 ng <- 10000
 ns <- 50
 nd <- 100
@@ -129,7 +134,6 @@ plot(a@significant.calls)
 plot(a@significant.calls[1:300])
 
 countSignificant(res, 1)
-
-rm(ng, ns, nd, dat, cla, res, a)
 }
 \keyword{classes}
+
