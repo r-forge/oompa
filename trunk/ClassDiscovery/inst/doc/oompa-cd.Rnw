@@ -26,7 +26,7 @@ large biological data sets, such as those arising from mRNA expression
 microarrays or mass spectrometry proteomics.  The
 \Rpackage{ClassDiscovery} package in OOMPA provides tools to work on
 the ``class discovery'' problem.  Class discovery is one of the three
-primary types of applictions of microarrays described by Richard Simon
+primary types of applications of microarrays described by Richard Simon
 and colleagues.  These are unsupervised methods that are intended to
 uncover the underlying structure in a data set.
 
@@ -145,7 +145,7 @@ One important factor about clustering routines is that they always
 produce clusters, whether or not clusters are truly present in the
 data.  Thus, it is important to have some tools available to try to
 determine if the clusters are believable.  One way to approach this
-problem, as decribed by Kerr and Churchill, is to repeat the
+problem, as described by Kerr and Churchill, is to repeat the
 clustering using a bootstrap.  If we are trying to cluster samples,
 for example, we can use a bootstrap to repeatedly resample the genes
 used for the clustering, and count how many times each pair of
@@ -276,7 +276,7 @@ new data sets, you have to be able to project new samples into the
 same principal component space. To illustrate how this works, we
 simulate some new data that does not really belong to any of the three
 classes, and we use the \Rfunction{predict} method to project it into
-the principal component space.  We can then plot the resultsd of the
+the principal component space.  We can then plot the results of the
 PCA and overlay the projected points (Figure~\ref{fig:proj}).
 
 <<nd>>=
@@ -307,7 +307,7 @@ Our answer to this challenge is the \Rfunction{Mosaic}
 class.  We can use our simulated data as an example, following the
 usual R convention in which we first construct an object and then
 print it or display it (Figure~\ref{fig:mose}).  The summary tells us
-which distance metrics and linkage methods were used to contruct the
+which distance metrics and linkage methods were used to construct the
 object.  The plot command then gives a simple interface to get the
 desired figure.
 
@@ -344,7 +344,7 @@ parameters to a function that was already almost unusable in the hands
 of novice R users. (This claim is based on three years experience
 teaching a course on the analysis of microarray data to a mixture of
 statisticians and biologists.)  The \Rpackage{Mosaic} class hides most
-of this complexity; the only things you really neeed to know about are
+of this complexity; the only things you really need to know about are
 the \Robject{hExp} and \Robject{wExp} parameters that act as expansion
 factors for the height and width of the figure, respectively.
 
