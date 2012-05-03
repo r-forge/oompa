@@ -1,13 +1,13 @@
 \name{distanceMatrix}
 \alias{distanceMatrix}
-\title{Distance Matrix Computation }
+\title{Distance Matrix Computation}
 \description{
   This function computes and returns the distance matrix determined by
   using the specified distance metric to compute the distances between
   the columns of a data matrix.
 }
 \usage{
-distanceMatrix(dataset, metric, ...)
+distanceMatrix(dataset, metric, \dots)
 }
 \arguments{
   \item{dataset}{A numeric matrix or an \code{\link[Biobase]{ExpressionSet}}}
@@ -56,8 +56,13 @@ distanceMatrix(dataset, metric, ...)
   the sort returned by the \code{dist} function or the \code{as.dist}
   function. 
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
-\seealso{  \code{\link{dist}}, \code{\link{as.dist}} }
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+}
+\seealso{
+  \code{\link{dist}},
+  \code{\link{as.dist}}
+}
 \section{BUGS}{
   It would be good to have a better name for the \code{weird} metric.
 }

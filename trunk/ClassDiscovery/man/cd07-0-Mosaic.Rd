@@ -1,23 +1,28 @@
 \name{Mosaic}
-\docType{class}
 \alias{Mosaic}
 \alias{Mosaic-class}
 \alias{plot,Mosaic,missing-method}
 \alias{pltree,Mosaic-method}
 \alias{summary,Mosaic-method}
-
-\title{The Mosaic Class}
+\docType{class}
+\title{Class "Mosaic"}
 \description{
   Produce \dQuote{Eisen} plots of microarray or proteomics data.
 }
 \usage{
-Mosaic(data, sampleMetric = "pearson", sampleLinkage = "average", geneMetric = "euclid", geneLinkage = "average", usecor = FALSE, center = FALSE, name = "My mosaic")
-
-\S4method{pltree}{Mosaic}(x, colors, labels, ...)
-
+Mosaic(data,
+       sampleMetric="pearson",
+       sampleLinkage="average",
+       geneMetric="euclid",
+       geneLinkage="average",
+       usecor=FALSE,
+       center=FALSE,
+       name="My mosaic")
+\S4method{pltree}{Mosaic}(x, colors, labels, \dots)
 \S4method{plot}{Mosaic,missing}(x, main=x@name, center=FALSE,
- scale=c("none", "row", "column"), limits=NULL,
- sampleColors=NULL, sampleClasses=NULL, geneColors=NULL, geneClasses=NULL, ...)
+  scale=c("none", "row", "column"), limits=NULL,
+  sampleColors=NULL, sampleClasses=NULL,
+  geneColors=NULL, geneClasses=NULL, \dots)
 }
 \arguments{
   \item{data}{ Either a data frame or matrix with numeric values or an
@@ -31,11 +36,11 @@ Mosaic(data, sampleMetric = "pearson", sampleLinkage = "average", geneMetric = "
     \code{\link{distanceMatrix}} function}
   \item{geneLinkage}{Any valid linkage method that can be passed to the
     \code{\link{hclust}} function}
-  \item{center}{A logical flag; should the data rows be centered?}
-  \item{usecor}{A logical flag; should the data rows be scaled to have
-    standard deviation one?}
-  \item{name}{A character string; the name of this object.}
-  \item{x}{A \code{Mosaic} object.}
+  \item{center}{logical scalar. If \code{TRUE}, center the data rows.}
+  \item{usecor}{logical scalar. If \code{TRUE}, scale the data rows to have
+    standard deviation one.}
+  \item{name}{character string specifying the name of this object}
+  \item{x}{object of class \code{Mosaic}}
   \item{scale}{Same as in \code{\link{heatmap}}.}
   \item{colors}{An optional vector of character strings containing color
     names to be used when labeling the trees in the dendrogram. If
@@ -44,7 +49,7 @@ Mosaic(data, sampleMetric = "pearson", sampleLinkage = "average", geneMetric = "
   \item{labels}{An optional vector of character strings used to label
     the leaves in the dendrogram. If omitted, the column names are
     used.}
-  \item{main}{A character string; the plot title}
+  \item{main}{character string specifying the main title for the plot}
   \item{limits}{An numeric vector. If provided, the data is truncated
     for display purposes, both above and below, at the minimum and
     maximum values of \code{limits}.}
@@ -81,7 +86,7 @@ Mosaic(data, sampleMetric = "pearson", sampleLinkage = "average", geneMetric = "
   the \code{Mosaic} class.
 }
 \section{Objects from the Class}{
-Objects should be created with the \code{Mosaic} function.
+  Objects should be created with the \code{Mosaic} function.
 }
 \section{Slots}{
   \describe{
@@ -114,51 +119,69 @@ Objects should be created with the \code{Mosaic} function.
   }
 }
 \references{
-  Eisen MB, Spellman PT, Brown PO, Botstein D. Cluster analysis and
-  display of genome-wide expression patterns. Proc Natl Acad Sci U S
-  A. 1998 Dec 8;95(25):14863-8.
+  Eisen MB, Spellman PT, Brown PO, Botstein D.\cr
+  "Cluster analysis and display of genome-wide expression patterns."\cr
+  Proc Natl Acad Sci U S A. 1998 Dec 8;95(25):14863-8.
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
-\seealso{ \code{\link{heatmap}}, \code{\link{hclust}}, \code{\link{cutree}} }
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org},
+  P. Roebuck \email{proebuck@mdanderson.org}
+}
+\seealso{
+  \code{\link{cutree}},
+  \code{\link{hclust}},
+  \code{\link{heatmap}}
+}
 \examples{
-# simulate data from three different sample groups
+showClass("Mosaic")
+
+## simulate data from three different sample groups
 d1 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
 d2 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
 d3 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
 dd <- cbind(d1, d2, d3)
 kind <- factor(rep(c('red', 'green', 'blue'), each=10))
 
-# prepare the Mosaic object
-m <- Mosaic(dd, sampleMetric='pearson', geneMetric='spearman', center=TRUE, usecor=TRUE)
+## prepare the Mosaic object
+m <- Mosaic(dd,
+            sampleMetric='pearson',
+            geneMetric='spearman',
+            center=TRUE,
+            usecor=TRUE)
 summary(m)
 
-# The default plot with red-green color map
+## The default plot with red-green color map
 plot(m, col=redgreen(64))
 
-# change to a blue-yellow color map, and mark the four top splits in the sample
-# direction with a color bar along the top
+## change to a blue-yellow color map, and mark the four top splits in the
+## sample direction with a color bar along the top
 plot(m, col=blueyellow(128), sampleClasses=4,
      sampleColors=c('red', 'green', 'blue', 'black'))
 
-# This time, mark the three classes that we know are there
+## This time, mark the three classes that we know are there
 plot(m, col=blueyellow(128), sampleClasses=kind,
      sampleColors=c('red', 'green', 'blue'))
 
-plot(m, col=blueyellow(128), geneClasses=3, geneColors=c('red', 'green', 'black'))
-
-# In addition, mark the top 5 splits in the gene dendrogram
 plot(m, col=blueyellow(128),
-     sampleClasses=kind, sampleColors=c('red', 'green', 'black'),
-     geneClasses=5, geneColors=c('cyan', 'magenta', 'royalblue', 'darkgreen', 'orange'))
+     geneClasses=3, geneColors=c('red', 'green', 'black'))
 
-# plot the sample dendrogram by itself
+## In addition, mark the top 5 splits in the gene dendrogram
+plot(m,
+     col=blueyellow(128),
+     sampleClasses=kind,
+     sampleColors=c('red', 'green', 'black'),
+     geneClasses=5,
+     geneColors=c('cyan', 'magenta', 'royalblue', 'darkgreen', 'orange'))
+
+## plot the sample dendrogram by itself
 cols <- as.character(kind)
 pltree(m, labels=1:30, colors=cols)
 
-# cleanup
+## cleanup
 rm(d1, d2, d3, dd, kind, cols, m)
 }
-\keyword{hplot}
-\keyword{cluster}
 \keyword{classes}
+\keyword{cluster}
+\keyword{hplot}
 \keyword{multivariate}
+
