@@ -6,8 +6,8 @@
   New generic functions for processing and analyzing microarrays.
 }
 \usage{
-process(object, action, parameter = NULL)
-analyze(object, ...)
+process(object, action, parameter=NULL)
+analyze(object, \dots)
 }
 \arguments{
   \item{object}{ Any OOMPA class representing a microarrays or a set of
@@ -35,9 +35,12 @@ analyze(object, ...)
   Varies depending on the implementation in derived classes.  Typically
   another object of the same or a closely related class.
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
-\seealso{ \code{\link{Processor}}, \code{\link{Pipeline}} }
-\examples{
-# these are generic functions...
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+}
+\seealso{
+  \code{\link{Processor}},
+  \code{\link{Pipeline}}
 }
 \keyword{methods}
+

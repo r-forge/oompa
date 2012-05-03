@@ -1,7 +1,6 @@
 \name{matrix.utility}
 \alias{flipud}
 \alias{fliplr}
-
 \title{OOMPA Matrix Utility Functions}
 \description{
   Utility functions for manipulating matrices.
@@ -20,7 +19,9 @@ fliplr(x)
   as \code{x} but flipped horizontally, with the order of the columns
   reversed. 
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+}
 \examples{
 mat <- matrix(1:6, 2, 3)
 mat
@@ -28,3 +29,4 @@ flipud(mat)
 fliplr(mat)
 }
 \keyword{array}
+

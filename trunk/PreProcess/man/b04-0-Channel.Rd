@@ -1,5 +1,4 @@
 \name{Channel-class}
-\docType{class}
 \alias{Channel-class}
 \alias{Channel}
 \alias{plot,Channel,missing-method}
@@ -7,8 +6,8 @@
 \alias{summary,Channel-method}
 \alias{print,Channel-method}
 \alias{image,Channel-method}
-
-\title{ The Channel class }
+\docType{class}
+\title{Class "Channel"}
 \description{
   An object of the \code{Channel} class represents a single kind of
   measurement performed at all spots of a microarray channel. These
@@ -17,13 +16,12 @@
 }
 \usage{
 Channel(parent, name, type, vec)
-\S4method{plot}{Channel,missing}(x, y, ...)
-\S4method{hist}{Channel}(x, breaks=67, xlab = x@name, main = x@parent, ...)
-\S4method{summary}{Channel}(object, ...)
-\S4method{print}{Channel}(x, ...)
-\S4method{image}{Channel}(x, main = x@name, sub = NULL, ...)
+\S4method{plot}{Channel,missing}(x, y, \dots)
+\S4method{hist}{Channel}(x, breaks=67, xlab=x@name, main=x@parent, \dots)
+\S4method{summary}{Channel}(object, \dots)
+\S4method{print}{Channel}(x, \dots)
+\S4method{image}{Channel}(x, main=x@name, sub=NULL, \dots)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{parent}{ A string representing the name of a parent object from
     which this object was derived }
@@ -44,7 +42,7 @@ Channel(parent, name, type, vec)
   microarray hybridization experiment produces one or more channels of
   data. \code{Channel} objects represent a single measurement performed
   at spots in one microarray channel. The raw data from a full
-  experiment typically contains multiple measurements in mutliple
+  experiment typically contains multiple measurements in multiple
   channels.
 
   The full set of measurements is often highly processed (by, for
@@ -71,17 +69,17 @@ Channel(parent, name, type, vec)
 }
 \section{Methods}{
   \describe{
-    \item{print(object, ...)}{Print all the data on the object. Since
+    \item{print(object, \dots)}{Print all the data on the object. Since
       this includes the entire data vector, you rarely want to do this. }
-    \item{summary(object, ...)}{Write out a summary of the object.}
-    \item{plot(object, ...)}{Produce a scatter plot of the measurement
+    \item{summary(object, \dots)}{Write out a summary of the object.}
+    \item{plot(object, \dots)}{Produce a scatter plot of the measurement
       values in the slot \code{x} of the \code{object} against their
       index , which serves as a surrogate for the position on the
       microarray. Additional graphical parameters are passed along.}
-    \item{hist(object, ...)}{Produce a histogram of the data values in slot
+    \item{hist(object, \dots)}{Produce a histogram of the data values in slot
       \code{x} of the \code{object}. Additional graphical parameters are
       passed along.}
-    \item{image(object, ...)}{This method produces a two-dimensional
+    \item{image(object, \dots)}{This method produces a two-dimensional
       "cartoon" image of the measurement values, with the position in
       the cartoon corresponding to the two-dimensional arrangement of
       spots on the actual microarray. Additional graphical parameters
@@ -93,16 +91,21 @@ Channel(parent, name, type, vec)
   return the \code{Channel} object on which they were invoked. The
   \code{print} and \code{summary} methods return nothing.
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
-\seealso{ \code{\link{ChannelType}}, \code{\link{process}},
-  \code{\link{Processor}} }
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+}
+\seealso{
+  \code{\link{ChannelType}},
+  \code{\link{process}},
+  \code{\link{Processor}}
+}
 \examples{
 # simulate a moderately realistic looking microarray
 nc <- 100			# number of rows
 nr <- 100			# number of columns
 v <- rexp(nc*nr, 1/1000)	# "true" signal intensity (vol)
 b <- rnorm(nc*nr, 80, 10)	# background noise
-s <- sapply(v-b, max, 1)	# corrected signal instensity (svol)
+s <- sapply(v-b, max, 1)	# corrected signal intensity (svol)
 ct <- ChannelType('user', 'random', nc, nr,  'fake')
 raw <- Channel(name='fraud', type=ct, parent='', vec=v)
 subbed <- Channel(name='fraud', parent='', type=ct, vec=s)
@@ -122,3 +125,4 @@ image(raw)
 rm(ct, raw, subbed)
 }
 \keyword{manip}
+

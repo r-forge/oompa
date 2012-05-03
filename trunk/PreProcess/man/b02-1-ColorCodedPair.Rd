@@ -47,8 +47,13 @@ ColorCodedPair(x, y, ccl)
 
   The \code{plot} method invisibly returns the object being plotted.
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
-\seealso{The \code{\link{ColorCoding}} class, \code{\link{colorCode}}}
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+}
+\seealso{
+  \code{\link{colorCode}},
+  \code{\link{ColorCoding}}
+}
 \examples{
 theta <- (0:360)*pi/180
 x <- cos(theta)

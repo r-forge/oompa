@@ -20,7 +20,7 @@ channelize(object)
   underlying idea is that specific kinds of microarrays or specific
   software to quantify microarrays might have special properties that
   should be exploited in processing. For example, the first few
-  generations of miroarrays printed at M.D. Anderson spotted every cDNA
+  generations of microarrays printed at M.D. Anderson spotted every cDNA
   clone in duplicate. The analysis of such arrays should exploit this
   additional structure.  In order to do so, we must derive classes from
   \code{CompleteChannel} and \code{Channel} and ensure that the classes
@@ -33,9 +33,15 @@ channelize(object)
   passing to the \code{new} constructor) extracted from an object
   belonging to a class derived from \code{\link{CompleteChannel}}.
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
-\seealso{\code{\link{Processor}}, \code{\link{Pipeline}},
-  \code{\link{Channel}}, \code{\link{CompleteChannel}}
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org}
 }
+\seealso{
+  \code{\link{Channel}},
+  \code{\link{CompleteChannel}},
+  \code{\link{Pipeline}},
+  \code{\link{Processor}}
+}
+\keyword{methods}
 \keyword{manip}
-\keyword{classes}
+

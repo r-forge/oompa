@@ -35,9 +35,12 @@ f.qt(x, df, main = "", cut = 0, ...)
   The function \code{f.qt} is a wrapper that produces quantile-quantile
   plots comparing the observed vector \code{x} with a T-distribution.
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
-
-\seealso{ See also \code{\link{points}}}
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+}
+\seealso{
+  \code{\link{points}}
+}
 \examples{
 x <- rnorm(1000, 1, 2)
 y <- rnorm(1000, 1, 2)
@@ -49,5 +52,5 @@ f.qq(x, cut = 3)
 f.qt(x, df = 3)
 f.qt(x, df = 40)
 }
-
 \keyword{aplot}
+

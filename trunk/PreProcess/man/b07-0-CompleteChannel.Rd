@@ -1,5 +1,4 @@
 \name{CompleteChannel-class}
-\docType{class}
 \alias{CompleteChannel-class}
 \alias{CompleteChannel}
 \alias{print,CompleteChannel-method}
@@ -16,7 +15,7 @@
 \alias{PROC.NEG.CORRECTED.SIGNAL}
 \alias{PROC.SD.SIGNAL}
 \alias{PROC.SIGNAL.TO.NOISE}
-
+\docType{class}
 \title{ The CompleteChannel class }
 \description{
   An object of the CompleteChannel class represents one channel (red or
@@ -37,7 +36,6 @@ CompleteChannel(name, type, data)
 \S4method{process}{CompleteChannel,Processor}(object, action, parameter)
 \S4method{channelize}{CompleteChannel}(object)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{name}{A string containing the name of the object}
   \item{type}{A \code{\link{ChannelType}} object}
@@ -57,11 +55,9 @@ CompleteChannel(name, type, data)
   \item{\dots}{Additional arguments are as in the underlying generic methods.}
 }
 \details{
- The
-    names come from the default column names in the ArrayVision software
-    package used at M.D. Anderson for quantifying glass or nylon
-    microarrays. Column names used by other software packages should be
-    mapped to these.
+  The names come from the default column names in the ArrayVision software
+  package used at M.D. Anderson for quantifying glass or nylon microarrays.
+  Column names used by other software packages should be mapped to these.
 }
 \section{Slots}{
   \describe{
@@ -102,7 +98,6 @@ CompleteChannel(name, type, data)
       \code{CompleteChannel} \code{object}. Returns an object of the
       class described by \code{channelize}, which defaults to
       \code{Channel}.}
-
   }
 }
 
@@ -139,10 +134,16 @@ CompleteChannel(name, type, data)
       standard deviation of the background pixels.}
   }
 }
-
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
-\seealso{ \code{\link{process}}, \code{\link{Processor}},
-  \code{\link{Pipeline}}, \code{\link{Channel}}, \code{\link{as.data.frame}}} 
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+}
+\seealso{
+  \code{\link{process}},
+  \code{\link{Processor}},
+  \code{\link{Pipeline}},
+  \code{\link{Channel}},
+  \code{\link{as.data.frame}}
+}
 \examples{
 # simulate a complete channel object
 
@@ -178,3 +179,4 @@ summary(q)
 rm(x, b, q, opar)
 }
 \keyword{manip}
+

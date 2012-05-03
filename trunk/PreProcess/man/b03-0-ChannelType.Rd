@@ -6,7 +6,7 @@
 \alias{setDesign}
 \alias{getDesign}
 
-\title{ The ChannelType class }
+\title{Class "ChannelType"}
 \description{
   This class represents the "type" of a microarray channel. 
 }
@@ -36,10 +36,10 @@ getDesign(object)
   types are the synthesized oligonucleotide arrays produced by
   Affymetrix and the printed cDNA arrays on glass, which started in Pat
   Brown's lab at Stanford. In earlier days, it was also common to find
-  nylon microarrays, with the samples labeled using a radiactive
+  nylon microarrays, with the samples labeled using a radioactive
   isotope.  The glass arrays are distinguished from other kinds of
   arrays in that they typically cohybridize two different samples
-  imultaneously, using two different fluorescent dyes.  The fluorescence
+  simultaneously, using two different fluorescent dyes.  The fluorescence
   from each dye is scanned separately, producing two images and thus two
   related sets of data from the same microarray. We refer to these
   parallel data sets within an array as ``channels''.
@@ -60,7 +60,7 @@ getDesign(object)
   string should be the name of a separate object containing the detailed
   design information. This implementation allows us to defer the design
   details until later.  It also saves space by putting the details in a
-  single object instead of copying them into every microarry. Finally,
+  single object instead of copying them into every microarray. Finally,
   it allows that single object to be updated when better biological
   annotations are available, with the benefits spreading immediately to
   all the microarray projects that use that design.
@@ -85,7 +85,7 @@ getDesign(object)
   }
 }
 \value{
-  The \code{ChannelType} constructor reutrns a valid object of the
+  The \code{ChannelType} constructor returns a valid object of the
   class.
 
   The \code{setDesign} function invisibly returns the \code{ChannelType}
@@ -96,8 +96,12 @@ getDesign(object)
   string does not evaluate to the name of an object, then
   \code{getDesign} returns a \code{NULL} value.
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
-\seealso{ \code{\link{Channel}} }
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+}
+\seealso{
+  \code{\link{Channel}}
+}
 \examples{
 x <- ChannelType('Affymetrix', 'oligo', 100, 100, 'fluor')
 print(x)
@@ -112,4 +116,6 @@ d
 
 rm(d, x, y) # cleanup
 }
+\keyword{classes}
 \keyword{manip}
+

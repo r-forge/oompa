@@ -1,5 +1,4 @@
 \name{Pipeline-class}
-\docType{class}
 \alias{Pipeline}
 \alias{Pipeline-class}
 \alias{process,ANY,Pipeline-method}
@@ -7,7 +6,7 @@
 \alias{PIPELINE.STANDARD}
 \alias{PIPELINE.MDACC.DEFAULT}
 \alias{makeDefaultPipeline}
-
+\docType{class}
 \title{ The Pipeline class }
 \description{
   A \code{Pipeline} represents a standard multi-step procedure for
@@ -32,7 +31,7 @@ makeDefaultPipeline(ef = PROC.SIGNAL, ep = 0,
     the input to the \code{Pipeline}. In the \code{summary} method, a
     \code{Pipeline} object. } 
   \item{action}{ A \code{Pipeline} object used to process an object. }
-  \item{parameter}{ Irrelevant, since the \code{Pipline} ignores the
+  \item{parameter}{Irrelevant, since the \code{Pipeline} ignores the
     parameter when \code{process} is invoked.}
   \item{\dots}{Additional arguments are as in the underlying generic methods.}
   \item{ef}{ ``Extractor function'': First \code{\link{Processor}} in
@@ -107,9 +106,13 @@ makeDefaultPipeline(ef = PROC.SIGNAL, ep = 0,
     }
   }
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
-\seealso{ \code{\link{Channel}}, \code{\link{process}},
-  \code{\link{CompleteChannel}}
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+}
+\seealso{
+  \code{\link{Channel}},
+  \code{\link{CompleteChannel}},
+  \code{\link{process}}
 }
 \examples{
 # simulate a moderately realistic looking microarray
@@ -137,3 +140,4 @@ image(processed)
 rm(subbed, processed)
 }
 \keyword{manip}
+

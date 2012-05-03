@@ -2,7 +2,6 @@
 \alias{f.above.thresh}
 \alias{f.cord}
 \alias{f.oneway.rankings}
-
 \title{OOMPA Statistical Utility Functions}
 \description{
   Utility functions for statistical computations.
@@ -33,7 +32,9 @@ f.oneway.rankings(r, s)
   \code{f.oneway.rankings} is implemented as \code{order(s)[r]} and I
   cannot recall why we defined it or where we used it.
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+}
 \examples{
 x <- rnorm(1000, 1, 2)
 y <- rnorm(1000, 1, 2)

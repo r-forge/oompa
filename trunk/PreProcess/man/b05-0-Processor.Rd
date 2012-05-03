@@ -1,5 +1,4 @@
 \name{Processor-class}
-\docType{class}
 \alias{Processor}
 \alias{Processor-class}
 \alias{summary,Processor-method}
@@ -12,8 +11,8 @@
 \alias{PROC.MEDIAN.EXPRESSED.NORMALIZATION}
 \alias{PROC.SUBSET.NORMALIZATION}
 \alias{PROC.SUBSET.MEAN.NORMALIZATION}
-
-\title{ The Processor class }
+\docType{class}
+\title{Class "Processor"}
 \description{
   A \code{Processor} represents a function that acts on the data of a
   some object to process it in some way. The result is always
@@ -22,9 +21,8 @@
 }
 \usage{
 \S4method{process}{Channel,Processor}(object, action, parameter=NULL)
-\S4method{summary}{Processor}(object, ...)
+\S4method{summary}{Processor}(object, \dots)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{object}{In the \code{process} method, a \code{Channel}
     object. In the \code{summary} method, a \code{Processor} object}
@@ -48,11 +46,11 @@
 \section{Methods}{
   \describe{
     \item{process(object, action, parameter)}{Apply the function
-      represnted by \code{action} to the \code{Channel} object, updating
+      represented by \code{action} to the \code{Channel} object, updating
       the history appropriately. If the \code{parameter} is \code{NULL},
       then use the default value.
     }
-    \item{summary(object, ...)}{Write out a summary of the object.}
+    \item{summary(object, \dots)}{Write out a summary of the object.}
   }
 }
 \value{
@@ -100,9 +98,14 @@
     }
   }
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
-\seealso{ \code{\link{Channel}}, \code{\link{process}},
-  \code{\link{Pipeline}}, \code{\link{CompleteChannel}}
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+}
+\seealso{
+  \code{\link{Channel}},
+  \code{\link{CompleteChannel}},
+  \code{\link{process}},
+  \code{\link{Pipeline}}
 }
 \examples{
 # simulate a moderately realistic looking microarray

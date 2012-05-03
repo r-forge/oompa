@@ -3,8 +3,7 @@
 \alias{ColorCoding-class}
 \alias{ColorCoding}
 \alias{colorCode}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{ The ColorCoding class }
+\title{Class "ColorCoding"}
 \description{
   A class for associating plotting symbols and colors with a logical
   vector or with levels of a factor.
@@ -21,7 +20,7 @@ colorCode(fac, colorScheme = 1:length(levels(fac)), mark = 1)
 }
 \arguments{
   \item{v}{ a logical vector }
-  \item{color}{ a string or interger representing a color }
+  \item{color}{ a string or integer representing a color }
   \item{mark}{ an integer representing a plotting symbol, or list of
     plotting symbols that should be associated with levels of the factor
     \code{fac} }
@@ -58,8 +57,12 @@ colorCode(fac, colorScheme = 1:length(levels(fac)), mark = 1)
   valid \code{ColorCoding} objects that can be passed directly to the
   constructor of a \code{\link{ColorCodedPair}} object.
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
-\seealso{The \code{\link{ColorCodedPair}} class}
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+}
+\seealso{
+  \code{\link{ColorCodedPair}}
+}
 \examples{
 
 theta <- (0:360)*pi/180
@@ -103,3 +106,4 @@ for (i in 1:4) {
 rm(colorList, i, j)
 }
 \keyword{color}
+
