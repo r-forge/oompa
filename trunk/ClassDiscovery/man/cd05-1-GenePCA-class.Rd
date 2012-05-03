@@ -1,10 +1,9 @@
 \name{GenePCA}
-\docType{class}
 \alias{GenePCA}
 \alias{GenePCA-class}
 \alias{plot,GenePCA,missing-method}
-
-\title{The GenePCA Class  }
+\docType{class}
+\title{Class "GenePCA"}
 \description{
   Perform principal components analysis on the genes (rows) from a
   microarray or proteomics experiment.
@@ -50,9 +49,12 @@ GenePCA(geneData)
       genes in the space of the first two principal components. }
   }
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+}
 \seealso{
-  \code{\link{SamplePCA}}, \code{\link{princomp}}
+  \code{\link{SamplePCA}},
+  \code{\link{princomp}}
 }
 \examples{
 # simulate samples from three different groups, with generic genes
@@ -70,7 +72,8 @@ plot(gpc)
 # cleanup
 rm(d1, d2, d3, dd, gpc)
 }
-\keyword{classes}
-\keyword{array}
 \keyword{algebra}
+\keyword{array}
+\keyword{classes}
 \keyword{multivariate}
+

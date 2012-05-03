@@ -8,8 +8,8 @@
   the different levels of a factor.
 }
 \usage{
-plotColoredClusters(hd, labs, cols, cex = 0.8, main = "", line = 0, ...)
-pcc(hd, colors=NULL, ...)
+plotColoredClusters(hd, labs, cols, cex = 0.8, main = "", line = 0, \dots)
+pcc(hd, colors=NULL, \dots)
 }
 \arguments{
   \item{hd}{ An object with S3 class \code{hclust}, as produced by the
@@ -92,3 +92,4 @@ rm(fakedata, faccol, fac2col, BA, colors)
 }
 \keyword{hplot}
 \keyword{cluster}
+

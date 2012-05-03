@@ -1,9 +1,8 @@
 \name{PerturbationClusterTest}
-\docType{class}
 \alias{PerturbationClusterTest}
 \alias{PerturbationClusterTest-class}
 \alias{summary,PerturbationClusterTest-method}
-
+\docType{class}
 \title{The PerturbationClusterTest Class }
 \description{
   Performs a parametric bootstrap test (by adding independent Gaussian
@@ -11,7 +10,7 @@
   method appear to be robust in a given data set.
 }
 \usage{
-PerturbationClusterTest(data, FUN, nTimes = 100, noise = 1, verbose = TRUE, ...)
+PerturbationClusterTest(data, FUN, nTimes=100, noise=1, verbose=TRUE, \dots)
 }
 \arguments{
   \item{data}{A data matrix, numerical data frame, or
@@ -29,10 +28,10 @@ PerturbationClusterTest(data, FUN, nTimes = 100, noise = 1, verbose = TRUE, ...)
   \item{verbose}{A logical flag}
 }
 \section{Objects from the Class}{
-Objects should be created using the  \code{PerturbationClusterTest}
-function, which performs the requested bootstrap on the
-clusters. Following the standard R paradigm, the resulting object can be
-summarized and plotted to determine the results of the test.
+  Objects should be created using the  \code{PerturbationClusterTest}
+  function, which performs the requested bootstrap on the
+  clusters. Following the standard R paradigm, the resulting object can be
+  summarized and plotted to determine the results of the test.
 }
 \section{Slots}{
   \describe{
@@ -54,24 +53,27 @@ summarized and plotted to determine the results of the test.
   }
 }
 \section{Extends}{
-Class \code{\link{ClusterTest}}, directly. See that class for
-descriptions of the inherited methods \code{image} and \code{hist}. 
+  Class \code{\link{ClusterTest}}, directly. See that class for
+  descriptions of the inherited methods \code{image} and \code{hist}. 
 }
 \section{Methods}{
   \describe{
     \item{summary}{\code{signature(object = PerturbationClusterTest)}:
-      Write out a summary of the object. }
+      Write out a summary of the object.}
   }
 }
 \references{
-  Kerr MK, Churchill GJ. Bootstrapping cluster analysis: Assessing the
-  reliability of conclusions from microarray experiments. PNAS 2001;
-  98:8961-8965.
+  Kerr MK, Churchill GJ.\cr
+  "Bootstrapping cluster analysis: Assessing the reliability of conclusions
+  from microarray experiments."\cr
+  PNAS 2001; 98:8961-8965.
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+}
 \seealso{
-  \code{\link{ClusterTest}},
-  \code{\link{BootstrapClusterTest}}
+  \code{\link{BootstrapClusterTest}},
+  \code{\link{ClusterTest}}
 }
 \examples{
 # simulate data from two different groups

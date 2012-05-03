@@ -7,7 +7,7 @@
   dichotomized data.
 }
 \usage{
-cluster3(data, eps = logb(1, 2), name = "", labels = dimnames(data)[[2]])
+cluster3(data, eps=logb(1, 2), name="", labels=dimnames(data)[[2]])
 }
 \arguments{
   \item{data}{ A matrix, numeric data.frame, or
@@ -21,14 +21,19 @@ cluster3(data, eps = logb(1, 2), name = "", labels = dimnames(data)[[2]])
 \value{
   Invisibly returns the \code{data} object on which it was invoked.
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
-\seealso{\code{\link{hclust}}, \code{\link{plclust}} }
+\author{
+  Kevin R. Coombes email{kcoombes@mdanderson.org}
+}
+\seealso{
+  \code{\link{hclust}},
+  \code{\link{plclust}}
+}
 \examples{
-# simulate data from two different classes
+## simulate data from two different classes
 d1 <- matrix(rnorm(100*30, rnorm(100, 0.5)), nrow=100, ncol=30, byrow=FALSE)
 d2 <- matrix(rnorm(100*20, rnorm(100, 0.5)), nrow=100, ncol=20, byrow=FALSE)
 dd <- cbind(d1, d2)
-# cluster it 3 ways
+## cluster it 3 ways
 par(mfrow=c(2,2))
 cluster3(dd)
 par(mfrow=c(1,1))

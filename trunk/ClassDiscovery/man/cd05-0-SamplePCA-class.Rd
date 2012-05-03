@@ -1,22 +1,20 @@
 \name{SamplePCA}
-\docType{class}
 \alias{SamplePCA}
 \alias{SamplePCA-class}
 \alias{plot,SamplePCA,missing-method}
 \alias{predict,SamplePCA-method}
 \alias{screeplot,SamplePCA-method}
 \alias{summary,SamplePCA-method}
-
-\title{The SamplePCA Class }
+\docType{class}
+\title{Class "SamplePCA"}
 \description{
   Perform principal components analysis on the samples (columns) from a
   microarray or proteomics experiment.
 }
 \usage{
-SamplePCA(data, splitter = 0, usecor = FALSE, center = TRUE)
-\S4method{plot}{SamplePCA,missing}(x, splitter=x@splitter, col, main='', which=1:2, ...)
+SamplePCA(data, splitter=0, usecor=FALSE, center=TRUE)
+\S4method{plot}{SamplePCA,missing}(x, splitter=x@splitter, col, main='', which=1:2, \dots)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{data}{ Either a data frame or matrix with numeric values or an
     \code{\link[Biobase:class.ExpressionSet]{ExpressionSet}} as defined
@@ -115,12 +113,15 @@ SamplePCA(data, splitter = 0, usecor = FALSE, center = TRUE)
   The predict method returns a matrix whose size is the number of
   columns in the input by the number of principal components.
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+}
 \seealso{
-  \code{\link{princomp}}, \code{\link{GenePCA}}
+  \code{\link{princomp}},
+  \code{\link{GenePCA}}
 }
 \examples{
-# simulate data from three different groups
+## simulate data from three different groups
 d1 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
 d2 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
 d3 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
@@ -128,13 +129,13 @@ dd <- cbind(d1, d2, d3)
 kind <- factor(rep(c('red', 'green', 'blue'), each=10))
 colnames(dd) <- paste(kind, rep(1:10, 3), sep='')
 
-# perform PCA
+## perform PCA
 spc <- SamplePCA(dd, splitter=kind)
 
-# plot the results
+## plot the results
 plot(spc, col=levels(kind))
 
-# mark the group centers
+## mark the group centers
 x1 <- predict(spc, matrix(apply(d1, 1, mean), ncol=1))
 points(x1[1], x1[2], col='red', cex=2)
 x2 <- predict(spc, matrix(apply(d2, 1, mean), ncol=1))
@@ -142,10 +143,10 @@ points(x2[1], x2[2], col='green', cex=2)
 x3 <- predict(spc, matrix(apply(d3, 1, mean), ncol=1))
 points(x3[1], x3[2], col='blue', cex=2)
 
-# check out the variances
+## check out the variances
 screeplot(spc)
 
-# cleanup
+## cleanup
 rm(d1, d2, d3, dd,kind, spc, x1, x2, x3)
 }
 \keyword{classes}

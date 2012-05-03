@@ -1,10 +1,18 @@
 \name{hclust}
-\docType{class}
 \alias{hclust-class}
-
-\title{An S4 hclust class}
-\description{ Creates an S4 hclust class that is equivalent to the S3
-  hclust class returned by the hclust function.}
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
-\seealso{ \code{\link{heatmap}}, \code{\link{hclust}}, \code{\link{cutree}} }
+\docType{class}
+\title{Class "hclust"}
+\description{
+  Creates an S4 class equivalent to the S3 hclust class returned by the
+  \code{hclust} function.
+}
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+}
+\seealso{
+  \code{\link{cutree}},
+  \code{\link{hclust}},
+  \code{\link{heatmap}}
+}
 \keyword{classes}
+

@@ -1,18 +1,17 @@
 \name{ClusterTest-class}
-\docType{class}
 \alias{ClusterTest}
 \alias{ClusterTest-class}
 \alias{hist,ClusterTest-method}
 \alias{image,ClusterTest-method}
 \alias{summary,ClusterTest-method}
-
-\title{The ClusterTest Class}
-\description{ This is a base class for tests that attempt to determine
-  whether the groups found by an unsupervised clustering method are
-  statistically significant.
+\docType{class}
+\title{Class "ClusterTest"}
+\description{
+  This is a base class for tests that attempt to determine whether the groups
+  found by an unsupervised clustering method are statistically significant.
 }
 \usage{
-\S4method{image}{ClusterTest}(x, dendrogram, ...)
+\S4method{image}{ClusterTest}(x, dendrogram, \dots)
 }
 \arguments{
   \item{x}{An object of the \code{ClusterTest} class.}
@@ -23,10 +22,10 @@
     \code{image} method.}
 }
 \section{Objects from the Class}{
-Objects can be created by calls of the form \code{new("ClusterTest",  ...)}. 
-Most users, however, will only create objects from one of the derived
-classes such as \code{\link{BootstrapClusterTest}} or
-\code{\link{PerturbationClusterTest}}. 
+  Objects can be created by calls of the form \code{new("ClusterTest", \dots)}. 
+  Most users, however, will only create objects from one of the derived
+  classes such as \code{\link{BootstrapClusterTest}} or
+  \code{\link{PerturbationClusterTest}}. 
 }
 \section{Slots}{
   \describe{
@@ -62,25 +61,29 @@ classes such as \code{\link{BootstrapClusterTest}} or
   }
 }
 \references{
-  Kerr MK, Churchill GJ. Bootstrapping cluster analysis: Assessing the
-  reliability of conclusions from microarray experiments. PNAS 2001;
-  98:8961-8965.
+  Kerr MK, Churchill GJ.\cr
+  "Bootstrapping cluster analysis: Assessing the reliability of conclusions
+  from microarray experiments."\cr
+  PNAS 2001; 98:8961-8965.
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
+\author{
+  Kevin R. Coombes email{kcoombes@mdanderson.org}
+}
 \seealso{
   \code{\link{BootstrapClusterTest}},
-  \code{\link{PerturbationClusterTest}}, \code{\link{heatmap}}
+  \code{\link{PerturbationClusterTest}},
+  \code{\link{heatmap}}
 }
 \examples{
-# simulate data from two different classes
+## simulate data from two different classes
 d1 <- matrix(rnorm(100*30, rnorm(100, 0.5)), nrow=100, ncol=30, byrow=FALSE)
 d2 <- matrix(rnorm(100*20, rnorm(100, 0.5)), nrow=100, ncol=20, byrow=FALSE)
 dd <- cbind(d1, d2)
 
-# cluster the data
+## cluster the data
 hc <- hclust(distanceMatrix(dd, 'pearson'), method='average')
 
-# make a fake reproducibility matrix
+## make a fake reproducibility matrix
 fraud <- function(x) {
   new('ClusterTest', result=abs(cor(x)), call=match.call())
 }
@@ -96,10 +99,11 @@ image(fake, dendrogram=hc) # use the actual dendrogram from the data
 
 image(fake, dendrogram=hc, col=blueyellow(64)) # change the colors
 
-#cleanup
+## cleanup
 rm(fake, fraud, hc, dd, d1, d2)
 }
 \keyword{classes}
-\keyword{multivariate}
 \keyword{cluster}
 \keyword{htest}
+\keyword{multivariate}
+

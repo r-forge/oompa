@@ -1,17 +1,16 @@
 \name{BootstrapClusterTest}
-\docType{class}
 \alias{BootstrapClusterTest}
 \alias{BootstrapClusterTest-class}
 \alias{summary,BootstrapClusterTest-method}
-
-\title{The BootstrapClusterTest Class }
+\docType{class}
+\title{Class "BootstrapClusterTest"}
 \description{
   Performs a nonparametric bootstrap (sampling with replacement) test to
   determine whether the clusters found by an unsupervised method appear
   to be robust in a given data set.
 }
 \usage{
-BootstrapClusterTest(data, FUN, subsetSize, nTimes = 100, verbose = TRUE, ...)
+BootstrapClusterTest(data, FUN, subsetSize, nTimes=100, verbose=TRUE, \dots)
 }
 \arguments{
   \item{data}{A data matrix, numerical data frame, or
@@ -30,10 +29,10 @@ BootstrapClusterTest(data, FUN, subsetSize, nTimes = 100, verbose = TRUE, ...)
   \item{verbose}{A logical flag}
 }
 \section{Objects from the Class}{
-Objects should be created using the  \code{BootstrapClusterTest}
-function, which performs the requested bootstrap on the
-clusters. Following the standard R paradigm, the resulting object can be
-summarized and plotted to determine the results of the test.
+  Objects should be created using the \code{BootstrapClusterTest}
+  function, which performs the requested bootstrap on the
+  clusters. Following the standard R paradigm, the resulting object can be
+  summarized and plotted to determine the results of the test.
 }
 \section{Slots}{
   \describe{
@@ -55,8 +54,8 @@ summarized and plotted to determine the results of the test.
   }
 }
 \section{Extends}{
-Class \code{\link{ClusterTest}}, directly. See that class for
-descriptions of the inherited methods \code{image} and \code{hist}. 
+  Class \code{\link{ClusterTest}}, directly. See that class for
+  descriptions of the inherited methods \code{image} and \code{hist}. 
 }
 \section{Methods}{
   \describe{
@@ -65,53 +64,57 @@ descriptions of the inherited methods \code{image} and \code{hist}.
   }
 }
 \references{
-  Kerr MK, Churchill GJ. Bootstrapping cluster analysis: Assessing the
-  reliability of conclusions from microarray experiments. PNAS 2001;
-  98:8961-8965.
+  Kerr MK, Churchill GJ.\cr
+  "Bootstrapping cluster analysis: Assessing the reliability of conclusions
+  from microarray experiments."
+  PNAS 2001; 98:8961-8965.
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+}
 \seealso{
   \code{\link{ClusterTest}},
   \code{\link{PerturbationClusterTest}}
 }
 \examples{
-# simulate data from two different groups
+## simulate data from two different groups
 d1 <- matrix(rnorm(100*30, rnorm(100, 0.5)), nrow=100, ncol=30, byrow=FALSE)
 d2 <- matrix(rnorm(100*20, rnorm(100, 0.5)), nrow=100, ncol=20, byrow=FALSE)
 dd <- cbind(d1, d2)
 cols <- rep(c('red', 'green'), times=c(30,20))
 colnames(dd) <- paste(cols, c(1:30, 1:20), sep='')
-# peform your basic hierarchical clustering...
+## peform your basic hierarchical clustering...
 hc <- hclust(distanceMatrix(dd, 'pearson'), method='complete')
 
-# bootstrap the clusters arising from hclust
+## bootstrap the clusters arising from hclust
 bc <- BootstrapClusterTest(dd, cutHclust, nTimes=200, k=3, metric='pearson')
 summary(bc)
 
-# look at the distribution of agreement scores
+## look at the distribution of agreement scores
 hist(bc, breaks=101)
 
-# let heatmap compute a new dendrogram from the agreement
+## let heatmap compute a new dendrogram from the agreement
 image(bc, col=blueyellow(64), RowSideColors=cols, ColSideColors=cols)
 
-# plot the agreement matrix with the original dendrogram
+## plot the agreement matrix with the original dendrogram
 image(bc, dendrogram=hc, col=blueyellow(64), RowSideColors=cols, ColSideColors=cols)
 
-# bootstrap the results of PAM
+## bootstrap the results of PAM
 pamc <- BootstrapClusterTest(dd, cutPam, nTimes=200, k=3)
 image(pamc, dendrogram=hc, col=blueyellow(64), RowSideColors=cols, ColSideColors=cols)
 
-# contrast the behavior when all the data comes from the same group
+## contrast the behavior when all the data comes from the same group
 xx <- matrix(rnorm(100*50, rnorm(100, 0.5)), nrow=100, ncol=50, byrow=FALSE)
 hct <- hclust(distanceMatrix(xx, 'pearson'), method='complete')
 bct <- BootstrapClusterTest(xx, cutHclust, nTimes=200, k=4, metric='pearson')
 summary(bct)
 image(bct, dendrogram=hct, col=blueyellow(64), RowSideColors=cols, ColSideColors=cols)
 
-# cleanup
+## cleanup
 rm(d1, d2, dd, cols, hc, bc, pamc, xx, hct, bct)
 }
 \keyword{classes}
-\keyword{multivariate}
 \keyword{cluster}
 \keyword{htest}
+\keyword{multivariate}
+

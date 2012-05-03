@@ -1,6 +1,5 @@
 \name{aspectHeatmap}
 \alias{aspectHeatmap}
-
 \title{ Heatmap with control over the aspect ratio }
 \description{
   This function replaces the heatmap function in the stats package with
@@ -10,9 +9,8 @@
   or vertical lines to mark out important regions.
 }
 \usage{
-aspectHeatmap(x, Rowv = NULL, Colv = if (symm) "Rowv" else NULL, distfun = dist, hclustfun = hclust, reorderfun = function(d, w) reorder(d, w), add.expr, symm = FALSE, revC = identical(Colv, "Rowv"), scale = c("row", "column", "none"), na.rm = TRUE, margins = c(5, 5), ColSideColors, RowSideColors, cexRow = 0.2 + 1/log10(nr), cexCol = 0.2 + 1/log10(nc), labRow = NULL, labCol = NULL, main = NULL, xlab = NULL, ylab = NULL, keep.dendro = FALSE, verbose = getOption("verbose"), hExp = 1, wExp = 1, vlines = NULL, hlines = NULL, lasCol = 2, ...)
+aspectHeatmap(x, Rowv = NULL, Colv = if (symm) "Rowv" else NULL, distfun = dist, hclustfun = hclust, reorderfun = function(d, w) reorder(d, w), add.expr, symm = FALSE, revC = identical(Colv, "Rowv"), scale = c("row", "column", "none"), na.rm = TRUE, margins = c(5, 5), ColSideColors, RowSideColors, cexRow = 0.2 + 1/log10(nr), cexCol = 0.2 + 1/log10(nc), labRow = NULL, labCol = NULL, main = NULL, xlab = NULL, ylab = NULL, keep.dendro = FALSE, verbose = getOption("verbose"), hExp = 1, wExp = 1, vlines = NULL, hlines = NULL, lasCol = 2, \dots)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{ See documentation for \link{heatmap}.}
   \item{Rowv}{ See documentation for \link{heatmap}.}
@@ -42,8 +40,7 @@ aspectHeatmap(x, Rowv = NULL, Colv = if (symm) "Rowv" else NULL, distfun = dist,
   \item{vlines}{ Vector of positions at which to draw vertical lines. } 
   \item{hlines}{ Vector of positions at which to draw horizontal lines. } 
   \item{lasCol}{ Axis label style (las) for columns. }
-  \item{\dots}{ Additional arguments passed along to the image
-    command. }
+  \item{\dots}{additional arguments passed along to the image command}
 }
 \details{
   The new arguments \code{hExp} and \code{wExp} are "expansion factors"
@@ -58,8 +55,12 @@ aspectHeatmap(x, Rowv = NULL, Colv = if (symm) "Rowv" else NULL, distfun = dist,
 \value{
   The same as the \link{heatmap} function.
 }
-\author{ Kevin R. Coombes <kcoombes@mdanderson.org>}
-\seealso{ \code{\link{heatmap}} }
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+}
+\seealso{
+  \code{\link{heatmap}}
+}
 \examples{
 nC <- 30
 nR <- 1000
@@ -67,4 +68,5 @@ fakeData <- matrix(rnorm(nC*nR), ncol=nC, nrow=nR)
 aspectHeatmap(fakeData, scale='none', hExp=2, wExp=1.4, margins=c(6,3))
 aspectHeatmap(fakeData, scale='none', hExp=2, wExp=1.4, margins=c(6,3), vlines=15.5, hlines=c(100, 300))
 }
-\keyword{ hplot }% at least one, from doc/KEYWORDS
+\keyword{hplot}
+

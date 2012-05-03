@@ -23,7 +23,6 @@ cutRepeatedKmeans(data, k, nTimes)
 
 repeatedKmeans(data, k, nTimes)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{data}{A numerical data matrix}
   \item{k}{The number of classes desired from the algorithm}
@@ -60,10 +59,14 @@ repeatedKmeans(data, k, nTimes)
   The component \code{x$withinss} contains the sum of the within-group
   sums of squares, which is used as the measure of fitness.
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+}
 \seealso{
-  \code{\link[cluster]{pam}}, \code{\link{hclust}},
-  \code{\link{cutree}}, \code{\link{kmeans}}. 
+  \code{\link{cutree}},
+  \code{\link{hclust}},
+  \code{\link{kmeans}},
+  \code{\link[cluster]{pam}}
 }
 \examples{
 # simulate data from three different groups
@@ -89,3 +92,4 @@ rm(d1, d2, d3, dd)
 }
 \keyword{cluster}
 \keyword{multivariate}
+

@@ -1,6 +1,5 @@
 \name{bimodalIndex}
 \alias{bimodalIndex}
-
 \title{The Bimodality Index}
 \description{
   The "bimodality index" is a continuous measure of the extent to which
@@ -9,7 +8,7 @@
   separation between the two modes is larger.
 }
 \usage{
-bimodalIndex(dataset, verbose = TRUE)
+bimodalIndex(dataset, verbose=TRUE)
 }
 \arguments{
   \item{dataset}{A matrix or data.frame, usually with columns
@@ -60,15 +59,17 @@ bimodalIndex(dataset, verbose = TRUE)
   corresponding to the rows of the original data set.  The columns
   contain the four parameters from the normal mixture model (\code{mu1},
   \code{mu2}, \code{sigma}, and \code{pi}) along with the standardized
-    distance \code{delta} and the bimodal index \code{BI}.
+  distance \code{delta} and the bimodal index \code{BI}.
 }
 \references{
-  Wang J, Wen S, Symmans WF, Pusztai L, Coombes KR. The bimodality
-  index: A criterion for discovering and ranking bimodal signatures from
-  cancer gene expression profiling data. Cancer Informatics, 2009 Aug 5;
-  7:199--216.
+  Wang J, Wen S, Symmans WF, Pusztai L, Coombes KR.\cr
+  "The bimodality index: A criterion for discovering and ranking bimodal
+  signatures from cancer gene expression profiling data."\cr
+  Cancer Informatics, 2009 Aug 5; 7:199--216.
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+}
 \examples{
 data(lungData)
 bi <- bimodalIndex(lung.dataset, verbose=FALSE)

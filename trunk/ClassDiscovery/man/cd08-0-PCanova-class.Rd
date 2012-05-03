@@ -1,20 +1,19 @@
 \name{PCanova}
-\docType{class}
 \alias{PCanova}
 \alias{PCanova-class}
 \alias{plot,PCanova,missing-method}
 \alias{pltree,PCanova-method}
 \alias{summary,PCanova-method}
-
-\title{The PCanova Class  }
+\docType{class}
+\title{Class "PCanova"}
 \description{
   Implements the PCANOVA method for determining whether a putative group
-  structure is truly reflected in  multivariate data set.
+  structure is truly reflected in multivariate data set.
 }
 \usage{
-PCanova(data, classes, labels, colors, usecor = TRUE)
+PCanova(data, classes, labels, colors, usecor=TRUE)
 
-\S4method{plot}{PCanova,missing}(x, tag='', mscale=1, cex=1, ...)
+\S4method{plot}{PCanova,missing}(x, tag='', mscale=1, cex=1, \dots)
 }
 \arguments{
   \item{data}{ Either a data frame or matrix with numeric values or an
@@ -148,15 +147,20 @@ PCanova(data, classes, labels, colors, usecor = TRUE)
   [2] The pltree method fails if you only supply two groups; this may be
   a failure in \code{hclust} if you only provide two objects to cluster.
 }
-\references{ Examples of the output of PCANOVA applied to the NCI60 data
-  set can be found at
-  \url{http://bioinformatics.mdanderson.org/camda01.html}. The full
+\references{
+  Examples of the output of PCANOVA applied to the NCI60 data set can be found
+  at \url{http://bioinformatics.mdanderson.org/camda01.html}. The full
   description has not been published (out of laziness on the part of the
   author of this code). The only description that has appeared in print
   is an extremely brief description that can be found in the proceedings of
-  the CAMDA 2001 conference.}
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
-\seealso{ \code{\link{SamplePCA}} }
+  the CAMDA 2001 conference.
+}
+\author{
+  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+}
+\seealso{
+  \code{\link{SamplePCA}}
+}
 \examples{
 # simulate data from three groups
 d1 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
@@ -189,3 +193,4 @@ rm(d1, d2, d3, dd, cols, pan)
 }
 \keyword{classes}
 \keyword{multivariate}
+
