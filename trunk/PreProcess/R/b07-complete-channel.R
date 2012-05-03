@@ -94,12 +94,8 @@ setMethod('plot',
 # argument in a call to "new". Should plan on making this a proper
 # method as soon as we get a derived class.
 
-if(!isGeneric('channelize'))
-  setGeneric('channelize',
-             function(object) standardGeneric('channelize'))
-
 setMethod('channelize', 'CompleteChannel',
-          function(object) { 'Channel' })
+          function(object, ...) { 'Channel' })
 
 setMethod('process', signature('CompleteChannel', 'Processor'),
           function(object, action, parameter=NULL) {
