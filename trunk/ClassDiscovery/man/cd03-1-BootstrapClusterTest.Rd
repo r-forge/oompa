@@ -65,7 +65,7 @@ descriptions of the inherited methods \code{image} and \code{hist}.
   }
 }
 \references{
-  Kerr MK, Churchill GJ. Boostrapping cluster analysis: Assessing the
+  Kerr MK, Churchill GJ. Bootstrapping cluster analysis: Assessing the
   reliability of conclusions from microarray experiments. PNAS 2001;
   98:8961-8965.
 }

@@ -39,7 +39,7 @@ repeatedKmeans(data, k, nTimes)
   structure for storing cluster assignments. The \code{\link{kmeans}}
   function stores the assignments in a \sQuote{cluster} attribute.  The
   \code{\link[cluster]{pam}} function uses a \sQuote{clustering} attribute.  For
-  \code{\link{hclust}}, the assigments are produced by a call to the
+  \code{\link{hclust}}, the assignments are produced by a call to the
   \code{\link{cutree}} function.
 
   It has been observed that the K-means algorithm can converge to

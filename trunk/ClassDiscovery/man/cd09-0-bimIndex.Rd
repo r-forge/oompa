@@ -42,7 +42,7 @@ bimodalIndex(dataset, verbose = TRUE)
   Monte Carlo (MCMC) techniques to estimate the model parameters.  In
   this package, we rely on the \link[mclust]{Mclust} implementation.
 
-  In the paper by Wang et al. referenced below, we provide a staistical
+  In the paper by Wang et al. referenced below, we provide a statistical
   justification for the definition of the bimodality index, based on
   considerations of power and sample size.  Theoretical considerations
   suggest that a bimodality index of 1.1 or greater is likely to

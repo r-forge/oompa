@@ -20,17 +20,17 @@ GenePCA(geneData)
   \item{splitter}{A logical vector classifying the genes.}
 }
 \details{
-  This is a preliminary attenpt at a class for principal components
+  This is a preliminary attempt at a class for principal components
   analysis of genes, parallel to the \code{\link{SamplePCA}} class for
   samples.  The interface will (one hopes) improve markedly in the next
   version of the library.
 }
 \value{
-  The \code{GenePCA} function construcs and returns a valid object of
+  The \code{GenePCA} function constructs and returns a valid object of
   the \code{GenePCA} class.
 }
 \section{Objects from the Class}{
-  Objects should be created using the \code{GenePCA} function.
+  Objects should be created using the \code{GenePCA} generator function.
 }
 \section{Slots}{
   \describe{
@@ -55,7 +55,7 @@ GenePCA(geneData)
   \code{\link{SamplePCA}}, \code{\link{princomp}}
 }
 \examples{
-# simulate samples from thre different groups, with generic genes
+# simulate samples from three different groups, with generic genes
 d1 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
 d2 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
 d3 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)

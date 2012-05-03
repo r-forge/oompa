@@ -37,10 +37,10 @@ pcc(hd, colors=NULL, ...)
 
   The \code{pcc} function also produces dendrograms with colored
   annotations.  However, instead of coloring the labels based on a
-  single factor, it produces color bars for any number of facotrs.  The
+  single factor, it produces color bars for any number of factors.  The
   \code{colors} argument should be a list with named components, where
   each component should correspond to a factor and a color scheme.
-  Specifically, the components must thmeselves be lisst with two
+  Specifically, the components must themselves be lists with two
   components named \code{fac} (and containing the factor) and \code{col}
   (containing a named vector specifying colors for each level of the
   factor).
@@ -66,7 +66,7 @@ labs <- paste('X', 1:30, sep='')
 # plot the dendrogram with color-coded groups
 plotColoredClusters(hc, labs=labs, cols=cols)
 
-# simualte another dataset
+# simulate another dataset
 fakedata <- matrix(rnorm(200*30), ncol=30)
 colnames(fakedata) <- paste("P", 1:30, sep='')
 # define two basic factors, with colors
@@ -74,7 +74,7 @@ faccol <- list(fac=factor(rep(c("A", "B"), each=15)),
                col=c(A='red', B='green'))
 fac2col <- list(fac=factor(rep(c("X", "Y", "Z"), times=10)),
                col=c(X='cyan', Y='orange', Z='purple'))
-# add aniother factor that erverses the colors
+# add another factor that reverses the colors
 BA <- faccol
 BA$col <- c(A='blue', B='yellow')
 # assemble the list of factors

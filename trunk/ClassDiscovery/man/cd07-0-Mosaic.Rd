@@ -63,7 +63,7 @@ Mosaic(data, sampleMetric = "pearson", sampleLinkage = "average", geneMetric = "
   \item{\dots}{Additional parameters for \code{heatmap}.}
 }
 \details{
-  One of the earliest papers in the microaray literature used
+  One of the earliest papers in the microarray literature used
   independent clustering of the genes (rows) and samples (columns) to
   produce dendrograms that were plotted along with a red-green heat map
   of the centered expression values. Since that time, literally thousand
@@ -85,7 +85,7 @@ Objects should be created with the \code{Mosaic} function.
 }
 \section{Slots}{
   \describe{
-    \item{\code{data}:}{The \code{matrix} contaiing the numerical data }
+    \item{\code{data}:}{The \code{matrix} containing the numerical data }
     \item{\code{samples}:}{A dendrogram of class \code{hclust} produced
       by clustering the biological samples (columns of \code{data}). }
     \item{\code{genes}:}{A dendrogram of class \code{hclust} produced by

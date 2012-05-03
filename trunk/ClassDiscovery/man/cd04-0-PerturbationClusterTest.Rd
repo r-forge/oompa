@@ -44,7 +44,7 @@ summarized and plotted to determine the results of the test.
     }
     \item{\code{noise}:}{ The standard deviation of the Gaussian noise
       added during each bootstrap sample.}
-    \item{\code{nTimes}:}{An intetger, the number of bootstrap samples
+    \item{\code{nTimes}:}{An integer, the number of bootstrap samples
       that were collected.}
     \item{\code{call}:}{An object of class \code{call}, which records
       how the object was produced. }
@@ -64,7 +64,7 @@ descriptions of the inherited methods \code{image} and \code{hist}.
   }
 }
 \references{
-  Kerr MK, Churchill GJ. Boostrapping cluster analysis: Assessing the
+  Kerr MK, Churchill GJ. Bootstrapping cluster analysis: Assessing the
   reliability of conclusions from microarray experiments. PNAS 2001;
   98:8961-8965.
 }

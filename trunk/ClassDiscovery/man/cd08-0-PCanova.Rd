@@ -38,7 +38,7 @@ PCanova(data, classes, labels, colors, usecor = TRUE)
     projection of the sample vectors into the principal component space
     computed from the matrix of group means seems to be off by a factor
     approximately equal to the square root of the average number of
-    samples per group. Until we sort out the corect formula, this term
+    samples per group. Until we sort out the correct formula, this term
     can be adjusted until the group means appear to be in the correct
     place in the plots.}
   \item{cex}{Character expansion factor used only in the plot legend on
@@ -49,7 +49,7 @@ PCanova(data, classes, labels, colors, usecor = TRUE)
 \details{
   The PCANOVA method was developed as part of the submission that won
   the award for best presentation at the 2001 conference on the Critical
-  ASsessment of Microarray Data Analaysis (CAMDA;
+  Assessment of Microarray Data Analysis (CAMDA;
   \url{http://www.camda.duke.edu}).  The idea is to perform the
   equivalent of an analysis of variance (ANOVA) in principal component
   (PC) space. Let X(i,j) denote the jth column vector belonging to the
@@ -74,7 +74,7 @@ PCanova(data, classes, labels, colors, usecor = TRUE)
   The \code{PCanova} function returns an object of the \code{PCanova} class.
 }
 \section{Objects from the Class}{
-Objects should be created by calling the \code{PCanova} function.
+  Objects should be created by calling the \code{PCanova} generator function.
 }
 \section{Slots}{
   \describe{
@@ -82,10 +82,10 @@ Objects should be created by calling the \code{PCanova} function.
     component from PCA performed on the total matrix.  All principal
     components analyses are performed using the \code{SamplePCA} class.}
     \item{\code{class.pca}:}{A \code{matrix} containing the
-      \code{scores} component fromm PCA performed on the matrix of
+      \code{scores} component from PCA performed on the matrix of
       group-mean vectors. }
     \item{\code{resid.pca}:}{A \code{matrix} containing the
-      \code{scores} component rom PCA performed on the matrix of
+      \code{scores} component from PCA performed on the matrix of
       residuals. } 
     \item{\code{mixed.pca}:}{A \code{matrix} containing the projections
       of all the original vectoprs into the principal component space
@@ -112,7 +112,7 @@ Objects should be created by calling the \code{PCanova} function.
       identifying the distinct groups. }
     \item{\code{colors}:}{A character vector of color names used to
       indicate the group membership fo samples in plots.}
-    \item{\code{call}:}{An object of class \code{call} that records hwo
+    \item{\code{call}:}{An object of class \code{call} that records how
       the object was constructed.}
   }
 }

@@ -52,9 +52,9 @@ classes such as \code{\link{BootstrapClusterTest}} or
     \item{image}{\code{signature(x = "ClusterTest")}: Uses the
       \code{heatmap} function to display the agreement matrix. The
       optional \code{dendrogram} argument should be used to display the
-      extent to which the ageement matrix matches the results of
+      extent to which the agreement matrix matches the results of
       hierarchical clustering using the full data set.  This method
-      invisbly returns the result of a call to \code{heatmap}; thus, you
+      invisibly returns the result of a call to \code{heatmap}; thus, you
       can use \code{keep.dendro=TRUE} to recover the cluster assignments
       from the dendrograms.}
     \item{summary}{\code{signature(object = "ClusterTest")}: Write out a
@@ -62,7 +62,7 @@ classes such as \code{\link{BootstrapClusterTest}} or
   }
 }
 \references{
-  Kerr MK, Churchill GJ. Boostrapping cluster analysis: Assessing the
+  Kerr MK, Churchill GJ. Bootstrapping cluster analysis: Assessing the
   reliability of conclusions from microarray experiments. PNAS 2001;
   98:8961-8965.
 }

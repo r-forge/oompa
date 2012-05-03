@@ -72,7 +72,7 @@ SamplePCA(data, splitter = 0, usecor = FALSE, center = TRUE)
       as the input matrix) containing each of the first P principal
       components as columns.}
     \item{\code{splitter}:}{A logical vector or factor of length N
-      classifying the coluimns into known groups.}
+      classifying the columns into known groups.}
     \item{\code{usecor}:}{A \code{logical} value; was the data standardized?}
     \item{\code{shift}:}{A \code{numeric} vector of length P; the mean
       vector of the input data, which is used for centering by the
@@ -120,7 +120,7 @@ SamplePCA(data, splitter = 0, usecor = FALSE, center = TRUE)
   \code{\link{princomp}}, \code{\link{GenePCA}}
 }
 \examples{
-# simulate datda from three different groups
+# simulate data from three different groups
 d1 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
 d2 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
 d3 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)

@@ -1,7 +1,7 @@
 \name{mahalanobisQC}
 \alias{mahalanobisQC}
 
-\title{Using Mahalnobis Distance and PCA for Quality Control}
+\title{Using Mahalanobis Distance and PCA for Quality Control}
 \description{
   Compute the Mahalanobis distance of each sample from the center of an
   N-dimensional principal component space.
@@ -21,7 +21,7 @@ mahalanobisQC(spca, N)
   center of a D-dimensional principal component space should follow a 
   chi-squared distribution with D degrees of freedom. This theory lets
   us compute p-values associated with the Mahalanobis distances for
-  each sample.  This method can be used for quality contriol or outlier
+  each sample.  This method can be used for quality control or outlier
   identification.
 }
 \value{
