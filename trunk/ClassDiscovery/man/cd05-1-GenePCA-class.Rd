@@ -57,19 +57,21 @@ GenePCA(geneData)
   \code{\link{princomp}}
 }
 \examples{
-# simulate samples from three different groups, with generic genes
+showClass("GenePCA")
+
+## simulate samples from three different groups, with generic genes
 d1 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
 d2 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
 d3 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
 dd <- cbind(d1, d2, d3)
 
-# perform PCA in gene space
+## perform PCA in gene space
 gpc <- GenePCA(dd)
 
-# plot the results
+## plot the results
 plot(gpc)
 
-# cleanup
+## cleanup
 rm(d1, d2, d3, dd, gpc)
 }
 \keyword{algebra}

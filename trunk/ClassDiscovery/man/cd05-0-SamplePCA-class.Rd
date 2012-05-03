@@ -110,7 +110,7 @@ SamplePCA(data, splitter=0, usecor=FALSE, center=TRUE)
   \code{SamplePCA} class.  We assume that the input data matrix has N
   columns (of biological samples) and P rows (of genes). 
 
-  The predict method returns a matrix whose size is the number of
+  The \code{predict} method returns a matrix whose size is the number of
   columns in the input by the number of principal components.
 }
 \author{
@@ -121,6 +121,8 @@ SamplePCA(data, splitter=0, usecor=FALSE, center=TRUE)
   \code{\link{GenePCA}}
 }
 \examples{
+showClass("SamplePCA")
+
 ## simulate data from three different groups
 d1 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
 d2 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
