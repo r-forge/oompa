@@ -120,7 +120,7 @@ Mosaic(data,
 }
 \references{
   Eisen MB, Spellman PT, Brown PO, Botstein D.\cr
-  "Cluster analysis and display of genome-wide expression patterns."\cr
+  \emph{Cluster analysis and display of genome-wide expression patterns.}\cr
   Proc Natl Acad Sci U S A. 1998 Dec 8;95(25):14863-8.
 }
 \author{

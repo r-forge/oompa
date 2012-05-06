@@ -64,8 +64,8 @@ PerturbationClusterTest(data, FUN, nTimes=100, noise=1, verbose=TRUE, \dots)
 }
 \references{
   Kerr MK, Churchill GJ.\cr
-  "Bootstrapping cluster analysis: Assessing the reliability of conclusions
-  from microarray experiments."\cr
+  \emph{Bootstrapping cluster analysis: Assessing the reliability of
+  conclusions from microarray experiments.}\cr
   PNAS 2001; 98:8961-8965.
 }
 \author{

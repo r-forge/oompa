@@ -65,8 +65,8 @@ BootstrapClusterTest(data, FUN, subsetSize, nTimes=100, verbose=TRUE, \dots)
 }
 \references{
   Kerr MK, Churchill GJ.\cr
-  "Bootstrapping cluster analysis: Assessing the reliability of conclusions
-  from microarray experiments."
+  \emph{Bootstrapping cluster analysis: Assessing the reliability of
+  conclusions from microarray experiments.}\cr
   PNAS 2001; 98:8961-8965.
 }
 \author{

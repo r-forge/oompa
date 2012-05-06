@@ -26,10 +26,12 @@ data(lungData)
   selected to form this data set.
 }
 \references{
-Shedden K, Taylor JM, et al. (Director's Challenge Consortium for the
-Molecular Classification of Lung Adenocarcinoma).  Gene expression-based
-survival prediction in lung adenocarcinoma: a multi-site, blinded
-validation study. \emph{Nature Medicine} 2008; 14(8):822-7.
+  Shedden K, Taylor JM, et al.\cr
+  \emph{Gene expression-based survival prediction in lung adenocarcinoma:
+  a multi-site, blinded validation study.}\cr
+  (Director's Challenge Consortium for the Molecular Classification of
+  Lung Adenocarcinoma).\cr
+  Nature Medicine 2008; 14(8):822-7.
 }
 \keyword{datasets}
 
