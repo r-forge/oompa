@@ -3,7 +3,7 @@
 \title{Using Mahalanobis Distance and PCA for Quality Control}
 \description{
   Compute the Mahalanobis distance of each sample from the center of an
-  N-dimensional principal component space.
+  \var{N}-dimensional principal component space.
 }
 \usage{
 mahalanobisQC(spca, N)
@@ -17,8 +17,8 @@ mahalanobisQC(spca, N)
 \details{
   The theory says that, under the null hypothesis that all samples arise
   from the same multivariate normal distribution, the distance from the
-  center of a D-dimensional principal component space should follow a 
-  chi-squared distribution with D degrees of freedom. This theory lets
+  center of a \var{D}-dimensional principal component space should follow a 
+  chi-squared distribution with \var{D} degrees of freedom. This theory lets
   us compute p-values associated with the Mahalanobis distances for
   each sample. This method can be used for quality control or outlier
   identification.
@@ -30,7 +30,10 @@ mahalanobisQC(spca, N)
   degrees of freedom. Second column is the associated p-value.
 }
 \references{
-  Coombes et al, Clin Chem 2003; 49:1615-23.
+  Coombes KR, et al.\cr
+  \emph{Quality control and peak finding for proteomics data collected from
+  nipple aspirate fluid by surface-enhanced laser desorption and ionization.}
+  Clin Chem 2003; 49:1615-23.
 }
 \author{
   Kevin R. Coombes \email{kcoombes@mdanderson.org}

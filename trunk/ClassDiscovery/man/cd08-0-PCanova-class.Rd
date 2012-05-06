@@ -16,22 +16,22 @@ PCanova(data, classes, labels, colors, usecor=TRUE)
 \S4method{plot}{PCanova,missing}(x, tag='', mscale=1, cex=1, \dots)
 }
 \arguments{
-  \item{data}{ Either a data frame or matrix with numeric values or an
+  \item{data}{either data frame or matrix with numeric values, or an
     \code{\link[Biobase:class.ExpressionSet]{ExpressionSet}} as defined
     in the BioConductor tools for analyzing microarray data.}
-  \item{labels}{ A character vector used to label points in plots. The
+  \item{labels}{character vector used to label points in plots. The
     length of the \code{labels} vector should equal the number of
     columns (samples) in the \code{data} matrix. Since only the first
     character of each label is used in the plots, these should be unique.}
   \item{classes}{ A subset of the \code{labels} used to indicate
     distinct classes. Again, the method truncates each class indicator
     to a single letter.}
-  \item{colors}{ A character vector containing color names; this should
+  \item{colors}{character vector containing color names; this should
     be the same length as the vector of \code{labels}.}
-  \item{usecor}{ A logical flag; should the rows of the data matrix be
-    standardized before use?}
-  \item{x}{A \code{PCanova} object.}
-  \item{tag}{A character string to name the object, used as part of the
+  \item{usecor}{logical scalar. If \code{TRUE}, standardize the rows of the
+    data matrix before use.}
+  \item{x}{object of class \code{PCanova}}
+  \item{tag}{character string to name the object, used as part of the
     plot title.}
   \item{mscale}{A real number. This is a hack; for some reason, the
     projection of the sample vectors into the principal component space
@@ -42,14 +42,14 @@ PCanova(data, classes, labels, colors, usecor=TRUE)
     place in the plots.}
   \item{cex}{Character expansion factor used only in the plot legend on
     the plot of PC correlations.}
-  \item{\dots}{Additional graphical parameters passed on to \code{plot}
+  \item{\dots}{additional graphical parameters passed on to \code{plot}
     when displaying the principal components plots.}
 }
 \details{
   The PCANOVA method was developed as part of the submission that won
   the award for best presentation at the 2001 conference on the Critical
   Assessment of Microarray Data Analysis (CAMDA;
-  \url{http://www.camda.duke.edu}).  The idea is to perform the
+  \url{http://www.camda.duke.edu}). The idea is to perform the
   equivalent of an analysis of variance (ANOVA) in principal component
   (PC) space. Let X(i,j) denote the jth column vector belonging to the
   ith group of samples. We can model this as X(i,j) = mu + tau(i) +
@@ -66,7 +66,7 @@ PCanova(data, classes, labels, colors, usecor=TRUE)
   structures are recognizable because the PC correlation between the
   total-matrix PC space and the group-means PC space is much larger than
   the PC correlation between the total-matrix PC space and the residual
-  PC space.  Weak or nonexistent group structures are recognizable
+  PC space. Weak or nonexistent group structures are recognizable
   because the relative sizes of the PC correlations is reversed.
 }
 \value{
