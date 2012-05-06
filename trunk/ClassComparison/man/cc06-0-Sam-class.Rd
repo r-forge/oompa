@@ -98,9 +98,9 @@ Sam(data, classes, nPerm=100, verbose=TRUE)
   \code{countSignificant} returns an integer.
 }
 \references{
-  Tusher, V.G., Tibshirani, R., and Chu, G.\cr
-  "Significance analysis of microarrays applied to the ionizing radiation
-  response."\cr
+  Tusher VG, Tibshirani R, Chu G.\cr
+  \emph{Significance analysis of microarrays applied to the ionizing radiation
+  response.}\cr
   Proc Natl Acad Sci U S A (2001) 98, 5116-5121.
 }
 \author{

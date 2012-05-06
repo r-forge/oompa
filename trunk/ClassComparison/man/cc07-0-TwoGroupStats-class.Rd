@@ -111,7 +111,7 @@ TwoGroupStats(data, classes, name=comparison, name1=A, name2=B)
 }
 \references{
   Altman DG, Bland JM.\cr
-  "Measurement in Medicine: the Analysis of Method Comparison Studies."\cr
+  \emph{Measurement in Medicine: the Analysis of Method Comparison Studies.}\cr
   The Statistician, 1983; 32: 307-317. 
 }
 \author{

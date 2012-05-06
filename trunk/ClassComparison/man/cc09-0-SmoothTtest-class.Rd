@@ -136,25 +136,23 @@ SmoothTtest(stats, aname='Group One', bname='Group Two',
   }
 }
 \references{
-  Baggerly, K.A., Coombes, K.R., Hess, K.R., Stivers, D.N., Abruzzo,
-  L.V., Zhang, W.\cr
-  "Identifying differentially expressed genes in cDNA microarray
-  experiments."\cr
+  Baggerly KA, Coombes KR, Hess KR, Stivers DN, Abruzzo LV, Zhang W.\cr
+  \emph{Identifying differentially expressed genes in cDNA microarray
+  experiments.}\cr
   J Comp Biol. 8:639-659, 2001.
-  
-  Coombes, K.R., Highsmith, W.E., Krogmann, T.A., Baggerly, K.A.,
-  Stivers, D.N., Abruzzo, L.V.\cr
-  "Identifying and quantifying sources of variation in microarray data using
-  high-density cDNA membrane arrays."\cr
+
+  Coombes KR, Highsmith WE, Krogmann TA, Baggerly KA, Stivers DN, Abruzzo LV.\cr
+  \emph{Identifying and quantifying sources of variation in microarray data
+  using high-density cDNA membrane arrays.}\cr
   J Comp Biol. 9:655-669, 2002.
 
   Altman DG, Bland JM.\cr
-  "Measurement in Medicine: the Analysis of Method Comparison Studies."\cr
+  \emph{Measurement in Medicine: the Analysis of Method Comparison Studies.}\cr
   The Statistician, 1983; 32: 307-317. 
 }
 \author{
   Kevin R. Coombes \email{kcoombes@mdanderson.org},
-  P. Roebuck \email{kcoombes@mdanderson.org}
+  P. Roebuck \email{proebuck@mdanderson.org}
 }
 \seealso{
   \code{\link{Bum}},

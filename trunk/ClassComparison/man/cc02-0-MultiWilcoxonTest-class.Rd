@@ -135,14 +135,14 @@ MultiWilcoxonTest(data, classes, histsize=NULL)
   See the paper by Efron and Tibshirani.
 }
 \references{
-  Efron B, Tibshirani R\cr
-  "Empirical bayes methods and false discovery rates for microarrays."\cr
+  Efron B, Tibshirani R.\cr
+  \emph{Empirical bayes methods and false discovery rates for microarrays.}\cr
   Genet Epidemiol 2002, 23: 70-86.
 
   Pounds S, Morris SW.\cr
-  "Estimating the occurrence of false positives and false negatives in
+  \emph{Estimating the occurrence of false positives and false negatives in
   microarray studies by approximating and partitioning the empirical
-  distribution of p-values."\cr
+  distribution of p-values.}\cr
   Bioinformatics. 2003 Jul 1;19(10):1236-42. 
 }
 \author{

@@ -95,15 +95,14 @@ SingleGroup(avg, sd, span=0.5, name='')
   }
 }
 \references{
-  Baggerly, K.A., Coombes, K.R., Hess, K.R., Stivers, D.N., Abruzzo,
-  L.V., Zhang, W.\cr
-  "Identifying differentially expressed genes in cDNA microarray experiments."\cr
+  Baggerly KA, Coombes KR, Hess KR, Stivers DN, Abruzzo LV, Zhang W.\cr
+  \emph{Identifying differentially expressed genes in cDNA microarray
+  experiments.}\cr
   J Comp Biol. 8:639-659, 2001.
   
-  Coombes, K.R., Highsmith, W.E., Krogmann, T.A., Baggerly, K.A.,
-  Stivers, D.N., Abruzzo, L.V.\cr
-  "Identifying and quantifying sources of variation in microarray data using
-  high-density cDNA membrane arrays."\cr
+  Coombes KR, Highsmith WE, Krogmann TA, Baggerly KA, Stivers DN, Abruzzo LV.\cr
+  \emph{Identifying and quantifying sources of variation in microarray data
+  using high-density cDNA membrane arrays.}\cr
   J Comp Biol. 9:655-669, 2002.
 }
 \author{

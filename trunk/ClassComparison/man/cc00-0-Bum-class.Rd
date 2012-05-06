@@ -140,18 +140,18 @@ likelihoodBum(object)
 }
 \references{
   Pounds S, Morris SW.\cr
-  "Estimating the occurrence of false positives and false negatives in
+  \emph{Estimating the occurrence of false positives and false negatives in
   microarray studies by approximating and partitioning the empirical
-  distribution of p-values."\cr
+  distribution of p-values.}\cr
   Bioinformatics. 2003 Jul 1;19(10):1236-42. 
 
   Benjamini Y, Hochberg Y.\cr
-  "Controlling the false discovery rate: a practical and powerful approach
-  to multiple testing."\cr
+  \emph{Controlling the false discovery rate: a practical and powerful approach
+  to multiple testing.}\cr
   J Roy Statist Soc B, 1995; 57: 289-300.
 
   Efron B, Tibshirani R.\cr
-  "Empirical bayes methods and false discovery rates for microarrays."\cr
+  \emph{Empirical bayes methods and false discovery rates for microarrays.}\cr
   Genet Epidemiol 2002, 23: 70-86.
 }
 \author{

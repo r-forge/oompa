@@ -134,8 +134,8 @@ TNoM(data, classes, verbose=TRUE)
   Simon R, Yakhini Z, Ben-Dor A, Sampas N, Dougherty E, Wang E, Marincola
   F, Gooden C, Lueders J, Glatfelter A, Pollock P, Carpten J, Gillanders
   E, Leja D, Dietrich K, Beaudry C, Berens M, Alberts D, Sondak V.\cr
-  "Molecular classification of cutaneous malignant melanoma by gene expression
-  profiling."\cr
+  \emph{Molecular classification of cutaneous malignant melanoma by gene
+  expression profiling.}\cr
   Nature. 2000 Aug 3;406(6795):536-40.
 }
 \author{

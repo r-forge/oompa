@@ -99,14 +99,14 @@ Dudoit(data, classes, nPerm=1000, verbose=TRUE)
   significant test results.
 }
 \references{
-  Dudoit, S., Y.H. Yang, M.J. Callow, and T.P. Speed.\cr
-  "Statistical Methods for Identifying Differentially Expressed Genes in
-  Replicated cDNA Microarray Experiments."\cr
+  Dudoit S, Yang YH, Callow MJ, Speed TP.\cr
+  \emph{Statistical Methods for Identifying Differentially Expressed Genes in
+  Replicated cDNA Microarray Experiments.}\cr
   Statistica Sinica (2002), 12(1): 111-139.
 
-  Westfall, P.H., Young, S.S.\cr
-  "Resampling-based multiple testing: examples and methods for p-value
-  adjustment."\cr
+  Westfall PH, Young SS.\cr
+  \emph{Resampling-based multiple testing: examples and methods for p-value
+  adjustment.}\cr
   Wiley series in probability and mathematics statistics.
   John Wiley and Sons, 1993.
 }
