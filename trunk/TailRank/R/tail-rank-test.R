@@ -24,7 +24,8 @@ setClass("TailRankTest",
                         )
          )
 
-setMethod('summary', 'TailRankTest', function(object, ...) {
+setMethod('summary', signature(object='TailRankTest'),
+          function(object, ...) {
   cat(paste('A tail-rank test object in the',
             object@direction,'direction.\n'))
   cat(paste('The test was performed using the', object@model, 'model.\n'))
@@ -38,9 +39,12 @@ setMethod('summary', 'TailRankTest', function(object, ...) {
 })
 
 # altered by KRC to use beta-binomial on 5 July 2007
-setMethod('hist', 'TailRankTest',
-          function(x,  overlay=FALSE,
-                   xlab='tail-rank statistic', main='', ...) {
+setMethod('hist', signature(x='TailRankTest'),
+          function(x,
+                   overlay=FALSE,
+                   xlab='tail-rank statistic',
+                   main='',
+                   ...) {
             if(overlay) {
               xx <- 0:length(x@statistic)
               qq <- 1 - pnorm(toleranceBound(x@specificity, x@tolerance, x@N1))
@@ -62,7 +66,8 @@ setMethod('hist', 'TailRankTest',
             invisible(x)
           })
 
-setMethod('as.logical', 'TailRankTest', function(x, ...) {
+setMethod('as.logical', signature(x='TailRankTest'),
+          function(x, ...) {
   x@statistic > x@cutoff
 })
 
@@ -70,8 +75,10 @@ if (!isGeneric('getStatistic'))
   setGeneric('getStatistic', function(object, ...) {
     standardGeneric('getStatistic')})
 
-setMethod('getStatistic', 'TailRankTest',
-          function(object, ...) {object@statistic})
+setMethod('getStatistic', signature(object='TailRankTest'),
+          function(object, ...) {
+              object@statistic
+          })
 
 ############################
 # Here is the constructor that actually performs the test

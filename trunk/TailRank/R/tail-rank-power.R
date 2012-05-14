@@ -80,9 +80,13 @@ BMPT <- function(G, psi, conf, power) {
   new('BMPT', G=G, psi=psi, conf=conf, power=power)
 }
 
-setMethod('summary', 'BMPT', function(object, ...) {object})
+setMethod('summary', signature(object='BMPT'),
+          function(object, ...) {
+              object
+          })
 
-setMethod('print', 'BMPT', function(x, ...) {
+setMethod('print', signature(x='BMPT'),
+          function(x, ...) {
   cat(paste('G = ', x@G, ', psi = ', x@psi,
             ', conf = ', x@conf, '\nPower:\n', sep=''))
   print(x@power)
