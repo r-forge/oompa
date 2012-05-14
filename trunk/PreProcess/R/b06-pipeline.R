@@ -21,7 +21,8 @@ setMethod('process', signature('ANY', 'Pipeline'),
             object
           })
 
-setMethod('summary', 'Pipeline', function(object, ...) {
+setMethod('summary', signature(object='Pipeline'),
+          function(object, ...) {
   cat(paste('A pipeline object:', object@name, '\nGoal:',
             object@description, '\nConcatenates',
             length(object@proclist), 'steps:\n'))
@@ -30,9 +31,8 @@ setMethod('summary', 'Pipeline', function(object, ...) {
 })
 
 PIPELINE.STANDARD <- new('Pipeline',
-                         proclist = list(
-                           PROC.GLOBAL.NORMALIZATION,
-                           PROC.THRESHOLD,
-                           PROC.LOG.TRANSFORM),
+                         proclist = list(PROC.GLOBAL.NORMALIZATION,
+                                         PROC.THRESHOLD,
+                                         PROC.LOG.TRANSFORM),
                          name = 'standard processor',
                          description = 'Default channel processing')

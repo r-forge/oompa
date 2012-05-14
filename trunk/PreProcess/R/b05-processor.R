@@ -27,7 +27,8 @@ setMethod('process', signature('Channel', 'Processor'),
             object
           })
 
-setMethod('summary', 'Processor', function(object, ...) {
+setMethod('summary', signature(object='Processor'),
+          function(object, ...) {
   cat(paste('A processor object ', object@name, '\nAction: ',
             object@description, '\nDefault parameter: ',
             object@default, '\n',

@@ -26,27 +26,30 @@ CompleteChannel <- function(name, type, data) {
       history = list(cl))
 }
 
-setMethod('print', 'CompleteChannel', function(x, ...) {
+setMethod('print', signature(x='CompleteChannel'),
+          function(x, ...) {
 	print(x@type)
 	print(x@name)
 	print(x@data, ...)
 })
 
-setMethod('summary', 'CompleteChannel', function(object, ...) {
+setMethod('summary', signature(object='CompleteChannel'),
+          function(object, ...) {
 	print(object@type)
 	print(object@name)
 	summary(object@data, ...)
 })
 
-setMethod('as.data.frame',
-          'CompleteChannel', function(x, row.names = NULL, optional = FALSE) {
-            x@data
+setMethod('as.data.frame', signature(x='CompleteChannel'),
+          function(x, row.names=NULL, optional=FALSE) {
+              x@data
 })
 
 # The function analyze.CompleteChannel computes three density functions
 # for the given channel: one each for volume, background, and corrected
 # volume. These are returned as components of a list.
-setMethod('analyze', 'CompleteChannel', function(object, useLog = FALSE, ...) {
+setMethod('analyze', signature(object='CompleteChannel'),
+          function(object, useLog=FALSE, ...) {
   ch <- x@data
   if (useLog) {
     vwid <- 0.4
@@ -79,8 +82,7 @@ setMethod('analyze', 'CompleteChannel', function(object, useLog = FALSE, ...) {
 
 # The function plot.CompleteChannel combines the computation of channel
 # densities with a plotting routine.
-setMethod('plot',
-          signature('CompleteChannel', 'missing'),
+setMethod('plot', signature('CompleteChannel', 'missing'),
           function(x, main=x@name, useLog=FALSE, ...) {
             d <- analyze(x, useLog)
             .f.plot3(d, main, ...)
@@ -94,7 +96,7 @@ setMethod('plot',
 # argument in a call to "new". Should plan on making this a proper
 # method as soon as we get a derived class.
 
-setMethod('channelize', 'CompleteChannel',
+setMethod('channelize', signature(object='CompleteChannel'),
           function(object, ...) { 'Channel' })
 
 setMethod('process', signature('CompleteChannel', 'Processor'),
@@ -133,7 +135,8 @@ PROC.SIGNAL <-
       )
 
 
-setMethod('image', 'CompleteChannel', function(x, ...) {
+setMethod('image', signature(x='CompleteChannel'),
+          function(x, ...) {
   image(process(process(x, PROC.SIGNAL), PROC.LOG.TRANSFORM, 2), ...)
   image(process(process(x, PROC.BACKGROUND), PROC.LOG.TRANSFORM, 2), ...)
   invisible(x)

@@ -25,20 +25,21 @@ Channel <- function(parent, name, type, vec) {
 
 # The plot method for a channel produces a graph of the values against
 # the position.
-setMethod('plot', signature('Channel', 'missing'), function(x, ...) {
+setMethod('plot', signature('Channel', 'missing'),
+          function(x, ...) {
   plot(x@x, xlab='Position', ylab=x@name, main=x@parent, ...)
   invisible(x)
 })
 
-setMethod('hist', 'Channel', function(x, breaks=67,
-                                      xlab=x@name,
-                                      main=x@parent, ...) {
+setMethod('hist', signature(x='Channel'),
+          function(x, breaks=67, xlab=x@name, main=x@parent, ...) {
   hist(x@x, breaks=breaks, xlab=xlab, main=main, ...)
   invisible(x)
 })
 
 # The summary method for a channel summarizes the underlying vector.
-setMethod('summary', 'Channel', function(object, ...) {
+setMethod('summary', signature(object='Channel'),
+          function(object, ...) {
   cat(paste(object@name, ', a microarray channel object\n', sep=''))
   parent <- object@parent
   if (parent == '') parent <- 'NA'
@@ -53,7 +54,8 @@ setMethod('summary', 'Channel', function(object, ...) {
 })
 
 # The print method for a channel prints the underlying vector.
-setMethod('print', 'Channel', function(x, ...) {
+setMethod('print', signature(x='Channel'),
+          function(x, ...) {
   print(x@type)
   print(x@x, ...)
 })
@@ -61,7 +63,8 @@ setMethod('print', 'Channel', function(x, ...) {
 # The image method for a slide produces a cartoon of the geographically
 # arranged values for each channel.
 # Quantiles are reported in the subtitle of each figure.
-setMethod('image', 'Channel', function(x, main=x@name, sub=NULL, ...) {
+setMethod('image', signature(x='Channel'),
+          function(x, main=x@name, sub=NULL, ...) {
   my.show <- function(x) {
     qq <- quantile(x, c(0.25, 0.5, 0.75), na.rm=TRUE)
     paste('median = ', format(qq[2], digits=4),

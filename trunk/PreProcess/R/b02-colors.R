@@ -46,8 +46,7 @@ ColorCodedPair <- function(x, y, ccl) {
   val <- new('ColorCodedPair', x=x, y=y, colorCodingList=ccl)
 }
 
-setMethod('plot',
-          signature(x='ColorCodedPair', y='missing'),
+setMethod('plot', signature(x='ColorCodedPair', y='missing'),
           function(x, ...) {
   ob <- x
   myargs <- list(...)

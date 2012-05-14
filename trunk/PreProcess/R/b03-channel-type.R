@@ -15,12 +15,14 @@ ChannelType <- function(mk, md, nc, nr, gl, design='') {
       nCol=nc, nRow=nr, glow=gl, design=design)
 }
 
-setMethod('print', 'ChannelType', function(x, ...) {
+setMethod('print', signature(x='ChannelType'),
+          function(x, ...) {
   cat(paste('Microarray type:', x@maker, x@model, '\n'))
   cat(paste('Labeled with:', x@glow), '\n')
 })
 
-setMethod('summary', 'ChannelType', function(object, ...) {
+setMethod('summary', signature(object='ChannelType'),
+          function(object, ...) {
   print(object)
   cat("Design size:", object@nCol, "by", object@nRow, "\n")
   cat("Design information object:", object@design, "\n")
