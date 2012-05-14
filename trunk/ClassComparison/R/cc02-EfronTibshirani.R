@@ -82,9 +82,12 @@ MultiWilcoxonTest <- function(data, classes, histsize=NULL) {
       theoretical.pdf=theoretical.pdf, unravel=unravel)
 }
 
-setMethod('hist', 'MultiWilcoxonTest', function(x,
-           xlab='Rank Sum',
-           ylab='Prob(Different | Y)', main='', ...) {
+setMethod('hist', signature(x='MultiWilcoxonTest'),
+          function(x,
+                   xlab='Rank Sum',
+                   ylab='Prob(Different | Y)',
+                   main='',
+                   ...) {
   top <- max(c(x@unravel, x@theoretical.pdf))
   hist(x@rank.sum.statistics, probability=TRUE, breaks=100, ylim=c(0, top),
        xlim=c(min(x@xvals), max(x@xvals)), xlab=xlab, main=main)
@@ -95,10 +98,14 @@ setMethod('hist', 'MultiWilcoxonTest', function(x,
   invisible(x)
 })
 
-setMethod('plot', signature('MultiWilcoxonTest', 'missing'), function(x,
-                  prior=1, significance=0.9, ylim=c(-0.5, 1),
-                  xlab='Rank Sum',
-                  ylab='Prob(Different | Y)', ...) {
+setMethod('plot', signature('MultiWilcoxonTest', 'missing'),
+          function(x,
+                   prior=1,
+                   significance=0.9,
+                   ylim=c(-0.5, 1),
+                   xlab='Rank Sum',
+                   ylab='Prob(Different | Y)',
+                   ...) {
   plot(c(min(x@xvals), max(x@xvals)), c(-0.5,1), type='n',
        xlab=xlab, ylab=ylab, ylim=ylim, ...)
   toss <- unlist(lapply(prior, function(p, o) {
@@ -108,26 +115,27 @@ setMethod('plot', signature('MultiWilcoxonTest', 'missing'), function(x,
   invisible(x)
 })
 
-setMethod('cutoffSignificant', signature('MultiWilcoxonTest'),
+setMethod('cutoffSignificant', signature(object='MultiWilcoxonTest'),
           function(object, prior, significance, ...) {
             z <- .probDiff(object, prior)
             x <- object@xvals[z < significance]
             list(low=min(x), high=max(x))
           })
 
-setMethod('selectSignificant', signature('MultiWilcoxonTest'),
+setMethod('selectSignificant', signature(object='MultiWilcoxonTest'),
           function(object, prior, significance, ...) {
             stats <- object@rank.sum.statistics
             lh <- cutoffSignificant(object, prior, significance)
             (stats < lh$low) | (stats > lh$high)
           })
 
-setMethod('countSignificant', signature('MultiWilcoxonTest'),
+setMethod('countSignificant', signature(object='MultiWilcoxonTest'),
           function(object, prior, significance, ...) {
             sum(selectSignificant(object, prior, significance))
           })
 
-setMethod('summary', 'MultiWilcoxonTest', function(object, prior=1, significance=0.9, ...) {
+setMethod('summary', signature(object='MultiWilcoxonTest'),
+          function(object, prior=1, significance=0.9, ...) {
   lh <- cutoffSignificant(object, prior, significance)
   cat(paste('Call:', as.character(list(object@call)),'\n'))
   cat(paste('Row-by-row Wilcoxon rank-sum tests with',

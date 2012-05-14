@@ -76,8 +76,7 @@ SingleGroup <- function(avg, sd, span=0.5, name='')
        ColorCoding(s  > span*multiple, COLOR.WORST.REPLICATE, 8))
 }
 
-setMethod('plot',
-          signature('SingleGroup', 'missing'),
+setMethod('plot', signature('SingleGroup', 'missing'),
           function(x, multiple=3, ccl=0, main=x@name,
                    xlab='Mean', ylab='Std Dev', xlim=0, ylim=0, ...) {
 # Plot method for objects of class 'SingleGroup'. The plot flags
@@ -104,20 +103,23 @@ setMethod('plot',
             invisible(x)
           })
 
-setMethod('as.data.frame',
-          'SingleGroup', function(x, row.names = NULL, optional = FALSE) {
+setMethod('as.data.frame', signature(x='SingleGroup'),
+          function(x, row.names=NULL, optional=FALSE) {
             x <- data.frame(x@avg, x@sd, x@score, x@fit$x, x@fit$y)
             dimnames(x)[[2]] <- c('avg', 'sd', 'score', 'fit.x', 'fit.y')
             x
           })
 
-setMethod('summary', 'SingleGroup', function(object, ...) {
+setMethod('summary', signature(object='SingleGroup'),
+          function(object, ...) {
 	cat('Name:', object@name, '\n')
 	summary(as.data.frame(object), ...)
       })
 
-setMethod('print', 'SingleGroup', function(x, ...) {
+setMethod('print', signature(x='SingleGroup'),
+          function(x, ...) {
 	cat('Name:', x@name, '\n')
         xdf <- as.data.frame(x)
 	print(xdf, ...)
       })
+

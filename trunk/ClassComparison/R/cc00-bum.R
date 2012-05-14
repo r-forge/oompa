@@ -91,7 +91,7 @@ Bum <- function(pvals, ...) {
 
 # public interface to the private methods
 
-setMethod('cutoffSignificant', signature('Bum'),
+setMethod('cutoffSignificant', signature(object='Bum'),
           function(object, alpha, by='FDR', ...) {
             by <- match.arg(by, c('FDR', 'FalseDiscovery', 'falsediscovery',
                                   'EmpiricalBayes', 'empiricalbayes'))
@@ -103,19 +103,20 @@ setMethod('cutoffSignificant', signature('Bum'),
                    empiricalbayes = .cutoffByEB(object, alpha))
           })
 
-setMethod('selectSignificant', signature('Bum'),
+setMethod('selectSignificant', signature(object='Bum'),
           function(object, alpha, by='FDR', ...) {
             object@pvals < cutoffSignificant(object, by=by, alpha=alpha)
           })
 
-setMethod('countSignificant', signature('Bum'),
+setMethod('countSignificant', signature(object='Bum'),
           function(object, alpha, by='FDR', ...) {
             sum(selectSignificant(object, by=by, alpha=alpha), na.rm=TRUE)
           })
 
 # plot and print routines
 
-setMethod('hist', 'Bum', function(x, res=100, xlab='P Values', main='', ...) {
+setMethod('hist', signature(x='Bum'),
+          function(x, res=100, xlab='P Values', main='', ...) {
   hist(x@pvals, nclass=100, probability=TRUE, xlab=xlab, main=main, ...)
   xvals <- (0:res)/res
   fit <- x@lhat + (1-x@lhat)*dbeta(xvals, x@ahat, 1)
@@ -129,7 +130,8 @@ setClass('BumSummary',
                         estimates='data.frame',
                         Fhat='numeric'))
 
-setMethod('summary', 'Bum', function(object, tau=0.01, ...) {
+setMethod('summary', signature(object='Bum'),
+          function(object, tau=0.01, ...) {
   Fhat <- object@lhat*tau + (1-object@lhat)*tau^object@ahat
   PA <- Fhat - object@pihat*tau
   PB <- 1 - Fhat - (1-tau)*object@pihat
@@ -139,7 +141,8 @@ setMethod('summary', 'Bum', function(object, tau=0.01, ...) {
   new('BumSummary', bum=object, estimates = estimates, Fhat=Fhat)
 })
 
-setMethod('show', 'BumSummary', function(object) {
+setMethod('show', signature(object='BumSummary'),
+          function(object) {
   cat('\nBeta-Uniform Mixture Model\n\n')
   cat(paste('MLE Estimates: ahat =', format(object@bum@ahat, digits=5),
             ', lhat =', format(object@bum@lhat, digits=5), '\n'))
@@ -152,7 +155,8 @@ likelihoodBum <- function(object) {
   object@lhat + (1-object@lhat)*object@ahat*object@pvals^(object@ahat-1)
 }
 
-setMethod('image', 'Bum', function(x, ...) {
+setMethod('image', signature(x='Bum'),
+         function(x, ...) {
   opar <- par(mfrow=c(2,2))
   hist(x, res=200, main='Beta-Uniform Mixture')
   alpha <- (1:25)/100

@@ -24,7 +24,8 @@ MultiTtestPaired <- function (data, classes, pairing)
       groups = levels(classes), call = call)
 }
 
-setMethod('summary', 'MultiTtestPaired', function(object,...) {
+setMethod('summary', signature(object='MultiTtestPaired'),
+          function(object, ...) {
   cat('Results of a paired t-test\n')
   callNextMethod(...)
 })
@@ -56,7 +57,8 @@ MultiTtestUnequal <- function (data, classes)
       groups = levels(classes), call = call, df=df)
 }
 
-setMethod('summary', 'MultiTtestUnequal', function(object,...) {
+setMethod('summary', signature(object='MultiTtestUnequal'),
+          function(object, ...) {
   cat('Results of an unequal variance t-test\n')
   callNextMethod(...)
 })

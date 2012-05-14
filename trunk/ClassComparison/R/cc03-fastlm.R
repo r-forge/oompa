@@ -47,7 +47,8 @@ MultiLinearModel <- function(form, clindata, arraydata) {
       p.values=pfval)
 }
 
-setMethod('summary', 'MultiLinearModel', function(object,...) {
+setMethod('summary', signature(object='MultiLinearModel'),
+          function(object,...) {
   cat(paste('Row-by-row linear models with',
             length(object@F.statistics), 'rows\n\n'))
   cat(paste('Call:', as.character(list(object@call)),'\n\nF-statistics:\n'))
@@ -56,19 +57,21 @@ setMethod('summary', 'MultiLinearModel', function(object,...) {
   summary(object@p.values)
 })
 
-setMethod('hist', 'MultiLinearModel', function(x, xlab='F Statistics',
-                                         main=NULL, ...) {
+setMethod('hist', signature(x='MultiLinearModel'),
+          function(x, xlab='F Statistics', main=NULL, ...) {
   hist(x@F.statistics, xlab=xlab, main=main, ...)
 })
 
-setMethod('plot', signature('MultiLinearModel', 'missing'), function(x, y,
-                  ylab='F Statistics', ...) {
+setMethod('plot', signature('MultiLinearModel', 'missing'),
+          function(x, y, ylab='F Statistics', ...) {
   plot(x@F.statistics, ylab=ylab, ...)
 })
 
-setMethod('plot', signature('MultiLinearModel', 'ANY'), function(x, y,
-                  xlab='F Statistics',
-                  ylab=deparse(substitute(y)), ...) {
+setMethod('plot', signature('MultiLinearModel', 'ANY'),
+          function(x, y,
+                   xlab='F Statistics',
+                   ylab=deparse(substitute(y)),
+                   ...) {
   plot(x@F.statistics, y, xlab=xlab, ylab=ylab, ...)
 })
 
@@ -81,7 +84,8 @@ multiTukey <- function(object, alpha) {
 
 ##########################################################
 # this has been verified, all too painfully
-setMethod('anova', 'MultiLinearModel', function(object, ob2, ...) {
+setMethod('anova', signature(object='MultiLinearModel'),
+          function(object, ob2, ...) {
   df1 <- object@df[2]+1
   df2 <- ob2@df[2]+1
   if (df1 < df2) {

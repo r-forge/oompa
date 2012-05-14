@@ -48,9 +48,12 @@ Sam <- function(data, classes, nPerm=100, verbose=TRUE) {
       expected=motors, sim.data=motorway, observed=base.t)
 }
 
-setMethod('plot', signature('Sam', 'missing'), function(x, y, tracks=NULL,
-                  xlab='Expected T Statistics (Empirical)',
-                  ylab='Observed T Statistics', ...) {
+setMethod('plot', signature(x='Sam', y='missing'),
+          function(x, y,
+                   tracks=NULL,
+                   xlab='Expected T Statistics (Empirical)',
+                   ylab='Observed T Statistics',
+                   ...) {
   plot(x@expected, x@observed, xlab=xlab, ylab=ylab, ...)
   abline(0,1, col=COLOR.CENTRAL.LINE)
   if (!is.null(tracks)) {
@@ -68,14 +71,16 @@ setClass('SamSummary',
                         significant.calls='logical',
                         average.false.count='numeric'))
 
-setMethod('show', 'SamSummary', function(object) {
+setMethod('show', signature(object='SamSummary'),
+          function(object) {
   cat(paste('Using a cutoff of', format(object@cutoff, digits=3), ', we '))
   cat(paste('called', sum(object@significant.calls), 'genes significant '))
   cat(paste('with expected FDR =', format(object@fdr, digits=3),
             ' (', object@average.false.count,')\n'))
 })
 
-setMethod('summary', 'Sam', function(object, cutoff=1, ...) {
+setMethod('summary', signature(object='Sam'),
+          function(object, cutoff=1, ...) {
   positive <- object@observed - object@expected > cutoff
   negative <- object@observed - object@expected < -cutoff
   hi.limit <- min(object@observed[positive])
@@ -101,13 +106,13 @@ setMethod('summary', 'Sam', function(object, cutoff=1, ...) {
       average.false.count=average.false.count)
 })
 
-setMethod('selectSignificant', signature('Sam'),
+setMethod('selectSignificant', signature(object='Sam'),
           function(object, cutoff=1, ...) {
             a <- summary(object, cutoff)
             a@significant.calls
           })
 
-setMethod('countSignificant', signature('Sam'),
+setMethod('countSignificant', signature(object='Sam'),
           function(object, cutoff=1, ...) {
             sum(selectSignificant(object, cutoff=cutoff))
           })

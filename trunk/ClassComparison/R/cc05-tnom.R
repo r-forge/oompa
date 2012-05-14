@@ -50,7 +50,8 @@ setClass('TNoMSummary',
          representation(TNoM='TNoM',
                         counts='numeric'))
 
-setMethod('show', 'TNoMSummary', function(object) {
+setMethod('show', signature(object='TNoMSummary'),
+          function(object) {
   cat(paste('TNoM object with', object@TNoM@nRow,
             'rows and', object@TNoM@nCol, 'columns\n'))
   cat(paste('Call:', as.character(list(object@TNoM@call)),'\n\n'))
@@ -60,7 +61,8 @@ setMethod('show', 'TNoMSummary', function(object) {
   print(counts)
 })
 
-setMethod('summary', 'TNoM', function(object, ...) {
+setMethod('summary', signature(object='TNoM'),
+          function(object, ...) {
   temp <- hist(object@tnomData, breaks=(-1:((object@nCol+1)/2)+0.5), plot=FALSE)
   new('TNoMSummary', TNoM=object, counts=temp$counts)
 })
@@ -88,7 +90,8 @@ setClass('fullTNoM',
                         scr='numeric',
                         name='character'))
 
-setMethod('update', 'TNoM', function (object, nPerm=10, verbose=FALSE, ...)  {
+setMethod('update', signature(object='TNoM'),
+          function(object, nPerm=10, verbose=FALSE, ...)  {
   temp <- matrix(0, nPerm, length(summary(object)@counts))
   cat('Simulation number: ')
   for (i in 1:nPerm) {
@@ -110,7 +113,8 @@ setMethod('update', 'TNoM', function (object, nPerm=10, verbose=FALSE, ...)  {
       name=deparse(substitute(object)))
 })
 
-setMethod('plot', signature('fullTNoM', 'missing'), function(x, y, ...) {
+setMethod('plot', signature('fullTNoM', 'missing'),
+          function(x, y, ...) {
   plot(x@dex, x@fakir, type='n',
        xlab='Maximum Number of Misclassifications', ylab='Number of Genes')
   points(x@dex, x@fakir, type='b', col=COLOR.EXPECTED, pch=1)
@@ -125,19 +129,20 @@ setMethod('plot', signature('fullTNoM', 'missing'), function(x, y, ...) {
   invisible(x)
 })
 
-setMethod('hist', 'fullTNoM', function(x, ...) {
+setMethod('hist', signature(x='fullTNoM'),
+          function(x, ...) {
   plot(x@dex, x@obs-x@fakir, type='h',
        xlab='Excess Number of Misclassifications', ylab='Number of Genes')
   title(paste('TNoM', x@name))
   invisible(x)
 })
 
-setMethod('selectSignificant', signature('TNoM'),
+setMethod('selectSignificant', signature(object='TNoM'),
           function(object, cutoff, ...) {
             object@tnomData < cutoff
           })
 
-setMethod('countSignificant', signature('TNoM'),
+setMethod('countSignificant', signature(object='TNoM'),
           function(object, cutoff, ...) {
             sum(selectSignificant(object, cutoff))
           })

@@ -28,7 +28,8 @@ MultiTtest <- function(data, classes, na.rm=TRUE) {
       call=call)
 }
 
-setMethod('summary', 'MultiTtest', function(object,...) {
+setMethod('summary', signature(object='MultiTtest'),
+          function(object, ...) {
   cat(paste('Row-by-row two-sample t-tests with',
             length(object@t.statistics), 'rows\n'))
   cat(paste('Positive sign indicates an increase in class:',
@@ -39,25 +40,27 @@ setMethod('summary', 'MultiTtest', function(object,...) {
   summary(object@p.values)
 })
 
-setMethod('hist', 'MultiTtest', function(x, xlab='T Statistics',
-                                         main=NULL, ...) {
+setMethod('hist', signature(x='MultiTtest'),
+          function(x, xlab='T Statistics', main=NULL, ...) {
   hist(x@t.statistics, xlab=xlab, main=main, ...)
 })
 
-setMethod('plot', signature('MultiTtest', 'missing'), function(x, y,
-                  ylab='T Statistics', ...) {
+setMethod('plot', signature('MultiTtest', 'missing'),
+          function(x, y, ylab='T Statistics', ...) {
   plot(x@t.statistics, ylab=ylab, ...)
 })
 
-setMethod('plot', signature('MultiTtest', 'ANY'), function(x, y,
-                  xlab='T Statistics',
-                  ylab=deparse(substitute(y)), ...) {
+setMethod('plot', signature('MultiTtest', 'ANY'),
+          function(x, y,
+                   xlab='T Statistics',
+                   ylab=deparse(substitute(y)), ...) {
   plot(x@t.statistics, y, xlab=xlab, ylab=ylab, ...)
 })
 
-setMethod("as.data.frame", "MultiTtest", function (x, row.names = NULL,
-                                                   optional = FALSE, ...) {
+setMethod("as.data.frame", signature(x="MultiTtest"),
+          function (x, row.names=NULL, optional=FALSE, ...) {
   data.frame(Tstats=x@t.statistics,
              Pvalues=x@p.values,
              DF=x@df)
 })
+

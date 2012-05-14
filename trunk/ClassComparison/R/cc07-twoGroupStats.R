@@ -40,8 +40,8 @@ TwoGroupStats <- function(data, classes, name='comparison', name1='A', name2='B'
       pooledVar=pooledVar, n1=n1, n2=n2, name1=name1, name2=name2)
 }
 
-setMethod('as.data.frame',
-          'TwoGroupStats', function (x, row.names = NULL, optional = FALSE)  {
+setMethod('as.data.frame', signature(x='TwoGroupStats'),
+          function(x, row.names=NULL, optional=FALSE) {
             data.frame(mean1=x@mean1,
                        mean2=x@mean2,
                        overallMean=x@overallMean,
@@ -52,12 +52,14 @@ setMethod('as.data.frame',
           })
 
 
-setMethod('summary', 'TwoGroupStats', function(object, ...) {
+setMethod('summary', signature(object='TwoGroupStats'),
+          function(object, ...) {
 	cat('first group: ', object@n1, 'second group:', object@n2, '\n')
 	summary(as.data.frame(object), ...)
 })
 
-setMethod('print', 'TwoGroupStats', function(x, ...) {
+setMethod('print', signature(x='TwoGroupStats'),
+          function(x, ...) {
 	cat('first group: ', x@n1, 'second group:', x@n2, '\n')
 	summary(as.data.frame(x), ...)
 })
@@ -106,8 +108,7 @@ setMethod('print', 'TwoGroupStats', function(x, ...) {
 }
 
 
-setMethod('plot',
-          signature('TwoGroupStats', 'missing'),
+setMethod('plot', signature('TwoGroupStats', 'missing'),
           function(x, main=x@name, useLog=FALSE, ...) {
 # plot 1:
             plot(x@mean1, sqrt(x@var1), xlab='mean', ylab='std dev', main=x@name1)

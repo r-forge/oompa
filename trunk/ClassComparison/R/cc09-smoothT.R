@@ -39,8 +39,8 @@ SmoothTtest <- function(stats, aname='Group One', bname='Group Two',
       fit=fit, dif=dif, avg=avg, aname=aname, bname=bname, name=name, stats=stats)
 }
 
-setMethod('as.data.frame',
-          'SmoothTtest', function(x, row.names = NULL, optional = FALSE) {
+setMethod('as.data.frame', signature(x='SmoothTtest'),
+          function(x, row.names=NULL, optional=FALSE) {
             val <- data.frame(x@avg, x@dif, x@smooth.t.statistics,
                               x@one@score, x@two@score)
             dimnames(val)[[2]] <- c('AverageLogIntensity', 'LogRatio',
@@ -48,7 +48,8 @@ setMethod('as.data.frame',
             val
           })
 
-setMethod('summary', 'SmoothTtest', function(object, ...) {
+setMethod('summary', signature(object='SmoothTtest'),
+          function(object, ...) {
   cat(paste('Smooth T test of', object@aname, 'versus', object@bname, '\n\n', sep=' '))
   summary(as.data.frame(object))
 })
@@ -66,10 +67,17 @@ setMethod('summary', 'SmoothTtest', function(object, ...) {
        ColorCoding(good.guy, COLOR.SIGNIFICANT, 15))
 }
 
-setMethod('plot',
-          signature('SmoothTtest', 'missing'),
-          function(x, folddiff=3, goodflag = 2, badch=4, ccl=0,
-                   name=x@name, pch='.', xlab='log intensity', ylab='log ratio', ...) {
+setMethod('plot', signature('SmoothTtest', 'missing'),
+          function(x,
+                   folddiff=3,
+                   goodflag=2,
+                   badch=4,
+                   ccl=0,
+                   name=x@name,
+                   pch='.',
+                   xlab='log intensity',
+                   ylab='log ratio',
+                   ...) {
             r <- x@stats@mean1
             R <- x@stats@mean2
             xx <- x@fit$x
