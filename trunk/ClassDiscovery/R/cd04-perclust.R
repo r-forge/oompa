@@ -33,7 +33,8 @@ PerturbationClusterTest <- function(data, FUN, nTimes=100, noise=1, verbose=TRUE
       f=FUN, nTimes=nTimes, noise=noise)
 }
 
-setMethod('summary', 'PerturbationClusterTest', function(object, ...) {
+setMethod('summary', signature(object='PerturbationClusterTest'),
+          function(object, ...) {
   cat(paste('Number of perturbation samples: ', object@nTimes, '.\n', sep=''))
   cat(paste('Noise level: ', object@noise, '.\n', sep=''))
   callNextMethod()

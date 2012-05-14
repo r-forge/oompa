@@ -44,7 +44,8 @@ Mosaic <- function(data, sampleMetric='pearson', sampleLinkage = 'average',
              call=call, name=name)
 }
 
-setMethod('summary', 'Mosaic', function(object, ...) {
+setMethod('summary', signature(object='Mosaic'),
+          function(object, ...) {
   cat(paste(object@name, ', an object of the ', class(object), ' class.\n\n', sep=''))
   cat(paste('Call:\n\t', as.character(list(object@call)), sep=''))
   cat(paste('\n\nSample dendrogram constructed with "', object@sampleLinkage,
@@ -53,10 +54,17 @@ setMethod('summary', 'Mosaic', function(object, ...) {
             '" linkage and "', object@geneMetric, '" distance metric.\n', sep=''))
 })
 
-setMethod('plot', signature('Mosaic', 'missing'), function(x, main=x@name,
-                        center=FALSE, scale=c('none', 'row', 'column'), limits=NULL,
-                        sampleColors=NULL, sampleClasses=NULL,
-                        geneColors=NULL, geneClasses=NULL, ...) {
+setMethod('plot', signature('Mosaic', 'missing'),
+          function(x,
+                   main=x@name,
+                   center=FALSE,
+                   scale=c('none', 'row', 'column'),
+                   limits=NULL,
+                   sampleColors=NULL,
+                   sampleClasses=NULL,
+                   geneColors=NULL,
+                   geneClasses=NULL,
+                   ...) {
   data <- x@data
   if(center == TRUE) {
     geneMean <- apply(data, 1, mean)
@@ -105,7 +113,8 @@ setMethod('plot', signature('Mosaic', 'missing'), function(x, main=x@name,
   invisible(arglist)
 })
 
-setMethod('pltree', 'Mosaic', function(x, colors, labels, ...) {
+setMethod('pltree', signature(x='Mosaic'),
+          function(x, colors, labels, ...) {
   if (missing(labels)) {
     labels <- dimnames(x@data)[[2]]
     if (is.null(labels)) {

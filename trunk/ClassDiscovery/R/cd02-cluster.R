@@ -14,19 +14,22 @@ setClass('ClusterTest',
   joint
 }
 
-setMethod('summary', 'ClusterTest', function(object, ...) {
+setMethod('summary', signature(object='ClusterTest'),
+          function(object, ...) {
   cat(paste('A', as.character(class(object)), 'object.\n\n'))
   cat(paste('Call:\n\t', as.character(list(object@call))),'\n\n')
   cat('Agreement levels:\n')
   summary(.getUpperTriValues(object@result))
 })
 
-setMethod('hist', 'ClusterTest', function(x, ...) {
+setMethod('hist', signature(x='ClusterTest'),
+          function(x, ...) {
   agreement <- .getUpperTriValues(x@result)
   hist(agreement, ...)
 })
 
-setMethod('image', 'ClusterTest', function(x, dendrogram, ...) {
+setMethod('image', signature(x='ClusterTest'),
+          function(x, dendrogram, ...) {
   if(missing(dendrogram)) {
     h <- heatmap(x@result, symm=TRUE, revC=FALSE, scale='none', ...)
   } else {

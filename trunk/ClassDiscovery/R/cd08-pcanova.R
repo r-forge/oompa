@@ -20,7 +20,8 @@ setClass('PCanova',
                         colors  = 'character',
                         call='call'))
 
-setMethod('summary', 'PCanova', function(object, ...) {
+setMethod('summary', signature(object='PCanova'),
+          function(object, ...) {
   cat(paste('An object of the', class(object),  'class with', object@n, 'groups.\n'))
   cat(paste('Call:\n\t', as.character(list(object@call)), '\n', sep=''))
 })
@@ -96,7 +97,8 @@ PCanova <- function(data, classes, labels, colors, usecor=TRUE) {
       labels = labels, classes = classes, colors = colors, call=call)
 }
 
-setMethod('plot', signature('PCanova', 'missing'),  function(x, tag='', mscale = 1, cex=1, ...) {
+setMethod('plot', signature('PCanova', 'missing'),
+          function(x, tag='', mscale=1, cex=1, ...) {
   opar <- par(mfrow=c(2,2))
   on.exit(par(opar))
   plot(x@orig.pca[,1], x@orig.pca[,2], pch=x@labels, col=x@colors,
@@ -127,7 +129,8 @@ setMethod('plot', signature('PCanova', 'missing'),  function(x, tag='', mscale =
   invisible(x)
 })
 
-setMethod('pltree', 'PCanova', function(x, ...) {
+setMethod('pltree', signature(x='PCanova'),
+          function(x, ...) {
   opar <- par(mfrow=c(3,1))
   on.exit(par(opar))
   plotColoredClusters(x@xc, labs=x@labels, cols=x@colors, ...)

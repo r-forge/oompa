@@ -79,7 +79,8 @@ BootstrapClusterTest <- function(data, FUN, subsetSize, nTimes=100, verbose=TRUE
       f=FUN, nTimes=nTimes, subsetSize=subsetSize)
 }
 
-setMethod('summary', 'BootstrapClusterTest', function(object, ...) {
+setMethod('summary', signature(object='BootstrapClusterTest'),
+          function(object, ...) {
   cat(paste('Number of bootstrap samples: ', object@nTimes, '.\n', sep=''))
   cat(paste('Number of rows sampled: ', object@subsetSize, '.\n', sep=''))
   callNextMethod()
