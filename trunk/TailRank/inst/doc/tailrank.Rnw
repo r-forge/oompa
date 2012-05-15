@@ -25,7 +25,7 @@ large biological data sets, such as those arising from mRNA expression
 microarrays or mass spectrometry proteomics.
 
 This vignette documents the tail rank test, which provides an
-alternative method for dicovering poitential biomarkers in large data
+alternative method for discovering potential biomarkers in large data
 sets.  The idea is that one starts with a target specificity for a
 gene as a univariate biomarker, and uses the ``normal'' or
 ``baseline'' samples to estimate a threshold that yields that
@@ -99,7 +99,7 @@ summary(trt2)
 After performing an analysis that identifies a gene list like this, it
 is, of course, natural to want to know which genes were selected.  The
 \Rfunction{as.logical} method converts the results of the tail rank
-test into a logival vector that selects these significant genes.
+test into a logical vector that selects these significant genes.
 Using this method, we can verify that the $25$ genes selected by the
 more stringent criteria are a subset of the $49$ genes selected using
 the weaker criteria.
