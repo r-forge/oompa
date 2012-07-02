@@ -21,8 +21,7 @@ GenePCA <- function(geneData)
   new('GenePCA', scores=scores, variances=variances, components=components)
 }
 
-setMethod('plot', signature('GenePCA', 'missing'),
-          function(x, splitter=0) {
+setMethod('plot', signature('GenePCA', 'missing'), function(x, splitter=0) {
   plot(x@scores[,1], x@scores[,2], xlab='Comp1', ylab='Comp2')
   if (length(splitter)>1) {
     points(x@scores[splitter,1], x@scores[splitter,2], col='red', pch=16)
@@ -78,15 +77,13 @@ SamplePCA <- function(data, splitter = 0, usecor = FALSE, center = TRUE)
       splitter=splitter, usecor=usecor, shift=geneMean, scale=geneSD, call=call)
 }
 
-setMethod('summary', signature(object='SamplePCA'),
-          function(object, ...) {
+setMethod('summary', 'SamplePCA', function(object, ...) {
   cat('A SamplePCA object.\nCall:\n\t')
   cat(as.character(list(object@call)))
   cat('\n')
 })
 
-setMethod('predict', signature(object='SamplePCA'),
-          function(object, newdata=NULL, ...) {
+setMethod('predict', 'SamplePCA', function(object, newdata=NULL, ...) {
   if(is.null(newdata)) {
     value <- object@scores
   } else {
@@ -97,13 +94,8 @@ setMethod('predict', signature(object='SamplePCA'),
   value
 })
 
-setMethod('plot', signature('SamplePCA', 'missing'),
-          function(x,
-                   splitter=x@splitter,
-                   col,
-                   main='',
-                   which=1:2,
-                   ...) {
+setMethod('plot', signature('SamplePCA','missing'), function(x,
+                  splitter=x@splitter, col, main='', which=1:2, ...) {
   .my.plot <- function(z, colors, i, j, ...) {
     plot(ColorCodedPair(z[,i], z[,j], colors),
          xlab=paste('Component', i),
@@ -168,9 +160,10 @@ setMethod('plot', signature('SamplePCA', 'missing'),
   invisible(ccl)
 })
 
-setMethod('screeplot', signature(x='SamplePCA'),
-          function(x, ...) {
-  barplot(x@variances/sum(x@variances), ...)
+setMethod('screeplot', 'SamplePCA', function(x, N=NULL, ...) {
+  if(is.null(N)) N <- length(x@variances)
+  N <- min(N, length(x@variances))
+  barplot(x@variances[1:N]/sum(x@variances), ...)
 })
 
 mahalanobisQC <- function(spca, N) {
