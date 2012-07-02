@@ -1,3 +1,5 @@
+# Copyright (C) Kevin R. Coombes, 2007-2012
+
 #########################################################################
 ## CLASS: two.groups
 ## Computes t-statistics using smoothed estimates of sd vs mean.

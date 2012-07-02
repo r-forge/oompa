@@ -1,3 +1,5 @@
+# Copyright (C) Kevin R. Coombes, 2007-2012
+
 ## paired t-tests, vectorized
 ## basic code for the paired t-test was contributed by Roland Bassett.
 

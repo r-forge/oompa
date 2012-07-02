@@ -1,3 +1,5 @@
+# Copyright (C) Kevin R. Coombes, 2007-2012
+
 TNoM <- function(data, classes, verbose=TRUE) {
   call <- match.call()
   if(is.logical(classes)) classes <- factor(classes)

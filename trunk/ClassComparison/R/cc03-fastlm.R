@@ -1,3 +1,5 @@
+# Copyright (C) Kevin R. Coombes, 2007-2012
+
 setClass('MultiLinearModel',
          representation(call='call',
                         model='formula',

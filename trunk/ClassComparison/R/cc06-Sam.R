@@ -1,3 +1,5 @@
+# Copyright (C) Kevin R. Coombes, 2007-2012
+
 # Sam
 #	significance analysis of microarrays (Tusher et al)
 
