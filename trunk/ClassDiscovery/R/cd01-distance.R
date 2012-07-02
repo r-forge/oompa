@@ -1,3 +1,5 @@
+# Copyright (C) Kevin R. Coombes, 2007-2012
+
 # adds additional (common microarray) metrics to 'dist'
 distanceMatrix <- function(dataset, metric, ...) {
   if(inherits(dataset, "ExpressionSet")) {

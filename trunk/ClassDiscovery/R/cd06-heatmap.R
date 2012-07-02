@@ -1,3 +1,5 @@
+# Copyright (C) Kevin R. Coombes, 2007-2012
+
 aspectHeatmap <- function (x, Rowv = NULL, Colv = if (symm) "Rowv" else NULL, 
     distfun = dist, hclustfun = hclust, reorderfun = function(d, 
         w) reorder(d, w), add.expr, symm = FALSE, revC = identical(Colv, 

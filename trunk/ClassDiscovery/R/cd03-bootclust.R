@@ -1,3 +1,5 @@
+# Copyright (C) Kevin R. Coombes, 2007-2012
+
 ################################################
 cutHclust <- function(data, k, method='average', metric = 'pearson') {
   tempCorr <- distanceMatrix(data, metric=metric)
