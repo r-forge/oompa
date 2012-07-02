@@ -1,3 +1,5 @@
+# Copyright (C) Kevin R. Coombes, 2007-2012
+
 ################################################################
 # COLOR.CODING		attributes: v, color, mark
 #

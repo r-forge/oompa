@@ -1,3 +1,5 @@
+# Copyright (C) Kevin R. Coombes, 2007-2012
+
 ##########################################################################
 # COMPLETECHANNEL		attributes: name, type, data
 #	name is a character string

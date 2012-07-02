@@ -1,3 +1,5 @@
+# Copyright (C) Kevin R. Coombes, 2007-2012
+
 # A "processor" represents a function that acts on the data of a
 # some object to process it in some way. The result is always
 # another related object, which should record some history about
