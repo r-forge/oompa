@@ -1,8 +1,8 @@
 
-R version 2.15.0 Patched (2012-05-01 r59304) -- "Easter Beagle"
+R version 2.15.1 (2012-06-22) -- "Roasted Marshmallows"
 Copyright (C) 2012 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
-Platform: x86_64-apple-darwin9.8.0/x86_64 (64-bit)
+Platform: x86_64-pc-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -19,26 +19,12 @@ Type 'q()' to quit R.
 > library(ClassComparison)
 Loading required package: splines
 Loading required package: Biobase
-Loading required package: BiocGenerics
-
-Attaching package: 'BiocGenerics'
-
-The following object(s) are masked from 'package:stats':
-
-    xtabs
-
-The following object(s) are masked from 'package:base':
-
-    Filter, Find, Map, Position, Reduce, anyDuplicated, cbind,
-    colnames, duplicated, eval, get, intersect, lapply, mapply, mget,
-    order, paste, pmax, pmax.int, pmin, pmin.int, rbind, rep.int,
-    rownames, sapply, setdiff, table, tapply, union, unique
 
 Welcome to Bioconductor
 
-    Vignettes contain introductory material; view with
-    'browseVignettes()'. To cite Bioconductor, see
-    'citation("Biobase")', and for packages 'citation("pkgname")'.
+  Vignettes contain introductory material. To view, type
+  'browseVignettes()'. To cite Bioconductor, see
+  'citation("Biobase")' and for packages 'citation("pkgname")'.
 
 Loading required package: oompaBase
 Loading required package: PreProcess
@@ -178,4 +164,4 @@ Smooth T test of Group One versus Group Two
 > 
 > proc.time()
    user  system elapsed 
-  7.039   0.124   7.195 
+   3.91    0.01    3.93 
