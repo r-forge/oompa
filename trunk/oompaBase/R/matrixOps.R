@@ -1,3 +1,5 @@
+# Copyright (C) Kevin R. Coombes, 2007-2012
+
 ############################
 # vectorized functions to compute row-wise mean and variance quickly
 matrixMean <- function(x, na.rm=FALSE) {
