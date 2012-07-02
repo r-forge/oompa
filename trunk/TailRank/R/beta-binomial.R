@@ -1,3 +1,5 @@
+# Copyright (C) Kevin R. Coombes, 2007-2012
+
 dbb <- function(x, N, u, v) {
   beta(x+u, N-x+v)/beta(u,v)*choose(N,x)
 }

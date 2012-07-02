@@ -1,3 +1,4 @@
+# Copyright (C) Kevin R. Coombes, 2007-2012
 
 # tail-rank-power.R
 # Copyright, Kevin R. Coombes, 2004.
