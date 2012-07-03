@@ -26,10 +26,10 @@ large biological data sets, such as those arising from mRNA expression
 microarrays or mass spectrometry proteomics.
 
 This vignette documents the base package, \Rpackage{oompaBase}.  A
-rcitical (but invisible to the user) feature of the
+critical (but invisible to the user) feature of the
 \Rpackage{oompaBase} package is that it defines a 
 \Robject{class union} allowing you to use ``numeric'' or ``NULL''
-objects in the design of an S4 class.  More intersting user-visibel
+objects in the design of an S4 class.  More interesting user-visible
 features include alternative color schemes and vectorized matrix
 operations to speed the computation of row-by-row mweans, variances,
 and t-tests. 
@@ -81,7 +81,7 @@ ng <- 10000
 ns <- 50
 dat <- matrix(rnorm(ng*ns, 0, rep(c(1, 2), each=25)), ncol=ns, byrow=TRUE)
 @ 
-Next, we shift the mean for te first $500$ ``genes'' (rows).
+Next, we shift the mean for the first $500$ ``genes'' (rows).
 <<dat>>=
 dat[1:500, 1:25] <- dat[1:500, 1:25] + 2
 @ 
@@ -97,7 +97,7 @@ a0 <- proc.time()
 myMean <- matrixMean(dat)
 used0 <- proc.time() - a0
 @ 
-For comparions purposes, we perfom the same computation using
+For comparison purposes, we perfom the same computation using
 \Rfunction{apply}.
 <<checkApply>>=
 a1 <- proc.time()
