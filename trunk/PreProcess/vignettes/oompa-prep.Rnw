@@ -1,0 +1,224 @@
+%\VignetteIndexEntry{OOMPA PreProcessing}
+%\VignetteKeywords{OOMPA, Preprocessing}
+%\VignetteDepends{oompaBase,PreProcess}
+%\VignettePackage{preProcess}
+\documentclass{article}
+
+\usepackage{hyperref}
+
+\newcommand{\Rfunction}[1]{{\texttt{#1}}}
+\newcommand{\Robject}[1]{{\texttt{#1}}}
+\newcommand{\Rclass}[1]{{\texttt{#1}}}
+\newcommand{\Rpackage}[1]{{\textit{#1}}}
+
+\title{PreProcessing with OOMPA}
+\author{Kevin R. Coombes}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Introduction}
+
+OOMPA is a suite of object-oriented tools for processing and analyzing
+large biological data sets, such as those arising from mRNA expression
+microarrays or mass spectrometry proteomics. This vignette documents a
+low-level package that supplies utilities and preprocessing routines
+for the higher-level pieces that come later.
+
+\section{Getting Started}
+
+As usual, you begin by loading the package
+
+<<load>>=
+library(PreProcess)
+@ 
+
+\subsection{Matrix manipulations}
+
+Now we can play with some of the simple utilities. The first two are
+matrix operations borrowed from MATLAB.  To see how they work, start
+with a small matrix:
+<<mat>>=
+mat <- matrix(1:12, 3, 4)
+mat
+@ 
+Now flip it left-to-right:
+<<lr>>=
+fliplr(mat)
+@ 
+Next, flip it up-to-down:
+<<ud>>=
+flipud(mat)
+@ 
+Mathematically, a left-right flip followed by an up-down flip is a
+$180^\circ$ rotation.
+<<rot>>=
+flipud(fliplr(mat))
+@ 
+
+\subsection{Plotting Ellipses}
+
+We also have a utility that adds ellipses to plots.
+Figure~\ref{fig:elli} contains some examples.
+\begin{figure}
+<<elli,fig=TRUE>>=
+x <- rnorm(1000, 1, 2)
+y <- rnorm(1000, 1, 2)
+plot(x,y)
+ellipse(1, 1, col="red", type='l', lwd=2)
+ellipse(3, 2, col="green", type='l', lwd=2)
+ellipse(3, 2, x0=2, y0=2, col="blue", type='l', lwd=2)
+@ 
+\caption{Independent normal noise with overlaid ellipses.}
+\label{fig:elli}
+\end{figure}
+
+\subsection{Concordance}
+
+We also include a few statistical utilities, the most interesting of
+which is probably a computation of the ``concordance correlation
+coefficient''.  As the name suggests, this quantity is similar to the
+Pearson correlation coefficient.  However, instead of measuring
+whether the points track any straight line, this quantity is
+specifically designed to test if the values track the identity line.
+For example, consider the following three variables:
+<<xyz>>=
+x <- rnorm(30)
+y <-  x + rnorm(30, sd=0.1)
+z <- 3 + 2*x + rnorm(30, sd=0.1)
+@ 
+By construction, all three are highly correlated.
+<<cord>>=
+cor(x, y)
+cor(x, z)
+cor(y, z)
+@ 
+But only $x$ and $y$ are concordant.
+<<cord>>=
+f.cord(x, y)
+f.cord(x, z)
+f.cord(y, z)
+@ 
+
+\subsection{Color Coded Graphs}
+
+We frequently find ourselves producing multiple figures with a common
+color scheme, where each color or each symbol is used to denote
+samples or genes with a particular property (in the simplest case,
+``cancer'' versus ``normal'').  Because we got tired of continually
+cutting and pasting \Rfunction{plot} and \Rfunction{points} commands
+and making sure the color legends stayed synchronized, we developed
+the \Rclass{ColorCoding} and \Rclass{ColorCodedPair} classes to
+encapsulate this notion.
+
+We can simulate some data as an example.
+<<xy>>=
+x <- matrix(rnorm(100*3), nrow=100, ncol=3)
+class1 <- class2<- rep(FALSE, 100)
+class1[sample(100, 20)] <- TRUE
+class2[sample(100, 20)] <- TRUE
+class3 <- !(class1 | class2)
+codes <- list(ColorCoding(class1, "red", 16),
+              ColorCoding(class2, "blue", 15),
+              ColorCoding(class3, "black", 17))
+@ 
+\begin{figure}
+<<pcc,fig=TRUE,width=6,height=8>>=
+par(mfrow=c(2,1))
+plot(ColorCodedPair(x[,1], x[,2], codes), xlab="Coord1", ylab="Coord2")
+plot(ColorCodedPair(x[,1], x[,3], codes), xlab="Coord1", ylab="Coord3")
+par(mfrow=c(1,1))
+@ 
+\caption{Color coded plots of three (simulated) related variables.}
+\label{fig:pcc}
+\end{figure}
+
+\section{Processing in Pipelines}
+
+We have been analyzing microarray data at M.D. Anderson for more than
+seven years now.  We have continually been looking for better ways to
+process the data, since we are still not convinced that any of the
+existing methods is truly ``best'' in all circumstances. As a result,
+we have often tinkered with our default processing method, changing
+it when we find something that we think works better.
+
+That approach is common in academic settings.  However, we also have a
+service role to perform, in that we have to analyze data for grant
+proposals and articles in preparation by the biologists and clinicians
+at M.D. Anderson.  In particular, we often find ourselves going back
+to analyses that were performed six months ago (possibly by a
+statistical analyst who has since moved on to another position) and
+trying to figure out exactly how we processed the data.
+
+That question is much, \textit{much}, \textbf{much} harder than it
+sounds.  The problem is that, just because there is an '.Rdata'
+workspace and an R script sitting in the directory that contains the
+raw data, there is no assurance that the objects in that workspace
+were actually processed using the code in that script.  The
+\Rpackage{Sweave} package goes a long way toward solving this problem,
+but only if one adds some additional discipline.  For example, some
+unknown commands may have been entered at the command line; multiple
+scripts may have been invoked, and even the code within the script may
+have been executed in some order other than the one that has been
+preserved.
+
+The approach we are working on for this problem involves objects that
+have a ``history'' slot so they remember what was done to them.  In
+order for this to work, however, we have to convert simple processing
+functions into full-fledged objects that can update the history slot
+in the right way.  We do this with \Rclass{Processor}s and
+\Rclass{Pipeline}s.
+
+To see how this might work, we start by simulating one
+\Rclass{Channel} of a microarray experiment:
+<<chan>>=
+nc <- 100
+nr <- 100
+v <- rexp(nc*nr, 1/1000)
+b <- rnorm(nc*nr, 80, 10)
+s <- sapply(v-b, max, 1)
+ct <- ChannelType('user', 'random', nc, nr,  'fake')
+subbed <- Channel(name='fraud', parent='', type=ct, vec=s)
+rm(ct, nc, nr, v, b, s)		# clean some stuff
+summary(subbed)
+@ 
+As you can see from the summary, this object remembers the function
+call that created it.
+
+The \Rpackage{PreProcess} package include an object called the
+\Robject{PIPELINE.STANDARD} that represents one simple, standard way
+to process microarray data. We can invoke it and see what happens:
+<<pipe>>=
+processed <- process(subbed, PIPELINE.STANDARD)
+summary(processed)
+@ 
+
+Now the summary tells us that this object was processed using the
+standard pipeline.  It also knows that this means that we started by
+performing global normalization, we then truncated below to remove any
+values below $0$, and we then transformed by computing the base two
+logarithm.
+
+Each \Rclass{Pipeline} is just a list of \Rclass{Processor}s that are
+applied in sequence, so we can mix-and-match simple pieces inside the
+\Rclass{Pipeline}.  The \Rclass{Processor}s that are defined inside
+the \Rpackage{PreProcess} package are
+\begin{itemize}
+\item \texttt{PROC.SUBTRACTOR}: subtract a global constant (default: 0).
+\item \texttt{PROC.THRESHOLD}:  truncate below (default: at 0).
+\item \texttt{PROC.LOG.TRANSFORM}: Compute logarithms (default base: 2)
+\item \texttt{PROC.GLOBAL.NORMALIZATION}: divide by a global constant
+  (default: $75^{\rm th}$ percentile).
+\item \texttt{PROC.MEDIAN.EXPRESSED.NORMALIZATION}: divide by the
+  median of the expressed values, where expressed means that the
+  signal is greater than $0$.
+\item \texttt{PROC.SUBSET.NORMALIZATION}: divide by the median of a
+  specified subset of spots (default: all).
+\item \texttt{PROC.SUBSET.MEAN.NORMALIZATION}: divide by the mean of
+  a specified subset of spots (default: all).
+\end{itemize}
+
+
+\end{document}
