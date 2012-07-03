@@ -8,8 +8,8 @@ v <- rexp(nc*nr, 1/1000)	# "true" signal intensity (vol)
 b <- rnorm(nc*nr, 80, 10)	# background noise
 s <- sapply(v-b, max, 1)	# corrected signal instensity (svol)
 ct <- ChannelType('user', 'random', nc, nr,  'fake')
-raw <- Channel(name='fraud', type=ct, parent='', x=v)
-subbed <- Channel(name='fraud', parent='', type=ct, x=s)
+raw <- Channel(name='fraud', type=ct, parent='', vec=v)
+subbed <- Channel(name='fraud', parent='', type=ct, vec=s)
 rm(nc, nr, v, b, s)		# clean some stuff
 
 summary(subbed)
