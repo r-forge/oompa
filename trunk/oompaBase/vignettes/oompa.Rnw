@@ -1,0 +1,156 @@
+%\VignetteIndexEntry{OOMPA}
+%\VignetteKeywords{OOMPA}
+%\VignetteDepends{oompaBase}
+%\VignettePackage{oompaBase}
+\documentclass{article}
+
+\usepackage{hyperref}
+\usepackage{Sweave}
+
+\newcommand{\Rfunction}[1]{{\texttt{#1}}}
+\newcommand{\Robject}[1]{{\texttt{#1}}}
+\newcommand{\Rpackage}[1]{{\textit{#1}}}
+
+\title{Object Oriented Microarray and Proteomics Analysis (OOMPA)}
+\author{Kevin R. Coombes}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Introduction}
+
+OOMPA is a suite of object-oriented tools for processing and analyzing
+large biological data sets, such as those arising from mRNA expression
+microarrays or mass spectrometry proteomics.
+
+This vignette documents the base package, \Rpackage{oompaBase}.  A
+rcitical (but invisible to the user) feature of the
+\Rpackage{oompaBase} package is that it defines a 
+\Robject{class union} allowing you to use ``numeric'' or ``NULL''
+objects in the design of an S4 class.  More intersting user-visibel
+features include alternative color schemes and vectorized matrix
+operations to speed the computation of row-by-row mweans, variances,
+and t-tests. 
+
+\section{Getting Started}
+
+You invoke the package in the usual way:
+<<invoke>>=
+library(oompaBase)
+@ 
+
+\section{Color Schemes}
+
+To illustrate the various color schemes, we first create a structured
+matrix: 
+<<data>>=
+mat <- matrix(1:1024, ncol=1)
+@ 
+The following code is used to generate Figure~\ref{colsch}.
+<<figmaker,eval=FALSE>>=
+# windows(width=6,height=8)
+opar <- par(mfrow=c(5, 1), mai=c(0.3, 0.5, 0.2, 0.2))
+image(mat, col=redgreen(64), main='redgreen')
+image(mat, col=jetColors(128), main='jetColors')
+image(mat, col=blueyellow(32), main='blueyellow')
+image(mat, col=redscale(64), main='redscale')
+image(mat, col=bluescale(64), main='bluescale')
+par(opar)
+@ 
+
+\begin{figure}
+<<fig=TRUE,echo=FALSE,width=6,height=8>>=
+<<figmaker>>
+@ 
+\caption{Five color schemes.}
+\label{colsch}
+\end{figure}
+
+\section{Row-by-row Matrix Operations}
+
+We now want to illustrate the ``matrix operations'' that allow for
+rapid computation of row-by-row means, variances, and t-tests.
+
+We start by creating a slightly more interesting matrix full of random
+data.  First, we make the variance larger in the second half (by
+column) of the data than in the first half.
+<<dat>>=
+ng <- 10000
+ns <- 50
+dat <- matrix(rnorm(ng*ns, 0, rep(c(1, 2), each=25)), ncol=ns, byrow=TRUE)
+@ 
+Next, we shift the mean for te first $500$ ``genes'' (rows).
+<<dat>>=
+dat[1:500, 1:25] <- dat[1:500, 1:25] + 2
+@ 
+In order to compute t-tests, we also assign arbitrary labels
+separating the ``sample columns'' into two groups.
+<<clas>>=
+clas <- factor(rep(c('Good', 'Bad'), each=25))
+@ 
+
+Here we compute the row-by-row means.
+<<mm>>=
+a0 <- proc.time()
+myMean <- matrixMean(dat)
+used0 <- proc.time() - a0
+@ 
+For comparions purposes, we perfom the same computation using
+\Rfunction{apply}.
+<<checkApply>>=
+a1 <- proc.time()
+mm <- apply(dat, 1, mean)
+used1 <- proc.time() - a1
+@ 
+The results are the same, to within round-off error.
+<<nodiff>>=
+summary(as.vector(myMean-mm))
+@ 
+There is a measurable (although not really user-perceptible)
+difference in the time for the two methods.
+<<times>>=
+used0
+used1
+@ 
+
+Here we compute the variances using two different methods.
+<<varns>>=
+a0 <- proc.time()
+myVar  <- matrixVar(dat, myMean)
+a1 <- proc.time()
+vv <- apply(dat, 1, var)
+a2 <- proc.time()
+@ 
+Again, the values are the same:
+<<nodiffv>>=
+summary(as.vector(myVar - vv))
+@ 
+
+However, the time savings is substantially larger.
+<<timers>>=
+a1 - a0
+a2 - a1
+@ 
+
+Not surprisingly, there is an even bigger time savings when computing
+(equal variance) t-statistics.
+<<tstats>>=
+t0 <- proc.time()
+myT <- matrixT(dat, clas)
+t1 <- proc.time()
+tt <- sapply(1:nrow(dat), function(i) {
+  t.test(dat[i,clas=="Bad"], dat[i, clas=="Good"], var.equal=T)$statistic
+})
+t2 <- proc.time()
+@ 
+<<>>=
+summary(as.vector(tt - myT))
+@ 
+<<>>=
+t1 - t0
+t2 - t1
+@ 
+
+\end{document}
