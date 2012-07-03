@@ -1,0 +1,108 @@
+
+R version 2.15.1 (2012-06-22) -- "Roasted Marshmallows"
+Copyright (C) 2012 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: x86_64-pc-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> # complete.channel-test.ssc
+> library(PreProcess)
+Loading required package: oompaBase
+> 
+> # simulate a complete channel object
+> 
+> v <- rexp(10000, 1/1000)
+> b <- rnorm(10000, 60, 6)
+> s <- sapply(v-b, function(x) {max(0, x)})
+> ct <- ChannelType('user', 'random', 100, 100, 'fake')
+> x <- CompleteChannel(name='fraud', type=ct,
++                       data=data.frame(vol=v, bkgd=b, svol=s))
+> rm(v, b, s, ct)
+> 
+> summary(x)
+Microarray type: user random 
+Labeled with: fake 
+[1] "fraud"
+      vol                bkgd            svol       
+ Min.   :   0.155   Min.   :35.94   Min.   :   0.0  
+ 1st Qu.: 279.255   1st Qu.:56.19   1st Qu.: 219.8  
+ Median : 686.024   Median :60.21   Median : 625.5  
+ Mean   : 991.823   Mean   :60.12   Mean   : 933.5  
+ 3rd Qu.:1387.748   3rd Qu.:64.08   3rd Qu.:1328.7  
+ Max.   :8595.929   Max.   :80.78   Max.   :8534.7  
+> 
+> opar <- par(mfrow=c(2,3))
+> plot(x)
+> plot(x, main='Log Scale', useLog=TRUE)
+> par(opar)
+> 
+> opar <- par(mfrow=c(2,1))
+> image(x)
+> par(opar)
+> 
+> b <- process(x, PROC.NEG.CORRECTED.SIGNAL)
+> summary(b)
+background-corrected signal fraud, a microarray channel object
+Parent object: x 
+Microarray type: user random 
+Labeled with: fake 
+Design size: 100 by 100 
+Design information object:  
+History:
+	 Foreground - Background (using object: PROC.NEG.CORRECTED.SIGNAL) with parameter = 0 
+
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ -69.92  219.80  625.50  931.70 1329.00 8535.00 
+> 
+> q <- process(b, PIPELINE.STANDARD)
+> summary(q)
+log normalized background-corrected signal fraud, a microarray channel object
+Parent object: x 
+Microarray type: user random 
+Labeled with: fake 
+Design size: 100 by 100 
+Design information object:  
+History:
+	 Foreground - Background (using object: PROC.NEG.CORRECTED.SIGNAL) with parameter = 0 
+	 Default channel processing (using pipeline: PIPELINE.STANDARD) 
+	 Global normalization (using object: proc) with parameter = 0 
+	 Truncated below (using object: proc) with parameter = 0 
+	 Log transformation (using object: proc) with parameter = 2 
+
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   -Inf       7       9    -Inf      10      13 
+> 
+> q <- process(x, PIPELINE.MDACC.DEFAULT)
+> summary(q)
+log normalized signal fraud, a microarray channel object
+Parent object: object 
+Microarray type: user random 
+Labeled with: fake 
+Design size: 100 by 100 
+Design information object:  
+History:
+	 Foreground intensity (using object: proc) with parameter = 0 
+	 Global normalization (using object: proc) with parameter = 0 
+	 Truncated below (using object: proc) with parameter = 25 
+	 Log transformation (using object: proc) with parameter = 2 
+
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  4.644   7.653   8.949   8.701   9.966  12.600 
+> 
+> # cleanup
+> rm(x, b, q, opar)
+> 
+> proc.time()
+   user  system elapsed 
+   0.39    0.04    0.46 

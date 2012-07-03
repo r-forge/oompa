@@ -1,0 +1,65 @@
+
+R version 2.15.1 (2012-06-22) -- "Roasted Marshmallows"
+Copyright (C) 2012 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: x86_64-pc-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> # colors-test.ssc
+> library(PreProcess)
+Loading required package: oompaBase
+> 
+> theta <- (0:360)*pi/180
+> x <- cos(theta)
+> y <- sin(theta)
+> xp <- x > 0
+> yp <- y > 0
+> colors <- list(ColorCoding(xp&yp, COLOR.BORING),
++                ColorCoding(xp&!yp, COLOR.TOP.TEN),
++                ColorCoding(!xp&yp, COLOR.BOTTOM.TEN),
++                ColorCoding(!xp&!yp, COLOR.CONFIDENCE.CURVE))
+> plot(ColorCodedPair(x, y, colors))
+> 
+> plot(ColorCodedPair(theta, x, colors))
+> 
+> plot(ColorCodedPair(theta, y, colors),
++      xlab='angle in radians', ylab='sine', main='colored sine')
+> 
+> fac <- factor(rep(c('left', 'right'), c(180, 181)))
+> colors <- colorCode(fac, c('blue', 'red'))
+> plot(ColorCodedPair(x, y, colors))
+> 
+> # cleanup
+> rm(x, y, xp, yp, theta, colors, fac)
+> 
+> colorList <- c(COLOR.BORING, COLOR.SIGNIFICANT,
++                COLOR.EXPECTED, COLOR.OBSERVED,
++                COLOR.PERMTEST, COLOR.FITTED,
++                COLOR.CENTRAL.LINE, COLOR.CONFIDENCE.CURVE,
++                COLOR.BAD.REPLICATE, COLOR.WORST.REPLICATE,
++                COLOR.FOLD.DIFFERENCE, COLOR.BAD.REPLICATE.RATIO,
++                COLOR.TOP.TEN, COLOR.BOTTOM.TEN,
++                COLOR.TOP.TEN.SOLO, COLOR.BOTTOM.TEN.SOLO
++                )
+> plot(c(1,4), c(1,4), type='n')
+> for (i in 1:4) {
++   for (j in 1:4) {
++     points(i,j, col=colorList[i + 4*(j-1)], pch=16, cex=4)
++   }
++ }
+> rm(colorList, i, j)
+> 
+> proc.time()
+   user  system elapsed 
+   0.26    0.03    0.31 

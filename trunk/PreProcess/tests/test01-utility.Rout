@@ -1,0 +1,78 @@
+
+R version 2.15.1 (2012-06-22) -- "Roasted Marshmallows"
+Copyright (C) 2012 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: x86_64-pc-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> # utility-test.ssc
+> library(PreProcess)
+Loading required package: oompaBase
+> 
+> # matrix reorganization
+> mat <- matrix(1:15, 5, 3)
+> mat
+     [,1] [,2] [,3]
+[1,]    1    6   11
+[2,]    2    7   12
+[3,]    3    8   13
+[4,]    4    9   14
+[5,]    5   10   15
+> flipud(mat)
+     [,1] [,2] [,3]
+[1,]    5   10   15
+[2,]    4    9   14
+[3,]    3    8   13
+[4,]    2    7   12
+[5,]    1    6   11
+> fliplr(mat)
+     [,1] [,2] [,3]
+[1,]   11    6    1
+[2,]   12    7    2
+[3,]   13    8    3
+[4,]   14    9    4
+[5,]   15   10    5
+> 
+> # concordance
+> x <- rnorm(1000, 1, 2)
+> y <- rnorm(1000, 1, 2)
+> f.above.thresh(x, 0)
+[1] 0.716
+> f.above.thresh(y, 0)
+[1] 0.708
+> f.cord(x, y)
+[1] -0.002546033
+> z <- scale(x)
+> f.cord(x, z)
+          [,1]
+[1,] 0.6606886
+> 
+> #plotting ellipses
+> plot(x,y)
+> ellipse(1, 1, type='l', lwd=2)
+> ellipse(3, 2, type='l', lwd=2, col='blue')
+> 
+> # other weird stuff
+> f.qq(x, main='Demo', col='blue')
+> f.qq(x, cut=3)
+> f.qt(x, df = 3)
+> f.qt(x, df = 40)
+> 
+> # cleanup utility test
+> rm(x, y, mat, z)
+> 
+> 
+> proc.time()
+   user  system elapsed 
+   0.26    0.03    0.34 
