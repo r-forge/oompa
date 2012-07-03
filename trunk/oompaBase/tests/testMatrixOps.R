@@ -1,6 +1,6 @@
 library(oompaBase)
 # a key point is to test the matrixPairedT code
-# we create a simnple example
+# we create a simple example
 set.seed(372284)
 nPairs <- 3
 nGenes <- 7
@@ -9,7 +9,7 @@ v <- factor(rep(c("A","B"), each=nPairs))
 pf <- rep(1:nPairs, 2)
 colnames(m) <- paste(as.character(v), pf, sep='')
 round(m, 2)
-# Now we run the pacakge code
+# Now we run the package code
 mpt <- matrixPairedT(m, v, pf)
 # We also loop over the standard t.test function
 # for each gene
@@ -34,7 +34,7 @@ realt <- sapply(1:nGenes, function(i) {
 # The differences should all be less than 1e-15
 all(round(mtt-realt, 15) == 0)
 
-# and the unequal varaince case
+# and the unequal variance case
 mut <- matrixUnequalT(m,v)
 realt <- sapply(1:nGenes, function(i) {
   x <- m[i, v=="A"]
