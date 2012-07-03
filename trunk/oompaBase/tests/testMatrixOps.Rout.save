@@ -1,6 +1,6 @@
 
-R version 2.12.0 (2010-10-15)
-Copyright (C) 2010 The R Foundation for Statistical Computing
+R version 2.15.1 (2012-06-22) -- "Roasted Marshmallows"
+Copyright (C) 2012 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 Platform: x86_64-pc-mingw32/x64 (64-bit)
 
@@ -18,7 +18,7 @@ Type 'q()' to quit R.
 
 > library(oompaBase)
 > # a key point is to test the matrixPairedT code
-> # we create a simnple example
+> # we create a simple example
 > set.seed(372284)
 > nPairs <- 3
 > nGenes <- 7
@@ -35,7 +35,7 @@ Type 'q()' to quit R.
 [5,] -1.63 -0.22  1.35  0.06  0.18 -1.35
 [6,]  1.04 -1.94 -0.72 -0.36  1.03 -1.70
 [7,]  0.36  0.73  0.70  3.91  0.29 -1.00
-> # Now we run the pacakge code
+> # Now we run the package code
 > mpt <- matrixPairedT(m, v, pf)
 > # We also loop over the standard t.test function
 > # for each gene
@@ -62,7 +62,7 @@ Type 'q()' to quit R.
 > all(round(mtt-realt, 15) == 0)
 [1] TRUE
 > 
-> # and the unequal varaince case
+> # and the unequal variance case
 > mut <- matrixUnequalT(m,v)
 > realt <- sapply(1:nGenes, function(i) {
 +   x <- m[i, v=="A"]
@@ -74,3 +74,6 @@ Type 'q()' to quit R.
 > all(round(mut$tt-realt, 15) == 0)
 [1] TRUE
 > 
+> proc.time()
+   user  system elapsed 
+   0.14    0.04    0.18 
