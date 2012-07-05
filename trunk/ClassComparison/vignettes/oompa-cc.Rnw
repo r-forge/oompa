@@ -292,7 +292,7 @@ sum(selectSignificant(sam, cutoff) & truth)
 
 \section{Other class comparison approaches}
 
-The package contains three other methods for finding genes that are
+The package contains several other methods for finding genes that are
 differentially expressed between known classes:
 \begin{enumerate}
 \item Total Number of Misclassification (\Rfunction{TNoM}): This
@@ -310,6 +310,9 @@ differentially expressed between known classes:
   using the usual R formula, providing generalization to one-way
   designs with more than two classes to compare, or to factorial
   designs.
+\item Gene-by-gene paired t-tests (\Rfunction{MultiTtestPaired}).
+\item Gene-by-gene t-tests assuming unequal variance in the two groups
+  (\Rfunction{MultiTtestUnequal}).
 \end{enumerate}
 A future version of this vignette may include more examples of their
 use; for now, you can read the examples in the help pages.
