@@ -19,8 +19,8 @@ bimodalIndex <- function(dataset, verbose=TRUE) {
     bim[i,] <-  c(mc$parameters$mean, sigma=sigma, delta=delta, pi=pi, bim=bi)
   }
   if(verbose) cat("\n")
-  bim <- as.data.frame(bim)
   dimnames(bim) <- list(rownames(dataset),
                         c("mu1", "mu2", "sigma", "delta", "pi", "BI"))
+  bim <- as.data.frame(bim)
   bim
 }
