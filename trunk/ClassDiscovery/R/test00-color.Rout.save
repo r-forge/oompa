@@ -1,0 +1,43 @@
+
+R version 2.15.1 (2012-06-22) -- "Roasted Marshmallows"
+Copyright (C) 2012 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: x86_64-pc-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(ClassDiscovery)
+Loading required package: cluster
+Loading required package: mclust
+by using mclust, invoked on its own or through another package,
+you accept the license agreement in the mclust LICENSE file
+and at http://www.stat.washington.edu/mclust/license.txt
+
+
+Loading required package: oompaBase
+Loading required package: PreProcess
+> data <- matrix(1:1024, nrow=1024)
+> opar <- par(mfrow=c(2,3))
+> image(data, col=bluescale(64))
+> image(data, col=redscale(128))
+> image(data, col=greenscale(256))
+> image(data, col=redgreen(32))
+> image(data, col=blueyellow(64))
+> image(data, col=jetColors(64))
+> par(opar)
+> rm(data, opar) # cleanup
+> 
+> 
+> proc.time()
+   user  system elapsed 
+   0.37    0.04    0.42 
