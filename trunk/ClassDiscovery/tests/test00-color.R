@@ -1,3 +1,4 @@
+library(ClassDiscovery)
 data <- matrix(1:1024, nrow=1024)
 opar <- par(mfrow=c(2,3))
 image(data, col=bluescale(64))
