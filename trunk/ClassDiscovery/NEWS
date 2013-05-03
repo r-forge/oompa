@@ -12,6 +12,11 @@ BUG FIXES
 
     o	Moved the previously added .Rout.save files to correct directory.
 
+    o	Added 'TailRank' dependency to Suggests: (used in tests).
+
+    o	Replaced platform-specific windows() method with dev.new() method
+	to invoke default graphics device instead.
+
 
 		CHANGES IN R VERSION 2.14.0
 
