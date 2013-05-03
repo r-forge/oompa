@@ -1,6 +1,6 @@
 Package: ClassDiscovery
-Version: 2.14.0
-Date: 2012-05-01
+Version: 2.14.1
+Date: 2013-05-01
 Title: Classes and methods for "class discovery" with microarrays or proteomics
 Author: Kevin R. Coombes
 Maintainer: Kevin R. Coombes <kcoombes@mdanderson.org>
