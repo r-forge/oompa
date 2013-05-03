@@ -1,0 +1,31 @@
+###
+### NAMESPACE
+###
+
+
+## Imported methods
+import(methods)
+importFrom("graphics", hist)
+
+## Public classes
+exportClasses(BMPT)
+exportClasses(TailRankTest)
+
+## S4 methods
+exportMethods(as.logical)
+exportMethods(getStatistic)
+exportMethods(hist)
+exportMethods(print)
+exportMethods(summary)
+
+## Public functions (Generators)
+export(BMPT)
+export(TailRankTest)
+
+## Public functions
+export(dbb, pbb, qbb, rbb)
+export(biomarkerPowerTable)
+export(tailRankCutoff)
+export(tailRankPower)
+export(toleranceBound)
+
