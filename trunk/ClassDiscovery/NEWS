@@ -1,6 +1,35 @@
 			Dear Emacs, please make this -*-Text-*- mode!
 	**************************************************
 	*						 *
+	*	       2.14 SERIES NEWS			 *
+	*						 *
+	**************************************************
+
+
+		CHANGES IN R VERSION 2.14.1
+
+BUG FIXES
+
+    o	Moved the previously added .Rout.save files to correct directory.
+
+
+		CHANGES IN R VERSION 2.14.0
+
+NEW FEATURES
+
+    o	Added .Rout.save files for the ClassComparison tests.
+
+    o	Added test for the bimodalIndex function.
+
+    o	Created tests for ClassDiscovery from /inst/samples.
+
+    o	Moved vignettes from /inst/doc to /vignettes.
+
+    o	Added optional argument to screeplot() method.
+
+
+	**************************************************
+	*						 *
 	*	       2.13 SERIES NEWS			 *
 	*						 *
 	**************************************************
