@@ -62,11 +62,11 @@ setMethod('summary', signature(object='SmoothTtest'),
   good.guy <- (abs(tg@smooth.t.statistics) > goodflag) & !(bad.one | bad.two)
   big.fold <- (abs(tg@dif) > logb(folddiff,2))
   boring <- !bad.one & !bad.two & !good.guy & !big.fold 
-  list(ColorCoding(boring, COLOR.BORING, '.'),
-       ColorCoding(bad.one, COLOR.BAD.REPLICATE, 8),
-       ColorCoding(bad.two, COLOR.WORST.REPLICATE, 8),
-       ColorCoding(big.fold, COLOR.FOLD.DIFFERENCE, '.'),
-       ColorCoding(good.guy, COLOR.SIGNIFICANT, 15))
+  list(ColorCoding(boring, oompaColor$BORING, '.'),
+       ColorCoding(bad.one, oompaColor$BAD.REPLICATE, 8),
+       ColorCoding(bad.two, oompaColor$WORST.REPLICATE, 8),
+       ColorCoding(big.fold, oompaColor$FOLD.DIFFERENCE, '.'),
+       ColorCoding(good.guy, oompaColor$SIGNIFICANT, 15))
 }
 
 setMethod('plot', signature('SmoothTtest', 'missing'),
@@ -84,7 +84,6 @@ setMethod('plot', signature('SmoothTtest', 'missing'),
             R <- x@stats@mean2
             xx <- x@fit$x
             yy <- x@fit$y
-            cord <- f.cord(R,r)
             if (!is.list(ccl)) {
               ccl <- .group.coding(x, goodflag, badch, folddiff)
             }
@@ -95,17 +94,17 @@ setMethod('plot', signature('SmoothTtest', 'missing'),
             plot(x@two, multiple=badch, pch=pch, xlab=xlab, ylab=ylab, ...)
 ### plot3
             plot(ColorCodedPair(R, r, ccl), pch=pch,
-                 xlab=paste(x@aname, 'concord(A,B)=', format(cord, digits=3)),
+                 xlab=x@aname,
                  ylab=x@bname,
                  main=paste(name, 'Direct Comparison'), ...)
-            abline(0, 1, col=COLOR.CENTRAL.LINE, lwd=1)
+            abline(0, 1, col=oompaColor$CENTRAL.LINE, lwd=1)
 ### plot4
             plot(ColorCodedPair(x@avg, x@dif, ccl),
                  main=paste(x@bname, '-', x@aname),
                  xlab=xlab, ylab=ylab, pch=pch, ...)
-            abline(h=0,col=COLOR.CENTRAL.LINE, lwd=1)
-            points(xx, +goodflag*yy, col=COLOR.CONFIDENCE.CURVE, type='l')
-            points(xx, -goodflag*yy, col=COLOR.CONFIDENCE.CURVE, type='l')
+            abline(h=0,col=oompaColor$CENTRAL.LINE, lwd=1)
+            points(xx, +goodflag*yy, col=oompaColor$CONFIDENCE.CURVE, type='l')
+            points(xx, -goodflag*yy, col=oompaColor$CONFIDENCE.CURVE, type='l')
 ### plot5
             hist(x@smooth.t.statistics, nclass=53,
                  xlab='T-statistics', ylab='Frequency', main='Histogram of T-statistics')

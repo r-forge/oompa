@@ -70,8 +70,8 @@ likelihoodBum(object)
       the contribution of the uniform component and (2) the fitted
       beta-uniform distribution from the observed values. Colors in the
       plot are controlled by
-      \code{\link[PreProcess:semanticColors]{COLOR.EXPECTED}} and 
-      \code{\link[PreProcess:semanticColors]{COLOR.OBSERVED}}.
+      \code{\link[oompaBase:oompaColor]{oompaColor$EXPECTED}} and 
+      \code{\link[oompaBase:oompaColor]{oompaColor$OBSERVED}}.
     }
     \item{image(x, \dots)}{Produces four plots in a 2x2 layout: (1) the
       histogram produced by \code{hist}; (2) a plot of cutoffs against

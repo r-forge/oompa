@@ -73,9 +73,9 @@ SingleGroup <- function(avg, sd, span=0.5, name='')
 
 .scored.coding <- function(sg, multiple, span=1.6) {
   s <- abs(sg@score)
-  list(ColorCoding(s < multiple, COLOR.BORING, 16),
-       ColorCoding(s > multiple, COLOR.BAD.REPLICATE, 8),
-       ColorCoding(s  > span*multiple, COLOR.WORST.REPLICATE, 8))
+  list(ColorCoding(s < multiple, oompaColor$BORING, 16),
+       ColorCoding(s > multiple, oompaColor$BAD.REPLICATE, 8),
+       ColorCoding(s  > span*multiple, oompaColor$WORST.REPLICATE, 8))
 }
 
 setMethod('plot', signature('SingleGroup', 'missing'),
@@ -99,9 +99,9 @@ setMethod('plot', signature('SingleGroup', 'missing'),
             }
             plot(ColorCodedPair(m, d, ccl), xlab='', ylab='', xlim=xlim, ylim=ylim, ...)
             title(main, xlab=xlab, ylab=ylab)
-            points(z$x, multiple*z$y, type='l', col=COLOR.CONFIDENCE.CURVE, err=-1, ...)
-            points(z$x, -multiple*z$y, type='l', col=COLOR.CONFIDENCE.CURVE, err=-1, ...)
-            abline(h=0, col=COLOR.CENTRAL.LINE, lwd=1, ...)
+            points(z$x, multiple*z$y, type='l', col=oompaColor$CONFIDENCE.CURVE, err=-1, ...)
+            points(z$x, -multiple*z$y, type='l', col=oompaColor$CONFIDENCE.CURVE, err=-1, ...)
+            abline(h=0, col=oompaColor$CENTRAL.LINE, lwd=1, ...)
             invisible(x)
           })
 

@@ -82,8 +82,8 @@ Sam(data, classes, nPerm=100, verbose=TRUE)
       t-statistics. The \code{tracks} argument causes parallel lines to be
       drawn on either side of the quantile-quantile central line, at the
       specified offsets. Colors in the plot are controlled by the current
-      values of \code{\link[PreProcess:semanticColors]{COLOR.CENTRAL.LINE}} and
-	\code{\link[PreProcess:semanticColors]{COLOR.CONFIDENCE.CURVE}} }
+      values of \code{\link[oompaBase:oompaColor]{oompaColor$CENTRAL.LINE}} and
+	\code{\link[oompaBase:oompaColor]{oompaColor$CONFIDENCE.CURVE}} }
     \item{selectSignificant(object, cutoff=1, \dots)}{Compute a vector
       that selects significant values}
     \item{countSignificant(object, cutoff=1, \dots)}{Count the number of

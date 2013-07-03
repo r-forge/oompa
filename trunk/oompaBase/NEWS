@@ -13,6 +13,9 @@ NEW FEATURES
     	mainly to simplify the overall dependence structure 
 	by taking unused PreProcess code out of the main line.
 
+    o   Moved ColorCoding and ColorCodedPair classes from this package
+    	into the oompaBase package.
+
 BREAKING CHANGES
 
     o	Also moved semantic color names from PreProcess to oompaBase,

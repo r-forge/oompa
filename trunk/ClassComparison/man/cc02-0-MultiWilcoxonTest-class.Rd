@@ -98,8 +98,8 @@ MultiWilcoxonTest(data, classes, histsize=NULL)
       Plot a histogram of the rank-sum statistics, with overlaid curves
       representing the expected and observed distributions.  Colors of
       the curves are controlled by
-      \code{\link[PreProcess:semanticColors]{COLOR.EXPECTED}} and 
-      \code{\link[PreProcess:semanticColors]{COLOR.OBSERVED}}.
+      \code{\link[oompaBase:oompaColor]{oompaColor$EXPECTED}} and 
+      \code{\link[oompaBase:oompaColor]{oompaColor$OBSERVED}}.
     }
     \item{plot(x, prior=1, significance=0.9, ylim=c(-0.5, 1), xlab='Rank
       Sum', ylab='Prob(Different | Y)', \dots)}{

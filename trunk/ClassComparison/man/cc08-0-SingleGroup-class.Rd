@@ -29,7 +29,7 @@ SingleGroup(avg, sd, span=0.5, name='')
   \item{multiple}{numeric scalar specifying the multiple of the smoothed
     standard deviation to call significant}
   \item{ccl}{list containing objects of the
-    \code{\link[PreProcess]{ColorCoding}} class. If left at its default
+    \code{\link[oompaBase]{ColorCoding}} class. If left at its default
     value of zero, colors are chosen automatically.}
   \item{main}{character string specifying plot title}
   \item{xlab}{character string specifying label for the x axis}
@@ -86,11 +86,11 @@ SingleGroup(avg, sd, span=0.5, name='')
     The appropriate multiple of the \code{loess} fit is overlaid, and
     points that exceed this multiple are flagged in a different
     color. Colors in the plot are controlled by the current values of
-    \code{\link[PreProcess:semanticColors]{COLOR.CENTRAL.LINE}},
-    \code{\link[PreProcess:semanticColors]{COLOR.CONFIDENCE.CURVE}},
-    \code{\link[PreProcess:semanticColors]{COLOR.BORING}},
-    \code{\link[PreProcess:semanticColors]{COLOR.BAD.REPLICATE}}, and
-    \code{\link[PreProcess:semanticColors]{COLOR.WORST.REPLICATE}}.
+    \code{\link[oompaBase:oompaColor]{oompaColor$CENTRAL.LINE}},
+    \code{\link[oompaBase:oompaColor]{oompaColor$CONFIDENCE.CURVE}},
+    \code{\link[oompaBase:oompaColor]{oompaColor$BORING}},
+    \code{\link[oompaBase:oompaColor]{oompaColor$BAD.REPLICATE}}, and
+    \code{\link[oompaBase:oompaColor]{oompaColor$WORST.REPLICATE}}.
   }
   }
 }

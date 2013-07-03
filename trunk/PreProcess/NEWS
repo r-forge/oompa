@@ -16,12 +16,17 @@ OLD FEATURES
     	PreProcess still depends on oompaBase, no functionality should
     	change.
 
+    o   Moved ColorCoding and ColorCodedPair classes from this package
+    	into the oompaBase package.  Since PreProcess still depends on
+    	oompaBase, no functionality should change.
+
 BREAKING CHANGES
 
     o	Also moved semantic color names from PreProcess to oompaBase,
         and restructured it to add fewer entries into the namespace.
         Instead of using 'COLOR.EXPECTED', you must now refer to
         'oompaColors$EXPECTED'.
+
 
         **************************************************
         *                                                *

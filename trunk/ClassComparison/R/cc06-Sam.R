@@ -57,10 +57,10 @@ setMethod('plot', signature(x='Sam', y='missing'),
                    ylab='Observed T Statistics',
                    ...) {
   plot(x@expected, x@observed, xlab=xlab, ylab=ylab, ...)
-  abline(0,1, col=COLOR.CENTRAL.LINE)
+  abline(0,1, col=oompaColor$CENTRAL.LINE)
   if (!is.null(tracks)) {
     tracks=unique(c(tracks, -tracks))
-    lapply(tracks, abline, 1, col=COLOR.CONFIDENCE.CURVE)
+    lapply(tracks, abline, 1, col=oompaColor$CONFIDENCE.CURVE)
   }
   invisible(x)
 })

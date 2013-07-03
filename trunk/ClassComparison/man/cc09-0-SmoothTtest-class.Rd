@@ -36,7 +36,7 @@ SmoothTtest(stats, aname='Group One', bname='Group Two',
     groups considered large enough to be worrisome. See the \code{multiple}
     argument to the \code{plot} method in the \code{\link{SingleGroup}} class.} 
   \item{ccl}{list containing objects of class
-    \code{\link[PreProcess]{ColorCoding}}. If left at its default
+    \code{\link[oompaBase]{ColorCoding}}. If left at its default
     value of zero, colors are chosen automatically.}
   \item{pch}{default plotting character}
   \item{xlab}{character string specifying label for the x axis}
@@ -125,13 +125,13 @@ SmoothTtest(stats, aname='Group One', bname='Group Two',
       t-statistics. The final plot is a scatter plot of the smooth
       t-statistics as a function of the mean intensity.
       Colors in the plots are controlled by the current values of
-      \code{\link[PreProcess:semanticColors]{COLOR.BORING}},
-      \code{\link[PreProcess:semanticColors]{COLOR.SIGNIFICANT}},
-      \code{\link[PreProcess:semanticColors]{COLOR.BAD.REPLICATE}},
-      \code{\link[PreProcess:semanticColors]{COLOR.WORST.REPLICATE}},
-      \code{\link[PreProcess:semanticColors]{COLOR.FOLD.DIFFERENCE}},
-      \code{\link[PreProcess:semanticColors]{COLOR.CENTRAL.LINE}}, and
-      \code{\link[PreProcess:semanticColors]{COLOR.CONFIDENCE.CURVE}}.
+      \code{\link[oompaBase:oompaColor]{oompaColor$BORING}},
+      \code{\link[oompaBase:oompaColor]{oompaColor$SIGNIFICANT}},
+      \code{\link[oompaBase:oompaColor]{oompaColor$BAD.REPLICATE}},
+      \code{\link[oompaBase:oompaColor]{oompaColor$WORST.REPLICATE}},
+      \code{\link[oompaBase:oompaColor]{oompaColor$FOLD.DIFFERENCE}},
+      \code{\link[oompaBase:oompaColor]{oompaColor$CENTRAL.LINE}}, and
+      \code{\link[oompaBase:oompaColor]{oompaColor$CONFIDENCE.CURVE}}.
     }
   }
 }

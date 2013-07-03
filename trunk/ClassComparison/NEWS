@@ -1,6 +1,19 @@
 			Dear Emacs, please make this -*-Text-*- mode!
 	**************************************************
 	*						 *
+	*	       3.0 SERIES NEWS			 *
+	*						 *
+	**************************************************
+
+
+		CHANGES IN R VERSION 3.0.0
+
+STRUCTURAL CHANGES
+
+    o	Removed dependence on PreProcess.
+
+	**************************************************
+	*						 *
 	*	       2.15 SERIES NEWS			 *
 	*						 *
 	**************************************************

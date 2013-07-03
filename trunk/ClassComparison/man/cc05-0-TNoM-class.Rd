@@ -122,9 +122,9 @@ TNoM(data, classes, verbose=TRUE)
       misclassification level, along with the corresponding numbers
       expected based on simulations or permutation tests.
       The colors of the curves are controlled by the values of
-      \code{\link[PreProcess:semanticColors]{COLOR.OBSERVED}}, 
-      \code{\link[PreProcess:semanticColors]{COLOR.EXPECTED}}, and
-      \code{\link[PreProcess:semanticColors]{COLOR.PERMTEST}} }
+      \code{\link[oompaBase:oompaColor]{oompaColor$OBSERVED}}, 
+      \code{\link[oompaBase:oompaColor]{oompaColor$EXPECTED}}, and
+      \code{\link[oompaBase:oompaColor]{oompaColor$PERMTEST}} }
     \item{hist(x, \dots)}{Plot a not terribly useful nor informative
       histogram of the results.}
   }

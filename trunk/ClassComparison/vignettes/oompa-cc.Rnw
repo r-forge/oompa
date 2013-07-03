@@ -1,6 +1,6 @@
 %\VignetteIndexEntry{OOMPA ClassComparison}
 %\VignetteKeywords{OOMPA,Class Comparison,Differential Expression, Multiple Testing}
-%\VignetteDepends{oompaBase,PreProcess,ClassComparison}
+%\VignetteDepends{oompaBase,ClassComparison}
 %\VignettePackage{ClassComparison}
 \documentclass{article}
 

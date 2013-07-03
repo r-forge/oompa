@@ -6,12 +6,6 @@ exportMethods("process")
 export("fliplr", "flipud", "ellipse")
 export("f.qq", "f.qt", "f.above.thresh", "f.cord", "f.oneway.rankings")
 
-# b02-colors
-exportClasses("ColorCoding")
-export("ColorCoding")
-exportClasses("ColorCodedPair")
-export("ColorCodedPair", "colorCode")
-
 # b03-channelType
 exportClasses("ChannelType")
 export("ChannelType")

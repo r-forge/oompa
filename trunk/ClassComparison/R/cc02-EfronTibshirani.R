@@ -93,10 +93,10 @@ setMethod('hist', signature(x='MultiWilcoxonTest'),
   top <- max(c(x@unravel, x@theoretical.pdf))
   hist(x@rank.sum.statistics, probability=TRUE, breaks=100, ylim=c(0, top),
        xlim=c(min(x@xvals), max(x@xvals)), xlab=xlab, main=main)
-  lines(x@xvals, x@theoretical.pdf, col=COLOR.EXPECTED, lwd=2)
-  lines(x@xvals, x@unravel, col=COLOR.OBSERVED, lwd=2)
+  lines(x@xvals, x@theoretical.pdf, col=oompaColor$EXPECTED, lwd=2)
+  lines(x@xvals, x@unravel, col=oompaColor$OBSERVED, lwd=2)
   legend(min(x@xvals), max(x@unravel), c('Empirical', 'Theoretical'),
-         col=c(COLOR.OBSERVED, COLOR.EXPECTED), lwd=2)
+         col=c(oompaColor$OBSERVED, oompaColor$EXPECTED), lwd=2)
   invisible(x)
 })
 
@@ -113,7 +113,7 @@ setMethod('plot', signature('MultiWilcoxonTest', 'missing'),
   toss <- unlist(lapply(prior, function(p, o) {
     lines(o@xvals, .probDiff(o, p), err=-1)
   }, x))
-  abline(h=significance, col=COLOR.OBSERVED)
+  abline(h=significance, col=oompaColor$OBSERVED)
   invisible(x)
 })
 

@@ -1,5 +1,5 @@
 # colors-test.ssc
-library(PreProcess)
+library(oompaBase)
 
 theta <- (0:360)*pi/180
 x <- cos(theta)

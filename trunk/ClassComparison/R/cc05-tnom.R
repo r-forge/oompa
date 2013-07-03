@@ -119,14 +119,14 @@ setMethod('plot', signature('fullTNoM', 'missing'),
           function(x, y, ...) {
   plot(x@dex, x@fakir, type='n',
        xlab='Maximum Number of Misclassifications', ylab='Number of Genes')
-  points(x@dex, x@fakir, type='b', col=COLOR.EXPECTED, pch=1)
-  points(x@dex, x@obs, type='b', col=COLOR.OBSERVED, pch=16)
-  points(x@dex, x@scr, type='b', col=COLOR.PERMTEST, pch=17)
+  points(x@dex, x@fakir, type='b', col=oompaColor$EXPECTED, pch=1)
+  points(x@dex, x@obs, type='b', col=oompaColor$OBSERVED, pch=16)
+  points(x@dex, x@scr, type='b', col=oompaColor$PERMTEST, pch=17)
   title(paste('TNoM', x@name))
   xx <- 0 #length(x@dex)/2
   yy <- max(x@fakir)# /4
   legend(xx, yy, c('observed', 'expected', 'scrambled'),
-         col=c(COLOR.OBSERVED, COLOR.EXPECTED, COLOR.PERMTEST),
+         col=c(oompaColor$OBSERVED, oompaColor$EXPECTED, oompaColor$PERMTEST),
          pch=c(16, 1, 17))
   invisible(x)
 })

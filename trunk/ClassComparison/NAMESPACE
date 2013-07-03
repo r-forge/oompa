@@ -7,9 +7,9 @@
 importFrom(stats, "anova")
 importFrom(stats, "update")
 
-importMethodsFrom(PreProcess,
+importMethodsFrom(oompaBase,
                   "hist", "image", "plot")
-importMethodsFrom(PreProcess,
+importMethodsFrom(oompaBase,
                   "print", "summary", "as.data.frame")
 
 exportMethods("show")

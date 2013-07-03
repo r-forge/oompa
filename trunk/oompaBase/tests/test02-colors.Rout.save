@@ -17,18 +17,17 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > # colors-test.ssc
-> library(PreProcess)
-Loading required package: oompaBase
+> library(oompaBase)
 > 
 > theta <- (0:360)*pi/180
 > x <- cos(theta)
 > y <- sin(theta)
 > xp <- x > 0
 > yp <- y > 0
-> colors <- list(ColorCoding(xp&yp, COLOR.BORING),
-+                ColorCoding(xp&!yp, COLOR.TOP.TEN),
-+                ColorCoding(!xp&yp, COLOR.BOTTOM.TEN),
-+                ColorCoding(!xp&!yp, COLOR.CONFIDENCE.CURVE))
+> colors <- list(ColorCoding(xp&yp, oompaColor$BORING),
++                ColorCoding(xp&!yp, oompaColor$TOP.TEN),
++                ColorCoding(!xp&yp, oompaColor$BOTTOM.TEN),
++                ColorCoding(!xp&!yp, oompaColor$CONFIDENCE.CURVE))
 > plot(ColorCodedPair(x, y, colors))
 > 
 > plot(ColorCodedPair(theta, x, colors))
@@ -43,23 +42,15 @@ Loading required package: oompaBase
 > # cleanup
 > rm(x, y, xp, yp, theta, colors, fac)
 > 
-> colorList <- c(COLOR.BORING, COLOR.SIGNIFICANT,
-+                COLOR.EXPECTED, COLOR.OBSERVED,
-+                COLOR.PERMTEST, COLOR.FITTED,
-+                COLOR.CENTRAL.LINE, COLOR.CONFIDENCE.CURVE,
-+                COLOR.BAD.REPLICATE, COLOR.WORST.REPLICATE,
-+                COLOR.FOLD.DIFFERENCE, COLOR.BAD.REPLICATE.RATIO,
-+                COLOR.TOP.TEN, COLOR.BOTTOM.TEN,
-+                COLOR.TOP.TEN.SOLO, COLOR.BOTTOM.TEN.SOLO
-+                )
 > plot(c(1,4), c(1,4), type='n')
 > for (i in 1:4) {
 +   for (j in 1:4) {
-+     points(i,j, col=colorList[i + 4*(j-1)], pch=16, cex=4)
++     points(i,j, col=oompaColor[i + 4*(j-1)], pch=16, cex=4)
 +   }
 + }
-> rm(colorList, i, j)
+There were 16 warnings (use warnings() to see them)
+> rm(i, j)
 > 
 > proc.time()
    user  system elapsed 
-   0.26    0.03    0.31 
+   0.28    0.03    0.35 

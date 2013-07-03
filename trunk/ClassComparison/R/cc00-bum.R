@@ -122,8 +122,8 @@ setMethod('hist', signature(x='Bum'),
   hist(x@pvals, nclass=100, probability=TRUE, xlab=xlab, main=main, ...)
   xvals <- (0:res)/res
   fit <- x@lhat + (1-x@lhat)*dbeta(xvals, x@ahat, 1)
-  lines(xvals, fit, col=COLOR.OBSERVED, lwd=2)
-  abline(h=x@pihat, col=COLOR.EXPECTED, lwd=2)
+  lines(xvals, fit, col=oompaColor$OBSERVED, lwd=2)
+  abline(h=x@pihat, col=oompaColor$EXPECTED, lwd=2)
   invisible(x)
 })
 

@@ -153,4 +153,39 @@ t1 - t0
 t2 - t1
 @ 
 
+\section{Color Coded Graphs}
+
+We frequently find ourselves producing multiple figures with a common
+color scheme, where each color or each symbol is used to denote
+samples or genes with a particular property (in the simplest case,
+``cancer'' versus ``normal'').  Because we got tired of continually
+cutting and pasting \Rfunction{plot} and \Rfunction{points} commands
+and making sure the color legends stayed synchronized, we developed
+the \Rclass{ColorCoding} and \Rclass{ColorCodedPair} classes to
+encapsulate this notion.
+
+We can simulate some data as an example.
+<<xy>>=
+x <- matrix(rnorm(100*3), nrow=100, ncol=3)
+class1 <- class2<- rep(FALSE, 100)
+class1[sample(100, 20)] <- TRUE
+class2[sample(100, 20)] <- TRUE
+class3 <- !(class1 | class2)
+codes <- list(ColorCoding(class1, "red", 16),
+              ColorCoding(class2, "blue", 15),
+              ColorCoding(class3, "black", 17))
+@ 
+\begin{figure}
+<<pcc,fig=TRUE,width=6,height=8>>=
+par(mfrow=c(2,1))
+plot(ColorCodedPair(x[,1], x[,2], codes), xlab="Coord1", ylab="Coord2")
+plot(ColorCodedPair(x[,1], x[,3], codes), xlab="Coord1", ylab="Coord3")
+par(mfrow=c(1,1))
+@ 
+\caption{Color coded plots of three (simulated) related variables.}
+\label{fig:pcc}
+\end{figure}
+
+
+
 \end{document}

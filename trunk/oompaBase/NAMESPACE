@@ -17,7 +17,12 @@ exportMethods("as.data.frame")
 export("redscale", "bluescale", "greenscale",
        "blueyellow","redgreen", "jetColors")
 
+# b02-colors
 export("oompaColor")
+exportClasses("ColorCoding")
+export("ColorCoding")
+exportClasses("ColorCodedPair")
+export("ColorCodedPair", "colorCode")
 
 # b03-matrixOps
 export("matrixMean", "matrixVar", "matrixT")

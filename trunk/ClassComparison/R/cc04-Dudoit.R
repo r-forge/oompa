@@ -52,7 +52,7 @@ setMethod('plot', signature('Dudoit', 'missing'), function(x, y,
   or <- order(x@t.statistics)
   plot(x@t.statistics[or], x@adjusted.p[or], xlab=xlab, ylab=ylab, type='l', ...)
   points(x@t.statistics, x@adjusted.p)
-  lines(x@t.statistics[or], x@p.values[or], pch='.', col=COLOR.CENTRAL.LINE)
+  lines(x@t.statistics[or], x@p.values[or], pch='.', col=oompaColor$CENTRAL.LINE)
   invisible(x)
 })
 

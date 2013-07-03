@@ -76,14 +76,14 @@ setMethod('print', signature(x='TwoGroupStats'),
 	y <- fitted(smooth)
 	plot(smooth, ylim=range(my.diff), xlab='position', ylab='difference',
 		main=name)
-	points(z, y+mult, type='l', col=COLOR.BAD.REPLICATE)
-	points(z, y-mult, type='l', col=COLOR.BAD.REPLICATE)
+	points(z, y+mult, type='l', col=oompaColor$BAD.REPLICATE)
+	points(z, y-mult, type='l', col=oompaColor$BAD.REPLICATE)
 	points(z, my.diff, pch='.')
-	abline(h=0, col=COLOR.CENTRAL.LINE)
+	abline(h=0, col=oompaColor$CENTRAL.LINE)
 	hi <- my.diff > y + mult
 	lo <- my.diff < y - mult
-	points(z[hi], my.diff[hi], pch=2, col=COLOR.SIGNIFICANT)
-	points(z[lo], my.diff[lo], pch=3, col=COLOR.SIGNIFICANT)
+	points(z[hi], my.diff[hi], pch=2, col=oompaColor$SIGNIFICANT)
+	points(z[lo], my.diff[lo], pch=3, col=oompaColor$SIGNIFICANT)
 	invisible(list(hi=hi, lo=lo))
 }
 
@@ -96,7 +96,7 @@ setMethod('print', signature(x='TwoGroupStats'),
 	ox <- order(x)
 	plot(z, xlab=xname, ylab=yname, ylim=range(y))
 	points(x, y, pch='.')
-	points(x[ox], z$fitted.values[ox], type='l', col=COLOR.FITTED)
+	points(x[ox], z$fitted.values[ox], type='l', col=oompaColor$FITTED)
 	abline(h=0)
 	title(t)
 	invisible(0)
@@ -126,7 +126,7 @@ setMethod('plot', signature('TwoGroupStats', 'missing'),
             .screwyPlot(x@mean1, x@mean2, name=x@name)
 # plot 6:
             plot(x@pooledVar, x@overallVar, main='Variance Estimates')
-            abline(0, 1, col=COLOR.CENTRAL.LINE)
+            abline(0, 1, col=oompaColor$CENTRAL.LINE)
             invisible(x)
 })
 
