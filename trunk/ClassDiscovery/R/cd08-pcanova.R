@@ -121,12 +121,13 @@ setMethod('plot', signature('PCanova', 'missing'),
   title('Residual PCA')
   plot(c(0, x@n), c(0,2), type='n', ylim=c(0, 1),
        xlab='Number of Components', ylab='PC Correlation')
-  points(cumsum(x@class2resid)/(1:x@n), type='b', col=COLOR.OBSERVED, pch=15)
-  points(cumsum(x@class2orig)/(1:x@n), type='b', col=COLOR.PERMTEST, pch=16)
-  points(cumsum(x@orig2resid)/(1:x@n), type='b', col=COLOR.EXPECTED, pch=17)
+  points(cumsum(x@class2resid)/(1:x@n), type='b', col=oompaColor$OBSERVED, pch=15)
+  points(cumsum(x@class2orig)/(1:x@n), type='b', col=oompaColor$PERMTEST, pch=16)
+  points(cumsum(x@orig2resid)/(1:x@n), type='b', col=oompaColor$EXPECTED, pch=17)
   abline(h=1/2)
   legend((x@n-1)/2, 1, c('d(Class, Residual)', 'd(Total, Class)', 'd(Total, Residual)'),
-         col=c(COLOR.OBSERVED, COLOR.PERMTEST, COLOR.EXPECTED), pch=c(15, 16, 17), cex=cex)
+         col=c(oompaColor$OBSERVED, oompaColor$PERMTEST, oompaColor$EXPECTED),
+         pch=c(15, 16, 17), cex=cex)
   title(paste('Cumulative PC-ANOVA', tag))
   invisible(x)
 })

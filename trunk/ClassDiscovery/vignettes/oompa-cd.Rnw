@@ -1,6 +1,6 @@
 %\VignetteIndexEntry{OOMPA ClassDiscovery}
 %\VignetteKeywords{OOMPA, Class Discovery, Clustering}
-%\VignetteDepends{oompaBase,PreProcess,ClassDiscovery}
+%\VignetteDepends{oompaBase,ClassDiscovery}
 %\VignettePackage{ClassDiscovery}
 \documentclass{article}
 

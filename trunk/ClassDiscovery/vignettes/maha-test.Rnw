@@ -1,6 +1,6 @@
 %\VignetteIndexEntry{OOMPA Mahalanobis Distance}
 %\VignetteKeywords{OOMPA, PCA, Mahalanobis Distance, Outliers}
-%\VignetteDepends{oompaBase,PreProcess,ClassDiscovery}
+%\VignetteDepends{oompaBase,ClassDiscovery}
 %\VignettePackage{ClassDiscovery}
 \documentclass{article}
 \usepackage{graphicx}

@@ -126,9 +126,9 @@ PCanova(data, classes, labels, colors, usecor=TRUE)
       first three plots are determined by the \code{colors} slot of the
       object, which was set when the object was created. Colors in the
       PC correlation plot are determined by the current values of
-      \code{\link[PreProcess:semanticColors]{COLOR.OBSERVED}},
-      \code{\link[PreProcess:semanticColors]{COLOR.EXPECTED}}, and
-      \code{\link[PreProcess:semanticColors]{COLOR.PERMTEST}}
+      \code{\link[oompaBase:oompaColor]{oompaColor$OBSERVED}},
+      \code{\link[oompaBase:oompaColor]{oompaColor$EXPECTED}}, and
+      \code{\link[oompaBase:oompaColor]{oompaColor$PERMTEST}}
     }
     \item{pltree}{\code{signature(x = PCanova)}: Produce dendrograms of
       the three hierarchical clusters of the samples, based on all the

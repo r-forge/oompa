@@ -4,9 +4,9 @@
 
 ## various generics
 import(methods)
-importMethodsFrom(PreProcess,
+importMethodsFrom(oompaBase,
                   "hist", "image", "plot")
-importMethodsFrom(PreProcess,
+importMethodsFrom(oompaBase,
                   "print", "summary", "as.data.frame")
 
 exportMethods("hist", "image", "plot")
