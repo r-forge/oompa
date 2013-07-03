@@ -26,8 +26,25 @@ Microarray type: Affymetrix oligo
 Labeled with: fluor 
 > 
 > summary(x)
-Microarray type: Affymetrix oligo 
-Labeled with: fluor 
+An object of class "ChannelType"
+Slot "maker":
+[1] "Affymetrix"
+
+Slot "model":
+[1] "oligo"
+
+Slot "nCol":
+[1] 100
+
+Slot "nRow":
+[1] 100
+
+Slot "glow":
+[1] "fluor"
+
+Slot "design":
+[1] ""
+
 Design size: 100 by 100 
 Design information object:  
 > 
@@ -36,8 +53,25 @@ Design information object:
 Microarray type: Affymetrix oligo 
 Labeled with: fluor 
 > summary(y)
-Microarray type: Affymetrix oligo 
-Labeled with: fluor 
+An object of class "ChannelType"
+Slot "maker":
+[1] "Affymetrix"
+
+Slot "model":
+[1] "oligo"
+
+Slot "nCol":
+[1] 100
+
+Slot "nRow":
+[1] 100
+
+Slot "glow":
+[1] "fluor"
+
+Slot "design":
+[1] "fake.design"
+
 Design size: 100 by 100 
 Design information object: fake.design 
 > d <- getDesign(y)
@@ -50,4 +84,4 @@ NULL
 > 
 > proc.time()
    user  system elapsed 
-   0.17    0.04    0.21 
+   0.18    0.09    0.28 

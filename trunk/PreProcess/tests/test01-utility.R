@@ -7,6 +7,7 @@ mat
 flipud(mat)
 fliplr(mat)
 
+set.seed(473824)
 # concordance
 x <- rnorm(1000, 1, 2)
 y <- rnorm(1000, 1, 2)

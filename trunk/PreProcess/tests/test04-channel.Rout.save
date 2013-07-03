@@ -20,6 +20,7 @@ Type 'q()' to quit R.
 > library(PreProcess)
 Loading required package: oompaBase
 > 
+> set.seed(732657)
 > # simulate a moderately realistic looking microarray
 > nc <- 100			# number of rows
 > nr <- 100			# number of columns
@@ -34,27 +35,19 @@ Loading required package: oompaBase
 > summary(subbed)
 fraud, a microarray channel object
 Parent object: NA 
-Microarray type: user random 
-Labeled with: fake 
-Design size: 100 by 100 
-Design information object:  
 History:
 	 Channel(parent = "", name = "fraud", type = ct, vec = s) 
 
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-    1.0   206.3   624.6   931.9  1311.0  8654.0 
+    1.0   199.5   594.9   910.9  1279.0  9550.0 
 > summary(raw)
 fraud, a microarray channel object
 Parent object: NA 
-Microarray type: user random 
-Labeled with: fake 
-Design size: 100 by 100 
-Design information object:  
 History:
 	 Channel(parent = "", name = "fraud", type = ct, vec = v) 
 
     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
-   0.003  287.500  703.900 1009.000 1390.000 8744.000 
+   0.244  280.000  675.700  987.600 1356.000 9631.000 
 > 
 > par(mfrow=c(2,1))
 > plot(raw)
@@ -69,4 +62,4 @@ History:
 > 
 > proc.time()
    user  system elapsed 
-   0.56    0.04    0.60 
+   0.53    0.09    0.67 

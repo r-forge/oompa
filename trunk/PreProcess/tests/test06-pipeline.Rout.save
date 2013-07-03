@@ -20,6 +20,7 @@ Type 'q()' to quit R.
 > library(PreProcess)
 Loading required package: oompaBase
 > 
+> set.seed(147745)
 > # simulate a moderately realistic looking microarray
 > nc <- 100
 > nr <- 100
@@ -36,10 +37,6 @@ Loading required package: oompaBase
 > summary(processed)
 log normalized fraud, a microarray channel object
 Parent object: NA 
-Microarray type: user random 
-Labeled with: fake 
-Design size: 100 by 100 
-Design information object:  
 History:
 	 Channel(parent = "", name = "fraud", type = ct, vec = s) 
 	 Default channel processing (using pipeline: PIPELINE.STANDARD) 
@@ -48,7 +45,7 @@ History:
 	 Log transformation (using object: proc) with parameter = 2 
 
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
--0.3686  7.3140  8.8650  8.0520  9.9660 12.8100 
+ -0.390   7.260   8.849   8.009   9.966  12.780 
 > 
 > par(mfrow=c(2,1))
 > plot(processed)
@@ -62,4 +59,4 @@ History:
 > 
 > proc.time()
    user  system elapsed 
-   0.57    0.04    0.60 
+   0.59    0.03    0.68 

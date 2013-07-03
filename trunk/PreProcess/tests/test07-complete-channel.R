@@ -1,8 +1,8 @@
 # complete.channel-test.ssc
 library(PreProcess)
 
+set.seed(989431)
 # simulate a complete channel object
-
 v <- rexp(10000, 1/1000)
 b <- rnorm(10000, 60, 6)
 s <- sapply(v-b, function(x) {max(0, x)})

@@ -20,8 +20,8 @@ Type 'q()' to quit R.
 > library(PreProcess)
 Loading required package: oompaBase
 > 
+> set.seed(989431)
 > # simulate a complete channel object
-> 
 > v <- rexp(10000, 1/1000)
 > b <- rnorm(10000, 60, 6)
 > s <- sapply(v-b, function(x) {max(0, x)})
@@ -31,16 +31,33 @@ Loading required package: oompaBase
 > rm(v, b, s, ct)
 > 
 > summary(x)
-Microarray type: user random 
-Labeled with: fake 
+An object of class "ChannelType"
+Slot "maker":
+[1] "user"
+
+Slot "model":
+[1] "random"
+
+Slot "nCol":
+[1] 100
+
+Slot "nRow":
+[1] 100
+
+Slot "glow":
+[1] "fake"
+
+Slot "design":
+[1] ""
+
 [1] "fraud"
-      vol                bkgd            svol       
- Min.   :   0.155   Min.   :35.94   Min.   :   0.0  
- 1st Qu.: 279.255   1st Qu.:56.19   1st Qu.: 219.8  
- Median : 686.024   Median :60.21   Median : 625.5  
- Mean   : 991.823   Mean   :60.12   Mean   : 933.5  
- 3rd Qu.:1387.748   3rd Qu.:64.08   3rd Qu.:1328.7  
- Max.   :8595.929   Max.   :80.78   Max.   :8534.7  
+      vol                 bkgd            svol        
+ Min.   :    0.066   Min.   :33.61   Min.   :    0.0  
+ 1st Qu.:  285.474   1st Qu.:55.95   1st Qu.:  225.7  
+ Median :  687.351   Median :60.01   Median :  626.7  
+ Mean   : 1002.718   Mean   :59.99   Mean   :  944.6  
+ 3rd Qu.: 1395.736   3rd Qu.:64.07   3rd Qu.: 1336.5  
+ Max.   :11776.787   Max.   :85.24   Max.   :11718.9  
 > 
 > opar <- par(mfrow=c(2,3))
 > plot(x)
@@ -55,24 +72,16 @@ Labeled with: fake
 > summary(b)
 background-corrected signal fraud, a microarray channel object
 Parent object: x 
-Microarray type: user random 
-Labeled with: fake 
-Design size: 100 by 100 
-Design information object:  
 History:
 	 Foreground - Background (using object: PROC.NEG.CORRECTED.SIGNAL) with parameter = 0 
 
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
- -69.92  219.80  625.50  931.70 1329.00 8535.00 
+    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+  -71.28   225.70   626.70   942.70  1336.00 11720.00 
 > 
 > q <- process(b, PIPELINE.STANDARD)
 > summary(q)
 log normalized background-corrected signal fraud, a microarray channel object
 Parent object: x 
-Microarray type: user random 
-Labeled with: fake 
-Design size: 100 by 100 
-Design information object:  
 History:
 	 Foreground - Background (using object: PROC.NEG.CORRECTED.SIGNAL) with parameter = 0 
 	 Default channel processing (using pipeline: PIPELINE.STANDARD) 
@@ -87,10 +96,6 @@ History:
 > summary(q)
 log normalized signal fraud, a microarray channel object
 Parent object: object 
-Microarray type: user random 
-Labeled with: fake 
-Design size: 100 by 100 
-Design information object:  
 History:
 	 Foreground intensity (using object: proc) with parameter = 0 
 	 Global normalization (using object: proc) with parameter = 0 
@@ -98,11 +103,11 @@ History:
 	 Log transformation (using object: proc) with parameter = 2 
 
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  4.644   7.653   8.949   8.701   9.966  12.600 
+  4.644   7.676   8.944   8.692   9.966  13.040 
 > 
 > # cleanup
 > rm(x, b, q, opar)
 > 
 > proc.time()
    user  system elapsed 
-   0.39    0.04    0.46 
+   0.42    0.09    0.54 

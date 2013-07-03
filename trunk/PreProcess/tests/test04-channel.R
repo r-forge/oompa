@@ -1,6 +1,7 @@
 # channel-test.ssc
 library(PreProcess)
 
+set.seed(732657)
 # simulate a moderately realistic looking microarray
 nc <- 100			# number of rows
 nr <- 100			# number of columns

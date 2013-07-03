@@ -44,19 +44,20 @@ Loading required package: oompaBase
 [4,]   14    9    4
 [5,]   15   10    5
 > 
+> set.seed(473824)
 > # concordance
 > x <- rnorm(1000, 1, 2)
 > y <- rnorm(1000, 1, 2)
 > f.above.thresh(x, 0)
-[1] 0.716
+[1] 0.721
 > f.above.thresh(y, 0)
-[1] 0.708
+[1] 0.693
 > f.cord(x, y)
-[1] -0.002546033
+[1] -0.007403479
 > z <- scale(x)
 > f.cord(x, z)
           [,1]
-[1,] 0.6606886
+[1,] 0.6401066
 > 
 > #plotting ellipses
 > plot(x,y)
@@ -75,4 +76,4 @@ Loading required package: oompaBase
 > 
 > proc.time()
    user  system elapsed 
-   0.26    0.03    0.34 
+   0.32    0.07    0.40 

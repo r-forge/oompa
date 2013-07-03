@@ -1,6 +1,7 @@
 # pipeline-test
 library(PreProcess)
 
+set.seed(147745)
 # simulate a moderately realistic looking microarray
 nc <- 100
 nr <- 100

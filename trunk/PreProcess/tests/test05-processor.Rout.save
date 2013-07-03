@@ -20,6 +20,7 @@ Type 'q()' to quit R.
 > library(PreProcess)
 Loading required package: oompaBase
 > 
+> set.seed(237554)
 > # simulate a moderately realistic looking microarray
 > nc <- 100
 > nr <- 100
@@ -38,10 +39,6 @@ Loading required package: oompaBase
 > summary(processed)
 log normalized fraud, a microarray channel object
 Parent object: NA 
-Microarray type: user random 
-Labeled with: fake 
-Design size: 100 by 100 
-Design information object:  
 History:
 	 Channel(parent = "", name = "fraud", type = ct, vec = s) 
 	 Global normalization (using object: PROC.GLOBAL.NORMALIZATION) with parameter = 0 
@@ -49,7 +46,7 @@ History:
 	 Log transformation (using object: PROC.LOG.TRANSFORM) with parameter = 2 
 
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  4.644   7.397   8.920   8.522   9.966  13.040 
+  4.644   7.254   8.848   8.448   9.966  12.740 
 > 
 > par(mfrow=c(2,1))
 > plot(processed)
@@ -62,4 +59,4 @@ History:
 > 
 > proc.time()
    user  system elapsed 
-   0.59    0.03    0.60 
+   0.53    0.09    0.68 
