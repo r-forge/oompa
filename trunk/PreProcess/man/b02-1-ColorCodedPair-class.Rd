@@ -62,10 +62,10 @@ x <- cos(theta)
 y <- sin(theta)
 xp <- x > 0
 yp <- y > 0
-colors <- list(ColorCoding(xp&yp, COLOR.EXPECTED),
-               ColorCoding(xp&!yp, COLOR.OBSERVED),
-               ColorCoding(!xp&yp, COLOR.PERMTEST),
-               ColorCoding(!xp&!yp, COLOR.FITTED))
+colors <- list(ColorCoding(xp&yp, oompaColor$EXPECTED),
+               ColorCoding(xp&!yp, oompaColor$OBSERVED),
+               ColorCoding(!xp&yp, oompaColor$PERMTEST),
+               ColorCoding(!xp&!yp, oompaColor$FITTED))
 plot(ColorCodedPair(x, y, colors))
 
 plot(ColorCodedPair(theta, x, colors))

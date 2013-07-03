@@ -13,27 +13,6 @@ ColorCoding <- function(v, color, mark=1) {
   val <- new('ColorCoding', v=v, color=color, mark=mark)
 }
 
-# some common colors that we use for specialized plots
-COLOR.BORING              <- 'gray'
-COLOR.SIGNIFICANT         <- 'red'
-COLOR.EXPECTED            <- 'blue'
-COLOR.OBSERVED            <- 'darkgreen'
-
-COLOR.PERMTEST            <- 'magenta'
-COLOR.FITTED              <- 'orange'
-COLOR.CENTRAL.LINE        <- COLOR.EXPECTED
-COLOR.CONFIDENCE.CURVE    <- 'red3'
-
-COLOR.BAD.REPLICATE       <- 'purple1'
-COLOR.WORST.REPLICATE     <- 'purple3'
-COLOR.FOLD.DIFFERENCE     <- 'skyblue'
-COLOR.BAD.REPLICATE.RATIO <- 'violetred'
-
-COLOR.TOP.TEN             <- 'cadetblue'
-COLOR.BOTTOM.TEN          <- 'pink'
-COLOR.TOP.TEN.SOLO        <- 'palegreen'
-COLOR.BOTTOM.TEN.SOLO     <- 'deeppink'
-
 ################################################################
 # COLOR.CODED.PAIR		attributes: x, y, ccl
 #

@@ -1,10 +1,10 @@
 Package: oompaBase
-Version: 3.0.0
-Date: 2013-05-01
+Version: 3.0.1
+Date: 2013-07-03
 Title: Class unions and matrix operations for OOMPA
 Author: Kevin R. Coombes
 Maintainer: Kevin R. Coombes <kcoombes@mdanderson.org>
-Depends: R (>= 3.0), methods
+Depends: R (>= 2.15), methods
 Description: This package defines the class unions that must be
   preloaded in order for the basic tools in the OOMPA (object-oriented 
   microarray and proteomics analysis) project to be defined and loaded.

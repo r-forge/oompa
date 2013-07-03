@@ -73,10 +73,10 @@ x <- cos(theta)
 y <- sin(theta)
 xp <- x > 0
 yp <- y > 0
-colors <- list(ColorCoding(xp&yp, COLOR.BORING),
-               ColorCoding(xp&!yp, COLOR.TOP.TEN),
-               ColorCoding(!xp&yp, COLOR.BOTTOM.TEN),
-               ColorCoding(!xp&!yp, COLOR.CONFIDENCE.CURVE))
+colors <- list(ColorCoding(xp&yp, oompaColor$BORING),
+               ColorCoding(xp&!yp, oompaColor$TOP.TEN),
+               ColorCoding(!xp&yp, oompaColor$BOTTOM.TEN),
+               ColorCoding(!xp&!yp, oompaColor$CONFIDENCE.CURVE))
 plot(ColorCodedPair(x, y, colors))
 
 plot(ColorCodedPair(theta, x, colors))
@@ -91,14 +91,14 @@ plot(ColorCodedPair(x, y, colors))
 ## cleanup
 rm(x, y, xp, yp, theta, colors, fac)
 
-colorList <- c(COLOR.BORING, COLOR.SIGNIFICANT,
-               COLOR.EXPECTED, COLOR.OBSERVED,
-               COLOR.PERMTEST, COLOR.FITTED,
-               COLOR.CENTRAL.LINE, COLOR.CONFIDENCE.CURVE,
-               COLOR.BAD.REPLICATE, COLOR.WORST.REPLICATE,
-               COLOR.FOLD.DIFFERENCE, COLOR.BAD.REPLICATE.RATIO,
-               COLOR.TOP.TEN, COLOR.BOTTOM.TEN,
-               COLOR.TOP.TEN.SOLO, COLOR.BOTTOM.TEN.SOLO
+colorList <- c(oompaColor$BORING, oompaColor$SIGNIFICANT,
+               oompaColor$EXPECTED, oompaColor$OBSERVED,
+               oompaColor$PERMTEST, oompaColor$FITTED,
+               oompaColor$CENTRAL.LINE, oompaColor$CONFIDENCE.CURVE,
+               oompaColor$BAD.REPLICATE, oompaColor$WORST.REPLICATE,
+               oompaColor$FOLD.DIFFERENCE, oompaColor$BAD.REPLICATE.RATIO,
+               oompaColor$TOP.TEN, oompaColor$BOTTOM.TEN,
+               oompaColor$TOP.TEN.SOLO, oompaColor$BOTTOM.TEN.SOLO
                )
 plot(c(1,4), c(1,4), type='n')
 for (i in 1:4) {

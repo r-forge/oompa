@@ -1,6 +1,34 @@
 			Dear Emacs, please make this -*-Text-*- mode!
 	**************************************************
 	*						 *
+	*	       3.0 SERIES NEWS			 *
+	*						 *
+	**************************************************
+
+		CHANGES IN R VERSION 3.0.1
+
+NEW FEATURES
+
+    o	Moved generic functions from PreProcess to oompaBase,
+    	mainly to simplify the overall dependence structure 
+	by taking unused PreProcess code out of the main line.
+
+BREAKING CHANGES
+
+    o	Also moved semantic color names from PreProcess to oompaBase,
+        and restructured it to add fewer entries into the namespace.
+        Instead of using 'COLOR.EXPECTED', you must now refer to
+        'oompaColors$EXPECTED'.
+
+		CHANGES IN R VERSION 3.0.0
+
+NEW FEATURES
+
+    o	Released in conjunction with new version of R.
+
+
+	**************************************************
+	*						 *
 	*	       2.15 SERIES NEWS			 *
 	*						 *
 	**************************************************

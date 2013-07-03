@@ -62,3 +62,29 @@ jetColors <- function(N){
   rgb(temp.rgb[,1], temp.rgb[,2], temp.rgb[,3])
 
 }
+
+################################################################
+# some common colors that we use for specialized plots
+
+oompaColor = list(
+  BORING              = 'gray',
+  SIGNIFICANT         = 'red',
+  EXPECTED            = 'blue',
+  OBSERVED            = 'darkgreen',
+  
+  PERMTEST            = 'magenta',
+  FITTED              = 'orange',
+  CENTRAL.LINE        = 'blue',
+  CONFIDENCE.CURVE    = 'red3',
+
+  BAD.REPLICATE       = 'purple1',
+  WORST.REPLICATE     = 'purple3',
+  FOLD.DIFFERENCE     = 'skyblue',
+  BAD.REPLICATE.RATIO = 'violetred',
+
+  TOP.TEN             = 'cadetblue',
+  BOTTOM.TEN          = 'pink',
+  TOP.TEN.SOLO        = 'palegreen',
+  BOTTOM.TEN.SOLO     = 'deeppink'
+  )
+

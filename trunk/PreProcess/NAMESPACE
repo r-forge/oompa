@@ -1,16 +1,6 @@
 # b00-generics
-importFrom(graphics, "plot")
-importFrom(graphics, "hist")
-importFrom(graphics, "image")
-
 exportMethods("analyze")
 exportMethods("process")
-exportMethods("plot")
-exportMethods("hist")
-exportMethods("image")
-exportMethods("print")
-exportMethods("summary")
-exportMethods("as.data.frame")
 
 # b01-utility
 export("fliplr", "flipud", "ellipse")
@@ -21,14 +11,6 @@ exportClasses("ColorCoding")
 export("ColorCoding")
 exportClasses("ColorCodedPair")
 export("ColorCodedPair", "colorCode")
-export("COLOR.BORING", "COLOR.SIGNIFICANT",
-       "COLOR.EXPECTED", "COLOR.OBSERVED",
-       "COLOR.PERMTEST", "COLOR.FITTED",
-       "COLOR.CENTRAL.LINE", "COLOR.CONFIDENCE.CURVE",
-       "COLOR.BAD.REPLICATE", "COLOR.WORST.REPLICATE",
-       "COLOR.FOLD.DIFFERENCE", "COLOR.BAD.REPLICATE.RATIO",
-       "COLOR.TOP.TEN", "COLOR.BOTTOM.TEN",
-       "COLOR.TOP.TEN.SOLO", "COLOR.BOTTOM.TEN.SOLO")
 
 # b03-channelType
 exportClasses("ChannelType")
