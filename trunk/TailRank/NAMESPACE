@@ -5,7 +5,7 @@
 
 ## Imported methods
 import(methods)
-importFrom("graphics", hist)
+importFrom("oompaBase", "hist", "print", "summary")
 
 ## Public classes
 exportClasses(BMPT)
