@@ -139,8 +139,7 @@ TNoM(data, classes, verbose=TRUE)
   Nature. 2000 Aug 3;406(6795):536-40.
 }
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org},
-  P. Roebuck \email{proebuck@mdanderson.org}
+  Kevin R. Coombes \email{krc@silicovore.com}
 }
 \seealso{
   \code{\link{Bum}},

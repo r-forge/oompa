@@ -92,7 +92,7 @@ Channel(parent, name, type, vec)
   The \code{print} and \code{summary} methods return nothing.
 }
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org},
+  Kevin R. Coombes \email{krc@silicovore.com},
   P. Roebuck \email{proebuck@mdanderson.org}
 }
 \seealso{

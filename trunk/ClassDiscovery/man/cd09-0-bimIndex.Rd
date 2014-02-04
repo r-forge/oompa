@@ -68,7 +68,7 @@ bimodalIndex(dataset, verbose=TRUE)
   Cancer Informatics, 2009 Aug 5; 7:199--216.
 }
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+  Kevin R. Coombes \email{krc@silicovore.com}
 }
 \examples{
 data(lungData)

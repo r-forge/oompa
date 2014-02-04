@@ -50,8 +50,7 @@ matrixT(m, v, na.rm=FALSE)
   matrix of the degrees of freedom associated with each row.. 
 }
 
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
-\seealso{ \code{\link[ClassComparison]{MultiTtest}} }
+\author{Kevin R. Coombes <krc@silicovore.com>}
 \examples{
 ng <- 1000
 ns <- 50

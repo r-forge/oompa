@@ -4,6 +4,8 @@
 
 ## various generics
 import(methods)
+import(mclust)
+
 importMethodsFrom(oompaBase,
                   "hist", "image", "plot")
 importMethodsFrom(oompaBase,

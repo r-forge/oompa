@@ -124,7 +124,7 @@ Mosaic(data,
   Proc Natl Acad Sci U S A. 1998 Dec 8;95(25):14863-8.
 }
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org},
+  Kevin R. Coombes \email{krc@silicovore.com},
   P. Roebuck \email{proebuck@mdanderson.org}
 }
 \seealso{

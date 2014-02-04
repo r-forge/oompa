@@ -104,8 +104,7 @@ Sam(data, classes, nPerm=100, verbose=TRUE)
   Proc Natl Acad Sci U S A (2001) 98, 5116-5121.
 }
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org},
-  P. Roebuck \email{proebuck@mdanderson.org}
+  Kevin R. Coombes \email{krc@silicovore.com}
 }
 \seealso{
   \code{\link{Bum}},

@@ -146,8 +146,7 @@ MultiWilcoxonTest(data, classes, histsize=NULL)
   Bioinformatics. 2003 Jul 1;19(10):1236-42. 
 }
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org},
-  P. Roebuck \email{proebuck@mdanderson.org}
+  Kevin R. Coombes \email{krc@silicovore.com}
 }
 \seealso{
   Implementation is handled in part by the functions \code{\link{dwil}}

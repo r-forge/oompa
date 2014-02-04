@@ -20,7 +20,7 @@ fliplr(x)
   reversed. 
 }
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+  Kevin R. Coombes \email{krc@silicovore.com}
 }
 \examples{
 mat <- matrix(1:6, 2, 3)

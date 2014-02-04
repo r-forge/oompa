@@ -54,7 +54,7 @@ jetColors(N)
   respect to which color represents low values and which color
   represents high values. It is too late to fix this.
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
+\author{Kevin R. Coombes <krc@silicovore.com>}
 \seealso{\code{\link{rainbow}}, \code{\link{topo.colors}},
   \code{\link{terrain.colors}}, \code{\link{heat.colors}},
   \code{\link{rgb}}, \code{\link[graphics]{image}}, \code{\link{heatmap}},

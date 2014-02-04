@@ -36,7 +36,7 @@ f.qt(x, df, main="", cut=0, \dots)
   plots comparing the observed vector \code{x} with a T-distribution.
 }
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+  Kevin R. Coombes \email{krc@silicovore.com}
 }
 \seealso{
   \code{\link{points}}

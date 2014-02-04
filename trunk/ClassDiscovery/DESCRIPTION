@@ -1,11 +1,12 @@
 Package: ClassDiscovery
-Version: 3.0.0
-Date: 2013-07-03
+Version: 3.0.1
+Date: 2014-01-29
 Title: Classes and methods for "class discovery" with microarrays or proteomics
 Author: Kevin R. Coombes
-Maintainer: Kevin R. Coombes <kcoombes@mdanderson.org>
-Depends: R (>= 2.14), methods, stats, cluster, mclust, oompaBase (>= 3.0.1)
-Suggests: Biobase, xtable
+Maintainer: Kevin R. Coombes <krc@silicovore.com>
+Depends: R (>= 3.0), cluster, oompaBase (>= 3.0.1)
+Imports: methods, stats, mclust
+Suggests: Biobase, xtable, ProstateData
 Description: This package defines the classes used for "class
   discovery" problems in the OOMPA project. Class discovery primarily
   consists of unsupervised clustering methods with attempts to assess

@@ -31,7 +31,7 @@ critical (but invisible to the user) feature of the
 \Robject{class union} allowing you to use ``numeric'' or ``NULL''
 objects in the design of an S4 class.  More interesting user-visible
 features include alternative color schemes and vectorized matrix
-operations to speed the computation of row-by-row mweans, variances,
+operations to speed the computation of row-by-row means, variances,
 and t-tests. 
 
 \section{Getting Started}

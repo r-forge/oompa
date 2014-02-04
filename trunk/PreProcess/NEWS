@@ -6,6 +6,14 @@
         **************************************************
 
 
+                CHANGES IN R VERSION 3.0.1
+
+BUG FIXES
+
+    o	Made compatible with new R check steps that verify DESCRIPTION
+        and NAMESPACE dependencies.
+
+
                 CHANGES IN R VERSION 3.0.0
 
 
@@ -28,13 +36,6 @@ BREAKING CHANGES
         'oompaColors$EXPECTED'.
 
 
-        **************************************************
-        *                                                *
-        *              2.12 SERIES NEWS                  *
-        *                                                *
-        **************************************************
-
-
                 CHANGES IN R VERSION 2.12.2
 
 
@@ -51,26 +52,12 @@ BUG FIXES
     o   Corrected export of 'channelize' method.
 
 
-	**************************************************
-	*						 *
-	*	       2.10 SERIES NEWS			 *
-	*						 *
-	**************************************************
-
-
 		CHANGES IN R VERSION 2.10.0
 
 NEW FEATURES
 
     o	Removed the deprecated function 'stdize'. Use 'scale'
         instead.
-
-
-	**************************************************
-	*						 *
-	*	        2.9 SERIES NEWS			 *
-	*						 *
-	**************************************************
 
 
 		CHANGES IN R VERSION 2.9.0

@@ -1,8 +1,7 @@
 
-R version 2.15.1 (2012-06-22) -- "Roasted Marshmallows"
-Copyright (C) 2012 The R Foundation for Statistical Computing
-ISBN 3-900051-07-0
-Platform: x86_64-pc-mingw32/x64 (64-bit)
+R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"
+Copyright (C) 2013 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -20,24 +19,9 @@ Type 'q()' to quit R.
 > # load the data set
 > library(ClassDiscovery)
 Loading required package: cluster
-Loading required package: mclust
-by using mclust, invoked on its own or through another package,
-you accept the license agreement in the mclust LICENSE file
-and at http://www.stat.washington.edu/mclust/license.txt
-
-
 Loading required package: oompaBase
-Loading required package: PreProcess
-> require(TailRank) # for the prostate cancer data set with 2000 genes
-Loading required package: TailRank
-Loading required package: Biobase
-
-Welcome to Bioconductor
-
-  Vignettes contain introductory material. To view, type
-  'browseVignettes()'. To cite Bioconductor, see
-  'citation("Biobase")' and for packages 'citation("pkgname")'.
-
+> require(ProstateData) # for the prostate cancer data set with 2000 genes
+Loading required package: ProstateData
 > data(expression.data)
 > data(clinical.info)
 > # make sure the Status variable has "N"ormals as the first level
@@ -49,6 +33,45 @@ Welcome to Bioconductor
 > #################################################################
 > # create an exprSet
 > require(Biobase)
+Loading required package: Biobase
+Loading required package: BiocGenerics
+Loading required package: parallel
+
+Attaching package: 'BiocGenerics'
+
+The following objects are masked from 'package:parallel':
+
+    clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+    clusterExport, clusterMap, parApply, parCapply, parLapply,
+    parLapplyLB, parRapply, parSapply, parSapplyLB
+
+The following object is masked from 'package:ClassDiscovery':
+
+    as.data.frame
+
+The following object is masked from 'package:oompaBase':
+
+    as.data.frame
+
+The following object is masked from 'package:stats':
+
+    xtabs
+
+The following objects are masked from 'package:base':
+
+    Filter, Find, Map, Position, Reduce, anyDuplicated, append,
+    as.data.frame, as.vector, cbind, colnames, duplicated, eval, evalq,
+    get, intersect, is.unsorted, lapply, mapply, match, mget, order,
+    paste, pmax, pmax.int, pmin, pmin.int, rank, rbind, rep.int,
+    rownames, sapply, setdiff, sort, table, tapply, union, unique,
+    unlist
+
+Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    'browseVignettes()'. To cite Bioconductor, see
+    'citation("Biobase")', and for packages 'citation("pkgname")'.
+
 > # create a phenoData object and an exprSet
 > vl <- data.frame(labelDescription=dimnames(clinical.info)[[2]])
 > rownames(vl) <- as.character(vl[,1])
@@ -88,6 +111,7 @@ Welcome to Bioconductor
 +                     col=colorScheme[as.numeric(spc@splitter)])
 > 
 > ##################################
+> set.seed(644913)
 > bc <- BootstrapClusterTest(es, cutHclust, k = 12, nTimes=200, verbose=FALSE,
 +                            metric=metric, method=linkage)
 > summary(bc)
@@ -100,7 +124,7 @@ Call:
 
 Agreement levels:
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
- 0.0000  0.0000  0.0250  0.1874  0.2950  1.0000 
+ 0.0000  0.0000  0.0250  0.1877  0.3000  1.0000 
 > hist(bc)
 > image(bc, dendrogram=hc, col=blueyellow(64))
 > 
@@ -117,7 +141,7 @@ Call:
 
 Agreement levels:
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
- 0.0000  0.0000  0.0800  0.2075  0.3200  1.0000 
+ 0.0000  0.0000  0.0500  0.2077  0.3500  1.0000 
 > hist(pc)
 > image(pc, dendrogram=hc, col=blueyellow(64))
 > 
@@ -146,4 +170,4 @@ Agreement levels:
 > 
 > proc.time()
    user  system elapsed 
-  17.55    2.19   19.89 
+  29.28    4.32   33.61 

@@ -1,8 +1,7 @@
 
-R version 2.15.1 (2012-06-22) -- "Roasted Marshmallows"
-Copyright (C) 2012 The R Foundation for Statistical Computing
-ISBN 3-900051-07-0
-Platform: x86_64-pc-mingw32/x64 (64-bit)
+R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"
+Copyright (C) 2013 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -18,14 +17,8 @@ Type 'q()' to quit R.
 
 > library(ClassDiscovery)
 Loading required package: cluster
-Loading required package: mclust
-by using mclust, invoked on its own or through another package,
-you accept the license agreement in the mclust LICENSE file
-and at http://www.stat.washington.edu/mclust/license.txt
-
-
 Loading required package: oompaBase
-Loading required package: PreProcess
+> set.seed(320085)
 > # simulate data from two different classes
 > d1 <- matrix(rnorm(100*30, rnorm(100, 0.5)), nrow=100, ncol=30, byrow=FALSE)
 > d2 <- matrix(rnorm(100*20, rnorm(100, 0.5)), nrow=100, ncol=20, byrow=FALSE)
@@ -48,7 +41,7 @@ Call:
 
 Agreement levels:
      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
-0.0001352 0.0850100 0.3753000 0.3108000 0.5233000 0.6937000 
+0.0000367 0.0643400 0.3529000 0.2976000 0.5154000 0.6698000 
 > 
 > hist(fake)
 > 
@@ -63,4 +56,4 @@ Agreement levels:
 > 
 > proc.time()
    user  system elapsed 
-   0.57    0.06    0.67 
+   1.10    0.01    1.26 

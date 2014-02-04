@@ -36,7 +36,7 @@ mahalanobisQC(spca, N)
   Clin Chem 2003; 49:1615-23.
 }
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+  Kevin R. Coombes \email{krc@silicovore.com}
 }
 \examples{
 data(lungData)

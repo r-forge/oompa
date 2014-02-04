@@ -74,8 +74,7 @@ class for descriptions of the inherited methods and slots.
 }
 \references{OOMPA}
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org},
-  P. Roebuck \email{proebuck@mdanderson.org}
+  Kevin R. Coombes \email{krc@silicovore.com}
 }
 \seealso{
   \code{\link{Bum}},

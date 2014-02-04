@@ -88,13 +88,15 @@ through \Rfunction{distanceMatrix}, but some new ones are added. The
 first example clusters the samples using Pearson correlation
 (Figure~\ref{fig:pear}).  As you can see, the imposed three-group
 structure is visible in the dendrogram.  Similar results are obtained
-using Spearman rank correlation instead of the Pearson correlation
-(Figure~\ref{fig:spear}).
+using Spearman rank correlation (Figure~\ref{fig:spear}) or the
+``uncentered correlation'' that is the default in Mike Eisen's
+TreeView clustering software (Figure~\ref{fig:unc}) instead of the
+Pearson correlation.
 
 \begin{figure}
 <<pear,fig=TRUE>>=
 pearson <- hclust(distanceMatrix(dd, "pearson"), "average")
-plclust(pearson)
+plot(pearson)
 @ 
 \caption{Hierarchical clustering using Pearson correlation to define distances.}
 \label{fig:pear}
@@ -103,7 +105,7 @@ plclust(pearson)
 \begin{figure}
 <<spear,fig=TRUE>>=
 spear <- hclust(distanceMatrix(dd, "spearman"), "average")
-plclust(spear)
+plot(spear)
 @ 
 \caption{Hierarchical clustering using Spearman rank correlation to
   define distances.}
@@ -111,13 +113,13 @@ plclust(spear)
 \end{figure}
 
 \begin{figure}
-<<spear,fig=TRUE>>=
+<<unc,fig=TRUE>>=
 unc <- hclust(distanceMatrix(dd, "uncent"), "average")
-plclust(unc)
+plot(unc)
 @ 
 \caption{Hierarchical clustering using Eisen's uncentered correlation to
   define distances.} %'
-\label{fig:spear}
+\label{fig:unc}
 \end{figure}
 
 \subsection{Colored Clusters}
@@ -364,7 +366,7 @@ s
 
 \begin{figure}
 <<eclu,fig=TRUE>>=
-plclust(hclust(distanceMatrix(s, "pearson"), "average"))
+plot(hclust(distanceMatrix(s, "pearson"), "average"))
 @ 
 \caption{Hierarchical clustering of a sample ExpressionSet.}
 \label{fig:eclu}

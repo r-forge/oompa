@@ -29,8 +29,7 @@ dwil(q, m, n)
   exact) values of the density function.
 }
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org},
-  P. Roebuck \email{proebuck@mdanderson.org}
+  Kevin R. Coombes \email{krc@silicovore.com}
 }
 \seealso{
   \code{\link{MultiWilcoxonTest}}

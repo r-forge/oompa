@@ -115,8 +115,7 @@ TwoGroupStats(data, classes, name=comparison, name1=A, name2=B)
   The Statistician, 1983; 32: 307-317. 
 }
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org},
-  P. Roebuck \email{proebuck@mdanderson.org}
+  Kevin R. Coombes \email{krc@silicovore.com}
 }
 \seealso{
   \code{\link{MultiTtest}},

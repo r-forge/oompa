@@ -2,6 +2,7 @@
 exportClasses("numeric or NULL")
 
 # b01-generics
+import(methods)
 importFrom(graphics, "plot")
 importFrom(graphics, "hist")
 importFrom(graphics, "image")

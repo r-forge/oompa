@@ -27,7 +27,7 @@ microarrays or mass spectrometry proteomics.  The
 \Rpackage{ClassComparison} package in OOMPA provides tools to work on
 the ``class comparison'' problem.  Class comparison is one of the three
 primary types of applications of microarrays described by Richard Simon
-and colleagues.  The point os these problems is to identify genes that
+and colleagues.  The point of these problems is to identify genes that
 behave differently in known classes; in other words, a typical class
 comparison problem is to find the genes that are differentially
 expressed between two types of samples.
@@ -90,32 +90,32 @@ summary(bum)
 
 The default value of the \Rfunction{summary} command is not very
 enlightening, but we can get a graphical overview of the distribution.
-The region below the horizontal blue line in Figure~\ref{fig:bum}
+The region below the horizontal blue line in Figure~\ref{fig:histbum}
 represents the uniform component of the mixture (i.e., genes that are
 not differentially expressed); the region between the blue line and
 the green curve represents the beta component (i.e., genes that are
 differentially expressed).  If we set a threshold for significance
 using some cutoff on the $p$-value (such as the one indicated by the
-vertical purple line in Figure~\ref{fig:bum}), then we can divide the
+vertical purple line in Figure~\ref{fig:histbum}), then we can divide the
 area into four regions representing true positives, false positives,
 true negatives, and false negatives.  These areas can then be used to
 estimate the false discovery rate (FDR) as a function of the threshold
-(Figure~\ref{bum2}).
+(Figure~\ref{imagebum}).
 \begin{figure}
 <<fbum,fig=TRUE>>=
 hist(bum)
 abline(v=0.05, col="purple", lwd=2)
 @ 
 \caption{Results of the BUM analysis of the $p$-values.}
-\label{fig:bum}
+\label{fig:histbum}
 \end{figure}
 
 \begin{figure}
-<<fbum,fig=TRUE>>=
+<<fbum2,fig=TRUE>>=
 image(bum)
 @ 
 \caption{Results of the BUM analysis of the $p$-values.}
-\label{fig:bum2}
+\label{fig:imagebum}
 \end{figure}
 
 The usual application of this idea is to choose a threshold that
@@ -299,7 +299,7 @@ differentially expressed between known classes:
   method was introduced by Yakhini and Ben-Dor and applied by Bittner
   and colleagues in 2000. It has probably seen fewer applications than
   it deserves, which this implementation may help rectify.
-\item The smooth (regularized) t-test (\Rfunction{SmoothTtest}: This
+\item The smooth (regularized) t-test (\Rfunction{SmoothTtest}): This
   method was introduced by Baggerly and Coombes in 2001, but a large
   number of authors have proposed similar ideas.  The basic idea is
   that (even after log transformation) genes of similar intensity

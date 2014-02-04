@@ -111,8 +111,7 @@ Dudoit(data, classes, nPerm=1000, verbose=TRUE)
   John Wiley and Sons, 1993.
 }
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org},
-  P. Roebuck \email{proebuck@mdanderson.org}
+  Kevin R. Coombes \email{krc@silicovore.com}
 }
 \seealso{
   \code{\link{Bum}},

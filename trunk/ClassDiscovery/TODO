@@ -1,8 +1,10 @@
 [1] Do something sensible with the "exprSet-xampe.R" test script,
-which adds a dependency onthe TailRank package in n0rder to et a real
-dataset to illustrate te methods.
+which adds a dependency on the TailRank package in rder to get a real
+dataset to illustrate the methods.
 
 [2] Sort out the potential changes to the bimodalIndex code, where we
 considered (a) automating the selection of various models or (b)
-substituting a different package to fit the Em algorithm currently
+substituting a different package to fit the EM algorithm currently
 provided by mclust.
+
+[3] Write another vignette to go along with the bimodal index code.

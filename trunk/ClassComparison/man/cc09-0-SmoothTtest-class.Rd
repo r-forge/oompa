@@ -151,8 +151,7 @@ SmoothTtest(stats, aname='Group One', bname='Group Two',
   The Statistician, 1983; 32: 307-317. 
 }
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org},
-  P. Roebuck \email{proebuck@mdanderson.org}
+  Kevin R. Coombes \email{krc@silicovore.com}
 }
 \seealso{
   \code{\link{Bum}},

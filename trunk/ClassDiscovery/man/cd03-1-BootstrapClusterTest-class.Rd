@@ -70,7 +70,7 @@ BootstrapClusterTest(data, FUN, subsetSize, nTimes=100, verbose=TRUE, \dots)
   PNAS 2001; 98:8961-8965.
 }
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+  Kevin R. Coombes \email{krc@silicovore.com}
 }
 \seealso{
   \code{\link{ClusterTest}},

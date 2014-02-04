@@ -155,8 +155,7 @@ likelihoodBum(object)
   Genet Epidemiol 2002, 23: 70-86.
 }
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org},
-  P. Roebuck \email{proebuck@mdanderson.org}
+  Kevin R. Coombes \email{krc@silicovore.com}
 }
 \seealso{
   Two classes that produce lists of p-values that can (and often

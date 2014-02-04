@@ -23,8 +23,7 @@ rankSum(data, selector)
   \code{data} for which the \code{selector} is true. 
 }
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org},
-  P. Roebuck \email{proebuck@mdanderson.org}
+  Kevin R. Coombes \email{krc@silicovore.com}
 }
 \seealso{
   \code{\link{dwil}},

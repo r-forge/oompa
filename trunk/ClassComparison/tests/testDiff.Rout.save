@@ -1,8 +1,7 @@
 
-R version 2.15.1 (2012-06-22) -- "Roasted Marshmallows"
-Copyright (C) 2012 The R Foundation for Statistical Computing
-ISBN 3-900051-07-0
-Platform: x86_64-pc-mingw32/x64 (64-bit)
+R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"
+Copyright (C) 2013 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -17,17 +16,7 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(ClassComparison)
-Loading required package: splines
-Loading required package: Biobase
-
-Welcome to Bioconductor
-
-  Vignettes contain introductory material. To view, type
-  'browseVignettes()'. To cite Bioconductor, see
-  'citation("Biobase")' and for packages 'citation("pkgname")'.
-
 Loading required package: oompaBase
-Loading required package: PreProcess
 > 
 > nGenes <- 1000
 > nSamplesPerGroup <- 10
@@ -164,4 +153,4 @@ Smooth T test of Group One versus Group Two
 > 
 > proc.time()
    user  system elapsed 
-   3.91    0.01    3.93 
+  15.78    0.18   15.99 

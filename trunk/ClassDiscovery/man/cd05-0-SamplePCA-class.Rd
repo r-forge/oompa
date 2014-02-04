@@ -114,7 +114,7 @@ SamplePCA(data, splitter=0, usecor=FALSE, center=TRUE)
   columns in the input by the number of principal components.
 }
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+  Kevin R. Coombes \email{krc@silicovore.com}
 }
 \seealso{
   \code{\link{princomp}},

@@ -60,7 +60,7 @@ repeatedKmeans(data, k, nTimes)
   sums of squares, which is used as the measure of fitness.
 }
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+  Kevin R. Coombes \email{krc@silicovore.com}
 }
 \seealso{
   \code{\link{cutree}},

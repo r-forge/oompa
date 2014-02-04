@@ -106,8 +106,7 @@ SingleGroup(avg, sd, span=0.5, name='')
   J Comp Biol. 9:655-669, 2002.
 }
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org},
-  P. Roebuck \email{proebuck@mdanderson.org}
+  Kevin R. Coombes \email{krc@silicovore.com}
 }
 \seealso{
   \code{\link{SmoothTtest}}

@@ -1,8 +1,7 @@
 
-R version 2.15.1 (2012-06-22) -- "Roasted Marshmallows"
-Copyright (C) 2012 The R Foundation for Statistical Computing
-ISBN 3-900051-07-0
-Platform: x86_64-pc-mingw32/x64 (64-bit)
+R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"
+Copyright (C) 2013 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -18,39 +17,33 @@ Type 'q()' to quit R.
 
 > library(ClassDiscovery)
 Loading required package: cluster
-Loading required package: mclust
-by using mclust, invoked on its own or through another package,
-you accept the license agreement in the mclust LICENSE file
-and at http://www.stat.washington.edu/mclust/license.txt
-
-
 Loading required package: oompaBase
-Loading required package: PreProcess
+> set.seed(593996)
 > dd <- matrix(rnorm(100*5, rnorm(100)), nrow=100, ncol=5)
 > distanceMatrix(dd, 'pearson')
           1         2         3         4
-2 0.2208750                              
-3 0.2455437 0.1961790                    
-4 0.2151706 0.2515556 0.2595329          
-5 0.2493755 0.2649968 0.2675725 0.2970395
+2 0.2076737                              
+3 0.2695364 0.1801450                    
+4 0.2333953 0.1927620 0.1724315          
+5 0.2913239 0.2293372 0.2168545 0.2209858
 > distanceMatrix(dd, 'euclid')
          1        2        3        4
-2 13.62592                           
-3 14.91217 12.22556                  
-4 13.45782 12.95759 13.87519         
-5 14.91894 13.96411 14.66096 14.51576
+2 13.68928                           
+3 15.31751 12.94784                  
+4 14.23804 13.43355 12.51983         
+5 15.01881 13.96244 13.32337 13.21688
 > distanceMatrix(dd, 'sqrt')
           1         2         3         4
-2 0.6646427                              
-3 0.7007763 0.6263849                    
-4 0.6560040 0.7093033 0.7204622          
-5 0.7062230 0.7280066 0.7315361 0.7707652
+2 0.6444745                              
+3 0.7342157 0.6002415                    
+4 0.6832208 0.6209058 0.5872504          
+5 0.7633137 0.6772550 0.6585658 0.6648094
 > distanceMatrix(dd, 'weird')
           1         2         3         4
-2 0.6374207                              
-3 0.7028299 0.5573194                    
-4 0.6196956 0.7256264 0.7471869          
-5 0.7307825 0.7705185 0.7729099 0.8435170
+2 0.6316359                              
+3 0.7882128 0.5264999                    
+4 0.7029820 0.5481066 0.4937517          
+5 0.8321969 0.6762622 0.6302502 0.6460226
 > rm(dd) # cleanup
 > 
 > # simulate data from three different groups
@@ -72,4 +65,4 @@ Loading required package: PreProcess
 > 
 > proc.time()
    user  system elapsed 
-   0.39    0.01    0.39 
+   0.59    0.09    0.68 

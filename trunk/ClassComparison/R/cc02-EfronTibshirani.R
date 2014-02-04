@@ -1,7 +1,6 @@
 # Copyright (C) Kevin R. Coombes, 2007-2012
 
 # EfronTibshirani.R
-require(splines)
 
 rankSum <- function(data, selector) {
   x <- data[selector]
@@ -40,7 +39,6 @@ setClass('MultiWilcoxonTest',
 
 
 MultiWilcoxonTest <- function(data, classes, histsize=NULL) {
-  require(splines)
   call <- match.call()
   if(inherits(data, 'ExpressionSet')) {
     if(is.character(classes)) {

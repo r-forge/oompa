@@ -1,8 +1,7 @@
 
-R version 2.15.1 (2012-06-22) -- "Roasted Marshmallows"
-Copyright (C) 2012 The R Foundation for Statistical Computing
-ISBN 3-900051-07-0
-Platform: x86_64-pc-mingw32/x64 (64-bit)
+R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"
+Copyright (C) 2013 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -18,14 +17,8 @@ Type 'q()' to quit R.
 
 > library(ClassDiscovery)
 Loading required package: cluster
-Loading required package: mclust
-by using mclust, invoked on its own or through another package,
-you accept the license agreement in the mclust LICENSE file
-and at http://www.stat.washington.edu/mclust/license.txt
-
-
 Loading required package: oompaBase
-Loading required package: PreProcess
+> set.seed(587677)
 > # simulate data from three different sample groups
 > d1 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
 > d2 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
@@ -73,4 +66,4 @@ Gene dendrogram constructed with "average" linkage and "spearman" distance metri
 > 
 > proc.time()
    user  system elapsed 
-   0.82    0.10    0.98 
+   1.54    0.07    1.68 

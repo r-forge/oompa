@@ -69,7 +69,7 @@ PerturbationClusterTest(data, FUN, nTimes=100, noise=1, verbose=TRUE, \dots)
   PNAS 2001; 98:8961-8965.
 }
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+  Kevin R. Coombes \email{krc@silicovore.com}
 }
 \seealso{
   \code{\link{BootstrapClusterTest}},

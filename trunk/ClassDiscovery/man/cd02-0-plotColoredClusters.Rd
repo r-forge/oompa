@@ -3,9 +3,10 @@
 \alias{pcc}
 \title{Plot Dendrograms with Color-Coded Labels}
 \description{
-  Provides an interface to \code{\link{plclust}} that makes it easier to
-  plot dendrograms with labels that are color-coded, usually to indicate
-  the different levels of a factor.
+  Provides an interface to the \code{plot} method for
+  \code{\link{hclust}} that makes it easier to plot dendrograms with
+  labels that are color-coded, usually to indicate the different levels
+  of a factor.
 }
 \usage{
 plotColoredClusters(hd, labs, cols, cex = 0.8, main = "", line = 0, \dots)
@@ -48,7 +49,7 @@ pcc(hd, colors=NULL, \dots)
 \value{
   The function has no useful return value; it merely produces a plot.
 }
-\seealso{ \code{\link{plclust}}, \code{\link{hclust}},
+\seealso{ \code{\link{hclust}},
   \code{\link{Mosaic}}, \code{\link{PCanova}}, \code{\link{par}}
 }
 \examples{

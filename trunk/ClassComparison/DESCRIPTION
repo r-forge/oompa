@@ -1,14 +1,15 @@
 Package: ClassComparison
-Version: 3.0.0
-Date: 2013.07.03
+Version: 3.0.1
+Date: 2014-01-29
 Title: Classes and methods for "class comparison" problems on microarrays
 Author: Kevin R. Coombes
-Maintainer: Kevin R. Coombes <kcoombes@mdanderson.org>
+Maintainer: Kevin R. Coombes <krc@silicovore.com>
 Description: This package defines the classes used for "class
   comparison" problems in the OOMPA project. Class comparison includes
   tests for differential expression; see Simon's book for details on
   typical problem types.
-Depends: R (>= 2.14), methods, splines, Biobase, oompaBase (>= 3.0.1)
+Depends: R (>= 3.0), oompaBase (>= 3.0)
+Imports: methods, stats, splines, Biobase
 License: Artistic-2.0
 LazyLoad: yes
 biocViews: Microarray, DifferentialExpression, MultipleComparisons

@@ -156,7 +156,7 @@ PCanova(data, classes, labels, colors, usecor=TRUE)
   the CAMDA 2001 conference.
 }
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+  Kevin R. Coombes \email{krc@silicovore.com}
 }
 \seealso{
   \code{\link{SamplePCA}}

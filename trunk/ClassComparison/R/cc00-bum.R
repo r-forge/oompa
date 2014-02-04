@@ -7,8 +7,6 @@
 
 ####################################
 # new generic methods
-require('methods')
-
 if (!isGeneric("countSignificant"))
   setGeneric("countSignificant",
              function(object, ...) { standardGeneric("countSignificant") }
@@ -23,9 +21,6 @@ if (!isGeneric("cutoffSignificant"))
   setGeneric("cutoffSignificant",
              function(object, ...) { standardGeneric("cutoffSignificant") }
              )
-
-
-require("stats")
 
 if (!isGeneric("anova"))
   setGeneric("anova", function(object, ...) standardGeneric("anova"))

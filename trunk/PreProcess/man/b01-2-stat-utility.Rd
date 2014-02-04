@@ -33,7 +33,7 @@ f.oneway.rankings(r, s)
   cannot recall why we defined it or where we used it.
 }
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+  Kevin R. Coombes \email{krc@silicovore.com}
 }
 \examples{
 x <- rnorm(1000, 1, 2)

@@ -84,7 +84,7 @@ aspectHeatmap(x,
   The same as the \link{heatmap} function.
 }
 \author{
-  Kevin R. Coombes \email{kcoombes@mdanderson.org}
+  Kevin R. Coombes \email{krc@silicovore.com}
 }
 \seealso{
   \code{\link{heatmap}}
@@ -94,7 +94,8 @@ nC <- 30
 nR <- 1000
 fakeData <- matrix(rnorm(nC*nR), ncol=nC, nrow=nR)
 aspectHeatmap(fakeData, scale='none', hExp=2, wExp=1.4, margins=c(6,3))
-aspectHeatmap(fakeData, scale='none', hExp=2, wExp=1.4, margins=c(6,3), vlines=15.5, hlines=c(100, 300))
+aspectHeatmap(fakeData, scale='none', hExp=2, wExp=1.4, margins=c(6,3),
+              vlines=15.5, hlines=c(100, 300))
 }
 \keyword{hplot}
 

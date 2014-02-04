@@ -3,6 +3,9 @@
 ###
 
 # cc00-bum
+import(methods)
+import(splines)
+import(Biobase)
 
 importFrom(stats, "anova")
 importFrom(stats, "update")
