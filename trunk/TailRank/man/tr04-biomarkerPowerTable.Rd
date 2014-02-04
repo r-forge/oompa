@@ -5,7 +5,9 @@
   Compute an array of power tables for the tail-rank.test.
 }
 \usage{
-biomarkerPowerTable(G, N1=20, N2=seq(25, 250, by=25), psi = c(0.95, 0.99), conf=0.99, phi = seq(0.10, 0.50, by = 0.05), model="bb")
+biomarkerPowerTable(G, N1=20, N2=seq(25, 250, by=25),
+                    psi = c(0.95, 0.99), conf=0.99,
+                    phi = seq(0.10, 0.50, by = 0.05), model="bb")
 }
 \arguments{
   \item{G}{An integer; the number of genes being assessed as potential
@@ -34,7 +36,7 @@ biomarkerPowerTable(G, N1=20, N2=seq(25, 250, by=25), psi = c(0.95, 0.99), conf=
 \note{Default values of the optional arguments (\code{N}, \code{psi},
   \code{conf}, \code{phi})are included in the usage examples.
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
+\author{Kevin R. Coombes <krc@silicovore.com>}
 \seealso{\code{\link{TailRankTest}},
   \code{\link{tailRankPower}},
   \code{\link{biomarkerPowerTable}},

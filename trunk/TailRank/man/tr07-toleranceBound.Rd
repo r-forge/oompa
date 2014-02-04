@@ -65,7 +65,7 @@ John Wiley and Sons, Inc., New York.
 }
 \note{Lower tolerance bounds on quantiles with \code{psi} less than
   one-half can be obtained as \eqn{X_U = \bar{X} - k_{\gamma,1-\psi}s},}
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
+\author{Kevin R. Coombes <krc@silicovore.com>}
 \examples{
 N <- 50
 x <- rnorm(N)

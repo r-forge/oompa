@@ -41,13 +41,15 @@ As usual, we start by loading the library.
 library(TailRank)
 @ 
 
-The \Rpackage{TailRank} package comes with some sample data that we
+The \Rpackage{TailRank} package uses an auxiliary packae to supply
+sample data that we
 can use to illustrate the methods.  The sample data consists of a
 subset containing $2000$ genes from a prostate cancer study on glass
 arrays reported by Lapointe and colleagues [1].  The next set of
 commands loads the data.
 
 <<data>>=
+library(ProstateData)
 data(expression.data)
 data(gene.info)
 data(clinical.info)

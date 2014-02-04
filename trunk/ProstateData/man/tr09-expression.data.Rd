@@ -36,8 +36,7 @@
   \emph{Proc Natl Acad Sci U S A}, 101, 811--816.
 }
 \seealso{\code{\link{clinical.info}},
-  \code{\link{gene.info}},
-  \code{\link{TailRankTest}}
+  \code{\link{gene.info}}
 }
 \examples{
 data(expression.data)

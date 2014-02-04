@@ -52,7 +52,7 @@ BMPT(G, psi, conf, power)
     \item{summary(object, ...)}{Summarize the power table \code{object}.}
   }
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
+\author{Kevin R. Coombes <krc@silicovore.com>}
 \seealso{\code{\link{TailRankTest}},
   \code{\link{tailRankPower}},
   \code{\link{biomarkerPowerTable}}

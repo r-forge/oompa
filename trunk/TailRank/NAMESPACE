@@ -5,6 +5,7 @@
 
 ## Imported methods
 import(methods)
+import(Biobase)
 importFrom("oompaBase", "hist", "print", "summary")
 
 ## Public classes

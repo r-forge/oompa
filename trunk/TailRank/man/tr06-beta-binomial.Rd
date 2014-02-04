@@ -56,7 +56,7 @@ rbb(n, N, u, v)
 \seealso{ \code{\link{dbeta}} for the beta distribution and
   \code{\link{dbinom}} for the binomial distribution.
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
+\author{Kevin R. Coombes <krc@silicovore.com>}
 \examples{
 # set up parameters
 w <- 10

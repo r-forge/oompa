@@ -34,7 +34,7 @@
   \item{\code{hist}}{Invisibly returns the TailRankTest object.}
   \item{\code{summary}}{Invisibly returns the TailRankTest object.}
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
+\author{Kevin R. Coombes <krc@silicovore.com>}
 \seealso{\code{\link{TailRankTest-class}},
   \code{\link{TailRankTest}},
   \code{\link{tailRankPower}}

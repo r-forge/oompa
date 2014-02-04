@@ -7,7 +7,9 @@
   data set.
 }
 \usage{
-TailRankTest(data, classes, specificity = 0.95, tolerance = 0.50, model=c("bb", "betabinomial", "binomial"), confidence = 0.95, direction = "up")
+TailRankTest(data, classes, specificity = 0.95, tolerance = 0.50,
+             model=c("bb", "betabinomial", "binomial"),
+             confidence = 0.95, direction = "up")
 }
 \arguments{
   \item{data}{A matrix or data.frame containing numerical measurements on
@@ -48,7 +50,7 @@ desired family-wise error rate.
   \link[=TailRankTest-class]{TailRankTest}.
 }
 \references{http://bioinformatics.mdanderson.org}
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
+\author{Kevin R. Coombes <krc@silicovore.com>}
 \seealso{\code{\link{TailRankTest-class}},
   \code{\link{tailRankPower}},
   \code{\link{biomarkerPowerTable}},

@@ -43,8 +43,7 @@
   \emph{Proc Natl Acad Sci U S A}, 101, 811--816.
 }
 \seealso{\code{\link{expression.data}},
-  \code{\link{gene.info}},
-  \code{\link{TailRankTest}}
+  \code{\link{gene.info}}
 }
 \examples{
 data(clinical.info)

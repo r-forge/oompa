@@ -6,8 +6,11 @@
   Compute the significance level and the power of a tail-rank test.
 }
 \usage{
-tailRankPower(G, N1, N2, psi, phi, conf = 0.95, model=c("bb", "betabinom", "binomial"))
-tailRankCutoff(G, N1, N2, psi, conf, model=c("bb", "betabinom", "binomial"), method=c('approx', 'exact'))
+tailRankPower(G, N1, N2, psi, phi, conf = 0.95,
+              model=c("bb", "betabinom", "binomial"))
+tailRankCutoff(G, N1, N2, psi, conf,
+               model=c("bb", "betabinom", "binomial"),
+               method=c('approx', 'exact'))
                            
 }
 %- maybe also 'usage' for other objects documented here.
@@ -71,7 +74,7 @@ our paper on the tail-rank test.
   that is the power of the tail-rank test to detect a marker with
   true sensitivity equal to \eqn{phi}.
 }
-\author{Kevin R. Coombes <kcoombes@mdanderson.org>}
+\author{Kevin R. Coombes <krc@silicovore.com>}
 \seealso{\code{\link{TailRankTest}},
   \code{\link{tailRankPower}},
   \code{\link{biomarkerPowerTable}},
