@@ -8,6 +8,10 @@
 
 		CHANGES IN R VERSION 3.0.1
 
+GENERAL
+
+    o	Moved to R-Forge.
+
 BUG FIXES
 
     o	Made compatible with new R check steps that verify DESCRIPTION
