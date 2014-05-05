@@ -7,4 +7,6 @@ considered (a) automating the selection of various models or (b)
 substituting a different package to fit the EM algorithm currently
 provided by mclust.
 
-[3] Write another vignette to go along with the bimodal index code.
+[3] Write another vignette to go along with the bimodal index code. --
+Isn't it time to actually finish this? Or at least start it? Should we
+move this to another package?
