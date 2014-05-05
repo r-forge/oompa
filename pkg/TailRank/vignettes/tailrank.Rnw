@@ -41,7 +41,7 @@ As usual, we start by loading the library.
 library(TailRank)
 @ 
 
-The \Rpackage{TailRank} package uses an auxiliary packae to supply
+The \Rpackage{TailRank} package uses an auxiliary package to supply
 sample data that we
 can use to illustrate the methods.  The sample data consists of a
 subset containing $2000$ genes from a prostate cancer study on glass
@@ -67,7 +67,8 @@ there is a natural order to this status in terms of the severity of
 the disease, we are going to make certain that it is used:
 
 <<summary>>=
-clinical.info$Status <- ordered(clinical.info$Status, levels=c("N", "T", "L"))
+clinical.info$Status <- ordered(clinical.info$Status, 
+                                levels=c("N", "T", "L"))
 summary(clinical.info)
 @ 
 
