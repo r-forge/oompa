@@ -46,6 +46,7 @@ the BioConductor \Rpackage{Biobase} package.  For the first set of
 examples in this vignette, we will use simulated data that represents
 different groups of samples:
 <<simu>>=
+set.seed(6781252) # for reproducibility
 nGenes <- 5000
 nSamp <- 15
 nDif <- 150
@@ -53,7 +54,8 @@ delta <- 1
 fake.class <- factor(rep(c('A', 'B'), each=nSamp))
 fake.data <- matrix(rnorm(nGenes*nSamp*2), nrow=nGenes, ncol=2*nSamp)
 fake.data[1:nDif, 1:nSamp] <- fake.data[1:nDif, 1:nSamp] + delta
-fake.data[(nDif+1):(2*nDif), 1:nSamp] <- fake.data[(nDif+1):(2*nDif), 1:nSamp] - delta
+fake.data[(nDif+1):(2*nDif), 1:nSamp] <- fake.data[(nDif+1):(2*nDif),
+                                                   1:nSamp] - delta
 @ 
 
 \section{Gene-by-gene t-tests}
@@ -100,7 +102,7 @@ vertical purple line in Figure~\ref{fig:histbum}), then we can divide the
 area into four regions representing true positives, false positives,
 true negatives, and false negatives.  These areas can then be used to
 estimate the false discovery rate (FDR) as a function of the threshold
-(Figure~\ref{imagebum}).
+(Figure~\ref{fig:imagebum}).
 \begin{figure}
 <<fbum,fig=TRUE>>=
 hist(bum)
@@ -113,6 +115,7 @@ abline(v=0.05, col="purple", lwd=2)
 \begin{figure}
 <<fbum2,fig=TRUE>>=
 image(bum)
+
 @ 
 \caption{Results of the BUM analysis of the $p$-values.}
 \label{fig:imagebum}
@@ -202,11 +205,11 @@ abline(h=0)
 
 \begin{figure}
 <<wil3,fig=TRUE>>=
-plot(mw, prior=0.94, signif=0.9)
+plot(mw, prior=0.92, signif=0.9)
 abline(h=0)
 @ 
 \caption{Plot of the posterior probability of being differentially
-  expressed, assuming \textit{a priori} that $94\%$ of the genes are
+  expressed, assuming \textit{a priori} that $92\%$ of the genes are
   not different.}
 \label{fig:wil3}
 \end{figure}
