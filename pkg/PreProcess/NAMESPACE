@@ -1,3 +1,6 @@
+import(methods)
+import(oompaBase)
+
 # b00-generics
 exportMethods("analyze")
 exportMethods("process")
