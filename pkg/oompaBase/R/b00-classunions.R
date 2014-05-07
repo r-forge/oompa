@@ -1,4 +1,4 @@
-# Copyright (C) Kevin R. Coombes, 2007-2012
+# Copyright (C) Kevin R. Coombes, 2007-2014
 
 #########################################################
 ## NEW CLASS UNION
@@ -25,4 +25,3 @@
 require(methods)
 
 setClassUnion('numeric or NULL', c('numeric', 'NULL'))
-
