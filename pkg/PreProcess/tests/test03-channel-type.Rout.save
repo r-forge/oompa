@@ -1,8 +1,7 @@
 
-R version 2.15.1 (2012-06-22) -- "Roasted Marshmallows"
-Copyright (C) 2012 The R Foundation for Statistical Computing
-ISBN 3-900051-07-0
-Platform: x86_64-pc-mingw32/x64 (64-bit)
+R version 3.1.0 (2014-04-10) -- "Spring Dance"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -21,57 +20,25 @@ Type 'q()' to quit R.
 Loading required package: oompaBase
 > 
 > x <- ChannelType('Affymetrix', 'oligo', 100, 100, 'fluor')
+> x
+Microarray type: Affymetrix oligo 
+Labeled with: fluor 
 > print(x)
 Microarray type: Affymetrix oligo 
 Labeled with: fluor 
-> 
 > summary(x)
-An object of class "ChannelType"
-Slot "maker":
-[1] "Affymetrix"
-
-Slot "model":
-[1] "oligo"
-
-Slot "nCol":
-[1] 100
-
-Slot "nRow":
-[1] 100
-
-Slot "glow":
-[1] "fluor"
-
-Slot "design":
-[1] ""
-
+Microarray type: Affymetrix oligo 
+Labeled with: fluor 
 Design size: 100 by 100 
 Design information object:  
 > 
 > y <- setDesign(x, 'fake.design')
-> print(y)
+> y
 Microarray type: Affymetrix oligo 
 Labeled with: fluor 
 > summary(y)
-An object of class "ChannelType"
-Slot "maker":
-[1] "Affymetrix"
-
-Slot "model":
-[1] "oligo"
-
-Slot "nCol":
-[1] 100
-
-Slot "nRow":
-[1] 100
-
-Slot "glow":
-[1] "fluor"
-
-Slot "design":
-[1] "fake.design"
-
+Microarray type: Affymetrix oligo 
+Labeled with: fluor 
 Design size: 100 by 100 
 Design information object: fake.design 
 > d <- getDesign(y)
@@ -84,4 +51,4 @@ NULL
 > 
 > proc.time()
    user  system elapsed 
-   0.18    0.09    0.28 
+   0.40    0.01    0.43 

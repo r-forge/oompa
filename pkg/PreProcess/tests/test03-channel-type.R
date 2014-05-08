@@ -2,12 +2,12 @@
 library(PreProcess)
 
 x <- ChannelType('Affymetrix', 'oligo', 100, 100, 'fluor')
+x
 print(x)
-
 summary(x)
 
 y <- setDesign(x, 'fake.design')
-print(y)
+y
 summary(y)
 d <- getDesign(y)
 d

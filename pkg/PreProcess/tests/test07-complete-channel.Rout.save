@@ -1,8 +1,7 @@
 
-R version 2.15.1 (2012-06-22) -- "Roasted Marshmallows"
-Copyright (C) 2012 The R Foundation for Statistical Computing
-ISBN 3-900051-07-0
-Platform: x86_64-pc-mingw32/x64 (64-bit)
+R version 3.1.0 (2014-04-10) -- "Spring Dance"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -31,25 +30,8 @@ Loading required package: oompaBase
 > rm(v, b, s, ct)
 > 
 > summary(x)
-An object of class "ChannelType"
-Slot "maker":
-[1] "user"
-
-Slot "model":
-[1] "random"
-
-Slot "nCol":
-[1] 100
-
-Slot "nRow":
-[1] 100
-
-Slot "glow":
-[1] "fake"
-
-Slot "design":
-[1] ""
-
+Microarray type: user random 
+Labeled with: fake 
 [1] "fraud"
       vol                 bkgd            svol        
  Min.   :    0.066   Min.   :33.61   Min.   :    0.0  
@@ -72,6 +54,10 @@ Slot "design":
 > summary(b)
 background-corrected signal fraud, a microarray channel object
 Parent object: x 
+Microarray type: user random 
+Labeled with: fake 
+Design size: 100 by 100 
+Design information object:  
 History:
 	 Foreground - Background (using object: PROC.NEG.CORRECTED.SIGNAL) with parameter = 0 
 
@@ -82,6 +68,10 @@ History:
 > summary(q)
 log normalized background-corrected signal fraud, a microarray channel object
 Parent object: x 
+Microarray type: user random 
+Labeled with: fake 
+Design size: 100 by 100 
+Design information object:  
 History:
 	 Foreground - Background (using object: PROC.NEG.CORRECTED.SIGNAL) with parameter = 0 
 	 Default channel processing (using pipeline: PIPELINE.STANDARD) 
@@ -96,6 +86,10 @@ History:
 > summary(q)
 log normalized signal fraud, a microarray channel object
 Parent object: object 
+Microarray type: user random 
+Labeled with: fake 
+Design size: 100 by 100 
+Design information object:  
 History:
 	 Foreground intensity (using object: proc) with parameter = 0 
 	 Global normalization (using object: proc) with parameter = 0 
@@ -110,4 +104,4 @@ History:
 > 
 > proc.time()
    user  system elapsed 
-   0.42    0.09    0.54 
+   0.84    0.01    0.85 

@@ -62,6 +62,12 @@ setMethod('print', signature(x='Channel'),
   print(x@x, ...)
 })
 
+setMethod('show', signature(object='Channel'),
+          function(object) {
+  print(object@type)
+  print(object@x)
+})
+
 # The image method for a slide produces a cartoon of the geographically
 # arranged values for each channel.
 # Quantiles are reported in the subtitle of each figure.

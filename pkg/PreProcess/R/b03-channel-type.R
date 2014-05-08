@@ -23,9 +23,15 @@ setMethod('print', signature(x='ChannelType'),
   cat(paste('Labeled with:', x@glow), '\n')
 })
 
+setMethod('show', signature(object='ChannelType'),
+          function(object) {
+  cat(paste('Microarray type:', object@maker, object@model, '\n'))
+  cat(paste('Labeled with:', object@glow), '\n')
+})
+
 setMethod('summary', signature(object='ChannelType'),
           function(object, ...) {
-  print(object)
+  show(object)
   cat("Design size:", object@nCol, "by", object@nRow, "\n")
   cat("Design information object:", object@design, "\n")
 })

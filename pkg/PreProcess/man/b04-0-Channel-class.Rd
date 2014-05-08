@@ -5,6 +5,7 @@
 \alias{hist,Channel-method}
 \alias{summary,Channel-method}
 \alias{print,Channel-method}
+\alias{show,Channel-method}
 \alias{image,Channel-method}
 \docType{class}
 \title{Class "Channel"}
@@ -20,6 +21,7 @@ Channel(parent, name, type, vec)
 \S4method{hist}{Channel}(x, breaks=67, xlab=x@name, main=x@parent, \dots)
 \S4method{summary}{Channel}(object, \dots)
 \S4method{print}{Channel}(x, \dots)
+\S4method{show}{Channel}(object)
 \S4method{image}{Channel}(x, main=x@name, sub=NULL, \dots)
 }
 \arguments{
@@ -69,6 +71,8 @@ Channel(parent, name, type, vec)
 \section{Methods}{
   \describe{
     \item{print(object, \dots)}{Print all the data on the object. Since
+      this includes the entire data vector, you rarely want to do this.}
+    \item{show(object)}{Print all the data on the object. Since
       this includes the entire data vector, you rarely want to do this.}
     \item{summary(object, \dots)}{Write out a summary of the object.}
     \item{plot(object, \dots)}{Produce a scatter plot of the measurement

@@ -2,6 +2,7 @@
 \alias{CompleteChannel-class}
 \alias{CompleteChannel}
 \alias{print,CompleteChannel-method}
+\alias{show,CompleteChannel-method}
 \alias{summary,CompleteChannel-method}
 \alias{channelize,CompleteChannel-method}
 \alias{plot,CompleteChannel,missing-method}
@@ -27,6 +28,7 @@
 \usage{
 CompleteChannel(name, type, data)
 \S4method{print}{CompleteChannel}(x, \dots)
+\S4method{show}{CompleteChannel}(object)
 \S4method{summary}{CompleteChannel}(object, \dots)
 \S4method{as.data.frame}{CompleteChannel}(x, row.names=NULL, optional=FALSE)
 \S4method{plot}{CompleteChannel,missing}(x, main=x@name, useLog=FALSE, \dots)
@@ -70,6 +72,8 @@ CompleteChannel(name, type, data)
 \section{Methods}{
   \describe{
     \item{print(x, \dots)}{Print all the data on the object. Since
+      this includes the data frame, you rarely want to do this.}
+    \item{show(object)}{Print all the data on the object. Since
       this includes the data frame, you rarely want to do this.}
     \item{summary(object, \dots)}{Write out a summary of the object.}
     \item{as.data.frame(x,row.names=NULL, optional=FALSE)}{Convert the

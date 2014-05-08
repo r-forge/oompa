@@ -2,6 +2,7 @@
 \alias{ChannelType-class}
 \alias{ChannelType}
 \alias{print,ChannelType-method}
+\alias{show,ChannelType-method}
 \alias{summary,ChannelType-method}
 \alias{setDesign}
 \alias{getDesign}
@@ -15,6 +16,7 @@ ChannelType(mk, md, nc, nr, gl, design="")
 setDesign(object, design)
 getDesign(object)
 \S4method{print}{ChannelType}(x, \dots)
+\S4method{show}{ChannelType}(object)
 \S4method{summary}{ChannelType}(object, \dots)
 }
 \arguments{
@@ -81,6 +83,7 @@ getDesign(object)
 \section{Methods}{
   \describe{
     \item{print(x, \dots)}{Prints all the information in the object}
+    \item{show(object)}{Prints all the information in the object}
     \item{summary(object, \dots)}{Writes out a summary of the object}
   }
 }
@@ -107,8 +110,8 @@ getDesign(object)
 showClass("ChannelType")
 
 x <- ChannelType('Affymetrix', 'oligo', 100, 100, 'fluor')
+x
 print(x)
-
 summary(x)
 
 y <- setDesign(x, 'fake.design')

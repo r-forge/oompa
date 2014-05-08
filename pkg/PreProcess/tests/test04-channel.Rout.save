@@ -1,8 +1,7 @@
 
-R version 2.15.1 (2012-06-22) -- "Roasted Marshmallows"
-Copyright (C) 2012 The R Foundation for Statistical Computing
-ISBN 3-900051-07-0
-Platform: x86_64-pc-mingw32/x64 (64-bit)
+R version 3.1.0 (2014-04-10) -- "Spring Dance"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -35,6 +34,10 @@ Loading required package: oompaBase
 > summary(subbed)
 fraud, a microarray channel object
 Parent object: NA 
+Microarray type: user random 
+Labeled with: fake 
+Design size: 100 by 100 
+Design information object:  
 History:
 	 Channel(parent = "", name = "fraud", type = ct, vec = s) 
 
@@ -43,6 +46,10 @@ History:
 > summary(raw)
 fraud, a microarray channel object
 Parent object: NA 
+Microarray type: user random 
+Labeled with: fake 
+Design size: 100 by 100 
+Design information object:  
 History:
 	 Channel(parent = "", name = "fraud", type = ct, vec = v) 
 
@@ -62,4 +69,4 @@ History:
 > 
 > proc.time()
    user  system elapsed 
-   0.53    0.09    0.67 
+   0.98    0.07    1.04 

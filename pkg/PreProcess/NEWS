@@ -6,6 +6,13 @@
         **************************************************
 
 
+                CHANGES IN R VERSION 3.0.3
+
+GENERAL
+
+    o	Added a 'show' method that is basically the same as
+        'print'. Updated test scripts accordingly. 
+
                 CHANGES IN R VERSION 3.0.1
 
 GENERAL

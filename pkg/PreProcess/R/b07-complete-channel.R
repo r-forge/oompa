@@ -35,6 +35,13 @@ setMethod('print', signature(x='CompleteChannel'),
 	print(x@data, ...)
 })
 
+setMethod('show', signature(object='CompleteChannel'),
+          function(object) {
+	print(object@type)
+	print(object@name)
+	print(object@data)
+})
+
 setMethod('summary', signature(object='CompleteChannel'),
           function(object, ...) {
 	print(object@type)
