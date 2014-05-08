@@ -4,6 +4,7 @@
 \alias{as.data.frame,TwoGroupStats-method}
 \alias{plot,TwoGroupStats,missing-method}
 \alias{print,TwoGroupStats-method}
+\alias{show,TwoGroupStats-method}
 \alias{summary,TwoGroupStats-method}
 \docType{class}
 \title{Class "TwoGroupStats"}
@@ -16,6 +17,7 @@ TwoGroupStats(data, classes, name=comparison, name1=A, name2=B)
 \S4method{as.data.frame}{TwoGroupStats}(x, row.names=NULL, optional=FALSE)
 \S4method{summary}{TwoGroupStats}(object, \dots)
 \S4method{print}{TwoGroupStats}(x, \dots)
+\S4method{show}{TwoGroupStats}(object)
 \S4method{plot}{TwoGroupStats,missing}(x, main=x@name, useLog=FALSE, \dots)
 }
 \arguments{
@@ -90,6 +92,7 @@ TwoGroupStats(data, classes, name=comparison, name1=A, name2=B)
       summary, since the whole object is almost always more than you
       really want to see. If you insist on printing everything, use
       \code{as.data.frame}.)}
+    \item{show(object)}{Print the object (same as print method).)}
     \item{plot(x, main=x@name, useLog=FALSE, \dots)}{This function
       actually produces six different plots of the data, so it is
       usually wrapped by a graphical layout command like

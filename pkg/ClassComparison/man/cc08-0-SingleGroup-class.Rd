@@ -4,6 +4,7 @@
 \alias{as.data.frame,SingleGroup-method}
 \alias{plot,SingleGroup,missing-method}
 \alias{print,SingleGroup-method}
+\alias{show,SingleGroup-method}
 \alias{summary,SingleGroup-method}
 \docType{class}
 \title{Class "SingleGroup"}
@@ -16,6 +17,7 @@ SingleGroup(avg, sd, span=0.5, name='')
 \S4method{as.data.frame}{SingleGroup}(x, row.names=NULL, optional=FALSE)
 \S4method{summary}{SingleGroup}(object, \dots)
 \S4method{print}{SingleGroup}(x, \dots)
+\S4method{show}{SingleGroup}(object)
 \S4method{plot}{SingleGroup,missing}(x, multiple=3, ccl=0, main=x@name,
  xlab='Mean', ylab='Std Dev', xlim=0, ylim=0, \dots)
 }
@@ -79,6 +81,8 @@ SingleGroup(avg, sd, span=0.5, name='')
       printing or exporting.}
     \item{summary(object, \dots)}{Write out a summary of the object.}
     \item{print(x, \dots)}{Print the entire object. You never want to do
+      this.}
+    \item{show(object)}{Print the entire object. You never want to do
       this.}
     \item{plot(x, multiple=3, ccl=0, main=x@name, xlab='Mean', ylab='Std
     Dev', xlim=0, ylim=0, \dots)}{Produce a scatter plot of the standard

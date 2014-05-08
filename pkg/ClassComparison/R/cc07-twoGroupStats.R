@@ -66,6 +66,12 @@ setMethod('print', signature(x='TwoGroupStats'),
 	summary(as.data.frame(x), ...)
 })
 
+setMethod('show', signature(object='TwoGroupStats'),
+          function(object) {
+	cat('first group: ', object@n1, 'second group:', object@n2, '\n')
+	summary(as.data.frame(object))
+})
+
 .screwyPlot <- function(A, B, name='', mult=1) {
 # Input is two vectors of log expression data.  Produces a loess fit to
 # the difference in vectors as a function of position on the miroarray

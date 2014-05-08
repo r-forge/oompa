@@ -125,3 +125,10 @@ setMethod('print', signature(x='SingleGroup'),
 	print(xdf, ...)
       })
 
+setMethod('show', signature(object='SingleGroup'),
+          function(object) {
+	cat('Name:', object@name, '\n')
+        xdf <- as.data.frame(object)
+	print(xdf)
+      })
+
