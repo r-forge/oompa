@@ -1,6 +1,6 @@
 
-R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"
-Copyright (C) 2013 The R Foundation for Statistical Computing
+R version 3.1.0 (2014-04-10) -- "Spring Dance"
+Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -60,11 +60,11 @@ The following object is masked from 'package:stats':
 The following objects are masked from 'package:base':
 
     Filter, Find, Map, Position, Reduce, anyDuplicated, append,
-    as.data.frame, as.vector, cbind, colnames, duplicated, eval, evalq,
-    get, intersect, is.unsorted, lapply, mapply, match, mget, order,
-    paste, pmax, pmax.int, pmin, pmin.int, rank, rbind, rep.int,
-    rownames, sapply, setdiff, sort, table, tapply, union, unique,
-    unlist
+    as.data.frame, as.vector, cbind, colnames, do.call, duplicated,
+    eval, evalq, get, intersect, is.unsorted, lapply, mapply, match,
+    mget, order, paste, pmax, pmax.int, pmin, pmin.int, rank, rbind,
+    rep.int, rownames, sapply, setdiff, sort, table, tapply, union,
+    unique, unlist
 
 Welcome to Bioconductor
 
@@ -90,7 +90,7 @@ Welcome to Bioconductor
 > # Now we can start exercising the ClassDiscovery package
 > 
 > ##################################
-> windows(width=14, height=7, pointsize=10)
+> #windows(width=14, height=7, pointsize=10)
 > par(mfrow=c(2,2))
 > cluster3(es)
 > par(mfrow=c(1,1))
@@ -111,7 +111,6 @@ Welcome to Bioconductor
 +                     col=colorScheme[as.numeric(spc@splitter)])
 > 
 > ##################################
-> set.seed(644913)
 > bc <- BootstrapClusterTest(es, cutHclust, k = 12, nTimes=200, verbose=FALSE,
 +                            metric=metric, method=linkage)
 > summary(bc)
@@ -124,7 +123,7 @@ Call:
 
 Agreement levels:
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
- 0.0000  0.0000  0.0250  0.1877  0.3000  1.0000 
+ 0.0000  0.0000  0.0250  0.1883  0.3050  1.0000 
 > hist(bc)
 > image(bc, dendrogram=hc, col=blueyellow(64))
 > 
@@ -141,7 +140,7 @@ Call:
 
 Agreement levels:
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
- 0.0000  0.0000  0.0500  0.2077  0.3500  1.0000 
+ 0.0000  0.0000  0.0700  0.2101  0.3200  1.0000 
 > hist(pc)
 > image(pc, dendrogram=hc, col=blueyellow(64))
 > 
@@ -170,4 +169,4 @@ Agreement levels:
 > 
 > proc.time()
    user  system elapsed 
-  29.28    4.32   33.61 
+  78.26    1.98   82.43 

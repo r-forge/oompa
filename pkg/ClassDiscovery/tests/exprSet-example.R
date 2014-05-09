@@ -1,7 +1,7 @@
 #################################################################
 # load the data set
 library(ClassDiscovery)
-require(TailRank) # for the prostate cancer data set with 2000 genes
+require(ProstateData) # for the prostate cancer data set with 2000 genes
 data(expression.data)
 data(clinical.info)
 # make sure the Status variable has "N"ormals as the first level
@@ -31,7 +31,7 @@ rm(vl, pheno)
 # Now we can start exercising the ClassDiscovery package
 
 ##################################
-windows(width=14, height=7, pointsize=10)
+#windows(width=14, height=7, pointsize=10)
 par(mfrow=c(2,2))
 cluster3(es)
 par(mfrow=c(1,1))

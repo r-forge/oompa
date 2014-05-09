@@ -1,12 +1,8 @@
-[1] Do something sensible with the "exprSet-xampe.R" test script,
-which adds a dependency on the TailRank package in rder to get a real
-dataset to illustrate the methods.
-
-[2] Sort out the potential changes to the bimodalIndex code, where we
+[1] Sort out the potential changes to the bimodalIndex code, where we
 considered (a) automating the selection of various models or (b)
 substituting a different package to fit the EM algorithm currently
 provided by mclust.
 
-[3] Write another vignette to go along with the bimodal index code. --
+[2] Write another vignette to go along with the bimodal index code. --
 Isn't it time to actually finish this? Or at least start it? Should we
 move this to another package?
