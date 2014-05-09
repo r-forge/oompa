@@ -15,6 +15,7 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
+> set.seed(932451)
 > #################################################################
 > # load the data set
 > library(ClassDiscovery)
@@ -123,7 +124,7 @@ Call:
 
 Agreement levels:
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
- 0.0000  0.0000  0.0250  0.1883  0.3050  1.0000 
+ 0.0000  0.0000  0.0200  0.1834  0.2900  1.0000 
 > hist(bc)
 > image(bc, dendrogram=hc, col=blueyellow(64))
 > 
@@ -140,7 +141,7 @@ Call:
 
 Agreement levels:
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
- 0.0000  0.0000  0.0700  0.2101  0.3200  1.0000 
+ 0.0000  0.0000  0.0600  0.2095  0.3400  1.0000 
 > hist(pc)
 > image(pc, dendrogram=hc, col=blueyellow(64))
 > 
@@ -169,4 +170,4 @@ Agreement levels:
 > 
 > proc.time()
    user  system elapsed 
-  78.26    1.98   82.43 
+  71.29    1.52   73.38 

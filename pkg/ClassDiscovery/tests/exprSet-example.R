@@ -1,3 +1,4 @@
+set.seed(932451)
 #################################################################
 # load the data set
 library(ClassDiscovery)
