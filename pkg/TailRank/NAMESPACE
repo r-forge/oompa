@@ -2,7 +2,6 @@
 ### NAMESPACE
 ###
 
-
 ## Imported methods
 import(methods)
 import(Biobase)
