@@ -1,3 +1,7 @@
+###
+### NAMESPACE
+###
+
 import(methods)
 import(oompaBase)
 
