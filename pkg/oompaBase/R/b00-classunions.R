@@ -17,7 +17,6 @@
 ## So the fix is to make a separate package that defines the class union,
 ## and require that package in the one that wants to use it.
 
-
 # The 'numeric or NULL' class is used for the 'default' slot in
 # the 'Processor'' class. This is needed to allow either numeric
 # vectors or NULL values to be supplied and stored in the objects.
