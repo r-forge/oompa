@@ -1,0 +1,177 @@
+/* use these Google web fonts */
+@import url('http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic');
+@import url('http://fonts.googleapis.com/css?family=Droid+Sans:400,700');
+@import url('http://fonts.googleapis.com/css?family=Droid+Sans+Mono');
+@import url('http://fonts.googleapis.com/css?family=Kaushan+Script');
+
+/* layout */
+#logobar {
+    position: absolute;
+    top:  5px;
+    left: 5px;
+    width: 159px;
+}
+
+#mainarea {
+    position: absolute;
+    top:  0px;
+    left: 169px;
+    width: 840px;
+    border-left: 5px solid #ffbad2;
+    padding-left: 13px;
+}
+
+/* basic text */
+body {
+    background-color: #fafffd;
+    font-size : 100%;
+    font-family: 'Lora', Georgia, Utopia, serif;
+}
+p {
+    font-size: 100%;
+}
+
+/* headers */
+h1 {
+    font-family: 'Droid Sans', Arial, Helvetica, sans-serif;
+    font-size: 200%;
+    font-weight: bold;
+    color: #1657e6;
+}
+h2 {
+    font-family: 'Kaushan Script', cursive;
+    font-size: 175%;
+    color: #1657e6;
+}
+h3 {
+    font-family: 'Droid Sans', Arial, Helvetica, sans-serif;
+    font-size: 150%;
+    font-weight: bold;
+    color: #1657e6;
+}
+h4 {
+    font-family: 'Kaushan Script', cursive;
+    font-size: 130%;
+    color: #1657e6;
+}
+h5 {
+    font-family: 'Droid Sans', Arial, Helvetica, sans-serif;
+    font-size: 115%;
+    font-weight: bold;
+    color: #1657e6;
+}
+h6 {
+    font-family: 'Kaushan Script', cursive;
+    font-size: 100%;
+    color: #1657e6;
+}
+
+/* computer code and other monospace stuff */
+pre, code, kbd, samp {
+    font-family: 'Droid Sans Mono', 'Courier New', Courier, monospace;
+    font-size: 91%;
+}
+
+pre {
+    background-color: #cce6e6;
+    padding: 2px 2px 2px 10px;
+}
+
+mark {
+    background-color: #ccffff;
+}
+
+/* hyperlinks */
+a:link {
+    color: #ff0000;
+    text-decoration: underline;
+}
+a:visited {
+    color: #cc2518;
+    text-decoration: underline;
+}
+a:hover {
+    color: #80cccc;
+    text-decoration: underline;
+}
+
+.script {
+    font-family: 'Kaushan Script', cursive;
+}
+
+.number {
+    text-align: right;
+    font-family: 'Droid Sans Mono', 'Courier New', Courier, monospace;
+}
+
+TABLE, TH, TR, TD {
+    border-collapse: collapse;
+    padding: 2px 6px 2px 6px;
+    border: 1px solid black;
+}
+
+.padded {
+    border-collapse: collapse;
+    padding: 5px 12px 5px 12px;
+    border: 1px solid black;
+}
+
+.tagline {
+    position: relative;
+    border: 2px solid #ee3124;
+    padding: 0px 30px 0px 30px;
+    width: 600px;
+    left: 100px;
+    font-size: 120%;
+}
+
+/* STILL WORKING ON COLOR SCHEME */
+
+/* celeste (sky blue/bianchi green) */
+.kcel { background-color:  #b2ffff;}
+/* celeste polvere  (dusty) */
+.kcelpolvere { background-color:  #e6ffff;}
+/* celeste pallido (pale) */
+.kcelpallido { background-color:  #ccffff;}
+/* celeste velado (overcast) */
+.kcelvelado { background-color:  #cce6e6;}
+/* celeste opace (opaque) */
+.kcelopace { background-color:  #80cccc;}
+
+
+.kred    { background-color: #cc2518; }
+.kpink   { background-color: #ffbad2; } /* maglia rosa */
+
+.kblue   { background-color: #1657E6; }
+.ksky    { background-color: #00ccff; }
+
+.kblack  { background-color: #000000; }
+.kgray   { background-color: #877e71; }
+.kltgray { background-color: #cccccc; }
+
+.korange { background-color: #ffaa33; }
+.kltorange { background-color: #ffdd77; }
+
+.kgreen { background-color: #48AB36; }
+.klime  { background-color: #77ff77; }
+
+.kyellow { background-color: #EEEE00; }/* mailleux jaune */
+.kbutter { background-color: #FFFF77; }
+
+.kviolet   { background-color: #8833ff; }
+.klavender { background-color: #bb77ff; }
+
+.kindigo {
+/*    background-color: #661A99; */
+    background-color: #8811aa;
+}
+.kgoo {
+    background-color: #9944ff;
+}
+
+
+
+
+.temp {
+    padding: 20px;
+}
