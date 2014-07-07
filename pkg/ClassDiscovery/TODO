@@ -6,3 +6,7 @@ provided by mclust.
 [2] Write another vignette to go along with the bimodal index code. --
 Isn't it time to actually finish this? Or at least start it? Should we
 move this to another package?
+
+[3] When R-Forger gets the build process fixed so it finds "Suggests"
+packages locally, move 'ProstateData' back from Depends to Suggests.
+And get rid of the "import" directive in NAMESPACE.

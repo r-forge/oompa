@@ -6,6 +6,7 @@
 ## various generics
 import(methods)
 import(mclust)
+import(ProstateData)
 
 importMethodsFrom(oompaBase,
                   "hist", "image", "plot")
