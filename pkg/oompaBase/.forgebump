@@ -1,4 +1,4 @@
-Used to force RForge top rebuild the package for newer R versiosn when
+Used to force RForge to rebuild the package for newer R versions when
 nothing else in the package has changed.
 
 Last Bumped: 2014-11-07
