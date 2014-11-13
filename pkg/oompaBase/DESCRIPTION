@@ -1,6 +1,6 @@
 Package: oompaBase
-Version: 3.0.4
-Date: 2014-05-30
+Version: 3.1.0
+Date: 2014-11-13
 Title: Class unions, matrix operations, and color schemes for OOMPA
 Author: Kevin R. Coombes
 Maintainer: Kevin R. Coombes <krc@silicovore.com>
@@ -11,8 +11,8 @@ Description: This package defines the class unions that must be
   microarray and proteomics analysis) project to be defined and loaded.
   It also includes vectorized operations for row-by-row means,
   variances, and t-tests. Finally, it provides new color schemes.
-License: Artistic-2.0
+License: Apache License (== 2.0)
 LazyLoad: yes
 biocViews: Infrastructure
-URL: http://bioinformatics.mdanderson.org/Software/OOMPA
+URL: http://oompa.r-forge.r-project.org/
 
