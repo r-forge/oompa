@@ -7,6 +7,7 @@
 import(methods)
 import(mclust)
 import(ProstateData)
+import(oompaBase)
 
 importMethodsFrom(oompaBase,
                   "hist", "image", "plot")
