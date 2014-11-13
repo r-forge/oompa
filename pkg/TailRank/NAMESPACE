@@ -6,7 +6,7 @@
 import(methods)
 import(Biobase)
 import(ProstateData)
-importFrom("oompaBase", "hist", "print", "summary")
+import(oompaBase)
 
 ## Public classes
 exportClasses(BMPT)
