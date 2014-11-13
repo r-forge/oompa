@@ -1,0 +1,12 @@
+Package: oompaData
+Title: Data to Illustrate OOMPA Algorithms
+Version: 3.1.0
+Date: 2014-11-13
+Author: Kevin R. Coombes
+Description: This is a data-only package to provide example data for
+  other OOMPA packages.
+Maintainer: Kevin R. Coombes <krc@silicovore.com>
+Depends: R (>= 3.0)
+License: Apache License (== 2.0)
+LazyData: yes
+URL: http://oompa.r-forge.r-project.org/

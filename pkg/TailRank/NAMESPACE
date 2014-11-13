@@ -5,8 +5,8 @@
 ## Imported methods
 import(methods)
 import(Biobase)
-import(ProstateData)
 import(oompaBase)
+import(oompaData)
 
 ## Public classes
 exportClasses(BMPT)

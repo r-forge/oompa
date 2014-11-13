@@ -21,8 +21,8 @@ Type 'q()' to quit R.
 > library(ClassDiscovery)
 Loading required package: cluster
 Loading required package: oompaBase
-> require(ProstateData) # for the prostate cancer data set with 2000 genes
-Loading required package: ProstateData
+> require(oompaData) # for the prostate cancer data set with 2000 genes
+Loading required package: oompaData
 > data(expression.data)
 > data(clinical.info)
 > # make sure the Status variable has "N"ormals as the first level
@@ -170,4 +170,4 @@ Agreement levels:
 > 
 > proc.time()
    user  system elapsed 
-  71.29    1.52   73.38 
+  31.34    0.81   32.30 

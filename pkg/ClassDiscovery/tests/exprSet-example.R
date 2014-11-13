@@ -2,7 +2,7 @@ set.seed(932451)
 #################################################################
 # load the data set
 library(ClassDiscovery)
-require(ProstateData) # for the prostate cancer data set with 2000 genes
+require(oompaData) # for the prostate cancer data set with 2000 genes
 data(expression.data)
 data(clinical.info)
 # make sure the Status variable has "N"ormals as the first level

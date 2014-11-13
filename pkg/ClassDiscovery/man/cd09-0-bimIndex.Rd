@@ -71,6 +71,7 @@ bimodalIndex(dataset, verbose=TRUE)
   Kevin R. Coombes \email{krc@silicovore.com}
 }
 \examples{
+library(oompaData)
 data(lungData)
 bi <- bimodalIndex(lung.dataset, verbose=FALSE)
 summary(bi)

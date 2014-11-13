@@ -39,6 +39,7 @@ mahalanobisQC(spca, N)
   Kevin R. Coombes \email{krc@silicovore.com}
 }
 \examples{
+library(oompaData)
 data(lungData)
 spca <- SamplePCA(na.omit(lung.dataset))
 mc <- mahalanobisQC(spca, 2)

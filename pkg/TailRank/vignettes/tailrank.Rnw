@@ -49,7 +49,7 @@ arrays reported by Lapointe and colleagues [1].  The next set of
 commands loads the data.
 
 <<data>>=
-library(ProstateData)
+library(oompaData)
 data(expression.data)
 data(gene.info)
 data(clinical.info)
