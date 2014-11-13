@@ -1,9 +1,15 @@
 			Dear Emacs, please make this -*-Text-*- mode!
 	**************************************************
 	*						 *
-	*	       3.0 SERIES NEWS			 *
+	*	       3.1 SERIES NEWS			 *
 	*						 *
 	**************************************************
+
+		CHANGES IN R VERSION 3.1.0
+
+ADMINISTRATIVE
+
+    o	Changed the LICENSE to Apache 2.0.
 
 		CHANGES IN R VERSION 3.0.1
 
