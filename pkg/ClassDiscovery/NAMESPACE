@@ -62,7 +62,3 @@ export("Mosaic")
 ## cd08-pcanova
 exportClasses("PCanova")
 export("PCanova")
-
-## cd09-bimIndex
-export("bimodalIndex")
-

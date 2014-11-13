@@ -1,16 +1,23 @@
 			Dear Emacs, please make this -*-Text-*- mode!
 	**************************************************
 	*						 *
-	*	       3.1 SERIES NEWS			 *
+	*	       3.2 SERIES NEWS			 *
 	*						 *
 	**************************************************
 
+
+		CHANGES IN R VERSION 3.2.0
+
+BREAKING CHANGES
+
+    o	Finished creating a separate package for the bimodalIndex
+    	function, and so removed duplicate code from here.
 
 		CHANGES IN R VERSION 3.1.0
 
 BREAKING CHANGES
 
-    o	Refactored to move te lungData set out of this package into 
+    o	Refactored to move the lungData set out of this package into 
     	the newly organized "oompaData" package. 
 
 ADMINISTRATIVE
