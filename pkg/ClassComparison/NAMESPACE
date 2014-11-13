@@ -7,6 +7,7 @@
 import(methods)
 import(splines)
 import(Biobase)
+import(oompaBase)
 
 importFrom(stats, "anova")
 importFrom(stats, "update")
