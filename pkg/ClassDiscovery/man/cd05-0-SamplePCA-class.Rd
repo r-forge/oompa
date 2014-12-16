@@ -5,6 +5,8 @@
 \alias{predict,SamplePCA-method}
 \alias{screeplot,SamplePCA-method}
 \alias{summary,SamplePCA-method}
+\alias{identify,SamplePCA-method}
+\alias{text,SamplePCA-method}
 \docType{class}
 \title{Class "SamplePCA"}
 \description{
@@ -92,6 +94,11 @@ SamplePCA(data, splitter=0, usecor=FALSE, center=TRUE)
       chart of the variances explained by each principal component. }
     \item{summary}{\code{signature(object = SamplePCA)}: Write out a
       summary of the object.}
+    \item{identify}{\code{signature(object = SamplePCA)}: interactively
+      identify points in the plot of a \code{SamplePCA} object.}
+    \item{text}{\code{signature(object = SamplePCA)}: Add sample
+      identifiers to the scatter plot of a \code{SamplePCA} object,
+      using the base \code{text} function.}
   }
 }
 \details{
@@ -104,6 +111,15 @@ SamplePCA(data, splitter=0, usecor=FALSE, center=TRUE)
   of genes.  The \code{SamplePCA} class, by contrast, uses singular
   value decomposition (\code{\link{svd}}) on the original data matrix to
   compute the principal components.
+
+  The base functions \code{screeplot}, which produces  a barplot of the
+  percentage of variance explained by each component, and \code{plot},
+  which produces a scatter plot comparing two selected components
+  (defaulting to the first two), have been generalized as methods for
+  the \code{SamplePCA} class.  You can add sample labels to the scatter
+  plot using either the \code{text} or \code{identify} methods.  One
+  should, however, note that the current implementaiton of these methods
+  only works when plotting the first two components.
 }
 \value{
   The \code{SamplePCA} function constructs and returns an object of the

@@ -168,6 +168,14 @@ setMethod('screeplot', 'SamplePCA', function(x, N=NULL, ...) {
   barplot(x@variances[1:N]/sum(x@variances), ...)
 })
 
+setMethod("identify", "SamplePCA", function(x, ...) {
+    identify(x=x@scores[,1], y=x@scores[,2], labels=rownames(x@scores), ...)
+})
+
+setMethod("text", "SamplePCA", function(x, ...) {
+    text(x=x@scores[,1], y=x@scores[,2], , labels=rownames(x@scores), ...)
+})
+
 mahalanobisQC <- function(spca, N) {
   ss <- spca@scores[, 1:N]
   maha <- sapply(1:nrow(ss), function(i) {

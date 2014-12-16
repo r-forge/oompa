@@ -28,6 +28,10 @@ exportMethods("screeplot")
 importFrom(cluster, "pltree")
 exportMethods("pltree")
 
+importFrom(graphics, "identify")
+importFrom(graphics, "text")
+exportMethods("identify", "text")
+
 ## cd01-distance
 export("distanceMatrix")
 export("plotColoredClusters", "pcc")

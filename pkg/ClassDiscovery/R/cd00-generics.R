@@ -13,4 +13,12 @@ if (!isGeneric("screeplot"))
   setGeneric("screeplot", function(x, ...)
              standardGeneric("screeplot"))
 
+if (!isGeneric("identify"))
+  setGeneric("identify", function(x, ...)
+             standardGeneric("identify"))
+
+if (!isGeneric("text"))
+  setGeneric("text", function(x, ...)
+             standardGeneric("text"))
+
 

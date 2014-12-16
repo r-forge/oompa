@@ -1,10 +1,16 @@
 			Dear Emacs, please make this -*-Text-*- mode!
 	**************************************************
 	*						 *
-	*	       3.2 SERIES NEWS			 *
+	*	       3.3 SERIES NEWS			 *
 	*						 *
 	**************************************************
 
+
+		CHANGES IN R VERSION 3.w.0
+
+FEATURES
+
+    o	Added S4 methods "identify" and "text" for the SamplePCA class.
 
 		CHANGES IN R VERSION 3.2.0
 
