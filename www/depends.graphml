@@ -341,7 +341,7 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="30.0" width="68.0234375" x="605.8194506448413" y="-67.0"/>
-          <y:Fill color="#FFDD77" transparent="false"/>
+          <y:Fill color="#00CCFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" modelName="custom" textColor="#000000" visible="true" width="58.0234375" x="5.0" y="5.6494140625">drexplorer<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
