@@ -1,0 +1,30 @@
+supercurve/pkg/SuperCurve
+supercurve/pkg/SuperCurveGUI
+C:/rforge/firstsign/pkg/FirstSign
+C:/rforge/craac/pkg/CRAAC
+C:/rforge/accuploidy/pkg/AccuPloidy
+C:/rforge/arraycube/pkg/ArrayCube
+C:/rforge/arraycube/pkg/MINiML
+clonefinder/pkg/CloneFinder
+# barf
+C:/rforge/drexplorer/pkg/drexplorer
+# rewind
+oompa/pkg/oompaBase
+oompa/pkg/PreProcess
+oompa/pkg/ClassComparison
+oompa/pkg/oompaData
+oompa/pkg/ClassDiscovery
+oompa/pkg/TailRank
+classpred/pkg/BimodalIndex
+classpred/pkg/Modeler
+classpred/pkg/CrossValidate
+classpred/pkg/GenAlgo
+classpred/pkg/ClassPrediction
+nameneedle/pkg/NameNeedle
+umpire/pkg/Umpire
+siber/pkg/SIBER
+integirty/pkg/integIRTy
+thresher/pkg/Thresher
+supercurve/pkg/tclish
+supercurve/pkg/SlideDesignerGUI
+supercurve/pkg/SuperCurveSampleData
