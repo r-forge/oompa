@@ -5,12 +5,17 @@
     <title>OOMPA</title>
     <link href="bianchi.css" rel="stylesheet" type="text/css" />
   </head>
-
 <body>
 
 <!-- <img src="tuba3.gif" alt="OOMPA logo" width="262px"  height="156px" /> -->
 <div id="logobar">
   <img src="tuba2.gif" alt="OOMPA logo" height="262px" width="156px" />
+<br />
+<a href="#overview">Overview</a>
+<br />
+<a href="#install">Installation</a>
+<br />
+<a href="#source">Source Code</a>
 </div>
 <div id="mainarea">
 <h1>OOMPA</h1>
@@ -22,6 +27,17 @@ biology data. OOMPA uses S4 classes to construct object-oriented tools
 with a consistent user interface.
 </p>
 
+<p>
+All higher level analysis tools in OOMPA work with the expressionSet
+classes defined in <a href="http://bioconductor.org">BioConductor</a>.  
+The lower level processing tools offer an alternative to parts of
+BioConductor, but can also be used to enhance the existing BioConductor
+packages.
+</p>
+
+<a name="overview">
+<h3>Package Overview</h3>
+</a>
 
 <img src="depends.png" alt="Dependency Graph" />
 
@@ -33,6 +49,40 @@ DESCRIPTION file. Red arrows indicate a weaker relationship, reflected
 by a <code>Suggests</code> entry in the packager DESCRFIPTION file.
 </p>
 
+<a name="install">
+<h3>Installation</h3>
+</a>
+
+<p>
+The simplest way to install OOMPA packages is to start your local
+version of R and use the following commands:
+<pre>
+source("http://silicovore.com/OOMPA/oompaLite.R")
+oompaLite()
+</pre>
+The <code>oompaLite</code> command installs a small set of "base" OOMPA
+packages. To get a slightly larger set of (default) packages, you can
+execute the command:
+<pre>
+oompainstall()
+</pre>
+If you want to get absolutely everything (which may include some
+experimental packages with very little in the way of documentation), use
+the command:
+<pre>
+oompainstall(groupName="all")
+</pre>
+Alternatively, if you want more control over which packages get
+installed, execute the following command and select from the resulting
+list:
+<PRE>
+install.packages(repos="http://silicovore.com/OOMPA/")
+</PRE>
+</p>
+
+<a name="source">
+<h3>Source Code</h3>
+</a>
 <p>
 The source packages for OOMPA are available from  R-Forge.  To
 simplify package maintenance, the packages are separated into multiple
@@ -97,6 +147,8 @@ table below.
   <TD class="padded">Under Development</TD>
 </TR>
 </TABLE>
+
+
 
 <BR />
 <BR />
