@@ -1,0 +1,13 @@
+###
+### NAMESPACE
+###
+
+## Imported methods
+import(colorspace)
+import(rgl)
+
+## Public functions
+export(rancurves, ranpoints, uvscatter, luminance,
+       plothc, p3d, bp, bpHue, bpLuminance, bpran,
+       createPalette)
+
