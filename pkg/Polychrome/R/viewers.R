@@ -96,3 +96,12 @@ bpran  <- function(colorset,
   text(pts, 0.5, names(scramble), srt=90)
   invisible(pts)
 }
+
+makegray <- function(colorset) {
+  temp <- as(hex2RGB(colorset), "LUV")
+  tc <- temp@coords
+  luv <- LUV(tc[,1], 0, 0)
+  grayed <- hex(luv)
+  names(grayed) <- names(colorset)
+  grayed
+}

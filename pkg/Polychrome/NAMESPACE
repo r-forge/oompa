@@ -11,3 +11,5 @@ export(rancurves, ranpoints, uvscatter, luminance,
        plothc, p3d, bp, bpHue, bpLuminance, bpran,
        createPalette)
 
+export(kelly.colors, green.armytage.colors)
+
