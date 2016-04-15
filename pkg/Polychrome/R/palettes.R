@@ -153,8 +153,7 @@ createAlphabet <- function() {
 }
 
 isccNames <- function(colorset) {
-  iscc <- read.table("../data/iscc.txt", header=TRUE,
-                     sep="\t", as.is=TRUE, comment.char="")
+  data('iscc', package='Polychrome')
   munsell <- as(hex2RGB(iscc$Hex), "LUV")
   d3 <- function(y0) {
     temp <- sweep(munsell@coords, 2, y0, "-")

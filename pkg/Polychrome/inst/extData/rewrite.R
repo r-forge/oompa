@@ -20,6 +20,9 @@ longName <- unlist(sapply(1:length(foo), function(i) {
   f <- foo[[i]]
   paste(f[(ping[i]+1):pong[i]], collapse="_")
 }))
+ln <- strsplit(longName, ',')
+longName <- unlist(lapply(ln, function(x) x[1]))
 
-daft <- data.frame(shortName, longName, Hex=temp$V2)
-write.table(daft, file="iscc.txt", sep="\t", row.names=FALSE, quote=FALSE)
+iscc <- data.frame(shortName, longName, Hex=temp$V2)
+write.table(iscc, file="iscc.txt", sep="\t", row.names=FALSE, quote=FALSE)
+save(iscc, file="iscc.rda")
