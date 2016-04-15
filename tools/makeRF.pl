@@ -8,6 +8,7 @@ my $home = getcwd;
 # get command line arguments
 my $oompafiles = shift || "oompafiles.txt";
 my $tools = shift || "tools.cfg";
+my $startdir = shift;
 
 # TODO: allow cfg file to be passed on the command line ?
 # Assume file consists of lines of the form "KEY = VALUE"
@@ -24,7 +25,6 @@ die "'$tools' must define the 'miktex' location" unless $toolhash{miktex};
 die "'$tools' must define the 'qpdf' location" unless $toolhash{qpdf};
 die "'$tools' must define the 'gs' location" unless $toolhash{gs};
 
-
 my $Ver  = $toolhash{major};
 my $s    = $toolhash{point};
 my $arch = $toolhash{arch};
@@ -37,7 +37,7 @@ options(repos = r)
 rm(r)
 EOP
     ;
-my $profloc = $ENV{R_PROFILE_USER} = "$home/.Rprofile";
+my $profloc = $ENV{R_PROFILE_USER} || "$ENV{HOME}/.Rprofile";
 my $rmProfile = 0;
 if (!(-e $profloc)) {
     my $ok = open(PROF, ">$profloc");
@@ -65,6 +65,12 @@ while (my $line = <OOMPA>) {
 
 
 #####################################################
+if ($startdir) {
+    chdir($startdir) or die "Unable to change directory to '$startdir': $!\n";
+    $home = cwd;
+}
+print STDERR "\nStarting at '$home'\n\n";
+
 # remember the PATH where we started
 my $path = $ENV{PATH};
 print STDERR "start path:\n$path\n\n";
@@ -79,7 +85,7 @@ if (-e $buildDir) {
 
 # make sure there is a directory for binary packages
 my $archDir = "Binary-$Ver.$s";
-$archDir = "$archDir-$arch" if $arch;
+$archDir = "$archDir-$arch" if $arch; 
 if (-e $archDir) {
     die("'$archDir' exists and is not a directory") unless (-d $archDir);
 } else {
@@ -94,6 +100,7 @@ my $Rpath = "$toolhash{rdir}\\R-$Ver.$s\\bin\\$arch";
 my @paths = ($Rpath,
 	     "C:\\Rtools\\$Ver\\bin",
 	     "C:\\Rtools\\$Ver\\MinGW\\bin",
+	     "C:\\Rtools\\$Ver\\gcc-4.6.3\\bin",
 	     $toolhash{miktex},
 	     "C:\\Windows\\system32",
 	     "C:\\Windows",
