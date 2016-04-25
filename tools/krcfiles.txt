@@ -1,5 +1,6 @@
-oompa/pkg/Polychrome
+classpred/pkg/Modeler
 barf
+oompa/pkg/Polychrome
 younsimon/pkg/YounSimon2012
 HAPSEG
 ABSOLUTE
@@ -8,7 +9,6 @@ C:/Box/Box Sync/BetaModels
 thresher/pkg/Thresher
 clonefinder/pkg/CloneFinder
 deepcnv/pkg/DeepCNV
-barf
 oompa/pkg/oompaBase
 oompa/pkg/PreProcess
 oompa/pkg/ClassComparison
