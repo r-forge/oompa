@@ -12,10 +12,10 @@
 }
 \usage{
 matrixMean(x,na.rm=FALSE)
-matrixUnequalT(m, v)
-matrixPairedT(m, v, pf)
 matrixVar(x, xmean, na.rm=FALSE)
 matrixT(m, v, na.rm=FALSE)
+matrixUnequalT(m, v)
+matrixPairedT(m, v, pf)
 }
 \arguments{
   \item{x}{ a matrix }

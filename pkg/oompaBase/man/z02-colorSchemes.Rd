@@ -24,7 +24,7 @@ jetColors(N)
 }
 \details{
   The color maps that ship with R (see, for example,
-  \code{\link{terrain.colors}}) do not include the most common colors
+  \code{\link{terrain.colors}}) do not include the most common color
   maps used in publications in the microarray literature. This
   collection of color maps expands the available options.  The functions
   \code{redscale}, \code{greenscale}, and \code{bluescale} each range
