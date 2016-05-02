@@ -1,3 +1,5 @@
+# Copyright (C) Kevin R. Coombes, 2007-2016
+
 ##
 ## S3 or non-generics converted to S4
 ##
@@ -27,3 +29,12 @@ if (!isGeneric("summary"))
   setGeneric("summary",
              function(object, ...) standardGeneric("summary"))
 
+if (!isGeneric("predict"))
+  setGeneric("predict", function(object, ...) standardGeneric("predict"))
+
+if (!isGeneric("screeplot"))
+  setGeneric("screeplot", function(x, ...)
+             standardGeneric("screeplot"))
+
+if (!isGeneric("pltree"))
+  setGeneric("pltree", function(x, ...) standardGeneric("pltree"))

@@ -1,4 +1,4 @@
-# Copyright (C) Kevin R. Coombes, 2007-2014
+# Copyright (C) Kevin R. Coombes, 2007-2016
 
 #########################################################
 ## NEW CLASS UNION

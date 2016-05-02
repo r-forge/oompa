@@ -6,6 +6,8 @@ import(methods)
 importFrom(graphics, "plot")
 importFrom(graphics, "hist")
 importFrom(graphics, "image")
+importFrom(stats, "predict", "screeplot")
+importFrom(cluster, "pltree")
 
 exportMethods("plot")
 exportMethods("hist")
