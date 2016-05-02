@@ -1,14 +1,10 @@
-classpred/pkg/Modeler
 oompa/pkg/Polychrome
-barf
-younsimon/pkg/YounSimon2012
-HAPSEG
-ABSOLUTE
 thresher/pkg/PCDimension
-C:/Box/Box Sync/BetaModels
 thresher/pkg/Thresher
 clonefinder/pkg/CloneFinder
 deepcnv/pkg/DeepCNV
+
+# mature packages
 oompa/pkg/oompaBase
 oompa/pkg/PreProcess
 oompa/pkg/ClassComparison
@@ -17,24 +13,29 @@ oompa/pkg/TailRank
 oompa/pkg/ClassDiscovery
 classpred/pkg/BimodalIndex
 classpred/pkg/Modeler
-classpred/pkg/GenAlgo
 classpred/pkg/CrossValidate
+classpred/pkg/GenAlgo
 classpred/pkg/ClassPrediction
 nameneedle/pkg/NameNeedle
 umpire/pkg/Umpire
 siber/pkg/SIBER
 integirty/pkg/integIRTy
-thresher/pkg/PCDimension
-thresher/pkg/Thresher
-C:/KRC/rforge/craac/pkg/CRAAC
-C:/KRC/rforge/arraycube/pkg/ArrayCube
-C:/KRC/rforge/arraycube/pkg/MINiML
-C:/KRC/rforge/accuploidy/pkg/AccuPloidy
-C:/KRC/rforge/firstsign/pkg/FirstSign
 supercurve/pkg/tclish
 supercurve/pkg/SuperCurveSampleData
 supercurve/pkg/SuperCurve
 supercurve/pkg/SlideDesignerGUI
 supercurve/pkg/SuperCurveGUI
-C:/KRC/rforge/drexplorer/pkg/drexplorer
 
+# local files
+C:/Box/Box Sync/BetaModels
+C:/KRC/rforge/craac/pkg/CRAAC
+C:/KRC/rforge/arraycube/pkg/ArrayCube
+C:/KRC/rforge/arraycube/pkg/MINiML
+C:/KRC/rforge/accuploidy/pkg/AccuPloidy
+C:/KRC/rforge/firstsign/pkg/FirstSign
+younsimon/pkg/YounSimon2012
+HAPSEG
+ABSOLUTE
+
+# fix to usse git
+C:/KRC/rforge/drexplorer/pkg/drexplorer
