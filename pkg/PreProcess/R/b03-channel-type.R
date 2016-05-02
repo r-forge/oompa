@@ -1,4 +1,4 @@
-# Copyright (C) Kevin R. Coombes, 2007-2012
+# Copyright (C) Kevin R. Coombes, 2007-2016
 
 #################################################################
 # CHANNEL.TYPE		attributes: make, model, ncol, nrow, glow

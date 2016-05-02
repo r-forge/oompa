@@ -1,4 +1,4 @@
-# Copyright (C) Kevin R. Coombes, 2007-2012
+# Copyright (C) Kevin R. Coombes, 2007-2016
 
 # A "pipeline" represents a series of processors that should be applied
 # in order. You should think of a pipeline as a completely defined set

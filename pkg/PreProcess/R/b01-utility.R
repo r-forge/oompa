@@ -1,4 +1,4 @@
-# Copyright (C) Kevin R. Coombes, 2007-2012
+# Copyright (C) Kevin R. Coombes, 2007-2016
 
 ##########################################################
 # Graphical utilities
@@ -93,9 +93,3 @@ function(x, y, inf.rm=FALSE)
 }
 
 f.oneway.rankings <- function(r, s) { order(s)[r] }
-
-### use scale(x) instead!!
-#stdize <- function(x, ...) {
-#  .Deprecated("scale")
-#  scale(x, ...)
-#}

@@ -1,4 +1,4 @@
-# Copyright (C) Kevin R. Coombes, 2007-2012
+# Copyright (C) Kevin R. Coombes, 2007-2016
 
 # A "processor" represents a function that acts on the data of a
 # some object to process it in some way. The result is always

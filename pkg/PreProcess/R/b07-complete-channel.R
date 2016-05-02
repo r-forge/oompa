@@ -1,4 +1,4 @@
-# Copyright (C) Kevin R. Coombes, 2007-2012
+# Copyright (C) Kevin R. Coombes, 2007-2016
 
 ##########################################################################
 # COMPLETECHANNEL		attributes: name, type, data
@@ -59,7 +59,7 @@ setMethod('as.data.frame', signature(x='CompleteChannel'),
 # volume. These are returned as components of a list.
 setMethod('analyze', signature(object='CompleteChannel'),
           function(object, useLog=FALSE, ...) {
-  ch <- x@data
+  ch <- object@data
   if (useLog) {
     vwid <- 0.4
     bwid <- 0.3
