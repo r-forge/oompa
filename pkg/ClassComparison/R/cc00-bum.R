@@ -1,4 +1,4 @@
-# Copyright (C) Kevin R. Coombes, 2007-2012
+# Copyright (C) Kevin R. Coombes, 2007-2016
 
 # bum.R
 
@@ -58,6 +58,9 @@ Bum <- function(pvals, ...) {
   orig.pvals <- pvals
   if (any(is.na(pvals))) {
     pvals <- pvals[!is.na(pvals)]
+  }
+  if (any(pvals < 0) || any(pvals > 1)) {
+    stop("all p-values must be between 0 and 1")
   }
   if(min(pvals)==0) {
     min.nonzero <- min(pvals[pvals>0])
@@ -129,6 +132,9 @@ setClass('BumSummary',
 
 setMethod('summary', signature(object='Bum'),
           function(object, tau=0.01, ...) {
+  if (any(tau < 0) || any (tau > 1)) {
+    stop("tau must be between 0 and 1")
+  }
   Fhat <- object@lhat*tau + (1-object@lhat)*tau^object@ahat
   PA <- Fhat - object@pihat*tau
   PB <- 1 - Fhat - (1-tau)*object@pihat

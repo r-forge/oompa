@@ -18,4 +18,23 @@ picked <- selectSignificant(fit, alpha=fdr, by="FDR")
 
 truth <- rep(c("Null", "Real"), times=c(nUnif, nGenes-nUnif))
 
-table(truth, picked)
+table(truth, byFDR=picked)
+
+conf <- 0.80
+countSignificant(fit, alpha=conf, by="EmpiricalBayes")
+epicked <- selectSignificant(fit, alpha=conf, by="EmpiricalBayes")
+
+table(truth, EB=epicked)
+
+table(byFDR=picked, EB=epicked)
+
+# unknown method
+try( countSignificant(fit, by="HandWaving") )
+
+# out of range
+try( b <-  Bum(rnorm(1000)) )
+try( b <- Bum(c(pvals, 1.1)) )
+
+# bad input type
+try( b <- Bum(LETTERS) )
+try( b <- Bum(factor(LETTERS) ))
