@@ -27,7 +27,7 @@ library(TailRank)
 @ 
 Mathematically, the beta-binomial distribution has parameters $N$,
 $u$, and $v$ that determine the density function
-$$ \choose{N, x} Beta(x+u, N-x+v)/Beta(u,v). $$
+$$ {N \choose x} Beta(x+u, N-x+v)/Beta(u,v). $$
 Statistically, one can think of this distribution as a hierarchical
 model, starting with a binomial distribution $Binom(x, N, \theta)$ whose
 success parameter $\theta$ comes from a beta distribution, $\theta

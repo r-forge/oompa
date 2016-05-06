@@ -146,7 +146,8 @@ We can determine the power for a variety of cancer sample sizes,
 keeping everything else the same
 
 <<trp3>>=
-tailRankPower(40000, N1=41, N2=seq(40,100,by=10), psi=0.95, phi=0.40, conf=0.95)
+tailRankPower(40000, N1=41, N2=seq(40,100,by=10), 
+              psi=0.95, phi=0.40, conf=0.95)
 @ 
 
 More generally, we can create power tables using the
@@ -157,8 +158,9 @@ detect that level of sensitivity when using that many samples.
 
 
 <<bmpt>>=
-biomarkerPowerTable(G=c(10000, 20000, 40000), N1=41, N2=seq(40, 100, by=10), 
-                    psi=0.95, conf=0.95, phi=seq(0.30, 0.50, by=0.05))
+biomarkerPowerTable(G=c(10000, 20000, 40000), N1=41, 
+                    N2=seq(40, 100, by=10), conf=0.95, 
+                    psi=0.95, phi=seq(0.30, 0.50, by=0.05))
 @ 
 
 \section{References}
