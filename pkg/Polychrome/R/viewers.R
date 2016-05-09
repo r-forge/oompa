@@ -97,7 +97,7 @@ bpran  <- function(colorset,
   invisible(pts)
 }
 
-makegray <- function(colorset) {
+turnGray <- function(colorset) {
   temp <- as(hex2RGB(colorset), "LUV")
   tc <- temp@coords
   luv <- LUV(tc[,1], 0, 0)

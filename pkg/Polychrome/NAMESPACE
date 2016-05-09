@@ -9,7 +9,7 @@ import(rgl)
 ## Public functions
 export(rancurves, ranpoints, uvscatter, luminance,
        plothc, p3d, bp, bpHue, bpLuminance, bpran,
-       createPalette, isccNames)
+       createPalette, turnGray, isccNames)
 
 # public data sets
 export(kelly.colors, green.armytage.colors,

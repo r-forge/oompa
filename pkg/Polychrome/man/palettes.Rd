@@ -1,4 +1,6 @@
 \name{palettes}
+\alias{palettes}
+\alias{Color Palettes}
 \alias{alphabet.colors}
 \alias{kelly.colors}
 \alias{green.armytage.colors}
@@ -16,40 +18,40 @@ palette36.colors(n=36)
 alphabet.colors(n=26)
 }
 \arguments{
-  \item{n}{an integer; the number of colors desired.}
+  \item{n}{An integer; the number of colors desired.}
 }
 \details{
-  Kenneth Kelly, a physicist who worked at the UNited States National
+  Kenneth Kelly, a physicist who worked at the United States National
   Bureau of Standards and chaired the Inter-Society Color Council
-  Subcommitte on Color Names, made one of the earliest attempts to find
-  a set of colors that could be easily distinguished in graphs. The
-  \code{kelly.colors} function produces a palette from the 22 colors
-  that he produced, using hos color names.  These are ordered so that
-  the optimal contrast for any palette with fewer than 22 colors can be
-  selected from the top of his list. 
+  Subcommittee on Color Names, made one of the earliest attempts to find
+  a set of colors that could be easily distinguished when used in
+  graphs. The \code{kelly.colors} function produces a palette from the
+  22 colors that he produced, using his color names.  These are ordered
+  so that the optimal contrast for any palette with fewer than 22 colors
+  can be selected from the top of his list. 
 
   Paul Green-Armytage described a study growing out of a workshop held
-  by te Coour Society of Australia in 2007 to test whether an alphabet
+  by the Colour Society of Australia in 2007 to test whether an alphabet
   composed of 26 distinguishable colors would serve in place of the usual
-  symbols of the English alphabet. Each color isw given a name starting
+  symbols of the English alphabet. Each color is given a name starting
   with a different letter of the alphabet, which was found to make it
   easier for people to learn the association and read sentences written
-  in color. The \code{green.armytage.colors} produces palettes from his
-  final color set, arranged in "alphabetical" order rather than by
-  maximum contrast.
+  in color. The \code{green.armytage.colors} function produces palettes
+  from his final color set, arranged in "alphabetical" order rather than
+  by maximum contrast.
 
   Carter and Carter followed Kelly's article with a study that showed
-  that "perceptuial distinguishability" of colors was related to their
+  that "perceptual distinguishability" of colors was related to their
   Euclidean distance in the L*u*v* color space coordinates, as defined
   by the International Commisision on Illumination (CIE).  They also
-  found that distinguishability falls of rapidly whenthe distance is
+  found that distinguishability falls off rapidly when the distance is
   less than about 40 L*u*v* units. We implemented a palette-construction
   algorithm based on this idea.  The \code{palette36.colors} function
   returns palettes from the resulting list of 36 colors, with names
   assigned using the ISCC-NSB standard.
 
   The \code{alphabet.colors} function uses the first 26 colors from
-  "\code{palett36}" but assigns them names beginning with different
+  "\code{palette36}" but assigns them names beginning with different
   letters of the English alphabet and reorders them accordingly.
 }
 \value{
@@ -68,6 +70,9 @@ alphabet.colors(n=26)
   
   Carter RC, Carter EC. High-contrast sets of colors. Applied Optics,
   1982; 21(16):2936--9.
+}
+\seealso{
+  \code{\link{createPalette}}
 }
 \examples{
 palette36.colors(5)
