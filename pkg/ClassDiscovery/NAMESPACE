@@ -9,6 +9,14 @@ import(mclust)
 import(oompaBase)
 import(oompaData)
 
+importFrom("grDevices", "colors", "hcl")
+importFrom("graphics", "abline", "axis", "barplot", "frame",
+           "grconvertX", "grconvertY", "layout", "legend", "mtext",
+           "par", "points", "title")
+importFrom("stats", "as.dendrogram", "as.dist", "cor", "cutree",
+           "dist", "hclust", "heatmap", "kmeans", "order.dendrogram",
+           "pchisq", "reorder", "rnorm", "sd", "var")
+
 importMethodsFrom(oompaBase,
                   "hist", "image", "plot")
 importMethodsFrom(oompaBase,
