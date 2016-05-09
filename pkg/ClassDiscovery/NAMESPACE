@@ -25,7 +25,7 @@ exportMethods("predict")
 importFrom(stats, "screeplot")
 exportMethods("screeplot")
 
-importFrom(cluster, "pltree")
+importFrom(cluster, "pltree", "pam")
 exportMethods("pltree")
 
 importFrom(graphics, "identify")
