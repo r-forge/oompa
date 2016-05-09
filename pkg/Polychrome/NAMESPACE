@@ -12,5 +12,6 @@ export(rancurves, ranpoints, uvscatter, luminance,
        createPalette, isccNames)
 
 # public data sets
-export(kelly.colors, green.armytage.colors, palette36.colors)
+export(kelly.colors, green.armytage.colors,
+       alphabet.colors, palette36.colors)
 

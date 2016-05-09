@@ -25,13 +25,20 @@ makePalette <- function(n, colorset) {
             "\nReturning the palette you asked for with that many colors\n")
     n <- L
   }
-  colorset[1:L]
+  colorset[1:n]
 }
 ####################################
 palette36.colors <- function(n=36) {
   data("palette36", package="Polychrome", envir=environment())
   palette36 <- get("palette36", envir=environment())
   return (makePalette(n, palette36))
+}
+
+####################################
+alphabet.colors <- function(n=26) {
+  data("alphabet", package="Polychrome", envir=environment())
+  alphabet <- get("alphabet", envir=environment())
+  return (makePalette(n, alphabet))
 }
 
 ####################################
