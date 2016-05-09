@@ -9,6 +9,9 @@ importFrom(graphics, "image")
 importFrom(stats, "predict", "screeplot")
 importFrom(cluster, "pltree")
 
+importFrom("graphics", "par", "points")
+importFrom("grDevices", "rgb")
+
 exportMethods("plot")
 exportMethods("hist")
 exportMethods("image")
