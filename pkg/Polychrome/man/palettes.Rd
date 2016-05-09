@@ -10,13 +10,47 @@
   distinguishable colors.
 }
 \usage{
-alphabet.colors(n=26)
 kelly.colors(n=22)
 green.armytage.colors(n=26)
 palette36.colors(n=36)
+alphabet.colors(n=26)
 }
 \arguments{
   \item{n}{an integer; the number of colors desired.}
+}
+\details{
+  Kenneth Kelly, a physicist who worked at the UNited States National
+  Bureau of Standards and chaired the Inter-Society Color Council
+  Subcommitte on Color Names, made one of the earliest attempts to find
+  a set of colors that could be easily distinguished in graphs. The
+  \code{kelly.colors} function produces a palette from the 22 colors
+  that he produced, using hos color names.  These are ordered so that
+  the optimal contrast for any palette with fewer than 22 colors can be
+  selected from the top of his list. 
+
+  Paul Green-Armytage described a study growing out of a workshop held
+  by te Coour Society of Australia in 2007 to test whether an alphabet
+  composed of 26 distinguishable colors would serve in place of the usual
+  symbols of the English alphabet. Each color isw given a name starting
+  with a different letter of the alphabet, which was found to make it
+  easier for people to learn the association and read sentences written
+  in color. The \code{green.armytage.colors} produces palettes from his
+  final color set, arranged in "alphabetical" order rather than by
+  maximum contrast.
+
+  Carter and Carter followed Kelly's article with a study that showed
+  that "perceptuial distinguishability" of colors was related to their
+  Euclidean distance in the L*u*v* color space coordinates, as defined
+  by the International Commisision on Illumination (CIE).  They also
+  found that distinguishability falls of rapidly whenthe distance is
+  less than about 40 L*u*v* units. We implemented a palette-construction
+  algorithm based on this idea.  The \code{palette36.colors} function
+  returns palettes from the resulting list of 36 colors, with names
+  assigned using the ISCC-NSB standard.
+
+  The \code{alphabet.colors} function uses the first 26 colors from
+  "\code{palett36}" but assigns them names beginning with different
+  letters of the English alphabet and reorders them accordingly.
 }
 \value{
   Each function returns a character vector of hexadecimal color values
@@ -25,6 +59,16 @@ palette36.colors(n=36)
   available from the individual palette.
 }
 \author{Kevin R. Coombes <krc@silicovore.com>}
+\references{
+  Kelly KL. Twenty-Two Colors of Maximum Contrast. Color Eng., 1965;
+  3:26--7. 
+
+  Green-Armytage, P. A Colour Alphabet and the Limits of Colour
+  Coding. Colour: Design and Creativity, 2010; 10:1--23.
+  
+  Carter RC, Carter EC. High-contrast sets of colors. Applied Optics,
+  1982; 21(16):2936--9.
+}
 \examples{
 palette36.colors(5)
 kelly.colors(5)

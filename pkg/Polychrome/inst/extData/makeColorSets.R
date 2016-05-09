@@ -78,7 +78,7 @@ createAlphabet <- function() {
   rm(x,h)
   alphabet["ebony"] <- "#565656"
   alphabet["iron"] <- "#E2E2E2"
-  alphabet
+  alphabet[order(names(alphabet))]
 }
 alphabet <- createAlphabet()
 
