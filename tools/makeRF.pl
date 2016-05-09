@@ -143,7 +143,7 @@ foreach my $packname (@packList) {
 # check the package from the tarball
     @cargs = ('R', 'CMD', 'check', '--as-cran', $tarball);
     $cmd = join(' ', @cargs);
-    print STDERR "Running $cmd...\n";
+    print STDERR "\nRunning $cmd...\n";
     $check = system(@cargs);
     last unless $check == 0;
 # install the package in the current R version
