@@ -5,6 +5,10 @@
 import(methods)
 import(oompaBase)
 
+importFrom("graphics", "abline", "points", "text")
+importFrom("stats", "density", "ppoints", "qqline", "qqnorm", "qqplot",
+           "qt", "quantile", "var")
+
 # b00-generics
 exportMethods("analyze")
 exportMethods("process")

@@ -1,12 +1,12 @@
 Package: PreProcess
-Version: 3.1.1
+Version: 3.1.2
 Date: 2016-05-01
 Title: Basic Functions for Pre-Processing Microarrays
 Author: Kevin R. Coombes
 Maintainer: Kevin R. Coombes <krc@silicovore.com>
 Description: The PreProcess package defines OOMPA classes to pre-process
   microarray gene expression data.
-Depends: R (>= 3.0), methods, graphics, oompaBase (>= 3.0)
+Depends: R (>= 3.0), methods, graphics, stats, oompaBase (>= 3.0)
 License: Apache License (== 2.0)
 LazyLoad: yes
 biocViews: Microarray, PreProcessing
