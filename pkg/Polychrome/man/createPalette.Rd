@@ -3,7 +3,8 @@
 
 \title{Creating New Color Palettes}
 \description{
-  
+  Tool to create new palettes that are well separated in CIE L*u*v*
+  color space.
 }
 \usage{
 createPalette(N, seedcolors, prefix="NC")
