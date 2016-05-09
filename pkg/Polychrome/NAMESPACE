@@ -6,6 +6,11 @@
 import(colorspace)
 import(rgl)
 
+importFrom("graphics", "barplot", "lines", "mtext", "text")
+importFrom("methods", "as")
+importFrom("stats", "dist", "hclust", "rnorm", "runif")
+importFrom("utils", "data")
+
 ## Public functions
 export(rancurves, ranpoints, uvscatter, luminance,
        plothc, p3d, bp, bpHue, bpLuminance, bpran,
