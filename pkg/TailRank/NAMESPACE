@@ -8,6 +8,10 @@ import(Biobase)
 import(oompaBase)
 import(oompaData)
 
+importFrom("graphics", "lines", "rug")
+importFrom("stats", "dbinom", "pbinom", "pnorm", "qbinom", "qnorm",
+           "rbeta", "rbinom")
+
 ## Public classes
 exportClasses(BMPT)
 exportClasses(TailRankTest)
