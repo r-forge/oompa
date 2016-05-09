@@ -1,6 +1,6 @@
 Package: ClassComparison
-Version: 3.1.2
-Date: 2016-05-06
+Version: 3.1.3
+Date: 2016-05-09
 Title: Classes and Methods for "Class Comparison" Problems on Microarrays
 Author: Kevin R. Coombes
 Maintainer: Kevin R. Coombes <krc@silicovore.com>
@@ -9,7 +9,7 @@ Description: The ClassComparison package defines the classes used for
   includes tests for differential expression; see Simon's book for
   details on typical problem types.
 Depends: R (>= 3.0), oompaBase (>= 3.0)
-Imports: methods, stats, splines, Biobase
+Imports: methods, graphics, stats, splines, Biobase
 License: Apache License (== 2.0)
 LazyLoad: yes
 biocViews: Microarray, DifferentialExpression, MultipleComparisons

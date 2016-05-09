@@ -12,6 +12,12 @@ import(oompaBase)
 importFrom(stats, "anova")
 importFrom(stats, "update")
 
+importFrom("graphics", "abline", "legend", "lines", "par", "points",
+           "text", "title")
+importFrom("stats", "dbeta", "dnorm", "dwilcox", "fitted", "lm",
+           "loess", "model.matrix", "optim", "pf", "predict", "pt",
+           "qtukey", "var")
+
 importMethodsFrom(oompaBase,
                   "hist", "image", "plot")
 importMethodsFrom(oompaBase,
