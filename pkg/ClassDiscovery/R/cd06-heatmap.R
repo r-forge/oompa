@@ -134,8 +134,12 @@ aspectHeatmap <- function (x, Rowv = NULL, Colv = if (symm) "Rowv" else NULL,
     else iy <- 1:nr
     image(1:nc, 1:nr, x, xlim = 0.5 + c(0, nc), ylim = 0.5 + 
         c(0, nr), axes = FALSE, xlab = "", ylab = "", ...)
-    print(xcoord <- grconvertX(c(0.5, nc+0.5), "user", "device"), file=stderr())
-    print(ycoord <- grconvertY(c(0.5, nr+0.5), "user", "device"), file=stderr())
+    xcoord <- grconvertX(c(0.5, nc+0.5), "user", "device")
+    ycoord <- grconvertY(c(0.5, nr+0.5), "user", "device")
+    if (verbose) {
+      print(xcoord, file=stderr())
+      print(ycoord, file=stderr())
+    }
     if (!is.null(vlines)) abline(v=vlines, col='purple')
     if (!is.null(hlines)) abline(h=hlines, col='purple')
     axis(1, 1:nc, labels = labCol, las = lasCol, line = -0.5, tick = 0, 
