@@ -8,7 +8,7 @@ my $home = getcwd;
 # get command line arguments
 my $oompafiles = shift || "oompafiles.txt";
 my $tools = shift || "tools.cfg";
-my $startdir = shift;
+my $startdir = shift || '..\..'; # assumes tools lives two levels below RForge
 
 # TODO: allow cfg file to be passed on the command line ?
 # Assume file consists of lines of the form "KEY = VALUE"
