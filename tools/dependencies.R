@@ -1,6 +1,7 @@
 source("https://bioconductor.org/biocLite.R")
 biocLite()
 biocLite("Biostrings")
+biocLite("edgeR")
 
 deps <- c("kernlab", "mclust", "cobs", "rpart", "ltm", "doParallel",
           "colorspace", "timeDate", "quantreg", "nnet", "e1071",
