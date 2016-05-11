@@ -1,7 +1,7 @@
 source("https://bioconductor.org/biocLite.R")
-biocLite()
-biocLite("Biostrings")
-biocLite("edgeR")
+biocLite(suppressUpdates=TRUE)
+biocLite("Biostrings", suppressUpdates=TRUE)
+biocLite("edgeR", suppressUpdates=TRUE)
 
 deps <- c("kernlab", "mclust", "cobs", "rpart", "ltm", "doParallel",
           "colorspace", "timeDate", "quantreg", "nnet", "e1071",
@@ -13,8 +13,8 @@ deps <- c("kernlab", "mclust", "cobs", "rpart", "ltm", "doParallel",
 install.packages(deps)
 
 if (FALSE) {
-  for (x in c("Biobase", "Biostrings", deps)) {
+  for (x in c("Biobase", "Biostrings", "edgeR", deps)) {
     library(x, character.only=TRUE)
-    cat(x, "is availablke.\n", file=stderr())
+    cat(x, "is available.\n", file=stderr())
   }
 }
