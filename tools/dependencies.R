@@ -15,5 +15,6 @@ install.packages(deps)
 if (FALSE) {
   for (x in c("Biobase", "Biostrings", deps)) {
     library(x, character.only=TRUE)
+    cat(x, "is availablke.\n", file=stderr())
   }
 }
