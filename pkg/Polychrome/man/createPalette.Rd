@@ -7,7 +7,7 @@
   color space.
 }
 \usage{
-createPalette(N, seedcolors, prefix="NC")
+createPalette(N, seedcolors, prefix="NC", range=c(30, 90))
 }
 \arguments{
   \item{N}{An integer, the size of the palette to create.}
@@ -15,6 +15,8 @@ createPalette(N, seedcolors, prefix="NC")
     representations of one or more colors.}
   \item{prefix}{A character string to be used as a prefix to numeric
     names of the colors.}
+  \item{range}{A numeric vector limitng the range of allowed luminance
+    values.}
 }
 \details{
   Carter and Carter showed that "perceptual distinguishability" of
