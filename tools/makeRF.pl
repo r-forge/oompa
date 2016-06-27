@@ -108,6 +108,7 @@ my @paths = ($Rpath,
 	     $toolhash{perl}."\\site\\bin",
 	     $toolhash{qpdf},
 	     $toolhash{gs},
+	     $toolhash{pandoc},
 );
 
 $ENV{PATH} = join(";", @paths);
