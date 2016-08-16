@@ -45,7 +45,17 @@ plothc <- function(colorset, main=deparse(substitute(colorset)), ...) {
        main = main, ...)
   mtext(names(colorset), side = 1, line = 0, at = order(hd$order), 
         col = colorset, las = 2)
-  invisible(colorset)
+  invisible(hd)
+}
+
+plotpc <- function(colorset, main=deparse(substitute(colorset)), ...) {
+  luvmat <- as(hex2RGB(colorset), "LUV")
+  x <- luvmat@coords
+  pc <- princomp(x)
+  plot(pc$scores[,1], pc$scores[,2],
+       pch=16, col=colorset, cex=2,
+       xlab="PC1", ylab="PC2", main=main, ...)
+  invisible(pc)
 }
 
 p3d <- function(colorset, main=deparse(substitute(colorset))) {

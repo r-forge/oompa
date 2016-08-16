@@ -10,6 +10,7 @@
 \alias{uvscatter}
 \alias{luminance}
 \alias{plothc}
+\alias{plotpc}
 \alias{p3d}
 
 \title{Visualizing Color Palettes}
@@ -29,6 +30,7 @@ bpran(colorset, main=deparse(substitute(colorset)))
 uvscatter(colorset, main=deparse(substitute(colorset)))
 luminance(colorset, main=deparse(substitute(colorset)))
 plothc(colorset, main=deparse(substitute(colorset)), ...)
+plotpc(colorset, main=deparse(substitute(colorset)), ...)
 p3d(colorset, main=deparse(substitute(colorset)))
 }
 \arguments{
@@ -67,10 +69,13 @@ p3d(colorset, main=deparse(substitute(colorset)))
   space. The \code{uvscatter} function produces a scatter plot of the
   palette colors using their projected u-v coordinates. The
   \code{luminance} function sorts the colors by luminance and produces a
-  scatter plot showing the luminance.  Finally, the \code{plothc}
-  function performs hierachcal clustering on the colors (using Euclidan
-  distance in CIE L*u*v* color space and Ward's linkage) and displays
-  the resulting dendrogram.
+  scatter plot showing the luminance.
+
+  The \code{plothc} function performs hierachcal clustering on the
+  colors (using Euclidan distance in CIE L*u*v* color space and Ward's
+  linkage) and displays the resulting dendrogram. The \code{plotpc}
+  function uses the same distance metric to compute and plot pincipal
+  components.
 }
 \value{
   In general, these functions are used for their side-effect (producing
@@ -78,7 +83,9 @@ p3d(colorset, main=deparse(substitute(colorset)))
   invisibly return the color set with which they were invoked.  The
   barplot-based functions (\code{bp}, \code{bpran}, \code{bpHue}, and
   \code{bpLuminance}), however, return the vector of bar-centers, which
-  can be used to add other information to the plot.
+  can be used to add other information to the plot. The \code{plothc}
+  function returns the dendrogram, and the \code{plotpc} function
+  returns the principal compnents object.
 }
 \author{Kevin R. Coombes <krc@silicovore.com>}
 \seealso{

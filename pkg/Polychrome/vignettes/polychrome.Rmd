@@ -89,6 +89,11 @@ hierarchical clustering of colors using this representation.
 ```{r fig.width=7, fig.height=5}
 plothc(pal2)
 ```
+We can also perform principal components in L\*u\*v\* space to display
+a projectionm that tries to preserve distances.
+```{r fig.width=7, fig.height=5}
+plotpc(pal2)
+```
 
 ## Grayscale
 One further consideration that should be kept in mind when creating
