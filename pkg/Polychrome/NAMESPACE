@@ -6,14 +6,15 @@
 import(colorspace)
 import(rgl)
 
-importFrom("graphics", "barplot", "lines", "mtext", "text")
+importFrom("graphics", "barplot", "lines", "mtext", "text", "par")
 importFrom("methods", "as")
-importFrom("stats", "dist", "hclust", "rnorm", "runif")
+importFrom("stats", "dist", "hclust", "rnorm", "runif", "princomp")
 importFrom("utils", "data")
 
 ## Public functions
 export(rancurves, ranpoints, uvscatter, luminance,
        plothc, plotpc, p3d, bp, bpHue, bpLuminance, bpran,
+       plotDistances,
        createPalette, turnGray, isccNames)
 
 # public data sets

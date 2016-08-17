@@ -14,8 +14,7 @@ upd <- function(idx, luv, mind) {
   minOf2(mind, temp)
 }
 
-createPalette <- function(N, seedcolors, prefix="NC", range=c(30, 90)) {
-  M <- 50000
+createPalette <- function(N, seedcolors, prefix="NC", range=c(30, 90), M=50000) {
   DARK <- min(range)
   LIGHT <- max(range)
   bigset <- as.matrix(data.frame(R=sample(0:255, M, replace=TRUE),

@@ -1,3 +1,9 @@
+invertColors <- function(...) {
+  par(bg="black", fg="white",
+      col.axis="white", col.lab="white",
+      col.main="white", col.sub="white", ...)
+}
+
 rancurves <- function(colorset, ...) {
   plot(c(-2*pi, 2*pi), c(-5,5), type="n", xlab="Angle", ylab="Intensity", ...)
   x <- seq(-2*pi, 2*pi, length=500)
@@ -114,4 +120,23 @@ turnGray <- function(colorset) {
   grayed <- hex(luv)
   names(grayed) <- names(colorset)
   grayed
+}
+
+plotDistances <- function(colorset, main=deparse(substitute(colorset)), ...) {
+  # work in LUV space
+  luvmat <- as(hex2RGB(colorset), "LUV")
+  # take the fist color as the starting point
+  selected <- 1
+  mind <- d2(selected, luvmat)
+  dd <- NULL
+  # loop through, finding the most well-seaprated color at each iteration
+  for (i in 2:length(colorset)) {
+    idx <- which(mind==max(mind))[1]
+    dd <- c(dd, sqrt(mind[idx]))
+    mind <- upd(idx, luvmat, mind)
+    selected <- c(selected, idx)
+  }
+  plot(dd, main=main,
+       xlab="Index", ylab="Disdtance in L*u*v* space", ...)
+  invisible(list(colors=colorset[selected], distances=dd))
 }
