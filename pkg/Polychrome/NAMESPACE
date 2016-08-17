@@ -14,7 +14,7 @@ importFrom("utils", "data")
 ## Public functions
 export(rancurves, ranpoints, uvscatter, luminance,
        plothc, plotpc, p3d, bp, bpHue, bpLuminance, bpran,
-       plotDistances,
+       plotDistances, invertColors,
        createPalette, turnGray, isccNames)
 
 # public data sets
