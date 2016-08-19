@@ -1,3 +1,21 @@
+colorNames <- function (colorset)  {
+  rigby <- t(col2rgb(colors())) # R-G-B matrix of
+  rownames(rigby) <- colors()   #  known color names
+  csrgb <- RGB(rigby/255)       # convert to colorpace
+  csluv <- as(csrgb, "LUV")     # then to L*u*v*
+  cc <- csluv@coords
+  cc[is.na(cc)] <- 0            # handle 'black'
+  d3 <- function(y0) {
+    # find the closest match
+    temp <- sweep(cc, 2, y0, "-")
+    dist <- apply(temp^2, 1, sum)
+    which(dist == min(dist))[1]
+  } # in L*u*v* space
+  alpha <- as(hex2RGB(colorset), "LUV")
+  m <- apply(alpha@coords, 1, d3)
+  rownames(cc)[m]
+}
+
 isccNames <- function(colorset) {
   data("iscc", package="Polychrome", envir=environment())
   iscc <- get("iscc", envir=environment())
