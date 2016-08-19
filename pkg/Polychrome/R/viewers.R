@@ -25,20 +25,20 @@ ranpoints <- function(colorset, N=10, ...) {
   invisible(colorset)
 }
 
-uvscatter <- function(colorset, main=deparse(substitute(colorset))) {
+uvscatter <- function(colorset, main=deparse(substitute(colorset)), ...) {
   luvmat <- as(hex2RGB(colorset), "LUV")
   x <- luvmat@coords
   plot(x[,2], x[,3], pch=16, col=colorset, cex=2,
-       xlab="U", ylab="V", main=main)
+       xlab="U", ylab="V", main=main, ...)
   invisible(colorset)
 }
 
-luminance <- function(colorset, main=deparse(substitute(colorset))) {
+luminance <- function(colorset, main=deparse(substitute(colorset)), ...) {
   luvmat <- as(hex2RGB(colorset), "LUV")
   x <- luvmat@coords
   ox <- order(x[,1])
   plot(x[ox,1], pch=16, col=colorset[ox], cex=2,
-       ylab="Luminance", main=main)
+       ylab="Luminance", main=main, ...)
   invisible(colorset)
 }
 
