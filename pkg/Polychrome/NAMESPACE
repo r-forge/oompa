@@ -21,5 +21,6 @@ export(rancurves, ranpoints, uvscatter, luminance,
 
 # public data sets
 export(kelly.colors, green.armytage.colors,
-       alphabet.colors, palette36.colors)
+       alphabet.colors, glasbey.colors,
+       palette36.colors)
 

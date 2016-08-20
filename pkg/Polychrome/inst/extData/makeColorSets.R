@@ -1,11 +1,6 @@
 library(Polychrome)
 library(colorspace)
 
-
-####################################
-
-
-
 ####################################
 # palette36
 
@@ -14,7 +9,7 @@ createnew36 <- function() {
   # three seed colors
   ebony <- hex(LUV(30,0,0))
   iron <- hex(LUV(90, 0, 0))
-  red <- hex(RGB(0.8, 0, 0))
+  red <- hex(sRGB(0.8, 0, 0))
   # set random number seed for reproducibility. 
   set.seed(567629)
   createPalette(36, c(ebony, iron, red))

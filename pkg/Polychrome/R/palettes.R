@@ -1,16 +1,17 @@
 colorNames <- function (colorset)  {
+  # note: should only use 'col2rgb' for color() names
   rigby <- t(col2rgb(colors())) # R-G-B matrix of
   rownames(rigby) <- colors()   #  known color names
-  csrgb <- RGB(rigby/255)       # convert to colorpace
+  csrgb <- sRGB(rigby/255)      # convert to colorpace
   csluv <- as(csrgb, "LUV")     # then to L*u*v*
   cc <- csluv@coords
   cc[is.na(cc)] <- 0            # handle 'black'
   d3 <- function(y0) {
-    # find the closest match
+    # find the closest match in L*u*v* space
     temp <- sweep(cc, 2, y0, "-")
     dist <- apply(temp^2, 1, sum)
     which(dist == min(dist))[1]
-  } # in L*u*v* space
+  }
   alpha <- as(hex2RGB(colorset), "LUV")
   m <- apply(alpha@coords, 1, d3)
   rownames(cc)[m]
@@ -57,6 +58,13 @@ alphabet.colors <- function(n=26) {
   data("alphabet", package="Polychrome", envir=environment())
   alphabet <- get("alphabet", envir=environment())
   return (makePalette(n, alphabet))
+}
+
+####################################
+glasbey.colors <- function(n=32) {
+  data("glasbey", package="Polychrome", envir=environment())
+  glasbey <- get("glasbey", envir=environment())
+  return (makePalette(n, glasbey))
 }
 
 ####################################
@@ -123,7 +131,7 @@ green.armytage.colors <- function(n=26) {
   R <- unlist(lapply(colsch, function(x) x[1]/255))
   G <- unlist(lapply(colsch, function(x) x[2]/255))
   B <- unlist(lapply(colsch, function(x) x[3]/255))
-  alpha <- as(RGB(R, G, B), "LUV")
+  alpha <- as(sRGB(R, G, B), "LUV")
   green.armytage <- hex(alpha)
   names(green.armytage) <- names(colsch)
   makePalette(n, green.armytage)

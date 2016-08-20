@@ -5,6 +5,7 @@
 \alias{kelly.colors}
 \alias{green.armytage.colors}
 \alias{palette36.colors}
+\alias{glasbey.colors}
 
 \title{Polychrome Color Palettes}
 \description{
@@ -13,6 +14,7 @@
 }
 \usage{
 kelly.colors(n=22)
+glasbey.colors(n=32)
 green.armytage.colors(n=26)
 palette36.colors(n=36)
 alphabet.colors(n=26)
@@ -28,7 +30,10 @@ alphabet.colors(n=26)
   graphs. The \code{kelly.colors} function produces a palette from the
   22 colors that he produced, using his color names.  These are ordered
   so that the optimal contrast for any palette with fewer than 22 colors
-  can be selected from the top of his list. 
+  can be selected from the top of his list.
+
+  Glasbey and colleagues used a sequential search algorithm in CIE LAB
+  color space to create a palette of 32 well-separated colors.
 
   Paul Green-Armytage described a study growing out of a workshop held
   by the Colour Society of Australia in 2007 to test whether an alphabet
@@ -78,6 +83,7 @@ alphabet.colors(n=26)
 palette36.colors(5)
 kelly.colors(5)
 alphabet.colors(7)
+glasbey.colors(9)
 green.armytage.colors(3)
 }
 \keyword{color}
