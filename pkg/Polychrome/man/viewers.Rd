@@ -11,7 +11,6 @@
 \alias{luminance}
 \alias{plothc}
 \alias{plotpc}
-\alias{plotDistances}
 \alias{p3d}
 
 \title{Visualizing Color Palettes}
@@ -32,7 +31,6 @@ uvscatter(colorset, main=deparse(substitute(colorset)), ...)
 luminance(colorset, main=deparse(substitute(colorset)), ...)
 plothc(colorset, main=deparse(substitute(colorset)), ...)
 plotpc(colorset, main=deparse(substitute(colorset)), ...)
-plotDistances(colorset, main=deparse(substitute(colorset)), ...)
 p3d(colorset, main=deparse(substitute(colorset)))
 }
 \arguments{
@@ -79,11 +77,6 @@ p3d(colorset, main=deparse(substitute(colorset)))
   function uses the same distance metric to compute and plot pincipal
   components.
 
-  Finally, the \code{plotDistnces} function works differently from all
-  the others. It reorders the colors by maximal separation in L\*u\*v\*
-  space, and plots the minimum distaqnce of the next color to all the
-  preceeding colors. For ideal perceptible separation, the minimu
-  distance should be at least 40 units.
 }
 \value{
   In general, these functions are used for their side-effect (producing

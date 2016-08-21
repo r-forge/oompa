@@ -122,7 +122,7 @@ turnGray <- function(colorset) {
   grayed
 }
 
-plotDistances <- function(colorset, main=deparse(substitute(colorset)), ...) {
+computeDistances <- function(colorset) {
   # work in LUV space
   luvmat <- as(hex2RGB(colorset), "LUV")
   # take the fist color as the starting point
@@ -136,7 +136,14 @@ plotDistances <- function(colorset, main=deparse(substitute(colorset)), ...) {
     mind <- upd(idx, luvmat, mind)
     selected <- c(selected, idx)
   }
+  list(colors=colorset[selected], distances=dd)
+}
+
+plotDistances <- function(colorset, main=deparse(substitute(colorset)), ...) {
+  luvd <- computeDistances(colorset)
+  dd <- luvd$distances
   plot(dd, main=main,
-       xlab="Index", ylab="Disdtance in L*u*v* space", ...)
-  invisible(list(colors=colorset[selected], distances=dd))
+       xlab="Index", ylab="Distance in L*u*v* space", ...)
+  abline(h=40)
+  invisible(luvd)
 }
