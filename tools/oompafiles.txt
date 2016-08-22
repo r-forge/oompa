@@ -1,3 +1,9 @@
+oompa/pkg/Polychrome
+BARF
+C:/KRC/rforge/younsimon/pkg/YounSimon2012
+C:/KRC/rforge/HAPSEG
+C:/KRC/rforge/ABSOLUTE
+BARF
 oompa/pkg/oompaBase
 oompa/pkg/PreProcess
 oompa/pkg/ClassComparison
@@ -23,3 +29,10 @@ supercurve/pkg/SlideDesignerGUI
 supercurve/pkg/SuperCurveSampleData
 supercurve/pkg/SuperCurve
 supercurve/pkg/SuperCurveGUI
+C:/KRC/rforge/drexplorer/pkg/drexplorer
+C:/KRC/rforge/BetaModels
+C:/KRC/rforge/craac/pkg/CRAAC
+C:/KRC/rforge/arraycube/pkg/ArrayCube
+C:/KRC/rforge/arraycube/pkg/MINiML
+C:/KRC/rforge/accuploidy/pkg/AccuPloidy
+C:/KRC/rforge/firstsign/pkg/FirstSign
