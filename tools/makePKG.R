@@ -10,3 +10,7 @@ write_PACKAGES(".", type="win.binary")
 setwd(home)
 setwd(paste("Build", thisRVer, sep='-'))
 write_PACKAGES(".", type="source")
+
+setwd(home)
+setwd(paste("MacBinary", thisRVer, "x64", sep='-'))
+write_PACKAGES(".", type="mac.binary")

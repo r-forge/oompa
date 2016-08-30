@@ -4,6 +4,7 @@ oompa/pkg/ClassComparison
 oompa/pkg/oompaData
 oompa/pkg/TailRank
 oompa/pkg/ClassDiscovery
+oompa/pkg/Polychrome
 classpred/pkg/BimodalIndex
 classpred/pkg/Modeler
 classpred/pkg/CrossValidate
@@ -19,7 +20,6 @@ supercurve/pkg/SuperCurve
 supercurve/pkg/SlideDesignerGUI
 supercurve/pkg/SuperCurveGUI
 C:/KRC/rforge/drexplorer/pkg/drexplorer
-oompa/pkg/Polychrome
 thresher/pkg/PCDimension
 thresher/pkg/Thresher
 clonefinder/pkg/CloneFinder
