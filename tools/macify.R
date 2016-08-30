@@ -15,6 +15,7 @@ if (!file.exists(macbin)) dir.create(macbin)
 
 files <- dir(winbin, pattern="zip")
 for (myfile in files) {
+  cat("xforming", myfile, "\n", file=stderr())
   unzip(file.path(winbin, myfile))
   base <- strsplit(myfile, "_")[[1]][1]
   if (!file.exists(base)) stop("Cannot find directory", base)

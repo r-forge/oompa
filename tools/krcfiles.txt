@@ -1,5 +1,3 @@
-
-# mature packages
 oompa/pkg/oompaBase
 oompa/pkg/PreProcess
 oompa/pkg/ClassComparison
@@ -20,18 +18,12 @@ supercurve/pkg/SuperCurveSampleData
 supercurve/pkg/SuperCurve
 supercurve/pkg/SlideDesignerGUI
 supercurve/pkg/SuperCurveGUI
-
-# fix to get updates from git
 C:/KRC/rforge/drexplorer/pkg/drexplorer
-
-# actively developing
 oompa/pkg/Polychrome
 thresher/pkg/PCDimension
 thresher/pkg/Thresher
 clonefinder/pkg/CloneFinder
 deepcnv/pkg/DeepCNV
-
-# local stuff
 C:/KRC/rforge/BetaModels
 C:/KRC/rforge/craac/pkg/CRAAC
 C:/KRC/rforge/arraycube/pkg/ArrayCube
