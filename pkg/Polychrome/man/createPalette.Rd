@@ -48,6 +48,6 @@ createPalette(N, seedcolors, prefix="NC", range=c(30, 90), M=50000)
 \examples{
 seed <- c("#ff0000", "#00ff00", "#0000ff")
 mycolors <- createPalette(15, seed, prefix="mine")
-bp(mycolors)
+swatch(mycolors)
 }
 \keyword{color}

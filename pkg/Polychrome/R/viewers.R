@@ -73,44 +73,36 @@ p3d <- function(colorset, main=deparse(substitute(colorset))) {
   invisible(colorset)
 }
 
-bp <- function(colorset, main=deparse(substitute(colorset))) {
+swatch <- function(colorset, main=deparse(substitute(colorset))) {
   L <- length(colorset)
-  pts <- barplot(rep(1, L), col=colorset, main=main)
+  pts <- barplot(rep(1, L), col=colorset, main=main, yaxt='n')
   text(pts, 0.5, names(colorset), srt=90)
   invisible(pts)
 }
 
-bpHue <- function(colorset,
+swatchHue <- function(colorset,
                         main=paste(deparse(substitute(colorset)),
                                    ", by Hue", sep="")) {
   luv <- as(hex2RGB(colorset), "HSV")
   tink <- luv@coords[,1]
   hh <- colorset[order(tink)]
-  L <- length(colorset)
-  pts <- barplot(rep(1, L), col=hh, main=main)
-  text(pts, 0.5, names(hh), srt=90)
-  invisible(pts)
+  swatch(hh)
 }
 
-bpLuminance <- function(colorset,
+swatchLuminance <- function(colorset,
                         main=paste(deparse(substitute(colorset)),
                                    ", by Luminance", sep="")) {
   luv <- as(hex2RGB(colorset), "LUV")
   tink <- luv@coords[,1]
   hh <- colorset[order(tink)]
-  L <- length(colorset)
-  pts <- barplot(rep(1, L), col=hh, main=main)
-  text(pts, 0.5, names(hh), srt=90)
-  invisible(pts)
+  swatch(hh)
 }
 
-bpran  <- function(colorset,
+ranswatch  <- function(colorset,
                         main=deparse(substitute(colorset))) {
   L <- length(colorset)
   scramble <- sample(colorset)
-  pts <- barplot(rep(1, L), col=scramble, main=main)
-  text(pts, 0.5, names(scramble), srt=90)
-  invisible(pts)
+  swatch(scramble)
 }
 
 turnGray <- function(colorset) {

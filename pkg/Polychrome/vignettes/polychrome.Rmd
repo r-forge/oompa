@@ -30,7 +30,7 @@ mypal <- kelly.colors(22)
 ```
 
 ```{r fig.width=7, fig.height=5}
-bp(mypal)
+swatch(mypal)
 ```
 
 ## Resorted barplots
@@ -38,17 +38,17 @@ bp(mypal)
 To get a better idea of whether colors are distinguishable, we can
 sort them by hue:
 ```{r fig.width=7, fig.height=5}
-bpHue(mypal)
+swatchHue(mypal)
 ```
 
 or by luminnace:
 ```{r fig.width=7, fig.height=5}
-bpLuminance(mypal)
+swatchLuminance(mypal)
 ```
 
 or in random order:
 ```{r fig.width=7, fig.height=5}
-bpran(mypal)
+ranswatch(mypal)
 ```
 
 ## Scatter Plots
@@ -103,5 +103,5 @@ context is to convert it to gray scale.
 
 ```{r fig.width=7, fig.height=5}
 grayed <- turnGray(pal2)
-bpLuminance(grayed)
+swatchLuminance(grayed)
 ```

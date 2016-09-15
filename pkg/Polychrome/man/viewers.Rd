@@ -3,10 +3,10 @@
 \alias{Palette Viewers}
 \alias{rancurves}
 \alias{ranpoints}
-\alias{bp}
-\alias{bpHue}
-\alias{bpLuminance}
-\alias{bpran}
+\alias{swatch}
+\alias{swatchHue}
+\alias{swatchLuminance}
+\alias{ranswatch}
 \alias{uvscatter}
 \alias{luminance}
 \alias{plothc}
@@ -21,12 +21,12 @@
 \usage{
 rancurves(colorset, ...)
 ranpoints(colorset, N=10, ...)
-bp(colorset, main=deparse(substitute(colorset)))
-bpHue(colorset, main=paste(deparse(substitute(colorset)),
+swatch(colorset, main=deparse(substitute(colorset)))
+swatchHue(colorset, main=paste(deparse(substitute(colorset)),
                            ", by Hue", sep=""))
-bpLuminance(colorset, main=paste(deparse(substitute(colorset)),
+swatchLuminance(colorset, main=paste(deparse(substitute(colorset)),
                            ", by Luminance", sep=""))
-bpran(colorset, main=deparse(substitute(colorset)))
+ranswatch(colorset, main=deparse(substitute(colorset)))
 uvscatter(colorset, main=deparse(substitute(colorset)), ...)
 luminance(colorset, main=deparse(substitute(colorset)), ...)
 plothc(colorset, main=deparse(substitute(colorset)), ...)
@@ -54,13 +54,13 @@ p3d(colorset, main=deparse(substitute(colorset)))
   \code{N} clustered points in each of the palette colors.
 
   There are four functions that use barplots to display the palette. The
-  simplest one, \code{bp}, simply produces one bar of height one for
+  simplest one, \code{swatch}, simply produces one bar of height one for
   each color, in the order that they are listed in the palette.  The
-  next two, \code{bpHue} and \code{bpLuminance}, first sort the palette
+  next two, \code{swatchHue} and \code{swatchLuminance}, first sort the palette
   (by hue or by luminance, respectively), before producing the
   barplot.  The goal of these functions is to make sure that similar
   colors can be distinguished by placing them close together. The final
-  fucntion, \code{bpran}, randomly sorts the colors, to help decide if
+  fucntion, \code{ranswatch}, randomly sorts the colors, to help decide if
   similar colors are identifiable when they are relatively far apart.
 
   The \code{p3d} function plots the palette colors as spheres in
@@ -82,8 +82,8 @@ p3d(colorset, main=deparse(substitute(colorset)))
   In general, these functions are used for their side-effect (producing
   plots) rather than for their return values. In most cases, they
   invisibly return the color set with which they were invoked.  The
-  barplot-based functions (\code{bp}, \code{bpran}, \code{bpHue}, and
-  \code{bpLuminance}), however, return the vector of bar-centers, which
+  barplot-based functions (\code{swatch}, \code{ranswatch}, \code{swatchHue}, and
+  \code{swatchLuminance}), however, return the vector of bar-centers, which
   can be used to add other information to the plot. The \code{plothc}
   function returns the dendrogram, and the \code{plotpc} function
   returns the principal compnents object.
@@ -100,9 +100,9 @@ uvscatter(alphabet)
 luminance(alphabet)
 plothc(alphabet)
 p3d(alphabet)
-bp(alphabet)
-bpHue(alphabet)
-bpLuminance(alphabet)
-bpran(alphabet)
+swatch(alphabet)
+swatchHue(alphabet)
+swatchLuminance(alphabet)
+ranswatch(alphabet)
 }
 \keyword{color}
