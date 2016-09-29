@@ -1,3 +1,5 @@
+# Copyright (C) Kevin R. Coombes, 2016
+
 minOf2 <- function(a, b) (a + b - abs(a-b))/2
 
 d1 <- function(y0, luv) {

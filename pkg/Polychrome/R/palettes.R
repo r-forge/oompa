@@ -1,3 +1,5 @@
+# Copyright (C) Kevin R. Coombes, 2016
+
 colorNames <- function (colorset)  {
   # note: should only use 'col2rgb' for color() names
   rigby <- t(col2rgb(colors())) # R-G-B matrix of

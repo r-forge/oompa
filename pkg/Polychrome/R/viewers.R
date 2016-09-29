@@ -1,3 +1,5 @@
+# Copyright (C) Kevin R. Coombes, 2016
+
 invertColors <- function(...) {
   par(bg="black", fg="white",
       col.axis="white", col.lab="white",
