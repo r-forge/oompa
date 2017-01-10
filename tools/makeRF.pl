@@ -31,7 +31,7 @@ my $arch = $toolhash{arch};
 
 my $profile =<<EOP
 r <- getOption("repos")
-r["CRAN"] <- "http://cran.case.edu"
+r["CRAN"] <- "https://cran.mtu.edu"
 r["R-Forge"] <- "http://R-Forge.R-project.org"
 options(repos = r)
 rm(r)
