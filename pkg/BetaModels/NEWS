@@ -1,0 +1,43 @@
+			Dear Emacs, please make this -*-Text-*- mode!
+	**************************************************
+	*						 *
+	*	       1.0 SERIES NEWS			 *
+	*						 *
+	**************************************************
+
+
+		CHANGES IN R VERSION 1.0.3
+
+BUG FIXES
+
+    o	Made compatible with new R check steps that verify DESCRIPTION
+        and NAMESPACE dependencies.
+
+
+		CHANGES IN R VERSION 1.0.2
+
+BUG FIXES
+
+    o	Manpage updates to silence R CMD check.
+
+    o	Converted NEWS file into something R can recognize.
+	And now it's actually news about THIS package!
+
+
+		CHANGES IN R VERSION 1.0.1
+
+NEW FEATURES
+
+    o	No clue.
+
+BUG FIXES
+
+    o	No clue.
+
+
+		CHANGES IN R VERSION 1.0.0
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o	Initial release.
+

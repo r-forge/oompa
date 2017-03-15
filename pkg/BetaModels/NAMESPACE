@@ -1,0 +1,23 @@
+###
+### NAMESPACE
+###
+
+importFrom("grDevices", "rgb")
+importFrom("graphics", "abline", "legend", "lines", "points")
+importFrom("stats", "dbeta", "lm", "predict", "rbeta", "runif", "var")
+
+import(methods)
+import(ClassComparison)
+
+importFrom(oompaBase, "summary")
+importFrom(oompaBase, "image")
+
+exportMethods("summary")
+exportMethods("image")
+
+
+## Public routines
+export("grayscale", "greyscale")
+exportClasses("BetaRates")
+export("BetaRates", "samplePosteriorRates")
+export("guessCenter")
