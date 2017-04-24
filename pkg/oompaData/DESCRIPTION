@@ -1,7 +1,7 @@
 Package: oompaData
 Title: Data to Illustrate OOMPA Algorithms
 Version: 3.1.0
-Date: 2016-05-06
+Date: 2017-04-24
 Author: Kevin R. Coombes
 Description: This is a data-only package to provide example data for
   other OOMPA packages.
