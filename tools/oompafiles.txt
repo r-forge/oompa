@@ -1,3 +1,4 @@
+oompa/pkg/BetaModels
 oompa/pkg/Polychrome
 BARF
 C:/KRC/rforge/younsimon/pkg/YounSimon2012
@@ -30,7 +31,6 @@ supercurve/pkg/SuperCurveSampleData
 supercurve/pkg/SuperCurve
 supercurve/pkg/SuperCurveGUI
 C:/KRC/rforge/drexplorer/pkg/drexplorer
-C:/KRC/rforge/BetaModels
 C:/KRC/rforge/craac/pkg/CRAAC
 C:/KRC/rforge/arraycube/pkg/ArrayCube
 C:/KRC/rforge/arraycube/pkg/MINiML

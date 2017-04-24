@@ -19,11 +19,11 @@ supercurve/pkg/SuperCurveSampleData
 supercurve/pkg/SuperCurve
 supercurve/pkg/SlideDesignerGUI
 supercurve/pkg/SuperCurveGUI
-C:/KRC/rforge/drexplorer/pkg/drexplorer
 thresher/pkg/PCDimension
 thresher/pkg/Thresher
 clonefinder/pkg/CloneFinder
 deepcnv/pkg/DeepCNV
+C:/KRC/rforge/drexplorer/pkg/drexplorer
 C:/KRC/rforge/BetaModels
 C:/KRC/rforge/craac/pkg/CRAAC
 C:/KRC/rforge/arraycube/pkg/ArrayCube
