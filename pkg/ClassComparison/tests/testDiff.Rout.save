@@ -1,6 +1,6 @@
 
-R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"
-Copyright (C) 2013 The R Foundation for Statistical Computing
+R version 3.4.0 (2017-04-21) -- "You Stupid Darkness"
+Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -36,11 +36,11 @@ Call: MultiTtest(data = data, classes = classes)
 
 T-statistics:
     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
--3.25700 -0.72070 -0.01096 -0.02219  0.66600  3.30200 
+-3.25711 -0.72072 -0.01096 -0.02219  0.66601  3.30242 
 
 P-values:
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-0.00396 0.25720 0.50330 0.49600 0.71980 0.99870 
+0.00396 0.25717 0.50326 0.49595 0.71980 0.99873 
 > 
 > mw <- MultiWilcoxonTest(data, classes)
 Warning messages:
@@ -70,11 +70,11 @@ Call: MultiLinearModel(form = Y ~ classes, clindata = data.frame(classes = class
 
 F-statistics:
      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
- 0.000003  0.132800  0.466600  1.060000  1.369000 10.910000 
+ 0.000003  0.132789  0.466590  1.059960  1.369473 10.905953 
 
 P-values:
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-0.00396 0.25720 0.50330 0.49600 0.71980 0.99870 
+0.00396 0.25717 0.50326 0.49595 0.71980 0.99873 
 > 
 > dud <- Dudoit(data, classes, nPerm=100, verbose=FALSE)
 > summary(dud)
@@ -85,11 +85,11 @@ Call: Dudoit(data = data, classes = classes, nPerm = 100, verbose = FALSE)
 
 T-statistics:
     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
--3.25700 -0.72070 -0.01096 -0.02219  0.66600  3.30200 
+-3.25711 -0.72072 -0.01096 -0.02219  0.66601  3.30242 
 
 P-values:
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-0.00396 0.25720 0.50330 0.49600 0.71980 0.99870 
+0.00396 0.25717 0.50326 0.49595 0.71980 0.99873 
 > 
 > tn <- TNoM(data, classes)
 [1] "ordering..."
@@ -153,4 +153,4 @@ Smooth T test of Group One versus Group Two
 > 
 > proc.time()
    user  system elapsed 
-  15.78    0.18   15.99 
+   6.55    0.15    6.64 
