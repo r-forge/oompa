@@ -29,7 +29,7 @@ plotDistances(colorset, main=deparse(substitute(colorset)), ...)
   \code{computeDistances} and immediately plots the result.
 }
 \value{
-  Both functions retuirn a list with two vectgor components: the
+  Both functions retuirn a list with two vector components: the
   \code{colors} in sorted order, and the minimum \code{distances} from
   each color to the set of preceeding colors.
 }
