@@ -39,16 +39,6 @@ xform <- function(xy) {
 }
 
 ##############################
-# useful color map
-
-greyscale <- function (N) 
-{
-  x <- (1:N)-1
-  rgb(x, x, x, maxColorValue = N)
-}
-grayscale <- greyscale
-
-##############################
 # BetaRates is the main class, as well as the name of a constructor.
 
 setClass("BetaRates", representation=list(

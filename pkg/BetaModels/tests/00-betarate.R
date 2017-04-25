@@ -38,7 +38,7 @@ abline(h=mean(event/total), col='purple')
 boxplot(theta)
 
 if(require(vioplot)) {
-  vioplot(theta[,1], theta[,2], theta[,3], theta[,4],
+  vioplot::vioplot(theta[,1], theta[,2], theta[,3], theta[,4],
           theta[,5], theta[,6], theta[,7], theta[,8],
           theta[,9], theta[,10], theta[,11], col='skyblue'
           )

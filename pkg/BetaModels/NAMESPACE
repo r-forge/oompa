@@ -9,15 +9,13 @@ importFrom("stats", "dbeta", "lm", "predict", "rbeta", "runif", "var")
 import(methods)
 import(ClassComparison)
 
-importFrom(oompaBase, "summary")
-importFrom(oompaBase, "image")
+importFrom(oompaBase, "grayscale", "greyscale", "summary", "image")
 
 exportMethods("summary")
 exportMethods("image")
 
 
 ## Public routines
-export("grayscale", "greyscale")
 exportClasses("BetaRates")
 export("BetaRates", "samplePosteriorRates")
 export("guessCenter")
