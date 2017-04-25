@@ -1,6 +1,6 @@
 
-R version 3.1.0 (2014-04-10) -- "Spring Dance"
-Copyright (C) 2014 The R Foundation for Statistical Computing
+R version 3.4.0 (2017-04-21) -- "You Stupid Darkness"
+Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -54,7 +54,7 @@ History:
 	 Channel(parent = "", name = "fraud", type = ct, vec = v) 
 
     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
-   0.244  280.000  675.700  987.600 1356.000 9631.000 
+   0.244  280.014  675.734  987.643 1355.511 9630.592 
 > 
 > par(mfrow=c(2,1))
 > plot(raw)
@@ -69,4 +69,4 @@ History:
 > 
 > proc.time()
    user  system elapsed 
-   0.98    0.07    1.04 
+   0.82    0.18    1.02 

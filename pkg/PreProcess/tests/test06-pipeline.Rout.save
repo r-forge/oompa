@@ -1,6 +1,6 @@
 
-R version 3.1.0 (2014-04-10) -- "Spring Dance"
-Copyright (C) 2014 The R Foundation for Statistical Computing
+R version 3.4.0 (2017-04-21) -- "You Stupid Darkness"
+Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -48,7 +48,7 @@ History:
 	 Log transformation (using object: proc) with parameter = 2 
 
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
- -0.390   7.260   8.849   8.009   9.966  12.780 
+ -0.390   7.260   8.849   8.009   9.966  12.777 
 > 
 > par(mfrow=c(2,1))
 > plot(processed)
@@ -62,4 +62,4 @@ History:
 > 
 > proc.time()
    user  system elapsed 
-   0.96    0.07    1.03 
+   0.93    0.15    1.06 

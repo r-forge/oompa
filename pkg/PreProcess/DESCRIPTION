@@ -1,6 +1,6 @@
 Package: PreProcess
-Version: 3.1.2
-Date: 2016-05-09
+Version: 3.1.3
+Date: 2017-04-25
 Title: Basic Functions for Pre-Processing Microarrays
 Author: Kevin R. Coombes
 Maintainer: Kevin R. Coombes <krc@silicovore.com>

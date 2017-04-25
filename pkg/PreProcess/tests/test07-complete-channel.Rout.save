@@ -1,6 +1,6 @@
 
-R version 3.2.5 (2016-04-14) -- "Very, Very Secure Dishes"
-Copyright (C) 2016 The R Foundation for Statistical Computing
+R version 3.4.0 (2017-04-21) -- "You Stupid Darkness"
+Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -62,7 +62,7 @@ History:
 	 Foreground - Background (using object: PROC.NEG.CORRECTED.SIGNAL) with parameter = 0 
 
     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
-  -71.28   225.70   626.70   942.70  1336.00 11720.00 
+  -71.28   225.68   626.71   942.73  1336.46 11718.88 
 > 
 > q <- process(b, PIPELINE.STANDARD)
 > summary(q)
@@ -80,7 +80,7 @@ History:
 	 Log transformation (using object: proc) with parameter = 2 
 
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   -Inf   7.400   8.873    -Inf   9.966  13.100 
+   -Inf   7.400   8.873    -Inf   9.966  13.098 
 > 
 > q <- process(x, PIPELINE.MDACC.DEFAULT)
 > summary(q)
@@ -97,11 +97,11 @@ History:
 	 Log transformation (using object: proc) with parameter = 2 
 
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  4.644   7.676   8.944   8.692   9.966  13.040 
+  4.644   7.676   8.944   8.692   9.966  13.043 
 > 
 > # cleanup
 > rm(x, b, q, opar)
 > 
 > proc.time()
    user  system elapsed 
-   0.39    0.06    0.45 
+   1.04    0.14    1.26 

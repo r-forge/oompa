@@ -35,7 +35,7 @@ As usual, you begin by loading the package
 library(PreProcess)
 @ 
 
-\subsection{Matrix manipulations}
+\subsection{Matrix Manipulations}
 
 Now we can play with some of the simple utilities. The first two are
 matrix operations borrowed from MATLAB.  To see how they work, start
