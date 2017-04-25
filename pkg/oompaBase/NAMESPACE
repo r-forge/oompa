@@ -22,6 +22,7 @@ exportMethods("as.data.frame")
 # b02-colorSchemes
 export("redscale", "bluescale", "greenscale",
        "blueyellow","redgreen", "jetColors")
+export("grayscale", "greyscale")
 
 # b02-colors
 export("oompaColor")

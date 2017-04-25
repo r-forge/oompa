@@ -52,12 +52,13 @@ mat <- matrix(1:1024, ncol=1)
 The following code is used to generate Figure~\ref{colsch}.
 <<figmaker,eval=FALSE>>=
 # windows(width=6,height=8)
-opar <- par(mfrow=c(5, 1), mai=c(0.3, 0.5, 0.2, 0.2))
+opar <- par(mfrow=c(6, 1), mai=c(0.3, 0.5, 0.2, 0.2))
 image(mat, col=redgreen(64), main='redgreen')
 image(mat, col=jetColors(128), main='jetColors')
 image(mat, col=blueyellow(32), main='blueyellow')
 image(mat, col=redscale(64), main='redscale')
 image(mat, col=bluescale(64), main='bluescale')
+image(mat, col=greyscale(64), main='greyscale')
 par(opar)
 @ 
 

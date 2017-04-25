@@ -5,6 +5,8 @@
 \alias{blueyellow}
 \alias{redgreen}
 \alias{jetColors}
+\alias{grayscale}
+\alias{greyscale}
 
 \title{Color Schemes for Images and Heat Maps}
 \description{
@@ -17,6 +19,8 @@ bluescale(N)
 blueyellow(N)
 redgreen(N)
 jetColors(N)
+grayscale(N)
+greyscale(N)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -29,7 +33,8 @@ jetColors(N)
   collection of color maps expands the available options.  The functions
   \code{redscale}, \code{greenscale}, and \code{bluescale} each range
   from pure black for low values to a pure primary color for high
-  values.
+  values. The synonyms \code{graysale} and \code{greysale} range from
+  pure black to pure white.
 
   The \code{redgreen} color map ranges from pure green at the low end,
   through black in the middle, to pure red at the high end. Although
@@ -67,6 +72,7 @@ image(data, col=redgreen(32))
 image(data, col=redscale(128))
 image(data, col=blueyellow(64))
 image(data, col=jetColors(64))
+image(data, col=grayscale(64))
 rm(data) # cleanup
 }
 \keyword{ color }

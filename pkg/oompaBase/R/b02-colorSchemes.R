@@ -1,4 +1,4 @@
-# Copyright (C) Kevin R. Coombes, 2007-2012
+# Copyright (C) Kevin R. Coombes, 2007-2017
 
 redscale <- function(N) {
   rgb((1:N)-1, 0, 0, maxColorValue=N)
@@ -16,6 +16,13 @@ blueyellow <- function(N) {
   x <- (1:N)-1
   rgb(x, x, rev(x), maxColorValue=N)
 }
+
+greyscale <- function (N) 
+{
+  x <- (1:N)-1
+  rgb(x, x, x, maxColorValue = N)
+}
+grayscale <- greyscale
 
 ## Fix to redgreen contributed by Karl Kashofer
 ## Fixed yet again, since it got the maxcolorvalue wrong
