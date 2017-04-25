@@ -47,9 +47,9 @@ SamplePCA <- function(data, splitter = 0, usecor = FALSE, center = TRUE)
   call <- match.call()
   if(inherits(data, 'ExpressionSet')) {
     if(is.character(splitter)) {
-      splitter <- as.factor(pData(data)[,splitter])
+      splitter <- as.factor(Biobase::pData(data)[,splitter])
     }
-    data <- exprs(data)
+    data <- Biobase::exprs(data)
   }
   nSample <- dim(data)[2]
   centered <- as.matrix(data)

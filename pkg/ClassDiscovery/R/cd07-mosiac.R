@@ -20,7 +20,7 @@ Mosaic <- function(data, sampleMetric='pearson', sampleLinkage = 'average',
                    usecor=FALSE, center=FALSE, name='My mosaic') {
   call <- match.call()
   if(inherits(data, 'ExpressionSet')) {
-    data <- exprs(data)
+    data <- Biobase::exprs(data)
   }
   data <- as.matrix(as.data.frame(data))
   if(center == TRUE) {

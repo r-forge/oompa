@@ -10,7 +10,7 @@ setClass('PerturbationClusterTest',
 PerturbationClusterTest <- function(data, FUN, nTimes=100, noise=1, verbose=TRUE, ...) {
   call <- match.call()
   if(inherits(data, 'ExpressionSet')) {
-    data <- exprs(data)
+    data <- Biobase::exprs(data)
   }
   N <- ncol(data)
   bootMatch <- matrix(0, nrow = N, ncol = N)

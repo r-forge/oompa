@@ -1,6 +1,6 @@
 
-R version 3.1.0 (2014-04-10) -- "Spring Dance"
-Copyright (C) 2014 The R Foundation for Statistical Computing
+R version 3.4.0 (2017-04-21) -- "You Stupid Darkness"
+Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -54,18 +54,19 @@ The following object is masked from 'package:oompaBase':
 
     as.data.frame
 
-The following object is masked from 'package:stats':
+The following objects are masked from 'package:stats':
 
-    xtabs
+    IQR, mad, sd, var, xtabs
 
 The following objects are masked from 'package:base':
 
     Filter, Find, Map, Position, Reduce, anyDuplicated, append,
-    as.data.frame, as.vector, cbind, colnames, do.call, duplicated,
-    eval, evalq, get, intersect, is.unsorted, lapply, mapply, match,
-    mget, order, paste, pmax, pmax.int, pmin, pmin.int, rank, rbind,
-    rep.int, rownames, sapply, setdiff, sort, table, tapply, union,
-    unique, unlist
+    as.data.frame, cbind, colMeans, colSums, colnames, do.call,
+    duplicated, eval, evalq, get, grep, grepl, intersect, is.unsorted,
+    lapply, lengths, mapply, match, mget, order, paste, pmax, pmax.int,
+    pmin, pmin.int, rank, rbind, rowMeans, rowSums, rownames, sapply,
+    setdiff, sort, table, tapply, union, unique, unsplit, which,
+    which.max, which.min
 
 Welcome to Bioconductor
 
@@ -124,7 +125,7 @@ Call:
 
 Agreement levels:
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
- 0.0000  0.0000  0.0200  0.1834  0.2900  1.0000 
+ 0.0000  0.0000  0.0300  0.1848  0.3000  1.0000 
 > hist(bc)
 > image(bc, dendrogram=hc, col=blueyellow(64))
 > 
@@ -141,7 +142,7 @@ Call:
 
 Agreement levels:
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
- 0.0000  0.0000  0.0600  0.2095  0.3400  1.0000 
+ 0.0000  0.0000  0.0700  0.2128  0.3300  1.0000 
 > hist(pc)
 > image(pc, dendrogram=hc, col=blueyellow(64))
 > 
@@ -170,4 +171,4 @@ Agreement levels:
 > 
 > proc.time()
    user  system elapsed 
-  31.34    0.81   32.30 
+  29.09    0.87   30.29 

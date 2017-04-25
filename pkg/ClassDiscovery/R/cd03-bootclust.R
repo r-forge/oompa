@@ -52,7 +52,7 @@ setClass('BootstrapClusterTest',
 BootstrapClusterTest <- function(data, FUN, subsetSize, nTimes=100, verbose=TRUE, ...) {
   call <- match.call()
   if(inherits(data, 'ExpressionSet')) {
-    data <- exprs(data)
+    data <- Biobase::exprs(data)
   }
   N <- ncol(data)
   if (missing(subsetSize)) {

@@ -3,7 +3,7 @@
 # adds additional (common microarray) metrics to 'dist'
 distanceMatrix <- function(dataset, metric, ...) {
   if(inherits(dataset, "ExpressionSet")) {
-    dataset <- exprs(dataset)
+    dataset <- Biobase::exprs(dataset)
   }
   METRICS <- c('pearson', 'sqrt pearson', 'spearman', 'weird',
                'absolute pearson', 'uncentered correlation')
@@ -35,7 +35,7 @@ distanceMatrix <- function(dataset, metric, ...) {
 # distance of on-or-off genes.
 cluster3 <- function(data, eps=logb(1,2), name='', labels=dimnames(data)[[2]]) {
   if(inherits(data, 'ExpressionSet')) {
-    d <- exprs(data)
+    d <- Biobase::exprs(data)
   } else {
     d <- data
   }

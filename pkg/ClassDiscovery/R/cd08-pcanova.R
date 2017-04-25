@@ -33,7 +33,7 @@ PCanova <- function(data, classes, labels, colors, usecor=TRUE) {
 
   call <- match.call()
   if(inherits(data, 'ExpressionSet')) {
-    data <- exprs(data)
+    data <- Biobase::exprs(data)
   }
   data <- as.matrix(as.data.frame(data))
   labels <- substring(labels, 1, 1)
