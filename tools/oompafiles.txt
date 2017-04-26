@@ -1,9 +1,12 @@
-oompa/pkg/BetaModels
-BARF
+oompa/pkg/oompaBase
+oompa/pkg/oompaData
+oompa/pkg/Polychrome
 oompa/pkg/PreProcess
 oompa/pkg/ClassComparison
 oompa/pkg/TailRank
 oompa/pkg/ClassDiscovery
+oompa/pkg/BetaModels
+BARF
 oompa/pkg/BetaModels
 classpred/pkg/BimodalIndex
 classpred/pkg/Modeler
@@ -34,6 +37,3 @@ C:/KRC/rforge/younsimon/pkg/YounSimon2012
 C:/KRC/rforge/HAPSEG
 C:/KRC/rforge/ABSOLUTE
 FINISHED
-oompa/pkg/oompaBase
-oompa/pkg/oompaData
-oompa/pkg/Polychrome
