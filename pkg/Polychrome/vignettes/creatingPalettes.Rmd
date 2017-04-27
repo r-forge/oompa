@@ -1,0 +1,31 @@
+---
+title: "Polychrome: Creating New Palettes"
+author: "Kevin R. Coombes"
+data: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Polychrome}
+  %\VignetteKeywords{OOMPA,Polychrome,Color Palettes,Palettes}
+  %\VignetteDepends{Polychrome}
+  %\VignettePackage{Polychrome}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+Although the <tt>Polychrome</tt> package ships with several pre-built
+multicolored palettes, it also contains tools to build more.  In this
+vignette, we expain how to use the <tt>createPalette</tt> function for
+this purpose.
+
+## Getting Started
+
+As usual, we start by loading the package:
+
+```{r lib}
+library(Polychrome)
+```
+
+Here are the arguments of thee main function.
+```{r args}
+args(createPalette)
+```
+

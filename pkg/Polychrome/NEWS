@@ -1,4 +1,19 @@
-Polychrome v0.8.3 (Release Date: 2017-04-35)
+Polychrome v0.9.0 (Release Date: 2017-04-27)
+==============
+
+Changes: 
+
+* Removed the 'turnGray' function, since it duplicates functionality
+  from colorspace::desaturate.
+
+* Added error checking to the arguments of most of the functions.
+
+Non-Visible Changes
+
+* Added test code for converting different kinds of color
+  specifications into hex-strings.
+
+Polychrome v0.8.3 (Release Date: 2017-04-25)
 ==============
 
 Changes: 
