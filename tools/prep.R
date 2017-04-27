@@ -10,6 +10,9 @@ for (p in mybiocs) {
   }
 }
 
+### sometimrs emacs is stupid
+plot(2,3)
+
 mypacks <- c("knitr",
              "rmarkdown",
              "RColorBrewer",
@@ -36,7 +39,8 @@ mypacks <- c("knitr",
              "ade4",
              "mgcv",
              "quantreg",
-             "robustbase"
+             "robustbase",
+             "cobs"
              )
 for (p in mypacks) {
   if (!require(p, character.only=TRUE)) {
