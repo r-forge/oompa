@@ -40,7 +40,8 @@ mypacks <- c("knitr",
              "mgcv",
              "quantreg",
              "robustbase",
-             "cobs"
+             "cobs",
+             "timeDate"
              )
 for (p in mypacks) {
   if (!require(p, character.only=TRUE)) {
