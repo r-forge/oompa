@@ -139,7 +139,10 @@ computeDistances <- function(colorset) {
   colorset <- xform(colorset)
   # work in LUV space
   luvmat <- as(hex2RGB(colorset), "LUV")
-  # take the fist color as the starting point
+  if(any(is.na(luvmat@coords))) {
+    luvmat@coords[is.na(luvmat@coords)] <- 0
+  }
+  # take the first color as the starting point
   selected <- 1
   mind <- d2(selected, luvmat)
   dd <- NULL
@@ -150,15 +153,18 @@ computeDistances <- function(colorset) {
     mind <- upd(idx, luvmat, mind)
     selected <- c(selected, idx)
   }
+  dd <- c(max(dd), dd)
+  names(dd)[1] <- names(colorset)[1]
   list(colors=colorset[selected], distances=dd)
 }
 
-plotDistances <- function(colorset, main=deparse(substitute(colorset)), ...) {
+plotDistances <- function(colorset, main=deparse(substitute(colorset)), pch=16, ...) {
   cset <- xform(colorset)
   luvd <- computeDistances(cset)
   dd <- luvd$distances
   plot(dd, main=main,
-       xlab="Index", ylab="Distance in L*u*v* space", ...)
+       xlab="Index", ylab="Distance in L*u*v* space",
+       col=luvd$colors, pch=pch, ...)
   abline(h=40)
   invisible(luvd)
 }

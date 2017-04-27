@@ -8,6 +8,14 @@ Changes:
 
 * Added error checking to the arguments of most of the functions.
 
+* Changed the 'computeDistances' function so it includes the default
+  starting point, thus obviating the need for adding one when you
+  count the number of separated colors. (Technically, the distance
+  for  the first point should be infinite, but we set it to the
+  distance to the second point to make it easier to plot.)
+
+* Changed the 'plotDistances' function so it now colors the points.
+
 Non-Visible Changes
 
 * Added test code for converting different kinds of color

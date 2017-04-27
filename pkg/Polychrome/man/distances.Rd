@@ -10,12 +10,13 @@
 }
 \usage{
 computeDistances(colorset)
-plotDistances(colorset, main=deparse(substitute(colorset)), ...)
+plotDistances(colorset, main=deparse(substitute(colorset)), pch=16, ...)
 }
 \arguments{
   \item{colorset}{a character vector containing hexadecimal color
     values.}
   \item{main}{a character string, the main title for a plot}
+  \item{pch}{Plotting character to use.}
   \item{\dots}{additional graphical parameters.}
 }
 \details{
