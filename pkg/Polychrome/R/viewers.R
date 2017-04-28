@@ -101,9 +101,12 @@ p3d <- function(colorset, main=deparse(substitute(colorset))) {
 
 swatch <- function(colorset, main=deparse(substitute(colorset))) {
   cset <- xform(colorset)
+  luvmat <- as(hex2RGB(cset), "LUV")
+  x <- luvmat@coords
+  labelcols <- c("white", "black")[1 + 1*(x[,1] > 50)]
   L <- length(cset)
   pts <- barplot(rep(1, L), col=cset, main=main, yaxt='n')
-  text(pts, 0.5, names(cset), srt=90)
+  text(pts, 0.5, names(cset), srt=90, col=labelcols)
   invisible(pts)
 }
 

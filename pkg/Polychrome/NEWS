@@ -1,4 +1,4 @@
-Polychrome v0.9.0 (Release Date: 2017-04-27)
+Polychrome v0.9.0 (Release Date: 2017-04-28)
 ==============
 
 Changes: 
@@ -7,6 +7,9 @@ Changes:
   from colorspace::desaturate.
 
 * Added error checking to the arguments of most of the functions.
+
+* Changed 'swatch' so it uses the luminance to decide whether to write
+  color labels in white or black.
 
 * Changed the 'computeDistances' function so it includes the default
   starting point, thus obviating the need for adding one when you
