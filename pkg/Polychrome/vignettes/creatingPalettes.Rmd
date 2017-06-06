@@ -45,20 +45,22 @@ generated in order to create the palette.
 
 ## Recommendations
 
-1. The seed colors usually have a small effect on the overall palette, but they
-can change the order.  White and black appear to be exceptions; they tend not
-to be included in the palette unless forced.
+1. The seed colors usually have a small effect on the overall palette,
+but they can change the order.  White and black appear to be
+exceptions; they tend not to be included in the palette unless forced.
+One reason to use more seed colors would be to aumgent an existing
+small palette by adding distinguishable colors.
 2. We show below that an upper bound on a good set of colors is likely to be
-around 40. it's probably better in the long run to build a palette that you like
+around 40. It may be better in the long run to build a palette that you like
 of about this size, and then just use colors from the beginning if you don't
 need that many.
 3. The speed of the algorithm mainly depends on <tt>M</tt>. You get a richer
 selection of colors with larger <tt>M</tt>. We have been successful using the
 default of 50000.
-4. The range deopends on whether you expect to use a light background (take 
-<tt>range = c(10, 60)</tt>), a dark background (take tt>range = c(55, 95)</tt>), 
-or both (take tt>range = c(30, 80)</tt>).
-5. Unless you really need colors called X1, ..., X37, yiu are probably better
+4. The range depends on whether you expect to use a light background (take 
+<tt>range = c(10, 60)</tt>), a dark background (take <tt>range = c(55,
+95)</or both (take <tt>range = c(30, 80)</tt>).
+5. Unless you really need colors called X1, ..., X37, you are probably better
 off using the <ttcolorNames</tt> function to assign meaningful names after
 creating the palette.
 
@@ -70,15 +72,16 @@ firstpal <- createPalette(10, c("#010101", "#ff0000"), M=1000)
 firstpal
 ```
 
-The probably surprising result is that the seed colors are actually _not_
-included in the final palette. There are two reasons for this.  First, the colors
-'black' and 'red' are outside the specified (default) luminance range. So, they
-are replaced by the closest randomly generated colors that are inside the range.
-But that leads us to the second reason. We specified a small value of <tt>M</tt>.
-The algorithm operates by randomly selecting a large set of potential colors in
-the desired range, and will eventually assemble the palette from this set.  With
-only 1000 candidates, there may not be anything that looks close to pure
-red or pure black in the set of candidates.
+The probably surprising result is that the seed colors are actually
+_not_ included in the final palette. There are two reasons for this.
+First, the colors 'black' and 'red' are outside the specified
+(default) luminance range. So, they are replaced by the closest
+randomly generated colors that are inside the range.  But that leads
+us to the second reason. We specified a small value of <tt>M</tt>.
+The algorithm operates by randomly selecting a set of potential colors
+in the desired range, and will eventually assemble the palette from
+this set.  With only 1000 candidates, there may not be anything that
+looks close to pure red or pure black in the set of candidates.
 
 ```{r firstswatch, fig.cap="First palette"}
 swatch(firstpal)
@@ -94,7 +97,7 @@ second <- createPalette(10, c("#010101"), M=1000)
 swatch(second)
 ```
 
-This paltte is essentially indistinguishable from the first one. However, here is
+This palette is essentially indistinguishable from the first one. However, here is
 what happens if we just start with the color red.
 ```{r third, fig.cap="A palette from a single red seed."}
 set.seed(723451) # for reproducibility
@@ -169,8 +172,8 @@ overvol <- 100*area
 overvol
 ```
 
-Now, we want colors to be 40 units apart to be reliably distinguisdhable by most
-viewers. So, each time we pick a oclor, it should "occupy" a sphere of radius 20
+Now, we want colors to be 40 units apart to be reliably distinguishable by most
+viewers. So, each time we pick a color, it should "occupy" a sphere of radius 20
 to avoid picking indistinguishable colors.  The volume of such a sphere is:
 ```{r volsphere}
 sphere <- 4/3*pi*20^3
@@ -194,9 +197,6 @@ most hope to get 50 distinct colors.
 We can empirically improve our estimate of the volume of the visible portion of
 LUV space.  We start by generating a tight, regularly spaced grid of values.
 ```{r what}
-L <- seq(0, 100, 10)
-V <- U <- seq(-200, 200, 20)
-
 L <- 0:100
 U <- -60:150
 V <- -150:150
@@ -242,9 +242,9 @@ going to take it to be about 40.
 
 # Computational Complexity
 
-The final parameterr we want to look at is <tt>M</tt>, the number of candidate
+The final parameter we want to look at is <tt>M</tt>, the number of candidate
 colors that we search through. In general, we expect the time needed to run the
-algorithm to be approximately <tt>N*M</tt>, since we msut search through all
+algorithm to be approximately <tt>N*M</tt>, since we must search through all
 <tt>M</tt> candidates for each of the <tt>N</tt> desired colors. The trade-off,
 of course, is that we can find more colors that are distinguishable with more
 candidates. Here we increase <tt>M</tt> from 1000 to 10000.

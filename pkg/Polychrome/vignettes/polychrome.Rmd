@@ -42,7 +42,7 @@ sort them by hue:
 swatchHue(mypal)
 ```
 
-or by luminnace:
+or by luminance:
 ```{r fig.width=7, fig.height=5}
 swatchLuminance(mypal)
 ```
@@ -100,7 +100,9 @@ plotpc(pal2)
 One further consideration that should be kept in mind when creating
 color palettes is that not every potential viewer has normal color
 vision. One way to test if a color palette will remain useful in this
-context is to convert it to gray scale. We do this 
+context is to convert it to gray scale. We do this by converting to
+grayscale using the desaturate function fromth  colorspace package,
+and then preparing a barplot by luminance. 
 
 ```{r fig.width=7, fig.height=5}
 grayed <- colorspace::desaturate(pal2)
