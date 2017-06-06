@@ -1,7 +1,7 @@
 Package: Polychrome
 Title: Qualitative Palettes with Many Colors
-Version: 0.9.1
-Date: 2017-06-05
+Version: 0.9.2
+Date: 2017-06-06
 Author: Kevin R. Coombes, Guy Brock
 Description: Tools for creating, viewing, and assessing qualitative
  palettes with many (20-30 or more) colors.

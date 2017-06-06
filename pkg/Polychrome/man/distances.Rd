@@ -26,13 +26,15 @@ plotDistances(colorset, main=deparse(substitute(colorset)), pch=16, ...)
   units. The  \code{computeDistances} function reorders the colors by
   maximal separation in L\*u\*v\*  space, and computes the minimum
   distance of the next color to all the preceeding colors.  The
-  \code{plotDistances} function is a convenient interface that calls
-  \code{computeDistances} and immediately plots the result.
+  \code{plotDistances} function computes distances and immediately plots
+  the result.
 }
 \value{
-  Both functions retuirn a list with two vector components: the
-  \code{colors} in sorted order, and the minimum \code{distances} from
-  each color to the set of preceeding colors.
+  The \code{plotDistances} function returns a list with two vector
+  components: the \code{colors} in sorted order, and the minimum
+  \code{distances} from  each color to the set of preceeding colors. The
+  \code{computeDistances} function returns the vector of minimum
+  distances.
 }
 \author{Kevin R. Coombes <krc@silicovore.com>}
 \references{

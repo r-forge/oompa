@@ -138,7 +138,7 @@ ranswatch  <- function(colorset,
   swatch(scramble, main=main)
 }
 
-computeDistances <- function(colorset) {
+luvDistances <- function(colorset) {
   colorset <- xform(colorset)
   # work in LUV space
   luvmat <- as(hex2RGB(colorset), "LUV")
@@ -161,9 +161,13 @@ computeDistances <- function(colorset) {
   list(colors=colorset[selected], distances=dd)
 }
 
+computeDistances <- function(colorset) {
+  luvDistances(colorset)$distances
+}
+
 plotDistances <- function(colorset, main=deparse(substitute(colorset)), pch=16, ...) {
   cset <- xform(colorset)
-  luvd <- computeDistances(cset)
+  luvd <- luvDistances(cset)
   dd <- luvd$distances
   plot(dd, main=main,
        xlab="Index", ylab="Distance in L*u*v* space",
