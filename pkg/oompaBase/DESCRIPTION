@@ -1,6 +1,6 @@
 Package: oompaBase
-Version: 3.2.0
-Date: 2017-04-24
+Version: 3.2.1
+Date: 2017-07-03
 Title: Class Unions, Matrix Operations, and Color Schemes for OOMPA
 Author: Kevin R. Coombes
 Maintainer: Kevin R. Coombes <krc@silicovore.com>
