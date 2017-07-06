@@ -2,6 +2,7 @@
 
 use strict;
 use warnings;
+use HTML::Entities;
 use File::Copy;
 use Cwd;
 my $home = getcwd;
@@ -70,7 +71,20 @@ foreach my $packname (@packList) {
 <htmL>
 <!-- autocreated by harvestHTML.pl -->
 <title>Package $pack</title><head></head>
-<body><h1>Package $pack</h1>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="http://oompa.r-forge.r-project.org/bianchi.css" rel="stylesheet" type="text/css" />
+<body>
+<div id="logobar">
+  <img src="http://oompa.r-forge.r-project.org/tuba2.gif" alt="OOMPA logo" height="262px" width="156px" />
+<br />
+<br />
+<a href="http://oompa.r-forge.r-project.org/">Main</a>
+<br />
+<a href="http://oompa.r-forge.r-project.org/packages.html">Package List</a>
+</div>
+<div id="mainarea">
+<h1>OOMPA</h1>
+<h2>$pack</h2>
 <table>
 ENDHEAD
 ;
@@ -83,6 +97,7 @@ ENDHEAD
     while (my $line = <DESC>) {
 	chomp $line;
 	if ($line =~ /^([a-zA-Z]+)\: (.*)$/) {
+	    $value = fixup($value);
 	    print TGT "<tr><td>$tag</td>\n\t<td>$value</td></tr>\n" if $tag;
 	    $tag = $1;
 	    $value = $2
@@ -91,6 +106,7 @@ ENDHEAD
 	    $value =~ s/\s+/ /g;
     }
     }
+    $value = fixup($value);
     print TGT "<tr><td>$tag</td>\n\t<td>$value</td>\n</tr>\n" if $tag;
     close DESC;
     my $man = "$pack-manual.pdf";
@@ -111,18 +127,31 @@ ENDHEAD
     }
     chdir "$pack/doc";
     my @vigs = glob "*.pdf *.html";
+    my $tick = 0;
     if ($#vigs) { # shortcut, since 0 means just index.html
 	print TGT "<tr><td>Vignettes</td>\n  <td>";
 	foreach my $f (@vigs) {
 	    next if ($f eq 'index.html');
 	    copy($f, $infoDir) or die "Copy failed for vignette '$f': $!\n";
-	    print TGT "<A HREF=\"$pack/$f\">$f</A>, ";
+	    print TGT ", " if ($tick) ;
+	    ++$tick;
+	    print TGT "<A HREF=\"$pack/$f\">$f</A>";
 	}
 	print TGT "</td></ttr>\n";
     }
-    print TGT "\n</table></body></html>\n";
+    print TGT "\n</table></div></body></html>\n";
     close(TGT);
     chdir $home or die "Unable to return to '$home': $!\n";;
+}
+
+sub fixup {
+    my $val = shift;
+    if ($val =~ /^http/) {
+	$val = "<A HREF=\"$val\">$val</a>";
+    } elsif ($val =~ /<(.*?)>/) {
+	$val = encode_entities($val);
+    }
+    return $val;
 }
 
 exit;
