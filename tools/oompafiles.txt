@@ -24,7 +24,6 @@ supercurve/pkg/SuperCurve
 supercurve/pkg/SuperCurveGUI
 clonefinder/pkg/CloneFinder
 deepcnv/pkg/DeepCNV
-BARF
 C:/KRC/rforge/drexplorer/pkg/drexplorer
 C:/KRC/rforge/craac/pkg/CRAAC
 C:/KRC/rforge/arraycube/pkg/ArrayCube
@@ -32,6 +31,6 @@ C:/KRC/rforge/arraycube/pkg/MINiML
 C:/KRC/rforge/accuploidy/pkg/AccuPloidy
 C:/KRC/rforge/firstsign/pkg/FirstSign
 C:/KRC/rforge/younsimon/pkg/YounSimon2012
+#HALT
 C:/KRC/rforge/HAPSEG
 C:/KRC/rforge/ABSOLUTE
-FINISHED

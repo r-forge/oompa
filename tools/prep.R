@@ -3,14 +3,15 @@ if (!require("Biobase")) {
   biocLite()
 }
 mybiocs <- c("edgeR",
-             "Biostrings")
+             "Biostrings",
+             "affy")
 for (p in mybiocs) {
   if (!require(p, character.only=TRUE)) {
     biocLite(p)
   }
 }
 
-### sometimrs emacs is stupid
+### sometimes emacs is stupid
 plot(2,3)
 
 mypacks <- c("knitr",
@@ -41,7 +42,11 @@ mypacks <- c("knitr",
              "quantreg",
              "robustbase",
              "cobs",
-             "timeDate"
+             "timeDate",
+             "drc",
+             "DoseFinding",
+             "alabama",
+             "doSNOW"
              )
 for (p in mypacks) {
   if (!require(p, character.only=TRUE)) {
