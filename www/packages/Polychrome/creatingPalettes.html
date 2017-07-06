@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Getting Started</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<p>Although the <tt>Polychrome</tt> package ships with several pre-built
+multicolored palettes, it also contains tools to build more.  In this
+vignette, we expain how to use the <tt>createPalette</tt> function for
+this purpose.</p>
+
+<h1>Getting Started</h1>
+
+<p>As usual, we start by loading the package:</p>
+
+<pre><code class="r">library(Polychrome)
+</code></pre>
+
+<p>Here are the arguments of the main function.</p>
+
+<pre><code class="r">args(createPalette)
+</code></pre>
+
+<pre><code>## function (N, seedcolors, prefix = &quot;NC&quot;, range = c(30, 90), M = 50000) 
+## NULL
+</code></pre>
+
+<ul>
+<li><tt>N</tt> is the number of colors to include in the palette</li>
+<li><tt>seedcolors</tt> is a list of one or more starting colors that you would
+like included in the palette.</li>
+<li><tt>prefix</tt> is a character string used to create default names for the
+palette colors.</li>
+<li><tt>range</tt> is a numeric vector of length 2 indicating the minimum and
+maximum desired luminance for the palette.</li>
+<li><tt>M</tt> is an an integer representing the number of random colors to be
+generated in order to create the palette.</li>
+</ul>
+
+<h2>Recommendations</h2>
+
+<ol>
+<li>The seed colors usually have a small effect on the overall palette,
+but they can change the order.  White and black appear to be
+exceptions; they tend not to be included in the palette unless forced.
+One reason to use more seed colors would be to aumgent an existing
+small palette by adding distinguishable colors.</li>
+<li>We show below that an upper bound on a good set of colors is likely to be
+around 40. It may be better in the long run to build a palette that you like
+of about this size, and then just use colors from the beginning if you don&#39;t
+need that many.</li>
+<li>The speed of the algorithm mainly depends on <tt>M</tt>. You get a richer
+selection of colors with larger <tt>M</tt>. We have been successful using the
+default of 50000.</li>
+<li>The range depends on whether you expect to use a light background (take 
+<tt>range = c(10, 60)</tt>), a dark background (take <tt>range = c(55,
+95)</or both (take <tt>range = c(30, 80)</tt>).</li>
+<li>Unless you really need colors called X1, &hellip;, X37, you are probably better
+off using the <ttcolorNames</tt> function to assign meaningful names after
+creating the palette.</li>
+</ol>
+
+<h1>A Small Palette</h1>
+
+<p>We&#39;ll start with a simple (but fast) example.</p>
+
+<pre><code class="r">set.seed(723451) # for reproducibility
+firstpal &lt;- createPalette(10, c(&quot;#010101&quot;, &quot;#ff0000&quot;), M=1000)
+firstpal
+</code></pre>
+
+<pre><code>##       NC1       NC2       NC3       NC4       NC5       NC6       NC7 
+## &quot;#625C53&quot; &quot;#F11C0D&quot; &quot;#5316FA&quot; &quot;#40FD16&quot; &quot;#F626CF&quot; &quot;#FADF26&quot; &quot;#26F6FD&quot; 
+##       NC8       NC9      NC10 
+## &quot;#FC9089&quot; &quot;#D5A8FA&quot; &quot;#9EE290&quot;
+</code></pre>
+
+<p>The probably surprising result is that the seed colors are actually
+<em>not</em> included in the final palette. There are two reasons for this.
+First, the colors &#39;black&#39; and &#39;red&#39; are outside the specified
+(default) luminance range. So, they are replaced by the closest
+randomly generated colors that are inside the range.  But that leads
+us to the second reason. We specified a small value of <tt>M</tt>.
+The algorithm operates by randomly selecting a set of potential colors
+in the desired range, and will eventually assemble the palette from
+this set.  With only 1000 candidates, there may not be anything that
+looks close to pure red or pure black in the set of candidates.</p>
+
+<pre><code class="r">swatch(firstpal)
+</code></pre>
+
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAFoCAIAAAA0LH5rAAAACXBIWXMAAAsSAAALEgHS3X78AAAWgklEQVR4nO3dfVTUdb7A8c8wMIfFddUNMcMQC0bTtrL2egxSbPfY8WHzamanJw8r6yOLgnsLW9dzl+24Ze6Wg7FUaLQca9fbanhoE09t61Ni13tLbynliIqT5Ips2BrEAsPcP2YGGGaWNpfvAB/fr9Mfzm8GPoN53nz5zm9+WDwejwAA9Iro7ScAADCL0AOAcoQeAJQj9ACgHKEHAOUIPQAoR+gBQDlCDwDKEXoAUI7QA4ByhB4AlCP0AKAcoQcA5Qg9AChH6AFAOUIPAMoRegBQjtADgHKEHgCUI/QAoByhBwDlCD0AKEfoAUA5Qg8AyhF6AFCO0EOjqvxUi1dqflX5EovFYllS/vU/TfmSy/qwjo++zLlAz4rs7ScA9LzyX+VUiCze6XlhuoiIeDwvXMYnWWKZUSSLZ/fwcwPCjxU9lKnKT7XMKBIRKZphsaTmVwWsrL1L/dQlS1L96/3Oy/+Ah3V8kiXl/gctKfd+si5L9Y6D/s8J9CWEHlegiqKiChGRlPtmJpUvSc6p6LiraEZ3oS6a4c1/wCPLl3QcFJGKnHRSj76F0EOZpOwDnp2LRUQW7/R4DmQnhXzU4p0ej8dzIDupynlURFIcJzx+B7KTunwS3waQdHrgzsUiUpHzq3IRmf5C+8f6jleeMP1VAl8HoccVKMXxqL/dSfYbRaQiJzl4QyaExWt83zimP+pIEZGjzva1u3f7JmBtD/QRhB5XuOkvnHCkdNwsmvF1N9l9W/wkHn0XoccVLyn7wD+781K01vdNwHtej9xoT6p649WK9i2dgO8ZQF9B6HFlCzjlxrssXzy7Y0++/awbH/8ez4wi8e0ABez9BLyuC/QVhB5XtqTsAwHL8BTHCd9rr75teOm8E794p/clWu8Dva/0Tn+h87ETjhSRoh28Swp9icXj8fT2cwD6vqr81OScio73YAH9CCt6AFCO0AOAcmzdAIByrOgBQDlCDwDKEXoAUI7QA4ByhB4AlCP0AKAcoQcA5Qg9AChH6AFAOUIPAMoRegBQjtADgHKEHgCUI/QAoByhBwDlCD0AKEfoAUA5Qg8AyhF6AFAusrefgFkWi8X0iOBfuqt1aPBchjKUoV9raG9RHnoRyXh4rrlPXvzy9pDHPx8x0NzQQWcvhTw+N67Z3FAR2V5rCz44xR1ndOgea23wwUb7YaNDY5zjgw82n7YbHWob5Qw+aG90Gx3qjLEGH2x1PGV0aGTOquCDx7aa/dc77v4Q/3qLXQ6jQzMScox+/n8eWzcAoByhBwDlCD0AKEfoAUA5Qg8AyhF6AFCO0AOAcoQeAJQj9ACgHKEHAOUIPQAoR+gBQDlCDwDKEXoAUI7QA4ByhB4AlCP0AKAcoQcA5Qg9AChH6AFAOUIPAMoRegBQjtADgHKEHgCUI/QAoByhBwDlCD0AKEfoAUA5Qg8AyhF6AFCO0AOAcoQeAJQj9ACgHKEHAOUIPQAoR+gBQDlCDwDKEXoAUI7QA4ByhB4AlCP0AKAcoQcA5Qg9AChH6AFAOUIPAMoRegBQjtADgHKEHgCUI/QAoByhBwDlCD0AKEfoAUA5Qg8AyhF6AFCO0AOAcoQeAJQj9ACgHKEHAOUIPQAoR+gBQDlCDwDKEXoAUI7QA4ByhB4AlCP0AKAcoQcA5Qg9AChH6AFAOUIPAMoRegBQjtADgHKEHgCUI/QAoByhBwDlCD0AKEfoAUA5Qg8AyhF6AFCO0AOAcoQeAJQj9ACgHKEHAOUIPQAoR+gBQDlCDwDKEXoAUI7QA4ByhB4AlCP0AKAcoQcA5Qg9AChH6AFAOUIPAMoRegBQjtADgHKRvf0EAKBvq977xOTSqq5HU1a67vtObzydy0DoAaAbdW+tLI0vcay+M/Dw7lcz5uxdV5oW1zvP6uth6wYAulH76Xspt94ZdPjOG9PeO3++F57P5SD0ANCNuGtuq3h/d9Dh3Uf33jZsWC88n8vB1k3vaW2Z+pemQyIi1ievjsn0/a9wZ59t/sGIb0w1NPTmiPw3rfEiNYWt25MiV9zlPdq2Mc69z2JoZFeWk1++Z29JdA/8tpgbeSDLuXuWfc1dvj9nFXsPRz/6YcKD1xubKmfq06ZcGPeSvXBKy7NzT//H+yIicuvQyu1DkkyN3FUbM7NpvTMhy+CXFVrdO5PWvn5QRFIyPh729pjSMyIiMuF1x9zpJsfu32xb+qeAI/Mea867xdzA2Kmli0sScjK6Hk9Z6eof+zZC6HtPW+FnTWNjB74VLSJthbWXpsYMeOubhn/A8lgeet5ak9OS/XuZvCVqxV3+vt8ckf9uhGtiW7WB8Fqk+WPrxXNBxz+wNolE32Q29+Iv/uEC762W332v9sCf41LNzGp59ifeysuu1ac/Wm5vniIiImfq0+bWv2iw9YsGSroz5uDgHe64u0zNCPLXjS9/MG/NU/tjpWpv4Zjz3291jBYRqXtnkuOd5Jw7DH2x+zfb3v5u87GFIiKu8rTi4XvzbpH9m23j/rfs2MJpZmaKyNh0lyPd2GcPA0IvIpOztqwYH/quQ5vmr3/XyFDP8ebIH0R7/xyRGTcwuf7SoPqYz4cYGeZnib+u7d3fiVhk3862uVVtvlX8Eam5zpIgUm1gpEdsY9yDxXrxnD/rYVnR+7WcqYy+bmX7zaiRYy/ufjMu1UwPmz96f/CsKSLScuJ49A1L/IdH2sa931AlYiz0Yst6x54lDVlW52wRWRTf+PwAY7P86j6qHjYr1nfj9mH+P8UOvbH66AlTX+yut/+08PsLfTcSbr33xG+edd2yfNLCsnn3l+1fOG2SkaEasEcvIvsK5j/yxjn5S9kjP5p/b+B/hiovIpbRttY/NnXcnjpk4OGovw+q/XulqYki4qk5FTHxQRER+b07+xce3+FbJP6Ux2VuqthGu+PudEdfsF7Yc8eXXxobFGj7bGd6gUy6R06dbD/WcqYy+jpjexwDZj1wsWyPiEQtXx697c8tvsN7GjY/MMDcarNjfIHb3ui2N85uiLE6Y6zOmKUNBqfF3pB4/kSd78bB8/4/1V04mjgs2dTQpOvtx6rbXwA999GRhOQEETlS9gf7DSNNDdWAFb1X9Wu5G6/ZsvKe/85+zVzwAkRkxsVkn700dXDHjs1134w5LI3jm43NtHhemejOrY3KlZb1v/cdS/x55K8zPRvj3Cb2bTrz5n7MyS/fs1/6m0SbHSapBfbDBfJJgWtWbpNI7Z2NcanSsDamRnbY15jbzJ72hF1WO20LvLcu2h4XEZEH4pufML/C7vQs4hrd5veOr1rx8E2T1q76icjtc3I/HvZfkTne10EmvO6Ya+xnl6T5j/80737bOO8t+9Plj0+TI5nj1h17LL8wwdRQDSwej+erH9VvWSyWjIfnmvv8xS9vD/4LtFgsn48YaG7ooLOXQg6dG2fuW4SIyPZaW5e5FotliuGk7LHWBg9ttB82OjTGOT54aPNpu9GhtlHO4KH2RrfRoc4Ya/DQVsdTRodG5qwKHnpsq9l/vePuD/Gvt9jl+Cc+tLIkoWhv6Lu+4j1TGQk5fSSwrOgBoBtj011rrpmz9n/uXrM6I/arH94nsUfvMzFn24s5k/23Jmdt2ZaVYnzoW/WXBtW3L9nc2WcvZTd19/geMXlL1LYt/v/vnojc81G5Dxgf+tnS2j1LfUs2izQft9Ye32V8pfNm7fiY2gP+WweynOOzTG5ae+1a7bStbh/TkDnKmbnH+NCGLKsza1f7U6iNsda+aXyoiJS/uiry1eP+W8eX5axaZvIlJq/9m23jNnd8sXn32/KOmJ4ZO7V0cXzey29Vmx5kCqEXEbl2Xv6ia0rzHPv8B/YVzN8oy7b9cl6iuaGnvmi8tyX68BCr/4A1f0SM1F2a+kWbuaGJP49ckeR+5GH/CEvb+ji3OKLyf25wh75p42cfHB048fko703feTgzL7y/0eC+xMn69NlNj37YcSZlaoG9QGrGf6/+E3NDq15yzTo+tLJjR35A4el4WeBMe6mluw/717QU3FFTuWFUQfvLvdPiGt+Q2VZXwcnuPuxfVrW38O5P7/74vtH+A6Ofc2RI0apJe/9qbqirPG2p6+nyjjMpp+VtLZN1tofKgy5F08PGprtypiYaHmIMoReRyf8+S94oeCUwAPsKflYq/5Z6ramh7vyL8uS3o64LOGjNvzpaGt2nDM30RNyXKaVLA8+Xt7Stv8st0yyJZlbYFmk+s1KSS6KjO51M6RHbGOdAebW5SQyt6w9suCDrh3d5b1RqwahH5dJ+Y/1reOZxefqZLufLDyjcM1T++IWxDu2qz5Whm1ZEBRycFvfhBnntDYPfXuT406XyzMNdzpcf/dyau+XwR+a+2OISeezHywNfd52Wl/+0HCwP01kU/ROh96r5NPifieuTc8Pj4w0OtSQHv0QSGTG2udXkSszzSfDPuf7z6I2J/EbwmS7XWwccbGk0ODTZHhV0LGrk2KZTJv96o5ODz/IbaRv3fovJBeeNthB/vfbodyvNvr4pw5KDt6xjh95Yff6EwaHjEoMvOzAsOdn50RmDQ+XDn+Zk/LR9W6qyJCGnJPiiCH0YoRcR16fnJnw3eEc+ZeL4czU1poZ2PY/ep6n5t7ZIY+f/dTqPvrMHLRMMnkdv/ebtTRd2BR3e1XTu9qgYU0MTxkRvLwvekW/YXWzwPHrbDbd6z6MPtKdh861Rxs44TI6auKkheEf+zR0XJ461mRoqIrE3JB4qC96Rrzy6yex59JvfDrFSMXsefW2xY8PHc9Y9OdZ/YGy6a7Gk5zxRXNfdh/UlhF5Eql8rKB2+LP+ezmvahId+uWzC4R2vGNvQjcj8dnRlXWNha6djrS1T61p/+K0u+zk9x+J5Zak73hH50M2dDt4cke+IOLTRyPUPRMQj1hElAxtm1tec7NilsZz88r2ZTcPXBOzn9Khrs4Y/WlmTXtB586Lld9+r2Z5xlblr3UQtf2bosQWuZzuvLc/Upy24uHC5uesfXD9k04am2XfUd/455eRG1+xNgx9bEfwjTc+5asXDdx8tKtzYuXV170wqOrToLlPXPxBJmv/jp0+sS9vS+aKR5599aN3mefcsN/YjaWV5njywoctlbcam75sjrx+rNTW0h3F6pYiIuF752fxPsrZse7Hj0KFN8+819rZYERGJjHprRET22UuDOh3aNmKgqcuZef1fW3ac5NZGbes41LYxrsXoFc0813/jNrf1Y+uFPR3Hom9yDzV7CYSoB/9sH5nlHN/ph4a5O+yHzV4MZuSQvadtmaOcnZbSg8tO282+Lfb6FQmN9toYq7Pj0KL4Rrfx92jF3rHfMXRZzqpOEZnwuuMpo1c0k2HLX9ma3PGeKRGRhc9vbTZ88YNrrk4MOpY4NP69o+dF+sV1zQh9u30F8/d99aN6mDV/xMD8MM+0tK0fFnhij/lLznjfFjv6qx/Ys7zvjw2zAYWn7YXhHhqed8MGG/2c46nnwj10Wt7W5rzwjfNepvi+73T9xSNH9942zOx3tZ7D1g0AdCN26oY5NemOgJPoq/c+kV6RtoLLFPcnvXL1Snf22cbfhr4rcpuh69F7InJrrRNC32fqkvT/6DLFImLyMsWdrkHf1dwdvuvU97iGzFE1m0PfNbjsdJyZDZxdtTEzL4a+y+hlLI8vyyneFPouc5ek35V3/6w/hL5r4fNbC01t4CSmrXYNDbwkfcpKl6O//MJYIfQiEnLT5tp5+Xmz4g8/Z+7qlSE2bU590Tj+ovuHscZ+60jwpo3vomaWQzmmfvFIyE2bpo2fvbuydfgb5q5UHGLT5mR9+ncufJARb6jyEnLTpuol19jHmxa+ZKjyEnLTpqXgjtO5BwfvMHqx4hCbNlV7C8eUnlm02NwvHgmxaeMqT5tecnDeY8Yq79O/L0lP6IN5F/iHNs3PNvtibADvAt/8i7Gd+Rb4bRvjWsP366V8C/zom9xDwnE9eh/vAn/uDntJ+H4zh2+BP7jsdEIYrlHs513gL4pvfCecF8z0L/AnvO7IDOO2tXeBv/D5rXu5En33CH0A70L+L2WP/OgP1WEb6l3ITxg84HPTv2GqE+9Cvqaw9d5feMLWW+9C/lsbrpqywvrVj+4h3oX8xKFljUOMvc05iHchf/t/jmpeYPIUx0DehXz0eqc9vL9W0LuQv31ObmvaVWEb6l3I35JeeWy6uV/o4nX5V6/sOwh9OxbyBrGQN4yFvDkhNm1qix2P5VWnlfSPyguh90nJfXHZhDAv5KXpy0F1rWFeyMsD1m2OiDAv5C27/rZ7ZlOYF/LSsDamZnuYF/Kyp9a24GKYF/Ly5lLn7E3hX8hL5fbIokNhXsjLkcxx6zaHZSH/j3gX+CkrXTn9pfJC6EVEZHLWsgkicvWsX784q8tdJs+6qWsVkUMXGwZ1PWfC5Fk3jggRic+M3JbZ5T6TZ93MbBKRv638656VXe40edZNzXYReffCrJgLXe4yedbNgosicvDx077fLdXB5Fk3szeJSFOu3Znb5S7DZ90UHRKRg6XrI0u73GXyrJt1m0XkSMnYcSVd7jJ51o2fdyGflLemuL9dmJ7QyxX9VqmAe43M5K1ShvFWqfDolwv5doQeALq1+9WM9Ir+uJBvR+gBoBuVJekVIlKVtzYjr8tdnHUDABr077dKeXGtGwBQjtADgHKEHgCUI/QAoByhBwDlCD0AKEfoAUA5Qg8AyhF6AFCO0AOAcoQeAJQj9ACgHKEHAOUIPQAoR+gBQDlCDwDKEXoAUI7QA4ByhB4AlCP0AKAcoQcA5Qg9AChH6AFAOUIPAMoRegBQjtADgHKEHgCUI/QAoByhBwDlCD0AKEfoAUA5Qg8AyhF6AFCO0AOAcoQeAJQj9ACgHKEHAOUIPQAoR+gBQDlCDwDKEXoAUI7QA4ByhB4AlCP0AKAcoQcA5Qg9AChH6AFAOUIPAMoRegBQjtADgHKEHgCUI/QAoByhBwDlCD0AKEfoAUA5Qg8AyhF6AFCO0AOAcoQeAJQj9ACgHKEHAOUIPQAoR+gBQDlCDwDKEXoAUI7QA4ByhB4AlCP0AKAcoQcA5Qg9AChH6AFAOUIPAMoRegBQjtADgHKEHgCUI/QAoByhBwDlCD0AKEfoAUA5Qg8AyhF6AFCO0AOAcoQeAJQj9ACgHKEHAOUIPQAoR+gBQDlCDwDKEXoAUI7QA4ByhB4AlCP0AKAcoQcA5Qg9AChH6AFAOUIPAMoRegBQzuLxeHr7ORhksVhMjwj+C9Q6NHguQxnK0K81tLcoDz0AgK0bAFCO0AOAcoQeAJQj9ACgHKEHAOUIPQAoR+gBQDlCDwDKEXoAUI7QA4ByhB4AlCP0AKAcoQcA5Qg9AChH6AFAOUIPAMoRegBQjtADgHKEHgCUI/QAoByhBwDlCD0AKEfoAUA5Qg8AyhF6AFCO0AOAcoQeAJQj9ACgHKEHAOUIPQAoR+gBQDlCDwDKEXoAUI7QA4ByhB4AlCP0AKAcoQcA5Qg9AChH6AFAOUIPAMoRegBQjtADgHKEHgCUI/QAoByhBwDlCD0AKEfoAUA5Qg8AyhF6AFCO0AOAcoQeAJQj9ACgHKEHAOUIPQAoR+gBQDlCDwDKEXoAUI7QA4ByhB4AlCP0AKAcoQcA5Qg9AChH6AFAOUIPAMoRegBQjtADgHKEHgCUI/QAoByhBwDlCD0AKEfoAUA5Qg8AyhF6AFCO0AOAcv8Pbw3sICVN1jsAAAAASUVORK5CYII=" alt="First palette"/></p>
+
+<h2>Do the seeds matter?</h2>
+
+<p>Here is the palette that we get if we just start with the color black. Note that
+we keep resetting the random seed &ndash; the one for the random number generator &ndash;
+to make sure we are choosing from the same set of randomly generated candidates.</p>
+
+<pre><code class="r">set.seed(723451) # for reproducibility
+second &lt;- createPalette(10, c(&quot;#010101&quot;), M=1000)
+swatch(second)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="A pallete from a single black seed."/></p>
+
+<p>This palette is essentially indistinguishable from the first one. However, here is
+what happens if we just start with the color red.</p>
+
+<pre><code class="r">set.seed(723451) # for reproducibility
+third &lt;- createPalette(10, c(&quot;#ff0000&quot;), M=1000)
+swatch(third)
+</code></pre>
+
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAFoCAMAAACMkBkOAAAC6FBMVEUAAAAAAAQAABEAAB0AAC4AADoAAFMAAFYAAGUAAGYABggACHUACwoAEJQAICoALnkAMwAAOI8AOREAOSoAOjQAOpAAU5kAXAAAYrUAZDQAZrYDAAADABEDAB0DOSoDjT4EAAAEABEEAB0Es0kIAAAIADkIOI8IOQAIitoI10kKZAAK+0kLjREL+0kNsx0N1yoN+zQN+z4N+0kOAAAOABEOICoOUT4QAAAQADkQAGUQsP0VOAAVijkV0/0bAAAbABEbAB0bYgAbZkkb9v0hijkh9v0lIAAlIBElfEkmsGUm048m9rUm9tom9v0qHPYqHPcqHPkqSvsqcvwuOgAukEk2AAA2AAM2Bgg2EAs4AAA4AC44ADE4AFY4CHU4EJQ4FbI4Lnk4MwA4dLg4gAA5URE5kEk6AAA6kJA6kNtCZh1CfCpCkDRCkD5CkElUHPZUmP1gAABgAANgAARgFA1iAABiAC5iAFNiG89jAABjADFjAFZjktZjowBmAABmZjpmtrZmtv9pRZRpRadpRblpaMtpiNx5HPZ5u/+ERZSEqO6HBgCHGA2KCACKCFOKIbKKIc+LLgCLsdaMMwCMxQCQOgCQ2/+dSvad3f+eRZSexv+sCwCsHA2wEACwJs+wUwCwztaxXACx5QC2ZgC225C2//+4aJS44v+/cva///y///2////EPV/EPX3EPZjEYrPEhM3PEAPPHA3PPV/PiJTPpebP/9zP/+7P///TFS7TJs/UdDHUsXnUztbVgADV5QDYPV/Yw//bkDrb/9vb///fmPff3fvf//3f///iYl/i4ebi4f/nqKfn4svn/+7n///shF/s/83s/+bs///xFATxGAjxHArxHAvxHA31pX314bP1/+b1///2G1P2IXX2JpT2JrL2Js/3klb3sXn3zpn3zrj3ztb4owD4xQD45QD/tmb/u/n/w5j/xrn/25D/3fv/4bP/4sv//7b//83//9v//9z//+b///z///9erMXTAAAACXBIWXMAAAsSAAALEgHS3X78AAALD0lEQVR4nO3afZRVVRnH8V2GlqZoSiVWYGamotBYmFaUgaUkCKTmVGbJROmIUE01Fb3YoORLb7yUZQXSu9MAIjZAopSUlqWF4FjBOGLglKkl5v63e55z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" alt="A palette from a single red seed."/></p>
+
+<p>The red, green, and blue triumvirate stays near the top of the list, but black has
+disappeared. What happens if we instead start with green and blue?</p>
+
+<pre><code class="r">set.seed(723451) # for reproducibility
+fourth &lt;- createPalette(10, c(&quot;#00ff00&quot;, &quot;#0000ff&quot;), M=1000)
+swatch(fourth)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="A blue and green seeded palette."/></p>
+
+<p>Except for the forced reordering at the start, we get nearly the same palette.
+So, let&#39;s instead try starting with cyan, magenta, and yellow.</p>
+
+<pre><code class="r">set.seed(723451) # for reproducibility
+fifth &lt;- createPalette(10, c(&quot;#00ffff&quot;, &quot;#ff00ff&quot;, &quot;#ffff00&quot;), M=1000)
+swatch(fifth)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="A CMY seeded palete."/></p>
+
+<p>We see that the initial seed colors have a relatively small effect.  This result
+should not be unexpected based on the &ldquo;greedy&rdquo; nature of the underlying algorithm,
+which tries at each step to find the color that is most distant from everything
+already included in the list.  The vertices of the polyhedron in three-dimensional
+LUV space include the usual primary colors.</p>
+
+<h1>How many good colors can we find?</h1>
+
+<p>Now we&#39;d like to examine how big we think we can realistically make <tt>N</tt>,
+the number of distinguishable colors. We can estimate this by first estimating
+the volume  of the visible region of LUV space. We can start by determining the
+convex hull of the UV projection.  We saw in the manuscript that our 36-color
+palette uses almost all of the visible region. So (for speed as well as
+simplicity), we are going to work with that palette.</p>
+
+<p>First, we have to get the LUV coordinates of the colors.</p>
+
+<pre><code class="r">library(colorspace)
+p36 &lt;- palette36.colors(36)
+luvmat &lt;- as(hex2RGB(p36), &quot;LUV&quot;)
+y &lt;- luvmat@coords
+</code></pre>
+
+<p>Now we can use a function from the <tt>grDevices</tt> package to compute the
+convex hull.</p>
+
+<pre><code class="r">hull &lt;- y[chull(y[,2], y[,3]), 2:3]
+uvscatter(p36)
+polygon(hull[,1], hull[,2], lwd=2)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="The convex hull of the UV coordinates of the 36-color palette."/></p>
+
+<p>The next step is to compute the area of the convex hull. While there are R
+packages that include functions to do this computation, the algorithm is
+sufficiently easy that it hardly seems worth it to load another package.</p>
+
+<pre><code class="r">hullaug &lt;- rbind(hull, hull[1,])
+N &lt;- nrow(hullaug)
+fst &lt;-sum(hullaug[1:(N-1), 1]*hullaug[2:N, 2] )
+snd &lt;- sum(hullaug[2:N, 1]*hullaug[1:(N-1), 2] )
+area &lt;- (snd - fst)/2
+area
+</code></pre>
+
+<pre><code>## [1] 37424.93
+</code></pre>
+
+<p>So, a crude (over)estimate of the volume of the viewable region of LUV space is
+to take the range of L values (0&ndash;100) and multiple it times the UV area. This
+is an overestimate for two reasons. First, we can&#39;t actually use the entire
+viewable range of luminances agains any single background, so the factor of 100
+is probably closer to 60. Second, not every combination of L-U-V values in this
+region designates an actual color.</p>
+
+<pre><code class="r">overvol &lt;- 100*area
+overvol
+</code></pre>
+
+<pre><code>## [1] 3742493
+</code></pre>
+
+<p>Now, we want colors to be 40 units apart to be reliably distinguishable by most
+viewers. So, each time we pick a color, it should &ldquo;occupy&rdquo; a sphere of radius 20
+to avoid picking indistinguishable colors.  The volume of such a sphere is:</p>
+
+<pre><code class="r">sphere &lt;- 4/3*pi*20^3
+sphere
+</code></pre>
+
+<pre><code>## [1] 33510.32
+</code></pre>
+
+<p>To get the most generous (over)estimate of the number of colors, we pretend for
+a moment that we can pack spheres into the space with minimal waste. By the
+Kepler conjecture, we know that this means that the spheres can occupy about
+74% of the volume.</p>
+
+<pre><code class="r">100 * area/sphere *0.74
+</code></pre>
+
+<pre><code>## [1] 82.64453
+</code></pre>
+
+<pre><code class="r">60 * area/sphere *0.74
+</code></pre>
+
+<pre><code>## [1] 49.58672
+</code></pre>
+
+<p>If we could use the full range of luminances, we could get about 82 colors. If
+we can only use a range of luminance values about 60 units wide, then we can at
+most hope to get 50 distinct colors.</p>
+
+<h3>Improving the estimate</h3>
+
+<p>We can empirically improve our estimate of the volume of the visible portion of
+LUV space.  We start by generating a tight, regularly spaced grid of values.</p>
+
+<pre><code class="r">L &lt;- 0:100
+U &lt;- -60:150
+V &lt;- -150:150
+luv &lt;- cbind(L = rep(L, length(U)*length(V)),
+             U = rep(rep(U, each=length(L)), times=length(V)),
+             V = rep(V, each=length(L)*length(U)))*1.0
+</code></pre>
+
+<p>Next, we convert the LUV coordinates into hexadecimal representations in RGB space.</p>
+
+<pre><code class="r">tested &lt;- LUV(luv)
+co &lt;- tested@coords
+</code></pre>
+
+<p>Whenever the conversion fails (yielding an <tt>NA</tt> value), the LUV coordinates
+were not visible. So, we can estimate the fraction of the regular grid that is
+visible:</p>
+
+<pre><code class="r">he &lt;- hex(tested)
+summary(is.na(he))
+</code></pre>
+
+<pre><code>##    Mode   FALSE    TRUE 
+## logical 1317593 5097018
+</code></pre>
+
+<pre><code class="r">mean(!is.na(he))
+</code></pre>
+
+<pre><code>## [1] 0.205405
+</code></pre>
+
+<p>That is roughly 20%.  Now we look at how many spheres we could pack into this
+space.</p>
+
+<pre><code class="r">VOL &lt;- diff(range(L)) * diff(range(U)) * diff(range(V)) * 0.205
+VOL
+</code></pre>
+
+<pre><code>## [1] 1291500
+</code></pre>
+
+<pre><code class="r">VOL/sphere * 0.74
+</code></pre>
+
+<pre><code>## [1] 28.51987
+</code></pre>
+
+<p>Hmm. This computation suggest that we can only find about 28 distinguishable
+colors. Since we have examples of palettes with more colors than this, we must
+now somehow be <em>underestimating</em> the value.</p>
+
+<p>But it&#39;s clear why.  Many of the spheres can be placed on the boundary, that is,
+along the faces, edges, or even vertices of the polyhedron.  In that case, half
+or more of their volume sticks outsde the polyhedron. If we crudely estimate
+that half of the volume of half of the spheres can be ignored, then this
+adjustment roughly undoes the correction for the sphere packing density. </p>
+
+<pre><code class="r">VOL/sphere
+</code></pre>
+
+<pre><code>## [1] 38.54036
+</code></pre>
+
+<p>So, our final estimate is that the maximum number of distinguishable colors is 
+roughly 38 or 39.  Being generous (and tending to favor round numbers), we&#39;re
+going to take it to be about 40.</p>
+
+<h1>Computational Complexity</h1>
+
+<p>The final parameter we want to look at is <tt>M</tt>, the number of candidate
+colors that we search through. In general, we expect the time needed to run the
+algorithm to be approximately <tt>N*M</tt>, since we must search through all
+<tt>M</tt> candidates for each of the <tt>N</tt> desired colors. The trade-off,
+of course, is that we can find more colors that are distinguishable with more
+candidates. Here we increase <tt>M</tt> from 1000 to 10000.</p>
+
+<pre><code class="r">set.seed(723451) # for reproducibility
+lastpal &lt;- createPalette(10, c(&quot;#010101&quot;, &quot;#ff0000&quot;), M=10000)
+lastpal
+</code></pre>
+
+<pre><code>##       NC1       NC2       NC3       NC4       NC5       NC6       NC7 
+## &quot;#474753&quot; &quot;#FA2A16&quot; &quot;#0DF51C&quot; &quot;#FA00F5&quot; &quot;#FAC70D&quot; &quot;#166EF6&quot; &quot;#2EF6D7&quot; 
+##       NC8       NC9      NC10 
+## &quot;#FE79AA&quot; &quot;#518600&quot; &quot;#E3A6F9&quot;
+</code></pre>
+
+<pre><code class="r">swatch(firstpal)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="Palette with more candidate colors."/></p>
+
+<pre><code class="r">swatch(lastpal)
+</code></pre>
+
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAFoCAMAAACMkBkOAAACzVBMVEUAAAAAAAMAAAQAAAgAAAsAADoAAEQAAFYAAGIAAGQAAGYAAIoAAK8ACgQACg0AERAAG2AAHwAAJYwALQgAMXoANQAAOBAAOHkAOpAAQ7EAUAoAYhQAYpoAZrYDAAADAAYDOBADihgEAAAEAAYEAAsErxwIOAAI0hwKYgAK9RwLAAALADELOHkLigYLirkL9RwNrwsN0hAN9RQN9RgN9RwTAAATADETAFYTHwATSwATsNcVbvcVbvkViPsVofwWbvYbOAAbijEb09cgAAAgYAAhYgAh9tcnijEn9tctHwAtcwAusFYu03ku9pou9rku9tczAAAzADgzJYwzXdY5AAA5AAM5AAQ5AAg5ACY5ADg5AGI5AIo5ANI5Cg05GBM5G2A5LQg5RJI5UAo5cAs6AAA6NQA6hgA6kNtFSwBFbvZFhgBFuf1HR1NHR3NHR5FHaa5HislRYABRcwBRhgBbAABbADhbAGRbdvlkAABkAANkAARkAAhkADhkAGJkAPVkHRVkjg1mAABmACZmAERmVqpmtv9pR1NpqORvbvZv0f+AJQCAj/mKR1OKxv+NAACNAPWNCgCNJBWNLQCNLQSNqguNqg2PGwCPGyaPaKqQOgCQ2/+ViPaV6P2V6P+iQwCipvmoaVOo4/+yAACyAPWyEQCyKhWyUACyxw21MQC1eaq2ZgC2tma2//+5ofa5//y5//25///DXTjDpvnGilPG/8nG/+TG///WADjWAIrWAPXWGATWKhXWcAPWxw3bRCbbearbkDrb/9vb///duffd6Pvd//3d///jdmTjj4zjprHjptbjpvnjqHPj467j/+Tj///6AGL6AIr6AK/6ANL6APX6HQj6JA36KhD6KhP6Khb6jgT6qgj6xwr6xwv6xw3+VkT+aGD+eXr+eZL+ear/tmb/xpH/0fn/25D/467/6Pv//7b//8n//9v///z////MUo5uAAAACXBIWXMAAAsSAAALEgHS3X78AAALMUlEQVR4nO3aibtVVRnH8RVNCuWQY1YWNmFFAkGmDLe6CoYUlrfZSBIQ4QripbzZYDSIFA3apJmZYYMkhQ2QCDeDUm5SiSEEXK8iFo7rb2ivd+9jZ++z91r77PDx3PN+f8+jm3vO++xH/fiu9a69r7FEZcyz/Q9Anp0ArzTAKw3wSgO80gCvNMArDfBKA7zSAK80wCsN8EoDvNIArzTAKw3wSgO80gCvNMArDfBKA7zSAK80wCsN8EoDvNJohH982fBbGz9d/ZWylW0R4JOsNsC3e4TzEWPM839g7YE5xgy/9cnroh9f8eR1w3/pfrK1b4FvqzjOx5dFtOb4zcn1Twm8SX26Gfi2So3TXQ/MOX6zfOiW+gj+wujTeNGP//cAvo0Sc7quTjrf/RjDuz/dGek//S3wbZS4000sLn+ItvMUfO1b4NsqjtO19YE5CatDTy31tW+Bb6s4zkdM3NNPd/7q+uGu9i3wbRXhjKAvvDPqciefHOui2d4d59y0l3wLvI7Ee7yOAF8X4JUGeNL2AV5pgFca4JUGeKUBXmmAVxrglQZ4pQFeaYBXGuCVBnilAV5pgFca4JUGeKUBXmmAVxrgleYgwptQDm6ZoSyvrLRWdeiGW3X7UxPd7U+tbHwgyX+OHYEkZYOBJGUdgSRlMwNJyvYHkpT1BJKU3RMI8MCX0aoO3XAr4IEH3gIPPPBSBjzwwFvggQdeyoAHHngLPPDASxnwwAPfjFZ16IZbAQ888BZ44IGXMuCBB94CDzzwUgY88MBb4IEHXsqABx74ZrSqQzfcCnjggbfAAw+8lAEPPPAWeOCBlzLggQfeAg888FIGPPDAN6NVHbrhVsADD7wFHnjgpQx44IG3wAMPvJQBDzzwFnjggZcy4IEHvhmt6tANtwIeeOAt8MADL2XAAw+8BR544KUMeOCBt8ADD7yUAQ888M1oVYduuBXwwANvgQceeCkDHnjgLfDAAy9lwAMPvAUeeOClDHjggW9Gqzp0w62ABx54CzzwwEsZ8MADb4EHHngpAx544C3wwAMvZcADD3wzWtWhG24FPPDAW+CBB17KgAceeAs88MBLGfDAA2+BBx54KQMeeOCb0aoO3XAr4IEH3gIPPPBSBjzwwFvggQdeyoD3wW89x7gceiPwquD/+tXL5Hr3S34DvCb4/k/dmLoCrwR+yHf8zi4z7Ordu3d95qde+LEnmpGjjHneySXgt39klR9+4PKfDw70GnPUJj/85LvWTLzB2scu8sK/e8Kby8E/1GWO7jPmBbcE4OfK5n1GYI/vXzqk9/h/feuK6K9ZIfi3vO6140dF6mNfdYoP/r5eE+eQVQF4Zz+49xNe+Ik3rOlYsSby//NFXvhT32FOLwH/8Pev3d93dOT/8T964edG5PPP6Jl7jB++Vaf6ReuSD59Y6YOPwW8+PAA/7jUnjx8zMr76Ov6+3oi8TMfvPX9T3Pke+Em/umriD6+Xqx9+6swzzQunhuD3femW/X2z46sPvnNeT8+lb1sg1yEI333xTdtKdnyUDS/+YLDjZcX3d7zQj/hDEL73Od/5tuv48zf54F27T9nS0THlP/6l/tSpsuCn7P+Pjn/X9J6eJcf0LDlywdCE7170+x+X2ON39c4S+ef69/hxJzn50WX2+O1dhwTgBwcfuMacMLhnWF3D5w53K+SzevdC+HJ7/Owye3ynMUcuWGKmD82lvuxwx1Rf8Ti3NBlnDuU4pwo+Os+d26Id//V/uxHvtyH4mw936/0VIfhRL6ut9174n7zIbfOfD8H/7AS3038hBL8iWuUnrV0Tgj/z5W6PPz0I/4toh9+37MsheJnnO0PHuXv6P/m1loRf/uiVbqNft80Pv+GwO/630xfDjz72FNnpR/rh14+4XQa88/zwG+UEP9B7gR9+oZzgJ63d4oefdtxZM7PH+Tz4viPcVLdv2Ww//Px4qus8bWju8bXRbvHfrvTB77r8arnu/NgdPvhxr369XEPn+M9+M57vPnq7D37g09+Va2Cqn/Tr6+UaOse/9Z1ynfGms7zw+754bTzjBab6zniqcye6IQn/u5WpaxF8cn4vcY6vvxbBf25V6loEn5zfw+f41LUIPpnqU9N9wTm+/loIPy99LYL/0UvdiHdZq8FffFO8u1/yqLfjk3P87vsP83Z87Rw/5lhvx//zG/Hufu8Ib8c/cE28u+85ytvx7smdy5THvB3/nrfHu/vZx/k7/uHvxbv7g0cEzvHx7h46x98mD+n7l57bYvDdi//u1vrF/6ib7vL2+J0fcGv9zq666S5vjx/7SrfWjz2xfrrL2eO3f9it9du76qe7nD1+7/vdWr+3q366y9njJ//FrfWT76qf7nL2+BlvdGv9jDfUT3e55/gPubX+oa666S4P/tIJ0+XvddNd3nEuGe22vq/lXtLIQ9snVnb74aO5LjqM1j2+KZjqx51kMu9ocqd6eVoffoDjXtGY1POb3Kl+0troo6eu6vDDu6d2JvPMNneq37fMpJ/fFBznOt35fF6PH57XsjsCac9z/JB/LQt8xQc4W9/r1vqt59RNdy0BX/btXO1Fqv9ZvSz0JrPY50z1JV/L1sqG+af6tcm/wlP+qX5CcrfASxpZ6E16sc+d6pMyE5jq5aFt/ev41oBPstwGhrs4G0xguIsz2gSGuzjrTWC4i7PRBIa7OAttYLiLM82Ehrs4fSYw3MWZb/zDXV5aB37RuvBwJ20fHu6k7cPD3Y7knXwYfqA3PNxJ24eHO2n7EsOdtH2J4U7aPjDctTT8crutzB6/wcxK/VwAP9qMTH+QD7/enJf+IB9+o7kg/UE+/EK7Jf1BPvw0k/n1qwL4PjM79XMB/HxzWurnvKm+dd/OZdq9CD7T7kXw2XYvgM+2ewF8tt0L4LPtXgCfbfci+Ey7F8Kn293b8beZVhvuui/JtHsB/P2Zdi+AH5Nt93z4e7Ptng+/J9vu+fBTsu2eD392tt0L4B/MtHsB/JJMu3vg+5e23nDHVG+f4anetXv6lXxLwOeFc3yZjs9JwXEu1e7AK4G/27Tqb+AAz+/cAf8MLPWNAR74MlrVoRtuBTzwwFvggQdeyoAHHngLPPDASxnwwANvgQceeCkDHnjgm9GqDt1wK+CBB94CDzzwUgY88MBb4IEHXsqABx54CzzwwEsZ8MAD34xWdeiGWwEPPPAWeOCBlzLggQfeAg888FIGPPDAW+CBB17KgAce+Ga0qkM33Ap44IG3wAMPvJQBDzzwFnjggZcy4IEH3gIPPPBSBjzwwDejVR264VbAAw+8BR544KUMeOCBt8ADD7yUAQ888BZ44IGXMuCBB74ZrerQDbcCHnjgLfDAAy9lwAMPvAUeeOClDHjggbfAAw+8lAEPPPDNaFWHbrgV8MADb4EHHngpAx544C3wwAMvZcADD7wFHnjgpQx44IFvRqs6dMOtgAceeAs88MBLGfDAA2+BBx54KQMeeOAt8MADL2XAAw98M1rVoRtuBTzwwFvggQdeyoAHHngLPPDASxnwwANvWxo+lINbZijLKyutVR2aDOUArzTAKw3wSgO80gCvNMArDfBKA7zSAK80wCsN8EoDvNIArzTAKw3wSgO80gCvNMArDfBKA7zSAK80wCsN8EoDvNIArzTAKw3wSgO80gCvNMArDfBKA7zSAK80wCsN8EoDvNIArzTAKw3wSgO80gCvNMArDfBKA7zSAK80wCsN8EoDvNIArzTAKw3wSgO80gCvNMArDfBKA7zSAK80wCsN8EoDvNIArzTAKw3wSgO80gCvNMArDfBKA7zSAK80wCsN8EoDvNIArzTAK81/AQrkv+MuULX+AAAAAElFTkSuQmCC" alt="Palette with more candidate colors."/></p>
+
+</body>
+
+</html>

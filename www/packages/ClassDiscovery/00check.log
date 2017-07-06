@@ -1,0 +1,88 @@
+* using log directory 'C:/Users/Kevin/Desktop/RForge/oompa/pkg/ClassDiscovery.Rcheck'
+* using R version 3.4.0 (2017-04-21)
+* using platform: x86_64-w64-mingw32 (64-bit)
+* using session charset: ISO8859-1
+* using option '--as-cran'
+* checking for file 'ClassDiscovery/DESCRIPTION' ... OK
+* this is package 'ClassDiscovery' version '3.3.5'
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: 'Kevin R. Coombes <krc@silicovore.com>'
+
+New submission
+
+Strong dependencies not in mainstream repositories:
+  oompaBase, oompaData
+
+The Date field is over a month old.
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking whether package 'ClassDiscovery' can be installed ... OK
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking 'build' directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking use of S3 registration ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd line widths ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking sizes of PDF files under 'inst/doc' ... OK
+* checking installed files from 'inst/doc' ... OK
+* checking files in 'vignettes' ... OK
+* checking examples ... OK
+* checking for unstated dependencies in 'tests' ... OK
+* checking tests ... OK
+  Running 'exprSet-example.R' [22s]
+  Comparing 'exprSet-example.Rout' to 'exprSet-example.Rout.save' ... OK
+  Running 'test00-color.R'
+  Comparing 'test00-color.Rout' to 'test00-color.Rout.save' ... OK
+  Running 'test01-distance.R'
+  Comparing 'test01-distance.Rout' to 'test01-distance.Rout.save' ... OK
+  Running 'test02-cluster.R'
+  Comparing 'test02-cluster.Rout' to 'test02-cluster.Rout.save' ... OK
+  Running 'test02.1-just.R'
+  Comparing 'test02.1-just.Rout' to 'test02.1-just.Rout.save' ... OK
+  Running 'test03-boot.R'
+  Comparing 'test03-boot.Rout' to 'test03-boot.Rout.save' ... OK
+  Running 'test04-perturb.R'
+  Comparing 'test04-perturb.Rout' to 'test04-perturb.Rout.save' ... OK
+  Running 'test04.1-gpca.R'
+  Comparing 'test04.1-gpca.Rout' to 'test04.1-gpca.Rout.save' ... OK
+  Running 'test05-spca.R'
+  Comparing 'test05-spca.Rout' to 'test05-spca.Rout.save' ... OK
+  Running 'test06-mosaic.R'
+  Comparing 'test06-mosaic.Rout' to 'test06-mosaic.Rout.save' ... OK
+  Running 'test07-pcanova.R'
+  Comparing 'test07-pcanova.Rout' to 'test07-pcanova.Rout.save' ... OK
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in 'inst/doc' ... OK
+* checking re-building of vignette outputs ... OK
+* checking PDF version of manual ... OK
+* DONE
+Status: 1 NOTE
