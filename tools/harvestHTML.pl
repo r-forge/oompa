@@ -125,19 +125,21 @@ ENDHEAD
     } else {
 	print STDERR "Missing manual: $check\n";
     }
-    chdir "$pack/doc";
-    my @vigs = glob "*.pdf *.html";
-    my $tick = 0;
-    if ($#vigs) { # shortcut, since 0 means just index.html
-	print TGT "<tr><td>Vignettes</td>\n  <td>";
-	foreach my $f (@vigs) {
-	    next if ($f eq 'index.html');
-	    copy($f, $infoDir) or die "Copy failed for vignette '$f': $!\n";
-	    print TGT ", " if ($tick) ;
-	    ++$tick;
-	    print TGT "<A HREF=\"$pack/$f\">$f</A>";
+    my $ok = chdir "$pack/doc";
+    if ($ok) {
+	my @vigs = glob "*.pdf *.html";
+	my $tick = 0;
+	if ($#vigs) { # shortcut, since 0 means just index.html
+	    print TGT "<tr><td>Vignettes</td>\n  <td>";
+	    foreach my $f (@vigs) {
+		next if ($f eq 'index.html');
+		copy($f, $infoDir) or die "Copy failed for vignette '$f': $!\n";
+		print TGT ", " if ($tick) ;
+		++$tick;
+		print TGT "<A HREF=\"$pack/$f\">$f</A>";
+	    }
+	    print TGT "</td></ttr>\n";
 	}
-	print TGT "</td></ttr>\n";
     }
     print TGT "\n</table></div></body></html>\n";
     close(TGT);
