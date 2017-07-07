@@ -1,3 +1,6 @@
+### sometimes emacs is stupid
+plot(2,3)
+
 source("https://bioconductor.org/biocLite.R")
 if (!require("Biobase")) {
   biocLite()
@@ -10,9 +13,6 @@ for (p in mybiocs) {
     biocLite(p)
   }
 }
-
-### sometimes emacs is stupid
-plot(2,3)
 
 mypacks <- c("knitr",
              "rmarkdown",
@@ -36,7 +36,6 @@ mypacks <- c("knitr",
              "kernlab",
              "changepoint",
              "cpm",
-             "movMF",
              "ade4",
              "mgcv",
              "quantreg",
@@ -46,10 +45,13 @@ mypacks <- c("knitr",
              "drc",
              "DoseFinding",
              "alabama",
-             "doSNOW"
+             "doSNOW",
+             "movMF",
+             "XML"
              )
 for (p in mypacks) {
   if (!require(p, character.only=TRUE)) {
     install.packages(p)
+    library(p, character.only=TRUE)
   }
 }
