@@ -113,7 +113,7 @@ ENDHEAD
     if (-e $man) {
 	copy($man, $infoDir) or die "Copy failed for '$man': $!\n";
 	print TGT "<tr><td>User Manual</td>",
-	"<td><A HREF=\"$pack/$man\">$man</A></td></tr>";
+	"<td><A HREF=\"$pack/$man\">$man</A></td></tr>\n";
     } else {
 	print STDERR "Missing manual: $man\n";
     }
@@ -121,7 +121,7 @@ ENDHEAD
     if (-e $check) {
 	copy($check, $infoDir) or die "Copy failed for '$check': $!\n";
 	print TGT "<tr><td>R CHECK</td>",
-	"<td><A HREF=\"$pack/$check\">$check</A></td></tr>";
+	"<td><A HREF=\"$pack/$check\">$check</A></td></tr>\n";
     } else {
 	print STDERR "Missing manual: $check\n";
     }
@@ -138,7 +138,7 @@ ENDHEAD
 		++$tick;
 		print TGT "<A HREF=\"$pack/$f\">$f</A>";
 	    }
-	    print TGT "</td></ttr>\n";
+	    print TGT "</td></tr>\n";
 	}
     }
     print TGT "\n</table></div></body></html>\n";
