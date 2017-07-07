@@ -3,7 +3,7 @@
 ###
 
 ## !!! Always change version number when updating this file !!!
-oompaVersion <- "3.2"
+oompaVersion <- "3.4"
 
 OOMPAinstallRepos <- function()
 {
@@ -90,8 +90,8 @@ OOMPAinstallPkgGroups <- function(groupName="default")
 }
 
 
-## OOMPAinstall() version 3.2
-## Called by OOMPALite() when R version 3.2 is detected.
+## OOMPAinstall() version 3.4
+## Called by OOMPALite() when R version 3.4 is detected.
 ##
 ## Install OOMPA packages using CRAN-style repositories.
 ## Arguments:
@@ -119,7 +119,7 @@ oompainstall <- function(pkgs,
                          type=getOption("pkgType"),
                          ...)
 {
-    ## R version 3.2 should have been detected by OOMPALite()
+    ## R version 3.4 should have been detected by OOMPALite()
     thisRVer <- paste(R.Version()[c("major", "minor")], collapse=".")
     cat(paste("Running OOMPAinstall version", oompaVersion, "with R version", thisRVer, "\n"))
 
