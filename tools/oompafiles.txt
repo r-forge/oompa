@@ -15,7 +15,7 @@ thresher/pkg/PCDimension
 thresher/pkg/Thresher
 nameneedle/pkg/NameNeedle
 umpire/pkg/Umpire
-siber/pkg/SIBER
+siber/pkg/SIBERG
 integirty/pkg/integIRTy
 supercurve/pkg/tclish
 supercurve/pkg/SlideDesignerGUI
