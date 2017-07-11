@@ -41,11 +41,11 @@ rbb(n, N, u, v)
   The mean and variance of the beta-binomial distribution can be
   computed explicitly as
   \deqn{
-    mu = \frac{nu}/{u+v}
+    \mu = \frac{Nu}{u+v}
   }
   and
   \deqn{
-    sigma^2 = \frac{nuv(n+u+v)}{(u+v)^2 (1+u+v)}
+    \sigma^2 = \frac{Nuv(N+u+v)}{(u+v)^2 (1+u+v)}
   }
 }
 \value{

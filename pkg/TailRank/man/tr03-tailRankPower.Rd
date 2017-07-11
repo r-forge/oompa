@@ -41,7 +41,7 @@ whether the value exceeds the psi-th quantile.  Now let
 \deqn{\alpha = P(X > x,| N, p)}
 be one such binomial measurement.  When we make \eqn{G} independent
 binomial measurements, we take
-\deqn{conf = P(all G of the X's \le x | N, p).}
+\deqn{conf = P(all\ G\ of\ the\ X's \le x | N, p).}
 (In our paper on the tail-rank statistic, we write everything in terms
 of \eqn{\gamma = 1 - conf}.) Then we have
 \deqn{conf = P(X \le x | N, p)^G = (1 - alpha)^G.}
