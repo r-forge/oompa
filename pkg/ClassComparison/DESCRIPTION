@@ -1,13 +1,13 @@
 Package: ClassComparison
-Version: 3.1.4
-Date: 2017-04-25
+Version: 3.1.5
+Date: 2017-07-11
 Title: Classes and Methods for "Class Comparison" Problems on Microarrays
 Author: Kevin R. Coombes
 Maintainer: Kevin R. Coombes <krc@silicovore.com>
-Description: The ClassComparison package defines the classes used for
-  "class comparison" problems in the OOMPA project. Class comparison
-  includes tests for differential expression; see Simon's book for
-  details on typical problem types.
+Description: Defines the classes used for "class comparison" problems
+  in the OOMPA project (<http://oompa.r-forge.r-project.org/>). Class
+  comparison includes tests for differential expression; see Simon's
+  book for details on typical problem types.
 Depends: R (>= 3.0), oompaBase (>= 3.0)
 Imports: methods, graphics, stats, splines, Biobase
 License: Apache License (== 2.0)
