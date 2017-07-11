@@ -50,10 +50,12 @@ foreach my $packname (@packList) {
     my $pack = pop @parts;
     my $pdir = join("/", @parts);
     chdir $pdir or die "Unable to change to '$pdir': $!\n";
-    my $checkDir = "$pdir/$pack.Rcheck";
+    my $checkDir = "$pack.Rcheck";
     if (-e $checkDir) {
 	my $n = rmtree($checkDir);
 	print STDERR "Removed $n files from '$checkDir'\n";
+    } else {
+	print STDERR "Cannot find '$checkDir'\n";
     }
     chdir $home or die "Unable to return to '$home': $!\n";;
 }
