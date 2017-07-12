@@ -52,19 +52,22 @@ plotColoredClusters(hc, labs=colnames(exprs(es)),
                     col=colorScheme[as.numeric(spc@splitter)])
 
 ##################################
+if (FALSE) { # don't run; this is slow
 bc <- BootstrapClusterTest(es, cutHclust, k = 12, nTimes=200, verbose=FALSE,
                            metric=metric, method=linkage)
 summary(bc)
 hist(bc)
 image(bc, dendrogram=hc, col=blueyellow(64))
+}
 
 ##################################
+if (FALSE) { # don't run;  this is slow
 pc <- PerturbationClusterTest(es, cutHclust, k = 10, nTimes=100, verbose=FALSE,
                            noise=1, metric=metric, method=linkage)
 summary(pc)
 hist(pc)
 image(pc, dendrogram=hc, col=blueyellow(64))
-
+}
 
 ##################################
 # mosaic
@@ -76,13 +79,15 @@ dimnames(pData(es))[[2]]
 plot(mos, sampleClasses=pData(es)[,'Status'], sampleColors=colorScheme,
      col=blueyellow(64), limits=c(-1,1), geneClasses=8)
 
+if (FALSE) { # don't really need more heatmaps
 plot(mos, sampleClasses=pData(es)[,'ChipType'], sampleColors=colorScheme,
      col=blueyellow(64), limits=c(-1,1), geneClasses=8)
 
 plot(mos, sampleClasses=pData(es)[,'Subgroups'], sampleColors=colorScheme,
      col=blueyellow(64), limits=c(-1,1), geneClasses=8)
+}
 
 ##################################
 # clean everything up
 
-rm(es, spc, colorScheme, hc, bc, pc, mos)
+rm(es, spc, colorScheme, hc, mos)

@@ -113,39 +113,22 @@ Welcome to Bioconductor
 +                     col=colorScheme[as.numeric(spc@splitter)])
 > 
 > ##################################
-> bc <- BootstrapClusterTest(es, cutHclust, k = 12, nTimes=200, verbose=FALSE,
+> if (FALSE) { # don't run; this is slow
++ bc <- BootstrapClusterTest(es, cutHclust, k = 12, nTimes=200, verbose=FALSE,
 +                            metric=metric, method=linkage)
-> summary(bc)
-Number of bootstrap samples: 200.
-Number of rows sampled: 2000.
-A BootstrapClusterTest object.
-
-Call:
-	 BootstrapClusterTest(data = es, FUN = cutHclust, nTimes = 200, verbose = FALSE, k = 12, metric = metric, method = linkage) 
-
-Agreement levels:
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
- 0.0000  0.0000  0.0300  0.1848  0.3000  1.0000 
-> hist(bc)
-> image(bc, dendrogram=hc, col=blueyellow(64))
++ summary(bc)
++ hist(bc)
++ image(bc, dendrogram=hc, col=blueyellow(64))
++ }
 > 
 > ##################################
-> pc <- PerturbationClusterTest(es, cutHclust, k = 10, nTimes=100, verbose=FALSE,
+> if (FALSE) { # don't run;  this is slow
++ pc <- PerturbationClusterTest(es, cutHclust, k = 10, nTimes=100, verbose=FALSE,
 +                            noise=1, metric=metric, method=linkage)
-> summary(pc)
-Number of perturbation samples: 100.
-Noise level: 1.
-A PerturbationClusterTest object.
-
-Call:
-	 PerturbationClusterTest(data = es, FUN = cutHclust, nTimes = 100, noise = 1, verbose = FALSE, k = 10, metric = metric, method = linkage) 
-
-Agreement levels:
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
- 0.0000  0.0000  0.0700  0.2128  0.3300  1.0000 
-> hist(pc)
-> image(pc, dendrogram=hc, col=blueyellow(64))
-> 
++ summary(pc)
++ hist(pc)
++ image(pc, dendrogram=hc, col=blueyellow(64))
++ }
 > 
 > ##################################
 > # mosaic
@@ -158,17 +141,19 @@ Agreement levels:
 > plot(mos, sampleClasses=pData(es)[,'Status'], sampleColors=colorScheme,
 +      col=blueyellow(64), limits=c(-1,1), geneClasses=8)
 > 
-> plot(mos, sampleClasses=pData(es)[,'ChipType'], sampleColors=colorScheme,
+> if (FALSE) { # don't really need more heatmaps
++ plot(mos, sampleClasses=pData(es)[,'ChipType'], sampleColors=colorScheme,
 +      col=blueyellow(64), limits=c(-1,1), geneClasses=8)
-> 
-> plot(mos, sampleClasses=pData(es)[,'Subgroups'], sampleColors=colorScheme,
++ 
++ plot(mos, sampleClasses=pData(es)[,'Subgroups'], sampleColors=colorScheme,
 +      col=blueyellow(64), limits=c(-1,1), geneClasses=8)
++ }
 > 
 > ##################################
 > # clean everything up
 > 
-> rm(es, spc, colorScheme, hc, bc, pc, mos)
+> rm(es, spc, colorScheme, hc, mos)
 > 
 > proc.time()
    user  system elapsed 
-  29.09    0.87   30.29 
+   4.78    0.21    5.89 
