@@ -1,0 +1,2 @@
+# WORK MACHINE
+set PATH=C:\R\R-3.4.0\bin\x64;C:\Rtools\3.4\bin;C:\Rtools\3.4\MinGW\bin;C:\Rtools\3.4\gcc-4.6.3\bin;C:\Program Files\MiKTeX 2.9\miktex\bin\x64;C:\Windows\system32;C:\Windows;C:\strawberry\perl\bin;C:\strawberry\perl\site\bin;C:\qpdf-5.1.1\bin;C:\Program Files\gs\gs9.10\bin;C:\Users\coom05\AppData\Local\Pandoc
