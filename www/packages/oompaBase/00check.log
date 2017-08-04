@@ -1,14 +1,14 @@
-* using log directory 'C:/Users/Kevin/Desktop/RForge/oompa/pkg/oompaBase.Rcheck'
+* using log directory 'C:/Users/coom05/Desktop/rforge/oompa/pkg/oompaBase.Rcheck'
 * using R version 3.4.0 (2017-04-21)
 * using platform: x86_64-w64-mingw32 (64-bit)
 * using session charset: ISO8859-1
 * using option '--as-cran'
 * checking for file 'oompaBase/DESCRIPTION' ... OK
-* this is package 'oompaBase' version '3.2.1'
-* checking CRAN incoming feasibility ... NOTE
+* this is package 'oompaBase' version '3.2.4'
+* checking CRAN incoming feasibility ... WARNING
 Maintainer: 'Kevin R. Coombes <krc@silicovore.com>'
 
-New submission
+Insufficient package version (submitted: 3.2.4, existing: 3.2.4)
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -62,4 +62,4 @@ New submission
 * checking re-building of vignette outputs ... OK
 * checking PDF version of manual ... OK
 * DONE
-Status: 1 NOTE
+Status: 1 WARNING

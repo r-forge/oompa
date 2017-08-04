@@ -1,4 +1,4 @@
-* using log directory 'C:/Users/Kevin/Desktop/RForge/oompa/pkg/BetaModels.Rcheck'
+* using log directory 'C:/Users/coom05/Desktop/rforge/oompa/pkg/BetaModels.Rcheck'
 * using R version 3.4.0 (2017-04-21)
 * using platform: x86_64-w64-mingw32 (64-bit)
 * using session charset: ISO8859-1
@@ -9,9 +9,6 @@
 Maintainer: 'Kevin R. Coombes <krc@silicovore.com>'
 
 New submission
-
-Strong dependencies not in mainstream repositories:
-  oompaBase, ClassComparison
 
 The Date field is over a month old.
 * checking package namespace information ... OK

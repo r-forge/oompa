@@ -1,4 +1,4 @@
-* using log directory 'C:/Users/Kevin/Desktop/RForge/oompa/pkg/Polychrome.Rcheck'
+* using log directory 'C:/Users/coom05/Desktop/rforge/oompa/pkg/Polychrome.Rcheck'
 * using R version 3.4.0 (2017-04-21)
 * using platform: x86_64-w64-mingw32 (64-bit)
 * using session charset: ISO8859-1
@@ -9,6 +9,15 @@
 Maintainer: 'Kevin R. Coombes <krc@silicovore.com>'
 
 Insufficient package version (submitted: 0.9.3, existing: 0.9.3)
+
+Found the following (possibly) invalid URLs:
+  URL: https://en.wikipedia.org/wiki/ISCC%E2%80%93NBS_system
+    From: man/iscc.Rd
+    Status: Error
+    Message: libcurl error code 7
+    	Failed to connect to en.wikipedia.org port 443: Connection refused
+
+The Date field is over a month old.
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
