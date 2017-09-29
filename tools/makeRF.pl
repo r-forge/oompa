@@ -69,11 +69,9 @@ if ($startdir) {
     chdir($startdir) or die "Unable to change directory to '$startdir': $!\n";
     $home = cwd;
 }
-print STDERR "\nStarting at '$home'\n\n";
 
 # remember the PATH where we started
 my $path = $ENV{PATH};
-print STDERR "start path:\n$path\n\n";
 
 # make sure there is a directory for source tarballs
 my $buildDir = "Build-$Ver.$s";
@@ -113,7 +111,16 @@ my @paths = ($Rpath,
 
 $ENV{PATH} = join(";", @paths);
 $ENV{nodosfilewarning} = '1';
+$ENV{RTOOLS} = "C:/Rtools/$Ver";
+$ENV{BINPREF} = "C:/Rtools/$Ver/MinGW_64/bin/";
+#$ENV{BINPREF64} = "C:/Rtools/$Ver/MinGW_64/bin/";
+
+print STDERR "start path:\n$path\n\n";
 print STDERR "working path:\n$ENV{PATH}\n\n";
+print STDERR "\nStarting directory: '$home'\n\n";
+print STDERR "Using architecture at '$archDir'\n";
+print STDERR "Using R at '$Rpath'\n";
+
 
 # process each package
 foreach my $packname (@packList) {
@@ -131,7 +138,7 @@ foreach my $packname (@packList) {
     die("got the wrong number of files") if ($#files);
     my $tarball = $files[0];
 # build the binary version for the current architecture
-    @cargs = ('R', 'CMD', 'INSTALL', '--build', $tarball);
+    @cargs = ('R', 'CMD', 'INSTALL', '--build', '--no-multiarch',  $tarball);
     $cmd = join(' ', @cargs);
     print STDERR "Running $cmd...\n";
     $check = system(@cargs);
@@ -142,13 +149,13 @@ foreach my $packname (@packList) {
     my $file = $files[0];
     rename $file, "$home/$archDir/$file";
 # check the package from the tarball
-    @cargs = ('R', 'CMD', 'check', '--as-cran', $tarball);
+    @cargs = ('R', 'CMD', 'check', '--as-cran', '--no-multiarch', $tarball);
     $cmd = join(' ', @cargs);
     print STDERR "\nRunning $cmd...\n";
     $check = system(@cargs);
     last unless $check == 0;
 # install the package in the current R version
-    @cargs = ('R', 'CMD', 'INSTALL', $tarball);
+    @cargs = ('R', 'CMD', 'INSTALL', '--no-multiarch', $tarball);
     $cmd = join(' ', @cargs);
     print STDERR "Running $cmd...\n";
     $check = system(@cargs);
