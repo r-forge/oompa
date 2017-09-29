@@ -10,7 +10,7 @@ if (!file.exists("Working")) dir.create("Working")
 setwd("Working")
 
 winbin <- file.path("..", paste("Binary", thisRVer, "x64", sep='-'))
-macbin <- file.path("..", paste("MacBinary", thisRVer, "x64", sep='-'))
+macbin <- file.path("..", paste("BinaryMac", thisRVer, "x64", sep='-'))
 
 if (!file.exists(winbin)) stop("no windows binaries")
 if (!file.exists(macbin)) dir.create(macbin)
