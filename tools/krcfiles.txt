@@ -1,2 +1,5 @@
-C:/KRC/rforge/mop/pkg/MOP
+supercurve/pkg/SuperCurve
+#newmanomics/pkg/NewmanOmics
+#mop/pkg/MOP
+#thresher/pkg/PCDimension
 #deepcnv/pkg/DeepCNV

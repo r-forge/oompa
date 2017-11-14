@@ -99,15 +99,17 @@ my @paths = ($Rpath,
 	     "C:\\Rtools\\$Ver\\bin",
 	     "C:\\Rtools\\$Ver\\MinGW\\bin",
 	     "C:\\Rtools\\$Ver\\gcc-4.6.3\\bin",
-	     $toolhash{miktex},
-	     "C:\\Windows\\system32",
-	     "C:\\Windows",
-	     $toolhash{perl}."\\bin",
-	     $toolhash{perl}."\\site\\bin",
-	     $toolhash{qpdf},
-	     $toolhash{gs},
-	     $toolhash{pandoc},
-);
+	     $toolhash{miktex});
+push @paths, $toolhash{im} if defined($toolhash{im}); # ImageMagick for SuperCurve
+push(@paths,
+     "C:\\Windows\\system32",
+     "C:\\Windows",
+     $toolhash{perl}."\\bin",
+     $toolhash{perl}."\\site\\bin",
+     $toolhash{qpdf},
+     $toolhash{gs},
+     $toolhash{pandoc},
+    );
 
 $ENV{PATH} = join(";", @paths);
 $ENV{nodosfilewarning} = '1';
