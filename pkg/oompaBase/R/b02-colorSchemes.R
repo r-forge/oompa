@@ -17,6 +17,11 @@ blueyellow <- function(N) {
   rgb(x, x, rev(x), maxColorValue=N)
 }
 
+cyanyellow <- function(N) {
+  x <- colorRampPalette(c("cyan", "black", "yellow"))
+  x(N)
+}
+
 greyscale <- function (N) 
 {
   x <- (1:N)-1

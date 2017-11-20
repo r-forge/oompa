@@ -3,6 +3,7 @@
 \alias{greenscale}
 \alias{bluescale}
 \alias{blueyellow}
+\alias{cyanyellow}
 \alias{redgreen}
 \alias{jetColors}
 \alias{grayscale}
@@ -17,6 +18,7 @@ redscale(N)
 greenscale(N)
 bluescale(N)
 blueyellow(N)
+cyanyellow(N)
 redgreen(N)
 jetColors(N)
 grayscale(N)
@@ -46,6 +48,14 @@ greyscale(N)
 
   The \code{jetColors} map tries to reproduce the default "jet" color map
   from MATLAB.
+
+  The \code{cyanyellow} color map was added to provide a divergent map
+  that should be usable by the majority of individuals whose vision has
+  a color deficit. It ranges from cyan (a mixture of blue and green) at
+  the low to yellow (a mixture of red and green) at the high end.  Since
+  the vast majority of color deficits arise because an individual lacks
+  cones for one of the three primary colors (red, green, or blue), this
+  colormap should stil provide adequate contrasts.
 }
 \value{
   A character vector '\code{cv}' of color names. This can be used to
@@ -73,6 +83,7 @@ image(data, col=redscale(128))
 image(data, col=blueyellow(64))
 image(data, col=jetColors(64))
 image(data, col=grayscale(64))
+image(data, col=cyanyellow(64))
 rm(data) # cleanup
 }
 \keyword{ color }

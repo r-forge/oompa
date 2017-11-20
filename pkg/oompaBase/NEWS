@@ -5,6 +5,17 @@
 	*						 *
 	**************************************************
 
+		CHANGES IN R VERSION 3.2.5
+
+NEW FEATURES
+
+    o	Added the 'cyanyellow' color scheme. This scheme is designed
+    to provide a divergent palette with distinguishable colors at both
+    ends of the scale even for indiviudals whose vision has color
+    deficits (that is, they lack cone receptors for one of the primary
+    colors).
+
+
 		CHANGES IN R VERSION 3.2.0
 
 NEW FEATURES
