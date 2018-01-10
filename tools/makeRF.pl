@@ -131,7 +131,7 @@ foreach my $packname (@packList) {
     my $pdir = join("/", @parts) || $home;
     chdir $pdir or die "Unable to change to '$pdir': $!\n";
 # build the source tarball
-    my @cargs = ('R', 'CMD', 'build', $pack);
+    my @cargs = ('R', 'CMD', 'build', '--resave-data', $pack);
     my $cmd = join(' ', @cargs);
     print STDERR "Running $cmd...\n";
     my $check = system(@cargs);

@@ -7,10 +7,12 @@ if (!require("Biobase")) {
 }
 mybiocs <- c("edgeR",
              "Biostrings",
-             "affy")
+             "affy",
+             "geneplotter",
+             "DNAcopy")
 for (p in mybiocs) {
   if (!require(p, character.only=TRUE)) {
-    biocLite(p)
+    biocLite(p, suppressUpdates = TRUE, suppressAutoUpdate = TRUE)
   }
 }
 
@@ -47,7 +49,9 @@ mypacks <- c("knitr",
              "alabama",
              "doSNOW",
              "movMF",
-             "XML"
+             "XML",
+             "nFactors",
+             "NbClust"
              )
 for (p in mypacks) {
   if (!require(p, character.only=TRUE)) {
