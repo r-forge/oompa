@@ -1,5 +1,6 @@
 ### sometimes emacs is stupid
 plot(2,3)
+dev.off()
 
 source("https://bioconductor.org/biocLite.R")
 if (!require("Biobase")) {
