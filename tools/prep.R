@@ -4,7 +4,7 @@ dev.off()
 
 source("https://bioconductor.org/biocLite.R")
 if (!require("Biobase")) {
-  biocLite()
+  biocLite(suppressUpdates = TRUE, suppressAutoUpdate = TRUE)
 }
 mybiocs <- c("edgeR",
              "Biostrings",
