@@ -27,6 +27,7 @@ die "'$tools' must define the 'gs' location" unless $toolhash{gs};
 
 my $Ver  = $toolhash{major};
 my $s    = $toolhash{point};
+my $fullver = ($s ? "$Ver.$s" : $Ver);
 my $arch = $toolhash{arch};
 
 my $profile =<<EOP
@@ -74,7 +75,7 @@ if ($startdir) {
 my $path = $ENV{PATH};
 
 # make sure there is a directory for source tarballs
-my $buildDir = "Build-$Ver.$s";
+my $buildDir = "Build-$fullver";
 if (-e $buildDir) {
     die("'$buildDir' exists and is not a directory") unless (-d $buildDir);
 } else {
@@ -82,7 +83,7 @@ if (-e $buildDir) {
 }
 
 # make sure there is a directory for binary packages
-my $archDir = "Binary-$Ver.$s";
+my $archDir = "Binary-$fullver";
 $archDir = "$archDir-$arch" if $arch; 
 if (-e $archDir) {
     die("'$archDir' exists and is not a directory") unless (-d $archDir);
@@ -93,12 +94,13 @@ if (-e $archDir) {
 #####################################################
 # set the path explicitly. Note that the path to the main
 # R executable varies by architecture.
-my $Rpath = "$toolhash{rdir}\\R-$Ver.$s\\bin\\$arch";
+my $Rpath = "$toolhash{rdir}\\R-$fullver\\bin\\$arch";
 
+my $pver = ($Ver eq "Devel" ? "3.4" : $Ver);
 my @paths = ($Rpath,
-	     "C:\\Rtools\\$Ver\\bin",
-	     "C:\\Rtools\\$Ver\\MinGW\\bin",
-	     "C:\\Rtools\\$Ver\\gcc-4.6.3\\bin",
+	     "C:\\Rtools\\$pver\\bin",
+	     "C:\\Rtools\\$pver\\MinGW\\bin",
+	     "C:\\Rtools\\$pver\\gcc-4.6.3\\bin",
 	     $toolhash{miktex});
 push @paths, $toolhash{im} if defined($toolhash{im}); # ImageMagick for SuperCurve
 push(@paths,
@@ -113,8 +115,8 @@ push(@paths,
 
 $ENV{PATH} = join(";", @paths);
 $ENV{nodosfilewarning} = '1';
-$ENV{RTOOLS} = "C:/Rtools/$Ver";
-$ENV{BINPREF} = "C:/Rtools/$Ver/MinGW_64/bin/";
+$ENV{RTOOLS} = "C:/Rtools/$pver";
+$ENV{BINPREF} = "C:/Rtools/$pver/MinGW_64/bin/";
 #$ENV{BINPREF64} = "C:/Rtools/$Ver/MinGW_64/bin/";
 
 print STDERR "start path:\n$path\n\n";

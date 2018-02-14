@@ -1,4 +1,5 @@
-thresher/pkg/Thresher
+oompa/pkg/TailRank
+#thresher/pkg/Thresher
 #supercurve/pkg/SuperCurve
 #newmanomics/pkg/NewmanOmics
 #mop/pkg/MOP
