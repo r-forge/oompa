@@ -1,7 +1,7 @@
 Package: TailRank
 Title: The Tail-Rank Statistic
-Version: 3.1.3
-Date: 2017-07-11
+Version: 3.1.4
+Date: 2018-02-14
 Author: Kevin R. Coombes
 Description: Implements the tail-rank statistic for selecting biomarkers
   from a microarray data set, an efficient nonparametric test focused
