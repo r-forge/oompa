@@ -52,7 +52,9 @@ mypacks <- c("knitr",
              "movMF",
              "XML",
              "nFactors",
-             "NbClust"
+             "NbClust",
+             "fgui",
+             "epiR"
              )
 for (p in mypacks) {
   if (!require(p, character.only=TRUE)) {

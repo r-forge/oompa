@@ -1,4 +1,5 @@
-oompa/pkg/TailRank
+C:/Users/coom05/Desktop/GitProjects/drexplorer/pkg/drexplorer
+#oompa/pkg/TailRank
 #thresher/pkg/Thresher
 #supercurve/pkg/SuperCurve
 #newmanomics/pkg/NewmanOmics

@@ -24,7 +24,7 @@ supercurve/pkg/SuperCurve
 supercurve/pkg/SuperCurveGUI
 clonefinder/pkg/CloneFinder
 mop/pkg/MOP
-C:/KRC/rforge/drexplorer/pkg/drexplorer
+C:/Users/coom05/Desktop/GitProjects/drexplorer/pkg/drexplorer
 C:/KRC/rforge/craac/pkg/CRAAC
 C:/KRC/rforge/arraycube/pkg/ArrayCube
 C:/KRC/rforge/arraycube/pkg/MINiML
