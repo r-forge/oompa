@@ -1,6 +1,12 @@
 # colors-test.ssc
 library(oompaBase)
 
+xc <- new("ColorCoding")
+xc
+
+xc <- new("ColorCoding", v=TRUE, mark=17)
+xc
+
 theta <- (0:360)*pi/180
 x <- cos(theta)
 y <- sin(theta)
@@ -27,7 +33,7 @@ rm(x, y, xp, yp, theta, colors, fac)
 plot(c(1,4), c(1,4), type='n')
 for (i in 1:4) {
   for (j in 1:4) {
-    points(i,j, col=oompaColor[i + 4*(j-1)], pch=16, cex=4)
+    points(i,j, col=oompaColor[[i + 4*(j-1)]], pch=16, cex=4)
   }
 }
 rm(i, j)

@@ -5,6 +5,12 @@
 	*						 *
 	**************************************************
 
+		CHANGES IN R VERSION 3.2.6
+
+UPDATES
+
+    o	Removed use of deprecated elements from S4-classes.
+
 		CHANGES IN R VERSION 3.2.5
 
 NEW FEATURES

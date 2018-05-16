@@ -6,8 +6,15 @@
 #    ColorCoding	constructor from a logical vector and two scalars
 
 setClass('ColorCoding',
-         representation(v='logical', color='vector', mark='vector'),
-         prototype=list(v=T, color='red', mark=16))
+         slots = c(v='logical', color='vector', mark='vector'))
+
+setMethod("initialize", "ColorCoding", function(.Object, ...) {
+  .Object <- callNextMethod()
+  if (length(.Object@v) == 0) .Object@v <- TRUE
+  if (length(.Object@color) == 0) .Object@color <- 'red'
+  if (length(.Object@mark) == 0) .Object@mark <- 16
+  .Object
+})
 
 ColorCoding <- function(v, color, mark=1) {
   val <- new('ColorCoding', v=v, color=color, mark=mark)
@@ -21,7 +28,7 @@ ColorCoding <- function(v, color, mark=1) {
 #	plot			scatter plot with colors
 
 setClass('ColorCodedPair',
-         representation(x='numeric', y='numeric', colorCodingList='list'))
+         slots = c(x='numeric', y='numeric', colorCodingList='list'))
 
 ColorCodedPair <- function(x, y, ccl) {
   val <- new('ColorCodedPair', x=x, y=y, colorCodingList=ccl)
