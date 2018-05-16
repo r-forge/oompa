@@ -27,7 +27,7 @@ die "'$tools' must define the 'gs' location" unless $toolhash{gs};
 
 my $Ver  = $toolhash{major};
 my $s    = $toolhash{point};
-my $fullver = ($s ? "$Ver.$s" : $Ver);
+my $fullver = (defined($s) ? "$Ver.$s" : $Ver);
 my $arch = $toolhash{arch};
 
 my $profile =<<EOP

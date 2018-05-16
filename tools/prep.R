@@ -10,7 +10,9 @@ mybiocs <- c("edgeR",
              "Biostrings",
              "affy",
              "geneplotter",
-             "DNAcopy")
+             "DNAcopy",
+             "flowCore"
+             )
 for (p in mybiocs) {
   if (!require(p, character.only=TRUE)) {
     biocLite(p, suppressUpdates = TRUE, suppressAutoUpdate = TRUE)
@@ -54,7 +56,8 @@ mypacks <- c("knitr",
              "nFactors",
              "NbClust",
              "fgui",
-             "epiR"
+             "epiR",
+             "scatterplot3d"
              )
 for (p in mypacks) {
   if (!require(p, character.only=TRUE)) {
