@@ -6,9 +6,9 @@
 # the set.
 
 setClass('Pipeline',
-         representation(proclist = 'list',
-                        name = 'character',
-                        description = 'character'))
+         slots = c(proclist = 'list',
+                   name = 'character',
+                   description = 'character'))
 
 setMethod('process', signature('ANY', 'Pipeline'),
           function(object, action, parameter = NULL) {

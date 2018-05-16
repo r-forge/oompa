@@ -6,10 +6,10 @@
 # exactly how it was processed.
 
 setClass('Processor',
-         representation(f = 'function',
-                        default = 'numeric or NULL',
-                        name = 'character',
-                        description = 'character'))
+         slots = c(f = 'function',
+                   default = 'numeric or NULL',
+                   name = 'character',
+                   description = 'character'))
 
 # To demonstrate, we first show how to process channel objects. Each
 # channel basically represents a single vector of data, together with

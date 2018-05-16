@@ -6,6 +6,13 @@
         **************************************************
 
 
+                CHANGES IN R VERSION 3.1.5
+
+UPDATE
+
+    o	Changed S4 classes to no longer use recently deprecated or
+    	discouraged elements.
+
                 CHANGES IN R VERSION 3.1.0
 
 ADMINISTRATIVE

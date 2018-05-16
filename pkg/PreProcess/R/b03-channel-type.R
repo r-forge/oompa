@@ -5,12 +5,12 @@
 #
 
 setClass('ChannelType',
-         representation(maker='character',
-                        model='character',
-                        nCol='numeric',
-                        nRow='numeric',
-                        glow='character',
-                        design='character'))
+         slots = c(maker='character',
+                   model='character',
+                   nCol='numeric',
+                   nRow='numeric',
+                   glow='character',
+                   design='character'))
 
 ChannelType <- function(mk, md, nc, nr, gl, design='') {
   new('ChannelType',  maker=mk, model=md,

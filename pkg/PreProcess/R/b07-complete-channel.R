@@ -15,10 +15,10 @@
 #	channelize		what kinds of channels are extracted?
 
 setClass('CompleteChannel',
-         representation(name = 'character',
-                        type = 'ChannelType',
-                        data = 'data.frame',
-                        history = 'list'))
+         slots = c(name = 'character',
+                   type = 'ChannelType',
+                   data = 'data.frame',
+                   history = 'list'))
 
 # The history object is used to keep a record of the calls that did the
 # data processing.

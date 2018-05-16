@@ -11,11 +11,11 @@
 #	image		geographic display of values
 
 setClass('Channel',
-         representation(parent = 'character',
-                        name = 'character',
-                        type = 'ChannelType',
-                        x = 'numeric',
-                        history = 'list'))
+         slots = c(parent = 'character',
+                   name = 'character',
+                   type = 'ChannelType',
+                   x = 'numeric',
+                   history = 'list'))
 
 # The history object is used to keep a record of the calls that did the
 # data processing.
