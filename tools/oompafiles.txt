@@ -13,6 +13,7 @@ classpred/pkg/GenAlgo
 classpred/pkg/ClassPrediction
 thresher/pkg/PCDimension
 thresher/pkg/Thresher
+cytangle/pkg/Cytangle
 nameneedle/pkg/NameNeedle
 umpire/pkg/Umpire
 siber/pkg/SIBERG
