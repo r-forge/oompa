@@ -57,7 +57,8 @@ mypacks <- c("knitr",
              "NbClust",
              "fgui",
              "epiR",
-             "scatterplot3d"
+             "scatterplot3d",
+             "quantmod"
              )
 for (p in mypacks) {
   if (!require(p, character.only=TRUE)) {
