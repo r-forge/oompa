@@ -2,10 +2,10 @@
 
 ################################################
 setClass('PerturbationClusterTest',
-         representation('ClusterTest',
-                        f='function',
-                        nTimes='numeric',
-                        noise='numeric'))
+         contains = 'ClusterTest',
+         slots = c(f='function',
+                   nTimes='numeric',
+                   noise='numeric'))
 
 PerturbationClusterTest <- function(data, FUN, nTimes=100, noise=1, verbose=TRUE, ...) {
   call <- match.call()

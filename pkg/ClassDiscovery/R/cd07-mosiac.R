@@ -5,15 +5,15 @@
 setOldClass("hclust")
 
 setClass('Mosaic',
-         representation(data = 'matrix',
-                        samples = 'hclust',
-                        genes = 'hclust',
-                        sampleMetric = 'character',
-                        sampleLinkage = 'character',
-                        geneMetric = 'character',
-                        geneLinkage = 'character',
-                        call = 'call',
-                        name = 'character'))
+         slots = c(data = 'matrix',
+                   samples = 'hclust',
+                   genes = 'hclust',
+                   sampleMetric = 'character',
+                   sampleLinkage = 'character',
+                   geneMetric = 'character',
+                   geneLinkage = 'character',
+                   call = 'call',
+                   name = 'character'))
 
 Mosaic <- function(data, sampleMetric='pearson', sampleLinkage = 'average',
                    geneMetric='euclid', geneLinkage = 'average',

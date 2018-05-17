@@ -6,21 +6,21 @@
 # Create yet another class of objects
 
 setClass('PCanova',
-         representation(orig.pca  = 'matrix',
-                        class.pca = 'matrix',
-                        mixed.pca = 'matrix',
-                        resid.pca = 'matrix',
-                        xc = 'hclust',
-                        hc = 'hclust',
-                        rc = 'hclust',
-                        n = 'numeric',
-                        class2orig  = 'numeric',
-                        class2resid = 'numeric',
-                        orig2resid  = 'numeric',
-                        labels  = 'character',
-                        classes = 'character',
-                        colors  = 'character',
-                        call='call'))
+         slots = c(orig.pca  = 'matrix',
+                   class.pca = 'matrix',
+                   mixed.pca = 'matrix',
+                   resid.pca = 'matrix',
+                   xc = 'hclust',
+                   hc = 'hclust',
+                   rc = 'hclust',
+                   n = 'numeric',
+                   class2orig  = 'numeric',
+                   class2resid = 'numeric',
+                   orig2resid  = 'numeric',
+                   labels  = 'character',
+                   classes = 'character',
+                   colors  = 'character',
+                   call='call'))
 
 setMethod('summary', signature(object='PCanova'),
           function(object, ...) {

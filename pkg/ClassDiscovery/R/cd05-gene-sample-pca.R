@@ -7,9 +7,9 @@
 # GenePCA represents each gene as a point in sample space,
 # with axes given by principal components.
 setClass('GenePCA',
-         representation(scores='matrix',
-                        variances='numeric',
-                        components='matrix'))
+         slots = c(scores='matrix',
+                   variances='numeric',
+                   components='matrix'))
 
 GenePCA <- function(geneData)
 {
@@ -33,15 +33,15 @@ setMethod('plot', signature('GenePCA', 'missing'), function(x, splitter=0) {
 })
 
 setClass('SamplePCA',
-         representation(scores = 'matrix',
-                        variances = 'numeric',
-                        components = 'matrix',
-                        splitter = 'ANY',
-                        usecor = 'logical',
-                        shift = 'numeric',
-                        scale = 'numeric',
-                        call = 'call'))
-         
+         slots = c(scores = 'matrix',
+                   variances = 'numeric',
+                   components = 'matrix',
+                   splitter = 'ANY',
+                   usecor = 'logical',
+                   shift = 'numeric',
+                   scale = 'numeric',
+                   call = 'call'))
+
 SamplePCA <- function(data, splitter = 0, usecor = FALSE, center = TRUE)
 {
   call <- match.call()

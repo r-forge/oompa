@@ -43,10 +43,10 @@ cutRepeatedKmeans <- function(data, k, nTimes) {
 
 ################################################
 setClass('BootstrapClusterTest',
-         representation('ClusterTest',
-                        f='function',
-                        subsetSize='numeric',
-                        nTimes='numeric'))
+         contains = 'ClusterTest',
+         slots = c(f='function',
+                   subsetSize='numeric',
+                   nTimes='numeric'))
 
 
 BootstrapClusterTest <- function(data, FUN, subsetSize, nTimes=100, verbose=TRUE, ...) {

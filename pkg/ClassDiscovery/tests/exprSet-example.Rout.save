@@ -1,6 +1,6 @@
 
-R version 3.4.0 (2017-04-21) -- "You Stupid Darkness"
-Copyright (C) 2017 The R Foundation for Statistical Computing
+R version 3.5.0 (2018-04-23) -- "Joy in Playing"
+Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -61,12 +61,12 @@ The following objects are masked from 'package:stats':
 The following objects are masked from 'package:base':
 
     Filter, Find, Map, Position, Reduce, anyDuplicated, append,
-    as.data.frame, cbind, colMeans, colSums, colnames, do.call,
-    duplicated, eval, evalq, get, grep, grepl, intersect, is.unsorted,
-    lapply, lengths, mapply, match, mget, order, paste, pmax, pmax.int,
-    pmin, pmin.int, rank, rbind, rowMeans, rowSums, rownames, sapply,
-    setdiff, sort, table, tapply, union, unique, unsplit, which,
-    which.max, which.min
+    as.data.frame, basename, cbind, colMeans, colSums, colnames,
+    dirname, do.call, duplicated, eval, evalq, get, grep, grepl,
+    intersect, is.unsorted, lapply, lengths, mapply, match, mget,
+    order, paste, pmax, pmax.int, pmin, pmin.int, rank, rbind,
+    rowMeans, rowSums, rownames, sapply, setdiff, sort, table, tapply,
+    union, unique, unsplit, which, which.max, which.min
 
 Welcome to Bioconductor
 
@@ -156,4 +156,4 @@ Welcome to Bioconductor
 > 
 > proc.time()
    user  system elapsed 
-   4.78    0.21    5.89 
+   4.58    0.23    6.13 

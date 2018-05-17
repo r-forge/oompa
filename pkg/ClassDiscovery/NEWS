@@ -6,7 +6,13 @@
 	**************************************************
 
 
-		CHANGES IN R VERSION 3.w.0
+		CHANGES IN R VERSION 3.3.8
+
+UPDATES
+
+    o	Modified use of S4 classes to avoid deprecated and discouraged elements.
+
+		CHANGES IN R VERSION 3.3.0
 
 FEATURES
 
