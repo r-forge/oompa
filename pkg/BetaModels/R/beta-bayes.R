@@ -1,13 +1,13 @@
 # use empirical bayes to determine significance of correlation coefficients
 
 setClass("ebCorrelation",
-         representation(correlations='numeric',
-                        nObservations='numeric',
-                        xvals='numeric',
-                        pdf='numeric',
-                        theoretical.pdf='numeric',
-                        unravel='numeric',
-                        call='call'))
+         slots = c(correlations='numeric',
+                   nObservations='numeric',
+                   xvals='numeric',
+                   pdf='numeric',
+                   theoretical.pdf='numeric',
+                   unravel='numeric',
+                   call='call'))
 
 .probUnusual <- function(object, p0) {
   1-p0*object@theoretical.pdf/object@unravel

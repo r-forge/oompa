@@ -41,13 +41,13 @@ xform <- function(xy) {
 ##############################
 # BetaRates is the main class, as well as the name of a constructor.
 
-setClass("BetaRates", representation=list(
-  k = 'numeric',
-  n = 'numeric',
-  x = 'numeric',
-  y = 'numeric',
-  results = 'matrix',
-  logresults = 'matrix'))
+setClass("BetaRates",
+         slots = c(k = 'numeric',
+                   n = 'numeric',
+                   x = 'numeric',
+                   y = 'numeric',
+                   results = 'matrix',
+                   logresults = 'matrix'))
 
 BetaRates <- function(k, n, x=seq(-3,3, length=100), y=x) {
   NX <- length(x)
