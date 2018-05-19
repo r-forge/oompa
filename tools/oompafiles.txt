@@ -6,6 +6,7 @@ oompa/pkg/ClassComparison
 oompa/pkg/TailRank
 oompa/pkg/ClassDiscovery
 oompa/pkg/BetaModels
+umpire/pkg/Umpire
 classpred/pkg/BimodalIndex
 classpred/pkg/Modeler
 classpred/pkg/CrossValidate
@@ -15,15 +16,16 @@ thresher/pkg/PCDimension
 thresher/pkg/Thresher
 cytangle/pkg/Cytangle
 nameneedle/pkg/NameNeedle
-umpire/pkg/Umpire
-siber/pkg/SIBERG
-integirty/pkg/integIRTy
+siber/pkg/siberg
+integirty/pkg/integirty
 supercurve/pkg/tclish
 supercurve/pkg/SlideDesignerGUI
 supercurve/pkg/SuperCurveSampleData
 supercurve/pkg/SuperCurve
 supercurve/pkg/SuperCurveGUI
 mop/pkg/MOP
+deepcnv/pkg/DeepCNV
+clonefinder/pkg/CloneFinder
 C:/Users/Kevin/Desktop/GitProjects/drexplorer
 C:/KRC/rforge/craac/pkg/CRAAC
 C:/KRC/rforge/arraycube/pkg/ArrayCube
@@ -32,7 +34,4 @@ C:/KRC/rforge/accuploidy/pkg/AccuPloidy
 C:/KRC/rforge/firstsign/pkg/FirstSign
 C:/KRC/rforge/HAPSEG
 C:/KRC/rforge/ABSOLUTE
-#HALT
-clonefinder/pkg/CloneFinder
-deepcnv/pkg/DeepCNV
 #END

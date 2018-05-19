@@ -8,5 +8,5 @@ write_PACKAGES(bin, type="win.binary", verbose=TRUE)
 src <- paste("Build", ver, sep='-')
 write_PACKAGES(src, type="source", verbose=TRUE)
 
-mac <- paste("MacBinary", ver, "x64", sep='-')
+mac <- paste("BinaryMac", ver, "x64", sep='-')
 write_PACKAGES(mac, type="mac.binary", verbose=TRUE)

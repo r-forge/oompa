@@ -17,8 +17,8 @@ sourceOOMPAinstallScript <- function() {
                    "  http://www.r-project.org/\n", sep=""))
     }
     ## update this to reflect most recent supported R version
-    if (compareVersion(thisRVer, "3.4.0") >= 0)
-        choppedRVer <- "3.4" 
+    if (compareVersion(thisRVer, "3.5.0") >= 0)
+        choppedRVer <- "3.5" 
     else
         choppedRVer <- gsub("(\\w+).(\\w+).(\\w+)", "\\1.\\2", thisRVer)
     scriptUrl <- paste(oompaROOT, "installScripts",

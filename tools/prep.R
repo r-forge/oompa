@@ -11,7 +11,9 @@ mybiocs <- c("edgeR",
              "affy",
              "geneplotter",
              "DNAcopy",
-             "flowCore"
+             "flowCore",
+             "AnnotationDbi",
+             "RSQLite"
              )
 for (p in mybiocs) {
   if (!require(p, character.only=TRUE)) {
@@ -58,7 +60,9 @@ mypacks <- c("knitr",
              "fgui",
              "epiR",
              "scatterplot3d",
-             "quantmod"
+             "quantmod",
+             "gtools",
+             "ggplot2"
              )
 for (p in mypacks) {
   if (!require(p, character.only=TRUE)) {

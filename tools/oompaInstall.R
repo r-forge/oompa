@@ -3,7 +3,7 @@
 ###
 
 ## !!! Always change version number when updating this file !!!
-oompaVersion <- "3.4"
+oompaVersion <- "3.5"
 
 OOMPAinstallRepos <- function()
 {
@@ -15,78 +15,85 @@ OOMPAinstallRepos <- function()
     myRepos
 }
 
-OOMPAinstallPkgGroups <- function(groupName="default")
-{
-    validGroups <- c(
-                     "supercurve",
-                     "lite",
-                     "tailrank",
-                     "genalg",
-                     "thresher",
-                     "bimodal",
-                     "prediction",
-                     "default",
-                     "arraycube",
-                     "all")
-    groupName <- match.arg(groupName, validGroups)
+OOMPAinstallPkgGroups <- function(groupName="default") {
+  validGroups <- c("supercurve",
+                   "lite",
+                   "tailrank",
+                   "genalg",
+                   "thresher",
+                   "bimodal",
+                   "prediction",
+                   "default",
+                   "arraycube",
+                   "experimental",
+                   "all")
+  groupName <- match.arg(groupName, validGroups)
 
-    supercurve.group <- c("tclish",
-                          "SuperCurve",
-                          "SuperCurveGUI",
-                          "SlideDesignerGUI",
-                          "SuperCurveSampleData")
-                          
-    lite.group <- c("oompaBase",
-                    "oompaData",
-                    "PreProcess",
-                    "ClassDiscovery",
-                    "ClassComparison")
+  supercurve.group <- c("tclish",
+                        "SuperCurve",
+                        "SuperCurveGUI",
+                        "SlideDesignerGUI",
+                        "SuperCurveSampleData")
 
-    tailrank.group <- c(lite.group,
-                        "TailRank")
+  lite.group <- c("oompaBase",
+                  "oompaData",
+                  "PreProcess",
+                  "ClassDiscovery",
+                  "ClassComparison",
+                  "Polychrome")
 
-    genalg.group <- c(lite.group,
-                      "GenAlgo")
+  tailrank.group <- c(lite.group,
+                      "TailRank")
 
-    thresher.group <- c(lite.group,
-                        "Thresher")
+  genalg.group <- c(lite.group,
+                    "GenAlgo")
 
-    bimodal.group <- c(lite.group,
-                       "BimodalIndex")
+  thresher.group <- c(lite.group,
+                      "PCDimension",
+                      "Thresher")
 
-    prediction.group <- c(tailrank.group,
-                          "Modeler",
-                          "CrossValidate",
-                          "GenAlgo",
-                          "BimodalIndex",
-                          "ClassPrediction")
+  bimodal.group <- c(lite.group,
+                     "BimodalIndex")
 
-    default.group <- prediction.group
-    
-    arraycube.group <- c("oompaBase",
-                         "ArrayCube",
-                         "MINiML")
+  prediction.group <- c(tailrank.group,
+                        "Modeler",
+                        "CrossValidate",
+                        "GenAlgo",
+                        "BimodalIndex",
+                        "ClassPrediction")
 
-    switch(EXPR=groupName,
-           supercurve = supercurve.group,
-           lite = lite.group,
-           tailrank = tailrank.group,
-           genalg = genalg.group,
-           thresher = thresher.group,
-           bimodal = bimodal.group,
-           prediction = prediction.group,
-           arraycube = arraycube.group,
-           default = default.group,
-           all = {
-               OOMPA.url <- OOMPAinstallRepos()[[1]]
-               contriburl <- paste(OOMPA.url, "src/contrib",
-                                   paste(oompaVersion, "0", sep='.'),
-                                   sep="/")
-               all.group <- available.packages(contriburl)[, "Package"]
-               names(all.group) <- NULL
-               all.group
-           },
-           stop(sprintf("unknown groupName %s", sQuote(groupName))))
+  default.group <- prediction.group
+
+  experimental.group <- c("BetaModels",
+                          "CloneFinder",
+                          "Cytangle",
+                          "DeepCNV",
+                          "FirstSign")
+
+  arraycube.group <- c("oompaBase",
+                       "ArrayCube",
+                       "MINiML")
+
+  switch(EXPR=groupName,
+         supercurve = supercurve.group,
+         lite = lite.group,
+         tailrank = tailrank.group,
+         genalg = genalg.group,
+         thresher = thresher.group,
+         bimodal = bimodal.group,
+         prediction = prediction.group,
+         arraycube = arraycube.group,
+         experimental = experimental.group,
+         default = default.group,
+         all = { OOMPA.url <- OOMPAinstallRepos()[[1]]
+                 contriburl <- paste(OOMPA.url, "src/contrib",
+                        paste(oompaVersion, "0", sep='.'),
+                        sep="/")
+                 all.group <- available.packages(contriburl)[, "Package"]
+                 names(all.group) <- NULL
+                 all.group
+         },
+         stop(sprintf("unknown groupName %s", sQuote(groupName))))
 }
 
 
