@@ -62,7 +62,9 @@ mypacks <- c("knitr",
              "scatterplot3d",
              "quantmod",
              "gtools",
-             "ggplot2"
+             "ggplot2",
+             "scales",
+             "plyr"
              )
 for (p in mypacks) {
   if (!require(p, character.only=TRUE)) {
