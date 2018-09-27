@@ -33,47 +33,7 @@ Loading required package: oompaData
 > 
 > #################################################################
 > # create an exprSet
-> require(Biobase)
-Loading required package: Biobase
-Loading required package: BiocGenerics
-Loading required package: parallel
-
-Attaching package: 'BiocGenerics'
-
-The following objects are masked from 'package:parallel':
-
-    clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
-    clusterExport, clusterMap, parApply, parCapply, parLapply,
-    parLapplyLB, parRapply, parSapply, parSapplyLB
-
-The following object is masked from 'package:ClassDiscovery':
-
-    as.data.frame
-
-The following object is masked from 'package:oompaBase':
-
-    as.data.frame
-
-The following objects are masked from 'package:stats':
-
-    IQR, mad, sd, var, xtabs
-
-The following objects are masked from 'package:base':
-
-    Filter, Find, Map, Position, Reduce, anyDuplicated, append,
-    as.data.frame, basename, cbind, colMeans, colSums, colnames,
-    dirname, do.call, duplicated, eval, evalq, get, grep, grepl,
-    intersect, is.unsorted, lapply, lengths, mapply, match, mget,
-    order, paste, pmax, pmax.int, pmin, pmin.int, rank, rbind,
-    rowMeans, rowSums, rownames, sapply, setdiff, sort, table, tapply,
-    union, unique, unsplit, which, which.max, which.min
-
-Welcome to Bioconductor
-
-    Vignettes contain introductory material; view with
-    'browseVignettes()'. To cite Bioconductor, see
-    'citation("Biobase")', and for packages 'citation("pkgname")'.
-
+> suppressMessages( require(Biobase) )
 > # create a phenoData object and an exprSet
 > vl <- data.frame(labelDescription=dimnames(clinical.info)[[2]])
 > rownames(vl) <- as.character(vl[,1])
@@ -156,4 +116,4 @@ Welcome to Bioconductor
 > 
 > proc.time()
    user  system elapsed 
-   4.58    0.23    6.13 
+   7.89    0.49    8.42 

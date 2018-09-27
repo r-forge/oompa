@@ -13,7 +13,7 @@ rm(temp)
 
 #################################################################
 # create an exprSet
-require(Biobase)
+suppressMessages( require(Biobase) )
 # create a phenoData object and an exprSet
 vl <- data.frame(labelDescription=dimnames(clinical.info)[[2]])
 rownames(vl) <- as.character(vl[,1])
