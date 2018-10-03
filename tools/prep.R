@@ -2,6 +2,9 @@
 plot(2,3)
 dev.off()
 
+options(install.packages.compile.from.source = "never")
+
+
 source("https://bioconductor.org/biocLite.R")
 if (!require("Biobase")) {
   biocLite(suppressUpdates = TRUE, suppressAutoUpdate = TRUE)
