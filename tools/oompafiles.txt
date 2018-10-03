@@ -23,7 +23,7 @@ supercurve/pkg/SlideDesignerGUI
 supercurve/pkg/SuperCurveSampleData
 supercurve/pkg/SuperCurve
 supercurve/pkg/SuperCurveGUI
-mop/pkg/MOP
+newmanomics/pkg/Newmanomics
 deepcnv/pkg/DeepCNV
 clonefinder/pkg/CloneFinder
 ../GitProjects/drexplorer/
@@ -32,6 +32,7 @@ C:/KRC/rforge/arraycube/pkg/ArrayCube
 C:/KRC/rforge/arraycube/pkg/MINiML
 C:/KRC/rforge/accuploidy/pkg/AccuPloidy
 C:/KRC/rforge/firstsign/pkg/FirstSign
+mop/pkg/MOP
 C:/KRC/rforge/HAPSEG
 C:/KRC/rforge/ABSOLUTE
 #END
