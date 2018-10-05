@@ -1,6 +1,6 @@
 
-R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"
-Copyright (C) 2013 The R Foundation for Statistical Computing
+R version 3.5.1 (2018-07-02) -- "Feather Spray"
+Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -40,12 +40,13 @@ Loading required package: oompaBase
 > 
 > cutRepeatedKmeans(dd, k=3, nTimes=10)
  [1] 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3
-> cutRepeatedKmeans(dd, k=4, nTimes=10)
- [1] 2 2 2 2 2 2 2 2 2 2 4 3 3 3 4 3 3 4 4 4 1 1 1 1 1 1 1 1 1 1
+> crk <- cutRepeatedKmeans(dd, k=4, nTimes=10)
+> sort(as.vector(table(crk))) # sme numbers, different labels on some machines
+[1]  5  5 10 10
 > 
 > # cleanup
 > rm(d1, d2, d3, dd)
 > 
 > proc.time()
    user  system elapsed 
-   0.57    0.09    0.67 
+   0.51    0.20    0.68 

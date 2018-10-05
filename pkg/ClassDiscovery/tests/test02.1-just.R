@@ -16,7 +16,8 @@ cutPam(dd, k=3)
 cutPam(dd, k=4)
 
 cutRepeatedKmeans(dd, k=3, nTimes=10)
-cutRepeatedKmeans(dd, k=4, nTimes=10)
+crk <- cutRepeatedKmeans(dd, k=4, nTimes=10)
+sort(as.vector(table(crk))) # sme numbers, different labels on some machines
 
 # cleanup
 rm(d1, d2, d3, dd)
