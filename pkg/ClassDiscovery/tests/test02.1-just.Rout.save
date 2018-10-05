@@ -1,0 +1,51 @@
+
+R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"
+Copyright (C) 2013 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(ClassDiscovery)
+Loading required package: cluster
+Loading required package: oompaBase
+> set.seed(547422)
+> # simulate data from three different groups
+> d1 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
+> d2 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
+> d3 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
+> dd <- cbind(d1, d2, d3)
+> 
+> cutKmeans(dd, k=3)
+ [1] 3 3 3 3 3 3 3 3 3 3 1 2 2 2 1 2 2 1 1 1 3 3 3 3 3 3 3 3 3 3
+> cutKmeans(dd, k=4)
+ [1] 3 3 3 3 3 3 3 3 3 3 1 1 1 1 1 1 1 1 1 1 4 2 2 4 4 2 2 4 4 2
+> 
+> cutHclust(dd, k=3)
+> cutHclust(dd, k=4)
+> 
+> cutPam(dd, k=3)
+ [1] 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3
+> cutPam(dd, k=4)
+ [1] 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 3 4 3 4 4 4 3 3 3 3
+> 
+> cutRepeatedKmeans(dd, k=3, nTimes=10)
+ [1] 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3
+> cutRepeatedKmeans(dd, k=4, nTimes=10)
+ [1] 2 2 2 2 2 2 2 2 2 2 4 3 3 3 4 3 3 4 4 4 1 1 1 1 1 1 1 1 1 1
+> 
+> # cleanup
+> rm(d1, d2, d3, dd)
+> 
+> proc.time()
+   user  system elapsed 
+   0.57    0.09    0.67 
