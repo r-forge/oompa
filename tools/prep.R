@@ -70,7 +70,7 @@ mypacks <- c("knitr",
              "plyr"
              )
 for (p in mypacks) {
-  if (!require(p, character.only=TRUE)) {
+  if (!require(p, character.only = TRUE, quietly = TRUE)) {
     install.packages(p)
     library(p, character.only=TRUE)
   }
