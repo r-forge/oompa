@@ -1,7 +1,4 @@
-cytangle/pkg/Cytangle
-#newmanomics/pkg/NewmanOmics
-#C:/Users/coom05/Desktop/GitProjects/drexplorer/pkg/drexplorer
-#oompa/pkg/TailRank
-#supercurve/pkg/SuperCurve
-#mop/pkg/MOP
-#deepcnv/pkg/DeepCNV
+oompa/pkg/ClassDiscovery
+classpred/pkg/GenAlgo
+classpred/pkg/BimodalityIndex
+thresher/pkg/Thresher

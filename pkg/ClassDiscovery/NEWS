@@ -6,6 +6,17 @@
 	**************************************************
 
 
+		CHANGES IN R VERSION 3.3.10
+
+BUG FIXES
+
+    o	Not exactly sure if this qualifies as a bug fix: modified some
+        of the test scripts so that they don't raise errors (because
+        of not matching the output) on a few of the extra installations
+        tested by CRAN. The underlying issue appears to be in the
+        results of "hclust", which finds the same groups but assigns
+        them different cluster-labels on some machines.
+
 		CHANGES IN R VERSION 3.3.8
 
 UPDATES
