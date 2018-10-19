@@ -1,4 +1,2 @@
-oompa/pkg/ClassDiscovery
-classpred/pkg/GenAlgo
-classpred/pkg/BimodalityIndex
+classpred/pkg/BimodalIndex
 thresher/pkg/Thresher
