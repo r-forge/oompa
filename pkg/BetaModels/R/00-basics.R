@@ -123,7 +123,7 @@ samplePosteriorRates <- function(br, nsamp=2000) {
 }
 
 ##############################
-# TODO: export this. It's useful for deciding where to center the
+# This is useful for deciding where to center the
 # grid for computing the posterior distribution.
 #
 # Or better yet, figure out how to automatically set the grid.
@@ -136,4 +136,64 @@ guessCenter <- function(v) {
     X <- log(a/b)
     Y <- log(a+b)
     list(X=X, Y=Y, a=a, b=b)
+}
+
+setClass("Deltas",
+         slots = c(left = "numeric",
+                   right = "numeric",
+                   bottom = "numeric",
+                   top = "numeric"))
+setValidity("Deltas", function(object) {
+  all( object@psi >= 0 ) & sum(object@psi) == 1
+})
+setMethod("initialize", "Deltas", function(.Object, left = 1, right = NULL,
+                                           top = NULL, bottom = NULL, ...) {
+  .Object <- callNextMethod(.Object) # in case this gets inherited
+  inputs <- c(left, right, top, bottom)
+  if (length(inputs) == 0) {
+    inputs <- c(1,1,1,1)
+  }
+  while (length(inputs) < 4) {
+    inputs <- c(inputs, inputs) # reuse earlier entries
+  }
+  if (length(inputs) != 4) { # only happens with 3 input values?
+    stop("Incorrect number of delta values.")
+  }
+  .Object$left   <- inputs[1]
+  .Object$right  <- inputs[2]
+  .Object$top    <- inputs[3]
+  .Object$bottom <- inputs[4]
+  .Object
+})
+Deltas <- function(phi) {
+  new("Deltas", psi = phi)
+}
+setAs("Deltas", "list", function(from) {
+  list(left = from@left, right = from@right,
+       top = from@top, bottom = from@bottom)
+})
+
+checkDeltas <- function(...) {
+  as(Deltas(...), "list")
+}
+
+refineGrid <- function(K, N, x=seq(-3,3, length=100), y=x, deltas = NULL) {
+  if (is.null(deltas)) {
+    deltas <- list(left=1, right=1, bottom=1, top=1)
+  }
+  # can we really use an S4 class _just_ for error checking?
+  deltas <- checkDeltas(deltas)
+  guess <- guessCenter(K/N)
+  repeat {
+    br <- BetaRates(K, N, 
+                    x = seq(guess$X - deltas$left, guess$X + deltas$right, length=100), 
+                    y = seq(guess$Y - deltas$bottom, guess$Y + deltas$top, length=100))
+    brr <- br@results
+    edges <- 100*c(left=sum(brr[1,]), right=sum(brr[100,]), 
+                   bottom=sum(brr[,1]), top=sum(brr[,100]))
+    if (all(edges < 0.5)) break # no edge should have more than 0.5% of the mass
+    temp <- names(which(edges >= 0.5))
+    for (n in temp) deltas[[n]] <- deltas[[n]] + 0.5 # make a wider box
+  }
+  br
 }
