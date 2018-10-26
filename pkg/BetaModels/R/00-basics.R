@@ -131,6 +131,7 @@ guessCenter <- function(v) {
     m <- mean(v)
     s2 <- var(v)
     temp <- m*(1-m)/s2 - 1
+    if (temp < 0) temp <- 0.001
     a <- m*temp
     b <- (1-m)*temp
     X <- log(a/b)
