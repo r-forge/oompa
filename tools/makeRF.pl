@@ -61,7 +61,7 @@ my @packList = ();
 open(OOMPA, "<$oompafiles") or die "Unable to open '$oompafiles': $!\n";
 while (my $line = <OOMPA>) {
     chomp($line);
-    push @packList, $line;
+    push @packList, $line if $line;
 }
 
 
