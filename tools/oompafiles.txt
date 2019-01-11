@@ -25,7 +25,8 @@ supercurve/pkg/SuperCurve
 supercurve/pkg/SuperCurveGUI
 newmanomics/pkg/Newmanomics
 deepcnv/pkg/DeepCNV
-clonefinder/pkg/CloneFinder
+clonefinder/pkg/CloneSeeker
+clonefinder/pkg/CloneData
 C:/KRC/rforge/craac/pkg/CRAAC
 C:/KRC/rforge/arraycube/pkg/ArrayCube
 C:/KRC/rforge/arraycube/pkg/MINiML
