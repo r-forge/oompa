@@ -14,6 +14,7 @@ classpred/pkg/GenAlgo
 classpred/pkg/ClassPrediction
 thresher/pkg/PCDimension
 thresher/pkg/Thresher
+thresher/pkg/BinaryMatrix
 cytangle/pkg/Cytangle
 nameneedle/pkg/NameNeedle
 siber/pkg/siberg
@@ -32,8 +33,8 @@ C:/KRC/rforge/arraycube/pkg/ArrayCube
 C:/KRC/rforge/arraycube/pkg/MINiML
 C:/KRC/rforge/accuploidy/pkg/AccuPloidy
 C:/KRC/rforge/firstsign/pkg/FirstSign
-mop/pkg/MOP
 ../GitProjects/drexplorer/pkg/drexplorer
 C:/KRC/rforge/HAPSEG
 C:/KRC/rforge/ABSOLUTE
+mop/pkg/MOP
 #END
