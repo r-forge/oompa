@@ -68,7 +68,10 @@ mypacks <- c("knitr",
              "ggplot2",
              "scales",
              "plyr",
-             "sirt"
+             "sirt",
+             "Rtsne",
+             "igraph",
+             "dendextend"
              )
 for (p in mypacks) {
   if (!require(p, character.only = TRUE, quietly = TRUE)) {
