@@ -1,6 +1,7 @@
 # channel-test.ssc
 library(PreProcess)
 
+RNGversion("3.5.3")
 set.seed(237554)
 # simulate a moderately realistic looking microarray
 nc <- 100
