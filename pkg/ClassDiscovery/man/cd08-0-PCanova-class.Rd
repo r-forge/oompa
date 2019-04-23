@@ -149,7 +149,7 @@ PCanova(data, classes, labels, colors, usecor=TRUE)
 }
 \references{
   Examples of the output of PCANOVA applied to the NCI60 data set can be found
-  at \url{http://bioinformatics.mdanderson.org/camda01.html}. The full
+  at \url{http:/silicovore.com/camda01.html}. The full
   description has not been published (out of laziness on the part of the
   author of this code). The only description that has appeared in print
   is an extremely brief description that can be found in the proceedings of

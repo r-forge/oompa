@@ -1,4 +1,5 @@
 library(ClassDiscovery)
+RNGversion("3.5.3")
 set.seed(341392)
 # simulate samples from thre different groups, with generic genes
 d1 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)

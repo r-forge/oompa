@@ -18,6 +18,7 @@ Type 'q()' to quit R.
 > library(ClassDiscovery)
 Loading required package: cluster
 Loading required package: oompaBase
+> RNGversion("3.5.3")
 > set.seed(547422)
 > # simulate data from three different groups
 > d1 <- matrix(rnorm(100*10, rnorm(100, 0.5)), nrow=100, ncol=10, byrow=FALSE)
@@ -49,4 +50,4 @@ Loading required package: oompaBase
 > 
 > proc.time()
    user  system elapsed 
-   0.51    0.20    0.68 
+   0.37    0.07    0.45 
