@@ -1,7 +1,7 @@
 # pipeline-test
 library(PreProcess)
 
-RNGversion("3.5.3")
+suppressWarnings( RNGversion("3.5.3") )
 set.seed(147745)
 # simulate a moderately realistic looking microarray
 nc <- 100

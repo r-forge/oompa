@@ -1,5 +1,5 @@
 library(ClassDiscovery)
-RNGversion("3.5.3")
+suppressWarnings( RNGversion("3.5.3") )
 set.seed(593996)
 dd <- matrix(rnorm(100*5, rnorm(100)), nrow=100, ncol=5)
 distanceMatrix(dd, 'pearson')

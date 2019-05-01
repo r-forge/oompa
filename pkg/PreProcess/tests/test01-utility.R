@@ -7,7 +7,7 @@ mat
 flipud(mat)
 fliplr(mat)
 
-RNGversion("3.5.3")
+suppressWarnings( RNGversion("3.5.3") )
 set.seed(473824)
 # concordance
 x <- rnorm(1000, 1, 2)

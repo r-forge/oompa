@@ -1,7 +1,7 @@
 library(oompaBase)
 # a key point is to test the matrixPairedT code
 # we create a simple example
-RNGversion("3.5.3")
+suppressWarnings( RNGversion("3.5.3") )
 set.seed(372284)
 nPairs <- 3
 nGenes <- 7

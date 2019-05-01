@@ -1,5 +1,5 @@
 library(ClassDiscovery)
-RNGversion("3.5.3")
+suppressWarnings( RNGversion("3.5.3") )
 set.seed(801422)
 # simulate data from two different groups
 d1 <- matrix(rnorm(100*30, rnorm(100, 0.5)), nrow=100, ncol=30, byrow=FALSE)

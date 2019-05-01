@@ -1,6 +1,6 @@
 
-R version 3.5.1 (2018-07-02) -- "Feather Spray"
-Copyright (C) 2018 The R Foundation for Statistical Computing
+R version 3.6.0 (2019-04-26) -- "Planting of a Tree"
+Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -43,7 +43,7 @@ Loading required package: oompaBase
 [4,]   14    9    4
 [5,]   15   10    5
 > 
-> RNGversion("3.5.3")
+> suppressWarnings( RNGversion("3.5.3") )
 > set.seed(473824)
 > # concordance
 > x <- rnorm(1000, 1, 2)
@@ -76,4 +76,4 @@ Loading required package: oompaBase
 > 
 > proc.time()
    user  system elapsed 
-   0.42    0.04    0.48 
+   0.68    0.32    0.95 

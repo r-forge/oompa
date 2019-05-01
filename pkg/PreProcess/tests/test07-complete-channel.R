@@ -1,7 +1,7 @@
 # complete.channel-test.ssc
 library(PreProcess)
 
-RNGversion("3.5.3")
+suppressWarnings( RNGversion("3.5.3") )
 set.seed(989431)
 # simulate a complete channel object
 v <- rexp(10000, 1/1000)

@@ -1,6 +1,6 @@
 
-R version 3.5.1 (2018-07-02) -- "Feather Spray"
-Copyright (C) 2018 The R Foundation for Statistical Computing
+R version 3.6.0 (2019-04-26) -- "Planting of a Tree"
+Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -18,7 +18,7 @@ Type 'q()' to quit R.
 > library(oompaBase)
 > # a key point is to test the matrixPairedT code
 > # we create a simple example
-> RNGversion("3.5.3")
+> suppressWarnings( RNGversion("3.5.3") )
 > set.seed(372284)
 > nPairs <- 3
 > nGenes <- 7
@@ -76,4 +76,4 @@ Type 'q()' to quit R.
 > 
 > proc.time()
    user  system elapsed 
-   0.29    0.06    0.35 
+   0.53    0.20    0.75 

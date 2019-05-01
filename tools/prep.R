@@ -4,10 +4,13 @@ dev.off()
 
 options(install.packages.compile.from.source = "never")
 
-
-source("https://bioconductor.org/biocLite.R")
+#source("https://bioconductor.org/biocLite.R")
+if (!requireNamespace("BiocManager"))
+    install.packages("BiocManager")
+BiocManager::install(update = FALSE, ask = FALSE)
 if (!require("Biobase")) {
-  biocLite(suppressUpdates = TRUE, suppressAutoUpdate = TRUE)
+#  biocLite(suppressUpdates = TRUE, suppressAutoUpdate = TRUE)
+  BiocManager::install("Biobase", update = FALSE, ask = FALSE)
 }
 mybiocs <- c("edgeR",
              "Biostrings",
@@ -20,7 +23,8 @@ mybiocs <- c("edgeR",
              )
 for (p in mybiocs) {
   if (!require(p, character.only=TRUE)) {
-    biocLite(p, suppressUpdates = TRUE, suppressAutoUpdate = TRUE)
+    BiocManager::install(p, update = FALSE, ask = FALSE)
+#    biocLite(p, suppressUpdates = TRUE, suppressAutoUpdate = TRUE)
   }
 }
 
