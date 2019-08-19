@@ -10,7 +10,8 @@ importFrom(stats, "predict", "screeplot")
 importFrom(cluster, "pltree")
 
 importFrom("graphics", "par", "points")
-importFrom("grDevices", "rgb", "colorRampPalette")
+importFrom("grDevices", "rgb", "colorRampPalette",
+           "hsv", "rgb2hsv", "col2rgb")
 
 exportMethods("plot")
 exportMethods("hist")
@@ -22,7 +23,7 @@ exportMethods("as.data.frame")
 # b02-colorSchemes
 export("redscale", "bluescale", "greenscale",
        "blueyellow","redgreen", "jetColors",
-       "cyanyellow")
+       "cyanyellow", "wheel")
 export("grayscale", "greyscale")
 
 # b02-colors

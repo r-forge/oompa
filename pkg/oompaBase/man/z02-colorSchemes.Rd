@@ -8,6 +8,7 @@
 \alias{jetColors}
 \alias{grayscale}
 \alias{greyscale}
+\alias{wheel}
 
 \title{Color Schemes for Images and Heat Maps}
 \description{
@@ -23,10 +24,12 @@ redgreen(N)
 jetColors(N)
 grayscale(N)
 greyscale(N)
+wheel(N, sat = 1)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{N}{ an integer; the number of distinct levels in the color map }
+  \item{sat}{a real number between 0 and 1; the saturation amount}
 }
 \details{
   The color maps that ship with R (see, for example,
