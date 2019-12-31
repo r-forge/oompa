@@ -1,2 +1,1 @@
-classpred/pkg/BimodalIndex
 thresher/pkg/Thresher
