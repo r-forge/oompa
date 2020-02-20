@@ -16,7 +16,7 @@ thresher/pkg/PCDimension
 thresher/pkg/Thresher
 thresher/pkg/Mercator
 thresher/pkg/SillyPutty
-thresher/pkg/CytoGPS
+thresher/pkg/RCytoGPS
 newmanomics/pkg/Newmanomics
 deepcnv/pkg/DeepCNV
 clonefinder/pkg/CloneSeeker
