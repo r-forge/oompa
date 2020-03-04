@@ -75,7 +75,8 @@ mypacks <- c("knitr",
              "sirt",
              "Rtsne",
              "igraph",
-             "dendextend"
+             "dendextend",
+             "DirichletReg"
              )
 for (p in mypacks) {
   if (!require(p, character.only = TRUE, quietly = TRUE)) {
