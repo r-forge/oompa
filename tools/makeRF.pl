@@ -96,10 +96,11 @@ if (-e $archDir) {
 # R executable varies by architecture.
 my $Rpath = "$toolhash{rdir}\\R-$fullver\\bin\\$arch";
 
-my $pver = ($Ver eq "Devel" ? "3.4" : $Ver);
+my $pver = ($Ver eq "Devel" ? "4.1" : $Ver);
 my @paths = ($Rpath,
 	     "C:\\Rtools\\$pver\\bin",
-	     "C:\\Rtools\\$pver\\MinGW\\bin",
+	     "C:\\Rtools\\$pver\\usr\\bin",
+	     "C:\\Rtools\\$pver\\MinGW64\\bin",
 	     "C:\\Rtools\\$pver\\gcc-4.6.3\\bin",
 	     $toolhash{miktex});
 push @paths, $toolhash{im} if defined($toolhash{im}); # ImageMagick for SuperCurve
