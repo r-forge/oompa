@@ -117,7 +117,7 @@ push(@paths,
 $ENV{PATH} = join(";", @paths);
 $ENV{nodosfilewarning} = '1';
 $ENV{RTOOLS} = "C:/Rtools/$pver";
-$ENV{BINPREF} = "C:/Rtools/$pver/MinGW_64/bin/";
+#$ENV{BINPREF} = "C:/Rtools/$pver/MinGW_64/bin/";
 #$ENV{BINPREF64} = "C:/Rtools/$Ver/MinGW_64/bin/";
 
 print STDERR "start path:\n$path\n\n";

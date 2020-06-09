@@ -1,5 +1,3 @@
-C:/KRC/rforge/HAPSEG
-#STOP
 oompa/pkg/oompaBase
 oompa/pkg/oompaData
 oompa/pkg/Polychrome
@@ -33,6 +31,7 @@ C:/KRC/rforge/accuploidy/pkg/AccuPloidy
 C:/KRC/rforge/firstsign/pkg/FirstSign
 ../GitProjects/drexplorer/pkg/drexplorer
 # FAIL
+C:/KRC/rforge/HAPSEG
 C:/KRC/rforge/ABSOLUTE
 mop/pkg/MOP
 supercurve/pkg/tclish
