@@ -61,7 +61,7 @@ mypacks <- c("knitr",
              "alabama",
              "doSNOW",
              "movMF",
-             "XML",
+             "XML", # not available for 3.6.3; copied from 3.6.0?
              "nFactors",
              "NbClust",
              "fgui",

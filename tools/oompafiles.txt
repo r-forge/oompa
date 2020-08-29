@@ -23,6 +23,7 @@ nameneedle/pkg/NameNeedle
 siber/pkg/siberg
 integirty/pkg/integirty
 cytangle/pkg/Cytangle
+clonefinder/pkg/CloneSeeker
 clonefinder/pkg/CloneData
 C:/KRC/rforge/craac/pkg/CRAAC
 C:/KRC/rforge/arraycube/pkg/ArrayCube
@@ -30,14 +31,13 @@ C:/KRC/rforge/arraycube/pkg/MINiML
 C:/KRC/rforge/accuploidy/pkg/AccuPloidy
 C:/KRC/rforge/firstsign/pkg/FirstSign
 ../GitProjects/drexplorer/pkg/drexplorer
-# FAIL
-C:/KRC/rforge/HAPSEG
-C:/KRC/rforge/ABSOLUTE
-mop/pkg/MOP
 supercurve/pkg/tclish
 supercurve/pkg/SlideDesignerGUI
 supercurve/pkg/SuperCurveSampleData
 supercurve/pkg/SuperCurve
 supercurve/pkg/SuperCurveGUI
-#END
-
+# FAIL
+C:/KRC/rforge/HAPSEG
+C:/KRC/rforge/ABSOLUTE
+mop/pkg/MOP
+# END
