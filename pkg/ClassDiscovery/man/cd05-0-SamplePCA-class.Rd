@@ -53,9 +53,7 @@ SamplePCA(data, splitter=0, usecor=FALSE, center=TRUE)
   The code is likely to fail, however, if one of the levels of the
   factor has zero representatives among the data columns.
 
-  As with the class comparison functions (see, for example,
-  \code{\link[ClassComparison]{MultiTtest}}) that are part of OOMPA,
-  we can also perform PCA on
+  We can also perform PCA on
   \code{\link[Biobase:class.ExpressionSet]{ExpressionSet}} objects 
   from the BioConductor libraries. In this case, we pass in an
   \code{ExpressionSet} object along with a character string containing the

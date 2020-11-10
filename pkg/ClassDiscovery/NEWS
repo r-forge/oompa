@@ -6,6 +6,15 @@
 	**************************************************
 
 
+		CHANGES IN R VERSION 3.3.13
+
+BUG FIXES
+
+    o	Not exactly sure if this qualifies as a bug fix: modified one
+    	of the man pages to remove an unnecessary cross-reference to a
+    	package that might not be available.
+
+
 		CHANGES IN R VERSION 3.3.10
 
 BUG FIXES

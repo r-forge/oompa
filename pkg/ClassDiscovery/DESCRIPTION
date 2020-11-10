@@ -1,6 +1,6 @@
 Package: ClassDiscovery
-Version: 3.3.12
-Date: 2019-05-01
+Version: 3.3.13
+Date: 2020-11-10
 Title: Classes and Methods for "Class Discovery" with Microarrays or Proteomics
 Author: Kevin R. Coombes
 Maintainer: Kevin R. Coombes <krc@silicovore.com>
