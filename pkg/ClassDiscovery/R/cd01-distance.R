@@ -1,12 +1,18 @@
 # Copyright (C) Kevin R. Coombes, 2007-2012
 
+unitize <- function(mat) {
+  enorm <- sqrt(apply(mat^2, 2, sum))
+  sweep(mat, 2, enorm, "/")
+}
+
 # adds additional (common microarray) metrics to 'dist'
 distanceMatrix <- function(dataset, metric, ...) {
   if(inherits(dataset, "ExpressionSet")) {
     dataset <- Biobase::exprs(dataset)
   }
   METRICS <- c('pearson', 'sqrt pearson', 'spearman', 'weird',
-               'absolute pearson', 'uncentered correlation')
+               'absolute pearson', 'uncentered correlation',
+               'cosine')
   m <- pmatch(metric, METRICS, nomatch=NA)
   if (is.na(m)) {
     distance <- dist(t(dataset), method=metric, ...)
@@ -18,13 +24,19 @@ distanceMatrix <- function(dataset, metric, ...) {
       temp <- t(dataset) %*% dataset/nrow(dataset)
       as.dist(1 - temp)
     }
+    cosine <- function(dataset) {
+      uni <- unitize(dataset) # unit norm
+      cosd <- t(uni) %*% uni        # similarity
+      cosineDistance <- as.dist(1 - cosd)
+    }
     distance <- switch(metric,
                        pearson = as.dist((1-cor(dataset))/2),
                        'sqrt pearson' = as.dist(sqrt(1-cor(dataset))),
                        weird = dist(cor(dataset)),
                        'absolute pearson' = as.dist((1-abs(cor(dataset)))),
                        spearman = as.dist((1-cor(apply(dataset, 2, rank)))/2),
-                       'uncentered correlation' = uncent(dataset))
+                       'uncentered correlation' = uncent(dataset),
+                       cosine = cosine(dataset))
   }
   distance
 }

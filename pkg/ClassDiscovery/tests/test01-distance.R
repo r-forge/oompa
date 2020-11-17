@@ -6,6 +6,7 @@ distanceMatrix(dd, 'pearson')
 distanceMatrix(dd, 'euclid')
 distanceMatrix(dd, 'sqrt')
 distanceMatrix(dd, 'weird')
+distanceMatrix(dd, 'cosine')
 rm(dd) # cleanup
 
 # simulate data from three different groups

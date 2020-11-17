@@ -1,9 +1,16 @@
 			Dear Emacs, please make this -*-Text-*- mode!
 	**************************************************
 	*						 *
-	*	       3.3 SERIES NEWS			 *
+	*	       3.4 SERIES NEWS			 *
 	*						 *
 	**************************************************
+
+
+		CHANGES IN R VERSION 3.4.0
+
+NEW FEATURES
+
+    o	Added "cosine" distance as a reasonable metric.
 
 
 		CHANGES IN R VERSION 3.3.13

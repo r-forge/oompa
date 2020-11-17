@@ -13,7 +13,8 @@ distanceMatrix(dataset, metric, \dots)
   \item{dataset}{A numeric matrix or an \code{\link[Biobase]{ExpressionSet}}}
   \item{metric}{ A character string defining the distance metric. This
     can be \code{pearson}, \code{sqrt pearson}, \code{spearman},
-    \code{absolute pearson}, \code{uncentered correlation}, \code{weird}
+    \code{absolute pearson}, \code{uncentered correlation},
+    \code{weird}, \code{cosine},
     or any of the metrics accepted by the     \code{\link{dist}}
     function. At present, the latter function accepts
     \code{euclidean}, \code{maximum}, \code{manhattan}, \code{canberra},
