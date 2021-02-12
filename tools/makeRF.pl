@@ -129,6 +129,7 @@ print STDERR "Using R at '$Rpath'\n";
 
 # process each package
 foreach my $packname (@packList) {
+    next if ($packname =~ /^#/);
     my @parts = split /\//, $packname;
     my $pack = pop @parts;
     my $pdir = join("/", @parts) || $home;
