@@ -19,3 +19,6 @@ exportMethods("image")
 exportClasses("BetaRates")
 export("BetaRates", "samplePosteriorRates")
 export("guessCenter")
+
+exportClasses("BetaMixture")
+export("BetaMixture", "NegBetaLogLike")

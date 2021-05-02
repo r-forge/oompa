@@ -1,6 +1,6 @@
 Package: BetaModels
-Version: 0.1.9
-Date: 2018-10-25
+Version: 0.2.0
+Date: 2021-05-02
 Title: Bayesian Analysis of Different Rates in Different Groups
 Author: Kevin R. Coombes
 Maintainer: Kevin R. Coombes <krc@silicovore.com>
@@ -9,7 +9,7 @@ Imports: methods, oompaBase, ClassComparison, grDevices, graphics, stats
 Suggests: vioplot
 Description: Test for different proportions (rates) in different groups
   using a Bayesian model in which all rate parameters follow a beta
-  distribution and are selected from a common hyperdistribution.
+  distribution and are selected from a common hyperdistribution. Includes
+  tools to fit an arbitrary mixture of beta distributions.
 License: Apache License (== 2.0)
 URL: http://oompa.r-forge.r-project.org/
-

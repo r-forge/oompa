@@ -6,36 +6,14 @@
 	**************************************************
 
 
-		CHANGES IN R VERSION 1.0.3
-
-BUG FIXES
-
-    o	Made compatible with new R check steps that verify DESCRIPTION
-        and NAMESPACE dependencies.
-
-
-		CHANGES IN R VERSION 1.0.2
-
-BUG FIXES
-
-    o	Manpage updates to silence R CMD check.
-
-    o	Converted NEWS file into something R can recognize.
-	And now it's actually news about THIS package!
-
-
-		CHANGES IN R VERSION 1.0.1
+		CHANGES IN R VERSION 0.2.0
 
 NEW FEATURES
 
-    o	No clue.
-
-BUG FIXES
-
-    o	No clue.
+    o	Classes to fit mixtures of beta distributions.
 
 
-		CHANGES IN R VERSION 1.0.0
+		CHANGES IN R VERSION 0.1.0
 
 SIGNIFICANT USER-VISIBLE CHANGES
 
