@@ -9,10 +9,16 @@
 NegBetaLogLike <- function(param, vec, z) {
   N <- length(vec)
   K <- ncol(z)
+  W <- options("warn")
+  options(warn = -1)
+  on.exit(options(warn = W$warn))
   temp <- sapply(1:K, function(I) {
     a <- param[2*I - 1]
     b <- param[2*I]
-    sum(z[, I] * (-lbeta(a, b) + (a - 1) * log(vec) + (b-1) * log(1-vec)))
+    L <- lbeta(a, b)
+    ifelse(is.infinite(L),
+           .Machine$double.xmax,
+           sum(z[, I] * (-L + (a - 1) * log(vec) + (b - 1) * log(1 - vec))))
   })
   - sum(temp)
 }
@@ -23,7 +29,7 @@ setClass("BetaMixture",
                    phi = "numeric",     # mixture weights
                    mle = "matrix",      # fitted beta parameters
                    Z = "matrix",        # fitted latent mixture parameters
-                   negloglike = "numeric", # negative log likelihood for c(Z, mle)
+                   loglike = "numeric", # log likelihood for c(Z, mle)
                    converged = "logical"
                    ))
 
@@ -47,7 +53,8 @@ setMethod("summary", "BetaMixture", function(object, ...) {
   print(object@mle)
   cat("The model did", ifelse(object@converged, " ", " not "),
       "converge and has a log-likelihood of ",
-      -object@negloglike, "\n", sep = "")
+      object@loglike, "\n", sep = "")
+  invisible(object)
 })
 
 setMethod("hist", "BetaMixture", function(x, mixcols = 1:7, ...) {
@@ -107,7 +114,7 @@ BetaMixture <- function(datavec, K = 2, forever = 100, epsilon = 0.001, debug = 
       phi = phi,
       mle = matrix(mle, nrow = 2),
       Z = Z,
-      negloglike = currlike,
+      loglike = -currlike,
       converged = count < forever)
 }
 

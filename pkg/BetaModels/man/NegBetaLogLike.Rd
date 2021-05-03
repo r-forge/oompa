@@ -2,17 +2,38 @@
 % Please edit documentation in R/betamix.R
 \name{NegBetaLogLike}
 \alias{NegBetaLogLike}
-\title{Compute the (negative) log-likelihood}
+\title{Compute the (negative) log-likelihood of a mixture of betas}
 \usage{
 NegBetaLogLike(param, vec, z)
 }
 \arguments{
 \item{param}{A vector of parameters of length 2K}
-
 \item{vec}{A data vector of length N}
-
 \item{z}{A matrix of size NxK of nonegative real numbers, with the sum of each row equal to 1.}
 }
 \description{
-Compute the (negative) log-likelihood
+Compute the (negative) log-likelihood of a mixture of beta distributions
+for a given set of observations. We take the negative in order to use
+the function in a call to \code{nlm}, which minimizes the objective
+function, when we actually want to compute the maximum likelihood.
+}
+\author{
+  Kevin R. Coombes \email{krc@silicovore.com}
+}
+\examples{
+set.seed(73892)
+datavec <- c(rbeta(30, 1, 4),
+             rbeta(70, 7, 4)) # mixture of two betas
+
+# randomly initialize Z
+temp <- sample(2, 100, replace = TRUE)
+Z <- matrix(0, nrow = 100, ncol = 2)
+for (I in 1:100) Z[I, temp[I]] <- 1
+
+# initialize parameters (2 identical components)
+initparam <- rep(1/2, 4)
+NegBetaLogLike(initparam, datavec, Z)
+
+# use true parameters
+NegBetaLogLike(c(1, 4, 7, 4), datavec, Z)
 }

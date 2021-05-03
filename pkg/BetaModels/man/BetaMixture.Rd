@@ -40,7 +40,7 @@ BetaMixture(datavec, K = 2, forever = 100, epsilon = 0.001, debug = FALSE)
     \item{\code{Z}:}{\eqn{$N\times K$}{NxK} matrix of the probability for each of
       the $N$ observations to arise from beta mixture component $K$. Each
       row will sum to 1.}
-    \item{\code{negloglike}:}{The negative log likelihood of the fitted model.}
+    \item{\code{loglike}:}{The log likelihood of the fitted model.}
     \item{\code{converged}:}{A logical value indicating where the EM
       algorithm converged.}
   }
@@ -95,4 +95,4 @@ summary(model)
 hist(model, breaks=35)
 }
 \keyword{classes}
-\keyword{htest}
+
