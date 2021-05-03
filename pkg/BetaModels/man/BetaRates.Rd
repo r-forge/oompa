@@ -32,7 +32,7 @@ guessCenter(v)
   \item{col}{vector containing the color map to use for the image}
   \item{nsamp}{Number of posterior samples to take}
   \item{v}{Vector of observed rates}
-  \item{\dots}{extra arguments for generic or plotting routines}
+  \item{\dots}{extra arguments for generic routines}
 }
 \section{Creating Objects}{
   Although objects can be created directly using \code{new}, the most
@@ -54,7 +54,7 @@ guessCenter(v)
 }
 \section{Methods}{
   \describe{
-    \item{summary(object, \dots)}{Prints a summary of the betaRates
+    \item{summary(object, \dots)}{Prints a summary of the BetaRates
       object.  This includes (1) the maximum a posterior coordinates on
       x-y-space, (2) the usual alpha-beta parameters for the Beta
       distribution, and (3) the mean and variance.}

@@ -39,8 +39,8 @@ setValidity("BetaMixture", function(object) {
 
 setMethod("summary", "BetaMixture", function(object, ...) {
   cat("An object of the 'BetaMixture' class with ",
-      length(object@phi), " components using",
-      length(object@datavec),  "observations.\n", sep = "")
+      length(object@phi), " components using ",
+      length(object@datavec),  " observations.\n", sep = "")
   cat("Mixing parameters (weights):\n")
   print(object@phi)
   cat("Beta component parameters:\n")
@@ -55,7 +55,6 @@ setMethod("hist", "BetaMixture", function(x, mixcols = 1:7, ...) {
   while(length(mixcols) < ncol(x@mle)) mixcols <- c(mixcols, mixcols)
   xv <- seq(0, 1, length=502)[1:501]
   for (J in 1:ncol(x@mle)) {
-    cat(J, mixcols[J], "\n")
     y  <- x@phi[J] * dbeta(xv, x@mle[1, J], x@mle[2, J])
     lines(xv, y, lwd=2, col = mixcols[J])
   }
@@ -90,7 +89,8 @@ BetaMixture <- function(datavec, K = 2, forever = 100, epsilon = 0.001, debug = 
     count <- count + 1
     if(debug) print(c(count, abs(lastlike - currlike), mle))
   ### M-step
-    maxlike <- nlm(NegBetaLogLike, rep(1, 2*K), vec = datavec, z = Z, stepmax = 10000, print.level = 0)
+    maxlike <- nlm(NegBetaLogLike, rep(1, 2*K), vec = datavec, z = Z,
+                   stepmax = 10000, print.level = 0)
     mle <- maxlike$estimate
     lastlike <- currlike
     currlike <- maxlike$minimum

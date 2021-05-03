@@ -4,7 +4,7 @@
 
 importFrom("grDevices", "rgb")
 importFrom("graphics", "abline", "legend", "lines", "points")
-importFrom("stats", "dbeta", "lm", "predict", "rbeta", "runif", "var")
+importFrom("stats", "dbeta", "lm", "predict", "rbeta", "runif", "var", "nlm")
 
 import(methods)
 import(ClassComparison)
@@ -13,6 +13,7 @@ importFrom(oompaBase, "grayscale", "greyscale", "summary", "image")
 
 exportMethods("summary")
 exportMethods("image")
+exportMethods("hist")
 
 
 ## Public routines
