@@ -4,8 +4,24 @@ dev.off()
 
 options(install.packages.compile.from.source = "never")
 
-mypacks <- c("beanplot",
-             "beeswarm")
+mypacks <- c("animation",
+             "arules",
+             "arulesViz",
+             "beanplot",
+             "beeswarm",
+             "caret",
+             "clValid",
+             "DT",
+             "Hmisc",
+             "pROC",
+             "prodlim",
+             "ROCR",
+             "rpart.plot",
+             "venn",
+             "VennDiagram",
+             "xlsx",
+             "ztable"
+             )
 
 for (p in mypacks) {
   if (!require(p, character.only = TRUE, quietly = TRUE)) {
