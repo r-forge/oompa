@@ -28,7 +28,8 @@ for (p in mybiocs) {
   }
 }
 
-mypacks <- c("knitr",
+mypacks <- c("fortunes",
+             "knitr",
              "rmarkdown",
              "RColorBrewer",
              "colorspace",
@@ -77,7 +78,11 @@ mypacks <- c("knitr",
              "igraph",
              "dendextend",
              "DirichletReg",
-             "rjson"
+             "rjson",
+             "kohonen",
+             "umap",
+             "isotone",
+             "flexmix" # why?
              )
 for (p in mypacks) {
   if (!require(p, character.only = TRUE, quietly = TRUE)) {

@@ -126,7 +126,6 @@ print STDERR "\nStarting directory: '$home'\n\n";
 print STDERR "Using architecture at '$archDir'\n";
 print STDERR "Using R at '$Rpath'\n";
 
-
 # process each package
 foreach my $packname (@packList) {
     next if ($packname =~ /^#/);
