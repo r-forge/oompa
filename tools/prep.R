@@ -82,6 +82,7 @@ mypacks <- c("fortunes",
              "kohonen",
              "umap",
              "isotone",
+             "fields",
              "flexmix" # why?
              )
 for (p in mypacks) {
