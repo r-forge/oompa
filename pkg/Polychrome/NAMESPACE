@@ -24,6 +24,8 @@ export(sortByHue, sortByLuminance)
 
 export(colorDeficit)
 
+export(memberPlot)
+
 # public data sets
 export(kelly.colors, green.armytage.colors,
        alphabet.colors, glasbey.colors,
