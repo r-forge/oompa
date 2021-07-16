@@ -6,7 +6,7 @@
 import(colorspace)
 import(scatterplot3d)
 
-importFrom("graphics", "barplot", "lines", "mtext", "text", "par", "abline")
+importFrom("graphics", "barplot", "lines", "mtext", "text", "par", "abline", "image")
 importFrom("grDevices", "col2rgb", "colors", "rgb")
 importFrom("methods", "as")
 importFrom("stats", "dist", "hclust", "rnorm", "runif", "princomp")
