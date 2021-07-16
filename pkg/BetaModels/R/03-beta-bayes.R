@@ -22,7 +22,7 @@ ebCorrelation <- function(ss, nObs, nPoints=500) {
   # start by estimating the empirical distribution
   eps <- 1/(2*nPoints)
   xvals <- seq(-1-eps, 1+eps, length=nPoints)
-  pdf <- hist(ss, breaks=xvals, prob=TRUE, plot=FALSE)$density
+  pdf <- hist(ss, breaks=xvals, plot = FALSE)$density
   # get the theoretical distribution from a beta(M,M)
   M <- (nObs-3)/2
   # have to evaluate at the midpoint of the intervals
@@ -36,9 +36,13 @@ ebCorrelation <- function(ss, nObs, nPoints=500) {
   X <- xvals[click]
   # fit this with a spline
   Z <- lm(Y ~ bs(X, df=25))
-  YP <- predict(Z, data.frame(X=xvals))
+  xclip <- xvals[xvals >= min(X) & xvals <= max(X)]
+  YP <- predict(Z, data.frame(X = xclip))
+  YP <- c(rep(NA, sum(xvals < min(X))),
+          YP, rep(NA, sum(xvals > max(X))))
   # convert back to the original scale
   unravel <- exp(YP+log(theo))
+  unravel[is.na(unravel)] <- min(unravel, na.rm = TRUE)/10
   new("ebCorrelation", correlations=ss, nObservations=nObs,
       xvals=xvals, pdf=pdf, theoretical.pdf=theo, unravel=unravel,
       call=call)

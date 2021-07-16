@@ -5,6 +5,7 @@
 importFrom("grDevices", "rgb")
 importFrom("graphics", "abline", "legend", "lines", "points")
 importFrom("stats", "dbeta", "lm", "predict", "rbeta", "runif", "var", "nlm")
+importFrom("splines", "bs")
 
 import(methods)
 import(ClassComparison)
@@ -14,12 +15,19 @@ importFrom(oompaBase, "grayscale", "greyscale", "summary", "image")
 exportMethods("summary")
 exportMethods("image")
 exportMethods("hist")
+exportMethods("plot")
 
 
-## Public routines
+## Modeling rates
 exportClasses("BetaRates")
 export("BetaRates", "samplePosteriorRates")
 export("guessCenter")
 
+## Mixtures of beta distributions
 exportClasses("BetaMixture")
 export("BetaMixture", "NegBetaLogLike")
+
+## Empirical Bayes for Correlation
+exportClasses("ebCorrelation")
+export(ebCorrelation)
+export(selectSignificant, cutoffSignificant, countSignificant)
