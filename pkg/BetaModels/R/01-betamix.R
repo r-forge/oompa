@@ -54,7 +54,7 @@ setMethod("summary", "BetaMixture", function(object, ...) {
   cat("The model did", ifelse(object@converged, " ", " not "),
       "converge and has a log-likelihood of ",
       object@loglike, "\n", sep = "")
-  invisible(object)
+#  invisible(object)
 })
 
 setMethod("hist", "BetaMixture", function(x, mixcols = 1:7, ...) {
