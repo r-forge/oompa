@@ -9,7 +9,8 @@
   arbitrary number of beta distributions.
 }
 \usage{
-BetaMixture(datavec, K = 2, forever = 100, epsilon = 0.001, debug = FALSE)
+BetaMixture(datavec, K = 2, forever = 100, epsilon = 0.001,
+            relative = 0.001, debug = FALSE)
 \S4method{summary}{BetaMixture}(object, \dots)
 \S4method{hist}{BetaMixture}(x, mixcols = 1:7, \dots)
 }
@@ -18,6 +19,8 @@ BetaMixture(datavec, K = 2, forever = 100, epsilon = 0.001, debug = FALSE)
   \item{K}{The number of mixture components to fit.}
   \item{forever}{The maximum number of iterations of the algorithm.}
   \item{epsilon}{The minimum change of parameters that must be observed
+    in order to continue iterating.}
+  \item{relative}{The minimum relative change of parameters that must be observed
     in order to continue iterating.}
   \item{debug}{A local valuecontrolling whethe to print out intermediate steps.}
   \item{x}{In the \code{hist} method, an object of class \code{BetaMixture}.}

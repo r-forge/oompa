@@ -80,7 +80,8 @@ setMethod("hist", "BetaMixture", function(x, mixcols = 1:7, ...) {
 #' @importFrom stats dbeta nlm
 #' 
 #' @export
-BetaMixture <- function(datavec, K = 2, forever = 100, epsilon = 0.001, debug = FALSE) {
+BetaMixture <- function(datavec, K = 2, forever = 100,
+                        epsilon = 0.001, relative = 0.001, debug = FALSE) {
 ### intitalize cluster assignments
   n <- length(datavec)
   starter <- cut(datavec, breaks = K, labels = FALSE, include.lowest = TRUE)
@@ -90,9 +91,11 @@ BetaMixture <- function(datavec, K = 2, forever = 100, epsilon = 0.001, debug = 
 ### Set up loop control
   lastlike <- -10^10
   currlike <- 0
+  delta <- abs(currlike - lastlike)
+  reld <- 2*relative
   count <- 0
   mle <- rep(1, 2*K)
-  while ((count < forever) & (abs(lastlike - currlike) > epsilon)) {
+  while ((count < forever) & (delta > epsilon) & (reld > relative)) {
     count <- count + 1
     if(debug) print(c(count, abs(lastlike - currlike), mle))
   ### M-step
@@ -108,6 +111,8 @@ BetaMixture <- function(datavec, K = 2, forever = 100, epsilon = 0.001, debug = 
       phi[I] * dbeta(datavec, mle[2*I -1], mle[2*I])
     }) # should be a matrix with n rows and K columns
     Z <-  sweep(mix, 1, apply(mix, 1, sum), "/")
+    delta <- abs(lastlike - currlike)
+    reld <- abs(delta/currlike)
   }
   new("BetaMixture",
      datavec = datavec,

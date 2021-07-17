@@ -1,6 +1,6 @@
 Package: BetaModels
-Version: 0.3.0
-Date: 2021-07-16
+Version: 0.3.1
+Date: 2021-07-17
 Title: Bayesian Analysis of Different Rates in Different Groups
 Author: Kevin R. Coombes, Amir Asiaee
 Maintainer: Kevin R. Coombes <krc@silicovore.com>

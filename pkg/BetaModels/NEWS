@@ -1,9 +1,19 @@
 			Dear Emacs, please make this -*-Text-*- mode!
 	**************************************************
 	*						 *
-	*	       1.0 SERIES NEWS			 *
+	*	       0.0 SERIES NEWS			 *
 	*						 *
 	**************************************************
+
+
+		CHANGES IN R VERSION 0.3.0
+
+NEW FEATURES
+
+    o	Started docuemting the ebCorrelation class.
+
+    o	Added a "relative" parameter to BetMixture to stop iterations
+        when relative change in likelihood is small.
 
 
 		CHANGES IN R VERSION 0.2.0
