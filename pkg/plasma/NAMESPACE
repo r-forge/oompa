@@ -1,0 +1,13 @@
+###
+### NAMESPACE
+###
+
+## Imported methods
+import(methods)
+
+## MultiOmics class
+exportClass("MultiOmics")
+
+export("prepareMultiOmics")
+
+

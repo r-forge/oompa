@@ -1,9 +1,15 @@
 			Dear Emacs, please make this -*-Text-*- mode!
 	**************************************************
 	*						 *
-	*	       3.1 SERIES NEWS			 *
+	*	       3.2 SERIES NEWS			 *
 	*						 *
 	**************************************************
+
+		CHANGES IN R VERSION 3.2.0
+
+UPDATES
+
+    o	Added an 'as.data.frame' method to the MultiLinearModel class.
 
 		CHANGES IN R VERSION 3.1.6
 
