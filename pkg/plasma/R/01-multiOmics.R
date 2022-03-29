@@ -11,7 +11,7 @@ validMultiOmics <- function(object) {
   okSS <- all(sampleSizes == nrow(object@outcome))
   if (okSS) {
     namesOK <- sapply(object@data, function(DS) {
-      all(colnames(DS) == rownames(oject@data))
+      all(colnames(DS) == rownames(object@data))
     })
     valid <- ifelse(namesOK, TRUE, "Sample names in all datasets must agree.")
   } else {
