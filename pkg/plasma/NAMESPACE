@@ -8,12 +8,13 @@ importFrom("stats", "median", "predict")
 importFrom("graphics", "par", "legend", "text")
 importFrom("survival", "coxph", "Surv", "survfit")
 importFrom("pls", "plsr")
+importFrom("plsRcox", "plsRcoxmodel")
 importFrom("Polychrome", "memberPlot")
 
 ## MultiOmics class
 exportClass("MultiOmics")
 exportMethods("summary", "plot")
 
-export("prepareMultiOmics")
+export("prepareMultiOmics", "fitOneCoxModel")
 
 
