@@ -1,40 +1,3 @@
-setClass("plastron",
-         slots = c(train = "MultiOmics",
-                   test = "MultiOmics",
-                   timeVariable = "character",
-                   eventVariable = "character"))
-
-doIt <- function(N, object) {
-  ## get the training data
-  X <- trainData[[N]]
-  allNA <- apply(X, 2, function(xcol) all(is.na(xcol)))
-  X <- X[, !allNA]
-  ident <- apply(X, 1, function(x) length(unique(x)))
-  X <- X[ident > 1, ]
-  Xout <- trainOut[colnames(X),]
-  mynt <- round(1 + log10(nrow(X)))
-  ## get the test data
-  Q <- testData[[N]]
-  allNA <- apply(Q, 2, function(xcol) all(is.na(xcol)))
-  Q <- Q[, !allNA]
-  Q <- Q[ident > 1,]
-  Qout <- testOut[colnames(Q),]
-  ## check trainng predictions
-  opera <- predict(coxmod$FinalModel)
-  Xout$Split <- factor(c("Low", "High")[1 + 1*(opera > median(opera))],
-                       levels = c("Low", "High"))
-  Xmodel <- coxph(Surv(survyr, sstat == "dead") ~ Split, data = Xout)
-  Xsf <- survfit(Surv(survyr, sstat == "dead") ~ Split, data = Xout)
-  ## Check test presdictions
-  opera2 <- predict(coxmod, t(Q))
-  Qout$Split <- opera2 > median(opera) # use training split point
-  Qmodel <- coxph(Surv(survyr, sstat == "dead") ~ Split, data = Qout)
-  Qsf <- survfit(Surv(survyr, sstat == "dead") ~ Split, data = Qout)
-
-  ## save something
-  invisible(list(N=N, plsmod = coxmod, Xmodel = Xmodel, Xsf = Xsf, Qmodel = Qmodel, Qsf = Qsf))
-}
-
 setOldClass("plsRcoxmodel")
 setOldClass("coxph")
 setOldClass("survfit")
@@ -46,7 +9,7 @@ setClass("SingleModel",
                  riskModel = "coxph",
                  splitModel = "coxph"))
 
-fitOneCoxModel <- function(object, N, timevar, eventvar, eventvalue) {
+fitSingleModel <- function(object, N, timevar, eventvar, eventvalue) {
   ## get the training data
   X <- object@data[[N]]
   allNA <- apply(X, 2, function(xcol) all(is.na(xcol)))
@@ -79,17 +42,45 @@ fitOneCoxModel <- function(object, N, timevar, eventvar, eventvalue) {
       splitModel = splitModel)
 }
 
-predictOneCoxModel <- function(model, newdata) {
-}
+
+setMethod("predict", "SingleModel", function(object, newdata = NULL,
+                                             type = c("components", "risk", "split"),
+                                             ...) {
+  type <- match.arg(type)
+  model <- switch(type,
+                  components = object@plsmod,
+                  risk = object@riskModel,
+                  split = object@splitModel)
+  arglist = list(model)
+  if(!is.null(newdata)) arglist <- c(arglist, newdata)
+  do.call(predict, arglist)
+})
+
+## summary method for SingleModel objects
+setMethod("summary", "SingleModel", function(object, ...) {
+  cat("Risk Model:\n", file = stdout())
+  print(summary(object@riskModel))
+  cat("SplitModel:\n", file = stdout())
+  print(summary(object@splitModel))
+  cat("PLS Model:\n", file = stdout())
+  S <- summary(object@plsmod$FinalModel)
+  S$call <- NULL
+  S
+})
+
+setMethod("plot", c("SingleModel", "missing"), function(x, y,  col = c("blue", "red"), lwd = 2, xlab = "", ylab = "Fraction Surviving", mark.time = TRUE, legloc = "topright", ...) {
+  plot(x@SF, col = col, lwd = lwd, xlab = xlab, ylab = ylab,  mark.time = mark.time, ...)
+  legend(legloc, paste(c("Low", "High"), "Risk"), col = col, lwd = lwd)
+})
 
 
 
-fitCoxModels <- function(object, timevar, eventvar, eventvalue) {
-  firstPass <- lapply(willuse, function(N) {
-    cat(N, "\n", file = stderr())
-    doIt(N)
+fitCoxModels <- function(object, timevar, eventvar, eventvalue, verbose = TRUE) {
+  firstPass <- lapply(names(object@data), function(N) {
+    if(verbose) cat(N, "\n", file = stderr())
+    fitSingleModel(object, N)
   })
-  names(firstPass) <- willuse
+  names(firstPass) <- names(object@data)
   firstPass
 }
 

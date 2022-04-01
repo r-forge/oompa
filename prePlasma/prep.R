@@ -14,7 +14,7 @@ for(TY in names(intern)) {
   assign(TY, get(intern[[TY]][1]), .GlobalEnv)
   rm(list = intern[[TY]])
 }
-
+rm(cancer, clean, TY, intern)
 
 temp <- Clinical
 foo <- toupper(temp$patient_id)
@@ -28,7 +28,7 @@ abline(h=53)
 Clinical <- temp[, nacount < 53]
 Clinical <- Clinical[, c(4:6, 10:12, 15, 19:20, 22:25, 28,
                          32:33, 36, 39:48, 50:53, 58, 60, 71:73, 79)]
-rm(temp, foo)
+rm(temp, foo, nacount)
 
 
 X <- t(MAF)
@@ -59,8 +59,8 @@ rm(foo)
 mu <- apply(m450beta, 1, mean, na.rm = TRUE)
 sigma <- apply(m450beta, 1, sd, na.rm = TRUE)
 smoothScatter(mu, sigma)
-abline(h = 0.02, v=0.1, col = "orange", lwd=2)
-keep <- !is.na(mu) & mu > 0.02 & sigma > 0.1
+abline(v = 0.15, h=0.3, col = "orange", lwd=2)
+keep <- !is.na(mu) & mu > 0.15 & sigma > 0.3
 summary(keep)
 m450info <- m450info[keep,]
 m450beta <- m450beta[keep,]
@@ -81,6 +81,8 @@ summary(keep)
 miRSeq <- miRSeq[keep,]
 rm(mu, sigma, keep)
 miRSeq <- miRSeq[, colnames(miRSeq) %in% rownames(Outcome)]
+set.seed(97531)
+miRSeq <- miRSeq[, sample(ncol(miRSeq), 166)]
 
 goo <- substring(sapply(strsplit(colnames(mRNASeq), "\\."), function(W) W[4]), 1, 2)
 table(goo)
@@ -98,6 +100,8 @@ summary(keep)
 mRNASeq <- mRNASeq[keep,]
 rm(mu, sigma, keep)
 mRNASeq <- mRNASeq[, colnames(mRNASeq) %in% rownames(Outcome)]
+set.seed(24680)
+mRNASeq <- mRNASeq[, sample(ncol(mRNASeq), 157)]
 
 goo <- substring(sapply(strsplit(colnames(RPPA), "\\."), function(W) W[4]), 1, 2)
 table(goo)
@@ -110,6 +114,7 @@ mu <- apply(RPPA, 1, mean, na.rm = TRUE)
 sigma <- apply(RPPA, 1, sd, na.rm = TRUE)
 smoothScatter(mu, sigma)
 RPPA <- RPPA[, colnames(RPPA) %in% rownames(Outcome)]
+rm(goo, mu, sigma)
 
 assemble <- list(Clinical = t(Clinical),
                  MAF = MAF,
@@ -118,3 +123,16 @@ assemble <- list(Clinical = t(Clinical),
                  mRNASeq = mRNASeq,
                  RPPA = RPPA)
 sapply(assemble, dim)
+
+summary(Outcome)
+time <- as.integer(as.character(Outcome$days_to_death))
+lfu <- as.integer(as.character(Outcome$days_to_last_followup))
+time[is.na(time)] <- lfu[is.na(time)]
+Outcome$Days <- time
+summary(Outcome)
+
+save(Outcome, assemble, m450info, file = "TCGA-ESCA.RData")
+
+## verify that it cn be re-loaded
+rm(assemble)
+load("TCGA-ESCA.RData")

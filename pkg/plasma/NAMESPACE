@@ -4,7 +4,7 @@
 
 ## Imported methods
 import(methods)
-importFrom("stats", "median", "predict")
+importFrom("stats", "median", "predict", "formula")
 importFrom("graphics", "par", "legend", "text")
 importFrom("survival", "coxph", "Surv", "survfit")
 importFrom("pls", "plsr")
@@ -14,7 +14,12 @@ importFrom("Polychrome", "memberPlot")
 ## MultiOmics class
 exportClass("MultiOmics")
 exportMethods("summary", "plot")
+export("prepareMultiOmics")
 
-export("prepareMultiOmics", "fitOneCoxModel")
+## SingleModel class
+exportClass("SingleModel")
+exportMethods("predict")
+export("fitSingleModel")
+
 
 

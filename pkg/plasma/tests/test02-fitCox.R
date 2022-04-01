@@ -1,16 +1,12 @@
 library(plasma)
 data("TCGA-ESCA")
 MO <- prepareMultiOmics(assemble, Outcome)
-fitted <- fitOneCoxModel(MO, "miRSeq", "Days", "vital_status", "dead")
-## The next part should probably be made into 'summary' and 'plot' methods
-## for the 'SingleModel' class
-
-class(fitted)
-slotNames(fitted)
-summary(fitted@riskModel)
-summary(fitted@splitModel)
-summary(fitted@Xout)
-plot(fitted@SF, col = c("blue", "red"), lwd = 2, xlab = "Days", mark.time = TRUE)
-legend("bottomleft", paste(c("Low", "High"), "Risk"), col = c("blue", "red"),
-       lwd=2)
-
+fitted <- fitSingleModel(MO, "miRSeq", "Days", "vital_status", "dead")
+summary(fitted)
+plot(fitted, xlab = "Time (Days)", legloc = "topright", main = "Training Data")
+p <- predict(fitted)
+p <- try( predict(fitted, "risk") )
+p <- try( predict(fitted, type = "riak") )
+p <- predict(fitted, type = "risk")
+q <- predict(fitted, type = "split")
+plot(p, q)
