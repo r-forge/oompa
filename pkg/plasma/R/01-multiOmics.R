@@ -39,6 +39,12 @@ setMethod("plot", c("MultiOmics", "missing"), function(x, y, ...) {
   memberPlot(t(binmat))
 })
 
+setMethod("[", "MultiOmics", function(x, i, j,  ..., drop = FALSE) {
+  if (!missing(i)) stop("Unable to select common features across data sets.\n")
+  dataslice <- lapply(x@data, function(X) X[,j])
+  new("MultiOmics", data = dataslice, outcome = x@outcome[j, ])
+})
+
 
 ## Here we assume that we have a list of datasets (on patient subsets)
 ## and a data.frame of outcomes thatn includes all patients.
