@@ -21,5 +21,7 @@ exportClass("SingleModel")
 exportMethods("predict")
 export("fitSingleModel")
 
+export("fitCoxModels")
+
 
 

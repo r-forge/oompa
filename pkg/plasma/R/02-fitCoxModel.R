@@ -75,17 +75,8 @@ setMethod("plot", c("SingleModel", "missing"), function(x, y,  col = c("blue", "
 
 
 
-fitCoxModels <- function(object, timevar, eventvar, eventvalue, verbose = TRUE) {
-  firstPass <- lapply(names(object@data), function(N) {
-    if(verbose) cat(N, "\n", file = stderr())
-    fitSingleModel(object, N)
-  })
-  names(firstPass) <- names(object@data)
-  firstPass
-}
-
 getSizes <- function(object) {
-  NT <- sapply(firstPass, function(result) {
+  NT <- sapply(firstPassobject@data, function(result) {
   S <- summary(result$Qmodel)
   PT <- S$sctest[3]
   c(NT = result$plsmod$nt, cNT = result$plsmod$computed_nt, p = PT)
