@@ -3,9 +3,9 @@ data("TCGA-ESCA")
 assemble <- assemble[-1] # remove clinical data until we convert to numeric
 MO <- prepareMultiOmics(assemble, Outcome)
 ## Chweck each dataset
-fitted <- fitSingleModel(MO, "miRSeq", "Days", "vital_status", "dead")
-summary(fitted) # OK
 if (FALSE) {
+  fitted <- fitSingleModel(MO, "miRSeq", "Days", "vital_status", "dead")
+  summary(fitted) # OK
   fitted <- fitSingleModel(MO, "Meth450", "Days", "vital_status", "dead")
   summary(fitted) # OK
   fitted <- fitSingleModel(MO, "mRNASeq", "Days", "vital_status", "dead")
@@ -23,6 +23,3 @@ p <- try( predict(fitted, type = "riak") )
 p <- predict(fitted, type = "risk")
 q <- predict(fitted, type = "split")
 plot(p, q)
-
-# test complete cox model
-bigfit <- fitCoxModels(MO, "Days", "vital_status", "dead")

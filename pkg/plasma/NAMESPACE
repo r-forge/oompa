@@ -21,7 +21,10 @@ exportClass("SingleModel")
 exportMethods("predict")
 export("fitSingleModel")
 
-export("fitCoxModels")
+## MuliplePLSCoxModels
+exportClass("MultiplePLSCoxModels")
+
+export("fitCoxModels", "extendCoxModels")
 
 
 

@@ -29,6 +29,7 @@ setMethod("summary", "MultiOmics", function(object, ...) {
   summary(object@outcome)
 })
 
+## plot method for MultiOmics objects.
 setMethod("plot", c("MultiOmics", "missing"), function(x, y, ...) {
   binmat <- 1*sapply(x@data, function(DS) {
     useless <- apply(DS, 2, function(samp) {
