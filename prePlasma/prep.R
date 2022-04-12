@@ -1,3 +1,4 @@
+## Load the ESCA TCGA data
 clean  <- "F:/TCGA/clean"
 intern <- list(Clinical = "clin",
                CNV = "segments",
@@ -16,6 +17,7 @@ for(TY in names(intern)) {
 }
 rm(cancer, clean, TY, intern)
 
+## Separate clinical covariates from outcomes.
 temp <- Clinical
 foo <- toupper(temp$patient_id)
 rownames(temp) <- foo
@@ -30,23 +32,26 @@ Clinical <- Clinical[, c(4:6, 10:12, 15, 19:20, 22:25, 28,
                          32:33, 36, 39:48, 50:53, 58, 60, 71:73, 79)]
 rm(temp, foo, nacount)
 
-
+## Clean up MAF data
 X <- t(MAF)
 sum(is.na(X))
 sum(X == "")
 Y <- 1*(X != "WT")
-Y[is.na(X)] <- NA
+Y[X== ""] <- NA
 foo <- sapply(strsplit(rownames(Y), "-"), function(W) W[3])
 goo <- substring(sapply(strsplit(rownames(Y), "-"), function(W) W[4]), 1, 2)
 Y <- Y[goo == "01",]
 rownames(Y) <- foo
 MAF <- t(Y)
+knock <- apply(MAF, 1, function(X) sum(is.na(X)))
+table(knock)
 mu <- apply(MAF, 1, mean, na.rm=TRUE)
-sum(mu > 0.01)
-MAF <- MAF[mu > 0.01,]
-rm(X, Y, foo, mu)
+sum(mu > 0.03)
+MAF <- MAF[mu > 0.03,]
+rm(X, Y, foo, mu, knock)
 MAF <- MAF[, colnames(MAF) %in% rownames(Outcome)]
 
+## Clean up data from Methylation 450 arrays
 m450info <- Meth450$info
 m450beta <- Meth450$betas
 goo <- substring(sapply(strsplit(colnames(m450beta), "\\."), function(W) W[4]), 1, 2)

@@ -3,8 +3,8 @@
 \alias{MultiOmics}
 \alias{MultiOmics-class}
 \alias{summary,MultiOmics-method}
-\alias{[,MultiOmics,ANY,ANY,ANY-method}
-\alias{plot,MultiOmics-method}
+\alias{[,MultiOmics,ANY,ANY,ANY-method}%]
+\alias{plot,MultiOmics,missing-method}
 \alias{validMultiOmics}
 \alias{prepareMultiOmics}
 
@@ -19,13 +19,17 @@
 }
 \usage{
 prepareMultiOmics(datalist, outcome)
-\S4method{summary}{MultiOmics}(object, \dots){}
-\S4method{plot}{MultiOmics,missing}(x, y, \dots){}
-#\S4method{[]}{x, i, j, ..., drop = FALSE}{}
+\S4method{summary}{MultiOmics}(object, \dots)
+\S4method{plot}{MultiOmics,missing}(x, y, \dots)
 }
 \arguments{
   \item{datalist}{a list of dataframes formatted to have sample names as column indexes and variable names as row indexes}
-  \item{outcome}{a dataframe of clinical outcomes formatted to have sample names as row indexes and variable names as column indexes}
+  \item{outcome}{a dataframe of clinical outcomes formatted to have
+    sample names as row indexes and variable names as column indexes}
+  \item{object}{An object of the \code{MultiOmics} class.}
+  \item{x}{An object of the \code{MultiOmics} class.}
+  \item{y}{Nothing; ignored.}
+  \item{\dots}{Extra graphical or other parameters.}
 }
 \section{Slots}{
   \describe{
