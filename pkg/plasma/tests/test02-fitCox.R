@@ -1,6 +1,6 @@
 library(plasma)
 data("TCGA-ESCA")
-assemble <- assemble[-1] # remove clinical data until we convert to numeric
+#assemble <- assemble[-1] # remove clinical data until we convert to numeric
 MO <- prepareMultiOmics(assemble, Outcome)
 ## Chweck each dataset
 if (FALSE) {

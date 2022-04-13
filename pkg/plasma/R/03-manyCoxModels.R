@@ -14,8 +14,8 @@ validMultipleCoxModels <- function(object) {
 setValidity("MultiplePLSCoxModels", validMultipleCoxModels)
 
 ## summary method for MultipleCoxModels objects
-setMethod("summary", "MultipleCoxModels", function(object, ...) {
-  cat("An object containing MulriplePLSCoxModels based on:\n",
+setMethod("summary", "MultiplePLSCoxModels", function(object, ...) {
+  cat("An object containing MultiplePLSCoxModels based on:\n",
       file = stdout())
   print(names(object@models))
 })
@@ -86,7 +86,7 @@ extendCoxModels <- function(object, firstPass, verbose = TRUE) {
 
   myArray <- array(NA, dim = c(nrow(stores), ncol(stores), length(bilge)))
   dimnames(myArray) <- list(rownames(stores), colnames(stores),
-                            names(object@outcome))
+                            names(object@data))
   for (I in 1:length(bilge)) {
     B <- bilge[[I]]
     myArray[rownames(B), colnames(B), I] <- B

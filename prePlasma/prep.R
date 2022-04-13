@@ -136,8 +136,8 @@ time[is.na(time)] <- lfu[is.na(time)]
 Outcome$Days <- time
 summary(Outcome)
 
-save(Outcome, assemble, m450info, file = "TCGA-ESCA.RData")
+save(Outcome, assemble, m450info, file = "TCGA-ESCA0.RData")
 
 ## verify that it cn be re-loaded
 rm(assemble)
-load("TCGA-ESCA.RData")
+load("TCGA-ESCA0.RData")
