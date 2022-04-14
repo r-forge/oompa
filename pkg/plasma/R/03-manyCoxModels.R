@@ -13,15 +13,6 @@ validMultipleCoxModels <- function(object) {
 }
 setValidity("MultiplePLSCoxModels", validMultipleCoxModels)
 
-## summary method for MultipleCoxModels objects
-setMethod("summary", "MultiplePLSCoxModels", function(object, ...) {
-  cat("An object containing MultiplePLSCoxModels based on:\n",
-      file = stdout())
-  print(names(object@models))
-})
-
-
-
 ## Need to define a class for the return value of this function
 fitCoxModels <- function(object, timevar, eventvar, eventvalue, verbose = TRUE) {
   firstPass <- lapply(names(object@data), function(N) {
@@ -36,61 +27,30 @@ fitCoxModels <- function(object, timevar, eventvar, eventvalue, verbose = TRUE) 
       eventvalue = eventvalue)
 }
 
-extendCoxModels <- function(object, firstPass, verbose = TRUE) {
-  Components <- lapply(firstPass@models, function(DS) {
-    DS@plsmod$tt
-  })
-  tempComps <- t(sapply(Components, dim))
-  dimnames(tempComps) <- list(names(Components), c("nPats", "nComps"))
-  sizing <- apply(tempComps, 2, sum)
-  stores <- matrix(NA, nrow(object@outcome), sizing[2])
-  rownames(stores) <- rownames(object@outcome)
-  foo <- unlist(sapply(tempComps[,2], function(K) 1:K))
-  colnames(stores) <- names(foo)
-  ##
-  for (N in names(Components)) {
-    cat(N, "\n", file = stderr())
-    X <- Components[[N]]
-    colnames(X) <- paste(N, 1:ncol(X), sep = "")
-    stores[rownames(X), colnames(X)] <- X
-  }
-  ##
-  featgroups <- substring(colnames(stores), 1, -1 + nchar(colnames(stores)))
-  wickedBig <- lapply(names(object@data), function(N) {
-    if(verbose) cat(N, "\n", file = stderr())
-    X <- object@data[[N]]
-    allNA <- apply(X, 2, function(xcol) all(is.na(xcol)))
-    X <- X[, !allNA]
-    ident <- apply(X, 1, function(x) length(unique(x)))
-    X <- t(X[ident > 1, ])
-    Xout <- object@outcome[rownames(X),]
-    Xstores <- stores[rownames(X),]
-    mango <- lapply(names(object@data), function(M) {
-      cat("\t", M, "\n", file = stderr())
-      Y = Xstores[, featgroups == M]
-      learn <- try(plsr(Y ~ X, 2))
-      if (inherits(learn, "try-error")) return(NULL)
-      extend <- predict(learn, X)
-      list(learn = learn, extend = extend)
-    })
-    names(mango) <- names(object@data)
-    t(sapply(mango, function(x) dim(x$extend)))
-    slurp <- sapply(mango, function(x) x$extend[,,2])
-    allPred <- do.call(cbind, slurp)
-    list(mango = mango, allPred = allPred)
-  })
-  ##
-  bilge <- sapply(wickedBig, function(x) x$allPred)
-  class(bilge)
-  sapply(bilge, dim)
+## summary method for MultiplePLSCoxModels objects
+setMethod("summary", "MultiplePLSCoxModels", function(object, ...) {
+  cat("An object containing MultiplePLSCoxModels based on:\n",
+      file = stdout())
+  print(names(object@models))
+})
 
-  myArray <- array(NA, dim = c(nrow(stores), ncol(stores), length(bilge)))
-  dimnames(myArray) <- list(rownames(stores), colnames(stores),
-                            names(object@data))
-  for (I in 1:length(bilge)) {
-    B <- bilge[[I]]
-    myArray[rownames(B), colnames(B), I] <- B
+## plot method for MultiplePLSCoxModels objects
+setMethod("plot", c("MultiplePLSCoxModels", "missing"), function(x, y,  col = c("blue", "red"), lwd = 2, xlab = "", ylab = "Fraction Surviving", mark.time = TRUE, legloc = "topright", ...) {
+  L <- length(x@models)
+  W <- ifelse(L > 12, 3, 2)
+  H <- (L %/% W) + 1*(L %% W > 0)
+  opar <- par(mfrow = c(H, W))
+  on.exit(par(opar))
+  for (N in names(x@models)) {
+    plot(x@models[[N]], main = N,  col = col, lwd = lwd, xlab = xlab, ylab = ylab,
+         mark.time = mark.time, legloc = legloc, ...)
   }
+  invisible(x)
+})
 
-  meanPreds <- apply(myArray, 1:2, mean, na.rm = TRUE)
-}
+## predict method for MultiplePLSCoxModels objects
+setMethod("predict", "MultiplePLSCoxModels", function(object, newdata = NULL,
+                                             type = c("components", "risk", "split"),
+                                             ...) {
+  lapply(object@models, predict, newdata = newdata, type = type, ...)
+})

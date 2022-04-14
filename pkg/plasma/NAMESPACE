@@ -24,7 +24,7 @@ export("fitSingleModel")
 ## MuliplePLSCoxModels
 exportClass("MultiplePLSCoxModels")
 
-export("fitCoxModels", "extendCoxModels")
+export("fitCoxModels", "extendCoxModels", "getSizes")
 
 
 

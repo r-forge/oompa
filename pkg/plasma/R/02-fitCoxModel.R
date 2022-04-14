@@ -43,6 +43,7 @@ fitSingleModel <- function(object, N, timevar, eventvar, eventvalue) {
 }
 
 
+## predict method for SingleModel objects
 setMethod("predict", "SingleModel", function(object, newdata = NULL,
                                              type = c("components", "risk", "split"),
                                              ...) {
@@ -68,41 +69,21 @@ setMethod("summary", "SingleModel", function(object, ...) {
   S
 })
 
+## plot method for SingleModel objects
 setMethod("plot", c("SingleModel", "missing"), function(x, y,  col = c("blue", "red"), lwd = 2, xlab = "", ylab = "Fraction Surviving", mark.time = TRUE, legloc = "topright", ...) {
   plot(x@SF, col = col, lwd = lwd, xlab = xlab, ylab = ylab,  mark.time = mark.time, ...)
   legend(legloc, paste(c("Low", "High"), "Risk"), col = col, lwd = lwd)
 })
 
 
-
 getSizes <- function(object) {
-  NT <- sapply(firstPassobject@data, function(result) {
-  S <- summary(result$Qmodel)
+  NT <- sapply(object@models, function(result) {
+  S <- summary(result@plsmod$FinalModel)
   PT <- S$sctest[3]
-  c(NT = result$plsmod$nt, cNT = result$plsmod$computed_nt, p = PT)
+  c(NT = result@plsmod$nt, cNT = result@plsmod$computed_nt, p = PT)
   })
-  colnames(NT) <- names(firstPass)
+  colnames(NT) <- names(object@models)
   t(NT)
  }
 
-showme <- function(object) {
-  S <- summary(object$Qmodel)
-  PT <- S$sctest[3]
-  ## Plot the results
-  opar <- par(mfrow = c(1, 2))
-  plot(object$Xsf, 
-       col=c("red", "blue"), lwd = 2,
-       main = paste("Cox model on training data (", object$N, ")", sep = ""))
-  legend("topright", paste(c("Low", "High"), "Risk"), col = c("red", "blue"), lwd=2)
-  plot(object$Qsf, 
-       col=c("red", "blue"), lwd = 2,
-       main = paste("Cox model on test data (", object$N, ")", sep = ""))
-  legend("topright", paste(c("Low", "High"), "Risk"), col = c("red", "blue"), lwd=2)
-  text(15.5, 0.75, paste("p =", formatC(PT, format = "e", digits = 2)))
-  par(opar)
-}
-
-showAll <- function(object) {
-  sapply(firstPass, showme)
-}
 

@@ -1,14 +1,14 @@
 library(plasma)
 data("TCGA-ESCA")
-assemble <- assemble[-1] # remove clinical data until we convert to numeric
+## prepare MultiOmics
 MO <- prepareMultiOmics(assemble, Outcome)
 ## test complete cox models
 bigfit <- fitCoxModels(MO, "Days", "vital_status", "dead")
-class(bigfit)
-summary(bigfit)
-
+## extend across dataset pairs
 extension <- extendCoxModels(MO, bigfit)
 class(extension)
+dim(extension)
+heatmap(extension, scale = "none")
 
 bonkers <- data.frame(MO@outcome[, c(2,5)], extension)
 
