@@ -11,7 +11,7 @@ validMultiOmics <- function(object) {
   okSS <- all(sampleSizes == nrow(object@outcome))
   if (okSS) {
     namesOK <- sapply(object@data, function(DS) {
-      all(colnames(DS) == rownames(object@data))
+      all(colnames(DS) == rownames(object@outcome))
     })
     valid <- ifelse(all(namesOK), TRUE, "Sample names in all datasets must agree.")
   } else {
@@ -58,9 +58,13 @@ prepareMultiOmics <- function(datalist, outcome) {
     filled <- merge(outcome[, 1:2], t(DS), by = "row.names", all.x = TRUE)
     ## first column should be the row names (patients)
     rownames(filled) <- filled[, 1]
+    ## match the order
+    filled <- filled[rownames(outcome),]
     ## columns two and three are copies of the outcome data
     filled <- filled[, -(1:3)]
-    if (all(is.na(filled))) stop("No matching sample names in dataset '", N, "'.\n", sep = "")
+    if (all(is.na(filled))) {
+      stop("No matching sample names in dataset '", N, "'.\n", sep = "")
+      }
     t(filled)
   })
   names(ready) <- names(datalist)

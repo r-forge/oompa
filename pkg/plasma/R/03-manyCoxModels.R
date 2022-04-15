@@ -49,8 +49,13 @@ setMethod("plot", c("MultiplePLSCoxModels", "missing"), function(x, y,  col = c(
 })
 
 ## predict method for MultiplePLSCoxModels objects
-setMethod("predict", "MultiplePLSCoxModels", function(object, newdata = NULL,
+setMethod("predict", "MultiplePLSCoxModels", function(object, newdata,
                                              type = c("components", "risk", "split"),
                                              ...) {
-  lapply(object@models, predict, newdata = newdata, type = type, ...)
+  if (missing(newdata)) {
+    result <- lapply(object@models, predict, type = type, ...)
+  } else {
+    result <- lapply(object@models, predict, newdata = newdata, type = type, ...)
+  }
+  result
 })

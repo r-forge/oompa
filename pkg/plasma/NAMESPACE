@@ -4,7 +4,7 @@
 
 ## Imported methods
 import(methods)
-importFrom("stats", "median", "predict", "formula")
+importFrom("stats", "median", "predict", "formula", "step")
 importFrom("graphics", "par", "legend", "text")
 importFrom("survival", "coxph", "Surv", "survfit")
 importFrom("pls", "plsr")
@@ -23,8 +23,9 @@ export("fitSingleModel")
 
 ## MuliplePLSCoxModels
 exportClass("MultiplePLSCoxModels")
+exportClass("plasma")
 
-export("fitCoxModels", "extendCoxModels", "getSizes")
+export("fitCoxModels", "extendCoxModels", "getSizes", "plasma")
 
 
 

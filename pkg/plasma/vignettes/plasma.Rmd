@@ -1,0 +1,128 @@
+---
+title: "plasma: Partial LeAst Squares for Multi-omics Analysis"
+author: "Kevin R. Coombes"
+data: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{plasma}
+  %\VignetteKeywords{OOMPA,plasma,supervised analysis,partial least squares}
+  %\VignetteDepends{plasma}
+  %\VignettePackage{plasma}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r opts, echo=FALSE}
+knitr::opts_chunk$set(fig.width=8, fig.height=5)
+```
+# Introduction
+
+# Methods
+
+# Results
+We start by loading the package.
+```{r pkgs}
+suppressWarnings( library(plasma) )
+```
+Next, we load ample data derived from teh esophageal cancer (ESCA) cohort of
+The Cancer Genome Atlas (TCGA). . 
+```{r data}
+data("TCGA-ESCA")
+ls()
+```
+The data we have available consist of
+* `assemble`, a list of datasets;
+* `m450info`, a data frame of annotation information about the probes from the
+  Illumina 450K methylation array; and
+* `Outcome`, a data frame of clinical outcomes, whihc basically comes down
+  to overall survival.
+
+Here is a summary of the outome data.
+```{r outcome}
+dim(Outcome)
+summary(Outcome)
+```
+
+Here are the sizes of the data sets.
+```{r sizes}
+t(sapply(assemble, dim))
+```
+To be consistent with the `MOFA2` R package, all of the data sets are arranged so that
+patient samples are columns and assay features are rows.
+
+We should also point out that we have not included all of the available data for the ESCA
+cohort. When getting the data ready to illustrate the `plasma` algorithm, we randomly removed
+different fractions of the samples from the miRSeq, mRNASeq, and RPPA data sets. The point of
+leaving them out is to be able to show that `plasma` can find useful components from any of the included datasets and manage to extend them to the full cohort.
+
+## Preparing the Data
+Our first task is to pad each data set with appropriate `NA`'s to ensure that each set
+includes the same patient samples in the same order, where that order matches the outcome
+data frame.
+
+```{r prep}
+MO <- prepareMultiOmics(assemble, Outcome)
+class(MO)
+summary(MO)
+```
+
+We see that the number of patients in each data set is now equal to the number of patients
+with clinical outcome data.
+
+```{r fig01, fig.cap = "Overview of te ESCA data sets."}
+plot(MO, main = "All ESCA")
+```
+
+## Split Into Training and Test
+
+```{r split}
+set.seed(98765)
+splitVec <- rbinom(nrow(Outcome), 1, 0.6)
+table(splitVec)
+```
+
+```{r fig02, fig.cap = "Overview of training data."}
+trainD <- MO[, splitVec == 1]
+summary(trainD)
+plot(trainD, main = "Train")
+```
+
+```{r fig03, fig.cap = "Overview of training data."}
+testD <- MO[, splitVec == 0]
+summary(testD)
+plot(testD, main = "Test")
+```
+
+## PLS Cox Regression Models
+Partial Least Squares [REFERENCE] has been shown to be an effective method for finding
+components that can predict clinically interesting outcomes. The first step of the `plasma`
+algorithm is to fit PLS Cox models on each data set.
+
+```{r fig04}
+firstPass <- fitCoxModels(trainD, timevar = "Days",
+                          eventvar = "vital_status", eventvalue = "dead")
+summary(firstPass)
+plot(firstPass)
+```
+
+## Extend the model compoennts
+```{r plasma, eval = FALSE}
+pl <- plasma(MO, firstPass)
+```
+
+## Independent Test Set
+Now we want to see how well any of the models we have constructed generalize to our test set.
+```{r firstpre, eval = FALSE}
+pre1 <- predict(firstPass, testD)
+```
+
+
+
+## Conclusions
+
+# Appendix: MOFA2
+
+```{r mofa, eval=FALSE}
+suppressWarnings( library(MOFA2) )
+```
+
+

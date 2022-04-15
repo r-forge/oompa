@@ -20,9 +20,11 @@ fitSingleModel <- function(object, N, timevar, eventvar, eventvalue) {
   Xout <-out[colnames(X),]
   mynt <- round(1 + log10(nrow(X)))
   ## Fit the PLS model
-  plsmod <- plsRcoxmodel(t(X), time = Xout[, timevar],
-                         event = Xout[eventvar] == eventvalue,
-                         nt = mynt)
+  tm <- Xout[, timevar]
+  print(summary(tm))
+  ev <- Xout[eventvar] == eventvalue
+  print(summary(ev))
+  plsmod <- plsRcoxmodel(t(X), time = tm, event = ev, nt = mynt)
   Xout$Risk = predict(plsmod)
   Xout$Split <- 1*(Xout$Risk > median(Xout$Risk))
   riskModel <- coxph(formula(paste("Surv(", timevar, ",", eventvar, "== \"",
@@ -44,7 +46,7 @@ fitSingleModel <- function(object, N, timevar, eventvar, eventvalue) {
 
 
 ## predict method for SingleModel objects
-setMethod("predict", "SingleModel", function(object, newdata = NULL,
+setMethod("predict", "SingleModel", function(object, newdata,
                                              type = c("components", "risk", "split"),
                                              ...) {
   type <- match.arg(type)
@@ -53,7 +55,7 @@ setMethod("predict", "SingleModel", function(object, newdata = NULL,
                   risk = object@riskModel,
                   split = object@splitModel)
   arglist = list(model)
-  if(!is.null(newdata)) arglist <- c(arglist, newdata)
+  if(!missing(newdata)) arglist <- c(arglist, newdata)
   do.call(predict, arglist)
 })
 
