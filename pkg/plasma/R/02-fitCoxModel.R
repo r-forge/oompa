@@ -4,6 +4,7 @@ setOldClass("survfit")
 
 setClass("SingleModel",
          slots=c(plsmod = "plsRcoxmodel",
+                 dsname = "character",
                  Xout = "data.frame",
                  SF = "survfit",
                  riskModel = "coxph",
@@ -38,6 +39,7 @@ fitSingleModel <- function(object, N, timevar, eventvar, eventvalue) {
                       data = Xout)
   new("SingleModel",
       plsmod = plsmod,
+      dsname = N,
       Xout = Xout,
       SF = SF,
       riskModel = riskModel,
@@ -54,9 +56,20 @@ setMethod("predict", "SingleModel", function(object, newdata,
                   components = object@plsmod,
                   risk = object@riskModel,
                   split = object@splitModel)
-  arglist = list(model)
-  if(!missing(newdata)) arglist <- c(arglist, newdata)
-  do.call(predict, arglist)
+  if(missing(newdata)) {
+    result <- predict(model)
+  } else {
+    base <- predict(object@plsmod)
+    newd <- as.data.frame(t(newdata@data[[object@dsname]]))
+    if (type != "components") {
+      newd$Risk <- predict(object@plsmod, newd)
+    }
+    if (type == "split") {
+      newd$Split <-  1*(newd$Risk > median(base))
+    }
+    result <- predict(model, newdata = newd)
+  }
+  result
 })
 
 ## summary method for SingleModel objects

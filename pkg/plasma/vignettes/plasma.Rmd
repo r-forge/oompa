@@ -13,6 +13,7 @@ vignette: >
 
 ```{r opts, echo=FALSE}
 knitr::opts_chunk$set(fig.width=8, fig.height=5)
+options(width=96)
 ```
 # Introduction
 
@@ -23,13 +24,14 @@ We start by loading the package.
 ```{r pkgs}
 suppressWarnings( library(plasma) )
 ```
-Next, we load ample data derived from teh esophageal cancer (ESCA) cohort of
-The Cancer Genome Atlas (TCGA). . 
+Next, we load sample data derived from teh esophageal cancer (ESCA) cohort of
+The Cancer Genome Atlas (TCGA).
 ```{r data}
 data("TCGA-ESCA")
 ls()
 ```
 The data we have available consist of
+
 * `assemble`, a list of datasets;
 * `m450info`, a data frame of annotation information about the probes from the
   Illumina 450K methylation array; and
@@ -52,7 +54,10 @@ patient samples are columns and assay features are rows.
 We should also point out that we have not included all of the available data for the ESCA
 cohort. When getting the data ready to illustrate the `plasma` algorithm, we randomly removed
 different fractions of the samples from the miRSeq, mRNASeq, and RPPA data sets. The point of
-leaving them out is to be able to show that `plasma` can find useful components from any of the included datasets and manage to extend them to the full cohort.
+leaving them out is to be able to show that `plasma` can find useful components from any of
+the included data sets and manage to extend them to the full cohort. In addition, the RPPA,
+miRSeq, and mRNASeq data sets were filtered to keep features with larger means and standard
+deviations, and the Meth450 data were filtered to keep only the most variable features.
 
 ## Preparing the Data
 Our first task is to pad each data set with appropriate `NA`'s to ensure that each set
@@ -68,7 +73,7 @@ summary(MO)
 We see that the number of patients in each data set is now equal to the number of patients
 with clinical outcome data.
 
-```{r fig01, fig.cap = "Overview of te ESCA data sets."}
+```{r fig01, fig.cap = "Overview of the ESCA data sets.", fig.width=5, fig.height=8}
 plot(MO, main = "All ESCA")
 ```
 
@@ -80,13 +85,13 @@ splitVec <- rbinom(nrow(Outcome), 1, 0.6)
 table(splitVec)
 ```
 
-```{r fig02, fig.cap = "Overview of training data."}
+```{r fig02, fig.cap = "Overview of training data.", fig.width=5, fig.height=8}
 trainD <- MO[, splitVec == 1]
 summary(trainD)
 plot(trainD, main = "Train")
 ```
 
-```{r fig03, fig.cap = "Overview of training data."}
+```{r fig03, fig.cap = "Overview of test data.", fig.width=5, fig.height=8}
 testD <- MO[, splitVec == 0]
 summary(testD)
 plot(testD, main = "Test")
@@ -97,7 +102,7 @@ Partial Least Squares [REFERENCE] has been shown to be an effective method for f
 components that can predict clinically interesting outcomes. The first step of the `plasma`
 algorithm is to fit PLS Cox models on each data set.
 
-```{r fig04}
+```{r fig04, cache=TRUE}
 firstPass <- fitCoxModels(trainD, timevar = "Days",
                           eventvar = "vital_status", eventvalue = "dead")
 summary(firstPass)
@@ -105,14 +110,22 @@ plot(firstPass)
 ```
 
 ## Extend the model compoennts
-```{r plasma, eval = FALSE}
+```{r plasma}
 pl <- plasma(MO, firstPass)
+plot(pl, legloc = "topright", main = "Training Data")
+heatmap(pl@meanPredictions) # make a standard method?
+summary(pl) # neds to be defined. 
 ```
 
 ## Independent Test Set
 Now we want to see how well any of the models we have constructed generalize to our test set.
 ```{r firstpre, eval = FALSE}
-pre1 <- predict(firstPass, testD)
+SM <- firstPass@models[[1]]
+ND <- as.data.frame(t(testD@data[[1]]))
+class(SM)
+foo <- predict(SM, type = "risk")
+foo <- predict(SM, type = "risk")
+poo <- predict(SM, newdata = ND)
 ```
 
 

@@ -1,5 +1,6 @@
-1. Add facilities to create and work with palettes in LAB space in
-addition to LUV space.
+1. Extend the selection "[" operator for MultiOmics objects. use the
+first argument 'i" to select data sets and the second argument [j] to
+select samples.
 
-2. Find time to comment the source code?
-
+2. Test "predict" methods on new data subset. (Split in a consistent
+way into train and test.)

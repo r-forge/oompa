@@ -7,8 +7,14 @@ opar <- par(mai = c(1.02, 1.82, 0.82, 0.42))
 plot(MO)
 par(opar)
 
-MO2 <- MO[, 1:50]
+train <- rep(c(TRUE, FALSE), times = c(112, 185-112))
+MO2 <- MO[, train]
 summary(MO2)
+
+if (require("survival")) {
+  plot(survfit(Surv(Days, vital_status == "dead") ~ train, data = MO@outcome))
+}
+
 
 ## disorient one of the component datasets.
 badinput <- assemble

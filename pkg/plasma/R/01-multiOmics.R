@@ -37,7 +37,7 @@ setMethod("plot", c("MultiOmics", "missing"), function(x, y, ...) {
     })
     !useless
   })
-  memberPlot(t(binmat))
+  memberPlot(t(binmat), ...)
 })
 
 setMethod("[", "MultiOmics", function(x, i, j,  ..., drop = FALSE) {

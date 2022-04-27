@@ -101,8 +101,8 @@ setMethod("summary", "plasma", function(object, ...) {
 
 ## plot method for plasma objects
 setMethod("plot", c("plasma", "missing"), function(x, y,  col = c("blue", "red"), lwd = 2, xlab = "", ylab = "Fraction Surviving", mark.time = TRUE, legloc = "topright", ...) {
-  plot(x@SF, col = col, lwd = lwd, xlab = xlab, ylab = ylab, mark.time = mark.time,
-       legloc = legloc, ...)
+  plot(x@SF, col = col, lwd = lwd, xlab = xlab, ylab = ylab, mark.time = mark.time, ...)
+  legend(legloc, paste(c("low", "high"), "risk"), col = col, lwd = lwd)
 })
 
 ## predict method for plasma objects
