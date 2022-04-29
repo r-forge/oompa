@@ -8,3 +8,4 @@ way into train and test.)
 3. Figure out a convenient way to plot the split-risk model when
 predicting outcomes on new data from a SingleModel.
 
+4. Remove conditonal use of Polychrome after it gets updated on CRAN.

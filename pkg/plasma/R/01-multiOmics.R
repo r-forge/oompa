@@ -37,14 +37,23 @@ setMethod("plot", c("MultiOmics", "missing"), function(x, y, ...) {
     })
     !useless
   })
-  NF <- sapply(x@data, nrow)
-  memberPlot(t(binmat), features = NF, ylab = "",  ...)
+  if (packageVersion("Polychrome") < "1.5.0") {
+    memberPlot(t(binmat), ylab = "",  ...)
+  } else {
+    NF <- sapply(x@data, nrow)
+    memberPlot(t(binmat), features = NF, ylab = "",  ...)
+  }
 })
 
 setMethod("[", "MultiOmics", function(x, i, j,  ..., drop = FALSE) {
-  if (!missing(i)) stop("Unable to select common features across data sets.\n")
-  dataslice <- lapply(x@data, function(X) X[,j])
-#  sap <- lapply(DD, function(X) apply(X, 1, function(R) all(is.na(R))))
+  if (!missing(i)) {
+    dataslice <- x@data[i]
+  } else {
+    dataslice <- x@data
+  }
+  if (!missing(j)) {
+    dataslice <- lapply(dataslice, function(X) X[,j])
+  }
   new("MultiOmics", data = dataslice, outcome = x@outcome[j, ])
 })
 
