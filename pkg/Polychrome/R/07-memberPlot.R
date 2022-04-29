@@ -17,7 +17,7 @@ memberPlot <- function(bindat, features = NULL, pal = NULL,
   M <- 1:nrow(bindat)
   bindat <- sweep(bindat, 1, M, "*")
   bindat <- bindat[rev(order(counts)),] # sort rows by membership
-  
+  if(!missing(features)) features <- features[rev(order(counts))]
   # order columns successively by row membership
   bd <- as.list(as.data.frame(t(bindat))) # temporary, for ordering
   oo <- do.call(order, bd)
