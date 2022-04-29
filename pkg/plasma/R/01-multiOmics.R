@@ -37,7 +37,8 @@ setMethod("plot", c("MultiOmics", "missing"), function(x, y, ...) {
     })
     !useless
   })
-  memberPlot(t(binmat), ...)
+  NF <- sapply(x@data, nrow)
+  memberPlot(t(binmat), features = NF, ylab = "",  ...)
 })
 
 setMethod("[", "MultiOmics", function(x, i, j,  ..., drop = FALSE) {
