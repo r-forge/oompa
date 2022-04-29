@@ -98,7 +98,7 @@ plot(testD, main = "Test")
 ```
 
 ## PLS Cox Regression Models
-Partial Least Squares [REFERENCE] has been shown to be an effective method for finding
+Partial Least Squares (PLS) [REFERENCE] has been shown to be an effective method for finding
 components that can predict clinically interesting outcomes. The first step of the `plasma`
 algorithm is to fit PLS Cox models on each data set.
 
@@ -119,13 +119,13 @@ summary(pl) # neds to be defined.
 
 ## Independent Test Set
 Now we want to see how well any of the models we have constructed generalize to our test set.
-```{r firstpre, eval = FALSE}
+```{r firstpre}
 SM <- firstPass@models[[1]]
 ND <- as.data.frame(t(testD@data[[1]]))
 class(SM)
 foo <- predict(SM, type = "risk")
 foo <- predict(SM, type = "risk")
-poo <- predict(SM, newdata = ND)
+poo <- predict(SM, newdata = testD)
 ```
 
 

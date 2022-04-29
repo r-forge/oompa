@@ -15,7 +15,7 @@ fitSingleModel <- function(object, N, timevar, eventvar, eventvalue) {
   X <- object@data[[N]]
   allNA <- apply(X, 2, function(xcol) all(is.na(xcol)))
   X <- X[, !allNA]
-  ident <- apply(X, 1, function(x) length(unique(x)))
+  ident <- apply(X, 1, function(x) length(unique(x[!is.na(x)])))
   X <- X[ident > 1, ]
   out <-  object@outcome
   Xout <-out[colnames(X),]
@@ -26,7 +26,7 @@ fitSingleModel <- function(object, N, timevar, eventvar, eventvalue) {
   ev <- Xout[eventvar] == eventvalue
   print(summary(ev))
   plsmod <- plsRcoxmodel(t(X), time = tm, event = ev, nt = mynt)
-  Xout$Risk = predict(plsmod)
+  Xout$Risk = predict(plsmod, verbose = FALSE)
   Xout$Split <- 1*(Xout$Risk > median(Xout$Risk))
   riskModel <- coxph(formula(paste("Surv(", timevar, ",", eventvar, "== \"",
                                    eventvalue, "\") ~ Risk", sep = "")),
@@ -57,17 +57,20 @@ setMethod("predict", "SingleModel", function(object, newdata,
                   risk = object@riskModel,
                   split = object@splitModel)
   if(missing(newdata)) {
-    result <- predict(model)
+    result <- predict(model, verbose = FALSE)
   } else {
-    base <- predict(object@plsmod)
+    base <- predict(object@plsmod, verbose = FALSE)
     newd <- as.data.frame(t(newdata@data[[object@dsname]]))
+    blankRow <- apply(is.na(newd), 1, all)
+    newd <- newd[!blankRow, colnames(object@plsmod$dataX)]
     if (type != "components") {
-      newd$Risk <- predict(object@plsmod, newd)
+      rsk <- predict(object@plsmod, newdata = newd, verbose = FALSE)
+      newd$Risk <- rsk
     }
     if (type == "split") {
       newd$Split <-  1*(newd$Risk > median(base))
     }
-    result <- predict(model, newdata = newd)
+    result <- predict(model, newdata = newd, verbose = FALSE)
   }
   result
 })

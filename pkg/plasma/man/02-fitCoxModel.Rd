@@ -67,6 +67,6 @@ firstPass <- fitCoxModels(trainD, timevar = "Days",
                           eventvar = "vital_status", eventvalue = "dead")
 summary(firstPass)
 plot(firstPass)
-pre1 <- predict(firstPass, testD)
+#pre1 <- predict(firstPass, testD)
 }
 \keyword{classes}

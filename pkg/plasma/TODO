@@ -4,3 +4,7 @@ select samples.
 
 2. Test "predict" methods on new data subset. (Split in a consistent
 way into train and test.)
+
+3. Figure out a convenient way to plot the split-risk model when
+predicting outcomes on new data from a SingleModel.
+

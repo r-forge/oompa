@@ -43,6 +43,7 @@ setMethod("plot", c("MultiOmics", "missing"), function(x, y, ...) {
 setMethod("[", "MultiOmics", function(x, i, j,  ..., drop = FALSE) {
   if (!missing(i)) stop("Unable to select common features across data sets.\n")
   dataslice <- lapply(x@data, function(X) X[,j])
+#  sap <- lapply(DD, function(X) apply(X, 1, function(R) all(is.na(R))))
   new("MultiOmics", data = dataslice, outcome = x@outcome[j, ])
 })
 

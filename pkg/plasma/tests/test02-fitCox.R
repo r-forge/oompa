@@ -1,34 +1,24 @@
 library(plasma)
+# Repeat basic stuff from first test
 data("TCGA-ESCA")
-#assemble <- assemble[-1] # remove clinical data until we convert to numeric
 MO <- prepareMultiOmics(assemble, Outcome)
 train <- rep(c(TRUE, FALSE), times = c(112, 185-112))
 MO2 <- MO[, train]
-## Chweck each dataset
-if (FALSE) {
-  fitted <- fitSingleModel(MO, "miRSeq", "Days", "vital_status", "dead")
-  summary(fitted) # OK
-  fitted <- fitSingleModel(MO, "Meth450", "Days", "vital_status", "dead")
-  summary(fitted) # OK
-  fitted <- fitSingleModel(MO, "mRNASeq", "Days", "vital_status", "dead")
-  summary(fitted) # OK
-  fitted <- fitSingleModel(MO, "RPPA", "Days", "vital_status", "dead")
-  summary(fitted) # OK
-}
-fitted <- fitSingleModel(MO2, "MAF", "Days", "vital_status", "dead")
+## Fit a survival model on a single data set on the MultiOmics object
+fitted <- fitSingleModel(MO2, "ClinicalBin", "Days", "vital_status", "dead")
 summary(fitted)
-
-plot(fitted, xlab = "Time (Days)", legloc = "topright", main = "Training Data")
 p <- predict(fitted)
-p <- try( predict(fitted, "risk") )
-p <- try( predict(fitted, type = "riak") )
-p <- predict(fitted, type = "risk")
-q <- predict(fitted, type = "split")
-plot(p, q)
-
+summary(p)
+plot(fitted, xlab = "Time (Days)", legloc = "topright", main = "Training Data")
+## Make sure we can predict on new data
 testobj <- MO[, !train]
 summary(testobj)
+## How do we get rid of the "Missing value" information?
 pre <- predict(fitted, newdata = testobj)
 prer <- predict(fitted, newdata = testobj, type = "risk")
 pres <- predict(fitted, newdata = testobj, type = "split")
 pairs(cbind(pre, prer, pres))
+
+## Things that should fail:
+p <- try( predict(fitted, "risk") )
+p <- try( predict(fitted, type = "riak") )
