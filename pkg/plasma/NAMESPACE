@@ -11,6 +11,9 @@ importFrom("pls", "plsr")
 importFrom("plsRcox", "plsRcoxmodel")
 importFrom("Polychrome", "memberPlot")
 
+## temporary
+importFrom("utils", "packageVersion")
+
 ## MultiOmics class
 exportClass("MultiOmics")
 exportMethods("summary", "plot")
