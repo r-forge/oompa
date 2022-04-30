@@ -57,7 +57,8 @@ fitCoxModels(object, timevar, eventvar, eventvalue, verbose = TRUE)
 \examples{
 data("TCGA-ESCA")
 MO <- prepareMultiOmics(assemble, Outcome)
-
+MO <- MO[c("ClinicalBin", "ClinicalCont", "RPPA", "MAF"),
+]
 set.seed(98765)
 splitVec <- rbinom(nrow(Outcome), 1, 0.6)
 trainD <- MO[, splitVec == 1]

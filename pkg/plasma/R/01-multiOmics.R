@@ -62,10 +62,18 @@ setMethod("[", "MultiOmics", function(x, i, j,  ..., drop = FALSE) {
 ## and a data.frame of outcomes thatn includes all patients.
 ## We assume that outcome is organized as patients x variables, but
 ## each dataset is organized as features x patients.
+##
+## IMPORTANT: Calling plsRcox will convert column names to syntactically
+## valid ones. That means some of the RPPA names (referring to proteins
+## like 14-3-3 wo't match correctly unless you convert them yourself
+## beforehand. The safest way (and easiewst on users) is to make sure
+## when creating this object that you have converted them.
 prepareMultiOmics <- function(datalist, outcome) {
   ready <- lapply(as.list(names(datalist)), function(N) {
     DS <- datalist[[N]]
-    ## merge each dataset with the first two columns 
+    ## remove odd punctuation from feature names.
+    rownames(DS) <- make.names(rownames(DS))
+    ## merge each dataset with the first two columns.
     filled <- merge(outcome[, 1:2], t(DS), by = "row.names", all.x = TRUE)
     ## first column should be the row names (patients)
     rownames(filled) <- filled[, 1]

@@ -74,7 +74,9 @@ We see that the number of patients in each data set is now equal to the number o
 with clinical outcome data.
 
 ```{r fig01, fig.cap = "Overview of the ESCA data sets.", fig.width=5, fig.height=8}
+opar <- par(mai = c(1.02, 1.32, 0.82, 0.22))
 plot(MO, main = "All ESCA")
+par(opar)
 ```
 
 ## Split Into Training and Test
@@ -88,21 +90,25 @@ table(splitVec)
 ```{r fig02, fig.cap = "Overview of training data.", fig.width=5, fig.height=8}
 trainD <- MO[, splitVec == 1]
 summary(trainD)
+opar <- par(mai = c(1.02, 1.32, 0.82, 0.22))
 plot(trainD, main = "Train")
+par(opar)
 ```
 
 ```{r fig03, fig.cap = "Overview of test data.", fig.width=5, fig.height=8}
 testD <- MO[, splitVec == 0]
 summary(testD)
+opar <- par(mai = c(1.02, 1.32, 0.82, 0.22))
 plot(testD, main = "Test")
+par(opar)
 ```
 
 ## PLS Cox Regression Models
-Partial Least Squares (PLS) [REFERENCE] has been shown to be an effective method for finding
-components that can predict clinically interesting outcomes. The first step of the `plasma`
+Partial Least Squares (PLS) has been shown to be an effective method for finding components
+that can predict clinically interesting outcomes {REFERENCE} . The first step of the `plasma`
 algorithm is to fit PLS Cox models on each data set.
 
-```{r fig04, cache=TRUE}
+```{r fig04, fig.width = 8, fig.height = 12}
 firstPass <- fitCoxModels(trainD, timevar = "Days",
                           eventvar = "vital_status", eventvalue = "dead")
 summary(firstPass)
