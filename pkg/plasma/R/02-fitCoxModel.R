@@ -22,9 +22,7 @@ fitSingleModel <- function(object, N, timevar, eventvar, eventvalue) {
   mynt <- round(1 + log10(nrow(X)))
   ## Fit the PLS model
   tm <- Xout[, timevar]
-  print(summary(tm))
   ev <- Xout[eventvar] == eventvalue
-  print(summary(ev))
   plsmod <- plsRcoxmodel(t(X), time = tm, event = ev, nt = mynt)
   Xout$Risk = predict(plsmod, verbose = FALSE)
   Xout$Split <- 1*(Xout$Risk > median(Xout$Risk))

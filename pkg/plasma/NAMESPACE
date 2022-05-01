@@ -4,7 +4,7 @@
 
 ## Imported methods
 import(methods)
-importFrom("stats", "median", "predict", "formula", "step")
+importFrom("stats", "median", "predict", "formula", "step", "na.omit")
 importFrom("graphics", "par", "legend", "text")
 importFrom("survival", "coxph", "Surv", "survfit")
 importFrom("pls", "plsr")
@@ -12,23 +12,23 @@ importFrom("plsRcox", "plsRcoxmodel")
 importFrom("Polychrome", "memberPlot")
 
 ## temporary
-importFrom("utils", "packageVersion")
+importFrom("utils", "packageVersion") # for v.1.5.0 of Polychrome
 
 ## MultiOmics class
 exportClass("MultiOmics")
-exportMethods("summary", "plot")
 export("prepareMultiOmics")
 
 ## SingleModel class
 exportClass("SingleModel")
-exportMethods("predict")
 export("fitSingleModel")
 
-## MuliplePLSCoxModels
+## MuliplePLSCoxModels class
 exportClass("MultiplePLSCoxModels")
+export("fitCoxModels", "getSizes")
+
+## plasma class
 exportClass("plasma")
+export("fitCoxModels", "plasma")
 
-export("fitCoxModels", "extendCoxModels", "getSizes", "plasma")
-
-
-
+## methods
+exportMethods("summary", "plot", "predict")

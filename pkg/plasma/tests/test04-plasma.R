@@ -4,14 +4,17 @@ data("TCGA-ESCA")
 MO <- prepareMultiOmics(assemble, Outcome)
 MO <- MO[c("ClinicalBin", "ClinicalCont", "RPPA"),]
 summary(MO)
+## split into train and test
+set.seed(12345)
+train <- rep(FALSE, 185)
+train[sample(185, 113)] <- TRUE
+MO2 <- MO[, train]
+summary(MO2)
 ## test complete cox models
-bigfit <- fitCoxModels(MO, "Days", "vital_status", "dead")
+bigfit <- fitCoxModels(MO2, "Days", "vital_status", "dead")
 ## extend across dataset pairs
-extension <- extendCoxModels(MO, bigfit)
-class(extension)
-dim(extension)
-ext <- extension[!is.na(extension[,1]),]
-heatmap(ext, scale = "none")
+mfm <- plasma(MO2, bigfit)
+plot(mfm)
+#heatmap(mfm@meanPredictions)
 
-
-#mfm <- plasma(MO, bigfit)
+foo <- predict(mfm)
