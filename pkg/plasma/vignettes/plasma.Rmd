@@ -66,7 +66,7 @@ data frame.
 
 ```{r prep}
 MO <- prepareMultiOmics(assemble, Outcome)
-MO <- MO[c("ClinicalBin", "ClinicalCont", "RPPA", "MAF"),]
+#MO <- MO[c("ClinicalBin", "ClinicalCont", "RPPA", "MAF"),]
 class(MO)
 summary(MO)
 ```
@@ -110,8 +110,8 @@ that can predict clinically interesting outcomes {REFERENCE} . The first step of
 algorithm is to fit PLS Cox models on each data set.
 
 ```{r fig04, fig.width = 8, fig.height = 12}
-firstPass <- fitCoxModels(trainD, timevar = "Days",
-                          eventvar = "vital_status", eventvalue = "dead")
+suppressWarnings( firstPass <- fitCoxModels(trainD, timevar = "Days",
+                          eventvar = "vital_status", eventvalue = "dead") )
 summary(firstPass)
 plot(firstPass)
 ```
