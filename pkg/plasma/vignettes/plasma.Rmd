@@ -4,7 +4,7 @@ author: "Kevin R. Coombes"
 data: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{plasma}
+  %\VignetteIndexEntry{plasma: Partial LeAst Squares for Multi-omics Analysis}
   %\VignetteKeywords{OOMPA,plasma,supervised analysis,partial least squares}
   %\VignetteDepends{plasma}
   %\VignettePackage{plasma}
@@ -24,7 +24,7 @@ We start by loading the package.
 ```{r pkgs}
 suppressWarnings( library(plasma) )
 ```
-Next, we load sample data derived from teh esophageal cancer (ESCA) cohort of
+Next, we load sample data derived from the esophageal cancer (ESCA) cohort of
 The Cancer Genome Atlas (TCGA).
 ```{r data}
 data("TCGA-ESCA")
@@ -83,7 +83,7 @@ par(opar)
 ## Split Into Training and Test
 
 ```{r split}
-set.seed(98765)
+set.seed(44931)
 splitVec <- rbinom(nrow(Outcome), 1, 0.6)
 table(splitVec)
 ```
@@ -117,7 +117,7 @@ plot(firstPass)
 ```
 
 ## Extend the model components
-```{r plasma, eval=FALSE}
+```{r plasma}
 pl <- plasma(MO, firstPass)
 plot(pl, legloc = "topright", main = "Training Data")
 heatmap(pl@meanPredictions) # make a standard method?
@@ -133,6 +133,11 @@ class(SM)
 foo <- predict(SM, type = "risk")
 foo <- predict(SM, type = "risk")
 poo <- predict(SM, newdata = testD)
+```
+
+```{r testingFinal}
+testpred <- predict(pl, testD)
+plot(testpred, main="Testing", xlab = "Time (Days)")
 ```
 
 

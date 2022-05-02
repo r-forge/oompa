@@ -15,6 +15,10 @@ bigfit <- fitCoxModels(MO2, "Days", "vital_status", "dead")
 ## extend across dataset pairs
 mfm <- plasma(MO2, bigfit)
 plot(mfm)
-#heatmap(mfm@meanPredictions)
+##heatmap(mfm@meanPredictions)
 
 foo <- predict(mfm)
+plot(foo, main="Train")
+
+noo <- predict(mfm, MO[, !train])
+plot(noo, main = "Test")

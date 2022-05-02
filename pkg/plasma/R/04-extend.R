@@ -1,24 +1,27 @@
 extendCoxModels <- function(object, firstPass, verbose = TRUE) {
+  ## get teh components from each data set
   Components <- lapply(firstPass@models, function(DS) {
     DS@plsmod$tt
   })
   tempComps <- t(sapply(Components, dim))
   dimnames(tempComps) <- list(names(Components), c("nPats", "nComps"))
   sizing <- apply(tempComps, 2, sum)
+  ## build a storage area to hold the combined components
   stores <- matrix(NA, nrow(object@outcome), sizing[2])
   rownames(stores) <- rownames(object@outcome)
-  foo <- unlist(sapply(tempComps[,2], function(K) 1:K))
-  colnames(stores) <- names(foo)
-  ##
+  compLevel <- unlist(sapply(tempComps[,2], function(K) 1:K))
+  colnames(stores) <- names(compLevel)
+  ## fill that storage area
   for (N in names(Components)) {
-    cat(N, "\n", file = stderr())
+    if(verbose) cat(N, "\n", file = stderr())
     X <- Components[[N]]
     colnames(X) <- paste(N, 1:ncol(X), sep = "")
     stores[rownames(X), colnames(X)] <- X
   }
-  ##
+  ## record the data set that each component comes from
   featgroups <- substring(colnames(stores), 1, -1 + nchar(colnames(stores)))
-  wickedBig <- lapply(names(object@data), function(N) {
+  ## learn how to cross-predict component values between each pair of data sets
+  componentModels <- lapply(names(object@data), function(N) {
     if(verbose) cat(N, "\n", file = stderr())
     X <- object@data[[N]]
     allNA <- apply(X, 2, function(xcol) all(is.na(xcol)))
@@ -27,47 +30,59 @@ extendCoxModels <- function(object, firstPass, verbose = TRUE) {
     X <- t(X[ident > 1, ])
     Xout <- object@outcome[rownames(X),]
     Xstores <- stores[rownames(X),]
-    mango <- lapply(names(object@data), function(M) {
-      cat("\t", M, "\n", file = stderr())
+    plsRegression <- lapply(names(object@data), function(M) {
+      if(verbose) cat("\t", M, "\n", file = stderr())
       Y = Xstores[, featgroups == M]
       learn <- try(plsr(Y ~ X, 2))
       if (inherits(learn, "try-error")) return(NULL)
       extend <- predict(learn, X)
       list(learn = learn, extend = extend)
     })
-    names(mango) <- names(object@data)
-    t(sapply(mango, function(x) dim(x$extend)))
-    slurp <- sapply(mango, function(x) x$extend[,,2])
+    names(plsRegression) <- names(object@data)
+    t(sapply(plsRegression, function(x) dim(x$extend)))
+    slurp <- sapply(plsRegression, function(x) x$extend[,,2])
     allPred <- do.call(cbind, slurp)
-    list(mango = mango, allPred = allPred)
+    list(plsRegression = plsRegression, allPred = allPred)
   })
-  names(wickedBig) <- names(object@data)
-  ##
-  bilge <- sapply(wickedBig, function(x) x$allPred)
-  class(bilge)
-  sapply(bilge, dim)
-
-  myArray <- array(NA, dim = c(nrow(stores), ncol(stores), length(bilge)))
+  names(componentModels) <- names(object@data)
+  ## Extract predicted values from all component datasets
+  componentPredictions <- sapply(componentModels, function(x) x$allPred)
+  ## Combine all the predictions into a 3D array
+  myArray <- array(NA, dim = c(nrow(stores), ncol(stores), length(componentPredictions)))
   dimnames(myArray) <- list(rownames(stores), colnames(stores),
                             names(object@data))
-  for (I in 1:length(bilge)) {
-    B <- bilge[[I]]
+  for (I in 1:length(componentPredictions)) {
+    B <- componentPredictions[[I]]
     myArray[rownames(B), colnames(B), I] <- B
   }
-
+  ## Average the predictions to reduce to samples-x-components matrix
   meanPreds <- apply(myArray, 1:2, mean, na.rm = TRUE)
-  list(meanPreds = meanPreds, compModels = wickedBig)
+  list(meanPreds = meanPreds, compModels = componentModels)
 }
 
-setClass("plasma",
-         slots = c(traindata = "MultiOmics",
-                   meanPredictions = "matrix",
-                   compModels = "list",
+setClass("plasmaPredictions",
+         slots = c(meanPredictions = "matrix",
                    riskDF = "data.frame",
-                   fullModel = "coxph",
                    riskModel = "coxph",
                    splitModel = "coxph",
                    SF = "survfit"))
+
+## plot method for plasmaPredictions object
+setMethod("plot", c("plasmaPredictions", "missing"), function(x, y,  col = c("blue", "red"),
+    lwd = 2, xlab = "", ylab = "Fraction Surviving", mark.time = TRUE, legloc = "topright", ...) {
+  S <- summary(x@splitModel)
+  PT <- S$sctest[3]
+  plot(x@SF, col = col, lwd = lwd, xlab = xlab, ylab = ylab, mark.time = mark.time, ...)
+  legend(legloc, paste(c("low", "high"), "risk"), col = col, lwd = lwd)
+  title(sub = paste("p =", formatC(PT, format = "e", digits = 2)))
+})
+
+
+setClass("plasma",
+         contains = "plasmaPredictions",
+         slots = c(traindata = "MultiOmics",
+                   compModels = "list",
+                   fullModel = "coxph"))
 
 ## object = MultiOmics
 ## multi = MultiplePLSCoxModels
@@ -76,7 +91,7 @@ plasma <- function(object, multi) {
   mp <- temp$meanPreds
   colms <- c(multi@timevar, multi@eventvar)
   riskDF <- data.frame(object@outcome[, colms], mp)
-  riskDF <- na.omit(riskDF)
+  riskDF <- na.omit(riskDF)         # see below
   form <- formula(paste("Surv(", multi@timevar, ",", multi@eventvar, "== \"",
                         multi@eventvalue, "\") ~ .", sep = ""))
   model <- coxph(form, data = riskDF)
@@ -94,10 +109,10 @@ plasma <- function(object, multi) {
   SF <- survfit(form, riskDF)
   new("plasma",
       traindata = object,
-      meanPredictions = temp$meanPreds,
       compModels = temp$compModels,
-      riskDF = riskDF,
       fullModel = model1,
+      meanPredictions = temp$meanPreds,
+      riskDF = riskDF,
       riskModel = rmodel,
       splitModel = smodel,
       SF = SF)
@@ -107,13 +122,6 @@ plasma <- function(object, multi) {
 setMethod("summary", "plasma", function(object, ...) {
 })
 
-## plot method for plasma objects
-setMethod("plot", c("plasma", "missing"), function(x, y,  col = c("blue", "red"),
-    lwd = 2, xlab = "", ylab = "Fraction Surviving", mark.time = TRUE, legloc = "topright", ...) {
-  plot(x@SF, col = col, lwd = lwd, xlab = xlab, ylab = ylab, mark.time = mark.time, ...)
-  legend(legloc, paste(c("low", "high"), "risk"), col = col, lwd = lwd)
-})
-
 ## predict method for plasma objects
 setMethod("predict", "plasma", function(object, newdata = NULL,
                                         type = c("components", "risk", "split"),
@@ -121,12 +129,12 @@ setMethod("predict", "plasma", function(object, newdata = NULL,
   if (is.null(newdata)) {
     newdata <- object@traindata
   }
-  wickedBig <- object@compModels
+  componentModels <- object@compModels
   testData <- newdata@data
   tempor <- lapply(names(newdata@data), function(N) {
-    wb <- wickedBig[[N]]
+    wb <- componentModels[[N]]
     goForIt <- lapply(names(newdata@data), function(M) {
-      localModel <- wickedBig[[N]]$mango[[M]]$learn
+      localModel <- componentModels[[N]]$plsRegression[[M]]$learn
       localTest <- t(testData[[N]])[, dimnames(localModel$coefficients)[[1]]]
       if (!is.null(localModel)) {
         predictions <- predict(localModel, localTest)
@@ -148,6 +156,7 @@ setMethod("predict", "plasma", function(object, newdata = NULL,
   barf <- predict(object@fullModel)
   testOut <- newdata@outcome
   meanPreds <- object@meanPredictions
+  
   tstArray <- array(NA, dim = c(nrow(testOut), ncol(meanPreds), length(newdata@data)))
   dimnames(tstArray) <- list(rownames(testOut), colnames(meanPreds), names(newdata@data))
   for (I in 1:length(tempor)) {
@@ -162,12 +171,17 @@ setMethod("predict", "plasma", function(object, newdata = NULL,
   testOut$Split <- factor(c("low", "high")[1+1*(testcox > median(barf))],
                           levels = c("low", "high"))
 
-  splitForm <- formula(object@splitModel)
-  testMod <- coxph(splitForm, data = testOut)
-
   riskForm <- formula(object@riskModel)
-  coxph(riskForm, data = testOut)
-  S <- summary(testMod)
-  PT <- S$sctest[3]
-  text(15.5, 0.75, paste("p =", formatC(PT, format = "e", digits = 2)))
+  riskMod <- coxph(riskForm, data = testOut)
+
+  splitForm <- formula(object@splitModel)
+  splitMod <- coxph(splitForm, data = testOut)
+  SF <- survfit(splitForm, testOut)
+
+  new("plasmaPredictions",
+      meanPredictions = as.matrix(meanTestPreds),
+      riskDF = testOut,
+      riskModel = riskMod,
+      splitModel = splitMod,
+      SF = SF)
 })
