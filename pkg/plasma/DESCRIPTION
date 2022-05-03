@@ -1,13 +1,13 @@
 Package: plasma
 Title: Partial LeAst Squares for Multiomic Analysis
-Version: 0.2.0
-Date: 2022-05-02
+Version: 0.2.1
+Date: 2022-05-03
 Author: Kevin R. Coombes
 Description: Contains tools for supervised analyes of incomplete, overlapping
   multi-omics datasets.
 Maintainer: Kevin R. Coombes <krc@silicovore.com>
 Depends: R (>= 3.5.0)
-Imports: methods, stats, graphics, survival, plsRcox, pls, Polychrome, utils
+Imports: methods, stats, graphics, survival, plsRcox, pls, Polychrome (>= 1.5.0)
 Suggests: knitr, rmarkdown
 License: Apache License (== 2.0)
 LazyLoad: yes

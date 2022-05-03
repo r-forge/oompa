@@ -5,14 +5,11 @@
 ## Imported methods
 import(methods)
 importFrom("stats", "median", "predict", "formula", "step", "na.omit")
-importFrom("graphics", "par", "legend", "text")
+importFrom("graphics", "par", "legend", "text", "title")
 importFrom("survival", "coxph", "Surv", "survfit")
 importFrom("pls", "plsr")
 importFrom("plsRcox", "plsRcoxmodel")
 importFrom("Polychrome", "memberPlot")
-
-## temporary
-importFrom("utils", "packageVersion") # for v.1.5.0 of Polychrome
 
 ## MultiOmics class
 exportClass("MultiOmics")

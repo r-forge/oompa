@@ -37,12 +37,7 @@ setMethod("plot", c("MultiOmics", "missing"), function(x, y, ...) {
     })
     !useless
   })
-  if (packageVersion("Polychrome") < "1.5.0") {
-    memberPlot(t(binmat), ylab = "",  ...)
-  } else {
-    NF <- sapply(x@data, nrow)
-    memberPlot(t(binmat), features = NF, ylab = "",  ...)
-  }
+  memberPlot(t(binmat), ylab = "",  ...)
 })
 
 setMethod("[", "MultiOmics", function(x, i, j,  ..., drop = FALSE) {

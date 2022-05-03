@@ -1,7 +1,4 @@
-* Test "predict" methods on new data subset. (Split in a consistent
-way into train and test.)
-
 * Figure out a convenient way to plot the split-risk model when
 predicting outcomes on new data from a SingleModel.
 
-* Remove conditional use of Polychrome after it gets updated on CRAN.
+* Add tools to interpret final results.
