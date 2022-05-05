@@ -140,7 +140,82 @@ testpred <- predict(pl, testD)
 plot(testpred, main="Testing", xlab = "Time (Days)")
 ```
 
+## Interpretation
+### Clinical Binary Data
+```{r }
+cbin <- getAllWeights(pl, "ClinicalBin")
+image(cbin)
+heat(cbin)
+cbin01 <- pickSignificant(cbin, 0.01)
+image(cbin01)
+heat(cbin01)
+getTop(cbin01, 3)
+```
 
+### Clinical Continuous Data
+```{r }
+ccont <- getAllWeights(pl, "ClinicalCont")
+image(ccont)
+heat(ccont)
+getTop(ccont, 2)
+```
+
+### Mutation Data
+```{r }
+cmaf <- getAllWeights(pl, "MAF")
+image(cmaf)
+heat(cmaf)
+cmaf01 <- pickSignificant(cmaf, 0.01)
+image(cmaf01)
+heat(cmaf01)
+getTop(cmaf01, 3)
+```
+
+### Methylation Data
+```{r }
+meth <- getAllWeights(pl, "Meth450")
+image(meth)
+heat(meth)
+meth01 <- pickSignificant(meth, 0.01)
+image(meth01)
+heat(meth01)
+getTop(meth01, 3)
+```
+
+### Proteomics Data
+```{r }
+rppa <- getAllWeights(pl, "RPPA")
+image(rppa)
+heat(rppa)
+rppa01 <- pickSignificant(rppa, 0.01)
+image(rppa01)
+heat(rppa01)
+getTop(rppa, 3)
+```
+
+
+### mRNA-Sequencing Data
+```{r }
+mrna <- getAllWeights(pl, "mRNASeq")
+image(mrna)
+heat(mrna)
+mrna01 <- pickSignificant(mrna, 0.01)
+image(mrna01)
+heat(mrna01)
+getTop(mrna01, 7)
+```
+
+
+### miR-Sequencing Data
+```{r }
+mir <- getAllWeights(pl, "miRSeq")
+image(mir)
+heat(mir)
+mir01 <- pickSignificant(mir, 0.01)
+image(mir01)
+heat(mir01)
+getTop(mir01, 5)
+```
 
 ## Conclusions
 

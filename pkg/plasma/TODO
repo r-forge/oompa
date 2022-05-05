@@ -1,4 +1,4 @@
 * Figure out a convenient way to plot the split-risk model when
 predicting outcomes on new data from a SingleModel.
 
-* Add tools to interpret final results.
+* Add a "heat" method for plasma objects.

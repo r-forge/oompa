@@ -4,12 +4,20 @@
 
 ## Imported methods
 import(methods)
-importFrom("stats", "median", "predict", "formula", "step", "na.omit")
-importFrom("graphics", "par", "legend", "text", "title")
-importFrom("survival", "coxph", "Surv", "survfit")
-importFrom("pls", "plsr")
-importFrom("plsRcox", "plsRcoxmodel")
-importFrom("Polychrome", "memberPlot")
+importFrom("stats",
+           "median", "predict", "formula", "step", "na.omit", "heatmap", "quantile")
+importFrom("graphics",
+           "par", "legend", "text", "mtext", "title")
+importFrom("survival",
+           "coxph", "Surv", "survfit")
+importFrom("pls",
+           "plsr")
+importFrom("plsRcox",
+           "plsRcoxmodel")
+importFrom("Polychrome",
+           "memberPlot")
+importFrom("viridisLite",
+           "viridis")
 
 ## MultiOmics class
 exportClass("MultiOmics")
@@ -27,5 +35,9 @@ export("fitCoxModels", "getSizes")
 exportClass("plasma")
 export("fitCoxModels", "plasma")
 
+## Contribution class
+exportClass("Contribution")
+export("getCompositeWeights", "getAllWeights", "getTop", "pickSignificant")
+
 ## methods
-exportMethods("summary", "plot", "predict")
+exportMethods("summary", "plot", "predict", "image", "heat")
