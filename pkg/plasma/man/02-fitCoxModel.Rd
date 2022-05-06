@@ -6,7 +6,6 @@
 \alias{summary,SingleModel-method}
 \alias{plot,SingleModel,missing-method}
 \alias{fitSingleModel}
-\alias{getSizes}
 
 \title{Class \code{"SingleModel"}}
 \description{
@@ -27,13 +26,14 @@ fitSingleModel(object, N, timevar, eventvar, eventvalue)
 }
 \arguments{
   \item{object}{an object of class \code{MultiOmics} for fitting the model.}
-  \item{x}{an object of class \code{MultiOmics} for fitting the model.}
   \item{N}{A character string identifying the data set being modeled.}
   \item{timevar}{a column in the \code{MultiOmics} object in the
     \code{outcome} dataframe containing the time-to-event.}
   \item{eventvar}{a column in the \code{MultiOmics} object in the
     \code{outcome} dataframe containing the event.}
   \item{eventvalue}{a character string specifying the value of the event.}
+  
+  \item{x}{an object of class \code{plsRcoxmodel} for plotting the Kaplan-Meier curves.}
   \item{y}{An ignored argrument for the plot method.}
   \item{col}{A vector of color specifications.}
   \item{lwd}{A vactor specifying the line width.}
@@ -71,8 +71,7 @@ fitSingleModel(object, N, timevar, eventvar, eventvalue)
       \item{\code{\link{summary}}:}{Returns a description of the
 	\code{MultiplePLSCoxModels} object and the names of the omics
 	datasets used to build the model.}
-      \item{\code{\link{predict}}:}{not sure what to put here, wasn't
-	able to run predict in the vignette.}
+      \item{\code{\link{predict}}:}{spaceholder.}
   }
 }
 \value{
@@ -81,7 +80,9 @@ fitSingleModel(object, N, timevar, eventvar, eventvalue)
 \author{Kevin R. Coombes \email{krc@silicovore.com}}
 \note{
 }
-\seealso{}
+\seealso{
+  \code{\link{getSizes}}
+}
 \examples{
 data("TCGA-ESCA")
 MO <- prepareMultiOmics(assemble, Outcome)
