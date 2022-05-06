@@ -58,3 +58,16 @@ setMethod("predict", "MultiplePLSCoxModels", function(object, newdata,
   }
   result
 })
+
+## getSizes function cutpasted from 02-fitCoxModel.R
+getSizes <- function(object) {
+  NT <- sapply(object@models, function(result) {
+  S <- summary(result@plsmod$FinalModel)
+  PT <- S$sctest[3]
+  names(PT)<-"p.value"
+  c(NT = result@plsmod$nt, cNT = result@plsmod$computed_nt, PT)
+  })
+  colnames(NT) <- names(object@models)
+  t(NT)
+ }
+

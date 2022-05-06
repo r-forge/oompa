@@ -90,16 +90,3 @@ setMethod("plot", c("SingleModel", "missing"), function(x, y,  col = c("blue", "
   plot(x@SF, col = col, lwd = lwd, xlab = xlab, ylab = ylab,  mark.time = mark.time, ...)
   legend(legloc, paste(c("Low", "High"), "Risk"), col = col, lwd = lwd)
 })
-
-
-getSizes <- function(object) {
-  NT <- sapply(object@models, function(result) {
-  S <- summary(result@plsmod$FinalModel)
-  PT <- S$sctest[3]
-  c(NT = result@plsmod$nt, cNT = result@plsmod$computed_nt, p = PT)
-  })
-  colnames(NT) <- names(object@models)
-  t(NT)
- }
-
-
