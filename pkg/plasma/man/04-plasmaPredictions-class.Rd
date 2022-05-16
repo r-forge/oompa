@@ -15,7 +15,7 @@
 }
 \arguments{
   \item{x}{An object of the \code{plasmaPredictions} class for plotting the Kaplan-Meier curves.}
-  \item{y}{An ignored argrument for the plot method.}
+  \item{y}{An ignored argument for the plot method.}
   \item{col}{A vector of color specifications. Default is c(\dQuote{blue}, \dQuote{red}).}
   \item{lwd}{A vactor specifying the line width. Default is \dQuote{2}.}
   \item{xlab}{A character string to label the x-axis. Default is \dQuote{}.}
