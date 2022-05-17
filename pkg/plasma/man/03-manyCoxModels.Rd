@@ -13,13 +13,10 @@
 \description{
   The \code{MultiplePLSCoxModels} object class ...
   The \code{validMultipleCoxModels} function checks if each data set contains the same set of samples.
-  The \code{fitCoxModels} function fits many plsRcoxmodels and returns an S4 object of class MultiplePLSCoxModels.
-  The \code{getSizes} returns a matrix with the list of dataframes of the \code{MultiOmics} object as rownames and columns with NT, cNT, and p-values.
+  The \code{fitCoxModels} function fits many plsRcoxmodels and returns an S4 object of class \code{MultiplePLSCoxModels}.
+  The \code{getSizes} function returns a matrix with the list of dataframes of the \code{MultiOmics} object as rownames and columns with NT, cNT, and p-values.
 }
 
-\section{Objects from the Class}{
-
-}
 \usage{
 fitCoxModels(object, timevar, eventvar, eventvalue)
 \S4method{summary}{MultiplePLSCoxModels}(object, \dots)
@@ -41,7 +38,7 @@ fitCoxModels(object, timevar, eventvar, eventvalue)
   \item{N}{A character string identifying the data set being modeled.}
   \item{y}{An ignored argrument for the plot method.}
   \item{col}{A vector of color specifications. Default is c(\dQuote{blue}, \dQuote{red}).}
-  \item{lwd}{A vactor specifying the line width. Default is \dQuote{2}.}
+  \item{lwd}{A vector specifying the line width. Default is \dQuote{2}.}
   \item{xlab}{A character string to label the x-axis. Default is \dQuote{}.}
   \item{ylab}{A character string to label the y-axis. Default is \dQuote{Fraction Surviving}.}
   \item{mark.time}{A logical value; should tickmarks indicate censored
@@ -64,7 +61,7 @@ fitCoxModels(object, timevar, eventvar, eventvalue)
       \item{\code{\link{summary}}:}{Returns a description of the
 	\code{MultiplePLSCoxModels} object and the names of the omics
 	datasets used to build the model.}
-      \item{\code{\link{predict}}:}{spaceholder.}
+      \item{\code{\link{predict}}:}{returns a list of numeric vectors of predicted risk per data type.}
   }
   }
 }
@@ -74,7 +71,7 @@ fitCoxModels(object, timevar, eventvar, eventvalue)
 \author{Kevin R. Coombes \email{krc@silicovore.com}}
 \note{
 }
-\seealso{}
+\seealso{fitSingleModel}
 \examples{
 data("TCGA-ESCA")
 MO <- prepareMultiOmics(assemble, Outcome)
@@ -82,10 +79,11 @@ splitVec <- rbinom(nrow(Outcome), 1, 0.6)
 trainD <- MO[, splitVec == 1]
 testD <- MO[, splitVec == 0]
 
-suppressWarnings( firstPass <- fitCoxModels(trainD, timevar = "Days",
+suppressWarnings( firstPass <- fitCoxModels(object = trainD, timevar = "Days",
                           eventvar = "vital_status", eventvalue = "dead") )
 summary(firstPass)
 plot(firstPass)
 getSizes(firstPass)
+pre1 <- predict(firstPass, testD)
 }
 \keyword{classes}

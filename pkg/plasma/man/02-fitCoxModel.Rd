@@ -9,20 +9,18 @@
 
 \title{Class \code{"SingleModel"}}
 \description{
-  The \code{SingleModel} object class ...
   The \code{fitSingleModel} function takes in an object of
   \code{MultiOmics} class and returns a new object of
-  \code{MultiplePLSCoxModels} class. 
+  \code{SingleModel} class. 
 }
-\section{Objects from the Class}{
 
-}
 \usage{
 fitSingleModel(object, N, timevar, eventvar, eventvalue)
 \S4method{summary}{SingleModel}(object, \dots)
 \S4method{plot}{SingleModel,missing}(x, y, col = c("blue", "red"),
       lwd = 2, xlab = "", ylab = "Fraction Surviving",
        mark.time = TRUE, legloc = "topright", \dots)
+\S4method{predict}{SingleModel}(object, \dots)
 }
 \arguments{
   \item{object}{an object of class \code{MultiOmics} for fitting the model.}
@@ -43,6 +41,10 @@ fitSingleModel(object, N, timevar, eventvar, eventvalue)
     data?}
   \item{legloc}{A character string indicating where to put the legend.}
   \item{\dots}{Other graphical parameters.}
+
+  \item{object}{an object of class \code{SingleModel} for the \code{predict} method.}
+  \item{\dots}{other parameters used in \code{predict}.}
+  
 }
 \section{Slots}{
   \describe{
@@ -71,7 +73,7 @@ fitSingleModel(object, N, timevar, eventvar, eventvalue)
       \item{\code{\link{summary}}:}{Returns a description of the
 	\code{MultiplePLSCoxModels} object and the names of the omics
 	datasets used to build the model.}
-      \item{\code{\link{predict}}:}{spaceholder.}
+      \item{\code{\link{predict}}:}{a numeric vector containing the predicted risk values.}
   }
 }
 \value{
@@ -92,10 +94,11 @@ splitVec <- rbinom(nrow(Outcome), 1, 0.6)
 trainD <- MO[, splitVec == 1]
 testD <- MO[, splitVec == 0]
 
-firstPass <- fitSingleModel(trainD, "RPPA",
-                           "Days", "vital_status", "dead")
-summary(firstPass)
-plot(firstPass)
-pre1 <- predict(firstPass, testD)
+zerothPass <- fitSingleModel(object = trainD, N = "RPPA",
+                           timevar = "Days", eventvar = "vital_status",
+                           eventvalue = "dead")
+summary(zerothPass)
+plot(zerothPass)
+pre0 <- predict(zerothPass, testD)
 }
 \keyword{classes}
