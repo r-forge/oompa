@@ -1,6 +1,6 @@
 Package: plasma
 Title: Partial LeAst Squares for Multiomic Analysis
-Version: 0.3.6
+Version: 0.3.7
 Date: 2022-05-17
 Author: Kevin R. Coombes
 Description: Contains tools for supervised analyes of incomplete, overlapping

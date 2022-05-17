@@ -19,7 +19,7 @@ extendCoxModels <- function(object, firstPass, verbose = TRUE) {
     stores[rownames(X), colnames(X)] <- X
   }
   ## record the data set that each component comes from
-  featgroups <- substring(colnames(stores), 1, -1 + nchar(colnames(stores)))
+  featgroups <- substring(colnames(stores), 1, -1 + nchar(colnames(stores))) #kevin look at later
   ## learn how to cross-predict component values between each pair of data sets
   componentModels <- lapply(names(object@data), function(N) {
     if(verbose) cat(N, "\n", file = stderr())
@@ -40,7 +40,7 @@ extendCoxModels <- function(object, firstPass, verbose = TRUE) {
     })
     names(plsRegression) <- names(object@data)
     t(sapply(plsRegression, function(x) dim(x$extend)))
-    slurp <- sapply(plsRegression, function(x) x$extend[,,2])
+    slurp <- sapply(plsRegression, function(x) x$extend[,,2]) # subset the portion of the 3D array that corresponds to the final item of the output of the plsr function, which fits a model iteratively
     allPred <- do.call(cbind, slurp)
     list(plsRegression = plsRegression, allPred = allPred)
   })
