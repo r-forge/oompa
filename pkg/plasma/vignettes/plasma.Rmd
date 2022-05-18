@@ -107,7 +107,13 @@ par(opar)
 ## PLS Cox Regression Models
 Partial Least Squares (PLS) has been shown to be an effective method for finding components
 that can predict clinically interesting outcomes {REFERENCE} . The first step of the `plasma`
-algorithm is to fit PLS Cox models on each data set.
+algorithm is to fit PLS Cox models on each data set with the function `fitCoxModels`. The returned object of class `MultiplePLSCoxModels` contains a list of `SingleModel` objects, one for each assay, and within this are 4 different regression models:
+
+* 1 plsRcoxmodel
+* 3 separate models are made on the prediction of Risk made from using the training data on the above plsRcoxmodel
+    + riskModel is a `coxph` model with predicted Risk as the predictors (continuous)
+    + splitModel is a `coxph` model with Split as the predictors (Risk categorized into high and low by the median)
+    + SF is a `survfit` model, which creates Kaplan-Meier curves corresponding to `splitModel`
 
 ```{r fig04, fig.width = 8, fig.height = 12}
 suppressWarnings( firstPass <- fitCoxModels(trainD, timevar = "Days",
@@ -117,11 +123,15 @@ plot(firstPass)
 ```
 
 ## Extend the model components
+The "extension" portion is done with the function plasma() where it takes in the previous created objects of class `multiOmics` and `MultiplePLSCoxModels` and returns an object of class `plasma`. Within the plasma() function, the PLS components from one dataset (ex. dataset A) is used to predict the PLS components from another dataset (ex. dataset B). The process does this iteratively such that in our case there are 7 different sets of predictions of the PLS components, which are averaged and saved to the object of class `plasma` as a dataframe called `meanPredictions`.
+
+Similarly to the objects that are part of the `MultiplePLSCoxModels` object, there are `riskModel`, `splitModel`, and `SF` stored in the `plasma` object.
+
 ```{r plasma}
 pl <- plasma(MO, firstPass)
 plot(pl, legloc = "topright", main = "Training Data")
 heatmap(pl@meanPredictions) # make a standard method?
-summary(pl) # neds to be defined. 
+summary(pl) # neds to be defined.
 ```
 
 ## Independent Test Set
@@ -141,22 +151,33 @@ plot(testpred, main="Testing", xlab = "Time (Days)")
 ```
 
 ## Interpretation
+
+The weight matrix of the `plasma` object can be extracted using the `getAllWeights` and specifying the name of the dataset. This weight matrix has the features from the particular dataset specified as rows and all of the PLS components as columns. Setting a cutoff of significance for the `pickSignificant` function will return a different weight matrix in which the rows have been selected if they contributed significantly to defining the PLS components. PLS regression is a supervised method that aims to find linear combinations of predictor variables (i.e. components) that maximize the variance in both the predictors and the response (reference: An Introduction to Statistical Learning with Applications in R, 2nd Ed.). Therefore, these weight matrices can be analyzed even further by looking at their heatmaps, to examine the relative 1) direction and 2) magnitude with which the original variables in the omics datasets contributed to the final PLS components.
+
 ### Clinical Binary Data
+
 ```{r }
 cbin <- getAllWeights(pl, "ClinicalBin")
 image(cbin)
-heat(cbin)
+heat(cbin, cexCol = 0.5)
 cbin01 <- pickSignificant(cbin, 0.01)
 image(cbin01)
-heat(cbin01)
+heat(cbin01, cexCol = 0.5)
 getTop(cbin01, 3)
 ```
+
+
+```{r}
+# kyoko added this to see if she could get the heatmap to display all of the row and column labels?
+heat(cbin01, cexCol=0.5)
+```
+
 
 ### Clinical Continuous Data
 ```{r }
 ccont <- getAllWeights(pl, "ClinicalCont")
 image(ccont)
-heat(ccont)
+heat(ccont, cexCol = 0.5)
 getTop(ccont, 2)
 ```
 
@@ -164,10 +185,10 @@ getTop(ccont, 2)
 ```{r }
 cmaf <- getAllWeights(pl, "MAF")
 image(cmaf)
-heat(cmaf)
+heat(cmaf, cexCol = 0.5)
 cmaf01 <- pickSignificant(cmaf, 0.01)
 image(cmaf01)
-heat(cmaf01)
+heat(cmaf01, cexCol = 0.5)
 getTop(cmaf01, 3)
 ```
 
@@ -175,10 +196,10 @@ getTop(cmaf01, 3)
 ```{r }
 meth <- getAllWeights(pl, "Meth450")
 image(meth)
-heat(meth)
+heat(meth, cexCol = 0.5)
 meth01 <- pickSignificant(meth, 0.01)
 image(meth01)
-heat(meth01)
+heat(meth01, cexCol = 0.5)
 getTop(meth01, 3)
 ```
 
@@ -186,10 +207,10 @@ getTop(meth01, 3)
 ```{r }
 rppa <- getAllWeights(pl, "RPPA")
 image(rppa)
-heat(rppa)
+heat(rppa, cexCol = 0.5)
 rppa01 <- pickSignificant(rppa, 0.01)
 image(rppa01)
-heat(rppa01)
+heat(rppa01, cexCol = 0.5)
 getTop(rppa, 3)
 ```
 
@@ -198,10 +219,10 @@ getTop(rppa, 3)
 ```{r }
 mrna <- getAllWeights(pl, "mRNASeq")
 image(mrna)
-heat(mrna)
+heat(mrna, cexCol = 0.5)
 mrna01 <- pickSignificant(mrna, 0.01)
 image(mrna01)
-heat(mrna01)
+heat(mrna01, cexCol = 0.5)
 getTop(mrna01, 7)
 ```
 
@@ -210,10 +231,10 @@ getTop(mrna01, 7)
 ```{r }
 mir <- getAllWeights(pl, "miRSeq")
 image(mir)
-heat(mir)
+heat(mir, cexCol = 0.5)
 mir01 <- pickSignificant(mir, 0.01)
 image(mir01)
-heat(mir01)
+heat(mir01, cexCol = 0.5)
 getTop(mir01, 5)
 ```
 
