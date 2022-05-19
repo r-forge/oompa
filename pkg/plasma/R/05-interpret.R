@@ -95,3 +95,9 @@ pickSignificant <- function(object, alpha) {
   sig <- apply(abs(object@contrib) > Q, 1, any)
   object[sig,]
 }
+
+influencer <- function(object) {
+  toto <- sapply(names(object@compModels), function(N) getAllWeights(object, N))
+  wolf <- lapply(toto, function(X) X@contrib)
+  do.call(rbind, wolf)
+}
