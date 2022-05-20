@@ -1,12 +1,12 @@
 Package: TailRank
 Title: The Tail-Rank Statistic
-Version: 3.2.1
-Date: 2018-05-17
+Version: 3.2.2
+Date: 2022-05-02
 Author: Kevin R. Coombes
 Description: Implements the tail-rank statistic for selecting biomarkers
   from a microarray data set, an efficient nonparametric test focused
   on the distributional tails. See
-  <http://bioinformatics.mdanderson.org/TailRank/tolstoy-new.pdf>.
+  <https://gitlab.com/krcoombes/coombeslab/-/blob/master/doc/papers/tolstoy-new.pdf>.
 Maintainer: Kevin R. Coombes <krc@silicovore.com>
 Depends: R (>= 3.0), oompaBase (>= 3.0.1)
 Imports: methods, graphics, stats, Biobase, oompaData

@@ -10,6 +10,8 @@ my $oompafiles = shift || "oompafiles.txt";
 my $tools = shift || "tools.cfg";
 my $startdir = shift || '..\..'; # assumes tools lives two levels below RForge
 
+print STDERR "Using arguments '$oompafiles', '$tools', and '$startdir'.\n";
+
 # TODO: allow cfg file to be passed on the command line ?
 # Assume file consists of lines of the form "KEY = VALUE"
 open(TOOL, "<$tools") or die "Unable to open '$tools': $!\n";

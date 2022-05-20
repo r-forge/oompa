@@ -4,12 +4,10 @@ dev.off()
 
 options(install.packages.compile.from.source = "never")
 
-#source("https://bioconductor.org/biocLite.R")
 if (!requireNamespace("BiocManager"))
     install.packages("BiocManager")
 BiocManager::install(update = FALSE, ask = FALSE)
 if (!require("Biobase")) {
-#  biocLite(suppressUpdates = TRUE, suppressAutoUpdate = TRUE)
   BiocManager::install("Biobase", update = FALSE, ask = FALSE)
 }
 mybiocs <- c("edgeR",
@@ -19,7 +17,9 @@ mybiocs <- c("edgeR",
              "DNAcopy",
              "flowCore",
              "AnnotationDbi",
-             "RSQLite"
+             "RSQLite",
+             "mixOmics",
+             "msa"
              )
 for (p in mybiocs) {
   if (!require(p, character.only=TRUE)) {
@@ -83,7 +83,11 @@ mypacks <- c("fortunes",
              "umap",
              "isotone",
              "fields",
-             "flexmix" # why?
+             "flexmix", # why?
+             "pls",
+             "plsRcox",
+             "ape",
+             "corrplot"
              )
 for (p in mypacks) {
   if (!require(p, character.only = TRUE, quietly = TRUE)) {

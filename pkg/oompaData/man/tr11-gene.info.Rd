@@ -24,7 +24,7 @@
 \source{
   The data was originally described in the paper by Lapointe et al., and
   downloaded from the Stanford Microarray Database
-  \url{http://genome-www5.stanford.edu/}. We randomly selected 2000 of
+  \url{https://bio.tools/stanfordmicroarraydb}. We randomly selected 2000 of
   the 42129 spots to include as demonstration data here.
 }
 \references{

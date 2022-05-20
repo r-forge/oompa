@@ -35,7 +35,7 @@
 \source{
   The data was originally described in the paper by Lapointe et al., and
   downloaded from the Stanford Microarray Database
-  \url{http://genome-www5.stanford.edu/}.
+  \url{https://bio.tools/stanfordmicroarraydb}.
 }
 \references{
   Lapointe J et al. (2004) Gene expression profiling identifies
