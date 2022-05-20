@@ -1,5 +1,13 @@
 library(plasma)
 load("TCGA-ESCA0.Rdata")
+set.seed(97531)
+miRSeq <- assemble$miRSeq[, sample(ncol(assemble$miRSeq), 166)]
+assemble$miRSeq <- miRSeq
+set.seed(24680)
+mRNASeq <- assemble$mRNASeq[, sample(ncol(assemble$mRNASeq), 157)]
+assemble$mRNASeq <- mRNASeq
+sapply(assemble, dim)
+
 clin <- assemble$Clinical
 clindf  <-  as.data.frame(t(clin))
 
@@ -81,10 +89,10 @@ clincont <- t(clincont)
 
 assemble <- list(ClinicalBin = clinbin,
                  ClinicalCont = clincont,
-                 MAF = MAF,
-                 Meth450 = m450beta,
-                 miRSeq = miRSeq,
-                 mRNASeq = mRNASeq,
-                 RPPA = RPPA)
+                 MAF = assemble$MAF,
+                 Meth450 = assemble$Meth450,
+                 miRSeq = assemble$miRSeq,
+                 mRNASeq = assemble$mRNASeq,
+                 RPPA = assemble$RPPA)
 sapply(assemble, dim)
 save(Outcome, assemble, m450info, file = "TCGA-ESCA1.RData")

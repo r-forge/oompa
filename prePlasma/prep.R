@@ -86,8 +86,6 @@ summary(keep)
 miRSeq <- miRSeq[keep,]
 rm(mu, sigma, keep)
 miRSeq <- miRSeq[, colnames(miRSeq) %in% rownames(Outcome)]
-set.seed(97531)
-miRSeq <- miRSeq[, sample(ncol(miRSeq), 166)]
 
 goo <- substring(sapply(strsplit(colnames(mRNASeq), "\\."), function(W) W[4]), 1, 2)
 table(goo)
@@ -100,13 +98,14 @@ mu <- apply(mRNASeq, 1, mean, na.rm = TRUE)
 sigma <- apply(mRNASeq, 1, sd, na.rm = TRUE)
 smoothScatter(mu, sigma)
 abline(v=4, h=0.7, col="orange", lwd=2)
-keep <- mu > 4 & sigma > 0.7
+M0 <- 6
+S0 <- 1.2
+abline(v=M0, h=S0, col="yellow", lwd=2)
+keep <- mu > M0 & sigma > S0
 summary(keep)
 mRNASeq <- mRNASeq[keep,]
 rm(mu, sigma, keep)
 mRNASeq <- mRNASeq[, colnames(mRNASeq) %in% rownames(Outcome)]
-set.seed(24680)
-mRNASeq <- mRNASeq[, sample(ncol(mRNASeq), 157)]
 
 goo <- substring(sapply(strsplit(colnames(RPPA), "\\."), function(W) W[4]), 1, 2)
 table(goo)
@@ -138,6 +137,6 @@ summary(Outcome)
 
 save(Outcome, assemble, m450info, file = "TCGA-ESCA0.RData")
 
-## verify that it cn be re-loaded
+## verify that it can be re-loaded
 rm(assemble)
 load("TCGA-ESCA0.RData")
