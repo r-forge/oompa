@@ -15,15 +15,16 @@
 }
 
 \usage{
-fitSingleModel(object, N, timevar, eventvar, eventvalue)
+fitSingleModel(multi, N, timevar, eventvar, eventvalue)
 \S4method{summary}{SingleModel}(object, \dots)
 \S4method{plot}{SingleModel,missing}(x, y, col = c("blue", "red"),
       lwd = 2, xlab = "", ylab = "Fraction Surviving",
        mark.time = TRUE, legloc = "topright", \dots)
-\S4method{predict}{SingleModel}(object, \dots)
+\S4method{predict}{SingleModel}(object, newdata, type = c("components", "risk",
+                 "split"), \dots)
 }
 \arguments{
-  \item{object}{an object of class \code{MultiOmics} for fitting the model.}
+  \item{multi}{an object of class \code{MultiOmics} for fitting the model.}
   \item{N}{A character string identifying the data set being modeled.}
   \item{timevar}{a column in the \code{MultiOmics} object in the
     \code{outcome} dataframe containing the time-to-event.}
@@ -40,10 +41,12 @@ fitSingleModel(object, N, timevar, eventvar, eventvalue)
   \item{mark.time}{A logical value; should tickmarks indicate censored
     data?}
   \item{legloc}{A character string indicating where to put the legend.}
-  \item{\dots}{Other graphical parameters.}
 
-  \item{object}{an object of class \code{SingleModel} for the \code{predict} method.}
-  \item{\dots}{other parameters used in \code{predict}.}
+  \item{object}{an object of class \code{SingleModel}.}
+  \item{newdata}{A \code{MultiOmics} object with the same structure as
+    the training data.}
+  \item{type}{An enumerated character valuee.}
+  \item{\dots}{other parameters used in graphing or prediction.}
   
 }
 \section{Slots}{
@@ -77,11 +80,15 @@ fitSingleModel(object, N, timevar, eventvar, eventvalue)
   }
 }
 \value{
-
+  The \code{fitSingleModel} function returns a newly constructed object
+  of the \code{SingleModel} class. The \code{plot} method invisibly
+  returns the value on which it was invoked. The {summary} method
+  returns an object summarizing the final model produced by PLS R cox
+  regression. The \code{predict} method returns either a vector or
+  matrix dependning on the type of predictiosn requested.
 }
-\author{Kevin R. Coombes \email{krc@silicovore.com}}
-\note{
-}
+\author{Kevin R. Coombes \email{krc@silicovore.com},
+  Kyoko Yamaguchi \email{kyoko.yamaguchi@osumc.edu}}
 \seealso{
   \code{\link{getSizes}}
 }
@@ -94,7 +101,7 @@ splitVec <- rbinom(nrow(Outcome), 1, 0.6)
 trainD <- MO[, splitVec == 1]
 testD <- MO[, splitVec == 0]
 
-zerothPass <- fitSingleModel(object = trainD, N = "RPPA",
+zerothPass <- fitSingleModel(trainD, N = "RPPA",
                            timevar = "Days", eventvar = "vital_status",
                            eventvalue = "dead")
 summary(zerothPass)

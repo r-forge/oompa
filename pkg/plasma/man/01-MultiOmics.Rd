@@ -45,10 +45,8 @@ prepareMultiOmics(datalist, outcome)
 \value{
 The \code{prepareMultiOmics} function returns a new object of the \code{MultiOmics} class.
 }
-\author{Kevin R. Coombes \email{krc@silicovore.com}}
-\note{
-}
-\seealso{}
+\author{Kevin R. Coombes \email{krc@silicovore.com},
+  Kyoko Yamaguchi \email{kyoko.yamaguchi@osumc.edu}}
 \examples{
 data("TCGA-ESCA")
 MO <- prepareMultiOmics(datalist = assemble, outcome = Outcome)

@@ -11,7 +11,9 @@
 \section{Objects from the Class}{
 }
 \usage{
-\S4method{plot}{plasmaPredictions,missing}(x, y, \dots)
+\S4method{plot}{plasmaPredictions,missing}(x, y, col = c("blue", "red"),
+                 lwd = 2, xlab = "", ylab = "Fraction Surviving",
+                 mark.time = TRUE, legloc = "topright", \dots)
 }
 \arguments{
   \item{x}{An object of the \code{plasmaPredictions} class for plotting the Kaplan-Meier curves.}
@@ -41,7 +43,8 @@
 }
 \value{
 }
-\author{Kevin R. Coombes \email{krc@silicovore.com}}
+\author{Kevin R. Coombes \email{krc@silicovore.com},
+  Kyoko Yamaguchi \email{kyoko.yamaguchi@osumc.edu}}
 \note{
 }
 \seealso{}

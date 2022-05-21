@@ -14,11 +14,11 @@ validMultipleCoxModels <- function(object) {
 setValidity("MultiplePLSCoxModels", validMultipleCoxModels)
 
 ## Need to define a class for the return value of this function
-fitCoxModels <- function(object, timevar, eventvar, eventvalue, verbose = TRUE) {
-  firstPass <- lapply(names(object@data), function(N) {
-    fitSingleModel(object, N, timevar, eventvar, eventvalue)
+fitCoxModels <- function(multi, timevar, eventvar, eventvalue, verbose = TRUE) {
+  firstPass <- lapply(names(multi@data), function(N) {
+    fitSingleModel(multi, N, timevar, eventvar, eventvalue)
   })
-  names(firstPass) <- names(object@data)
+  names(firstPass) <- names(multi@data)
   new("MultiplePLSCoxModels",
       models = firstPass,
       timevar = timevar,

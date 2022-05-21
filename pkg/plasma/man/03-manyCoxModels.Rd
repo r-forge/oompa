@@ -5,6 +5,7 @@
 \alias{summary,MultiplePLSCoxModels-method}
 \alias{[,MultiplePLSCoxModels,ANY,ANY,ANY-method}%]
 \alias{plot,MultiplePLSCoxModels,missing-method}
+\alias{predict,MultiplePLSCoxModels-method}
 \alias{validMultipleCoxModels}
 \alias{fitCoxModels}
 \alias{getSizes}
@@ -18,24 +19,24 @@
 }
 
 \usage{
-fitCoxModels(object, timevar, eventvar, eventvalue)
+fitCoxModels(multi, timevar, eventvar, eventvalue, verbose)
 \S4method{summary}{MultiplePLSCoxModels}(object, \dots)
 \S4method{plot}{MultiplePLSCoxModels,missing}(x, y, col = c("blue", "red"),
       lwd = 2, xlab = "", ylab = "Fraction Surviving",
        mark.time = TRUE, legloc = "topright", \dots)
+\S4method{predict}{MultiplePLSCoxModels}(object, newdata, type = c("components", "risk",
+                 "split"), \dots)
 }
 \arguments{
-  \item{object}{an object of class \code{MultiOmics} for fitting the model.}
+  \item{multi}{an object of class \code{MultiOmics} for fitting the model.}
   \item{timevar}{a column in the \code{MultiOmics} object in the
     \code{outcome} dataframe containing the time-to-event.}
   \item{eventvar}{a column in the \code{MultiOmics} object in the
     \code{outcome} dataframe containing the event.}
   \item{eventvalue}{a character string specifying the value of the event in \code{eventvar}.}
-  
+  \item{verbose}{logical; should the function report progress.}
   \item{object}{an object of class \code{MultiplePLSCoxModels} for outputting the summary.}
-  
   \item{x}{an object of class \code{MultiplePLSCoxModels} for plotting the Kaplan-Meier curves.}
-  \item{N}{A character string identifying the data set being modeled.}
   \item{y}{An ignored argrument for the plot method.}
   \item{col}{A vector of color specifications. Default is c(\dQuote{blue}, \dQuote{red}).}
   \item{lwd}{A vector specifying the line width. Default is \dQuote{2}.}
@@ -45,15 +46,20 @@ fitCoxModels(object, timevar, eventvar, eventvalue)
     data? Default is TRUE.}
   \item{legloc}{A character string indicating where to put the legend. Default is \dQuote{topright}.}
   \item{\dots}{Other graphical parameters.}
+  \item{newdata}{A \code{MultiOmics} object with the same structure as
+    the training data.}
+  \item{type}{An enumerated character value.}
+
 }
 \section{Slots}{
   \describe{
       \item{\code{models}:}{A list of \code{SingleModel} objects, one for each assay.}
       \item{\code{timevar}:}{A character matching the name of the column containing the time-to-event.}
       \item{\code{eventvar}:}{A character matching the name of the column containing the event.}
-      \item{\code{eventvalue}:}{A character specifying the event in \code{eventvar.}
+      \item{\code{eventvalue}:}{A character specifying the event in \code{eventvar.} }
   }
 }
+
 \section{Methods}{
   \describe{
       \item{\code{\link{plot}}:}{Plots Kaplan-Meier curves for each
@@ -63,14 +69,17 @@ fitCoxModels(object, timevar, eventvar, eventvalue)
 	datasets used to build the model.}
       \item{\code{\link{predict}}:}{returns a list of numeric vectors of predicted risk per data type.}
   }
-  }
 }
 \value{
-
+  The \code{fitCoxModels} function retuns a newly constructed object of
+  the \code{MultiplePLSCoxModels} class. The \code{plot} method
+  invisibly returns the object on hich it was invoked. The
+  \code{summary} method returns no value. The predict method returmns a
+  list of predictions results, each of which comes from the
+  \code{predict} method for the \code{\link{SingleModel-class}.}
 }
-\author{Kevin R. Coombes \email{krc@silicovore.com}}
-\note{
-}
+\author{Kevin R. Coombes \email{krc@silicovore.com},
+  Kyoko Yamaguchi \email{kyoko.yamaguchi@osumc.edu}}
 \seealso{fitSingleModel}
 \examples{
 data("TCGA-ESCA")
@@ -79,7 +88,7 @@ splitVec <- rbinom(nrow(Outcome), 1, 0.6)
 trainD <- MO[, splitVec == 1]
 testD <- MO[, splitVec == 0]
 
-suppressWarnings( firstPass <- fitCoxModels(object = trainD, timevar = "Days",
+suppressWarnings( firstPass <- fitCoxModels(trainD, timevar = "Days",
                           eventvar = "vital_status", eventvalue = "dead") )
 summary(firstPass)
 plot(firstPass)

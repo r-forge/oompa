@@ -10,14 +10,14 @@ setClass("SingleModel",
                  riskModel = "coxph",
                  splitModel = "coxph"))
 
-fitSingleModel <- function(object, N, timevar, eventvar, eventvalue) {
+fitSingleModel <- function(multi, N, timevar, eventvar, eventvalue) {
   ## get the training data
-  X <- object@data[[N]]
+  X <- multi@data[[N]]
   allNA <- apply(X, 2, function(xcol) all(is.na(xcol)))
   X <- X[, !allNA]
   ident <- apply(X, 1, function(x) length(unique(x[!is.na(x)])))
   X <- X[ident > 1, ]
-  out <-  object@outcome
+  out <-  multi@outcome
   Xout <-out[colnames(X),]
   mynt <- round(1 + log10(nrow(X)))
   ## Fit the PLS model
@@ -89,4 +89,5 @@ setMethod("summary", "SingleModel", function(object, ...) {
 setMethod("plot", c("SingleModel", "missing"), function(x, y,  col = c("blue", "red"), lwd = 2, xlab = "", ylab = "Fraction Surviving", mark.time = TRUE, legloc = "topright", ...) {
   plot(x@SF, col = col, lwd = lwd, xlab = xlab, ylab = ylab,  mark.time = mark.time, ...)
   legend(legloc, paste(c("Low", "High"), "Risk"), col = col, lwd = lwd)
+  invisible(x)
 })

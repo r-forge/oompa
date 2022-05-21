@@ -1,5 +1,8 @@
 \name{TCGA-ESCA}
 \alias{TCGA-ESCA}
+\alias{assemble}
+\alias{Outcome}
+\alias{m450info}
 \docType{data}
 \title{
 Esophageal carcinoma (ESCA) data from The Cancer Genome Atlas (TCGA)
@@ -29,7 +32,8 @@ The \code{TCGA-ESCA} dataset contains the objects \code{assemble}, \code{Outcome
 \source{
   \url{https://portal.gdc.cancer.gov/projects/TCGA-ESCA}
 }
-
+\author{Kevin R. Coombes \email{krc@silicovore.com},
+  Kyoko Yamaguchi \email{kyoko.yamaguchi@osumc.edu}}
 \examples{
 data("TCGA-ESCA")
 }
