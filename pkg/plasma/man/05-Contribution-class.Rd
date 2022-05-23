@@ -14,7 +14,7 @@
 
 \title{Class \code{"Contribution"}}
 \description{
-  The \code{Contribution} object class ...
+  The \code{Contribution} object class contains the weight matrix between variables and the PLS components. The values in the weight matrix are a numeric representation of how much a variable from the omics datasets contributed to defining the final PLS components.
 }
 \section{Objects from the Class}{
   Objects are defined using the \code{getAllWeights}, \code{getCompositeWeights}, \code{getTop}, or \code{pickSignificant} functions. In the simplest scenario, one would enter an object of class \code{plasma} and any specific parameters associated with the function (see arguments section for more info).
@@ -22,7 +22,7 @@
 \usage{
 getCompositeWeights(object, N, M)
 getAllWeights(object, N)
-getTop(object, N=1)
+getTop(object, N = 1)
 pickSignificant(object, alpha)
 \S4method{summary}{Contribution}(object, \dots)
 \S4method{image}{Contribution}(x, col = viridis(64), mai = c(1.82, 1.52, 0.32, 0.32), \dots)
@@ -33,7 +33,7 @@ pickSignificant(object, alpha)
   \item{object}{In the first four functions, an object of the
     \code{plasma} class. In the methods described here, an object
     of the \code{Contributions} class.}
-  \item{N}{name of the dataset being modeled.}
+  \item{N}{in the function \code{getCompositeWeights}, the name of the dataset being modeled. \cr in the function \code{getTop}, the number of significant components you want to print.}
   \item{M}{name of the dataset being modeled pairwise with dataset \code{N} in the \code{getCompositeWeights} function.}
   \item{alpha}{level of significance used in the \code{pickSignificant} function.}
   \item{\dots}{other graphical parameters.}
@@ -62,5 +62,27 @@ pickSignificant(object, alpha)
 \author{Kevin R. Coombes \email{krc@silicovore.com},
   Kyoko Yamaguchi \email{kyoko.yamaguchi@osumc.edu}}
 \examples{
+data("TCGA-ESCA")
+MO <- prepareMultiOmics(assemble, Outcome)
+splitVec <- rbinom(nrow(Outcome), 1, 0.6)
+trainD <- MO[, splitVec == 1]
+testD <- MO[, splitVec == 0]
+
+suppressWarnings( firstPass <- fitCoxModels(trainD, timevar = "Days",
+                          eventvar = "vital_status", eventvalue = "dead") )
+pl <- plasma(object = MO, multi = firstPass)
+
+getCompositeWeights(object = pl, N = "ClinicalBin", M = "MAF")
+
+cbin <- getAllWeights(object = pl, N = "ClinicalBin")
+summary(cbin)
+image(cbin)
+heat(cbin, cexCol = 0.5)
+
+cbin01 <- pickSignificant(object = cbin, alpha = 0.01)
+image(cbin01)
+heat(cbin01, cexCol = 0.5)
+
+getTop(object = cbin01, N = 3)
 }
 \keyword{classes}

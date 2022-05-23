@@ -4,15 +4,14 @@
 \alias{plot,plasma,missing-method}
 \alias{summary,plasma-method}
 \alias{predict,plasma-method}
-\alias{heat,plasma-method}
 \alias{plasma}
 
 \title{Class \code{"plasma"}}
 \description{
   The \code{plasma} object class is returned after running the \code{plasma} function.
-  The \code{plasma} function uses the \code{PLSRCox} components from one dataset as the predictor variables and the features of another dataset as the response variables to fit a partial least squares regression (\code{plsr}) model. Then, we take the average of the predictions to create a final matrix of samples versus components.
+  The \code{plasma} function uses the \code{PLSRCox} components from one dataset as the predictor variables and the \code{PLSRCox} components of another dataset as the response variables to fit a partial least squares regression (\code{plsr}) model. Then, we take the mean of the predictions to create a final matrix of samples versus components.
 
-  In practice, the user will feed in a MultiOmics object and a MultiplePLSCoxModels object to the \code{plasma} function. The matrix of components described earlier is then used to fit a Cox Proportional Hazards (\code{coxph}) model with AIC stepwise variable selection to return a final object of class \code{plasma} which includes a \code{coxph} model with a reduced number of predictors.
+  The matrix of components described earlier is then used to fit a Cox Proportional Hazards (\code{coxph}) model with AIC stepwise variable selection to return a final object of class \code{plasma} which includes a \code{coxph} model with a reduced number of predictors.
 }
 \section{Objects from the Class}{
 Objects should be defined using the \code{plasma} function.
@@ -22,7 +21,6 @@ plasma(object, multi)
 \S4method{plot}{plasma,missing}(x, y, \dots)
 \S4method{predict}{plasma}(object, newdata = NULL, type = c("components", "risk",
                  "split"), \dots)
-\S4method{heat}{plasma}(x, y, \dots)
 }
 \arguments{
   \item{multi}{an object of the \code{MultiplePLSCoxModels} class.}
@@ -45,11 +43,11 @@ plasma(object, multi)
 \section{Methods}{
   \describe{
       \item{\code{\link{plot}}:}{Plots a Kaplan-Meier curve of the final \code{coxph} model that has been categorized into \dQuote{low risk} and \dQuote{high risk} based whether it is higher or lower, respectively, than the median value of risk.}
-      \item{\code{\link{predict}}:}{spaceholder text}
-      \item{\code{\link{heatmap}}:}{spaceholder text}
+      \item{\code{\link{predict}}:}{creates an object of class \code{plasmaPredictions}.}
   }
 }
 \value{
+  The \code{plasma} function returns a newly constructed object of the \code{plasma} class. The \code{plot} method invisibly returns the object on which it was invoked. The \code{predict} method returns an object of the \code{\link{plasmaPredictions}} class.
 }
 \author{Kevin R. Coombes \email{krc@silicovore.com},
   Kyoko Yamaguchi \email{kyoko.yamaguchi@osumc.edu}}
@@ -57,5 +55,19 @@ plasma(object, multi)
 }
 \seealso{plasmaPredictions, plsr}
 \examples{
+data("TCGA-ESCA")
+MO <- prepareMultiOmics(assemble, Outcome)
+splitVec <- rbinom(nrow(Outcome), 1, 0.6)
+trainD <- MO[, splitVec == 1]
+testD <- MO[, splitVec == 0]
+
+suppressWarnings( firstPass <- fitCoxModels(trainD, timevar = "Days",
+                          eventvar = "vital_status", eventvalue = "dead") )
+pl <- plasma(object = MO, multi = firstPass)
+
+plot(pl, legloc = "topright", main = "Training Data")
+heatmap(pl@meanPredictions)
+testpred <- predict(pl, testD)
+plot(testpred, main = "Testing", xlab = "Time (Days)")
 }
 \keyword{classes}

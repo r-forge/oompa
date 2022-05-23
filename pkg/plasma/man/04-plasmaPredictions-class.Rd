@@ -29,11 +29,15 @@
 }
 \section{Slots}{
   \describe{
-      \item{\code{meanPredictions}:}{A matrix with samples as rows and factors as columns.}
-      \item{\code{riskDF}:}{A data.frame of the test data.}
-      \item{\code{riskModel}:}{A coxph object...}
-      \item{\code{splitModel}:}{A coxph object...}
-      \item{\code{SF}:}{A survfit object...}      
+      \item{\code{meanPredictions}:}{A matrix with samples as rows and factors as columns that is a result of taking the mean of the PLS component predictions from each dataset.}
+      \item{\code{riskDF}:}{Object of type \code{data.frame} containing
+	the original \code{outcome} dataframe and additional columns for
+	"Risk", and "Split", corresponding to the risk of the event
+	calculated by the model, and patient assignment to low versus
+	high-risk groups, respectively.}
+      \item{\code{riskModel}:}{Object of type \code{coxph} that uses predicted Risk (continuous) as the predictor variable and survival as the response variable. See documentation for \code{link{coxph}}.}
+      \item{\code{splitModel}:}{Object of type \code{coxph} that uses predicted Split (predicted Risk categorized into \dQuote{high} and \dQuote{low} risk by the median predicted Risk) as the predictor variable and survival as the response variable. See documentation for \code{link{coxph}}.}
+      \item{\code{SF}:}{Object of type \code{survfit} which is used by the \code{plot} method to plot Kaplan-Meier curves grouped by predicted Split. See documentation for \code{link{survfit}}.}      
   }
 }
 \section{Methods}{
@@ -42,12 +46,26 @@
   }
 }
 \value{
+  The \code{predict} method on an object of the \code{\link{plasma}} class returns an object of the \code{\link{plasmaPredictions}} class. The \code{plot} method invisibly returns the value on which it was invoked.
 }
 \author{Kevin R. Coombes \email{krc@silicovore.com},
   Kyoko Yamaguchi \email{kyoko.yamaguchi@osumc.edu}}
 \note{
+  An object of \code{plasmaPredictions} class contains many models that are similar to an object of \code{\link{MultiplePLSCoxModels}} class.
 }
-\seealso{}
+\seealso{plasma}
 \examples{
+data("TCGA-ESCA")
+MO <- prepareMultiOmics(assemble, Outcome)
+splitVec <- rbinom(nrow(Outcome), 1, 0.6)
+trainD <- MO[, splitVec == 1]
+testD <- MO[, splitVec == 0]
+
+suppressWarnings( firstPass <- fitCoxModels(trainD, timevar = "Days",
+                          eventvar = "vital_status", eventvalue = "dead") )
+pl <- plasma(object = MO, multi = firstPass)
+
+testpred <- predict(pl, testD)
+plot(testpred, main = "Testing", xlab = "Time (Days)")
 }
 \keyword{classes}

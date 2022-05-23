@@ -73,9 +73,9 @@ fitCoxModels(multi, timevar, eventvar, eventvalue, verbose)
 \value{
   The \code{fitCoxModels} function retuns a newly constructed object of
   the \code{MultiplePLSCoxModels} class. The \code{plot} method
-  invisibly returns the object on hich it was invoked. The
-  \code{summary} method returns no value. The predict method returmns a
-  list of predictions results, each of which comes from the
+  invisibly returns the object on which it was invoked. The
+  \code{summary} method returns no value. The predict method returns a
+  list of prediction results, each of which comes from the
   \code{predict} method for the \code{\link{SingleModel-class}.}
 }
 \author{Kevin R. Coombes \email{krc@silicovore.com},

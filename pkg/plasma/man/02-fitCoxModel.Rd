@@ -60,15 +60,14 @@ fitSingleModel(multi, N, timevar, eventvar, eventvalue)
 	high-risk groups, respectively.}
       \item{\code{dsname}:}{A character vector of length one; the name
 	of the data set being modeled from a \code{MultiOmics} object.}
-      \item{\code{SF}:}{Object of type \code{survfit}. See documentation
-	for \code{\link{survfit}}.}
-      \item{\code{riskModel}:}{Object of type \code{coxph}. See
-	documentation for \code{\link{coxph}}.}
-      \item{\code{splitModel}:}{Object of type \code{coxph}. See
-	documentation for \code{\link{coxph}}.}
+      \item{\code{SF}:}{Object of type \code{survfit} which is used by the \code{plot} method to plot Kaplan-Meier curves grouped by predicted Split. See documentation for \code{link{survfit}}.}
+      \item{\code{riskModel}:}{Object of type \code{coxph} that uses predicted Risk (continuous) as the predictor variable and survival as the response variable. See documentation for \code{link{coxph}}.}
+      \item{\code{splitModel}:}{Object of type \code{coxph} that uses predicted Split (predicted Risk categorized into \dQuote{high} and \dQuote{low} risk by the median predicted Risk) as the predictor variable and survival as the response variable. See documentation for \code{link{coxph}}.}
 
   }
 }
+
+
 \section{Methods}{
   \describe{
       \item{\code{\link{plot}}:}{Plots Kaplan-Meier curves for each
@@ -85,7 +84,7 @@ fitSingleModel(multi, N, timevar, eventvar, eventvalue)
   returns the value on which it was invoked. The {summary} method
   returns an object summarizing the final model produced by PLS R cox
   regression. The \code{predict} method returns either a vector or
-  matrix dependning on the type of predictiosn requested.
+  matrix depending on the type of predictions requested.
 }
 \author{Kevin R. Coombes \email{krc@silicovore.com},
   Kyoko Yamaguchi \email{kyoko.yamaguchi@osumc.edu}}
