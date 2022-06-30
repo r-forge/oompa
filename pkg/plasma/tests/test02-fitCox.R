@@ -1,6 +1,10 @@
 library(plasma)
 # Repeat basic stuff from first test
-data("TCGA-ESCA")
+fls <- try(loadESCAdata())
+if (inherits(fls, "try-error")) {
+  stop("Unable to load data from remote server.")
+}
+ls()
 MO <- prepareMultiOmics(assemble, Outcome)
 train <- rep(c(TRUE, FALSE), times = c(112, 185-112))
 MO2 <- MO[, train]

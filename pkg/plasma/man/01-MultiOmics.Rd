@@ -48,7 +48,10 @@ The \code{prepareMultiOmics} function returns a new object of the \code{MultiOmi
 \author{Kevin R. Coombes \email{krc@silicovore.com},
   Kyoko Yamaguchi \email{kyoko.yamaguchi@osumc.edu}}
 \examples{
-data("TCGA-ESCA")
+fls <- try(loadESCAdata())
+if (inherits(fls, "try-error")) {
+  stop("Unable to load data from remote server.")
+}
 MO <- prepareMultiOmics(datalist = assemble, outcome = Outcome)
 
 plot(MO)

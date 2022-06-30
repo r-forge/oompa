@@ -1,5 +1,9 @@
 library(plasma)
-data("TCGA-ESCA")
+fls <- try(loadESCAdata())
+if (inherits(fls, "try-error")) {
+  stop("Unable to load data from remote server.")
+}
+ls()
 ## prepare MultiOmics
 MO <- prepareMultiOmics(assemble, Outcome)
 MO <- MO[c("ClinicalBin", "ClinicalCont", "RPPA"),]

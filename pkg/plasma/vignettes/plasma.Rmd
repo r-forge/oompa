@@ -27,7 +27,7 @@ suppressWarnings( library(plasma) )
 Next, we load sample data derived from the esophageal cancer (ESCA) cohort of
 The Cancer Genome Atlas (TCGA).
 ```{r data}
-data("TCGA-ESCA")
+loadESCAdata()
 ls()
 ```
 The data we have available consist of

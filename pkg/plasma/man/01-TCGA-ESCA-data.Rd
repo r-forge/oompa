@@ -1,5 +1,6 @@
 \name{TCGA-ESCA}
 \alias{TCGA-ESCA}
+\alias{loadESCAdata}
 \alias{assemble}
 \alias{Outcome}
 \alias{m450info}
@@ -8,9 +9,14 @@
 Esophageal carcinoma (ESCA) data from The Cancer Genome Atlas (TCGA)
 }
 \description{
-The \code{TCGA-ESCA} dataset contains the objects \code{assemble}, \code{Outcome}, and \code{m450info} for building the \code{MultiOmics} object.
+The \code{TCGA-ESCA} dataset contains the objects \code{assemble},
+\code{Outcome}, and \code{m450info} for building the \code{MultiOmics}
+object. Because its size exceeds the CRAN limits, the data is stored on
+a remote server and must be loaded using the function \code{loadESCAdata}.
 }
-\usage{data("TCGA-ESCA")}
+\usage{
+loadESCAdata()
+}
 \format{
   The \dQuote{TCGA-ESCA} dataset contains the following:
   \describe{
@@ -35,6 +41,9 @@ The \code{TCGA-ESCA} dataset contains the objects \code{assemble}, \code{Outcome
 \author{Kevin R. Coombes \email{krc@silicovore.com},
   Kyoko Yamaguchi \email{kyoko.yamaguchi@osumc.edu}}
 \examples{
-data("TCGA-ESCA")
+fls <- try(loadESCAdata())
+if (inherits(fls, "try-error")) {
+  stop("Unable to load data from remote server.")
+}
 }
 \keyword{datasets}

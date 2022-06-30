@@ -21,7 +21,7 @@ importFrom("viridisLite",
 
 ## MultiOmics class
 exportClass("MultiOmics")
-export("prepareMultiOmics")
+export("prepareMultiOmics", "loadESCAdata")
 
 ## SingleModel class
 exportClass("SingleModel")

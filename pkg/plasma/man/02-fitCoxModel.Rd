@@ -92,7 +92,10 @@ fitSingleModel(multi, N, timevar, eventvar, eventvalue)
   \code{\link{getSizes}}
 }
 \examples{
-data("TCGA-ESCA")
+fls <- try(loadESCAdata())
+if (inherits(fls, "try-error")) {
+  stop("Unable to load data from remote server.")
+}
 MO <- prepareMultiOmics(assemble, Outcome)
 MO <- MO[c("ClinicalBin", "ClinicalCont", "RPPA"),]
 set.seed(98765)

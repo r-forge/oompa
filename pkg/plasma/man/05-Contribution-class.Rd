@@ -62,7 +62,10 @@ pickSignificant(object, alpha)
 \author{Kevin R. Coombes \email{krc@silicovore.com},
   Kyoko Yamaguchi \email{kyoko.yamaguchi@osumc.edu}}
 \examples{
-data("TCGA-ESCA")
+fls <- try(loadESCAdata())
+if (inherits(fls, "try-error")) {
+  stop("Unable to load data from remote server.")
+}
 MO <- prepareMultiOmics(assemble, Outcome)
 splitVec <- rbinom(nrow(Outcome), 1, 0.6)
 trainD <- MO[, splitVec == 1]
