@@ -19,12 +19,12 @@ mybiocs <- c("edgeR",
              "AnnotationDbi",
              "RSQLite",
              "mixOmics",
-             "msa"
+             "msa",
+             "survcomp"
              )
 for (p in mybiocs) {
   if (!require(p, character.only=TRUE)) {
     BiocManager::install(p, update = FALSE, ask = FALSE)
-#    biocLite(p, suppressUpdates = TRUE, suppressAutoUpdate = TRUE)
   }
 }
 
