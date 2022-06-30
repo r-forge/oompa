@@ -66,16 +66,17 @@ fls <- try(loadESCAdata())
 if (inherits(fls, "try-error")) {
   stop("Unable to load data from remote server.")
 }
-MO <- prepareMultiOmics(assemble, Outcome)
+# restrict data set size
+MO <- prepareMultiOmics(assemble[c("ClinicalBin", "ClinicalCont", "RPPA")], Outcome)
+
 splitVec <- rbinom(nrow(Outcome), 1, 0.6)
 trainD <- MO[, splitVec == 1]
 testD <- MO[, splitVec == 0]
 
-suppressWarnings( firstPass <- fitCoxModels(trainD, timevar = "Days",
-                          eventvar = "vital_status", eventvalue = "dead") )
-pl <- plasma(object = MO, multi = firstPass)
+firstPass <- fitCoxModels(trainD, "Days", "vital_status", "dead")
+pl <- plasma(object = trainD, multi = firstPass)
 
-getCompositeWeights(object = pl, N = "ClinicalBin", M = "MAF")
+getCompositeWeights(object = pl, N = "ClinicalBin", M = "RPPA")
 
 cbin <- getAllWeights(object = pl, N = "ClinicalBin")
 summary(cbin)
