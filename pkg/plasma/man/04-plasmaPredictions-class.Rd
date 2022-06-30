@@ -9,6 +9,9 @@
   The \code{plasmaPredictions} object class is returned when running the \code{predict} method on an object of class \code{plasma}.
 }
 \section{Objects from the Class}{
+  Users shold not create objects of this class directly. They will be
+  automatically created when you apply the \code{predict} method to a
+  fully worked out \code{plasma} model.
 }
 \usage{
 \S4method{plot}{plasmaPredictions,missing}(x, y, col = c("blue", "red"),

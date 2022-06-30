@@ -51,8 +51,6 @@ plasma(object, multi)
 }
 \author{Kevin R. Coombes \email{krc@silicovore.com},
   Kyoko Yamaguchi \email{kyoko.yamaguchi@osumc.edu}}
-\note{
-}
 \seealso{plasmaPredictions, plsr}
 \examples{
 fls <- try(loadESCAdata())
