@@ -14,108 +14,176 @@ vignette: >
 ```{r opts, echo=FALSE}
 knitr::opts_chunk$set(fig.width=8, fig.height=5)
 options(width=96)
+.format <- knitr::opts_knit$get("rmarkdown.pandoc.to")
+.tag <- function(N, cap ) ifelse(.format == "html",
+                                 paste("Figure", N, ":",  cap),
+                                 cap)
 ```
 # Introduction
+Recent years have seen the development of numerous algorithms and computational packages for
+the analysis of multi-omics data sets. at this point, one can find multiple review articles
+summarizing progress in the field [Subramanian-2020; Graw-2021; Heo-2021; Picard-2021;
+Reel-2021; Vlachavas-2021; Adossa-2021]. As with other applications of the general field of
+machine learning, the kinds of problems addressed by these algorithms are usually divided into
+two categories: unsupervised (typically, clustering and class discovery) or supervised
+(including class comparison and class prediction). Advances in the area of unsupervised
+learning have been broader and deeper than advances on supervised learning.
+
+One of the most effective unsupervised methods is Multi-Omic Factor Analysis (MOFA)
+[Argelaguet-2018; Argelaguet-2020]. A key property of MOFA is that it does not require
+all omics assays to have been performed on all samples under study. In particular, it can
+effectively discover class structure across omics data sets even when data for many
+patients have only been acquired on a subset of the omics technologies. As of this
+writing, we do not know of any supervised multi-omics method that is effective when
+samples have only been assayed on a subset of the omics data sets.
+
+MOFA starts with a standard method -- Latent
+factor Analysis -- that is known to work well on single omics data. It then FitS a coherent
+model that identifies latent factors that are common to, and able to explain the data well,
+all the omics data sets under study. Our investigation (unpublished) of the factors found by MOFA
+suggests that it is approximately equivalent to a two-step process:
+
+1. Use principal components analysis to identify initial latent factors in each individual
+   omics data set.
+2. For each pair of omics data sets, use overlapping samples to train and extends models of
+   each factor to the uni9on of assayed samples.
+
+That interpretation of MOFA suggests that an analogous procedure might work for supervised
+analyses as well. In this article, we describe a two-step method, which we call "_plasma_"
+to find models that can predict time-to-event outcomes on samples from multi-omics data sets
+even in the presence of incomplete data. We use partial least squares (PLS) for both steps,
+using Cox regression to learn the single omics models and linear regression to learn how to
+extend models from one omics data set to another. To illustrate the method, we use a subset
+of the esophageal cancer (ESCA) data set from The Cancer Genome Atlas (TCGA).
 
 # Methods
-
-# Results
-We start by loading the package.
+We start by loading the `plasma` package.
 ```{r pkgs}
 suppressWarnings( library(plasma) )
 ```
-Next, we load sample data derived from the esophageal cancer (ESCA) cohort of
-The Cancer Genome Atlas (TCGA).
+
+## Data
+We downloaded the entire esophageal cancer Level 3 data set from the TCGA on 6 August 2018. We
+filtered the data sets so that only the most variable, and presumably the most informative,
+features were retained. Here, we load this sample data set.
 ```{r data}
 loadESCAdata()
 ls()
 ```
-The data we have available consist of
 
-* `assemble`, a list of datasets;
-* `m450info`, a data frame of annotation information about the probes from the
-  Illumina 450K methylation array; and
-* `Outcome`, a data frame of clinical outcomes, whihc basically comes down
-  to overall survival.
+1. We obtained 162 columns of clinical, demographic, and laboratory data on 185 patients. We
+   removed any columns that always contained the same value. We also removed any columns whose
+   values were missing in more than 25% of the patients. We separated the clinical data into
+   three parts:
+    1. Outcome (overall survival)
+    2. Binary covariates (53 columns)
+    3. Continuous covariates (6 columns)
+1. Exome sequencing data for 184 patients with esophageal cancer was obtained as mutation allele
+   format (MAF) files. We removed any gene that was mutated in fewer than 3% of the samples. The
+   resulting data set contained 566 mutated genes.
+2. Methylation data for 185 ESCA patients was obtained as beta values computed by the TCGA from
+   Illumina Methylation 450K microarrays. We removed any CpG site for which the standard deviation
+   of the beta values was less than 0.3. The resulting data set contained 1,454 highly variable
+   CpG's.
+3. Already normalized sequencing data on 2566 microRNAs (miRs) was obtained in 185 patients.
+   We removed any miR for which the standard deviation of normalized expression was less
+   than 0.05 which left 926 miRs in the final data set.
+4. Already normalized sequencing data on 20,5341 mRNAs was obtained in 184 patients. We removed
+   any mRNA whose mean normalized expression was less than 6 or whose standard deviation was less
+   than 1.2. The final data set included 2520 mRNAs.
+5. Normalized expression data from reverse phase protein arrays (RPPA) was obtained from
+   antibodies targeting 192 proteins in 126 patients. All data was retained for further analysis.
+
+Finally, in order to be able to illustrate the ability of the plasma algorithm to work in
+the presence of missing data, we randomly selected 10% of the patients to remove from
+the miRSeq data set (leaving 166 patients) and 15% of the patients to remove from the
+mRNASeq data set (leaving 157 patients). 
+```{r sizes}
+sapply(assemble, dim)
+```
 
 Here is a summary of the outome data.
 ```{r outcome}
-dim(Outcome)
 summary(Outcome)
 ```
 
-Here are the sizes of the data sets.
-```{r sizes}
-t(sapply(assemble, dim))
-```
-To be consistent with the `MOFA2` R package, all of the data sets are arranged so that
-patient samples are columns and assay features are rows.
+## Computational Approach
+The `plasma` algorithm is based on Partial Least Squares (PLS), which has been shown to be
+an effective method for finding components that can predict clinically interesting outcomes
+[CITE]. The workflow of the plasma algorithm is illustrated in **Figure 1** in the case of three
+omics data sets. First, for each of the omics data sets, we apply the partial least squares
+(PLS) Cox regression algorithm (`plsRcox' Version 'r packageVersion(plsRcox)` [CITE]) to
+the time-to-event outcome data to learn separate predictive models. Each of these models
+may be incomplete, since they are only defined for patients who have been assayed using that particular omics technology. Second, for each pair of omics data sets, we apply the PLS
+linear regression algorithm (`plsr' Version 'r packageVersion(plsr)` [CITE]) to learn how
+to predict the coefficients of the Cox regression components from one data set using features
+from the other data set. This step extends each of the original models, in different ways,
+from the intersection of samples assayed on both data sets to their union. Third, we average
+all of the different extended models (ignoring missing data) to get a single coherent model
+of component coefficients across all omics data sets. Assuming that this process has been
+applied to learn the model from a training data set, we can evaluate te final Cox regression
+model on both the trainng set and a data set of patient samples.
 
-We should also point out that we have not included all of the available data for the ESCA
-cohort. When getting the data ready to illustrate the `plasma` algorithm, we randomly removed
-different fractions of the samples from the miRSeq, mRNASeq, and RPPA data sets. The point of
-leaving them out is to be able to show that `plasma` can find useful components from any of
-the included data sets and manage to extend them to the full cohort. In addition, the RPPA,
-miRSeq, and mRNASeq data sets were filtered to keep features with larger means and standard
-deviations, and the Meth450 data were filtered to keep only the most variable features.
+```{r fig01, out.width = "100%", fig.cap = .tag(1, "Workflow schematic for plasma algorithm with three omics data sets.")}
+SF <- system.file("Figure/methods.png", package = "plasma")
+knitr::include_graphics(SF)
+rm(SF)
+```
 
 ## Preparing the Data
-Our first task is to pad each data set with appropriate `NA`'s to ensure that each set
-includes the same patient samples in the same order, where that order matches the outcome
-data frame.
-
+To be consistent with the `MOFA2` R package, all of the data sets are arranged so that patient
+samples are columns and assay features are rows. Our first task is to pad each data set with
+appropriate `NA`'s to ensure that each set includes the same patient samples in the same order,
+where that order matches the outcome data frame.
 ```{r prep}
 MO <- prepareMultiOmics(assemble, Outcome)
-#MO <- MO[c("ClinicalBin", "ClinicalCont", "RPPA", "MAF"),]
-class(MO)
 summary(MO)
 ```
 
 We see that the number of patients in each data set is now equal to the number of patients
 with clinical outcome data.
 
-```{r fig01, fig.cap = "Overview of the ESCA data sets.", fig.width=5, fig.height=8}
-opar <- par(mai = c(1.02, 1.32, 0.82, 0.22))
-plot(MO, main = "All ESCA")
-par(opar)
-```
 
 ## Split Into Training and Test
-
+As indicated above, we want to separate the data set into training and test samples. We will
+use 60% for training and 40% for testing.
 ```{r split}
 set.seed(44931)
+set.seed(54321)
 splitVec <- rbinom(nrow(Outcome), 1, 0.6)
-table(splitVec)
 ```
 
-```{r fig02, fig.cap = "Overview of training data.", fig.width=5, fig.height=8}
+**Figure 2** presents a graphical overview of the number of samples (`N`) and the number of
+features (`D`) in each omics component of the training and test sets.
+
+```{r fig02, fig.cap = .tag(2, "Overview of training and test data."), fig.width=9, fig.height=8}
 trainD <- MO[, splitVec == 1]
 summary(trainD)
-opar <- par(mai = c(1.02, 1.32, 0.82, 0.22))
-plot(trainD, main = "Train")
-par(opar)
-```
-
-```{r fig03, fig.cap = "Overview of test data.", fig.width=5, fig.height=8}
 testD <- MO[, splitVec == 0]
 summary(testD)
-opar <- par(mai = c(1.02, 1.32, 0.82, 0.22))
+opar <- par(mai = c(1.02, 1.32, 0.82, 0.22), mfrow = c(1,2))
+plot(trainD, main = "Train")
 plot(testD, main = "Test")
 par(opar)
 ```
 
-## PLS Cox Regression Models
-Partial Least Squares (PLS) has been shown to be an effective method for finding components
-that can predict clinically interesting outcomes {REFERENCE} . The first step of the `plasma`
-algorithm is to fit PLS Cox models on each data set with the function `fitCoxModels`. The returned object of class `MultiplePLSCoxModels` contains a list of `SingleModel` objects, one for each assay, and within this are 4 different regression models:
+# Results
 
-* 1 plsRcoxmodel
-* 3 separate models are made on the prediction of Risk made from using the training data on the above plsRcoxmodel
-    + riskModel is a `coxph` model with predicted Risk as the predictors (continuous)
-    + splitModel is a `coxph` model with Split as the predictors (Risk categorized into high and low by the median)
-    + SF is a `survfit` model, which creates Kaplan-Meier curves corresponding to `splitModel`
+## Separate PLS Cox Regression Models
+The first step of the `plasma` algorithm is to fit PLS Cox models on each data set using the
+function `fitCoxModels`. The returned object of class `MultiplePLSCoxModels` contains a list
+of `SingleModel` objects, one for each assay, and within this are 4 different regression models:
 
-```{r fig04, fig.width = 8, fig.height = 12}
+* The `plsRcoxmodel` contains the coefficents of the components learned by PLS Cox regression.
+  The number of components is determined automatically as a function of th logarithm of the
+  number of features in the omics data set. The output of this model is a continuous prediction
+  of "risk" for the time-to-event outcome of interest.
+* Two separate models are constructed using the prediction of risk on the training data.
+    + The `riskModel` is a `coxph` model using continuous predicted Risk as the predictor.
+    + The `splitModel` is a `coxph` model using a binary split of the risk (at the median) as
+      the predictor.
+
+```{r fig03, fig.width = 8, fig.height = 12, fig.cap = .tag(3, "Kaplan-Meier plots of overall survival on the training set from separate PLS Cox omics models")}
 suppressWarnings( firstPass <- fitCoxModels(trainD, timevar = "Days",
                           eventvar = "vital_status", eventvalue = "dead") )
 summary(firstPass)
@@ -123,29 +191,32 @@ plot(firstPass)
 ```
 
 ## Extend the model components
-The "extension" portion is done with the function plasma() where it takes in the previous created objects of class `multiOmics` and `MultiplePLSCoxModels` and returns an object of class `plasma`. Within the plasma() function, the PLS components from one dataset (ex. dataset A) is used to predict the PLS components from another dataset (ex. dataset B). The process does this iteratively such that in our case there are 7 different sets of predictions of the PLS components, which are averaged and saved to the object of class `plasma` as a dataframe called `meanPredictions`.
+The second step of the algorithm is to extend the individual omics-based models across other omics
+data sets. This step is perfomed using the `plasma` function, which takes in the previously
+created objects of class `multiOmics` and `MultiplePLSCoxModels`. The function does this
+iteratively such that in our case there are seven different sets of predictions of the PLS
+components. These different predictions are averaged and saved internally as a data frame
+called `meanPredictions`. The structure of models created and stored in the `plasma` object is
+the same as for the separate, individual, omics models. **Figure 4** shows the Kaplan-Meier plot
+using the predicted risk, split at the median value, on the training data set.
 
-Similarly to the objects that are part of the `MultiplePLSCoxModels` object, there are `riskModel`, `splitModel`, and `SF` stored in the `plasma` object.
-
-```{r plasma}
+```{r fig04, fig.cap = .tag(4, "Kaplan-Meier plot of overall survival on the training set using the unified `plasma` Cox model.")}
 pl <- plasma(MO, firstPass)
 plot(pl, legloc = "topright", main = "Training Data")
+```
+
+```{r echo=FALSE, eval = FALSE}
 heatmap(pl@meanPredictions) # make a standard method?
 summary(pl) # neds to be defined.
 ```
 
 ## Independent Test Set
-Now we want to see how well any of the models we have constructed generalize to our test set.
-```{r firstpre}
-SM <- firstPass@models[[1]]
-ND <- as.data.frame(t(testD@data[[1]]))
-class(SM)
-foo <- predict(SM, type = "risk")
-foo <- predict(SM, type = "risk")
-poo <- predict(SM, newdata = testD)
-```
+Now we want to see how well the final composite model generalizes to our test set. **Figure 5**
+uses the predicted risk, split at the median of the training data, to construct a Kaplan-Meier
+plot on the test data. The model yields a statisticall significant (p = 0.0324) separation of
+outcomes between the high and low risk patients.
 
-```{r testingFinal}
+```{r fig05, fig.cap = .tag(5, "Kaplan-Meier plot of overall survival on the test set.")}
 testpred <- predict(pl, testD)
 plot(testpred, main="Testing", xlab = "Time (Days)")
 ```
@@ -247,3 +318,7 @@ suppressWarnings( library(MOFA2) )
 ```
 
 
+# Appendix
+```{r si}
+sessionInfo()
+```
