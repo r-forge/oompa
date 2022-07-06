@@ -2,3 +2,5 @@
 predicting outcomes on new data from a SingleModel.
 
 * Add a "heat" method for plasma objects.
+
+* Add 'cexRow" and 'cexCol" arguments to the 'image' method for "Contributions".
