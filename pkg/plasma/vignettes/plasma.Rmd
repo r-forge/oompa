@@ -56,6 +56,7 @@ using Cox regression to learn the single omics models and linear regression to l
 extend models from one omics data set to another. To illustrate the method, we use a subset
 of the esophageal cancer (ESCA) data set from The Cancer Genome Atlas (TCGA).
 
+
 # Methods
 We must load the `plasma` package.
 ```{r pkgs}
@@ -129,6 +130,21 @@ SF <- system.file("Figure/methods.png", package = "plasma")
 knitr::include_graphics(SF)
 rm(SF)
 ```
+
+### Terminology
+Because of the layered nature of the plasma algorithm, we intend to use the following terminology
+to help clarify the later discussions.
+
+1. The input data contains a list of _omics data sets_.
+2. Each omics data set contains measurements of multiple _features_.
+3. The first step in the algorithm uses PLS Cox regression to find a set of _components_.
+   Each component is a linear combination of features. The components are used as predictors
+   in a Cox proportional hazards model, which predicts the log hazard ratio as a linear
+   combination of components.
+4. The second step in the algorithm creates a secondary layer of components. We do not give
+   these components a separate name. They are not an itemn or particular focus; we view them
+   as a way to extend the first level components to more samples by "re-interpreting" them
+   in other omics data sets.
 
 ## Preparing the Data
 To be consistent with the `MOFA2` R package, all of the data sets are arranged so that patient
@@ -230,68 +246,128 @@ These components can then be combined in yet another linear model that predicts 
 outcome through Cox regression. In this section, we want to explore how the individual features
 from different omics data sets contribute to different model components.
 
+Our first act toward opening the black box is to realize that not all of the components discovered
+from the individual omics data sets survived into the final composite model. Some components were
+eliminated because they appeared to be nearly linearly related to components found in other omics
+data sets. So, we can examine the final composite model more closely.
+```{r pl@fullModel}
+pl@fullModel
+temp <- terms(pl@fullModel)
+mainterms <- attr(temp, "term.labels")
+rm(temp)
+mainterms
+```
+We see that at least one component discovered from each of the five "true" omics data sets
+survived in the final model. However, neither the binary clinical nor continuous clinical data sets
+contributed independent components. 
+
+Our interest now turns to understanding how the features from individual omics data sets
+contribute to the components that are used in the final model.
+
 The weight matrix of the `plasma` object can be extracted using the `getAllWeights` and specifying the name of the dataset. This weight matrix has the features from the particular dataset specified as rows and all of the PLS components as columns. Setting a cutoff of significance for the `pickSignificant` function will return a different weight matrix in which the rows have been selected if they contributed significantly to defining the PLS components. PLS regression is a supervised method that aims to find linear combinations of predictor variables (i.e. components) that maximize the variance in both the predictors and the response (reference: An Introduction to Statistical Learning with Applications in R, 2nd Ed.). Therefore, these weight matrices can be analyzed even further by looking at their heatmaps, to examine the relative 1) direction and 2) magnitude with which the original variables in the omics datasets contributed to the final PLS components.
 
 ### Clinical Binary Data
-
-```{r echo = FALSE,results = "hide"}
-A <- 32
-r <- c(rep(0, A), 0:A)[-A]
-g <- -c(-A:0, rep(0, A))[-A - 1]
-RG <- rgb(r, g, rep(0, 64), maxColorValue = A)
-rm(A, r, g)
-RG <- heat.colors(64)
+```{r echo=FALSE, eval=FALSE}
+infl <- plasma:::influencer(pl)
+class(infl)
+dim(infl)
+plot(MM <- apply(infl, 2, mean), pch=16)
+plot(SS <- apply(infl, 2, sd), pch=16)
+plot(MM, SS, type = "n")
+text(MM, SS, colnames(infl))
+text(MM[mainterms], SS[mainterms], mainterms, col = "red")
 ```
-
-```{r cbin}
+We use the binary clinical data set to illustrate our methods for interpreting the components.
+These arise from the secondary components that learn how to extend components from one omics
+data set to the others. Those models use linear combinations of features as linear predictors
+of the primary components. The `getAllWeights` function combines these two levels of linear
+coefficients to compute the weight of each feature contributing to each primary component.
+```{r fig06, fig.cap = .tag(6, "Unscaled heatmap of the contributions of binary clinical features to all components.")}
+HG <- heat.colors(64)
 cbin <- getAllWeights(pl, "ClinicalBin")
-heat(cbin, cexCol = 0.7, cexRow = 0.5, col = RG)
-cbin01 <- pickSignificant(cbin, 0.01)
-heat(cbin01, cexCol = 0.7, cexRow = 0.7, col = RG)
+heat(cbin, cexCol = 0.7, cexRow = 0.5, col = HG)
 ```
 
+**Figure 6** shows the raw weights for each clinical binary feature in all of the original
+omics components. **Figure 7** only includes the omics components that were retained in the
+final composite model. Structurally, these two figures look similar. There is a central set
+of components where all of the weights look weak, and a central set of features that appear
+to have weak contributions to all components.
+
+```{r fig07, fig.cap = .tag(7, "Unscaled heatmap of the contributions of binary clinical features to important components.")}
+heat(cbin[, mainterms], cexCol = 0.7, cexRow = 0.5, col = HG)
+```
+
+We hypothesize that some comonents intrinsically have a wider spread of weights, and that
+it might be more important to scale the components consistently to look at the relative
+contributions (**Figure 8**). By standardizing the weights component by component, we see
+a better balance of contributions per component. However, we can still identify a set of
+features that seem to make no contributions to any of the components. We can filter the
+features by only retaining those that make a large contribution to at least one omics
+component (**Figure 9**. 
+
+```{r fig08, fig.cap = .tag(8, "Scaled heatmap of the contributions of binary clinical features to important components.")}
+dbin <- cbin[, mainterms]
+dbin@contrib <- scale(dbin@contrib)
+heat(dbin, cexCol = 0.7, cexRow = 0.5, col = HG)
+```
+
+
+```{r fig09, fig.cap = .tag(9, "Scaled heatmap of the contributions of filtered binary clinical features to important components.")}
+shrink <- function(dset, N) {
+  dset@contrib <- scale(dset@contrib)
+  feat <- unique(unlist(getTop(dset, N)))
+  dset@contrib <- dset@contrib[feat, mainterms]
+  dset
+}
+xbin <- shrink(cbin, 4)
+heat(xbin, cexCol = 0.7, cexRow = 0.8, col = HG)
+```
 
 ### Clinical Continuous Data
-```{r ccont}
+```{r fig10, fig.cap = .tag(10, "Scaled heatmap of the contributions of filtered continuous clinical features to important components")}
 ccont <- getAllWeights(pl, "ClinicalCont")
-heat(ccont, cexCol = 0.8, cexRow = 1.2, col = RG)
+xcont <- shrink(ccont, 2)
+heat(xcont, cexCol = 0.8, cexRow = 1.2, col = HG)
 ```
 
 ### Mutation Data
-```{r cmaf}
+```{r fig11, fig.cap = .tag(11, "Scaled heatmap of the contributions of filtered mutation features to important components")}
 cmaf <- getAllWeights(pl, "MAF")
-cmaf01 <- pickSignificant(cmaf, 0.01)
-heat(cmaf01, cexCol = 0.7, cexRow = 0.4, col = RG)
+xmaf <- shrink(cmaf, 4)
+heat(xmaf, cexCol = 0.7, cexRow = 0.6, col = HG)
 ```
 
 ### Methylation Data
-```{r meth}
+```{r fig12, fig.cap = .tag(12, "Scaled heatmap of the contributions of filtered methylation features to important components")}
 meth <- getAllWeights(pl, "Meth450")
-meth01 <- pickSignificant(meth, 0.01)
-heat(meth01, cexCol = 0.7, cexRow = 0.3, col = RG)
+xmeth <- shrink(meth, 3)
+heat(xmeth, cexCol = 0.7, cexRow = 0.3, col = HG)
 ```
 
 ### Proteomics Data
-```{r rppa}
+```{r fig13, fig.cap = .tag(13, "Scaled heatmap of the contributions of filtered RPPA features to important components")}
 rppa <- getAllWeights(pl, "RPPA")
-rppa01 <- pickSignificant(rppa, 0.01)
-heat(rppa01, cexCol = 0.7, cexRow = 0.5, col = RG)
+xrppa <- shrink(rppa, 4)
+heat(xrppa, cexCol = 0.7, cexRow = 0.3, col = HG)
 ```
 
 
 ### mRNA-Sequencing Data
+```{r fig14, fig.cap = .tag(14, "Scaled heatmap of the contributions of filtered mRNA features to important components")}
 ```{r mrna}
 mrna <- getAllWeights(pl, "mRNASeq")
-mrna01 <- pickSignificant(mrna, 0.01)
-heat(mrna01, cexCol = 0.5, cexRow = 0.5, col = RG)
+xmrna <- shrink(mrna, 3)
+heat(xmrna, cexCol = 0.7, cexRow = 0.3, col = HG)
 ```
 
 
 ### miR-Sequencing Data
+```{r fig15, fig.cap = .tag(15, "Scaled heatmap of the contributions of filtered miR features to important components")}
 ```{r mir}
 mir <- getAllWeights(pl, "miRSeq")
-mir01 <- pickSignificant(mir, 0.01)
-heat(mir01, cexCol = 0.7, cexRow = 0.5, col = RG)
+xmir <- shrink(mir, 3)
+heat(xmir, cexCol = 0.7, cexRow = 0.3, col = HG)
 ```
 
 # Conclusions

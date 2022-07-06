@@ -19,6 +19,9 @@ setMethod("[", "Contribution", function(x, i, j,  ..., drop = FALSE) {
   if (!missing(i)) {
     contrib <- x@contrib[i,]
   }
+  if (!missing(j)) {
+    contrib <- contrib[, j]
+  }
   new("Contribution", datasets = x@datasets, contrib = contrib)
 })
 
