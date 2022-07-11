@@ -1,6 +1,6 @@
 ---
 title: "plasma: Partial LeAst Squares for Multi-omics Analysis"
-author: "Kevin R. Coombes, Kyoko Yamaguchi"
+author: "Kevin R. Coombes"
 data: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -21,9 +21,9 @@ options(width=96)
 ```
 # Introduction
 Recent years have seen the development of numerous algorithms and computational packages for
-the analysis of multi-omics data sets. at this point, one can find multiple review articles
+the analysis of multi-omics data sets. At this point, one can find multiple review articles
 summarizing progress in the field [Subramanian-2020; Graw-2021; Heo-2021; Picard-2021;
-Reel-2021; Vlachavas-2021; Adossa-2021]. As with other applications of the general field of
+Reel-2021; Vlachavas-2021; Adossa-2021]. As with other applications of the     field of
 machine learning, the kinds of problems addressed by these algorithms are usually divided into
 two categories: unsupervised (typically, clustering and class discovery) or supervised
 (including class comparison and class prediction). Advances in the area of unsupervised
@@ -39,7 +39,7 @@ samples have only been assayed on a subset of the omics data sets.
 
 MOFA starts with a standard method -- Latent Factor Analysis -- that is known to work 
 well on single omics data. It then fits a coherent model that identifies latent factors
-that are common to, and able to explain the data well, all the omics data sets under
+that are common to, and able to explain the data well in, all the omics data sets under
 study. Our investigation (unpublished) of the factors found by MOFA suggests that it is
 approximately equivalent to a two-step process:
 
@@ -58,9 +58,10 @@ of the esophageal cancer (ESCA) data set from The Cancer Genome Atlas (TCGA).
 
 
 # Methods
-We must load the `plasma` package.
+Our computational method is implemented and the data are available in the `plasma` package.
 ```{r pkgs}
 suppressWarnings( library(plasma) )
+packageVersion("plasma")
 ```
 
 ## Data
@@ -69,6 +70,7 @@ filtered the data sets so that only the most variable, and presumably the most i
 features were retained. Here, we load this sample data set.
 ```{r data}
 loadESCAdata()
+sapply(assemble, dim)
 ```
 
 1. From TCGA, we obtained 162 columns of clinical, demographic, and laboratory data on 185
@@ -87,20 +89,18 @@ loadESCAdata()
    CpG's.
 3. Already normalized sequencing data on 2566 microRNAs (miRs) was obtained in 185 patients.
    We removed any miR for which the standard deviation of normalized expression was less
-   than 0.05 which left 926 miRs in the final data set.
-4. Already normalized sequencing data on 20,5341 mRNAs was obtained in 184 patients. We removed
+   than 0.05, which left 926 miRs in the final data set.
+4. Already normalized sequencing data on 20,531 mRNAs was obtained in 184 patients. We removed
    any mRNA whose mean normalized expression was less than 6 or whose standard deviation was less
-   than 1.2. The final data set included 2520 mRNAs.
+   than 1.2. The final data set included 2,520 mRNAs.
 5. Normalized expression data from reverse phase protein arrays (RPPA) was obtained from
-   antibodies targeting 192 proteins in 126 patients. All data was retained for further analysis.
+   antibodies targeting 192 proteins in 126 patients. All data were retained for further analysis.
 
 Finally, in order to be able to illustrate the ability of the plasma algorithm to work in
 the presence of missing data, we randomly selected 10% of the patients to remove from
 the miRSeq data set (leaving 166 patients) and 15% of the patients to remove from the
 mRNASeq data set (leaving 157 patients). 
-```{r sizes}
-sapply(assemble, dim)
-```
+
 
 Here is a summary of the outcome data.
 ```{r outcome}
@@ -112,12 +112,12 @@ The `plasma` algorithm is based on Partial Least Squares (PLS), which has been s
 an effective method for finding components that can predict clinically interesting outcomes
 [CITE]. The workflow of the plasma algorithm is illustrated in **Figure 1** in the case of
 three omics data sets. First, for each of the omics data sets, we apply the PLS Cox regression
-algorithm (`plsRcox' Version 'r packageVersion(plsRcox)` [Bertrand F, Bastien P, Meyer N, Maumy-Bertrand M (2014). “plsRcox, Cox-Models in a high dimensional setting in R.” In Proceedings of User2014!, 177.]) to the time-to-event outcome
+algorithm (`plsRcox` Version `r packageVersion("plsRcox")` [CITE]) to the time-to-event outcome
 data to learn three separate predictive models (indicated in red, green, and blue,
 respectively). Each of these models may be incomplete, since they are not defined for patients
 who have not been assayed (shown in white) using that particular omics technology. Second,
 for each pair of omics data sets, we apply the PLS linear regression algorithm
-(`plsr' Version 'r packageVersion(pls)` [Mevik, B.-H., & Wehrens, R. (2007). The pls Package: Principal Component and Partial Least Squares Regression in R. Journal of Statistical Software, 18(2), 1–23. https://doi.org/10.18637/jss.v018.i02]) to learn how to predict the coefficients of
+(`pls` Version `r packageVersion("pls")` [CITE]) to learn how to predict the coefficients of
 the Cox regression components from one data set using features from the other data set. This step extends (shown in pastel red, green, and blue, resp.) each of the original models,
 in different ways, from the intersection of samples assayed on both data sets to their union.
 Third, we average all of the different extended models (ignoring missing data) to get a single
@@ -142,7 +142,7 @@ to help clarify the later discussions.
    in a Cox proportional hazards model, which predicts the log hazard ratio as a linear
    combination of components.
 4. The second step in the algorithm creates a secondary layer of components. We do not give
-   these components a separate name. They are not an itemn or particular focus; we view them
+   these components a separate name. They are not an item of particular focus; we view them
    as a way to extend the first level components to more samples by "re-interpreting" them
    in other omics data sets.
 
@@ -202,7 +202,7 @@ of `SingleModel` objects, one for each assay, and within each there are three re
 suppressWarnings( firstPass <- fitCoxModels(trainD, timevar = "Days",
                           eventvar = "vital_status", eventvalue = "dead") )
 summary(firstPass)
-plot(firstPass)
+plot(firstPass, legloc = "bottomleft")
 ```
 
 On the training set, each of the seven contributing omics data sets is able to find a PLS
@@ -261,13 +261,17 @@ We see that at least one component discovered from each of the five "true" omics
 survived in the final model. However, neither the binary clinical nor continuous clinical data sets
 contributed independent components. 
 
-Our interest now turns to understanding how the features from individual omics data sets
-contribute to the components that are used in the final model.
-
-The weight matrix of the `plasma` object can be extracted using the `getAllWeights` and specifying the name of the dataset. This weight matrix has the features from the particular dataset specified as rows and all of the PLS components as columns. Setting a cutoff of significance for the `pickSignificant` function will return a different weight matrix in which the rows have been selected if they contributed significantly to defining the PLS components. PLS regression is a supervised method that aims to find linear combinations of predictor variables (i.e. components) that maximize the variance in both the predictors and the response (reference: An Introduction to Statistical Learning with Applications in R, 2nd Ed.). Therefore, these weight matrices can be analyzed even further by looking at their heatmaps, to examine the relative 1) direction and 2) magnitude with which the original variables in the omics datasets contributed to the final PLS components.
+Our interest now turns to understanding how the features from individual omics data
+sets contribute to the components that are used in the final model. As mentioned 
+earlier, these contributions are mediated through two levels of linear regression
+models when extending a model from data set A to data set B. A linear combination
+of features from set B is used to define the secondary level of components; then
+a linear combination of these components is used to predict the components of the
+single Cox model built that had been from set A. These weights can be combined and
+extracted using the `getAllWeights` function, and can then be explored.
 
 ### Clinical Binary Data
-```{r echo=FALSE, eval=FALSE}
+```{r background, echo=FALSE, eval=FALSE}
 infl <- plasma:::influencer(pl)
 class(infl)
 dim(infl)
@@ -278,12 +282,9 @@ text(MM, SS, colnames(infl))
 text(MM[mainterms], SS[mainterms], mainterms, col = "red")
 ```
 We use the binary clinical data set to illustrate our methods for interpreting the components.
-These arise from the secondary components that learn how to extend components from one omics
-data set to the others. Those models use linear combinations of features as linear predictors
-of the primary components. The `getAllWeights` function combines these two levels of linear
-coefficients to compute the weight of each feature contributing to each primary component.
 ```{r fig06, fig.cap = .tag(6, "Unscaled heatmap of the contributions of binary clinical features to all components.")}
 HG <- heat.colors(64)
+HG <- oompaBase::blueyellow(64)
 cbin <- getAllWeights(pl, "ClinicalBin")
 heat(cbin, cexCol = 0.7, cexRow = 0.5, col = HG)
 ```
@@ -304,7 +305,7 @@ contributions (**Figure 8**). By standardizing the weights component by componen
 a better balance of contributions per component. However, we can still identify a set of
 features that seem to make no contributions to any of the components. We can filter the
 features by only retaining those that make a large contribution to at least one omics
-component (**Figure 9**. 
+component (**Figure 9**). 
 
 ```{r fig08, fig.cap = .tag(8, "Scaled heatmap of the contributions of binary clinical features to important components.")}
 dbin <- cbin[, mainterms]
@@ -355,6 +356,7 @@ heat(xrppa, cexCol = 0.7, cexRow = 0.3, col = HG)
 
 ### mRNA-Sequencing Data
 ```{r fig14, fig.cap = .tag(14, "Scaled heatmap of the contributions of filtered mRNA features to important components")}
+```{r mrna}
 mrna <- getAllWeights(pl, "mRNASeq")
 xmrna <- shrink(mrna, 3)
 heat(xmrna, cexCol = 0.7, cexRow = 0.3, col = HG)
@@ -363,16 +365,51 @@ heat(xmrna, cexCol = 0.7, cexRow = 0.3, col = HG)
 
 ### miR-Sequencing Data
 ```{r fig15, fig.cap = .tag(15, "Scaled heatmap of the contributions of filtered miR features to important components")}
+```{r mir}
 mir <- getAllWeights(pl, "miRSeq")
 xmir <- shrink(mir, 3)
 heat(xmir, cexCol = 0.7, cexRow = 0.3, col = HG)
 ```
 
+```{r eval=FALSE, echo = FALSE}
+xxx <- rbind(cbin@contrib, ccont@contrib, cmaf@contrib, meth@contrib, mir@contrib, mrna@contrib, rppa@contrib)
+xxx <- xxx[, mainterms]
+sss <- scale(xxx)
+wts <- apply(abs(sss), 1, max)
+hist(wts, breaks = 123)
+yyy <- xmir
+yyy@contrib <- sss[wts > 6, ]
+heat(yyy, col = HG)
+```
+
 # Conclusions
+We have identified a method analogous to that of `MOFA` that allows us
+to combine different omics data without the need for prior imputation
+of missing values. A major difference is that while `MOFA` model
+learns "factors" that are composites of the variables in an
+unsupervised fashion, the `plasma` model learns "components" that are
+composites of the variables in an supervised fashion, using the
+outcomes "event" and "time-to-event" as response variables.
 
-We have identified a method analogous to that of `MOFA` that allows us to combine different omics data without the need for prior imputation of missing values. A major difference is that while `MOFA` model learns "factors" that are composites of the variables in an unsupervised fashion, the `plasma` model learns "components" that are composites of the variables in an supervised fashion, using the outcomes "event" and "time-to-event" as response variables.
-
-Although the factors from `MOFA` are defined such that the first factor, Factor 1, accounts for the greatest variance in the model, the factors' may or may not be significantly associated with the outcome, and a post-hoc survival analysis would need to be done to assess this. It may be the case that some factors, although they are significantly associated with outcome, account for very small variance in the final `MOFA` model, which hinders interpretability. This was the case with the TCGA-ESCA dataset, in which, when 10 factors were learned from the `MOFA` model, only Factor 10 was significantly associated with survival, while accounting for [number] variance in the model [CITE SUPPLEMENTARY RESULTS?]. On the other hand, the components for `plasma` are created in a way that maximizes the covariance in the predictors and the response, and therefore these components will be automatically associated to some degree with the outcome. This could be advantageous in that dissecting the weights associated with the components would yield a list of variables from different omics datasets that contribute the most to defining the outcome, and any additional analyses could be refined by looking at these high-weighted variables most closely.
+Although the factors from `MOFA` are defined such that the efirst
+factor, Factor 1, accounts for the greatest variance in the model, the
+factors' may or may not be significantly associated with the outcome,
+and a post-hoc survival analysis would need to be done to assess
+this. It may be the case that some factors, although they are
+significantly associated with outcome, account for very small variance
+in the final `MOFA` model, which hinders interpretability. This was
+the case with the TCGA-ESCA dataset, in which, when 10 factors were
+learned from the `MOFA` model, only Factor 10 was significantly
+associated with survival, while accounting for [number] variance in
+the model [CITE SUPPLEMENTARY RESULTS?]. On the other hand, the
+components for `plasma` are created in a way that maximizes the
+covariance in the predictors and the response, and therefore these
+components will be automatically associated to some degree with the
+outcome. This could be advantageous in that dissecting the weights
+associated with the components would yield a list of variables from
+different omics datasets that contribute the most to defining the
+outcome, and any additional analyses could be refined by looking at
+these high-weighted variables most closely.
 
 # Appendix: MOFA2
 
