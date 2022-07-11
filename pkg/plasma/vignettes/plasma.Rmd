@@ -1,6 +1,6 @@
 ---
 title: "plasma: Partial LeAst Squares for Multi-omics Analysis"
-author: "Kevin R. Coombes"
+author: "Kevin R. Coombes, Kyoko Yamaguchi"
 data: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -37,8 +37,8 @@ patients have only been acquired on a subset of the omics technologies. As of th
 writing, we do not know of any supervised multi-omics method that is effective when
 samples have only been assayed on a subset of the omics data sets.
 
-MOFA starts with a standard method -- Latent Ffactor Analysis -- that is known to work 
-well on single omics data. It then fitS a coherent model that identifies latent factors
+MOFA starts with a standard method -- Latent Factor Analysis -- that is known to work 
+well on single omics data. It then fits a coherent model that identifies latent factors
 that are common to, and able to explain the data well, all the omics data sets under
 study. Our investigation (unpublished) of the factors found by MOFA suggests that it is
 approximately equivalent to a two-step process:
@@ -112,12 +112,12 @@ The `plasma` algorithm is based on Partial Least Squares (PLS), which has been s
 an effective method for finding components that can predict clinically interesting outcomes
 [CITE]. The workflow of the plasma algorithm is illustrated in **Figure 1** in the case of
 three omics data sets. First, for each of the omics data sets, we apply the PLS Cox regression
-algorithm (`plsRcox' Version 'r packageVersion(plsRcox)` [CITE]) to the time-to-event outcome
+algorithm (`plsRcox' Version 'r packageVersion(plsRcox)` [Bertrand F, Bastien P, Meyer N, Maumy-Bertrand M (2014). “plsRcox, Cox-Models in a high dimensional setting in R.” In Proceedings of User2014!, 177.]) to the time-to-event outcome
 data to learn three separate predictive models (indicated in red, green, and blue,
 respectively). Each of these models may be incomplete, since they are not defined for patients
 who have not been assayed (shown in white) using that particular omics technology. Second,
 for each pair of omics data sets, we apply the PLS linear regression algorithm
-(`plsr' Version 'r packageVersion(plsr)` [CITE]) to learn how to predict the coefficients of
+(`plsr' Version 'r packageVersion(pls)` [Mevik, B.-H., & Wehrens, R. (2007). The pls Package: Principal Component and Partial Least Squares Regression in R. Journal of Statistical Software, 18(2), 1–23. https://doi.org/10.18637/jss.v018.i02]) to learn how to predict the coefficients of
 the Cox regression components from one data set using features from the other data set. This step extends (shown in pastel red, green, and blue, resp.) each of the original models,
 in different ways, from the intersection of samples assayed on both data sets to their union.
 Third, we average all of the different extended models (ignoring missing data) to get a single
@@ -355,7 +355,6 @@ heat(xrppa, cexCol = 0.7, cexRow = 0.3, col = HG)
 
 ### mRNA-Sequencing Data
 ```{r fig14, fig.cap = .tag(14, "Scaled heatmap of the contributions of filtered mRNA features to important components")}
-```{r mrna}
 mrna <- getAllWeights(pl, "mRNASeq")
 xmrna <- shrink(mrna, 3)
 heat(xmrna, cexCol = 0.7, cexRow = 0.3, col = HG)
@@ -364,13 +363,16 @@ heat(xmrna, cexCol = 0.7, cexRow = 0.3, col = HG)
 
 ### miR-Sequencing Data
 ```{r fig15, fig.cap = .tag(15, "Scaled heatmap of the contributions of filtered miR features to important components")}
-```{r mir}
 mir <- getAllWeights(pl, "miRSeq")
 xmir <- shrink(mir, 3)
 heat(xmir, cexCol = 0.7, cexRow = 0.3, col = HG)
 ```
 
 # Conclusions
+
+We have identified a method analogous to that of `MOFA` that allows us to combine different omics data without the need for prior imputation of missing values. A major difference is that while `MOFA` model learns "factors" that are composites of the variables in an unsupervised fashion, the `plasma` model learns "components" that are composites of the variables in an supervised fashion, using the outcomes "event" and "time-to-event" as response variables.
+
+Although the factors from `MOFA` are defined such that the first factor, Factor 1, accounts for the greatest variance in the model, the factors' may or may not be significantly associated with the outcome, and a post-hoc survival analysis would need to be done to assess this. It may be the case that some factors, although they are significantly associated with outcome, account for very small variance in the final `MOFA` model, which hinders interpretability. This was the case with the TCGA-ESCA dataset, in which, when 10 factors were learned from the `MOFA` model, only Factor 10 was significantly associated with survival, while accounting for [number] variance in the model [CITE SUPPLEMENTARY RESULTS?]. On the other hand, the components for `plasma` are created in a way that maximizes the covariance in the predictors and the response, and therefore these components will be automatically associated to some degree with the outcome. This could be advantageous in that dissecting the weights associated with the components would yield a list of variables from different omics datasets that contribute the most to defining the outcome, and any additional analyses could be refined by looking at these high-weighted variables most closely.
 
 # Appendix: MOFA2
 
