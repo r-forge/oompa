@@ -87,7 +87,7 @@ sapply(assemble, dim)
    Illumina Methylation 450K microarrays. We removed any CpG site for which the standard deviation
    of the beta values was less than 0.3. The resulting data set contained 1,454 highly variable
    CpG's.
-3. Already normalized sequencing data on 2566 microRNAs (miRs) was obtained in 185 patients.
+3. Already normalized sequencing data on 2,566 microRNAs (miRs) was obtained for 185 patients.
    We removed any miR for which the standard deviation of normalized expression was less
    than 0.05, which left 926 miRs in the final data set.
 4. Already normalized sequencing data on 20,531 mRNAs was obtained in 184 patients. We removed
@@ -299,7 +299,7 @@ to have weak contributions to all components.
 heat(cbin[, mainterms], cexCol = 0.7, cexRow = 0.5, col = HG)
 ```
 
-We hypothesize that some comonents intrinsically have a wider spread of weights, and that
+We hypothesize that some components intrinsically have a wider spread of weights, and that
 it might be more important to scale the components consistently to look at the relative
 contributions (**Figure 8**). By standardizing the weights component by component, we see
 a better balance of contributions per component. However, we can still identify a set of
@@ -324,6 +324,11 @@ shrink <- function(dset, N) {
 xbin <- shrink(cbin, 4)
 heat(xbin, cexCol = 0.7, cexRow = 0.8, col = HG)
 ```
+In **Figure 9**, we can identify strong contrasts between several pairs of variables. For example,
+one set of components is enriched with white, never smokers, who still have evidence of tumors, at
+stage T3 and grade 3 in the lower third of the esophagus (ICD-10 code C15.5), while another group
+is enriched for Asian, current smokers, who are tumor-free, with stage N0, T2 tumors from the
+lower third of the esophagus (ICD-10 code C15.4).
 
 ### Clinical Continuous Data
 ```{r fig10, fig.cap = .tag(10, "Scaled heatmap of the contributions of filtered continuous clinical features to important components")}
@@ -331,6 +336,9 @@ ccont <- getAllWeights(pl, "ClinicalCont")
 xcont <- shrink(ccont, 2)
 heat(xcont, cexCol = 0.8, cexRow = 1.2, col = HG)
 ```
+
+The most important continuous clinical feature is the patient's weight, which is positively
+correlated (yellow) with four components and negatively correlated (blue) with six others.
 
 ### Mutation Data
 ```{r fig11, fig.cap = .tag(11, "Scaled heatmap of the contributions of filtered mutation features to important components")}
