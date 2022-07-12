@@ -40,7 +40,7 @@ extendCoxModels <- function(object, firstPass, verbose = TRUE) {
     })
     names(plsRegression) <- names(object@data)
     t(sapply(plsRegression, function(x) dim(x$extend)))
-    slurp <- sapply(plsRegression, function(x) x$extend[,,2]) # subset the portion of the 3D array that corresponds to the final item of the output of the plsr function, which fits a model iteratively
+    slurp <- lapply(plsRegression, function(x) x$extend[,,2]) # subset the portion of the 3D array that corresponds to the final item of the output of the plsr function, which fits a model iteratively
     allPred <- do.call(cbind, slurp)
     list(plsRegression = plsRegression, allPred = allPred)
   })
