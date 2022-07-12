@@ -9,7 +9,7 @@ extendCoxModels <- function(object, firstPass, verbose = TRUE) {
   ## build a storage area to hold the combined components
   stores <- matrix(NA, nrow(object@outcome), sizing[2])
   rownames(stores) <- rownames(object@outcome)
-  compLevel <- unlist(sapply(tempComps[,2], function(K) 1:K))
+  compLevel <- unlist(lapply(tempComps[,2], function(K) 1:K))
   colnames(stores) <- names(compLevel)
   ## fill that storage area
   for (N in names(Components)) {

@@ -283,8 +283,11 @@ text(MM[mainterms], SS[mainterms], mainterms, col = "red")
 ```
 We use the binary clinical data set to illustrate our methods for interpreting the components.
 ```{r fig06, fig.cap = .tag(6, "Unscaled heatmap of the contributions of binary clinical features to all components.")}
-HG <- heat.colors(64)
-HG <- oompaBase::blueyellow(64)
+if (requireNamespace("oompaBase")) {
+  HG <- oompaBase::blueyellow(64)
+} else {
+  HG <- heat.colors(64)
+}
 cbin <- getAllWeights(pl, "ClinicalBin")
 heat(cbin, cexCol = 0.7, cexRow = 0.5, col = HG)
 ```
