@@ -16,6 +16,7 @@ setValidity("MultiplePLSCoxModels", validMultipleCoxModels)
 ## Need to define a class for the return value of this function
 fitCoxModels <- function(multi, timevar, eventvar, eventvalue, verbose = TRUE) {
   firstPass <- lapply(names(multi@data), function(N) {
+    if (verbose) cat("Fitting model with ", N, "\n", file = stderr())
     fitSingleModel(multi, N, timevar, eventvar, eventvalue)
   })
   names(firstPass) <- names(multi@data)

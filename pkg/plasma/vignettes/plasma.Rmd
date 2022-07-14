@@ -23,22 +23,22 @@ options(width=96)
 Recent years have seen the development of numerous algorithms and computational packages for
 the analysis of multi-omics data sets. At this point, one can find multiple review articles
 summarizing progress in the field [Subramanian-2020; Graw-2021; Heo-2021; Picard-2021;
-Reel-2021; Vlachavas-2021; Adossa-2021]. As with other applications of the     field of
-machine learning, the kinds of problems addressed by these algorithms are usually divided into
-two categories: unsupervised (typically, clustering and class discovery) or supervised
+Reel-2021; Vlachavas-2021; Adossa-2021]. As with other applications of
+machine learning, the kinds of problems addressed by these algorithms are divided into
+two categories: unsupervised (e.g., clustering or class discovery) or supervised
 (including class comparison and class prediction). Advances in the area of unsupervised
-learning have been broader and deeper than advances on supervised learning.
+learning have been broader and deeper than advances on supervised learning [CITE].
 
 One of the most effective unsupervised methods is Multi-Omic Factor Analysis (MOFA)
 [Argelaguet-2018; Argelaguet-2020]. A key property of MOFA is that it does not require
 all omics assays to have been performed on all samples under study. In particular, it can
 effectively discover class structure across omics data sets even when data for many
 patients have only been acquired on a subset of the omics technologies. As of this
-writing, we do not know of any supervised multi-omics method that is effective when
-samples have only been assayed on a subset of the omics data sets.
+writing, we do not know of any supervised multi-omics method that can effectively learn
+to predict outcomes when samples have only been assayed on a subset of the omics data sets.
 
 MOFA starts with a standard method -- Latent Factor Analysis -- that is known to work 
-well on single omics data. It then fits a coherent model that identifies latent factors
+well on single omics data set. It then fits a coherent model that identifies latent factors
 that are common to, and able to explain the data well in, all the omics data sets under
 study. Our investigation (unpublished) of the factors found by MOFA suggests that it is
 approximately equivalent to a two-step process:
@@ -49,7 +49,7 @@ approximately equivalent to a two-step process:
    each factor to the union of assayed samples.
 
 That interpretation of MOFA suggests that an analogous procedure might work for supervised
-analyses as well. In this article, we describe a two-step method, which we call "_plasma_"
+analyses as well. In this article, we describe a two-step algorithm, which we call "_plasma_",
 to find models that can predict time-to-event outcomes on samples from multi-omics data sets
 even in the presence of incomplete data. We use partial least squares (PLS) for both steps,
 using Cox regression to learn the single omics models and linear regression to learn how to
@@ -75,8 +75,9 @@ sapply(assemble, dim)
 
 1. From TCGA, we obtained 162 columns of clinical, demographic, and laboratory data on 185
    patients. We removed any columns that always contained the same value. We also removed
-   any columns whose values were missing in more than 25% of the patients. We separated the
-   clinical data into three parts:
+   any columns whose values were missing in more than 25% of the patients. We converted
+   categorical variables into sets of binary variables using one-hot-encoding. We then
+   separated the clinical data into three parts:
     1. Outcome (overall survival)
     2. Binary covariates (53 columns)
     3. Continuous covariates (6 columns)
@@ -110,14 +111,14 @@ summary(Outcome)
 ## Computational Approach
 The `plasma` algorithm is based on Partial Least Squares (PLS), which has been shown to be
 an effective method for finding components that can predict clinically interesting outcomes
-[CITE]. The workflow of the plasma algorithm is illustrated in **Figure 1** in the case of
-three omics data sets. First, for each of the omics data sets, we apply the PLS Cox regression
-algorithm (`plsRcox` Version `r packageVersion("plsRcox")` [CITE]) to the time-to-event outcome
-data to learn three separate predictive models (indicated in red, green, and blue,
-respectively). Each of these models may be incomplete, since they are not defined for patients
-who have not been assayed (shown in white) using that particular omics technology. Second,
-for each pair of omics data sets, we apply the PLS linear regression algorithm
-(`pls` Version `r packageVersion("pls")` [CITE]) to learn how to predict the coefficients of
+[Bastien-2015]. The workflow of the plasma algorithm is illustrated in **Figure 1** in the
+case of three omics data sets. First, for each of the omics data sets, we apply the PLS Cox
+regression algorithm (`plsRcox` Version `r packageVersion("plsRcox")` [Bertand-2021]) to the
+time-to-event outcome data to learn three separate predictive models (indicated in red, green,
+and blue, respectively). Each of these models may be incomplete, since they are not defined
+for patients who have not been assayed (shown in white) using that particular omics technology.
+Second, for each pair of omics data sets, we apply the PLS linear regression algorithm
+(`pls` Version `r packageVersion("pls")` [Liland-2021]) to learn how to predict the coefficients of
 the Cox regression components from one data set using features from the other data set. This step extends (shown in pastel red, green, and blue, resp.) each of the original models,
 in different ways, from the intersection of samples assayed on both data sets to their union.
 Third, we average all of the different extended models (ignoring missing data) to get a single
@@ -165,6 +166,7 @@ As indicated above, we want to separate the data set into training and test samp
 use 60% for training and 40% for testing.
 ```{r split}
 set.seed(54321)
+#set.seed(34672)
 splitVec <- rbinom(nrow(Outcome), 1, 0.6)
 ```
 
@@ -282,14 +284,14 @@ text(MM, SS, colnames(infl))
 text(MM[mainterms], SS[mainterms], mainterms, col = "red")
 ```
 We use the binary clinical data set to illustrate our methods for interpreting the components.
-```{r fig06, fig.cap = .tag(6, "Unscaled heatmap of the contributions of binary clinical features to all components.")}
+```{r fig06, fig.cap = .tag(6, "Unscaled heatmap of the contributions of binary clinical features to all components."), fig.height = 7}
 if (requireNamespace("oompaBase")) {
   HG <- oompaBase::blueyellow(64)
 } else {
   HG <- heat.colors(64)
 }
 cbin <- getAllWeights(pl, "ClinicalBin")
-heat(cbin, cexCol = 0.7, cexRow = 0.5, col = HG)
+heat(cbin, cexCol = 0.9, cexRow = 0.5, col = HG)
 ```
 
 **Figure 6** shows the raw weights for each clinical binary feature in all of the original
@@ -298,8 +300,8 @@ final composite model. Structurally, these two figures look similar. There is a 
 of components where all of the weights look weak, and a central set of features that appear
 to have weak contributions to all components.
 
-```{r fig07, fig.cap = .tag(7, "Unscaled heatmap of the contributions of binary clinical features to important components.")}
-heat(cbin[, mainterms], cexCol = 0.7, cexRow = 0.5, col = HG)
+```{r fig07, fig.cap = .tag(7, "Unscaled heatmap of the contributions of binary clinical features to important components."), fig.height = 7}
+heat(cbin[, mainterms], cexCol = 0.9, cexRow = 0.5, col = HG)
 ```
 
 We hypothesize that some components intrinsically have a wider spread of weights, and that
@@ -310,22 +312,22 @@ features that seem to make no contributions to any of the components. We can fil
 features by only retaining those that make a large contribution to at least one omics
 component (**Figure 9**). 
 
-```{r fig08, fig.cap = .tag(8, "Scaled heatmap of the contributions of binary clinical features to important components.")}
+```{r fig08, fig.cap = .tag(8, "Scaled heatmap of the contributions of binary clinical features to important components."), fig.height = 7}
 dbin <- cbin[, mainterms]
 dbin@contrib <- scale(dbin@contrib)
-heat(dbin, cexCol = 0.7, cexRow = 0.5, col = HG)
+heat(dbin, cexCol = 0.9, cexRow = 0.5, col = HG)
 ```
 
 
-```{r fig09, fig.cap = .tag(9, "Scaled heatmap of the contributions of filtered binary clinical features to important components.")}
+```{r fig09, fig.cap = .tag(9, "Scaled heatmap of the contributions of filtered binary clinical features to important components."), fig.height = 7}
 shrink <- function(dset, N) {
   dset@contrib <- scale(dset@contrib)
-  feat <- unique(unlist(getTop(dset, N)))
+  feat <- unique(unlist(as.list(getTop(dset, N))))
   dset@contrib <- dset@contrib[feat, mainterms]
   dset
 }
 xbin <- shrink(cbin, 4)
-heat(xbin, cexCol = 0.7, cexRow = 0.8, col = HG)
+heat(xbin, cexCol = 0.9, cexRow = 0.9, col = HG)
 ```
 In **Figure 9**, we can identify strong contrasts between several pairs of variables. For example,
 one set of components is enriched with white, never smokers, who still have evidence of tumors, at
@@ -344,42 +346,48 @@ The most important continuous clinical feature is the patient's weight, which is
 correlated (yellow) with four components and negatively correlated (blue) with six others.
 
 ### Mutation Data
-```{r fig11, fig.cap = .tag(11, "Scaled heatmap of the contributions of filtered mutation features to important components")}
+```{r fig11, fig.cap = .tag(11, "Scaled heatmap of the contributions of filtered mutation features to important components"), fig.height = 7}
 cmaf <- getAllWeights(pl, "MAF")
 xmaf <- shrink(cmaf, 4)
-heat(xmaf, cexCol = 0.7, cexRow = 0.6, col = HG)
+heat(xmaf, cexCol = 0.9, cexRow = 0.9, col = HG)
 ```
 
 ### Methylation Data
-```{r fig12, fig.cap = .tag(12, "Scaled heatmap of the contributions of filtered methylation features to important components")}
+```{r fig12, fig.cap = .tag(12, "Scaled heatmap of the contributions of filtered methylation features to important components"), fig.height = 7}
 meth <- getAllWeights(pl, "Meth450")
-xmeth <- shrink(meth, 3)
-heat(xmeth, cexCol = 0.7, cexRow = 0.3, col = HG)
+xmeth <- shrink(meth, 4)
+heat(xmeth, cexCol = 0.9, cexRow = 0.9, col = HG)
 ```
 
 ### Proteomics Data
-```{r fig13, fig.cap = .tag(13, "Scaled heatmap of the contributions of filtered RPPA features to important components")}
+```{r fig13, fig.cap = .tag(13, "Scaled heatmap of the contributions of filtered RPPA features to important components"), fig.height = 7}
 rppa <- getAllWeights(pl, "RPPA")
-xrppa <- shrink(rppa, 4)
-heat(xrppa, cexCol = 0.7, cexRow = 0.3, col = HG)
+xrppa <- shrink(rppa, 5)
+tmp <- rownames(xrppa@contrib)
+rownames(xrppa@contrib) <- sapply(strsplit(tmp, "\\."), function(x) paste(x[-1], collapse = "."))
+hc <- heat(xrppa, cexCol = 0.9, cexRow = 0.9, col = HG, keep.dendro = TRUE)
 ```
 
 
 ### mRNA-Sequencing Data
-```{r fig14, fig.cap = .tag(14, "Scaled heatmap of the contributions of filtered mRNA features to important components")}
-```{r mrna}
+```{r fig14, fig.cap = .tag(14, "Scaled heatmap of the contributions of filtered mRNA features to important components"), fig.height = 7}
 mrna <- getAllWeights(pl, "mRNASeq")
-xmrna <- shrink(mrna, 3)
-heat(xmrna, cexCol = 0.7, cexRow = 0.3, col = HG)
+xmrna <- shrink(mrna, 7)
+tmp <- rownames(xmrna@contrib)
+rownames(xmrna@contrib) <- sapply(strsplit(tmp, "\\."), function(x) x[1])
+heat(xmrna, cexCol = 0.9, cexRow = 0.6, col = HG)
 ```
 
 
 ### miR-Sequencing Data
-```{r fig15, fig.cap = .tag(15, "Scaled heatmap of the contributions of filtered miR features to important components")}
-```{r mir}
+```{r fig15, fig.cap = .tag(15, "Scaled heatmap of the contributions of filtered miR features to important components"), fig.height = 7}
 mir <- getAllWeights(pl, "miRSeq")
-xmir <- shrink(mir, 3)
-heat(xmir, cexCol = 0.7, cexRow = 0.3, col = HG)
+xmir <- shrink(mir, 5)
+tmp <- strsplit(rownames(xmir@contrib), "\\.")
+nc <- sapply(tmp, length)
+rownames(xmir@contrib) <- sapply(1:length(tmp), function(dex) 
+  paste(tmp[[dex]][1:(nc[dex]-1)], collapse = "."))
+heat(xmir, cexCol = 0.9, cexRow = 0.9, col = HG)
 ```
 
 ```{r eval=FALSE, echo = FALSE}
