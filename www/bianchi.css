@@ -169,7 +169,11 @@ TABLE, TH, TR, TD {
     background-color: #9944ff;
 }
 
-
+.Xcyan { background-color: #00cccc; }
+.Xmauve { background-color: #dd77ff; }
+.Xgreen {  background-color: #7fcc7f; }
+.Xsky { background-color: #7fcccc; }
+.Xyellow { background-color: #ffdd77; }
 
 
 .temp {

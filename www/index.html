@@ -21,25 +21,26 @@
 <a href="#source">Source Code</a>
 <br />
 <a href="#license">License</a>
-<br />
-<a href="packages.html">Packages</a>
 </div>
 <div id="mainarea">
 <h1>OOMPA</h1>
 <h2>Object-Oriented Microarray and Proteomics Analysis</h2>
 <p>
 OOMPA is a suite of R packages for the analysis of gene expression
-(RNA), proteomics profiling , and other high throughput molecular
+(RNA), proteomics profiling, and other high throughput molecular
 biology data. OOMPA uses S4 classes to construct object-oriented tools
 with a consistent user interface.  All higher level analysis tools in
-OOMPA are compatible with the eSet classes defined
+OOMPA are compatible with the <TT>eSet</TT> classes defined
 in <a href="http://bioconductor.org">BioConductor</a>.  The lower
 level processing tools offer an alternative to parts of BioConductor,
 but can also be used to enhance existing BioConductor packages.
 </p>
 
+<P>OOMPA has been a project of the
+<A HREF = "https://gitlab.com/krcoombes/coombeslab">Coombes Lab</A> since 2013</P>
+
 <a name="overview">
-<h3>Package Overview</h3>
+<h3>Project Overview</h3>
 </a>
 
 <img src="depends.png" alt="Dependency Graph" />
@@ -52,35 +53,39 @@ DESCRIPTION file. Red arrows indicate a weaker relationship, reflected
 by a <code>Suggests</code> entry in the packager DESCRFIPTION file.
 </p>
 
+<P>An R-Forge "project" can contain multiple packages. We have taken
+  advantage of this structure to organize different packages into
+  different projects. The colors used in the figure indicate the
+  R=Forge project; more details about this organization can be found
+  in the <A HREF="#source">Source Code</A> section below.</P>
+
 <a name="install">
 <h3>Installation</h3>
 </a>
 
 <p>
-The simplest way to install OOMPA packages is to start your local
-version of R and use the following commands:
-<pre>
-source("http://silicovore.com/OOMPA/oompaLite.R")
-oompaLite()
-</pre>
-The <code>oompaLite</code> command installs a small set of "base" OOMPA
-packages. To get a slightly larger set of (default) packages, you can
-execute the command:
-<pre>
-oompainstall()
-</pre>
-If you want to get absolutely everything (which may include some
-experimental packages with very little in the way of documentation), use
-the command:
-<pre>
-oompainstall(groupName="all")
-</pre>
-Alternatively, if you want more control over which packages get
-installed, execute the following command and select from the resulting
-list:
+Most OOMPA pacakges have already been submitted to and accepted
+by <A HREF="https://cran.r-project.org/">CRAN</A>. So, the simplest
+way to install these packages is to use the standard R facilities
+(i.e., <TT>install.packages</TT>) to install R packages along with
+their dependencies.
+</P>
+
+<P>Some packages are still only present
+on <A HREF="https://r-forge.r-project.org/">R-Forge</A>. To install
+these packages, you can execute the following command for the
+appropriate "<TT>PKGNAME</TT>":
 <PRE>
-install.packages(repos="http://silicovore.com/OOMPA/")
-</PRE>
+install.packages("PKGNAME", repos="http://R-Forge.R-project.org")
+</PRE></P>
+
+<P>
+More detailed information is provided below to indicate which packages
+are already present in CRAN and which packages can still only be found
+on R-Forge. A handful of packages listed here still exist only on a
+local hard drive, having not yet reached a development state where
+they are ready to be moved onto R-Forge. Their status will be updated
+here as appropriate.
 </p>
 
 <a name="support">
@@ -93,13 +98,16 @@ help. These include:
 <ul>
 <li><a href="https://r-forge.r-project.org/forum/forum.php?forum_id=4515&group_id=1746">
     User Help Forum</a></li>
-<li><a href="https://r-forge.r-project.org/tracker/?atid=4516&group_id=1746&func=browse">
+<li><a href="https://r-forge.r-project.org/forum/forum.php?forum_id=4516&group_id=1746">
     Developer Forum</a></li>
 <li><a href="https://r-forge.r-project.org/tracker/?atid=5395&group_id=1746&func=browse">
     Feature Requests</a></li>
 <li><a href="https://r-forge.r-project.org/tracker/?atid=5394&group_id=1746&func=browse">
-    Bug Tracker</a> </li>
+    Bug Reports</a> </li>
 </ul>
+<P>Please take advantage of these resources to ask for help, to report
+bugs, and to request new features for any of the packages in the OOMPA
+family.</P> 
 
 <a name="source">
 <h3>Source Code</h3>
@@ -113,60 +121,70 @@ table below.
 
 <table class="padded" style="margin: auto;">
 <TR class="padded">
-  <TH class="padded kltgray">Project Name</TH><TH class="padded kltgray">Package URL</TH>
+  <TH class="padded kltgray">Project Name</TH>
+  <TH class="padded kltgray">Project URL</TH>
+  <TH class="padded kltgray">Project Details</TH>
 </TR>
 <TR class="padded">
   <TD class="padded kpink">OOMPA</TD>
   <TD class="padded"><A href="http://r-forge.r-project.org/projects/oompa">http://r-forge.r-project.org/projects/oompa</A></TD>
+  <TD><A HREF="packages.html">OOMPA Packages</A></TD>
 </TR>
 <TR class="padded">
-  <TD class="padded kcelopace">Class Prediction</TD>
+  <TD class="padded Xcyan">Class Prediction</TD>
   <TD class="padded"><A href="http://r-forge.r-project.org/projects/classpred">http://r-forge.r-project.org/projects/classpred</A></TD>
+  <TD><A HREF="https://classpred.r-forge.r-project.org/">Classpred</A></TD>
 </TR>
 <TR class="padded">
-  <TD class="padded kbutter">SuperCurve</TD>
-  <TD class="padded"><A href="http://r-forge.r-project.org/projects/supercurve">http://r-forge.r-project.org/projects/supercurve</A></TD>
-</TR>
-<TR class="padded">
-  <TD class="padded ksky">NameNeedle</TD>
-  <TD class="padded"><A href="http://r-forge.r-project.org/projects/nameneedle">http://r-forge.r-project.org/projects/nameneedle</A></TD>
-</TR>
-<TR class="padded">
-  <TD class="padded ksky">SIBER</TD>
-  <TD class="padded"><A href="http://r-forge.r-project.org/projects/siber">http://r-forge.r-project.org/projects/siber</A></TD>
-</TR>
-<TR class="padded">
-  <TD class="padded ksky">integIRTy</TD>
-  <TD class="padded"><A href="http://r-forge.r-project.org/projects/intgegirty">http://r-forge.r-project.org/projects/integirty</A></TD>
-</TR>
-<TR class="padded">
-  <TD class="padded ksky">UMPIRE</TD>
-  <TD class="padded"><A href="http://r-forge.r-project.org/projects/umpire">http://r-forge.r-project.org/projects/umpire</A></TD>
-</TR>
-<TR class="padded">
-  <TD class="padded klavender">Thresher</TD>
+  <TD class="padded Xmauve">Thresher</TD>
   <TD class="padded"><A href="http://r-forge.r-project.org/projects/thresher">http://r-forge.r-project.org/projects/thresher</A></TD>
+  <TD><A HREF="https://thresher.r-forge.r-project.org/">Thresher</A></TD>
 </TR>
 <TR class="padded">
-  <TD class="padded kltorange">ArrayCube</TD>
-  <TD class="padded">Under Development</TD>
+  <TD class="padded Xgreen">CloneFinder</TD>
+  <TD class="padded"><A href="http://r-forge.r-project.org/projects/clonefinder">http://r-forge.r-project.org/projects/clonefinder</A></TD>
+  <TD><A HREF="https://clonefinder.r-forge.r-project.org/">CloneFinder</A></TD>
 </TR>
 <TR class="padded">
-  <TD class="padded kltorange">FirstSign</TD>
-  <TD class="padded">Under Development</TD>
+  <TD class="padded Xsky">NameNeedle</TD>
+  <TD class="padded"><A href="http://r-forge.r-project.org/projects/nameneedle">http://r-forge.r-project.org/projects/nameneedle</A></TD>
+  <TD><A HREF="https://nameneedle.r-forge.r-project.org/">NameNeedle</A></TD>
 </TR>
 <TR class="padded">
-  <TD class="padded kltorange">CRAAC</TD>
-  <TD class="padded">Under Development</TD>
+  <TD class="padded Xsky">SIBER</TD>
+  <TD class="padded"><A href="http://r-forge.r-project.org/projects/siber">http://r-forge.r-project.org/projects/siber</A></TD>
+  <TD><A HREF="https://siber.r-forge.r-project.org/">SIBER</A></TD>
 </TR>
 <TR class="padded">
-  <TD class="padded kltorange">AccuPloidy</TD>
-  <TD class="padded">Under Development</TD>
+  <TD class="padded Xsky">integIRTy</TD>
+  <TD class="padded"><A href="http://r-forge.r-project.org/projects/integirty">http://r-forge.r-project.org/projects/integirty</A></TD>
+  <TD><A HREF="https://integirty.r-forge.r-project.org/">integIRTy</A></TD>
 </TR>
 <TR class="padded">
-  <TD class="padded ksky">drexplorer</TD>
+  <TD class="padded Xsky">UMPIRE</TD>
+  <TD class="padded"><A href="http://r-forge.r-project.org/projects/umpire">http://r-forge.r-project.org/projects/umpire</A></TD>
+  <TD><A HREF="https://umpire.r-forge.r-project.org/">Umpire</A></TD>
+</TR>
+<TR class="padded">
+  <TD class="padded Xsky">drexplorer</TD>
   <TD class="padded"><a href="https://github.com/nickytong/drexplorer">
   Available from GitHub</a></TD>
+</TR>
+<TR class="padded">
+  <TD class="padded Xyellow">ArrayCube</TD>
+  <TD class="padded">Under Development</TD>
+</TR>
+<TR class="padded">
+  <TD class="padded Xyellow">FirstSign</TD>
+  <TD class="padded">Under Development</TD>
+</TR>
+<TR class="padded">
+  <TD class="padded Xyellow">CRAAC</TD>
+  <TD class="padded">Under Development</TD>
+</TR>
+<TR class="padded">
+  <TD class="padded Xyellow">AccuPloidy</TD>
+  <TD class="padded">Under Development</TD>
 </TR>
 </TABLE>
 
@@ -176,9 +194,8 @@ table below.
 <p>
 Licenses for individual packages vary, so you should see their
 DESCRIPTION files for details.  Most current packages are released
-under Version 2.0 of the Apache License.  The current version of the
-SuperCurve packages, and older versions of many other packages, are
-released under Version 2.0 of the Perl Artistic License.
+under Version 2.0 of the Apache License.  Older versions of many other
+packages, are released under Version 2.0 of the Perl Artistic License.
 </p>
 
 <BR />
