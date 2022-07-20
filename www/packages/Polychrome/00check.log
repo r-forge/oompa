@@ -1,21 +1,14 @@
-* using log directory 'C:/Users/coom05/Desktop/rforge/oompa/pkg/Polychrome.Rcheck'
-* using R version 3.4.0 (2017-04-21)
+* using log directory 'C:/Users/KRC/Desktop/RForge/oompa/pkg/Polychrome.Rcheck'
+* using R version 4.2.1 (2022-06-23 ucrt)
 * using platform: x86_64-w64-mingw32 (64-bit)
-* using session charset: ISO8859-1
+* using session charset: UTF-8
 * using option '--as-cran'
 * checking for file 'Polychrome/DESCRIPTION' ... OK
-* this is package 'Polychrome' version '0.9.3'
+* this is package 'Polychrome' version '1.5.1'
 * checking CRAN incoming feasibility ... WARNING
 Maintainer: 'Kevin R. Coombes <krc@silicovore.com>'
 
-Insufficient package version (submitted: 0.9.3, existing: 0.9.3)
-
-Found the following (possibly) invalid URLs:
-  URL: https://en.wikipedia.org/wiki/ISCC%E2%80%93NBS_system
-    From: man/iscc.Rd
-    Status: Error
-    Message: libcurl error code 7
-    	Failed to connect to en.wikipedia.org port 443: Connection refused
+Insufficient package version (submitted: 1.5.1, existing: 1.5.1)
 
 The Date field is over a month old.
 * checking package namespace information ... OK
@@ -28,6 +21,7 @@ The Date field is over a month old.
 * checking whether package 'Polychrome' can be installed ... OK
 * checking installed package size ... OK
 * checking package directory ... OK
+* checking for future file timestamps ... OK
 * checking 'build' directory ... OK
 * checking DESCRIPTION meta-information ... OK
 * checking top-level files ... OK
@@ -64,11 +58,17 @@ The Date field is over a month old.
 * checking examples ... OK
 * checking for unstated dependencies in 'tests' ... OK
 * checking tests ... OK
+  Running 'test-07-member.R'
+  Running 'testDeficit.R'
+  Comparing 'testDeficit.Rout' to 'testDeficit.Rout.save' ... OK
   Running 'testXform.R'
   Comparing 'testXform.Rout' to 'testXform.Rout.save' ... OK
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in 'inst/doc' ... OK
 * checking re-building of vignette outputs ... OK
 * checking PDF version of manual ... OK
+* skipping checking HTML version of manual: no command 'tidy' found
+* checking for non-standard things in the check directory ... OK
+* checking for detritus in the temp directory ... OK
 * DONE
 Status: 1 WARNING

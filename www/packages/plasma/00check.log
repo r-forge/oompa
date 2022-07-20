@@ -1,14 +1,14 @@
-* using log directory 'C:/Users/KRC/Desktop/RForge/oompa/pkg/ClassComparison.Rcheck'
+* using log directory 'C:/Users/KRC/Desktop/RForge/oompa/pkg/plasma.Rcheck'
 * using R version 4.2.1 (2022-06-23 ucrt)
 * using platform: x86_64-w64-mingw32 (64-bit)
 * using session charset: UTF-8
 * using option '--as-cran'
-* checking for file 'ClassComparison/DESCRIPTION' ... OK
-* this is package 'ClassComparison' version '3.2.0'
+* checking for file 'plasma/DESCRIPTION' ... OK
+* this is package 'plasma' version '0.5.12'
 * checking CRAN incoming feasibility ... NOTE
 Maintainer: 'Kevin R. Coombes <krc@silicovore.com>'
 
-The Date field is over a month old.
+New submission
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -16,8 +16,7 @@ The Date field is over a month old.
 * checking for executable files ... OK
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
-* checking serialization versions ... OK
-* checking whether package 'ClassComparison' can be installed ... OK
+* checking whether package 'plasma' can be installed ... OK
 * checking installed package size ... OK
 * checking package directory ... OK
 * checking for future file timestamps ... OK
@@ -49,16 +48,16 @@ The Date field is over a month old.
 * checking Rd \usage sections ... OK
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
-* checking sizes of PDF files under 'inst/doc' ... OK
 * checking installed files from 'inst/doc' ... OK
 * checking files in 'vignettes' ... OK
 * checking examples ... OK
 * checking for unstated dependencies in 'tests' ... OK
 * checking tests ... OK
-  Running 'testBum.R'
-  Comparing 'testBum.Rout' to 'testBum.Rout.save' ... OK
-  Running 'testDiff.R'
-  Comparing 'testDiff.Rout' to 'testDiff.Rout.save' ... OK
+  Running 'test01-MO.R'
+  Running 'test02-fitCox.R'
+  Running 'test03-multiplePLS.R'
+  Running 'test04-plasma.R'
+  Running 'test05-interpret.R'
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in 'inst/doc' ... OK
 * checking re-building of vignette outputs ... OK

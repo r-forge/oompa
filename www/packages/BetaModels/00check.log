@@ -1,10 +1,10 @@
-* using log directory 'C:/Users/coom05/Desktop/rforge/oompa/pkg/BetaModels.Rcheck'
-* using R version 3.4.0 (2017-04-21)
+* using log directory 'C:/Users/KRC/Desktop/RForge/oompa/pkg/BetaModels.Rcheck'
+* using R version 4.2.1 (2022-06-23 ucrt)
 * using platform: x86_64-w64-mingw32 (64-bit)
-* using session charset: ISO8859-1
+* using session charset: UTF-8
 * using option '--as-cran'
 * checking for file 'BetaModels/DESCRIPTION' ... OK
-* this is package 'BetaModels' version '0.1.7'
+* this is package 'BetaModels' version '0.3.2'
 * checking CRAN incoming feasibility ... NOTE
 Maintainer: 'Kevin R. Coombes <krc@silicovore.com>'
 
@@ -18,9 +18,11 @@ The Date field is over a month old.
 * checking for executable files ... OK
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
+* checking serialization versions ... OK
 * checking whether package 'BetaModels' can be installed ... OK
 * checking installed package size ... OK
 * checking package directory ... OK
+* checking for future file timestamps ... OK
 * checking DESCRIPTION meta-information ... OK
 * checking top-level files ... OK
 * checking for left-over files ... OK
@@ -43,13 +45,7 @@ The Date field is over a month old.
 * checking Rd metadata ... OK
 * checking Rd line widths ... OK
 * checking Rd cross-references ... OK
-* checking for missing documentation entries ... WARNING
-Undocumented S4 methods:
-  generic 'summary' and siglist 'ebCorrelation'
-All user-level objects in a package (including S4 classes and methods)
-should have documentation entries.
-See chapter 'Writing R documentation files' in the 'Writing R
-Extensions' manual.
+* checking for missing documentation entries ... OK
 * checking for code/documentation mismatches ... OK
 * checking Rd \usage sections ... OK
 * checking Rd contents ... OK
@@ -58,6 +54,10 @@ Extensions' manual.
 * checking for unstated dependencies in 'tests' ... OK
 * checking tests ... OK
   Running '00-betarate.R'
+  Running '01-betamixture.R'
 * checking PDF version of manual ... OK
+* skipping checking HTML version of manual: no command 'tidy' found
+* checking for non-standard things in the check directory ... OK
+* checking for detritus in the temp directory ... OK
 * DONE
-Status: 1 WARNING, 1 NOTE
+Status: 1 NOTE
