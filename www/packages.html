@@ -17,90 +17,109 @@
 </div>
 <div id="mainarea">
 <h1>OOMPA</h1>
-<h2>Object-Oriented Microarray and Proteomics Analysis</h2>
-<h2>Package List (by Project)</h2>
 
-<h3>OOMPA</h3>
+<h3>OOMPA Core Packages</h3>
 <dl>
-<dt><A HREF="http://oompa.r-forge.r-project.org/packages/oompaBase.html">oompaBase<A></dt>
-  <dd>Class Unions, Matrix Operations, and Color Schemes for OOMPA</dd>
-<dt><A HREF="http://oompa.r-forge.r-project.org/packages/oompaData.html">oompaData<A></dt>
-  <dd>Data to Illustrate OOMPA Algorithms</dd>
-<dt><A HREF="http://oompa.r-forge.r-project.org/packages/PreProcess.html">PreProcess<A></dt>
-  <dd>Basic Functions for Pre-Processing Microarrays</dd>
-<dt><A HREF="http://oompa.r-forge.r-project.org/packages/ClassComparison.html">ClassComparison<A></dt>
-  <dd>Classes and Methods for "Class Comparison" Problems on Microarrays</dd>
-<dt><A HREF="http://oompa.r-forge.r-project.org/packages/ClassDiscovery.html">ClassDiscovery<A></dt>
-  <dd>Classes and Methods for "Class Discovery" with Microarrays or Proteomics</dd>
-<dt><A HREF="http://oompa.r-forge.r-project.org/packages/TailRank.html">TailRank<A></dt>
-  <dd>The Tail-Rank Statistic</dd>
-<dt><A HREF="http://oompa.r-forge.r-project.org/packages/Polychrome.html">Polychrome<A></dt>
-  <dd>Qualitative Palettes with Many Colors</dd>
-<dt><A HREF="http://oompa.r-forge.r-project.org/packages/BetaModels.html">BetaModels<A></dt>
-  <dd>Bayesian Analysis of Different Rates in Different Groups</dd>
+<dt><A HREF="http://oompa.r-forge.r-project.org/packages/oompaBase.html">oompaBase</A></dt>
+  <dd><I>Class Unions, Matrix Operations, and Color Schemes for
+  OOMPA</I>. Provides class unions that must be preloaded in order
+  for the basic tools in the OOMPA  project to be defined and loaded. It also
+  includes vectorized operations for row-by-row means, variances, and
+  t-tests. Finally, it provides new color schemes. </dd>
+<dt><A HREF="http://oompa.r-forge.r-project.org/packages/oompaData.html">oompaData</A></dt>
+  <dd><I>Data to Illustrate OOMPA Algorithms</I>. This is a data-only
+  package to provide example data for other packages that are part of
+  the OOMPA suite of packages.  </dd>
+<dt><A HREF="http://oompa.r-forge.r-project.org/packages/PreProcess.html">PreProcess</A></dt>
+  <dd><I>Basic Functions for Pre-Processing Microarrays</I>. Provides
+  classes to pre-process microarray gene expression data as part of
+  the OOMPA collection of packages.</dd>
+<dt><A HREF="http://oompa.r-forge.r-project.org/packages/ClassComparison.html">ClassComparison</A></dt>
+  <dd><I>Classes and Methods for "Class Comparison" Problems on
+  Microarrays</I>. Defines the classes used for "class comparison"
+  problems in the OOMPA project. Class comparison includes tests for
+  differential expression; see Simon's book for details on typical
+  problem types.</dd>
+<dt><A HREF="http://oompa.r-forge.r-project.org/packages/ClassDiscovery.html">ClassDiscovery</A></dt>
+  <dd><I>Classes and Methods for "Class Discovery" with Microarrays or
+  Proteomics</I>. Defines the classes used for "class discovery"
+  problems in the OOMPA project. Class discovery primarily consists of
+  unsupervised clustering methods with attempts to assess their
+  statistical significance.</dd>
+<dt><A HREF="http://oompa.r-forge.r-project.org/packages/TailRank.html">TailRank</A></dt>
+  <dd><I>The Tail-Rank Statistic</I>. Implements the tail-rank
+  statistic for selecting biomarkers from a microarray data set, an
+  efficient nonparametric test focused on the distributional
+  tails. See <A HREF="https://gitlab.com/krcoombes/coombeslab/-/blob/master/doc/papers/tolstoy-new.pdf">the
+  Tolstoy paper</A>. </dd>
+<dt><A HREF="http://oompa.r-forge.r-project.org/packages/Polychrome.html">Polychrome</A></dt>
+  <dd><I>Qualitative Palettes with Many Colors</I>. Tools for
+  creating, viewing, and assessing qualitative palettes with many
+  (20-30 or more)
+  colors. See <A HREF="https://www.jstatsoft.org/article/view/v090c01">Coombes
+  and colleagues (2019)</A>. </dd>
+<dt><A HREF="http://oompa.r-forge.r-project.org/packages/BetaModels.html">BetaModels</A></dt>
+  <dd><I>Bayesian Analysis of Different Rates in Different
+  Groups</I>. Test for different proportions (rates) in different
+  groups using a Bayesian model in which all rate parameters follow a
+  beta distribution and are selected from a common
+  hyperdistribution. Includes tools to fit an arbitrary mixture of
+  beta distributions. <B>Under Development</B>.</dd>
+<dt><A HREF="http://oompa.r-forge.r-project.org/packages/plasma.html">plasma</A></dt>
+  <dd><I>Partial LeAst Squares for Multiomic Analysis</I>. Contains
+  tools for supervised analyes of incomplete, overlapping multi-omics
+  datasets. <B>Under Development</B>.</dd>
 </dl>
 
-<h3>Class Prediction</h3>
+
+<h3>OOMPA Singletons</h3>
+<P>By "singletons" we mean projects that contain only one package,
+usually with the same name, usually with an accompanying
+manuscript. Each of these singletons is part of the broader OOMPA
+project.</P>
 <dl>
-<dt><A HREF="http://classpred.r-forge.r-project.org/packages/BimodalIndex.html">BimodalIndex<A></dt>
-  <dd>The Bimodality Index</dd>
-<dt><A HREF="http://classpred.r-forge.r-project.org/packages/Modeler.html">Modeler<A></dt>
-  <dd>Classes and Methods for Training and Using Binary Prediction Models</dd>
-<dt><A HREF="http://classpred.r-forge.r-project.org/packages/CrossValidate.html">CrossValidate<A></dt>
-  <dd>Classes and Methods for Cross Validation of "Class Prediction" with Microarrays or Proteomics </dd>
-<dt><A HREF="http://classpred.r-forge.r-project.org/packages/GenAlgo.html">GenAlgo<A></dt>
-  <dd>Classes and Methods to Use Genetic Algorithms for Feature Selection</dd>
-<dt><A HREF="http://classpred.r-forge.r-project.org/packages/ClassPrediction.html">Classprediction<A></dt>
-  <dd>Classes and Methods for "Class Prediction" with Microarrays or Proteomics</dd>
+<dt><A HREF="http://nameneedle.r-forge.r-project.org/packages/NameNeedle.html">NameNeedle</A></dt>
+  <dd><I>Using Needleman-Wunsch to Match Sample Names.</I> The
+  Needleman-Wunsch global alignment algorithm can be used to find
+  approximate matches between sample names in different data
+  sets. See <A HREF="https://pubmed.ncbi.nlm.nih.gov/21082038/">J
+  Wang and colleagues (2010)</A>.</dd> 
+<dt><A HREF="http://siber.r-forge.r-project.org/packages/SIBERG.html">SIBER</A></dt>
+  <dd><I>Systematic Identification of Bimodally Expressed Genes Using
+  RNAseq Data,</I> 	Provides models to identify bimodally expressed genes
+  from RNAseq data based on the Bimodality Index. SIBERG models the
+  RNAseq data in the finite mixture modeling framework and
+  incorporates mechanisms for dealing with RNAseq normalization. Three
+  types of mixture models are implemented, namely, the mixture of log
+  normal, negative binomial, or generalized Poisson distribution. See
+  <A HREF="https://pubmed.ncbi.nlm.nih.gov/23303507/">Tong and
+  colleagues (2013)</A>. </dd>
+<dt><A HREF="http://integirty.r-forge.r-project.org/packages/integIRTy.html">integIRTy</A></dt>
+  <dd><I>Integrating Multiple Modalities of High Throughput Assays
+    Using Item Response Theory</I>. Provides a systematic framework
+    for integrating multiple modalities of assays profiled on the same
+    set of samples. The goal is to identify genes that are altered in
+    cancer either marginally or consistently across different
+    assays. The heterogeneity among different platforms and different
+    samples are automatically adjusted so that the overall alteration
+    magnitude can be accurately
+    inferred. See <A HREF="https://pubmed.ncbi.nlm.nih.gov/23014630/">Tong
+    and Coombes (2012)</I>.</dd>
+<dt><A HREF="http://umpire.r-forge.r-project.org/packages/Umpire.html">UMPIRE</A></dt>
+  <dd><I>The Ultimate Microrray Prediction, Reality and Inference
+  Engine</I> (UMPIRE) is a package to facilitate the simulation of
+  realistic microarray data sets with links to associated
+  outcomes. See <A HREF="https://pubmed.ncbi.nlm.nih.gov/23320794/">Zhang
+  and Coombes (2012)</A>. Version 2.0 adds the ability to simulate realistic
+  mixed-typed clinical data.</dd>
+<dt><A HREF="http://newmanomics.r-forge.r-project.org/packages/Newmanomics.html">NewmanOmics</A></dt>
+  <dd><I>Extending the Newman Studentized Range Statistic to
+  Transcriptomics</I>.  Extends the classical Newman studentized range
+  statistic in various ways that can be applied to genome-scale
+  transcriptomic or other expression data. <B>Under Development</B>.</dd>
 </dl>
 
-<h3>NameNeedle</h3>
-<dl>
-<dt><A HREF="http://nameneedle.r-forge.r-project.org/packages/NameNeedle.html">NameNeedle<A></dt>
-  <dd>Using Needleman-Wunsch to Match Sample Names</dd>
-</dl>
 
-<h3>SIBER</h3>
-<dl>
-<dt><A HREF="http://siber.r-forge.r-project.org/packages/SIBER.html">SIBER<A></dt>
-  <dd>Systematic Identification of Bimodally Expressed Genes Using RNAseq Data</dd>
-</dl>
-
-<h3>integIRTy</h3>
-<dl>
-<dt><A HREF="http://integirty.r-forge.r-project.org/packages/integIRTy.html">integIRTy<A></dt>
-  <dd>Integrating Multiple Modalities of High Throughput Assays Using
-  Item Response Theory </dd>
-</dl>
-
-<h3>UMPIRE</h3>
-<dl>
-<dt><A HREF="http://umpire.r-forge.r-project.org/packages/Umpire.html">UMPIRE<A></dt>
-  <dd>The Ultimate Microrray Prediction, Reality and Inference
-  Engine</dd>
-</dl>
-
-<h3>Thresher</h3>
-<dl>
-<dt><A HREF="http://thresher.r-forge.r-project.org/packages/PCDimension.html">PCDimension<A></dt>
-  <dd>Finding the Number of Significant Principal Components</dd>
-<dt><A HREF="http://thresher.r-forge.r-project.org/packages/Thresher.html">Thresher<A></dt>
-  <dd>Threshing and Reaping for Principal Components</dd>
-</dl>
-
-<h3>SuperCurve</h3>
-<dl>
-<dt><A HREF="http://supercurve.r-forge.r-project.org/packages/SuperCurveSampleData.html">SuperCurveSampleData<A></dt>
-  <dd>'SuperCurve' RPPA Sample Data</dd>
-<dt><A HREF="http://supercurve.r-forge.r-project.org/packages/SuperCurve.html">SuperCurve<A></dt>
-  <dd>RPPA Analysis Package</dd>
-<dt><A HREF="http://supercurve.r-forge.r-project.org/packages/tclish.html">tclish<A></dt>
-  <dd>'Tcl/Tk' Utilities Package</dd>
-<dt><A HREF="http://supercurve.r-forge.r-project.org/packages/SuperCurveGUI.html">SuperCurveGUI<A></dt>
-  <dd>'SuperCurve' GUI Package</dd>
-<dt><A HREF="http://supercurve.r-forge.r-project.org/packages/SlideDesignerGUI.html">SlideDesignerGUI<A></dt>
-  <dd>Slide Designer GUI Package</dd>
-</dl>
 
 
 <BR />
