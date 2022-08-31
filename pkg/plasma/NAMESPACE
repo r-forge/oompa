@@ -19,6 +19,9 @@ importFrom("Polychrome",
 importFrom("viridisLite",
            "viridis")
 
+## Imputation
+export("meanModeImputer", "samplingImputer")
+
 ## MultiOmics class
 exportClass("MultiOmics")
 export("prepareMultiOmics", "loadESCAdata")
