@@ -1,5 +1,5 @@
 ---
-title: "plasma: Partial LeAst Squares for Multi-omics Analysis"
+title: "plasma: Partial LeAst Squares for Multi-omics Analysis (manuscript ver)"
 author: "Kevin R. Coombes"
 data: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -373,14 +373,14 @@ correlated (yellow) with four components and negatively correlated (blue) with s
 ```{r fig11, fig.cap = .tag(11, "Scaled heatmap of the contributions of filtered mutation features to important components"), fig.height = 7}
 cmaf <- getAllWeights(pl, "MAF")
 xmaf <- shrink(cmaf, 4)
-heat(xmaf, cexCol = 0.9, cexRow = 0.9, col = HG)
+heat(xmaf, cexCol = 0.9, cexRow = 0.5, col = HG)
 ```
 
 ### Methylation Data
 ```{r fig12, fig.cap = .tag(12, "Scaled heatmap of the contributions of filtered methylation features to important components"), fig.height = 7}
 meth <- getAllWeights(pl, "Meth450")
 xmeth <- shrink(meth, 4)
-heat(xmeth, cexCol = 0.9, cexRow = 0.9, col = HG)
+heat(xmeth, cexCol = 0.9, cexRow = 0.5, col = HG)
 ```
 
 ### Proteomics Data
@@ -392,7 +392,6 @@ rownames(xrppa@contrib) <- sapply(strsplit(tmp, "\\."), function(x) paste(x[-1],
 hc <- heat(xrppa, cexCol = 0.9, cexRow = 0.9, col = HG, keep.dendro = TRUE)
 ```
 
-
 ### mRNA-Sequencing Data
 ```{r fig14, fig.cap = .tag(14, "Scaled heatmap of the contributions of filtered mRNA features to important components"), fig.height = 7}
 mrna <- getAllWeights(pl, "mRNASeq")
@@ -401,7 +400,6 @@ tmp <- rownames(xmrna@contrib)
 rownames(xmrna@contrib) <- sapply(strsplit(tmp, "\\."), function(x) x[1])
 heat(xmrna, cexCol = 0.9, cexRow = 0.6, col = HG)
 ```
-
 
 ### miR-Sequencing Data
 ```{r fig15, fig.cap = .tag(15, "Scaled heatmap of the contributions of filtered miR features to important components"), fig.height = 7}
@@ -424,6 +422,57 @@ yyy <- xmir
 yyy@contrib <- sss[wts > 6, ]
 heat(yyy, col = HG)
 ```
+
+## Plots of ranked weights
+```{r}
+library(ggplot2)
+```
+
+```{r, out.width="50%"}
+n=10 # top 10
+dflist = mget(ls(pattern="x[A-Za-z]"))
+dflist_contrib<-list()
+# need to give unique names for variables based on which assay they came from, add a prefix
+for (i in 1:length(dflist)){
+ rownames(dflist[[i]]@contrib) <- 
+   paste( as.character(dflist[[i]]@datasets) , rownames(dflist[[i]]@contrib) , sep="_")
+ dflist_contrib[[i]] <-dflist[[i]]@contrib
+}
+# rbind all of the Formal class Contributions:
+rbinded<- do.call(rbind, dflist_contrib)
+
+# make a copy and save the signs
+rbinded_signs <- rbinded
+rbinded_signs[rbinded>0]<-"+"
+rbinded_signs[rbinded<0]<-"-"
+
+for (j in 1:ncol(rbinded)){
+
+o <- order(abs(rbinded[,j]), decreasing = TRUE)  
+
+weightsorted<- abs(rbinded)[o,j]
+rbinded_signs_sorted <- rbinded_signs[o,j]
+
+weightdf <- data.frame(names=factor(names(weightsorted), levels = factor(names(weightsorted))),
+                       weights=weightsorted, 
+                       signs=rbinded_signs_sorted)
+
+weightdf_top <- weightdf[n:1,]
+weightdf_top$names <- factor(weightdf_top$names, levels = weightdf_top$names)
+
+g<- ggplot(weightdf_top, aes(x=weights, y=names, label=signs))+ 
+  geom_point()+
+  geom_segment(aes(x=0, xend=weights, y=names, yend=names))+
+  geom_text(hjust=-1, size=5)+
+  ggtitle(colnames(rbinded)[j])+
+  labs(y="Variable names", x="Weights")+
+  theme_bw()
+  
+
+print(g)
+}
+```
+
 
 # Conclusions
 We have identified a method analogous to that of `MOFA` that allows us
@@ -456,6 +505,234 @@ these high-weighted variables most closely.
 
 # Appendix: MOFA2
 
-```{r mofa, eval=FALSE}
+```{r mofa}
 suppressWarnings( library(MOFA2) )
+library(ggplot2)
+library(dplyr)
+library(tidyr)
 ```
+
+In the final MOFA model, we would prefer that no single variable explains the most variance in the model simply because they encompass a wide range of values. For example, the untransformed "days_to_birth" column in "ClinicalCont" has a particularly wide range.
+
+```{r}
+range(assemble$ClinicalCont["days_to_birth",])
+```
+
+We will create a vector of names of datasets that are continuous (not binary) and scale them around 0 before running MOFA.
+
+```{r}
+# scale the columns that are not binary
+notbinarydata<-c("ClinicalCont","Meth450","miRSeq","mRNASeq","RPPA")
+UseMeScaled<- lapply(MO@data[notbinarydata], function(x) scale(x))
+UseMeScaled$ClinicalBin <- MO@data$ClinicalBin
+UseMeScaled$MAF <- MO@data$MAF
+```
+
+```{r}
+oof <- create_mofa(UseMeScaled)
+oof
+plot_data_overview(oof)
+```
+
+First, we need to output the options and alter them if necessary. There are three, called "data options" "model options" and "training options".
+
+```{r}
+dataoptions <- get_default_data_options(oof)
+dataoptions
+
+modeloptions <- MOFA2::get_default_model_options(oof)
+modeloptions$num_factors <-10
+
+modeloptions
+
+modeloptions[["likelihoods"]][["ClinicalBin"]] <- "bernoulli"
+modeloptions[["likelihoods"]][["MAF"]] <- "bernoulli"
+
+modeloptions
+
+trainingoptions <- get_default_training_options(oof)
+trainingoptions
+
+oof <- prepare_mofa(oof, data_options = dataoptions, model_options = modeloptions, training_options = trainingoptions)
+```
+
+```{r}
+# run MOFA if the file does not exist
+if (file.exists("mofaESCAScaled.Rda")){
+load("mofaESCAScaled.Rda") 
+} else{
+starttime<-Sys.time()
+mofaESCAScaled <- run_mofa(oof, use_basilisk = TRUE)
+save(mofaESCAScaled, file = "mofaESCAScaled.Rda")
+endtime<-Sys.time()
+endtime-starttime  
+}
+```
+
+## Looking at the factors: 
+
+plot_factor_cor
+
+```{r, message= FALSE, warning= FALSE,  fig.height=9, fig.width=13}
+
+# How do the factors correlate to each other? 
+
+plot_factor_cor(mofaESCAScaled)
+
+# Variance explained: 
+
+plot_variance_explained(mofaESCAScaled, plot_total = T)[[2]]
+
+plot_variance_explained(mofaESCAScaled)
+```
+
+## Heatmaps for the weight:
+
+```{r, message=FALSE, warning=FALSE, fig.height=15, fig.width=15}
+
+size <- sapply(UseMeScaled, dim)
+type <- sapply(UseMeScaled, function(M) {
+  U <- unique(as.vector(as.matrix(M)))
+  ifelse (length(U) >3, "gaussian", "bernoulli")
+})
+heatme <- function() {
+  Y <-  lapply(names(UseMeScaled), function(V) {
+    sz <- size[1, V] < 200
+    MOFA2::plot_weights_heatmap(mofaESCAScaled, view = V, main = V, show_colnames = sz, silent = TRUE)
+  })
+  Z <- lapply(Y, function(x) x$gtable)
+  W <- gridExtra::arrangeGrob(Z[[1]], Z[[2]], Z[[3]], Z[[4]],
+                              Z[[5]], Z[[6]], Z[[7]], nrow = 3)
+  W
+}
+X <- heatme()
+plot(X)
+
+```
+
+
+## Looking at each factor: 
+
+```{r, message=FALSE, warning=FALSE, fig.width = 15, fig.height = 15 }
+factorTopWeights <- function(J, mymofainput, mymofaoutput) {
+  Z <-  lapply(names(mymofainput), function(V) {
+    plot_top_weights(mymofaoutput, view = V, factor = J) + ggplot2::ggtitle(V)
+  })
+  W <- gridExtra::grid.arrange(Z[[1]], Z[[2]], Z[[3]], Z[[4]],
+                               Z[[5]], Z[[6]], Z[[7]], 
+                               nrow = 3)
+}
+
+factorTopWeights(J=1, mymofainput = UseMeScaled, mymofaoutput = mofaESCAScaled)
+factorTopWeights(J=2, mymofainput = UseMeScaled, mymofaoutput = mofaESCAScaled)
+factorTopWeights(J=3, mymofainput = UseMeScaled, mymofaoutput = mofaESCAScaled)
+factorTopWeights(J=4, mymofainput = UseMeScaled, mymofaoutput = mofaESCAScaled)
+factorTopWeights(J=5, mymofainput = UseMeScaled, mymofaoutput = mofaESCAScaled)
+factorTopWeights(J=6, mymofainput = UseMeScaled, mymofaoutput = mofaESCAScaled)
+factorTopWeights(J=7, mymofainput = UseMeScaled, mymofaoutput = mofaESCAScaled)
+factorTopWeights(J=8, mymofainput = UseMeScaled, mymofaoutput = mofaESCAScaled)
+factorTopWeights(J=9, mymofainput = UseMeScaled, mymofaoutput = mofaESCAScaled)
+factorTopWeights(J=10, mymofainput = UseMeScaled, mymofaoutput = mofaESCAScaled)
+```
+
+
+## Relationship to Overall Survival
+
+```{r}
+LF <- get_factors(mofaESCAScaled, groups = "all", factors = "all") [[1]]
+
+all(rownames(MO@outcome) == rownames(LF))
+
+vitalstatus2 <- ifelse(MO@outcome$vital_status=="alive", 0,
+                       ifelse(MO@outcome$vital_status=="dead", 1, NA))
+LFwithOutcome<- data.frame(LF, event =  vitalstatus2, time_to_event = MO@outcome$Days) 
+
+```
+
+```{r, warning=FALSE}
+LF2 <- as.data.frame(t(LF))
+
+OSresults <- matrix(NA, nrow=nrow(LF2), ncol = 4)
+rownames(OSresults) <- rownames(LF2)
+colnames(OSresults) <- c("coef", "HR", "score", "pvalue")
+
+
+for (J in 1:nrow(LF2)) {
+  tempdf <- data.frame(Time = LFwithOutcome$time_to_event,
+                       Event = LFwithOutcome$event,
+                       X <- LF2[J,])
+  model <- coxph(Surv(Time, Event) ~ unlist(X), data = tempdf)
+  S <- summary(model)
+  val <- c(S$coefficients[1:2], S$sctest[c(1,3)])
+  OSresults[J,] <- val}
+
+OSresults
+```
+
+```{r, message=FALSE, warning=FALSE, results=FALSE}
+osmodel <- survival::coxph(Surv(LFwithOutcome$time_to_event, LFwithOutcome$event) ~. , data = LFwithOutcome)
+AIC <- stats::step(osmodel)
+
+summary(osmodel)
+summary(AIC)
+```
+
+Factor 10 is the only factor significantly associated with survival.
+
+
+## Looking at Hazards ratio - OS: 
+
+```{r}
+s <- summary(osmodel)
+coef <- s[["coefficients"]]
+
+df <- data.frame(
+  factor = factor(rownames(coef), levels = rev(rownames(coef))),
+  p      = coef[,"Pr(>|z|)"], 
+  coef   = coef[,"exp(coef)"], 
+  lower  = s[["conf.int"]][,"lower .95"], 
+  higher = s[["conf.int"]][,"upper .95"]
+)
+
+ggplot(df, aes(x=factor, y=coef, ymin=lower, ymax=higher)) +
+  geom_pointrange( col='#619CFF') + 
+  coord_flip() +
+  scale_x_discrete() + 
+  labs(y="Hazard Ratio", x="") + 
+  geom_hline(aes(yintercept=1), linetype="dotted") +
+  theme_bw()
+```
+
+The only factor significantly associated with survival outcome is Factor 10, which is marginal in terms of the variance explained in the model:
+
+```{r}
+library(tidyr)
+v10<- plot_variance_explained(mofaESCAScaled)
+v10wide<-pivot_wider(v10$data, names_from="factor", values_from="value")
+v10wide<-v10wide %>% select(-c("group"))
+v10wide<-as.data.frame(v10wide) 
+rownames(v10wide) <- v10wide[,1]
+v10wide<-v10wide[,-1]
+v10wide_t<-t(v10wide)
+sort(rowSums(v10wide_t), decreasing = TRUE)
+```
+
+The variances don not total to 100, so they are not really like what we normally think of when we say $R^2$. 
+Possibly it would be easier to interpret if we force them into percentages like this:
+
+```{r}
+barplot(sort( rowSums(v10wide_t)/sum(rowSums(v10wide_t)) , decreasing = TRUE ), las=2, 
+        main="Relative R^2")
+sort( rowSums(v10wide_t)/sum(rowSums(v10wide_t)) , decreasing = TRUE )
+```
+
+
+## Some tentative conclusions from MOFA
+
+* This may highlight a crucial problem in MOFA, in which Factors that have a large variance explained in the model (usually the first few factors) may not be significantly related to survival outcome when doing the post-hoc analysis.
+
+* This is because these factors were learned with respect to explaining the most variance within the model, without any supervision. There is some "luck" associated with finding Factors that contribute to defining the model and are also significantly related to outcome.
+
+* Plasma solves this problem of the Factors becoming dissociated with outcome, since plasma is a supervised analysis that purposefully learns components that explain the outcome.
+
+
