@@ -592,6 +592,40 @@ par(opar)
 rm(opar)
 ```
 
+In **Figure 24**, we pool all the weights 9across all data sets and all components) to look at
+histograms of th distributions. In the center and right panels, we overlay the theoretical
+standard normal distribution that one would expect to see after standardizing the weights (by
+data set and component). Using the usual mean and distribution (center panel), the actual weights
+are slightly more conservative (i.e., concentrated near zero) than expected. Using the robust
+median and MAD (right panel), the weights are less conservative (with heavier tails). This figure
+suggests that we might want to use the usual method, and decide on significance purely from the
+theoretical distribution rather than from deviations away from that distribution.
+```{r fig24, fig.cap = .tag(24, "Histograms of all weights (combined)."), fig.width=12, fig.height=6}
+opar <- par(mfrow = c(1, 3))
+hist(contra, breaks = 123, main = "Raw Weights", prob = TRUE)
+hist(brute, breaks = 123, main = "Standardized Weights", prob = TRUE)
+xx <- seq(-10, 10, length=1001)
+yy <- dnorm(xx)
+lines(xx, yy, col = "red", lwd=2)
+hist(robust, breaks = 123, main = "Robust Weights", prob = TRUE)
+lines(xx, yy, col = "red", lwd=2)
+par(opar)
+rm(opar)
+```
+
+Finally, we create yet another image (**Figure 25**), counting the number of significant features
+from each data set for each component. As just suggested, we use the standardized weights. We feel
+that this result is more reasonable than any thing we got looking at the top 20 lists. The most
+contributions come from the biggest omics data sets (mRNA, methylation, and miR) with fewer from
+MAF, RPPA, and clinical binary. (There are none from the clinical continuous data set.)
+```{r fig25, fig.cap = .tag(25, "Number of significant contributions by data set and component."), fig.width=6, fig.height=6}
+top1p <- aggregate(brute, list(datasrc), function(X) sum(abs(X) > 2.5758)) # top 1 percent
+rownames(top1p) <- top1p[, 1]
+top1p <- as.matrix(top1p[, -1])
+image(1:7, 1:24, top1p, ylab = "Components", xlab = "Data Sets")
+mtext(levels(datasrc),side = 3, at = 1:7, line = 0)
+```
+
 # Conclusions
 We have identified a method analogous to that of `MOFA` that allows us
 to combine different omics data without the need for prior imputation
