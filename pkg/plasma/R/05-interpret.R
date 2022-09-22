@@ -53,7 +53,8 @@ setMethod("heat", "Contribution", function(object, main = "Contributions",
   if (main == "Contributions") main = paste(object@datasets, collapse = " => ")
   opar <- par(mai = mai)
   on.exit(par(opar))
-  heatmap(object@contrib, scale = "none", main = main, col = col, zlim = c(-M, M), ...)
+  heatmap(object@contrib, scale = "none",
+            main = main, col = col, zlim = c(-M, M), ...)
 })
 
 ## object is a thing of the "plasma" class

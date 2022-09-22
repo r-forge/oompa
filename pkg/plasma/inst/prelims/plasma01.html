@@ -138,28 +138,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<style type="text/css">
-/* for pandoc --citeproc since 2.11 */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <style type="text/css">body {
 background-color: #fff;
@@ -364,27 +342,22 @@ Multi-omics Analysis</h1>
 <p>Recent years have seen the development of numerous algorithms and
 computational packages for the analysis of multi-omics data sets. At
 this point, one can find multiple review articles summarizing progress
-in the field <span class="citation">(<a href="#ref-adossa2021" role="doc-biblioref">Adossa, Khan, Rytkonen, and Elo 2021</a>; <a href="#ref-graw2021" role="doc-biblioref">Graw et al. 2021</a>; <a href="#ref-heo2021" role="doc-biblioref">Heo, Hwa, Lee, Park, and An
-2021</a>; <a href="#ref-picard2021" role="doc-biblioref">Picard,
-Scott-Boyer, Bodein, Perin, and Droit 2021</a>; <a href="#ref-reel2021" role="doc-biblioref">Reel, Reel, Pearson, Trucco, and Jefferson
-2021</a>; <a href="#ref-subramanian2020" role="doc-biblioref">Subramanian, Verma, Kumar, Jere, and Anamika
-2020</a>; <a href="#ref-vlachavas2021" role="doc-biblioref">Vlachavas,
-Bohn, Uckert, and Nurnberg 2021</a>)</span>. As with other applications
-of machine learning, the kinds of problems addressed by these algorithms
+in the field [Subramanian-2020; Graw-2021; Heo-2021; Picard-2021;
+Reel-2021; Vlachavas-2021; Adossa-2021]. As with other applications of
+machine learning, the kinds of problems addressed by these algorithms
 are divided into two categories: unsupervised (e.g., clustering or class
 discovery) or supervised (including class comparison and class
-prediction) <span class="citation">(<a href="#ref-simon2003" role="doc-biblioref">Simon and Dobbin 2003</a>)</span>. Advances in the
-area of unsupervised learning have been broader and deeper than advances
-on supervised learning [CITE].</p>
+prediction). Advances in the area of unsupervised learning have been
+broader and deeper than advances on supervised learning [CITE].</p>
 <p>One of the most effective unsupervised methods is Multi-Omic Factor
-Analysis (MOFA) <span class="citation">(<a href="#ref-argelaguet2018" role="doc-biblioref">Argelaguet et al. 2018</a>, <a href="#ref-argelaguet2020" role="doc-biblioref">2020</a>)</span>. A key
-property of MOFA is that it does not require all omics assays to have
-been performed on all samples under study. In particular, it can
-effectively discover class structure across omics data sets even when
-data for many patients have only been acquired on a subset of the omics
-technologies. As of this writing, we do not know of any supervised
-multi-omics method that can effectively learn to predict outcomes when
-samples have only been assayed on a subset of the omics data sets.</p>
+Analysis (MOFA) [Argelaguet-2018; Argelaguet-2020]. A key property of
+MOFA is that it does not require all omics assays to have been performed
+on all samples under study. In particular, it can effectively discover
+class structure across omics data sets even when data for many patients
+have only been acquired on a subset of the omics technologies. As of
+this writing, we do not know of any supervised multi-omics method that
+can effectively learn to predict outcomes when samples have only been
+assayed on a subset of the omics data sets.</p>
 <p>MOFA starts with a standard method – Latent Factor Analysis – that is
 known to work well on single omics data set. It then fits a coherent
 model that identifies latent factors that are common to, and able to
@@ -414,7 +387,7 @@ of the esophageal cancer (ESCA) data set from The Cancer Genome Atlas
 the <code>plasma</code> package.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressWarnings</span>( <span class="fu">library</span>(plasma) )</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">&quot;plasma&quot;</span>)</span></code></pre></div>
-<pre><code>## [1] &#39;0.7.0&#39;</code></pre>
+<pre><code>## [1] &#39;0.5.14&#39;</code></pre>
 <div id="data" class="section level2">
 <h2>Data</h2>
 <p>We downloaded the entire esophageal cancer Level 3 data set from the
@@ -506,29 +479,27 @@ randomly from the observed data distribution.</li>
 <h2>Computational Approach</h2>
 <p>The <code>plasma</code> algorithm is based on Partial Least Squares
 (PLS), which has been shown to be an effective method for finding
-components that can predict clinically interesting outcomes <span class="citation">(<a href="#ref-bastien2015" role="doc-biblioref">Bastien, Bertrand, Meyer, and Maumy-Bertrand
-2015</a>)</span>. The workflow of the plasma algorithm is illustrated in
+components that can predict clinically interesting outcomes
+[Bastien-2015]. The workflow of the plasma algorithm is illustrated in
 <strong>Figure 1</strong> in the case of three omics data sets. First,
 for each of the omics data sets, we apply the PLS Cox regression
-algorithm (<code>plsRcox</code> Version 1.7.6 <span class="citation">(<a href="#ref-bertrand2021" role="doc-biblioref">Bertrand and
-Maumy-Bertrand 2021</a>)</span>) to the time-to-event outcome data to
-learn three separate predictive models (indicated in red, green, and
-blue, respectively). Each of these models may be incomplete, since they
-are not defined for patients who have not been assayed (shown in white)
-using that particular omics technology. Second, for each pair of omics
-data sets, we apply the PLS linear regression algorithm
-(<code>pls</code> Version 2.8.0 <span class="citation">(<a href="#ref-mishra2022" role="doc-biblioref">Mishra and Liland
-2022</a>)</span>) to learn how to predict the coefficients of the Cox
-regression components from one data set using features from the other
-data set. This step extends (shown in pastel red, green, and blue,
-resp.) each of the original models, in different ways, from the
-intersection of samples assayed on both data sets to their union. Third,
-we average all of the different extended models (ignoring missing data)
-to get a single coherent model of component coefficients across all
-omics data sets. Assuming that this process has been applied to learn
-the model from a training data set, we can evaluate the final Cox
-regression model on both the training set and a test set of patient
-samples.</p>
+algorithm (<code>plsRcox</code> Version 1.7.6 [Bertand-2021]) to the
+time-to-event outcome data to learn three separate predictive models
+(indicated in red, green, and blue, respectively). Each of these models
+may be incomplete, since they are not defined for patients who have not
+been assayed (shown in white) using that particular omics technology.
+Second, for each pair of omics data sets, we apply the PLS linear
+regression algorithm (<code>pls</code> Version 2.8.0 [Liland-2021]) to
+learn how to predict the coefficients of the Cox regression components
+from one data set using features from the other data set. This step
+extends (shown in pastel red, green, and blue, resp.) each of the
+original models, in different ways, from the intersection of samples
+assayed on both data sets to their union. Third, we average all of the
+different extended models (ignoring missing data) to get a single
+coherent model of component coefficients across all omics data sets.
+Assuming that this process has been applied to learn the model from a
+training data set, we can evaluate the final Cox regression model on
+both the training set and a test set of patient samples.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>SF <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;Figure/methods.png&quot;</span>, <span class="at">package =</span> <span class="st">&quot;plasma&quot;</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(SF)</span></code></pre></div>
 <div class="figure">
@@ -562,12 +533,12 @@ other omics data sets.</li>
 </div>
 <div id="preparing-the-data" class="section level2">
 <h2>Preparing the Data</h2>
-<p>To be consistent with the <code>MOFA2</code> R package <span class="citation">(<a href="#ref-argelaguet2020" role="doc-biblioref">Argelaguet et al. 2020</a>)</span>, all of the data
-sets are arranged so that patient samples are columns and assay features
-are rows. Our first task is to pad each data set with appropriate
-<code>NA</code>’s to ensure that each set includes the same patient
-samples in the same order, where that order matches the outcome data
-frame.</p>
+<p>To be consistent with the <code>MOFA2</code> R package, all of the
+data sets are arranged so that patient samples are columns and assay
+features are rows. Our first task is to pad each data set with
+appropriate <code>NA</code>’s to ensure that each set includes the same
+patient samples in the same order, where that order matches the outcome
+data frame.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>MO <span class="ot">&lt;-</span> <span class="fu">prepareMultiOmics</span>(imputed, Outcome)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(MO)</span></code></pre></div>
 <pre><code>## Datasets:
@@ -591,7 +562,8 @@ the number of patients with clinical outcome data.</p>
 <p>As indicated above, we want to separate the data set into training
 and test samples. We will use 60% for training and 40% for testing.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">54321</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>splitVec <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="fu">nrow</span>(Outcome), <span class="dv">1</span>, <span class="fl">0.6</span>)</span></code></pre></div>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#set.seed(34672)</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>splitVec <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="fu">nrow</span>(Outcome), <span class="dv">1</span>, <span class="fl">0.6</span>)</span></code></pre></div>
 <p><strong>Figure 2</strong> presents a graphical overview of the number
 of samples (<code>N</code>) and the number of features (<code>D</code>)
 in each omics component of the training and test sets.</p>
@@ -806,10 +778,10 @@ more closely.</p>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>mainterms</span></code></pre></div>
 <pre><code>## [1] &quot;ClinicalBin1&quot; &quot;MAF1&quot;         &quot;Meth4501&quot;     &quot;Meth4502&quot;     &quot;Meth4503&quot;     &quot;Meth4504&quot;    
 ## [7] &quot;mRNASeq1&quot;     &quot;RPPA2&quot;        &quot;RPPA3&quot;</code></pre>
-<p>We see that at least one component discovered from four of the five
-“true” omics data sets survived in the final model; only the miR
-components failed to make the cut. In addition, one component from the
-binary clinical data ws retained in the final model.</p>
+<p>We see that at least one component discovered from each of the five
+“true” omics data sets survived in the final model. However, neither the
+binary clinical nor continuous clinical data sets contributed
+independent components.</p>
 <p>Our interest now turns to understanding how the features from
 individual omics data sets contribute to the components that are used in
 the final model. As mentioned earlier, these contributions are mediated
@@ -1269,91 +1241,6 @@ looking at these high-weighted variables most closely.</p>
 <div id="appendix-mofa2" class="section level1">
 <h1>Appendix: MOFA2</h1>
 <div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressWarnings</span>( <span class="fu">library</span>(MOFA2) )</span></code></pre></div>
-</div>
-<div id="referrnces" class="section level1 unnumbered">
-<h1 class="unnumbered">Referrnces</h1>
-<div id="refs" class="references csl-bib-body hanging-indent" line-spacing="2">
-<div id="ref-adossa2021" class="csl-entry">
-Adossa N, Khan S, Rytkonen KT, Elo LL (2021). <span>“Computational
-Strategies for Single-Cell Multi-Omics Integration.”</span> <em>Comput
-Struct Biotechnol J</em>, <strong>19</strong>, 2588–2596. Journal
-Article. <a href="https://doi.org/10.1016/j.csbj.2021.04.060">https://doi.org/10.1016/j.csbj.2021.04.060.</a>
-</div>
-<div id="ref-argelaguet2020" class="csl-entry">
-Argelaguet R, Arnol D, Bredikhin D, Deloro Y, Velten B, Marioni JC,
-Stegle O (2020). <span>“MOFA+: A Statistical Framework for Comprehensive
-Integration of Multi-Modal Single-Cell Data.”</span> <em>Genome
-Biol</em>, <strong>21</strong>(1), 111. Journal Article. <a href="https://doi.org/10.1186/s13059-020-02015-1">https://doi.org/10.1186/s13059-020-02015-1.</a>
-</div>
-<div id="ref-argelaguet2018" class="csl-entry">
-Argelaguet R, Velten B, Arnol D, Dietrich S, Zenz T, Marioni JC,
-Buettner F, Huber W, Stegle O (2018). <span>“Multi-Omics Factor
-Analysis-a Framework for Unsupervised Integration of Multi-Omics Data
-Sets.”</span> <em>Mol Syst Biol</em>, <strong>14</strong>(6), e8124.
-Journal Article. <a href="https://doi.org/10.15252/msb.20178124">https://doi.org/10.15252/msb.20178124.</a>
-</div>
-<div id="ref-bastien2015" class="csl-entry">
-Bastien P, Bertrand F, Meyer N, Maumy-Bertrand M (2015). <span>“Deviance
-Residuals-Based Sparse PLS and Sparse Kernel PLS Regression for Censored
-Data.”</span> <em>Bioinformatics</em>, <strong>31</strong>(3), 397–404.
-Journal Article. <a href="https://doi.org/10.1093/bioinformatics/btu660">https://doi.org/10.1093/bioinformatics/btu660.</a>
-</div>
-<div id="ref-bertrand2021" class="csl-entry">
-Bertrand F, Maumy-Bertrand M (2021). <span>“Fitting and Cross-Validating
-Cox Models to Censored Big Data with Missing Values Using Extensions of
-Partial Least Squares Regression Models.”</span> <em>Front Big
-Data</em>, <strong>4</strong>, 684794. Journal Article. <a href="https://doi.org/10.3389/fdata.2021.684794">https://doi.org/10.3389/fdata.2021.684794.</a>
-</div>
-<div id="ref-graw2021" class="csl-entry">
-Graw S, Chappell K, Washam CL, Gies A, Bird J, Robeson 2nd M. S., Byrum
-SD (2021). <span>“Multi-Omics Data Integration Considerations and Study
-Design for Biological Systems and Disease.”</span> <em>Mol Omics</em>,
-<strong>17</strong>(2), 170–185. Journal Article. <a href="https://doi.org/10.1039/d0mo00041h">https://doi.org/10.1039/d0mo00041h.</a>
-</div>
-<div id="ref-heo2021" class="csl-entry">
-Heo YJ, Hwa C, Lee GH, Park JM, An JY (2021). <span>“Integrative
-Multi-Omics Approaches in Cancer Research: From Biological Networks to
-Clinical Subtypes.”</span> <em>Mol Cells</em>, <strong>44</strong>(7),
-433–443. Journal Article. <a href="https://doi.org/10.14348/molcells.2021.0042">https://doi.org/10.14348/molcells.2021.0042.</a>
-</div>
-<div id="ref-mishra2022" class="csl-entry">
-Mishra P, Liland KH (2022). <span>“Swiss Knife Partial Least Squares
-(SKPLS): One Tool for Modelling Single Block, Multiblock, Multiway,
-Multiway Multiblock Including Multi-Responses and Meta Information Under
-the ROSA Framework.”</span> <em>Anal Chim Acta</em>,
-<strong>1206</strong>, 339786. Journal Article. <a href="https://doi.org/10.1016/j.aca.2022.339786">https://doi.org/10.1016/j.aca.2022.339786.</a>
-</div>
-<div id="ref-picard2021" class="csl-entry">
-Picard M, Scott-Boyer MP, Bodein A, Perin O, Droit A (2021).
-<span>“Integration Strategies of Multi-Omics Data for Machine Learning
-Analysis.”</span> <em>Comput Struct Biotechnol J</em>,
-<strong>19</strong>, 3735–3746. Journal Article. <a href="https://doi.org/10.1016/j.csbj.2021.06.030">https://doi.org/10.1016/j.csbj.2021.06.030.</a>
-</div>
-<div id="ref-reel2021" class="csl-entry">
-Reel PS, Reel S, Pearson E, Trucco E, Jefferson E (2021). <span>“Using
-Machine Learning Approaches for Multi-Omics Data Analysis: A
-Review.”</span> <em>Biotechnol Adv</em>, <strong>49</strong>, 107739.
-Journal Article. <a href="https://doi.org/10.1016/j.biotechadv.2021.107739">https://doi.org/10.1016/j.biotechadv.2021.107739.</a>
-</div>
-<div id="ref-simon2003" class="csl-entry">
-Simon RM, Dobbin K (2003). <span>“Experimental Design of DNA Microarray
-Experiments.”</span> <em>Biotechniques</em>, <strong>Suppl</strong>,
-16–21. Journal Article. Retrieved from <a href="https://www.ncbi.nlm.nih.gov/pubmed/12664680">https://www.ncbi.nlm.nih.gov/pubmed/12664680</a>
-</div>
-<div id="ref-subramanian2020" class="csl-entry">
-Subramanian I, Verma S, Kumar S, Jere A, Anamika K (2020).
-<span>“Multi-Omics Data Integration, Interpretation, and Its
-Application.”</span> <em>Bioinform Biol Insights</em>,
-<strong>14</strong>, 1177932219899051. Journal Article. <a href="https://doi.org/10.1177/1177932219899051">https://doi.org/10.1177/1177932219899051.</a>
-</div>
-<div id="ref-vlachavas2021" class="csl-entry">
-Vlachavas EI, Bohn J, Uckert F, Nurnberg S (2021). <span>“A Detailed
-Catalogue of Multi-Omics Methodologies for Identification of Putative
-Biomarkers and Causal Molecular Networks in Translational Cancer
-Research.”</span> <em>Int J Mol Sci</em>, <strong>22</strong>(6).
-Journal Article. <a href="https://doi.org/10.3390/ijms22062822">https://doi.org/10.3390/ijms22062822.</a>
-</div>
-</div>
 </div>
 
 

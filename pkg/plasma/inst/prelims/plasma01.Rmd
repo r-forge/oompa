@@ -2,9 +2,6 @@
 title: "plasma: Partial LeAst Squares for Multi-omics Analysis"
 author: "Kevin R. Coombes"
 data: "`r Sys.Date()`"
-bibliography: "`r system.file('manuscript', 'plasma.bib', package = 'plasma')`"
-link-citations: yes
-csl: "`r system.file( 'manuscript', 'jss.csl', package = 'plasma')`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{plasma: Partial LeAst Squares for Multi-omics Analysis}
@@ -25,15 +22,15 @@ options(width=96)
 # Introduction
 Recent years have seen the development of numerous algorithms and computational packages for
 the analysis of multi-omics data sets. At this point, one can find multiple review articles
-summarizing progress in the field [@subramanian2020; @graw2021; @heo2021; @picard2021;
-@reel2021; @vlachavas2021; @adossa2021]. As with other applications of
+summarizing progress in the field [Subramanian-2020; Graw-2021; Heo-2021; Picard-2021;
+Reel-2021; Vlachavas-2021; Adossa-2021]. As with other applications of
 machine learning, the kinds of problems addressed by these algorithms are divided into
 two categories: unsupervised (e.g., clustering or class discovery) or supervised
-(including class comparison and class prediction) [@simon2003]. Advances in the area of unsupervised
+(including class comparison and class prediction). Advances in the area of unsupervised
 learning have been broader and deeper than advances on supervised learning [CITE].
 
 One of the most effective unsupervised methods is Multi-Omic Factor Analysis (MOFA)
-[@argelaguet2018; @argelaguet2020]. A key property of MOFA is that it does not require
+[Argelaguet-2018; Argelaguet-2020]. A key property of MOFA is that it does not require
 all omics assays to have been performed on all samples under study. In particular, it can
 effectively discover class structure across omics data sets even when data for many
 patients have only been acquired on a subset of the omics technologies. As of this
@@ -138,16 +135,15 @@ imputed <- lapply(assemble, samplingImputer)
 ## Computational Approach
 The `plasma` algorithm is based on Partial Least Squares (PLS), which has been shown to be
 an effective method for finding components that can predict clinically interesting outcomes
-[@bastien2015]. The workflow of the plasma algorithm is illustrated in **Figure 1** in the
+[Bastien-2015]. The workflow of the plasma algorithm is illustrated in **Figure 1** in the
 case of three omics data sets. First, for each of the omics data sets, we apply the PLS Cox
-regression algorithm (`plsRcox` Version `r packageVersion("plsRcox")` [@bertrand2021]) to the
+regression algorithm (`plsRcox` Version `r packageVersion("plsRcox")` [Bertand-2021]) to the
 time-to-event outcome data to learn three separate predictive models (indicated in red, green,
 and blue, respectively). Each of these models may be incomplete, since they are not defined
 for patients who have not been assayed (shown in white) using that particular omics technology.
 Second, for each pair of omics data sets, we apply the PLS linear regression algorithm
-(`pls` Version `r packageVersion("pls")` [@mishra2022]) to learn how to predict the coefficients of
-the Cox regression components from one data set using features from the other data set. This
-step extends (shown in pastel red, green, and blue, resp.) each of the original models,
+(`pls` Version `r packageVersion("pls")` [Liland-2021]) to learn how to predict the coefficients of
+the Cox regression components from one data set using features from the other data set. This step extends (shown in pastel red, green, and blue, resp.) each of the original models,
 in different ways, from the intersection of samples assayed on both data sets to their union.
 Third, we average all of the different extended models (ignoring missing data) to get a single
 coherent model of component coefficients across all omics data sets. Assuming that this process
@@ -176,10 +172,10 @@ to help clarify the later discussions.
    in other omics data sets.
 
 ## Preparing the Data
-To be consistent with the `MOFA2` R package [@argelaguet2020], all of the data sets are
-arranged so that patient samples are columns and assay features are rows. Our first task
-is to pad each data set with appropriate `NA`'s to ensure that each set includes the same
-patient samples in the same order, where that order matches the outcome data frame.
+To be consistent with the `MOFA2` R package, all of the data sets are arranged so that patient
+samples are columns and assay features are rows. Our first task is to pad each data set with
+appropriate `NA`'s to ensure that each set includes the same patient samples in the same order,
+where that order matches the outcome data frame.
 ```{r prep}
 MO <- prepareMultiOmics(imputed, Outcome)
 summary(MO)
@@ -194,6 +190,7 @@ As indicated above, we want to separate the data set into training and test samp
 use 60% for training and 40% for testing.
 ```{r split}
 set.seed(54321)
+#set.seed(34672)
 splitVec <- rbinom(nrow(Outcome), 1, 0.6)
 ```
 
@@ -283,9 +280,9 @@ mainterms <- attr(temp, "term.labels")
 rm(temp)
 mainterms
 ```
-We see that at least one component discovered from four of the five "true" omics data sets
-survived in the final model; only the miR components failed to make the cut. In addition, one
-component from the binary clinical data ws retained in the final model.
+We see that at least one component discovered from each of the five "true" omics data sets
+survived in the final model. However, neither the binary clinical nor continuous clinical data sets
+contributed independent components. 
 
 Our interest now turns to understanding how the features from individual omics data
 sets contribute to the components that are used in the final model. As mentioned 
@@ -666,5 +663,3 @@ these high-weighted variables most closely.
 ```{r mofa, eval=FALSE}
 suppressWarnings( library(MOFA2) )
 ```
-
-# Referrnces
