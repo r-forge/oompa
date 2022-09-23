@@ -41,7 +41,7 @@ writing, we do not know of any supervised multi-omics method that can effectivel
 to predict outcomes when samples have only been assayed on a subset of the omics data sets.
 
 MOFA starts with a standard method -- Latent Factor Analysis -- that is known to work 
-well on single omics data set. It then fits a coherent model that identifies latent factors
+well on a single omics data set. It then fits a coherent model that identifies latent factors
 that are common to, and able to explain the data well in, all the omics data sets under
 study. Our investigation (unpublished) of the factors found by MOFA suggests that it is
 approximately equivalent to a two-step process:
@@ -51,7 +51,7 @@ approximately equivalent to a two-step process:
 2. For each pair of omics data sets, use overlapping samples to train and extend models of
    each factor to the union of assayed samples.
 
-That interpretation of MOFA suggests that an analogous procedure might work for supervised
+That re-interpretation of MOFA suggests that an analogous procedure might work for supervised
 analyses as well. In this article, we describe a two-step algorithm, which we call "_plasma_",
 to find models that can predict time-to-event outcomes on samples from multi-omics data sets
 even in the presence of incomplete data. We use partial least squares (PLS) for both steps,
@@ -103,16 +103,10 @@ sapply(assemble, dim)
 Finally, in order to be able to illustrate the ability of the plasma algorithm to work in
 the presence of missing data, we randomly selected 10% of the patients to remove from
 the miRSeq data set (leaving 166 patients) and 15% of the patients to remove from the
-mRNASeq data set (leaving 157 patients). 
-
-
-Here is a summary of the outcome data.
-```{r outcome}
-summary(Outcome)
-```
+mRNASeq data set (leaving 157 patients). We provid a summary of the outcome data below.
 
 ## Imputation
-We recommend imputing small amounts of missing data in te input data sets. The underlying issue
+We recommend imputing small amounts of missing data in the input data sets. The underlying issue
 is that the PLS models we use for individual omics data sets will not be able to make predictions
 on a sample if even one data point is missing. As a result, if sample is missing at least one
 data point in every omics data set, then it will be impossible to use that sample at all.
@@ -154,7 +148,7 @@ coherent model of component coefficients across all omics data sets. Assuming th
 has been applied to learn the model from a training data set, we can evaluate the final Cox
 regression model on both the training set and a test set of patient samples.
 
-```{r fig01, out.width = "100%", fig.cap = .tag(1, "Workflow schematic for plasma algorithm with three omics data sets.")}
+```{r fig01, out.width = "100%", fig.cap = .tag(1, "Workflow schematic for plasma algorithm with three omics data sets."), echo = FALSE}
 SF <- system.file("Figure/methods.png", package = "plasma")
 knitr::include_graphics(SF)
 rm(SF)
@@ -202,9 +196,7 @@ features (`D`) in each omics component of the training and test sets.
 
 ```{r fig02, fig.cap = .tag(2, "Overview of training and test data."), fig.width=9, fig.height=8}
 trainD <- MO[, splitVec == 1]
-summary(trainD)
 testD <- MO[, splitVec == 0]
-summary(testD)
 opar <- par(mai = c(1.02, 1.32, 0.82, 0.22), mfrow = c(1,2))
 plot(trainD, main = "Train")
 plot(testD, main = "Test")
@@ -227,10 +219,12 @@ of `SingleModel` objects, one for each assay, and within each there are three re
     + The `splitModel` is a `coxph` model using a binary split of the risk (at the median) as
       the predictor.
 
-```{r fig03, fig.width = 8, fig.height = 12, fig.cap = .tag(3, "Kaplan-Meier plots of overall survival on the training set from separate PLS Cox omics models")}
+```{r firstPass}
 suppressWarnings( firstPass <- fitCoxModels(trainD, timevar = "Days",
                           eventvar = "vital_status", eventvalue = "dead") )
 summary(firstPass)
+```
+```{r fig03, fig.width = 8, fig.height = 12, fig.cap = .tag(3, "Kaplan-Meier plots of overall survival on the training set from separate PLS Cox omics models")}
 if (!interactive()) {
   plot(firstPass, legloc = "bottomleft") # margins too small inside RStudio window
 }
@@ -300,11 +294,9 @@ extracted using the `getAllWeights` function, and can then be explored.
 We use the binary clinical data set to begin illustrating one method for interpreting
 the components.
 ```{r fig06, fig.cap = .tag(6, "Unscaled heatmap of the contributions of binary clinical features to all components (purple = retained in final model, green = not retained)."), fig.height = 7}
-if(requireNamespace("oompaBase")) {
-  HG <-  oompaBase::blueyellow(64)
-} else {
-  HG <- heat.colors(64)
-}
+
+library(oompaBase)
+HG <-  blueyellow(64)
 cbin <- getAllWeights(pl, "ClinicalBin")
 compcolors <- c("forestgreen", "purple")[1 + 1*(colnames(cbin@contrib) %in% mainterms)]
 heat(cbin, cexCol = 0.9, cexRow = 0.5, col = HG, ColSideColors = compcolors)
@@ -313,11 +305,11 @@ heat(cbin, cexCol = 0.9, cexRow = 0.5, col = HG, ColSideColors = compcolors)
 **Figure 6** shows the raw weights for each clinical binary feature in all of the original
 omics components. We would like to simplify this plot in several ways. First, we can remove
 any components that were not retained in the final model (indicated by the green color bar
-in the top denrogram). Second, we hypothesize that some
+in the top dendrogram). Second, we hypothesize that some
 components intrinsically have a wider spread of weights, and that it might be more important
 to scale the components consistently to look at the relative contributions. Finally, we can
 remove any features that seem to make no contributions to any of the components; that is;
-those thatdo not have highly ranked weights (by absolute value) in any component. 
+those that do not have highly ranked weights (by absolute value) in any component. 
 ```{r shrink}
 shrink <- function(dset, N) {
   dset@contrib <- scale(dset@contrib)               # standardize
@@ -339,8 +331,8 @@ is enriched for Asian, current smokers, who are tumor-free, with stage N0, T2 tu
 lower third of the esophagus (ICD-10 code C15.4).
 
 ### mRNA-Sequencing Data
-We can apply the same method to visualize contributors from each of the different omics data sets.
-As a second illustration, we look at the standardized weights from the mRNA data set in the compoentns
+We can apply the same method to visualize contributors from each of the omics data sets.
+As a second illustration, we look at the standardized weights from the mRNA data set in the components
 that are part of the final model, keeping only those features that are highly ranked by absolute
 weight in at least one component (**Figure 8**).
 ```{r fig08, fig.cap = .tag(8, "Scaled heatmap of the contributions of filtered mRNA features to important components"), fig.height = 7}
@@ -362,15 +354,14 @@ the source data set.
 CW <- combineAllWeights(pl)
 ```
 
-**Figure 16** displays the mean, standard deviation (SD), median and median absolute deviation (MAD)
+**Figure 9** displays the mean, standard deviation (SD), median and median absolute deviation (MAD)
 of the weight-contributions for each data set in each component. 
-```{r fig16, fig.cap = .tag(16, "Summary statustics of weights by component and dataset."), fig.width = 10, fig.height = 10}
+```{r fig09, fig.cap = .tag(9, "Summary statistics of weights by component and dataset."), fig.width = 10, fig.height = 10}
 summer <- summary(CW)
 mx <- max(abs(summer$Mean))
 sx <- max(summer$SD)
 dx <- max(abs(summer$Median))
 ax <- max(summer$MAD)
-library(oompaBase)
 opar <- par(mfrow = c(2,2))
 image(1:24, 1:7, t(summer$Mean), xlab = "Component", ylab = "Dataset", main = "Mean",
       zlim = c(-mx, mx), col = redgreen(64))
@@ -395,33 +386,34 @@ datasrc <- factor(rep(names(foo), times = featsize))
 
 
 ### Raw Weights
-In **Figure 17**, we create beanplots showing the distributions of weights arising from each
+In **Figure 10**, we create beanplots showing the distributions of weights arising from each
 data set in each component. Some data sts have very different contribution patterns than others.
 For example, the "Clinical Binary" data set appears to have significant outliers making large
 contributions in almost every component, THA MAF and RPPA data sets also frequently (but not
 always) include such outliers.
-```{r fig17, fig.cap = .tag(17, "Distributions of weights by data set and component."), fig.width = 12, fig.height = 18}
+```{r fig10, fig.cap = .tag(10, "Distributions of weights by data set and component."), fig.width = 12, fig.height = 18}
 library(beanplot)
 library(Polychrome)
-data(alphabet)
-CB <- cbin@contrib
-opar <- par(mfrow = c(6, 4), mai = c(0.2,0.2, 0.5, 0.2))
-for (i in 1:24) {
-  beanplot(contra[, i] ~ datasrc, what = c(1,1,1,0), col = as.list(alphabet[1:7]),
-           main = paste("Component ", i, " (", colnames(CB)[i], ")", sep = ""))
+data(palette36)
+foo <- computeDistances(palette36[3:36])
+colist <- as.list(palette36[names(foo)[1:7]])
+opar <- par(mfrow = c(3, 3), mai = c(0.2,0.2, 0.5, 0.2))
+for (i in which(colnames(contra) %in% mainterms)) {
+  beanplot(contra[, i] ~ datasrc, what = c(1,1,1,0), col = colist,
+           main = paste("Component ", i, " (", colnames(contra)[i], ")", sep = ""))
 }
 par(opar)
 rm(opar)
 ```
 
-**Figure 18** lumps the weights from all data sets together to view the distributions by component.
+**Figure 11** lumps the weights from all data sets together to view the distributions by component.
 Most of these histograms are centered near 0 and are roughly symmetric. Exceptions include component
 eleven, where there is a bias toward negative weights. The scale of the outliers also varies
 dramatically, with most component weights having a range much less than 1, but component eighteen
 having a range between +4 and -4.
-```{r fig18, fig.cap = .tag(18, "Histogram of weights by component."), fig.width = 12, fig.height = 18}
-opar <- par(mfrow = c(6, 4), mai = c(0.4,0.4, 0.5, 0.2))
-for (i in 1:24) {
+```{r fig11, fig.cap = .tag(11, "Histogram of weights by component."), fig.width = 12, fig.height = 18}
+opar <- par(mfrow = c(3, 3), mai = c(0.4,0.4, 0.5, 0.2))
+for (i in which(colnames(contra) %in% mainterms)) {
   hist(contra[,i], breaks = 77, main = paste("Component", i))
 }
 par(opar)
@@ -430,17 +422,17 @@ rm(opar)
 
 ### Standardized Weights
 
-In **Figure 19**, we have standardized the weights in each data set and component, and recreate the
+In **Figure 12**, we have standardized the weights in each data set and component, and recreate the
 corresponding beanplot distributions. The standardization has moved the outliers away from the three
 previous data sets (clinical binary, MAF, and RPPA) primarily to the miRs, though with more dispersed
 contributions as well.
-```{r fig19, fig.cap = .tag(19, "Distributions of standardized weights by data set and component."), fig.width = 12, fig.height = 18}
+```{r fig12, fig.cap = .tag(12, "Distributions of standardized weights by data set and component."), fig.width = 12, fig.height = 18}
 M <- apply(summer$Mean, 2, function(X) rep(X, times = CW@featureSize))
 S <- apply(summer$SD, 2, function(X) rep(X, times = CW@featureSize))
 brute <- (contra - M)/S
-opar <- par(mfrow = c(6, 4), mai = c(0.2,0.2, 0.5, 0.2))
-for (i in 1:24) {
-  beanplot(brute[, i] ~ datasrc, what = c(1,1,1,0), col = as.list(alphabet[1:7]),
+opar <- par(mfrow = c(3,3), mai = c(0.2,0.2, 0.5, 0.2))
+for (i in which(colnames(contra) %in% mainterms)) {
+  beanplot(brute[, i] ~ datasrc, what = c(1,1,1,0), col = colist,
            main = paste("Std Wts, Component", i))
 }
 par(opar)
@@ -450,8 +442,8 @@ rm(opar)
 We also include plots of the histograms of distributions by component (**Figure 20**). None of
 these really looks normal; they almost have some odd shape and signs of skewness.
 ```{r fig20, fig.cap = .tag(20, "Histogram of standardized weights by component."), fig.width = 12, fig.height = 18}
-opar <- par(mfrow = c(6, 4), mai = c(0.2,0.2, 0.5, 0.2))
-for (i in 1:24) {
+opar <- par(mfrow = c(3, 3), mai = c(0.2,0.2, 0.5, 0.2))
+for (i in which(colnames(contra) %in% mainterms)) {
   hist(brute[,i], breaks = 77, main = paste("Component", i))
 }
 par(opar)
@@ -471,7 +463,7 @@ S <- apply(summer$MAD, 2, function(X) rep(X, times = CW@featureSize))
 robust <- (contra - M)/S
 opar <- par(mfrow = c(6, 4), mai = c(0.2,0.2, 0.5, 0.2))
 for (i in 1:24) {
-  beanplot(robust[, i] ~ datasrc, what = c(1,1,1,0), col = as.list(alphabet[1:7]),
+  beanplot(robust[, i] ~ datasrc, what = c(1,1,1,0), col = colist,
            main = paste("Robust Std Wts, Component", i))
 }
 par(opar)

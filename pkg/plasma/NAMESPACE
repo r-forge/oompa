@@ -19,6 +19,8 @@ importFrom("plsRcox",
            "plsRcoxmodel")
 importFrom("Polychrome",
            "memberPlot")
+importFrom("oompaBase",
+           "blueyellow", "redgreen", "bluescale")
 importFrom("viridisLite",
            "viridis")
 
