@@ -130,7 +130,9 @@ sapply(assemble, dim)
 
 summary(Outcome)
 time <- as.integer(as.character(Outcome$days_to_death))
+Outcome$days_to_death <- time
 lfu <- as.integer(as.character(Outcome$days_to_last_followup))
+Outcome$days_to_last_followup <- lfu
 time[is.na(time)] <- lfu[is.na(time)]
 Outcome$Days <- time
 summary(Outcome)
