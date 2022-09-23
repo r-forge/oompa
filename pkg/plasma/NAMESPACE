@@ -5,9 +5,12 @@
 ## Imported methods
 import(methods)
 importFrom("stats",
-           "median", "predict", "formula", "step", "heatmap", "na.omit", "quantile")
+           "median", "predict", "formula", "step", "heatmap", "na.omit", "quantile",
+           "aggregate")
 importFrom("graphics",
            "par", "legend", "text", "mtext", "title")
+importFrom("beanplot",
+           "beanplot")
 importFrom("survival",
            "coxph", "Surv", "survfit")
 importFrom("pls",
@@ -41,6 +44,9 @@ export("fitCoxModels", "plasma")
 ## Contribution class
 exportClass("Contribution")
 export("getCompositeWeights", "getAllWeights", "getTop", "pickSignificant")
+
+exportClass("CombinedWeights")
+export("combineAllWeights")
 
 ## methods
 exportMethods("summary", "plot", "predict", "image", "heat")

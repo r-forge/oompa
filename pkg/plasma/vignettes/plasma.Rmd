@@ -297,94 +297,53 @@ single Cox model built that had been from set A. These weights can be combined a
 extracted using the `getAllWeights` function, and can then be explored.
 
 ### Clinical Binary Data
-We use the binary clinical data set to illustrate our methods for interpreting the components.
-```{r fig06, fig.cap = .tag(6, "Unscaled heatmap of the contributions of binary clinical features to all components."), fig.height = 7}
-if (requireNamespace("oompaBase")) {
-  HG <- oompaBase::blueyellow(64)
+We use the binary clinical data set to begin illustrating one method for interpreting
+the components.
+```{r fig06, fig.cap = .tag(6, "Unscaled heatmap of the contributions of binary clinical features to all components (purple = retained in final model, green = not retained)."), fig.height = 7}
+if(requireNamespace("oompaBase")) {
+  HG <-  oompaBase::blueyellow(64)
 } else {
   HG <- heat.colors(64)
 }
 cbin <- getAllWeights(pl, "ClinicalBin")
-heat(cbin, cexCol = 0.9, cexRow = 0.5, col = HG)
+compcolors <- c("forestgreen", "purple")[1 + 1*(colnames(cbin@contrib) %in% mainterms)]
+heat(cbin, cexCol = 0.9, cexRow = 0.5, col = HG, ColSideColors = compcolors)
 ```
 
 **Figure 6** shows the raw weights for each clinical binary feature in all of the original
-omics components. **Figure 7** only includes the omics components that were retained in the
-final composite model. Structurally, these two figures look similar. There is a central set
-of components where all of the weights look weak, and a central set of features that appear
-to have weak contributions to all components.
-
-```{r fig07, fig.cap = .tag(7, "Unscaled heatmap of the contributions of binary clinical features to important components."), fig.height = 7}
-heat(cbin[, mainterms], cexCol = 0.9, cexRow = 0.5, col = HG)
-```
-
-We hypothesize that some components intrinsically have a wider spread of weights, and that
-it might be more important to scale the components consistently to look at the relative
-contributions (**Figure 8**). By standardizing the weights component by component, we see
-a better balance of contributions per component. However, we can still identify a set of
-features that seem to make no contributions to any of the components. We can filter the
-features by only retaining those that make a large contribution to at least one omics
-component (**Figure 9**). 
-
-```{r fig08, fig.cap = .tag(8, "Scaled heatmap of the contributions of binary clinical features to important components."), fig.height = 7}
-dbin <- cbin[, mainterms]
-dbin@contrib <- scale(dbin@contrib)
-heat(dbin, cexCol = 0.9, cexRow = 0.5, col = HG)
-```
-
-
-```{r fig09, fig.cap = .tag(9, "Scaled heatmap of the contributions of filtered binary clinical features to important components."), fig.height = 7}
+omics components. We would like to simplify this plot in several ways. First, we can remove
+any components that were not retained in the final model (indicated by the green color bar
+in the top denrogram). Second, we hypothesize that some
+components intrinsically have a wider spread of weights, and that it might be more important
+to scale the components consistently to look at the relative contributions. Finally, we can
+remove any features that seem to make no contributions to any of the components; that is;
+those thatdo not have highly ranked weights (by absolute value) in any component. 
+```{r shrink}
 shrink <- function(dset, N) {
-  dset@contrib <- scale(dset@contrib)
-  feat <- unique(unlist(as.list(getTop(dset, N))))
-  dset@contrib <- dset@contrib[feat, mainterms]
+  dset@contrib <- scale(dset@contrib)               # standardize
+  feat <- unique(unlist(as.list(getTop(dset, N))))  # remove useless features
+  dset@contrib <- dset@contrib[feat, mainterms]     # remove unused components
   dset
 }
+```
+
+```{r fig07, fig.cap = .tag(7, "Scaled heatmap of the contributions of filtered binary clinical features to important components."), fig.height = 7}
 xbin <- shrink(cbin, 4)
 heat(xbin, cexCol = 0.9, cexRow = 0.9, col = HG)
 ```
-In **Figure 9**, we can identify strong contrasts between several pairs of variables. For example,
+
+In **Figure 7**, we can identify strong contrasts between several pairs of variables. For example,
 one set of components is enriched with white, never smokers, who still have evidence of tumors, at
 stage T3 and grade 3 in the lower third of the esophagus (ICD-10 code C15.5), while another group
 is enriched for Asian, current smokers, who are tumor-free, with stage N0, T2 tumors from the
 lower third of the esophagus (ICD-10 code C15.4).
 
-### Clinical Continuous Data
-```{r fig10, fig.cap = .tag(10, "Scaled heatmap of the contributions of filtered continuous clinical features to important components")}
-ccont <- getAllWeights(pl, "ClinicalCont")
-xcont <- shrink(ccont, 2)
-heat(xcont, cexCol = 0.8, cexRow = 1.2, col = HG)
-```
-
-The most important continuous clinical feature is the patient's weight, which is positively
-correlated (yellow) with four components and negatively correlated (blue) with six others.
-
-### Mutation Data
-```{r fig11, fig.cap = .tag(11, "Scaled heatmap of the contributions of filtered mutation features to important components"), fig.height = 7}
-cmaf <- getAllWeights(pl, "MAF")
-xmaf <- shrink(cmaf, 4)
-heat(xmaf, cexCol = 0.9, cexRow = 0.9, col = HG)
-```
-
-### Methylation Data
-```{r fig12, fig.cap = .tag(12, "Scaled heatmap of the contributions of filtered methylation features to important components"), fig.height = 7}
-meth <- getAllWeights(pl, "Meth450")
-xmeth <- shrink(meth, 4)
-heat(xmeth, cexCol = 0.9, cexRow = 0.9, col = HG)
-```
-
-### Proteomics Data
-```{r fig13, fig.cap = .tag(13, "Scaled heatmap of the contributions of filtered RPPA features to important components"), fig.height = 7}
-rppa <- getAllWeights(pl, "RPPA")
-xrppa <- shrink(rppa, 5)
-tmp <- rownames(xrppa@contrib)
-rownames(xrppa@contrib) <- sapply(strsplit(tmp, "\\."), function(x) paste(x[-1], collapse = "."))
-hc <- heat(xrppa, cexCol = 0.9, cexRow = 0.9, col = HG, keep.dendro = TRUE)
-```
-
-
 ### mRNA-Sequencing Data
-```{r fig14, fig.cap = .tag(14, "Scaled heatmap of the contributions of filtered mRNA features to important components"), fig.height = 7}
+We can apply the same method to visualize contributors from each of the different omics data sets.
+As a second illustration, we look at the standardized weights from the mRNA data set in the compoentns
+that are part of the final model, keeping only those features that are highly ranked by absolute
+weight in at least one component (**Figure 8**).
+```{r fig08, fig.cap = .tag(8, "Scaled heatmap of the contributions of filtered mRNA features to important components"), fig.height = 7}
 mrna <- getAllWeights(pl, "mRNASeq")
 xmrna <- shrink(mrna, 7)
 tmp <- rownames(xmrna@contrib)
@@ -392,67 +351,48 @@ rownames(xmrna@contrib) <- sapply(strsplit(tmp, "\\."), function(x) x[1])
 heat(xmrna, cexCol = 0.9, cexRow = 0.6, col = HG)
 ```
 
-
-### miR-Sequencing Data
-```{r fig15, fig.cap = .tag(15, "Scaled heatmap of the contributions of filtered miR features to important components"), fig.height = 7}
-mir <- getAllWeights(pl, "miRSeq")
-xmir <- shrink(mir, 5)
-tmp <- strsplit(rownames(xmir@contrib), "\\.")
-nc <- sapply(tmp, length)
-rownames(xmir@contrib) <- sapply(1:length(tmp), function(dex) 
-  paste(tmp[[dex]][1:(nc[dex]-1)], collapse = "."))
-heat(xmir, cexCol = 0.9, cexRow = 0.9, col = HG)
-```
-
 ## Uniting the Contributors
-Here we put a record of all the contributions into a single data frame, with an accompanying
-factor tracking the source data set.
+One difficulty with the heatmaps in the previous section is that they are focused on individual
+input data sets, and not on individual components. In order to fully understand which features
+contribute, for example, to the first mutation component (MAF1), one would have to scan all the
+heatmaps from all the datasets and then try to combine the influences. In order to help with that procedure,
+we can merge all the contributions into a single data frame, with an accompanying factor tracking
+the source data set.
 ```{r contra}
-contra <- rbind(cbin@contrib, ccont@contrib, cmaf@contrib, meth@contrib,
-             mir@contrib, mrna@contrib, rppa@contrib)
-featsize <- sapply(list(cbin@contrib, ccont@contrib, cmaf@contrib, meth@contrib,
-                        mir@contrib, mrna@contrib, rppa@contrib), nrow)
-datasrc <- factor(rep(c("cbin", "ccont", "maf", "meth", "mir", "mrna", "rppa"), times = featsize))
-save(contra, datasrc, file = "rawWeights1.Rda")
+CW <- combineAllWeights(pl)
 ```
 
 **Figure 16** displays the mean, standard deviation (SD), median and median absolute deviation (MAD)
 of the weight-contributions for each data set in each component. 
 ```{r fig16, fig.cap = .tag(16, "Summary statustics of weights by component and dataset."), fig.width = 10, fig.height = 10}
-mu <- aggregate(contra, list(datasrc), mean)
-rownames(mu) <- mu[, 1]
-mu$Group.1 <- NULL
-mu <- as.matrix(mu)
-sigma <- aggregate(contra, list(datasrc), sd)
-rownames(sigma) <- sigma[, 1]
-sigma$Group.1 <- NULL
-sigma <- as.matrix(sigma)
-
-med <- aggregate(contra, list(datasrc), median)
-rownames(med) <- med[, 1]
-med$Group.1 <- NULL
-med <- as.matrix(med)
-mmad <- aggregate(contra, list(datasrc), mad)
-rownames(mmad) <- mmad[, 1]
-mmad$Group.1 <- NULL
-mmad <- as.matrix(mmad)
-mx <- max(abs(mu))
-sx <- max(sigma)
-dx <- max(abs(med))
-ax <- max(mmad)
+summer <- summary(CW)
+mx <- max(abs(summer$Mean))
+sx <- max(summer$SD)
+dx <- max(abs(summer$Median))
+ax <- max(summer$MAD)
 library(oompaBase)
 opar <- par(mfrow = c(2,2))
-image(1:24, 1:7, t(mu), xlab = "Component", ylab = "Dataset", main = "Mean",
+image(1:24, 1:7, t(summer$Mean), xlab = "Component", ylab = "Dataset", main = "Mean",
       zlim = c(-mx, mx), col = redgreen(64))
-image(1:24, 1:7, t(sigma), xlab = "Component", ylab = "Dataset", main = "SD",
-      zlim = c(0, sx), col = redscale(64))
-image(1:24, 1:7, t(med), xlab = "Component", ylab = "Dataset", main = "Median",
+image(1:24, 1:7, t(summer$SD), xlab = "Component", ylab = "Dataset", main = "SD",
+      zlim = c(0, sx), col = bluescale(64))
+image(1:24, 1:7, t(summer$Median), xlab = "Component", ylab = "Dataset", main = "Median",
       zlim =c(-dx, dx), col = redgreen(64))
-image(1:24, 1:7, t(mmad), xlab = "Component", ylab = "Dataset", main = "Mad",
-      zlim = c(0, ax), col = redscale(64))
+image(1:24, 1:7, t(summer$MAD), xlab = "Component", ylab = "Dataset", main = "Mad",
+      zlim = c(0, ax),col = bluescale(64))
 par(opar)
 rm(opar)
 ```
+
+
+```{r}
+foo <- lapply(names(pl@compModels), function(N) getAllWeights(pl, N)@contrib)
+names(foo) <- names(pl@compModels)
+contra <- do.call(rbind, foo)
+featsize <- sapply(foo, nrow)
+datasrc <- factor(rep(names(foo), times = featsize))
+```
+
 
 ### Raw Weights
 In **Figure 17**, we create beanplots showing the distributions of weights arising from each
@@ -492,10 +432,11 @@ rm(opar)
 
 In **Figure 19**, we have standardized the weights in each data set and component, and recreate the
 corresponding beanplot distributions. The standardization has moved the outliers away from the three
-previous data sets (clinical binary, MAF, and RPPA) primarily to the miRs, thought with more dispersed contributions as well.
+previous data sets (clinical binary, MAF, and RPPA) primarily to the miRs, though with more dispersed
+contributions as well.
 ```{r fig19, fig.cap = .tag(19, "Distributions of standardized weights by data set and component."), fig.width = 12, fig.height = 18}
-M <- apply(mu, 2, function(X) rep(X, times = featsize))
-S <- apply(sigma, 2, function(X) rep(X, times = featsize))
+M <- apply(summer$Mean, 2, function(X) rep(X, times = CW@featureSize))
+S <- apply(summer$SD, 2, function(X) rep(X, times = CW@featureSize))
 brute <- (contra - M)/S
 opar <- par(mfrow = c(6, 4), mai = c(0.2,0.2, 0.5, 0.2))
 for (i in 1:24) {
@@ -525,8 +466,8 @@ distributions. here all of th plots of the clinical continuos data look weird, b
 be because there are only six features in that data set. The miRs also end up with many of the
 largest contributions, for reasons that are unclear.
 ```{r fig21, fig.cap = .tag(21, "Distributions of robust standardized weights by data set and component."), fig.width = 12, fig.height = 18}
-M <- apply(med, 2, function(X) rep(X, times = featsize))
-S <- apply(mmad, 2, function(X) rep(X, times = featsize))
+M <- apply(summer$Median, 2, function(X) rep(X, times = CW@featureSize))
+S <- apply(summer$MAD, 2, function(X) rep(X, times = CW@featureSize))
 robust <- (contra - M)/S
 opar <- par(mfrow = c(6, 4), mai = c(0.2,0.2, 0.5, 0.2))
 for (i in 1:24) {
