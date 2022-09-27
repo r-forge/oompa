@@ -3,7 +3,10 @@
 \alias{CombinedWeights}
 \alias{CombinedWeights-class}
 \alias{summary,CombinedWeights-method}
+\alias{image,CombinedWeights-method}
 \alias{combineAllWeights}
+\alias{stdize}
+\alias{interpret}
 
 \title{Class \code{"CombinedWeights"}}
 \description{
@@ -17,15 +20,28 @@
 \usage{
 combineAllWeights(pl)
 \S4method{summary}{CombinedWeights}(object, \dots)
+\S4method{image}{CombinedWeights}(x, \dots)
+stdize(object, type = c("standard", "robust"))
+interpret(object, component, alpha = 0.05)
 }
 \arguments{
   \item{pl}{An object of the \code{plasma} class.}
   \item{object}{An object of the \code{CombinedWeightss} class.}
-  \item{\dots}{Ignored; potentially, extra arguments toth e summary method.}
+  \item{x}{An object of the \code{CombinedWeightss} class.}
+  \item{type}{A single character string indicating how to standardize
+    the object. Legal value are "standard" or "robust".}
+  \item{component}{A single chaaracter string; which componen should be
+    interpreted.}
+  \item{alpha}{A single numerical value between 0 and 1; what
+    signfiicance value should be used to select important features.}
+  \item{\dots}{Ignored; potentially, extra arguments to the summary or
+    image methods.}
 }
 \section{Slots}{
   \describe{
-      \item{\code{combined}:}{a matrix of the original variables in dataset \code{N} as rows and the PLS components \code{M} as columns.}
+      \item{\code{combined}:}{a matrix of the original variables in
+	dataset \code{N} as rows and the PLS components \code{M} as
+	columns.}
       \item{\code{featureSize}:}{a numeric (usually integer) vector that
 	stores the number of features in each omics data set.}
       \item{\code{dataSource}:}{a factor indicating which omics data set

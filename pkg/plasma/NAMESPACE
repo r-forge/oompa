@@ -6,7 +6,7 @@
 import(methods)
 importFrom("stats",
            "median", "predict", "formula", "step", "heatmap", "na.omit", "quantile",
-           "aggregate")
+           "aggregate", "qnorm")
 importFrom("graphics",
            "par", "legend", "text", "mtext", "title")
 importFrom("beanplot",
@@ -48,7 +48,7 @@ exportClass("Contribution")
 export("getCompositeWeights", "getAllWeights", "getTop", "pickSignificant")
 
 exportClass("CombinedWeights")
-export("combineAllWeights")
+export("combineAllWeights", "stdize", "interpret")
 
 ## methods
 exportMethods("summary", "plot", "predict", "image", "heat")
