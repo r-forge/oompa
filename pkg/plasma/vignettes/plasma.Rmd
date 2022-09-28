@@ -567,6 +567,47 @@ and 12q12.13. Associated gene families included cadherins, kallikreins, keratins
 proteins. Associated diseases included hyperkertosis, squamous cell carcinoma of the head and neck,
 intraepithelial neoplasia, endometrial carcinoma, basal-like breast carcinoma, and esophageal carcinoma.
 
+```{r echo = FALSE, eval = FALSE}
+data("tfESCA")
+shortTFname <- sapply(foo <- strsplit(tfESCA$ID, "\\."), function(X) paste(X[3:4], collapse="."))
+puff <- sapply(foo, function(X) X[[4]])
+shortTFname <- sub("A$", "", shortTFname)
+rownames(tfESCA) <- shortTFname
+data("mirESCA")
+shortMIRname <- sapply(strsplit(mirESCA$ID, "\\."), function(X) paste(X[3:4], collapse = "."))
+rownames(mirESCA) <- shortMIRname
+
+barf <- tfESCA[rownames(mirESCA),] # only two disagreements
+which(barf$Type != mirESCA$Type)
+
+temp <- tfESCA[puff != "11A", ]
+krak <- sapply(strsplit(temp$ID, "\\."), function(X) X[[3]])
+w <- which(duplicated(krak))
+if(any(w)) {
+  temp <- temp[-w,]
+  krak <- krak[-w]
+}
+rownames(temp) <- krak
+all(rownames(temp) %in% rownames(Outcome))
+outc <- Outcome[rownames(temp),]
+MP <- pl@meanPredictions[rownames(temp),]
+plot(MP[, "MAF1"] ~ factor(temp$Type))
+t.test(MP[, "MAF1"] ~ factor(temp$Type)) # not significant
+
+
+drat <- data.frame(outc, Type = temp$Type)
+
+onemod <- coxph(Surv(Days, vital_status == "dead") ~ Type, data = drat)
+onemod # not significant
+plot(survfit(Surv(Days, vital_status == "dead") ~ Type, data = drat))
+legend("topright", unique(drat$Type))
+
+drago <- data.frame(Outcome[-w,], t(imputed$ClinicalBin)[-w,], MP)
+onemod <- coxph(Surv(Days, vital_status == "dead") ~ gender.male + MAF1, data = drago)
+step(onemod) 
+```
+
+
 ```{r echo=FALSE, eval = FALSE}
 library("IlluminaHumanMethylation450kanno.ilmn12.hg19")
 data(IlluminaHumanMethylation450kanno.ilmn12.hg19)
