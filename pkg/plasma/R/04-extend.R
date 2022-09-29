@@ -47,6 +47,7 @@ extendCoxModels <- function(object, firstPass, verbose = TRUE) {
     t(sapply(plsRegression, function(x) dim(x$extend)))
     slurp <- lapply(plsRegression, function(x) x$extend[,,2]) # subset the portion of the 3D array that corresponds to the final item of the output of the plsr function, which fits a model iteratively
     allPred <- do.call(cbind, slurp)
+    colnames(allPred) <- NN
     list(plsRegression = plsRegression, allPred = allPred)
   })
   names(componentModels) <- names(object@data)
@@ -150,9 +151,15 @@ setMethod("predict", "plasma", function(object, newdata = NULL,
     })
     names(goForIt) <- names(newdata@data)
     ## reintegrate
-    lap <- lapply(goForIt, function(G) {
+    lap <- lapply(names(goForIt), function(N) {
+      G <- goForIt[[N]]
       top <- dim(G)[3]
-      G[,,top]
+      X <- G[,,top]
+      if (!inherits(X, "array")) {
+        X <- matrix(X, ncol = 1)
+        colnames(X) <- paste(N, "1", sep = "")
+      }
+      X
     })
     do.call(cbind, lap)
   })
