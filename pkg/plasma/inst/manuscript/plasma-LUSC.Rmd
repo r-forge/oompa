@@ -398,14 +398,14 @@ in **Supplementary Data**.) Some data sets have very different contribution patt
 For example, the miRSeq data set appears to have significant outliers making large contributions
 in almost every component, the MAF and RPPA data sets also frequently (but not always) include
 such outliers.
-```{r fig10, fig.cap = .tag(10, "Distributions of standardized weights by data set and component."), fig.width = 10, fig.height = 20}
+```{r fig10, fig.cap = .tag(10, "Distributions of standardized weights by data set and component."), fig.width = 10, fig.height = 17}
 library(beanplot)
 library(Polychrome)
 data(palette36)
 foo <- computeDistances(palette36[3:36])
 colist <- as.list(palette36[names(foo)[1:7]])
 brute <- stdize(CW, "standard")
-opar <- par(mfrow = c(6,3), mai = c(0.2,0.2, 0.5, 0.2))
+opar <- par(mfrow = c(5,3), mai = c(0.2,0.2, 0.5, 0.2))
 for (i in which(colnames(contra) %in% mainterms)) {
   beanplot(brute[, i] ~ datasrc, what = c(1,1,1,0), col = colist,
            main = paste("Std Wts, Component", i))
@@ -416,8 +416,8 @@ rm(opar)
 
 We also include plots of the histograms of distributions by component (**Figure 11**). None of
 these really looks quite normal; almost all have some slightly odd shape.
-```{r fig11, fig.cap = .tag(11, "Histogram of standardized weights by component."), fig.width = 10, fig.height = 20}
-opar <- par(mfrow = c(6, 3), mai = c(0.2,0.2, 0.5, 0.2))
+```{r fig11, fig.cap = .tag(11, "Histogram of standardized weights by component."), fig.width = 10, fig.height = 17}
+opar <- par(mfrow = c(5, 3), mai = c(0.2,0.2, 0.5, 0.2))
 for (i in which(colnames(contra) %in% mainterms)) {
   hist(brute[,i], breaks = 77, main = paste("Component", i))
 }
@@ -495,7 +495,8 @@ top1p <- aggregate(brute, list(datasrc), function(X) sum(abs(X) > Q)) # top 5 pe
 rownames(top1p) <- top1p[, 1]
 top1p <- as.matrix(top1p[, -1])
 top1p <- top1p[, mainterms]
-image(1:7, 1:17, top1p, ylab = "Components", xlab = "Data Sets")
+L <- length(mainterms)
+image(1:7, 1:L, top1p, ylab = "Components", xlab = "Data Sets")
 mtext(levels(datasrc),side = 3, at = 1:7, line = 0)
 ```
 
@@ -506,13 +507,13 @@ set), for which each one unit increase in the component corresponds to a 9-fold 
 in the hazard. Our next goal is to find a biological interpretation of this component.
 First, here is an overview of all the contributing features.
 ```{r interpret}
-pickA <- interpret(CW, "ClinicalBin3", 0.05)
+pickA <- interpret(CW, "ClinicalBin2", 0.05)
 summary(pickA)
 ```
 
 We start by looking more closely at the clinical features.
 ```{r clinfeat}
-pickA[1:6, ]
+pickA[1:5, ]
 ```
 Because of our decision to use one-hot encoding of categorical variables, our data set includes
 separate features for "male" and"female". Both terms are strongly related to the MAF1 component,
