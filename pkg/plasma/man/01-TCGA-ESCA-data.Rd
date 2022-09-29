@@ -1,21 +1,30 @@
 \name{TCGA-ESCA}
 \alias{TCGA-ESCA}
 \alias{loadESCAdata}
+\alias{TCGA-LUSC}
+\alias{loadLUSCdata}
 \alias{assemble}
 \alias{Outcome}
 \alias{m450info}
 \docType{data}
 \title{
-Esophageal carcinoma (ESCA) data from The Cancer Genome Atlas (TCGA)
+Esophageal carcinoma (ESCA) data or lung squamous cell carcinoma (LUSC)
+data from The Cancer Genome Atlas (TCGA).
 }
 \description{
 The \code{TCGA-ESCA} dataset contains the objects \code{assemble},
 \code{Outcome}, and \code{m450info} for building the \code{MultiOmics}
 object. Because its size exceeds the CRAN limits, the data is stored on
-a remote server and must be loaded using the function \code{loadESCAdata}.
+a remote server and must be loaded using the function
+\code{loadESCAdata}.
+
+The \code{TCGA-LUSC1}dataset is a parallel object for lung
+squamous cell carcinoma (LUSC) data, whihc must be loaded using the
+\code{loadLUSCdata} function.
 }
 \usage{
 loadESCAdata()
+loadLUSCdata()
 }
 \format{
   The \dQuote{TCGA-ESCA} dataset contains the following:

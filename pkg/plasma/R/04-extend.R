@@ -10,7 +10,12 @@ extendCoxModels <- function(object, firstPass, verbose = TRUE) {
   stores <- matrix(NA, nrow(object@outcome), sizing[2])
   rownames(stores) <- rownames(object@outcome)
   compLevel <- unlist(lapply(tempComps[,2], function(K) 1:K))
-  colnames(stores) <- names(compLevel)
+  NN <- names(compLevel)
+  nodigit <- !grepl("\\d", NN) # doesn't end wioth a digit
+  if (any(nodigit)) {
+    NN[nodigit] <- paste(NN[nodigit], "1", sep = "")
+  }
+  colnames(stores) <- NN
   ## fill that storage area
   for (N in names(Components)) {
     if(verbose) cat(N, "\n", file = stderr())

@@ -29,7 +29,7 @@ export("meanModeImputer", "samplingImputer")
 
 ## MultiOmics class
 exportClass("MultiOmics")
-export("prepareMultiOmics", "loadESCAdata")
+export("prepareMultiOmics", "loadESCAdata", "loadLUSCdata")
 
 ## SingleModel class
 exportClass("SingleModel")
