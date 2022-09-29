@@ -29,12 +29,14 @@ data(lungData)
   selected to form this data set.
 }
 \references{
-  Shedden K, Taylor JM, et al.\cr
-  \emph{Gene expression-based survival prediction in lung adenocarcinoma:
-  a multi-site, blinded validation study.}\cr
-  (Director's Challenge Consortium for the Molecular Classification of
-  Lung Adenocarcinoma).\cr
-  Nature Medicine 2008; 14(8):822-7.
+  Abrams ZB, Zucker M, Wang M, Asiaee Taheri A, Abruzzo LV, Coombes KR.\cr
+  \emph{Thirty biologically interpretable clusters of transcription
+    factors distinguish cancer type.}\cr
+  BMC Genomics. 2018 Oct 11;19(1):738. doi: 10.1186/s12864-018-5093-z.
+
+  Asiaee A, Abrams ZB, Nakayiza S, Sampath D, Coombes KR.\cr
+  \emphExplaining Gene Expression Using Twenty-One MicroRNAs.}\cr
+  J Comput Biol. 2020 Jul;27(7):1157-1170. doi: 10.1089/cmb.2019.0321.
 }
 \keyword{datasets}
 
