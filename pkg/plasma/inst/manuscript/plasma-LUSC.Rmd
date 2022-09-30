@@ -8,6 +8,9 @@ csl: "`r system.file( 'manuscript', 'jss.csl', package = 'plasma')`"
 output: 
   rmarkdown::html_vignette:
     toc: true
+  pdf_document:
+    highlight: kate
+    toc: yes
 vignette: >
   %\VignetteIndexEntry{plasma: Partial LeAst Squares for Multi-omics Analysis}
   %\VignetteKeywords{OOMPA,plasma,supervised analysis,partial least squares}
@@ -452,13 +455,13 @@ chop20types <- apply(chop20, 2, function(X) {
   table(datasrc[X])
 })
 
-
-
-opar <- par(mfrow = c(1, 2))
-image(1:7, 1:24, top20types, main = "Raw Weights", ylab = "Components", xlab = "Data Sets")
-mtext(levels(datasrc), side = 3, at = 1:7, line = 0)
-image(1:7, 1:24, chop20types, main = "Standardized Weights", ylab = "Components", xlab = "Data Sets")
-mtext(levels(datasrc), side = 3, at = 1:7, line = 0)
+opar <- par(mfrow = c(1, 2), mai = c(1.02, 0.82, 1.22, 0.32))
+image(1:7, 1:24, top20types, ylab = "Components", xlab = "Data Sets")
+mtext(levels(datasrc), side = 3, at = 1:7, line = 1/2, las=2)
+mtext("Raw", side = 3, at = 0, line = 2, font = 2, cex = 1.2)
+image(1:7, 1:24, chop20types, ylab = "Components", xlab = "Data Sets")
+mtext(levels(datasrc), side = 3, at = 1:7, line = 1/2, las=2)
+mtext("Std", side = 3, at = 0, line = 2, font = 2, cex = 1.2)
 par(opar)
 rm(opar)
 ```
@@ -496,8 +499,10 @@ rownames(top1p) <- top1p[, 1]
 top1p <- as.matrix(top1p[, -1])
 top1p <- top1p[, mainterms]
 L <- length(mainterms)
+opar <- par(mai = c(1.02, 0.82,1.22, 0.22))
 image(1:7, 1:L, top1p, ylab = "Components", xlab = "Data Sets")
-mtext(levels(datasrc),side = 3, at = 1:7, line = 0)
+mtext(levels(datasrc), side = 3, at = 1:7, line = 1, las=2)
+par(opar)
 ```
 
 ## Interpeting the MAF1 Component
@@ -505,9 +510,28 @@ In the final Cox proportional hazards model of overall survival, the component w
 largest hazard ratio was "`MAF1`" (the first feature discovered from the MAF mutation data
 set), for which each one unit increase in the component corresponds to a 9-fold increase
 in the hazard. Our next goal is to find a biological interpretation of this component.
-First, here is an overview of all the contributing features.
+Since many of the feature names obtained from TCGA include extra annotations that we won't
+use later, we are going to simplify them.
+
+Here is an overview of all the contributing features.
 ```{r interpret}
-pickA <- interpret(CW, "ClinicalBin2", 0.05)
+
+pickers <- function(dsname, Q = 0.05) {
+  pickA <- interpret(CW, dsname, Q)
+  rap <- pickA$Feature[pickA$Source == "RPPA"]
+  rap <- sapply(strsplit(rap, "\\."), function(x) x[1])
+  map <- pickA$Feature[pickA$Source == "MAF"]
+  nap <- pickA$Feature[pickA$Source == "mRNASeq"]
+  nap <- sapply(strsplit(nap, "\\."), function(x) x[1])
+  nap <- nap[-1]
+  nick <- rep("", nrow(pickA))
+  nick[pickA$Source == "RPPA"] <- rap
+  nick[pickA$Source == "MAF"] <- map
+  nick[pickA$Source == "mRNASeq"] <- c("", nap)
+  pickA$Nickname <- nick
+  pickA
+}
+pickA <- pickers("ClinicalBin2")
 summary(pickA)
 ```
 
@@ -523,26 +547,10 @@ final model of overall survival is itself positive, we can infer the direction t
 changes.  It is harder to "eyeball" the magnitude of the change in the hazard, since these
 coefficients only measure the relative contribution of these factors to the MAF1 component. 
 
-Many of the feature names obtained from TCGA include extra annotations that we won't use later,
-so we are going to simplify them.
-```{r simplifyFeatureNames}
-rap <- pickA$Feature[pickA$Source == "RPPA"]
-rap <- sapply(strsplit(rap, "\\."), function(x) x[1])
-map <- pickA$Feature[pickA$Source == "MAF"]
-nap <- pickA$Feature[pickA$Source == "mRNASeq"]
-nap <- sapply(strsplit(nap, "\\."), function(x) x[1])
-nap <- nap[-1]
-nick <- rep("", nrow(pickA))
-nick[pickA$Source == "RPPA"] <- rap
-nick[pickA$Source == "MAF"] <- map
-nick[pickA$Source == "mRNASeq"] <- c("", nap)
-pickA$Nickname <- nick
-#write.csv(pickA, file = "pickMAF1.csv")
-```
 
 Here are the mutated genes (from the MAF data set) associated with the component "`MAF1`".
 ```{r map}
-pickA[nick %in% map, ]
+pickA[pickA$Source == "MAF", ]
 ```
 Note that they all have negative coefficients, meaning that having these mutations decreases the
 effect of this component. Since the coefficient of `MAF1` in the final model of overall survival
