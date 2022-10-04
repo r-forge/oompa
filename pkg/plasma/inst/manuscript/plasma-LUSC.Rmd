@@ -511,10 +511,17 @@ largest hazard ratio was "`MAF1`" (the first feature discovered from the MAF mut
 set), for which each one unit increase in the component corresponds to a 9-fold increase
 in the hazard. Our next goal is to find a biological interpretation of this component.
 Since many of the feature names obtained from TCGA include extra annotations that we won't
-use later, we are going to simplify them.
+use later, we are going to simplify them. The code in the `pickers` function gets out all
+of the genes associated with teh Illumina methylation identifiers, not just the first
+element of the list.
 
 Here is an overview of all the contributing features.
 ```{r interpret}
+library(tidyr)
+illumina <- read.csv(file.path("https://webdata.illumina.com/downloads/productfiles",
+                               "humanmethylation450/humanmethylation450_15017482_v1-2.csv"),
+                     skip=7) 
+illumina <- illumina[, c("IlmnID", "UCSC_RefGene_Name")] # only care about two columns
 
 pickers <- function(dsname, Q = 0.05) {
   pickA <- interpret(CW, dsname, Q)
@@ -529,7 +536,19 @@ pickers <- function(dsname, Q = 0.05) {
   nick[pickA$Source == "MAF"] <- map
   nick[pickA$Source == "mRNASeq"] <- c("", nap)
   pickA$Nickname <- nick
-  pickA
+  
+  illuminaFeatures <- illumina[which(illumina$IlmnID %in% pickA$Feature),] # which did we use?
+  temp <- strsplit(illuminaFeatures$UCSC_RefGene_Name, ";") # look at duplicates
+  temp <- sapply(sapply(temp, unique), paste, collapse=";") # many dups have the same gene name
+  illuminaFeatures$UCSC_RefGene_Name <- temp
+  expanded <- as.data.frame(separate_rows(illuminaFeatures, UCSC_RefGene_Name, sep=";"))
+  M <- merge(pickA, expanded, by.x = "Feature", by.y = "IlmnID", all.x = TRUE, sort = FALSE)
+  M$Nickname[M$Nickname == ""] <- M$UCSC_RefGene_Name[M$Nickname == ""]
+  M$Nickname[is.na(M$Nickname)] <- ""
+  M$UCSC_RefGene_Name <- NULL
+  M <- M[order(M$Source, M$Feature), ]
+  
+  M
 }
 pickA <- pickers("ClinicalBin2")
 summary(pickA)
@@ -590,6 +609,59 @@ and 12q12.13. Associated gene families included cadherins, kallikreins, keratins
 proteins. Associated diseases included hyperkertosis, squamous cell carcinoma of the head and neck,
 intraepithelial neoplasia, endometrial carcinoma, basal-like breast carcinoma, and esophageal carcinoma.
 
+We save all the significant features as separate worksheets in an Excel workbook.
+```{r allPicks}
+allPicks <- lapply(mainterms, pickers, Q = 0.05)
+names(allPicks) <- mainterms
+sapply(allPicks, dim)
+library(xlsx)
+write.xlsx(allPicks[[1]], file="pickers.xlsx", sheetName=names(allPicks)[[1]], row.names=FALSE)
+for (I in 2:length(allPicks)) {
+  write.xlsx(allPicks[[I]], file="pickers.xlsx", sheetName=names(allPicks)[[I]], append=TRUE, row.names=FALSE)
+}
+```
+
+```{r echo = FALSE, eval = FALSE}
+for (I in 1:length(allPicks)) {
+  A <- allPicks[[I]]
+  cat ("\n\n-----------------------", names(allPicks)[I], "\---------------------n\n")
+  print(A[A$Source == "ClinicalBin",])
+}
+
+L <- sapply(allPicks, nrow)
+folderol <- do.call(rbind, allPicks)
+folderol$Comps <- factor(rep(names(allPicks), L))
+summary(folderol)
+
+tap <- tapply(folderol$Weight, list(folderol$Feature, folderol$Comps), mean)
+tap [is.na(tap)] <- 0
+heatmap(t(tap), scale = "none", col = viridisLite::viridis(64))
+
+fl <- dir("ToppGeneLUSC/", pattern = "txt$")
+
+blark <- lapply(1:length(fl), function(J) {
+  cat(fl[J], "\n")
+  sheet <- read.table(file.path("ToppGeneLUSC", fl[J]), 
+                      header = TRUE, sep = "\t", fill = TRUE, quote = "")
+  sheet <- sheet[sheet$Category %in% c("Cytoband", "Disease", "GO: Biological Process",
+                                       "GO: Cellular Component", "Human Phenotype", "Pathway") ,]
+  sheet$Category <- factor(sheet$Category)
+  sheet$Component <- sub(".txt", "", fl[J])
+  sheet
+})
+snark <- do.call(rbind, blark)
+dim(snark)
+summary(snark)
+
+tap <- tapply(snark$p.value, list(snark$ID, snark$Component), mean)
+tap <- -log10(tap)
+tap[is.na(tap)] <- 0
+dim(tap)
+hc <- hclust(dist(t(tap)), "ward.D2")
+plot(hc)
+image(tap[, hc$order], col = viridisLite::viridis(64))
+hist(apply(tap, 1, max), breaks = 123)
+```
 
 
 

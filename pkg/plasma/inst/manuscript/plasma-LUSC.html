@@ -1043,41 +1043,61 @@ one unit increase in the component corresponds to a 9-fold increase in
 the hazard. Our next goal is to find a biological interpretation of this
 component. Since many of the feature names obtained from TCGA include
 extra annotations that we won’t use later, we are going to simplify
-them.</p>
+them. The code in the <code>pickers</code> function gets out all of the
+genes associated with teh Illumina methylation identifiers, not just the
+first element of the list.</p>
 <p>Here is an overview of all the contributing features.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>pickers <span class="ot">&lt;-</span> <span class="cf">function</span>(dsname, <span class="at">Q =</span> <span class="fl">0.05</span>) {</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  pickA <span class="ot">&lt;-</span> <span class="fu">interpret</span>(CW, dsname, Q)</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  rap <span class="ot">&lt;-</span> pickA<span class="sc">$</span>Feature[pickA<span class="sc">$</span>Source <span class="sc">==</span> <span class="st">&quot;RPPA&quot;</span>]</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  rap <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">strsplit</span>(rap, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">.&quot;</span>), <span class="cf">function</span>(x) x[<span class="dv">1</span>])</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  map <span class="ot">&lt;-</span> pickA<span class="sc">$</span>Feature[pickA<span class="sc">$</span>Source <span class="sc">==</span> <span class="st">&quot;MAF&quot;</span>]</span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  nap <span class="ot">&lt;-</span> pickA<span class="sc">$</span>Feature[pickA<span class="sc">$</span>Source <span class="sc">==</span> <span class="st">&quot;mRNASeq&quot;</span>]</span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  nap <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">strsplit</span>(nap, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">.&quot;</span>), <span class="cf">function</span>(x) x[<span class="dv">1</span>])</span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  nap <span class="ot">&lt;-</span> nap[<span class="sc">-</span><span class="dv">1</span>]</span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>  nick <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">&quot;&quot;</span>, <span class="fu">nrow</span>(pickA))</span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>  nick[pickA<span class="sc">$</span>Source <span class="sc">==</span> <span class="st">&quot;RPPA&quot;</span>] <span class="ot">&lt;-</span> rap</span>
-<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>  nick[pickA<span class="sc">$</span>Source <span class="sc">==</span> <span class="st">&quot;MAF&quot;</span>] <span class="ot">&lt;-</span> map</span>
-<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>  nick[pickA<span class="sc">$</span>Source <span class="sc">==</span> <span class="st">&quot;mRNASeq&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;&quot;</span>, nap)</span>
-<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>  pickA<span class="sc">$</span>Nickname <span class="ot">&lt;-</span> nick</span>
-<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>  pickA</span>
-<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>pickA <span class="ot">&lt;-</span> <span class="fu">pickers</span>(<span class="st">&quot;ClinicalBin2&quot;</span>)</span>
-<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pickA)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>illumina <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;https://webdata.illumina.com/downloads/productfiles&quot;</span>,</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&quot;humanmethylation450/humanmethylation450_15017482_v1-2.csv&quot;</span>),</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">skip=</span><span class="dv">7</span>) </span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>illumina <span class="ot">&lt;-</span> illumina[, <span class="fu">c</span>(<span class="st">&quot;IlmnID&quot;</span>, <span class="st">&quot;UCSC_RefGene_Name&quot;</span>)] <span class="co"># only care about two columns</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>pickers <span class="ot">&lt;-</span> <span class="cf">function</span>(dsname, <span class="at">Q =</span> <span class="fl">0.05</span>) {</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  pickA <span class="ot">&lt;-</span> <span class="fu">interpret</span>(CW, dsname, Q)</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>  rap <span class="ot">&lt;-</span> pickA<span class="sc">$</span>Feature[pickA<span class="sc">$</span>Source <span class="sc">==</span> <span class="st">&quot;RPPA&quot;</span>]</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>  rap <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">strsplit</span>(rap, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">.&quot;</span>), <span class="cf">function</span>(x) x[<span class="dv">1</span>])</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>  map <span class="ot">&lt;-</span> pickA<span class="sc">$</span>Feature[pickA<span class="sc">$</span>Source <span class="sc">==</span> <span class="st">&quot;MAF&quot;</span>]</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>  nap <span class="ot">&lt;-</span> pickA<span class="sc">$</span>Feature[pickA<span class="sc">$</span>Source <span class="sc">==</span> <span class="st">&quot;mRNASeq&quot;</span>]</span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>  nap <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">strsplit</span>(nap, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">.&quot;</span>), <span class="cf">function</span>(x) x[<span class="dv">1</span>])</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>  nap <span class="ot">&lt;-</span> nap[<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>  nick <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">&quot;&quot;</span>, <span class="fu">nrow</span>(pickA))</span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>  nick[pickA<span class="sc">$</span>Source <span class="sc">==</span> <span class="st">&quot;RPPA&quot;</span>] <span class="ot">&lt;-</span> rap</span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>  nick[pickA<span class="sc">$</span>Source <span class="sc">==</span> <span class="st">&quot;MAF&quot;</span>] <span class="ot">&lt;-</span> map</span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>  nick[pickA<span class="sc">$</span>Source <span class="sc">==</span> <span class="st">&quot;mRNASeq&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;&quot;</span>, nap)</span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>  pickA<span class="sc">$</span>Nickname <span class="ot">&lt;-</span> nick</span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>  illuminaFeatures <span class="ot">&lt;-</span> illumina[<span class="fu">which</span>(illumina<span class="sc">$</span>IlmnID <span class="sc">%in%</span> pickA<span class="sc">$</span>Feature),] <span class="co"># which did we use?</span></span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>  temp <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(illuminaFeatures<span class="sc">$</span>UCSC_RefGene_Name, <span class="st">&quot;;&quot;</span>) <span class="co"># look at duplicates</span></span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>  temp <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">sapply</span>(temp, unique), paste, <span class="at">collapse=</span><span class="st">&quot;;&quot;</span>) <span class="co"># many dups have the same gene name</span></span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>  illuminaFeatures<span class="sc">$</span>UCSC_RefGene_Name <span class="ot">&lt;-</span> temp</span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>  expanded <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">separate_rows</span>(illuminaFeatures, UCSC_RefGene_Name, <span class="at">sep=</span><span class="st">&quot;;&quot;</span>))</span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>  M <span class="ot">&lt;-</span> <span class="fu">merge</span>(pickA, expanded, <span class="at">by.x =</span> <span class="st">&quot;Feature&quot;</span>, <span class="at">by.y =</span> <span class="st">&quot;IlmnID&quot;</span>, <span class="at">all.x =</span> <span class="cn">TRUE</span>, <span class="at">sort =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a>  M<span class="sc">$</span>Nickname[M<span class="sc">$</span>Nickname <span class="sc">==</span> <span class="st">&quot;&quot;</span>] <span class="ot">&lt;-</span> M<span class="sc">$</span>UCSC_RefGene_Name[M<span class="sc">$</span>Nickname <span class="sc">==</span> <span class="st">&quot;&quot;</span>]</span>
+<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a>  M<span class="sc">$</span>Nickname[<span class="fu">is.na</span>(M<span class="sc">$</span>Nickname)] <span class="ot">&lt;-</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a>  M<span class="sc">$</span>UCSC_RefGene_Name <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb38-30"><a href="#cb38-30" aria-hidden="true" tabindex="-1"></a>  M <span class="ot">&lt;-</span> M[<span class="fu">order</span>(M<span class="sc">$</span>Source, M<span class="sc">$</span>Feature), ]</span>
+<span id="cb38-31"><a href="#cb38-31" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-32"><a href="#cb38-32" aria-hidden="true" tabindex="-1"></a>  M</span>
+<span id="cb38-33"><a href="#cb38-33" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb38-34"><a href="#cb38-34" aria-hidden="true" tabindex="-1"></a>pickA <span class="ot">&lt;-</span> <span class="fu">pickers</span>(<span class="st">&quot;ClinicalBin2&quot;</span>)</span>
+<span id="cb38-35"><a href="#cb38-35" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pickA)</span></code></pre></div>
 <pre><code>##    Feature                   Source       Weight          Nickname        
-##  Length:267         ClinicalBin : 5   Min.   :-6.6680   Length:267        
-##  Class :character   ClinicalCont: 0   1st Qu.:-2.4424   Class :character  
-##  Mode  :character   MAF         :41   Median :-2.0293   Mode  :character  
-##                     Meth450     :67   Mean   :-0.3708                     
-##                     miRSeq      :45   3rd Qu.: 2.2343                     
+##  Length:272         ClinicalBin : 5   Min.   :-6.6680   Length:272        
+##  Class :character   ClinicalCont: 0   1st Qu.:-2.4140   Class :character  
+##  Mode  :character   MAF         :41   Median :-2.0211   Mode  :character  
+##                     Meth450     :72   Mean   :-0.3208                     
+##                     miRSeq      :45   3rd Qu.: 2.2699                     
 ##                     mRNASeq     :96   Max.   : 6.1734                     
 ##                     RPPA        :13</code></pre>
 <p>We start by looking more closely at the clinical features.</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>pickA[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ]</span></code></pre></div>
-<pre><code>##                                             Feature      Source    Weight Nickname
-## gender.female                         gender.female ClinicalBin -2.757341         
-## gender.male                             gender.male ClinicalBin  2.872117         
-## pathologic_stage.stage.ib pathologic_stage.stage.ib ClinicalBin  1.965747         
-## pathology_M_stage.m0           pathology_M_stage.m0 ClinicalBin  2.696807         
-## pathology_M_stage.mx           pathology_M_stage.mx ClinicalBin -2.510628</code></pre>
+<pre><code>##                      Feature      Source    Weight Nickname
+## 73             gender.female ClinicalBin -2.757341         
+## 74               gender.male ClinicalBin  2.872117         
+## 75 pathologic_stage.stage.ib ClinicalBin  1.965747         
+## 76      pathology_M_stage.m0 ClinicalBin  2.696807         
+## 77      pathology_M_stage.mx ClinicalBin -2.510628</code></pre>
 <p>Because of our decision to use one-hot encoding of categorical
 variables, our data set includes separate features for “male”
 and”female”. Both terms are strongly related to the MAF1 component, but
@@ -1091,48 +1111,48 @@ contribution of these factors to the MAF1 component.</p>
 <p>Here are the mutated genes (from the MAF data set) associated with
 the component “<code>MAF1</code>”.</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>pickA[pickA<span class="sc">$</span>Source <span class="sc">==</span> <span class="st">&quot;MAF&quot;</span>, ]</span></code></pre></div>
-<pre><code>##           Feature Source    Weight Nickname
-## ADAMTS16 ADAMTS16    MAF -2.241170 ADAMTS16
-## AKAP13     AKAP13    MAF  2.155648   AKAP13
-## CDH18       CDH18    MAF -2.472199    CDH18
-## CNTNAP5   CNTNAP5    MAF -2.378060  CNTNAP5
-## COL11A1   COL11A1    MAF -2.171134  COL11A1
-## COL6A3     COL6A3    MAF -1.978799   COL6A3
-## CSMD2       CSMD2    MAF -2.750257    CSMD2
-## CSMD3       CSMD3    MAF -3.300840    CSMD3
-## CUBN         CUBN    MAF -2.622299     CUBN
-## DCHS2       DCHS2    MAF -3.417828    DCHS2
-## DGKI         DGKI    MAF -2.533558     DGKI
-## DNAH10     DNAH10    MAF -2.791308   DNAH10
-## FAM135B   FAM135B    MAF -2.231716  FAM135B
-## FAT2         FAT2    MAF  2.022856     FAT2
-## FAT3         FAT3    MAF -2.353307     FAT3
-## FBN2         FBN2    MAF -2.747776     FBN2
-## FLG           FLG    MAF -3.338727      FLG
-## FSCB         FSCB    MAF -2.093879     FSCB
-## GRIN2B     GRIN2B    MAF -2.004967   GRIN2B
-## HCN1         HCN1    MAF -3.638311     HCN1
-## KEAP1       KEAP1    MAF -2.012947    KEAP1
-## LRP1         LRP1    MAF  2.250414     LRP1
-## LRP1B       LRP1B    MAF -3.841406    LRP1B
-## MUC16       MUC16    MAF -3.348977    MUC16
-## NAV3         NAV3    MAF -2.532153     NAV3
-## NFE2L2     NFE2L2    MAF  3.652172   NFE2L2
-## NLRP12     NLRP12    MAF -1.963323   NLRP12
-## NLRP14     NLRP14    MAF -2.499965   NLRP14
-## OR8G5       OR8G5    MAF -2.013133    OR8G5
-## PCDH15     PCDH15    MAF -4.109602   PCDH15
-## PIK3CA     PIK3CA    MAF  2.481328   PIK3CA
-## PRDM9       PRDM9    MAF -2.314944    PRDM9
-## RYR1         RYR1    MAF -1.996072     RYR1
-## SCN7A       SCN7A    MAF -2.116237    SCN7A
-## SI             SI    MAF -3.423093       SI
-## SPHKAP     SPHKAP    MAF -2.823433   SPHKAP
-## TENM3       TENM3    MAF -2.408292    TENM3
-## TNR           TNR    MAF -2.181196      TNR
-## USH2A       USH2A    MAF -2.811211    USH2A
-## UTRN         UTRN    MAF -2.721005     UTRN
-## ZFHX4       ZFHX4    MAF -3.458028    ZFHX4</code></pre>
+<pre><code>##      Feature Source    Weight Nickname
+## 78  ADAMTS16    MAF -2.241170 ADAMTS16
+## 79    AKAP13    MAF  2.155648   AKAP13
+## 80     CDH18    MAF -2.472199    CDH18
+## 81   CNTNAP5    MAF -2.378060  CNTNAP5
+## 82   COL11A1    MAF -2.171134  COL11A1
+## 83    COL6A3    MAF -1.978799   COL6A3
+## 84     CSMD2    MAF -2.750257    CSMD2
+## 85     CSMD3    MAF -3.300840    CSMD3
+## 86      CUBN    MAF -2.622299     CUBN
+## 87     DCHS2    MAF -3.417828    DCHS2
+## 88      DGKI    MAF -2.533558     DGKI
+## 89    DNAH10    MAF -2.791308   DNAH10
+## 90   FAM135B    MAF -2.231716  FAM135B
+## 91      FAT2    MAF  2.022856     FAT2
+## 92      FAT3    MAF -2.353307     FAT3
+## 93      FBN2    MAF -2.747776     FBN2
+## 94       FLG    MAF -3.338727      FLG
+## 95      FSCB    MAF -2.093879     FSCB
+## 96    GRIN2B    MAF -2.004967   GRIN2B
+## 97      HCN1    MAF -3.638311     HCN1
+## 98     KEAP1    MAF -2.012947    KEAP1
+## 99      LRP1    MAF  2.250414     LRP1
+## 100    LRP1B    MAF -3.841406    LRP1B
+## 101    MUC16    MAF -3.348977    MUC16
+## 102     NAV3    MAF -2.532153     NAV3
+## 103   NFE2L2    MAF  3.652172   NFE2L2
+## 104   NLRP12    MAF -1.963323   NLRP12
+## 105   NLRP14    MAF -2.499965   NLRP14
+## 106    OR8G5    MAF -2.013133    OR8G5
+## 107   PCDH15    MAF -4.109602   PCDH15
+## 108   PIK3CA    MAF  2.481328   PIK3CA
+## 109    PRDM9    MAF -2.314944    PRDM9
+## 110     RYR1    MAF -1.996072     RYR1
+## 111    SCN7A    MAF -2.116237    SCN7A
+## 112       SI    MAF -3.423093       SI
+## 113   SPHKAP    MAF -2.823433   SPHKAP
+## 114    TENM3    MAF -2.408292    TENM3
+## 115      TNR    MAF -2.181196      TNR
+## 116    USH2A    MAF -2.811211    USH2A
+## 117     UTRN    MAF -2.721005     UTRN
+## 118    ZFHX4    MAF -3.458028    ZFHX4</code></pre>
 <p>Note that they all have negative coefficients, meaning that having
 these mutations decreases the effect of this component. Since the
 coefficient of <code>MAF1</code> in the final model of overall survival
@@ -1216,6 +1236,22 @@ included cadherins, kallikreins, keratins, and gap-junction proteins.
 Associated diseases included hyperkertosis, squamous cell carcinoma of
 the head and neck, intraepithelial neoplasia, endometrial carcinoma,
 basal-like breast carcinoma, and esophageal carcinoma.</p>
+<p>We save all the significant features as separate worksheets in an
+Excel workbook.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>allPicks <span class="ot">&lt;-</span> <span class="fu">lapply</span>(mainterms, pickers, <span class="at">Q =</span> <span class="fl">0.05</span>)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(allPicks) <span class="ot">&lt;-</span> mainterms</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(allPicks, dim)</span></code></pre></div>
+<pre><code>##      ClinicalBin2 ClinicalBin3 MAF1 MAF2 MAF3 MAF4 Meth4501 Meth4502 Meth4503 Meth4504 miRSeq1
+## [1,]          272          258  269  294  282  268      305      300      290      278     356
+## [2,]            4            4    4    4    4    4        4        4        4        4       4
+##      miRSeq4 mRNASeq1 RPPA2
+## [1,]     291      302   264
+## [2,]       4        4     4</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xlsx)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.xlsx</span>(allPicks[[<span class="dv">1</span>]], <span class="at">file=</span><span class="st">&quot;pickers.xlsx&quot;</span>, <span class="at">sheetName=</span><span class="fu">names</span>(allPicks)[[<span class="dv">1</span>]], <span class="at">row.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (I <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(allPicks)) {</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.xlsx</span>(allPicks[[I]], <span class="at">file=</span><span class="st">&quot;pickers.xlsx&quot;</span>, <span class="at">sheetName=</span><span class="fu">names</span>(allPicks)[[I]], <span class="at">append=</span><span class="cn">TRUE</span>, <span class="at">row.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 </div>
 <div id="conclusions" class="section level1">

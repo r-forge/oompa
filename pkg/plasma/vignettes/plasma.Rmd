@@ -573,6 +573,18 @@ and 12q12.13. Associated gene families included cadherins, kallikreins, keratins
 proteins. Associated diseases included hyperkertosis, squamous cell carcinoma of the head and neck,
 intraepithelial neoplasia, endometrial carcinoma, basal-like breast carcinoma, and esophageal carcinoma.
 
+```{r allPicks, echo = FALSE, eval = FALSE}
+allPicks <- lapply(mainterms, pickers, Q = 0.05)
+names(allPicks) <- mainterms
+sapply(allPicks, dim)
+library(xlsx)
+write.xlsx(allPicks[[1]], file="pickers.xlsx", sheetName=names(allPicks)[[1]], row.names=FALSE)
+for (I in 2:length(allPicks)) {
+  write.xlsx(allPicks[[I]], file="pickers.xlsx", sheetName=names(allPicks)[[I]], append=TRUE, row.names=FALSE)
+}
+```
+
+
 ```{r echo = FALSE, eval = FALSE}
 data("tfESCA")
 shortTFname <- sapply(foo <- strsplit(tfESCA$ID, "\\."), function(X) paste(X[3:4], collapse="."))
