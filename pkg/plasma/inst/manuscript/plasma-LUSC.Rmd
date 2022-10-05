@@ -614,17 +614,45 @@ We save all the significant features as separate worksheets in an Excel workbook
 allPicks <- lapply(mainterms, pickers, Q = 0.05)
 names(allPicks) <- mainterms
 sapply(allPicks, dim)
-library(xlsx)
-write.xlsx(allPicks[[1]], file="pickers.xlsx", sheetName=names(allPicks)[[1]], row.names=FALSE)
-for (I in 2:length(allPicks)) {
-  write.xlsx(allPicks[[I]], file="pickers.xlsx", sheetName=names(allPicks)[[I]], append=TRUE, row.names=FALSE)
+```
+
+Now we call a perl script (`toppgene.pl`) to automate the process of retrieving the results
+of each of the enrichment analyses. Each result is again written to a separate file, in
+tab-separated-values (TSV) format.
+```{r doThisOnce, eval = FALSE}
+gldir <- "GeneLists"
+if (!file.exists(gldir)) dir.create(gldir)
+
+for (I in 1:length(allPicks)) {
+  N <- names(allPicks)[I]
+  genes <- allPicks[[I]]$Nickname
+  genes <- sort(unique(genes[genes != ""]))
+  write.table(genes, file = file.path(gldir, paste(N, "txt", sep = ".")), 
+              sep = "\t", quote = FALSE, row.names = FALSE, col.names = FALSE)
+}
+
+outdir <- "TGOUT"
+if (!file.exists(outdir)) dir.create(outdir)
+
+fnames <- file.path(gldir, dir(gldir, pattern = "*.txt"))
+for (I in 1:length(fnames)) {
+  R <- sub("^GeneLists", "TGOUT", sub("txt$", "tsv", fnames[I]))
+  if(file.exists(R)) next
+  topp <- file.path(getwd(), "toppgene.pl")
+  cmd <- paste("C:/Strawberry/perl/bin/perl.exe", topp, file.path(getwd(), fnames[I]))
+  sysout <- system(cmd)
+  if (sysout) {
+    stop("Received error code ", sysout, "\n")
+  }
+  Sys.sleep(10)
 }
 ```
 
-```{r echo = FALSE, eval = FALSE}
+```{r fig.width=7, fig.height=7}
+
 for (I in 1:length(allPicks)) {
   A <- allPicks[[I]]
-  cat ("\n\n-----------------------", names(allPicks)[I], "\---------------------n\n")
+  cat ("\n\n-----------------------", names(allPicks)[I], "---------------------n\n")
   print(A[A$Source == "ClinicalBin",])
 }
 
@@ -635,13 +663,16 @@ summary(folderol)
 
 tap <- tapply(folderol$Weight, list(folderol$Feature, folderol$Comps), mean)
 tap [is.na(tap)] <- 0
-heatmap(t(tap), scale = "none", col = viridisLite::viridis(64))
+heatmap(t(tap), scale = "none", col = redgreen(64))
+```
 
-fl <- dir("ToppGeneLUSC/", pattern = "txt$")
+```{r fig.width=7, fig.height=7}
+
+fl <- dir("TGOUT/", pattern = "tsv$")
 
 blark <- lapply(1:length(fl), function(J) {
   cat(fl[J], "\n")
-  sheet <- read.table(file.path("ToppGeneLUSC", fl[J]), 
+  sheet <- read.table(file.path("TGOUT", fl[J]), 
                       header = TRUE, sep = "\t", fill = TRUE, quote = "")
   sheet <- sheet[sheet$Category %in% c("Cytoband", "Disease", "GO: Biological Process",
                                        "GO: Cellular Component", "Human Phenotype", "Pathway") ,]
@@ -653,7 +684,7 @@ snark <- do.call(rbind, blark)
 dim(snark)
 summary(snark)
 
-tap <- tapply(snark$p.value, list(snark$ID, snark$Component), mean)
+tap <- tapply(snark$PValue, list(snark$ID, snark$Component), mean)
 tap <- -log10(tap)
 tap[is.na(tap)] <- 0
 dim(tap)
