@@ -66,7 +66,7 @@ setMethod("predict", "SingleModel", function(object, newdata,
       rsk <- predict(object@plsmod, newdata = newd, verbose = FALSE)
       newd$Risk <- rsk
     }
-    if (type == "split") {
+    if (type %in% c("split", "survfit")) {
       newd$Split <-  1*(newd$Risk > median(base))
     }
     if (type == "survfit") {
