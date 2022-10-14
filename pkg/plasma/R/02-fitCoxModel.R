@@ -47,9 +47,10 @@ fitSingleModel <- function(multi, N, timevar, eventvar, eventvalue) {
 
 ## predict method for SingleModel objects
 setMethod("predict", "SingleModel", function(object, newdata,
-                                             type = c("components", "risk", "split"),
+                                             type = c("components", "risk", "split", "survfit"),
                                              ...) {
   type <- match.arg(type)
+  cat(type, "\n", file = stderr())
   model <- switch(type,
                   components = object@plsmod,
                   risk = object@riskModel,
@@ -68,7 +69,12 @@ setMethod("predict", "SingleModel", function(object, newdata,
     if (type == "split") {
       newd$Split <-  1*(newd$Risk > median(base))
     }
-    result <- predict(model, newdata = newd, verbose = FALSE)
+    if (type == "survfit") {
+      simpleData <- data.frame(newdata@outcome[!blankRow,], Split = newd$Split)
+      result <- survfit(formula(object@splitModel), data = simpleData)
+    } else {
+      result <- predict(model, newdata = newd, verbose = FALSE)
+    }
   }
   result
 })

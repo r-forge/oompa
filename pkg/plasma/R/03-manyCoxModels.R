@@ -50,8 +50,9 @@ setMethod("plot", c("MultiplePLSCoxModels", "missing"), function(x, y,  col = c(
 
 ## predict method for MultiplePLSCoxModels objects
 setMethod("predict", "MultiplePLSCoxModels", function(object, newdata,
-                                             type = c("components", "risk", "split"),
+                                             type = c("components", "risk", "split", "survfit"),
                                              ...) {
+  type <- match.arg(type)
   if (missing(newdata)) {
     result <- lapply(object@models, predict, type = type, ...)
   } else {

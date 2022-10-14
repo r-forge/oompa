@@ -25,7 +25,7 @@ fitCoxModels(multi, timevar, eventvar, eventvalue, verbose)
       lwd = 2, xlab = "", ylab = "Fraction Surviving",
        mark.time = TRUE, legloc = "topright", \dots)
 \S4method{predict}{MultiplePLSCoxModels}(object, newdata, type = c("components", "risk",
-                 "split"), \dots)
+                 "split", "survfit"), \dots)
 }
 \arguments{
   \item{multi}{an object of class \code{MultiOmics} for fitting the model.}
@@ -67,7 +67,9 @@ fitCoxModels(multi, timevar, eventvar, eventvalue, verbose)
       \item{\code{\link{summary}}:}{Returns a description of the
 	\code{MultiplePLSCoxModels} object and the names of the omics
 	datasets used to build the model.}
-      \item{\code{\link{predict}}:}{returns a list of numeric vectors of predicted risk per data type.}
+      \item{\code{\link{predict}}:}{usually returns a list of numeric
+  vectors of predicted risk per data type. When \code{type = "survfit"},
+  retuns a list of \code{survfit} objects.}
   }
 }
 \value{

@@ -21,7 +21,7 @@ fitSingleModel(multi, N, timevar, eventvar, eventvalue)
       lwd = 2, xlab = "", ylab = "Fraction Surviving",
        mark.time = TRUE, legloc = "topright", \dots)
 \S4method{predict}{SingleModel}(object, newdata, type = c("components", "risk",
-                 "split"), \dots)
+                 "split", "survfit"), \dots)
 }
 \arguments{
   \item{multi}{an object of class \code{MultiOmics} for fitting the model.}
@@ -45,7 +45,7 @@ fitSingleModel(multi, N, timevar, eventvar, eventvalue)
   \item{object}{an object of class \code{SingleModel}.}
   \item{newdata}{A \code{MultiOmics} object with the same structure as
     the training data.}
-  \item{type}{An enumerated character valuee.}
+  \item{type}{An enumerated character value.}
   \item{\dots}{other parameters used in graphing or prediction.}
   
 }
@@ -75,7 +75,10 @@ fitSingleModel(multi, N, timevar, eventvar, eventvalue)
       \item{\code{\link{summary}}:}{Returns a description of the
 	\code{MultiplePLSCoxModels} object and the names of the omics
 	datasets used to build the model.}
-      \item{\code{\link{predict}}:}{a numeric vector containing the predicted risk values.}
+      \item{\code{\link{predict}}:}{Usually, a numeric vector containing
+        the predicted risk values. However, when using \code{type =
+	"survfit"}, tghe return value is a \code{survfit} object from
+	the\code{survival} package.}
   }
 }
 \value{
