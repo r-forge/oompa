@@ -33,7 +33,8 @@ Outcome$days_to_last_followup <- lfu
 time[is.na(time)] <- lfu[is.na(time)]
 Outcome$Days <- time
 summary(Outcome)
-## Need to get rid of samples where we don't know te outcome
+## Need to get rid of samples where we don't know the outcome
+Clinical <- Clinical[!is.na(Outcome$Days),]
 Outcome <- Outcome[!is.na(Outcome$Days),]
 summary(Outcome)
 

@@ -34,8 +34,8 @@ clincat$other_dx<- as.factor(temp)
 temp <- as.character(clincat$race)
 temp[!is.na(temp) & temp != "white"] <- "other"
 clincat$race<- as.factor(temp)
-## one strongly suspects that "tobacco_smoking_history" is categorical, not continuous
-## But it is critical to know what the numbers mean. This is from
+## ne strongly suspects that "tobacco_smoking_history" is categorical, not
+## continuous. But it is critical to know what the numbers mean. This is from
 ##    https://github.com/PoisonAlien/maftools/issues/410
 toblevels <- c("NeverSmoker", "CurrentSmoker", "FormerSmokerGreater15",
                "FormerSmokerLess15", "FormerSmokerUnknown", NA, NA)
