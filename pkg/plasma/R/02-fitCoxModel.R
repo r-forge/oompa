@@ -50,7 +50,6 @@ setMethod("predict", "SingleModel", function(object, newdata,
                                              type = c("components", "risk", "split", "survfit"),
                                              ...) {
   type <- match.arg(type)
-  cat(type, "\n", file = stderr())
   model <- switch(type,
                   components = object@plsmod,
                   risk = object@riskModel,
