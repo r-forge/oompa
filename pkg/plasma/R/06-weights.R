@@ -1,3 +1,4 @@
+##
 
 setClass("CombinedWeights",
          slots = c(combined = "matrix",
@@ -77,4 +78,26 @@ interpret <- function(object, component, alpha = 0.05) {
   data.frame(Feature = rownames(brute)[topA],
              Source = object@dataSource[topA],
              Weight = brute[topA, component])
+}
+
+# merge feature contributiosn across all components
+getFinalWeights <- function(object) {
+  fm <- object@fullModel
+  coy <- matrix(fm$coefficients, ncol = 1)
+  mainterms <- attr(terms(fm), "term.labels")
+  combined <- lapply(names(object@compModels), function(N) {
+    getAllWeights(object, N)@contrib[, mainterms]
+  })
+  names(combined) <- names(object@compModels)
+  runthrough <- lapply(names(combined), function(N) {
+    X <- combined[[N]] %*% coy
+    data.frame(Weight = X, Source = N, Feature = rownames(X))
+  })
+  FW <- do.call(rbind, runthrough)
+  mu <- aggregate(FW$Weight, list(FW$Source), mean)
+  mu2 <- rep(mu$x, times = as.vector(table(FW$Source)))
+  sigma <- aggregate(FW$Weight, list(FW$Source), sd)
+  sigma2 <- rep(sigma$x, times = as.vector(table(FW$Source)))
+  FW$Standard <- (FW$Weight - mu2)/sigma2
+  FW
 }

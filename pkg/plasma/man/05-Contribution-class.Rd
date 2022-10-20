@@ -9,6 +9,7 @@
 \alias{heat,Contribution-method}
 \alias{getCompositeWeights}
 \alias{getAllWeights}
+\alias{getFinalWeights}
 \alias{getTop}
 \alias{pickSignificant}
 
@@ -22,6 +23,7 @@
 \usage{
 getCompositeWeights(object, N, M)
 getAllWeights(object, N)
+getFinalWeights(object)
 getTop(object, N = 1)
 pickSignificant(object, alpha)
 \S4method{summary}{Contribution}(object, \dots)

@@ -6,7 +6,7 @@
 import(methods)
 importFrom("stats",
            "median", "predict", "formula", "step", "heatmap", "na.omit", "quantile",
-           "aggregate", "qnorm")
+           "aggregate", "qnorm", "sd", "terms")
 importFrom("graphics",
            "par", "legend", "text", "mtext", "title")
 importFrom("beanplot",
@@ -45,7 +45,8 @@ export("fitCoxModels", "plasma")
 
 ## Contribution class
 exportClass("Contribution")
-export("getCompositeWeights", "getAllWeights", "getTop", "pickSignificant")
+export("getCompositeWeights", "getAllWeights", "getFinalWeights",
+       "getTop", "pickSignificant")
 
 exportClass("CombinedWeights")
 export("combineAllWeights", "stdize", "interpret")
