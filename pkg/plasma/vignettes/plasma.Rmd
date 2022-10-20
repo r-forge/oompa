@@ -2,9 +2,9 @@
 title: "plasma: Partial LeAst Squares for Multi-omics Analysis"
 author: "Kevin R. Coombes"
 data: "`r Sys.Date()`"
-bibliography: "`r system.file('manuscript', 'plasma.bib', package = 'plasma')`"
+bibliography: "`r system.file('bib', 'plasma.bib', package = 'plasma')`"
 link-citations: yes
-csl: "`r system.file( 'manuscript', 'jss.csl', package = 'plasma')`"
+csl: "`r system.file( 'bib', 'jss.csl', package = 'plasma')`"
 output: 
   rmarkdown::html_vignette:
     toc: true
