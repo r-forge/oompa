@@ -443,7 +443,7 @@ of the esophageal cancer (ESCA) data set from The Cancer Genome Atlas
 the <code>plasma</code> package.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressWarnings</span>( <span class="fu">library</span>(plasma) )</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">&quot;plasma&quot;</span>)</span></code></pre></div>
-<pre><code>## [1] &#39;0.9.0&#39;</code></pre>
+<pre><code>## [1] &#39;0.9.1&#39;</code></pre>
 <div id="data" class="section level2">
 <h2>Data</h2>
 <p>The results included here are in whole or part based upon data
@@ -664,8 +664,9 @@ continuous predicted risk as a single predictor.</li>
 binary split of the risk (at the median) as the predictor.</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressWarnings</span>( firstPass <span class="ot">&lt;-</span> <span class="fu">fitCoxModels</span>(trainD, <span class="at">timevar =</span> <span class="st">&quot;Days&quot;</span>,</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">eventvar =</span> <span class="st">&quot;vital_status&quot;</span>, <span class="at">eventvalue =</span> <span class="st">&quot;dead&quot;</span>) )</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">23258</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressWarnings</span>( firstPass <span class="ot">&lt;-</span> <span class="fu">fitCoxModels</span>(trainD, <span class="at">timevar =</span> <span class="st">&quot;Days&quot;</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">eventvar =</span> <span class="st">&quot;vital_status&quot;</span>, <span class="at">eventvalue =</span> <span class="st">&quot;dead&quot;</span>) )</span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">interactive</span>()) {</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(firstPass, <span class="at">legloc =</span> <span class="st">&quot;bottomleft&quot;</span>) <span class="co"># margins too small inside RStudio window</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>

@@ -18,7 +18,7 @@ $ua->agent("tricolor/1.0 ");
 my $httpHeads = HTTP::Headers->new;
 $httpHeads->header('Content-Type' => 'text/json');
 
-my $verbose = 1;
+my $verbose = 0;
 my $logfile = "toppgene2.log";
 open(LOG, ">>$logfile") or die "Unable to write to 'logfile'.\n";
 print LOG "START\n";
@@ -38,10 +38,13 @@ print LOG "START\n";
 
 my $infile = shift or die "You must supply an input file name!\n";
 print STDERR "Opening '$infile'.\n";
+my $outfile = shift;
+print LOG "Using '$outfile'.\n\n";
 my @parts = split /\//, $infile;
 my $fname = $parts[$#parts];
 $fname =~ s/txt/tsv/;
-my $outfile = "TGOUT/$fname";
+$outfile =  "TGOUT/$fname" unless $outfile;
+print LOG "Still using '$outfile'.\n\n";
 
 open(SRC, "<$infile") or die "Unable to read '$infile': $!";
 my @symbols = ();
@@ -74,6 +77,7 @@ unless ($firstResponse->is_success) {
 ### At this point, we were successful and have received the HTML page
 ### with the JSON formatted response.
 my $firstContent = $firstResponse->decoded_content;
+print LOG "Still using '$outfile'.\n\n";
 
 my @hfn = $firstResponse->header_field_names;
 foreach my $fn (@hfn) {
@@ -146,9 +150,9 @@ my %faves = (GeneOntologyMolecularFunction => 1,
 	     Pathway => 1,
 	     Pubmed => 0,
 	     Interaction => 0,
-	     Cytoband => 1,
-	     TFBS => 1,
-	     GeneFamily => 1,
+	     Cytoband => 0,
+	     TFBS => 0,
+	     GeneFamily => 0,
 	     Coexpression => 0,
 	     CoexpressionAtlas => 0,
 	     ToppCell => 0,
@@ -182,7 +186,7 @@ print STDERR $secondparams, "\n";
 ### Set up the request.
 my $secondRequest = HTTP::Request->new('POST', $enrich, $httpHeads,  $secondparams);
 print STDERR $secondRequest->as_string, "\n" if $verbose;
-print LOG $secondRequest->as_string, "\n\n";
+print LOG $secondRequest->as_string, "\n\n" if $verbose;
 ### Send it.
 my $secondResponse = $ua->request($secondRequest);
 ### Test to make sure it worked as expected.
@@ -229,6 +233,7 @@ print STDERR "Terms: ", join(" ", @terms), "\n" if $verbose;
 my @colheads = @terms;
 push(@colheads, "Genes");
 
+print LOG "\nTrying '$outfile'\n\n";
 open(TSV, ">$outfile") or die "Unable to create '$outfile'.\n";
 print TSV join("\t", @colheads), "\n";
 foreach my $entry (@annos) {

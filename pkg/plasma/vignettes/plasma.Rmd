@@ -233,6 +233,7 @@ of `SingleModel` objects, one for each assay, and within each there are three re
       the predictor.
 
 ```{r firstPass, results = "hide"}
+set.seed(23258)
 suppressWarnings( firstPass <- fitCoxModels(trainD, timevar = "Days",
                           eventvar = "vital_status", eventvalue = "dead") )
 ```
