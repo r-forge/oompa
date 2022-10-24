@@ -30,23 +30,23 @@ document.addEventListener('DOMContentLoaded', function(e) {
 </script>
 
 <style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
 
 
 
 <style type="text/css">
-  code {
-    white-space: pre;
-  }
-  .sourceCode {
-    overflow: visible;
-  }
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
@@ -64,55 +64,54 @@ pre > code.sourceCode { white-space: pre-wrap; }
 pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
-  { counter-reset: source-line 0; }
+{ counter-reset: source-line 0; }
 pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
+{ position: relative; left: -4em; counter-increment: source-line; }
 pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
 div.sourceCode
-  {   }
+{ }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
 </style>
 <script>
 // apply pandoc div.sourceCode style to pre.sourceCode instead
@@ -139,25 +138,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 <style type="text/css">
-/* for pandoc --citeproc since 2.11 */
+
 div.csl-bib-body { }
 div.csl-entry {
-  clear: both;
+clear: both;
 }
 .hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
+margin-left:2em;
+text-indent:-2em;
 }
 div.csl-left-margin {
-  min-width:2em;
-  float:left;
+min-width:2em;
+float:left;
 }
 div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
+margin-left:2em;
+padding-left:1em;
 }
 div.csl-indent {
-  margin-left: 2em;
+margin-left: 2em;
 }
 </style>
 
@@ -380,6 +379,7 @@ Regression Models</a></li>
 Components Across Omics Data Sets</a></li>
 <li><a href="#independent-test-set" id="toc-independent-test-set">Independent Test Set</a></li>
 <li><a href="#single-omics" id="toc-single-omics">Single Omics</a></li>
+<li><a href="#mofa" id="toc-mofa">MOFA</a></li>
 <li><a href="#interpretation" id="toc-interpretation">Interpretation</a></li>
 </ul></li>
 <li><a href="#conclusions" id="toc-conclusions">Conclusions</a></li>
@@ -430,10 +430,11 @@ might work for supervised analyses as well. In this article, we describe
 a two-step algorithm, which we call “<em>plasma</em>”, to find models
 that can predict time-to-event outcomes on samples from multi-omics data
 sets even in the presence of incomplete data. We use partial least
-squares (PLS) for both steps, using Cox regression to learn the single
-omics models and linear regression to learn how to extend models from
-one omics data set to another. To illustrate the method, we use a subset
-of the esophageal cancer (ESCA) data set from The Cancer Genome Atlas
+squares (PLS) for both steps, using Cox regression <span class="citation">(<a href="#ref-bertrand2021" role="doc-biblioref">Bertrand and Maumy-Bertrand, 2021</a>)</span> to
+learn the single omics models and linear regression <span class="citation">(<a href="#ref-mishra2022" role="doc-biblioref">Mishra
+and Liland, 2022</a>)</span> to learn how to extend models from one
+omics data set to another. To illustrate the method, we use a subset of
+the esophageal cancer (ESCA) data set from The Cancer Genome Atlas
 (TCGA).</p>
 </div>
 <div id="methods" class="section level1">
@@ -448,11 +449,12 @@ the <code>plasma</code> package.</p>
 <p>The results included here are in whole or part based upon data
 generated by the <a href="https://www.cancer.gov/tcga">TCGA Research
 Network</a>. We downloaded the entire esophageal cancer Level 3 data set
-<span class="citation">(<a href="#ref-tcga2017" role="doc-biblioref">Network, 2017</a>)</span> from the FireBrowse web
-site (<a href="http://firebrowse.org/" class="uri">http://firebrowse.org/</a>) <span class="citation">(<a href="#ref-deng2017" role="doc-biblioref">Deng <em>et al.</em>,
-2017</a>)</span> in August 2018. We filtered the data sets so that only
-the most variable, and presumably the most informative, features were
-retained. Here, we load this sample data set.</p>
+<span class="citation">(<a href="#ref-tcga2017" role="doc-biblioref">Cancer Genome Atlas Research Network,
+2017</a>)</span> from the FireBrowse web site (<a href="http://firebrowse.org/" class="uri">http://firebrowse.org/</a>)
+<span class="citation">(<a href="#ref-deng2017" role="doc-biblioref">Deng <em>et al.</em>, 2017</a>)</span> in August
+2018. We filtered the data sets so that only the most variable, and
+presumably the most informative, features were retained. Here, we load
+this sample data set.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">loadESCAdata</span>()</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(assemble, dim)</span></code></pre></div>
 <pre><code>##      ClinicalBin ClinicalCont MAF Meth450 miRSeq mRNASeq RPPA
@@ -560,9 +562,9 @@ sets. See main text for an explanation.
 </p>
 </div>
 <p>All computations were performed in R version 4.2.1 (2022-06-23 ucrt)
-of the R Statistical Software Environment <span class="citation">(<a href="#ref-Rbook" role="doc-biblioref">Team, 2022</a>)</span>. Cox
-proportional hazards models for survival analysis were fit using version
-3.3.1 of the <code>survival</code> R package. We used additional
+of the R Statistical Software Environment <span class="citation">(<a href="#ref-Rbook" role="doc-biblioref">R Core Team, 2022</a>)</span>.
+Cox proportional hazards models for survival analysis were fit using
+version 3.3.1 of the <code>survival</code> R package. We used additional
 exploratory graphical tools from version 1.3.1 of the
 <code>beanplot</code> R package <span class="citation">(<a href="#ref-kampstra2008" role="doc-biblioref">Kampstra, 2008</a>)</span>
 and version 1.5.1 of the <code>Polychrome</code> R package <span class="citation">(<a href="#ref-coombes2019" role="doc-biblioref">Coombes <em>et al.</em>, 2019</a>)</span>. Gene
@@ -742,6 +744,101 @@ jointly from all the omics data sets.</p>
 the test set from separate PLS Cox omics models</p>
 </div>
 </div>
+<div id="mofa" class="section level2">
+<h2>MOFA</h2>
+<p>Next, we want to compare the plasma method to an alternative approach
+using MOFA. Here the idea is to first run the unsupervised MOFA
+algorithm to find latent factors, and then use the latent factors as
+potential predictors in a Cox proportional hazards model. We use the
+training data from our plasma analysis as inputs to
+<code>MOFA2</code>.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>hasMOFA <span class="ot">&lt;-</span> <span class="fu">suppressMessages</span>( <span class="fu">require</span>(<span class="st">&quot;MOFA2&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>) )</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>( mofaObject <span class="ot">&lt;-</span> <span class="fu">create_mofa</span>(trainD<span class="sc">@</span>data) )</span></code></pre></div>
+<p>We set the options to the MOFA algorithm by indicating which data
+sets are binary and by choosing to find 10 latent factors.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>dataoptions <span class="ot">&lt;-</span> <span class="fu">get_default_data_options</span>(mofaObject)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>modeloptions <span class="ot">&lt;-</span> MOFA2<span class="sc">::</span><span class="fu">get_default_model_options</span>(mofaObject)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>modeloptions<span class="sc">$</span>num_factors <span class="ot">&lt;-</span> NF <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>modeloptions[[<span class="st">&quot;likelihoods&quot;</span>]][[<span class="st">&quot;ClinicalBin&quot;</span>]] <span class="ot">&lt;-</span> <span class="st">&quot;bernoulli&quot;</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>modeloptions[[<span class="st">&quot;likelihoods&quot;</span>]][[<span class="st">&quot;MAF&quot;</span>]] <span class="ot">&lt;-</span> <span class="st">&quot;bernoulli&quot;</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>trainingoptions <span class="ot">&lt;-</span> <span class="fu">get_default_training_options</span>(mofaObject)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>( <span class="fu">suppressWarnings</span>(</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  mofaObject <span class="ot">&lt;-</span> <span class="fu">prepare_mofa</span>(mofaObject, <span class="at">data_options =</span> dataoptions, </span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>                             <span class="at">model_options =</span> modeloptions,</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>                             <span class="at">training_options =</span> trainingoptions)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>Now we can run the algorithm.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>( <span class="fu">suppressWarnings</span>(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  mofaESCA <span class="ot">&lt;-</span> <span class="fu">run_mofa</span>(mofaObject, <span class="at">use_basilisk =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>We want to see whether any of the latent factors are associated with
+overall survival.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>LF <span class="ot">&lt;-</span> <span class="fu">get_factors</span>(mofaESCA, <span class="at">groups =</span> <span class="st">&quot;all&quot;</span>, <span class="at">factors =</span> <span class="st">&quot;all&quot;</span>) [[<span class="dv">1</span>]]</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>LFwithOutcome <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(LF, trainD<span class="sc">@</span>outcome[, <span class="fu">c</span>(<span class="st">&quot;Days&quot;</span>, <span class="st">&quot;vital_status&quot;</span>)])</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>osmodel <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(Days, vital_status <span class="sc">==</span> <span class="st">&quot;dead&quot;</span>) <span class="sc">~</span>. , <span class="at">data =</span> LFwithOutcome)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>AIC <span class="ot">&lt;-</span> <span class="fu">step</span>(osmodel, <span class="at">trace =</span> <span class="dv">0</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>AIC</span></code></pre></div>
+<pre><code>## Call:
+## coxph(formula = Surv(Days, vital_status == &quot;dead&quot;) ~ Factor2 + 
+##     Factor3 + Factor4, data = LFwithOutcome)
+## 
+##             coef exp(coef) se(coef)      z      p
+## Factor2 -0.13573   0.87308  0.06024 -2.253 0.0242
+## Factor3 -0.16811   0.84526  0.10180 -1.651 0.0987
+## Factor4  0.15736   1.17041  0.09634  1.633 0.1024
+## 
+## Likelihood ratio test=7.63  on 3 df, p=0.0544
+## n= 108, number of events= 42</code></pre>
+<p>Factors 2, 3, and 4 are associated with survival.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>mofarisk <span class="ot">&lt;-</span> survival<span class="sc">:::</span><span class="fu">predict.coxph</span>(AIC)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>traindata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(trainD<span class="sc">@</span>outcome, mofarisk)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>traindata<span class="sc">$</span>Cut <span class="ot">&lt;-</span> mofarisk <span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>mofamodel <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(Days, vital_status <span class="sc">==</span> <span class="st">&quot;dead&quot;</span>) <span class="sc">~</span> Cut, <span class="at">data =</span> traindata)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>Strain <span class="ot">&lt;-</span> <span class="fu">summary</span>(mofamodel)</span></code></pre></div>
+<p>The hard part is to reverse-engineer the MOFA model so we can use its
+decompositions to make predictions on the test data.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>weightmats <span class="ot">&lt;-</span> <span class="fu">get_weights</span>(mofaESCA)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>Woo <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, weightmats)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>testMats <span class="ot">&lt;-</span> testD<span class="sc">@</span>data</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>testShift <span class="ot">&lt;-</span> <span class="fu">lapply</span>(testMats, <span class="cf">function</span>(X) {</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(<span class="fu">unique</span>(<span class="fu">as.vector</span>(X))) <span class="sc">&lt;</span> <span class="dv">10</span>) {</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    X</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">t</span>(<span class="fu">scale</span>(<span class="fu">t</span>(X), <span class="at">scale =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>Yoo <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, testShift)</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>Voo <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">qr.solve</span>(Woo, Yoo))</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(Voo)</span></code></pre></div>
+<pre><code>## [1] 77 10</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>punk <span class="ot">&lt;-</span> survival<span class="sc">:::</span><span class="fu">predict.coxph</span>(AIC, <span class="fu">as.data.frame</span>(Voo))</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>testdata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(testD<span class="sc">@</span>outcome, punk)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>testdata<span class="sc">$</span>Cut <span class="ot">&lt;-</span> punk <span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>testmodel <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(Days, vital_status <span class="sc">==</span> <span class="st">&quot;dead&quot;</span>) <span class="sc">~</span> Cut, <span class="at">data =</span> testdata)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>Stest <span class="ot">&lt;-</span> <span class="fu">summary</span>(testmodel)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>col2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>opar <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">survfit</span>(<span class="fu">Surv</span>(Days, vital_status <span class="sc">==</span> <span class="st">&quot;dead&quot;</span>) <span class="sc">~</span> Cut, <span class="at">data =</span> traindata),</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> col2, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">main =</span> <span class="st">&quot;MOFA model, training data&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Time (Days)&quot;</span>,</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">sub =</span> <span class="fu">paste</span>(<span class="st">&quot;Score test p-value = &quot;</span>, <span class="fu">round</span>(Strain<span class="sc">$</span>sctest[<span class="dv">3</span>], <span class="dv">3</span>)))</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;Low Risk&quot;</span>, <span class="st">&quot;High Risk&quot;</span>), <span class="at">col =</span> col2, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&quot;A&quot;</span>, <span class="at">side =</span> <span class="dv">2</span>, <span class="at">at =</span> <span class="fl">1.2</span>, <span class="at">line =</span> <span class="dv">3</span>, <span class="at">cex =</span> <span class="fl">1.5</span>, <span class="at">las =</span> <span class="dv">2</span>)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">survfit</span>(<span class="fu">Surv</span>(Days, vital_status <span class="sc">==</span> <span class="st">&quot;dead&quot;</span>) <span class="sc">~</span> Cut, <span class="at">data =</span> testdata),</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Time (Days)&quot;</span>,      <span class="at">col =</span> col2, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">main =</span> <span class="st">&quot;MOFA model, test data&quot;</span>,</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">sub =</span> <span class="fu">round</span>(Stest<span class="sc">$</span>sctest[<span class="dv">3</span>], <span class="dv">3</span>))</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;Low Risk&quot;</span>, <span class="st">&quot;High Risk&quot;</span>), <span class="at">col =</span> col2, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&quot;B&quot;</span>, <span class="at">side =</span> <span class="dv">2</span>, <span class="at">at =</span> <span class="fl">1.2</span>, <span class="at">line =</span> <span class="dv">3</span>, <span class="at">cex =</span> <span class="fl">1.5</span>, <span class="at">las =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="figure">
+<img src="data:image/png;base64,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" alt />
+<p class="caption">Figure 6 : Kaplan-Meier plot of overall survival on
+(A) the training set and (B) the test set using the <code>MOFA</code>
+Cox model.</p>
+</div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(opar)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(opar)</span></code></pre></div>
+</div>
 <div id="interpretation" class="section level2">
 <h2>Interpretation</h2>
 </div>
@@ -805,6 +902,11 @@ cross-validating cox models to censored big data with missing values
 using extensions of partial least squares regression models</a>.
 <em>Front Big Data</em>, <strong>4</strong>, 684794.
 </div>
+<div id="ref-tcga2017" class="csl-entry">
+Cancer Genome Atlas Research Network (2017) <a href="https://doi.org/10.1038/nature20805">Integrated genomic
+characterization of oesophageal carcinoma</a>. <em>Nature</em>,
+<strong>541</strong>, 169–175.
+</div>
 <div id="ref-chen2009" class="csl-entry">
 Chen,J. <em>et al.</em> (2009) <a href="https://doi.org/10.1093/nar/gkp427">ToppGene suite for gene list
 enrichment analysis and candidate gene prioritization</a>. <em>Nucleic
@@ -842,15 +944,15 @@ multiway, multiway multiblock including multi-responses and meta
 information under the ROSA framework</a>. <em>Anal Chim Acta</em>,
 <strong>1206</strong>, 339786.
 </div>
-<div id="ref-tcga2017" class="csl-entry">
-Network,C.G.A.R. (2017) <a href="https://doi.org/10.1038/nature20805">Integrated genomic
-characterization of oesophageal carcinoma</a>. <em>Nature</em>,
-<strong>541</strong>, 169–175.
-</div>
 <div id="ref-picard2021" class="csl-entry">
 Picard,M. <em>et al.</em> (2021) <a href="https://doi.org/10.1016/j.csbj.2021.06.030">Integration strategies
 of multi-omics data for machine learning analysis</a>. <em>Comput Struct
 Biotechnol J</em>, <strong>19</strong>, 3735–3746.
+</div>
+<div id="ref-Rbook" class="csl-entry">
+R Core Team (2022) <a href="https://www.R-project.org/">R: A language
+and environment for statistical computing</a> R Foundation for
+Statistical Computing, Vienna, Austria.
 </div>
 <div id="ref-reel2021" class="csl-entry">
 Reel,P.S. <em>et al.</em> (2021) <a href="https://doi.org/10.1016/j.biotechadv.2021.107739">Using machine
@@ -866,11 +968,6 @@ of DNA microarray experiments</a>. <em>Biotechniques</em>,
 Subramanian,I. <em>et al.</em> (2020) <a href="https://doi.org/10.1177/1177932219899051">Multi-omics data
 integration, interpretation, and its application</a>. <em>Bioinform Biol
 Insights</em>, <strong>14</strong>, 1177932219899051.
-</div>
-<div id="ref-Rbook" class="csl-entry">
-Team,R.C. (2022) <a href="https://www.R-project.org/">R: A language and
-environment for statistical computing</a> R Foundation for Statistical
-Computing, Vienna, Austria.
 </div>
 <div id="ref-vlachavas2021" class="csl-entry">
 Vlachavas,E.I. <em>et al.</em> (2021) <a href="https://doi.org/10.3390/ijms22062822">A detailed catalogue of

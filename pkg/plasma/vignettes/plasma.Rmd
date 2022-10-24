@@ -57,9 +57,10 @@ That re-interpretation of MOFA suggests that an analogous procedure might work f
 analyses as well. In this article, we describe a two-step algorithm, which we call "_plasma_",
 to find models that can predict time-to-event outcomes on samples from multi-omics data sets
 even in the presence of incomplete data. We use partial least squares (PLS) for both steps,
-using Cox regression to learn the single omics models and linear regression to learn how to
-extend models from one omics data set to another. To illustrate the method, we use a subset
-of the esophageal cancer (ESCA) data set from The Cancer Genome Atlas (TCGA).
+using Cox regression [@bertrand2021] to learn the single omics models and linear regression
+[@mishra2022] to learn how to extend models from one omics data set to another. To illustrate
+the method, we use a subset of the esophageal cancer (ESCA) data set from The Cancer Genome
+Atlas (TCGA).
 
 
 # Methods
@@ -297,6 +298,102 @@ if (!interactive()) {
   })
   par(opar)
 }
+```
+
+## MOFA
+Next, we want to compare the plasma method to an alternative approach using MOFA.
+Here the idea is to first run the unsupervised MOFA algorithm to find latent factors,
+and then use the latent factors as potential predictors in a Cox proportional
+hazards model. We use the training data from our plasma analysis as inputs to `MOFA2`.
+```{r mofa}
+hasMOFA <- suppressMessages( require("MOFA2", quietly = TRUE) )
+```
+```{r createMOFA, eval = hasMOFA}
+suppressMessages( mofaObject <- create_mofa(trainD@data) )
+```
+We set the options to the MOFA algorithm by indicating which data sets are binary
+and by choosing to find 10 latent factors.
+```{r prepMOFA, eval = hasMOFA}
+dataoptions <- get_default_data_options(mofaObject)
+modeloptions <- MOFA2::get_default_model_options(mofaObject)
+modeloptions$num_factors <- NF <- 10
+modeloptions[["likelihoods"]][["ClinicalBin"]] <- "bernoulli"
+modeloptions[["likelihoods"]][["MAF"]] <- "bernoulli"
+trainingoptions <- get_default_training_options(mofaObject)
+suppressMessages( suppressWarnings(
+  mofaObject <- prepare_mofa(mofaObject, data_options = dataoptions, 
+                             model_options = modeloptions,
+                             training_options = trainingoptions)
+  )
+)
+```
+Now we can run the algorithm.
+```{r runMOFA, eval = hasMOFA}
+suppressMessages( suppressWarnings(
+  mofaESCA <- run_mofa(mofaObject, use_basilisk = TRUE)
+  )
+)
+```
+
+We want to see whether any of the latent factors are associated with overall survival.
+```{r LFwithOutcome, eval = hasMOFA}
+LF <- get_factors(mofaESCA, groups = "all", factors = "all") [[1]]
+LFwithOutcome <- data.frame(LF, trainD@outcome[, c("Days", "vital_status")])
+osmodel <- coxph(Surv(Days, vital_status == "dead") ~. , data = LFwithOutcome)
+AIC <- step(osmodel, trace = 0)
+AIC
+```
+
+Factors 2, 3, and 4 are associated with survival.
+
+```{r, eval = hasMOFA}
+mofarisk <- survival:::predict.coxph(AIC)
+traindata <- data.frame(trainD@outcome, mofarisk)
+traindata$Cut <- mofarisk > 0
+mofamodel <- coxph(Surv(Days, vital_status == "dead") ~ Cut, data = traindata)
+Strain <- summary(mofamodel)
+```
+
+
+The hard part is to reverse-engineer the MOFA model so we can use its decompositions
+to make predictions on the test data.
+```{r fig11, eval = hasMOFA}
+weightmats <- get_weights(mofaESCA)
+Woo <- do.call(rbind, weightmats)
+testMats <- testD@data
+testShift <- lapply(testMats, function(X) {
+  if (length(unique(as.vector(X))) < 10) {
+    X
+  } else {
+    t(scale(t(X), scale = FALSE))
+  }
+})
+Yoo <- do.call(rbind, testShift)
+Voo <- t(qr.solve(Woo, Yoo))
+dim(Voo)
+
+punk <- survival:::predict.coxph(AIC, as.data.frame(Voo))
+testdata <- data.frame(testD@outcome, punk)
+testdata$Cut <- punk > 0
+testmodel <- coxph(Surv(Days, vital_status == "dead") ~ Cut, data = testdata)
+Stest <- summary(testmodel)
+```
+
+```{r fig06, eval = hasMOFA, fig.width = 6, fig.height = 8, fig.cap = .tag(6, "Kaplan-Meier plot of overall survival on (A) the training set and (B) the test set using the `MOFA` Cox model.")}
+col2 <- c("blue", "red")
+opar <- par(mfrow=c(2,1))
+plot(survfit(Surv(Days, vital_status == "dead") ~ Cut, data = traindata),
+     col = col2, lwd = 3, main = "MOFA model, training data", xlab = "Time (Days)",
+     sub = paste("Score test p-value = ", round(Strain$sctest[3], 3)))
+legend("topright", c("Low Risk", "High Risk"), col = col2, lwd = 2)
+mtext("A", side = 2, at = 1.2, line = 3, cex = 1.5, las = 2)
+plot(survfit(Surv(Days, vital_status == "dead") ~ Cut, data = testdata),
+     xlab = "Time (Days)",      col = col2, lwd = 3, main = "MOFA model, test data",
+     sub = round(Stest$sctest[3], 3))
+legend("topright", c("Low Risk", "High Risk"), col = col2, lwd = 2)
+mtext("B", side = 2, at = 1.2, line = 3, cex = 1.5, las = 2)
+par(opar)
+rm(opar)
 ```
 
 ## Interpretation
