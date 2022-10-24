@@ -25,14 +25,15 @@ options(width=96)
                                  cap)
 ```
 # Background
-Recent years have seen the development of numerous algorithms and computational packages for
-the analysis of multi-omics data sets. At this point, one can find multiple review articles
-summarizing progress in the field [@subramanian2020; @graw2021; @heo2021; @picard2021;
-@reel2021; @vlachavas2021; @adossa2021]. As with other applications of
-machine learning, the kinds of problems addressed by these algorithms are divided into
-two categories: unsupervised (e.g., clustering or class discovery) or supervised
-(including class comparison and class prediction) [@simon2003]. Advances in the area of unsupervised
-learning have been broader and deeper than advances on supervised learning.
+Recent years have seen the development of numerous algorithms and computational
+packages for the analysis of multi-omics data sets. At this point, one can find
+several review articles summarizing progress in the field [@subramanian2020;
+@graw2021; @heo2021; @picard2021; @reel2021; @vlachavas2021; @adossa2021]. As
+with other applications of machine learning, the kinds of problems addressed by
+these algorithms are divided into two categories: unsupervised (e.g., clustering
+or class discovery) or supervised (including class comparison and class
+prediction) [@simon2003]. Advances in the area of unsupervised learning have
+been broader and deeper than advances on supervised learning.
 
 One of the most effective unsupervised methods is Multi-Omic Factor Analysis (MOFA)
 [@argelaguet2018; @argelaguet2020]. A key property of MOFA is that it does not require
@@ -339,12 +340,13 @@ We want to see whether any of the latent factors are associated with overall sur
 ```{r LFwithOutcome, eval = hasMOFA}
 LF <- get_factors(mofaESCA, groups = "all", factors = "all") [[1]]
 LFwithOutcome <- data.frame(LF, trainD@outcome[, c("Days", "vital_status")])
-osmodel <- coxph(Surv(Days, vital_status == "dead") ~. , data = LFwithOutcome)
+osmodel <- coxph(Surv(Days, vital_status == "dead") ~ ., data = LFwithOutcome)
 AIC <- step(osmodel, trace = 0)
 AIC
 ```
 
-Factors 2, 3, and 4 are associated with survival.
+Factors 2, 3, and 4 are associated with survival, although the model itself is, at best,
+only borderline significant.
 
 ```{r, eval = hasMOFA}
 mofarisk <- survival:::predict.coxph(AIC)
@@ -370,8 +372,6 @@ testShift <- lapply(testMats, function(X) {
 })
 Yoo <- do.call(rbind, testShift)
 Voo <- t(qr.solve(Woo, Yoo))
-dim(Voo)
-
 punk <- survival:::predict.coxph(AIC, as.data.frame(Voo))
 testdata <- data.frame(testD@outcome, punk)
 testdata$Cut <- punk > 0
@@ -397,13 +397,15 @@ rm(opar)
 ```
 
 ## Interpretation
-
+The `plasma` package includes several tools to assist with the interpretation
+of components and of the features contributing to the final model. These are
+illustrated in the "interpretation" vignette
 
 # Conclusions
-We have identified a method analogous to that of `MOFA` that allows us
-to combine different omics data without the need for prior imputation
-of missing values. A major difference is that while `MOFA` model
-learns "factors" that are composites of the variables in an
+We have described a method analogous to that of `MOFA` that allows us
+to combine different omics data sets without the need for massive prior
+imputation of missing values. A major difference is that while the 
+`MOFA` model learns "factors" that are composites of the variables in an
 unsupervised fashion, the `plasma` model learns "components" that are
 composites of the variables in a supervised fashion, using the
 outcomes "event" and "time-to-event" as response variables.
@@ -416,16 +418,25 @@ this. It may be the case that some factors, although they are
 significantly associated with outcome, account for very small variance
 in the final `MOFA` model, which hinders interpretability. This was
 the case with the TCGA-ESCA data set, in which, when 10 factors were
-learned from the `MOFA` model, only Factor 10 was significantly
-associated with survival, while accounting for [number] variance in
-the model [CITE SUPPLEMENTARY RESULTS?]. On the other hand, the
-components for `plasma` are created in a way that maximizes the
-covariance in the predictors and the response, and therefore these
+learned from the `MOFA` model, only three factoes were significantly
+associated with survival, while not generalizing to the test data set.
+Bu contrast, the components for `plasma` are created in a way that
+maximizes the covariance in the predictors and the response, and therefore these
 components will be automatically associated to some degree with the
-outcome. This could be advantageous in that dissecting the weights
-associated with the components would yield a list of variables from
-different omics datasets that contribute the most to defining the
+outcome. This observation could be advantageous in that dissecting
+the weights associated with the components would yield a list of variables from
+different omics data sets that contribute the most to defining the
 outcome, and any additional analyses could be refined by looking at
 these high-weighted variables most closely.
+
+We were surprised to find that most of the models from the individual
+data sets did not generalize well to the test data. Nevertheless, the
+joint model that combined the components from those data sets had good
+performance in predicting the risk of patient in the test data set. It
+is unclear why this happens. We speculate that the phenomenon may be
+related to the more genral idea of "bagging" weak predictors to create
+a more effective composite model [@boulesteix2010; @abdia2017;
+@hillebrand2021; @poudel2022]. MOre research will be required to determine
+how general this phenomenon is.
 
 # References

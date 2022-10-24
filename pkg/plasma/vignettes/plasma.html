@@ -391,8 +391,8 @@ Components Across Omics Data Sets</a></li>
 <h1>Background</h1>
 <p>Recent years have seen the development of numerous algorithms and
 computational packages for the analysis of multi-omics data sets. At
-this point, one can find multiple review articles summarizing progress
-in the field <span class="citation">(<a href="#ref-subramanian2020" role="doc-biblioref">Subramanian <em>et al.</em>, 2020</a>; <a href="#ref-graw2021" role="doc-biblioref">Graw <em>et al.</em>,
+this point, one can find several review articles summarizing progress in
+the field <span class="citation">(<a href="#ref-subramanian2020" role="doc-biblioref">Subramanian <em>et al.</em>, 2020</a>; <a href="#ref-graw2021" role="doc-biblioref">Graw <em>et al.</em>,
 2021</a>; <a href="#ref-heo2021" role="doc-biblioref">Heo <em>et
 al.</em>, 2021</a>; <a href="#ref-picard2021" role="doc-biblioref">Picard <em>et al.</em>, 2021</a>; <a href="#ref-reel2021" role="doc-biblioref">Reel <em>et al.</em>,
 2021</a>; <a href="#ref-vlachavas2021" role="doc-biblioref">Vlachavas
@@ -443,7 +443,7 @@ the esophageal cancer (ESCA) data set from The Cancer Genome Atlas
 the <code>plasma</code> package.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressWarnings</span>( <span class="fu">library</span>(plasma) )</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">&quot;plasma&quot;</span>)</span></code></pre></div>
-<pre><code>## [1] &#39;0.9.2&#39;</code></pre>
+<pre><code>## [1] &#39;0.9.5&#39;</code></pre>
 <div id="data" class="section level2">
 <h2>Data</h2>
 <p>The results included here are in whole or part based upon data
@@ -777,7 +777,7 @@ sets are binary and by choosing to find 10 latent factors.</p>
 overall survival.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>LF <span class="ot">&lt;-</span> <span class="fu">get_factors</span>(mofaESCA, <span class="at">groups =</span> <span class="st">&quot;all&quot;</span>, <span class="at">factors =</span> <span class="st">&quot;all&quot;</span>) [[<span class="dv">1</span>]]</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>LFwithOutcome <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(LF, trainD<span class="sc">@</span>outcome[, <span class="fu">c</span>(<span class="st">&quot;Days&quot;</span>, <span class="st">&quot;vital_status&quot;</span>)])</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>osmodel <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(Days, vital_status <span class="sc">==</span> <span class="st">&quot;dead&quot;</span>) <span class="sc">~</span>. , <span class="at">data =</span> LFwithOutcome)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>osmodel <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(Days, vital_status <span class="sc">==</span> <span class="st">&quot;dead&quot;</span>) <span class="sc">~</span> ., <span class="at">data =</span> LFwithOutcome)</span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>AIC <span class="ot">&lt;-</span> <span class="fu">step</span>(osmodel, <span class="at">trace =</span> <span class="dv">0</span>)</span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>AIC</span></code></pre></div>
 <pre><code>## Call:
@@ -791,7 +791,8 @@ overall survival.</p>
 ## 
 ## Likelihood ratio test=7.63  on 3 df, p=0.0544
 ## n= 108, number of events= 42</code></pre>
-<p>Factors 2, 3, and 4 are associated with survival.</p>
+<p>Factors 2, 3, and 4 are associated with survival, although the model
+itself is, at best, only borderline significant.</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>mofarisk <span class="ot">&lt;-</span> survival<span class="sc">:::</span><span class="fu">predict.coxph</span>(AIC)</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>traindata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(trainD<span class="sc">@</span>outcome, mofarisk)</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>traindata<span class="sc">$</span>Cut <span class="ot">&lt;-</span> mofarisk <span class="sc">&gt;</span> <span class="dv">0</span></span>
@@ -811,48 +812,49 @@ decompositions to make predictions on the test data.</p>
 <span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>})</span>
 <span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>Yoo <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, testShift)</span>
 <span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>Voo <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">qr.solve</span>(Woo, Yoo))</span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(Voo)</span></code></pre></div>
-<pre><code>## [1] 77 10</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>punk <span class="ot">&lt;-</span> survival<span class="sc">:::</span><span class="fu">predict.coxph</span>(AIC, <span class="fu">as.data.frame</span>(Voo))</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>testdata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(testD<span class="sc">@</span>outcome, punk)</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>testdata<span class="sc">$</span>Cut <span class="ot">&lt;-</span> punk <span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>testmodel <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(Days, vital_status <span class="sc">==</span> <span class="st">&quot;dead&quot;</span>) <span class="sc">~</span> Cut, <span class="at">data =</span> testdata)</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>Stest <span class="ot">&lt;-</span> <span class="fu">summary</span>(testmodel)</span></code></pre></div>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>col2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>opar <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">survfit</span>(<span class="fu">Surv</span>(Days, vital_status <span class="sc">==</span> <span class="st">&quot;dead&quot;</span>) <span class="sc">~</span> Cut, <span class="at">data =</span> traindata),</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> col2, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">main =</span> <span class="st">&quot;MOFA model, training data&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Time (Days)&quot;</span>,</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">sub =</span> <span class="fu">paste</span>(<span class="st">&quot;Score test p-value = &quot;</span>, <span class="fu">round</span>(Strain<span class="sc">$</span>sctest[<span class="dv">3</span>], <span class="dv">3</span>)))</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;Low Risk&quot;</span>, <span class="st">&quot;High Risk&quot;</span>), <span class="at">col =</span> col2, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&quot;A&quot;</span>, <span class="at">side =</span> <span class="dv">2</span>, <span class="at">at =</span> <span class="fl">1.2</span>, <span class="at">line =</span> <span class="dv">3</span>, <span class="at">cex =</span> <span class="fl">1.5</span>, <span class="at">las =</span> <span class="dv">2</span>)</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">survfit</span>(<span class="fu">Surv</span>(Days, vital_status <span class="sc">==</span> <span class="st">&quot;dead&quot;</span>) <span class="sc">~</span> Cut, <span class="at">data =</span> testdata),</span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Time (Days)&quot;</span>,      <span class="at">col =</span> col2, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">main =</span> <span class="st">&quot;MOFA model, test data&quot;</span>,</span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">sub =</span> <span class="fu">round</span>(Stest<span class="sc">$</span>sctest[<span class="dv">3</span>], <span class="dv">3</span>))</span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;Low Risk&quot;</span>, <span class="st">&quot;High Risk&quot;</span>), <span class="at">col =</span> col2, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&quot;B&quot;</span>, <span class="at">side =</span> <span class="dv">2</span>, <span class="at">at =</span> <span class="fl">1.2</span>, <span class="at">line =</span> <span class="dv">3</span>, <span class="at">cex =</span> <span class="fl">1.5</span>, <span class="at">las =</span> <span class="dv">2</span>)</span></code></pre></div>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>punk <span class="ot">&lt;-</span> survival<span class="sc">:::</span><span class="fu">predict.coxph</span>(AIC, <span class="fu">as.data.frame</span>(Voo))</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>testdata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(testD<span class="sc">@</span>outcome, punk)</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>testdata<span class="sc">$</span>Cut <span class="ot">&lt;-</span> punk <span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>testmodel <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(Days, vital_status <span class="sc">==</span> <span class="st">&quot;dead&quot;</span>) <span class="sc">~</span> Cut, <span class="at">data =</span> testdata)</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>Stest <span class="ot">&lt;-</span> <span class="fu">summary</span>(testmodel)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>col2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>opar <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">survfit</span>(<span class="fu">Surv</span>(Days, vital_status <span class="sc">==</span> <span class="st">&quot;dead&quot;</span>) <span class="sc">~</span> Cut, <span class="at">data =</span> traindata),</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> col2, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">main =</span> <span class="st">&quot;MOFA model, training data&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Time (Days)&quot;</span>,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">sub =</span> <span class="fu">paste</span>(<span class="st">&quot;Score test p-value = &quot;</span>, <span class="fu">round</span>(Strain<span class="sc">$</span>sctest[<span class="dv">3</span>], <span class="dv">3</span>)))</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;Low Risk&quot;</span>, <span class="st">&quot;High Risk&quot;</span>), <span class="at">col =</span> col2, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&quot;A&quot;</span>, <span class="at">side =</span> <span class="dv">2</span>, <span class="at">at =</span> <span class="fl">1.2</span>, <span class="at">line =</span> <span class="dv">3</span>, <span class="at">cex =</span> <span class="fl">1.5</span>, <span class="at">las =</span> <span class="dv">2</span>)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">survfit</span>(<span class="fu">Surv</span>(Days, vital_status <span class="sc">==</span> <span class="st">&quot;dead&quot;</span>) <span class="sc">~</span> Cut, <span class="at">data =</span> testdata),</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Time (Days)&quot;</span>,      <span class="at">col =</span> col2, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">main =</span> <span class="st">&quot;MOFA model, test data&quot;</span>,</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">sub =</span> <span class="fu">round</span>(Stest<span class="sc">$</span>sctest[<span class="dv">3</span>], <span class="dv">3</span>))</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;Low Risk&quot;</span>, <span class="st">&quot;High Risk&quot;</span>), <span class="at">col =</span> col2, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&quot;B&quot;</span>, <span class="at">side =</span> <span class="dv">2</span>, <span class="at">at =</span> <span class="fl">1.2</span>, <span class="at">line =</span> <span class="dv">3</span>, <span class="at">cex =</span> <span class="fl">1.5</span>, <span class="at">las =</span> <span class="dv">2</span>)</span></code></pre></div>
 <div class="figure">
 <img src="data:image/png;base64,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" alt />
 <p class="caption">Figure 6 : Kaplan-Meier plot of overall survival on
 (A) the training set and (B) the test set using the <code>MOFA</code>
 Cox model.</p>
 </div>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(opar)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(opar)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(opar)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(opar)</span></code></pre></div>
 </div>
 <div id="interpretation" class="section level2">
 <h2>Interpretation</h2>
+<p>The <code>plasma</code> package includes several tools to assist with
+the interpretation of components and of the features contributing to the
+final model. These are illustrated in the “interpretation” vignette</p>
 </div>
 </div>
 <div id="conclusions" class="section level1">
 <h1>Conclusions</h1>
-<p>We have identified a method analogous to that of <code>MOFA</code>
-that allows us to combine different omics data without the need for
-prior imputation of missing values. A major difference is that while
-<code>MOFA</code> model learns “factors” that are composites of the
-variables in an unsupervised fashion, the <code>plasma</code> model
-learns “components” that are composites of the variables in a supervised
-fashion, using the outcomes “event” and “time-to-event” as response
-variables.</p>
+<p>We have described a method analogous to that of <code>MOFA</code>
+that allows us to combine different omics data sets without the need for
+massive prior imputation of missing values. A major difference is that
+while the <code>MOFA</code> model learns “factors” that are composites
+of the variables in an unsupervised fashion, the <code>plasma</code>
+model learns “components” that are composites of the variables in a
+supervised fashion, using the outcomes “event” and “time-to-event” as
+response variables.</p>
 <p>Although the factors from <code>MOFA</code> are defined such that the
 first factor, Factor 1, accounts for the greatest variance in the model,
 the factors may or may not be significantly associated with the outcome,
@@ -861,21 +863,36 @@ It may be the case that some factors, although they are significantly
 associated with outcome, account for very small variance in the final
 <code>MOFA</code> model, which hinders interpretability. This was the
 case with the TCGA-ESCA data set, in which, when 10 factors were learned
-from the <code>MOFA</code> model, only Factor 10 was significantly
-associated with survival, while accounting for [number] variance in the
-model [CITE SUPPLEMENTARY RESULTS?]. On the other hand, the components
-for <code>plasma</code> are created in a way that maximizes the
-covariance in the predictors and the response, and therefore these
-components will be automatically associated to some degree with the
-outcome. This could be advantageous in that dissecting the weights
-associated with the components would yield a list of variables from
-different omics datasets that contribute the most to defining the
-outcome, and any additional analyses could be refined by looking at
-these high-weighted variables most closely.</p>
+from the <code>MOFA</code> model, only three factoes were significantly
+associated with survival, while not generalizing to the test data set.
+Bu contrast, the components for <code>plasma</code> are created in a way
+that maximizes the covariance in the predictors and the response, and
+therefore these components will be automatically associated to some
+degree with the outcome. This observation could be advantageous in that
+dissecting the weights associated with the components would yield a list
+of variables from different omics data sets that contribute the most to
+defining the outcome, and any additional analyses could be refined by
+looking at these high-weighted variables most closely.</p>
+<p>We were surprised to find that most of the models from the individual
+data sets did not generalize well to the test data. Nevertheless, the
+joint model that combined the components from those data sets had good
+performance in predicting the risk of patient in the test data set. It
+is unclear why this happens. We speculate that the phenomenon may be
+related to the more genral idea of “bagging” weak predictors to create
+more effective composite model <span class="citation">(<a href="#ref-boulesteix2010" role="doc-biblioref">Boulesteix and Hothorn,
+2010</a>; <a href="#ref-abdia2017" role="doc-biblioref">Abdia <em>et
+al.</em>, 2017</a>; <a href="#ref-hillebrand2021" role="doc-biblioref">Hillebrand <em>et al.</em>, 2021</a>; <a href="#ref-poudel2022" role="doc-biblioref">Poudel <em>et al.</em>,
+2022</a>)</span>.</p>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1 class="unnumbered">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-abdia2017" class="csl-entry">
+Abdia,Y. <em>et al.</em> (2017) <a href="https://doi.org/10.1002/bimj.201600094">Propensity scores based
+methods for estimating average treatment effect and average treatment
+effect among treated: A comparative study</a>. <em>Biom J</em>,
+<strong>59</strong>, 967–985.
+</div>
 <div id="ref-adossa2021" class="csl-entry">
 Adossa,N. <em>et al.</em> (2021) <a href="https://doi.org/10.1016/j.csbj.2021.04.060">Computational
 strategies for single-cell multi-omics integration</a>. <em>Comput
@@ -901,6 +918,11 @@ Bertrand,F. and Maumy-Bertrand,M. (2021) <a href="https://doi.org/10.3389/fdata.
 cross-validating cox models to censored big data with missing values
 using extensions of partial least squares regression models</a>.
 <em>Front Big Data</em>, <strong>4</strong>, 684794.
+</div>
+<div id="ref-boulesteix2010" class="csl-entry">
+Boulesteix,A.L. and Hothorn,T. (2010) <a href="https://doi.org/10.1186/1471-2105-11-78">Testing the additional
+predictive value of high-dimensional molecular data</a>. <em>BMC
+Bioinformatics</em>, <strong>11</strong>, 78.
 </div>
 <div id="ref-tcga2017" class="csl-entry">
 Cancer Genome Atlas Research Network (2017) <a href="https://doi.org/10.1038/nature20805">Integrated genomic
@@ -932,6 +954,10 @@ Heo,Y.J. <em>et al.</em> (2021) <a href="https://doi.org/10.14348/molcells.2021.
 multi-omics approaches in cancer research: From biological networks to
 clinical subtypes</a>. <em>Mol Cells</em>, <strong>44</strong>, 433–443.
 </div>
+<div id="ref-hillebrand2021" class="csl-entry">
+Hillebrand,E. <em>et al.</em> (2021) Bagging weak predictors. <em>Int.
+J. Forecasting</em>, <strong>37</strong>, 237–254.
+</div>
 <div id="ref-kampstra2008" class="csl-entry">
 Kampstra,P. (2008) <a href="https://doi.org/10.18637/jss.v028.c01">Beanplot: A boxplot
 alternative for visual comparison of distributions</a>. <em>Journal of
@@ -948,6 +974,12 @@ information under the ROSA framework</a>. <em>Anal Chim Acta</em>,
 Picard,M. <em>et al.</em> (2021) <a href="https://doi.org/10.1016/j.csbj.2021.06.030">Integration strategies
 of multi-omics data for machine learning analysis</a>. <em>Comput Struct
 Biotechnol J</em>, <strong>19</strong>, 3735–3746.
+</div>
+<div id="ref-poudel2022" class="csl-entry">
+Poudel,G.R. <em>et al.</em> (2022) <a href="https://doi.org/10.3390/ijerph191710977">Machine learning for
+prediction of cognitive health in adults using sociodemographic,
+neighbourhood environmental, and lifestyle factors</a>. <em>Int J
+Environ Res Public Health</em>, <strong>19</strong>.
 </div>
 <div id="ref-Rbook" class="csl-entry">
 R Core Team (2022) <a href="https://www.R-project.org/">R: A language
