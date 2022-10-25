@@ -6,14 +6,9 @@ bibliography: "`r system.file('bib', 'plasma.bib', package = 'plasma')`"
 link-citations: yes
 csl: "`r system.file( 'bib', 'bioinformatics.csl', package = 'plasma')`"
 output: 
-  rmarkdown::html_vignette:
+  pdf_document:
     toc: true
-vignette: >
-  %\VignetteIndexEntry{plasma: Interpretation}
-  %\VignetteKeywords{OOMPA,plasma,supervised analysis,partial least squares}
-  %\VignetteDepends{plasma}
-  %\VignettePackage{plasma}
-  %\VignetteEngine{knitr::rmarkdown}
+    highlight: kate
 ---
 
 ```{r opts, echo=FALSE}
