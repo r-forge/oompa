@@ -86,7 +86,7 @@ getFinalWeights <- function(object) {
   coy <- matrix(fm$coefficients, ncol = 1)
   mainterms <- attr(terms(fm), "term.labels")
   combined <- lapply(names(object@compModels), function(N) {
-    getAllWeights(object, N)@contrib[, mainterms]
+    getAllWeights(object, N)@contrib[, mainterms, drop = FALSE]
   })
   names(combined) <- names(object@compModels)
   runthrough <- lapply(names(combined), function(N) {
@@ -102,33 +102,36 @@ getFinalWeights <- function(object) {
   FW
 }
 
-setMethod("barplot", c("plasma"), function(height, source, n, ...) {
+setMethod("barplot", c("plasma"), function(height, source, n,
+                                           direction = c("both", "up","down"), ...) {
+  direction <- match.arg(direction)
   wws <- getFinalWeights(height) # default name from function, but a plasma object
-  wmut <- wws[wws$Source  == source,]
-  ## Get positive and negative weights 
-  wmut <- wws[wws$Source  == source, ]
-  wmut <- wmut[order(wmut$Weight),]
-  wmutt <- wmut[1:n,]
-  wmutt <- wmutt[order(wmutt$Weight, decreasing = TRUE),]
-  wmutt$Feature <- as.character(wmutt$Feature)
-  wmutt$Feature <- factor(wmutt$Feature, levels = unique(wmutt$Feature))
 
-  wmut2 <- wws[wws$Source  == source,]
+  ## Get positive and negative weights. Start with negative.
+  wmutDn <- wws[wws$Source  == source, ]
+  wmutDn <- wmutDn[order(wmutDn$Weight),]
+  wmutDn <- wmutDn[1:n,]
 
-  ## positive weights 
-  wmut2 <- wmut2[order(wmut2$Weight, decreasing = TRUE),]
-  wmutt2 <- wmut2[1:20,]
-  wmutt2 <- wmutt2[order(wmutt2$Weight),]
-  wmutt2$Feature <- as.character(wmutt2$Feature)
-  wmutt2$Feature <- factor(wmutt2$Feature, levels = unique(wmutt2$Feature))
-  wmutt <- rbind(wmutt, wmutt2)
+  ## Then add positive weights.
+  wmutUp <- wws[wws$Source  == source,]
+  wmutUp <- wmutUp[order(wmutUp$Weight, decreasing = TRUE),]
+  wmutUp <- wmutUp[1:n,]
+
+  ##
+  wmut <- switch(direction,
+                 up = wmutUp,
+                 down = wmutDn,
+                 both = rbind(wmutUp, wmutDn))
+  wmut <- wmut[order(abs(wmut$Weight), decreasing = FALSE),]
+  wmut$Feature <- factor(as.character(wmut$Feature),
+                         levels = unique(wmut$Feature))
 
   ## Define variable mapping
   map <- aes_string(x = "Weight", y = "Feature", fill = "Weight")
 
   ## Make the ggplot
-  p <- ggplot(wmutt, map) + geom_bar(stat = "identity") +  theme_bw() + 
-    scale_fill_continuous(low = "red", high = "blue") + 
+  p <- ggplot(wmut, map) + geom_bar(stat = "identity") +  theme_bw() +
+    scale_fill_continuous(low = "red", high = "blue") +
     guides(fill = guide_colorbar(title = source , reverse = TRUE))
   ## return it
   p
