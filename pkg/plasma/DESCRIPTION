@@ -1,15 +1,15 @@
 Package: plasma
 Title: Partial LeAst Squares for Multiomic Analysis
-Version: 0.9.6
-Date: 2022-10-25
-Author: Kevin R. Coombes, Kyoko Yamaguchi
+Version: 0.9.7
+Date: 2022-11-14
+Author: Kevin R. Coombes, Kyoko Yamaguchi, Salma Abdelbaky
 Description: Contains tools for supervised analyes of incomplete, overlapping
   multi-omics datasets.
 Maintainer: Kevin R. Coombes <krc@silicovore.com>
 Depends: R (>= 3.5.0)
-Imports: methods, stats, graphics, survival, plsRcox, pls,
+Imports: methods, stats, graphics, survival, plsRcox, pls, ggplot2,
   Polychrome (>= 1.5.0), viridisLite, beanplot, oompaBase
-Suggests: R.rsp, MOFA2, ggplot2, tidyr, ClassDiscovery
+Suggests: R.rsp, tidyr, ClassDiscovery
 License: Apache License (== 2.0)
 LazyLoad: yes
 URL: http://oompa.r-forge.r-project.org/

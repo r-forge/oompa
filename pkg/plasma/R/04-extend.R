@@ -1,5 +1,5 @@
 extendCoxModels <- function(object, firstPass, verbose = TRUE) {
-  ## get teh components from each data set
+  ## get the components from each data set
   Components <- lapply(firstPass@models, function(DS) {
     DS@plsmod$tt
   })

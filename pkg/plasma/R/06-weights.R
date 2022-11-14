@@ -101,3 +101,35 @@ getFinalWeights <- function(object) {
   FW$Standard <- (FW$Weight - mu2)/sigma2
   FW
 }
+
+setMethod("barplot", c("plasma"), function(height, source, n, ...) {
+  wws <- getFinalWeights(height) # default name from function, but a plasma object
+  wmut <- wws[wws$Source  == source,]
+  ## Get positive and negative weights 
+  wmut <- wws[wws$Source  == source, ]
+  wmut <- wmut[order(wmut$Weight),]
+  wmutt <- wmut[1:n,]
+  wmutt <- wmutt[order(wmutt$Weight, decreasing = TRUE),]
+  wmutt$Feature <- as.character(wmutt$Feature)
+  wmutt$Feature <- factor(wmutt$Feature, levels = unique(wmutt$Feature))
+
+  wmut2 <- wws[wws$Source  == source,]
+
+  ## positive weights 
+  wmut2 <- wmut2[order(wmut2$Weight, decreasing = TRUE),]
+  wmutt2 <- wmut2[1:20,]
+  wmutt2 <- wmutt2[order(wmutt2$Weight),]
+  wmutt2$Feature <- as.character(wmutt2$Feature)
+  wmutt2$Feature <- factor(wmutt2$Feature, levels = unique(wmutt2$Feature))
+  wmutt <- rbind(wmutt, wmutt2)
+
+  ## Define variable mapping
+  map <- aes_string(x = "Weight", y = "Feature", fill = "Weight")
+
+  ## Make the ggplot
+  p <- ggplot(wmutt, map) + geom_bar(stat = "identity") +  theme_bw() + 
+    scale_fill_continuous(low = "red", high = "blue") + 
+    guides(fill = guide_colorbar(title = source , reverse = TRUE))
+  ## return it
+  p
+})

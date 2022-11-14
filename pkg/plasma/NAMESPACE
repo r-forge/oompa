@@ -9,6 +9,8 @@ importFrom("stats",
            "aggregate", "qnorm", "sd", "terms")
 importFrom("graphics",
            "par", "legend", "text", "mtext", "title")
+importFrom("ggplot2", "aes_string", "geom_bar", "ggplot", "theme_bw",
+           "scale_fill_continuous", "guides", "guide_colorbar")
 importFrom("beanplot",
            "beanplot")
 importFrom("survival",
@@ -52,4 +54,4 @@ exportClass("CombinedWeights")
 export("combineAllWeights", "stdize", "interpret")
 
 ## methods
-exportMethods("summary", "plot", "predict", "image", "heat")
+exportMethods("summary", "plot", "predict", "image", "heat", "barplot")

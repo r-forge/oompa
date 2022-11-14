@@ -2,6 +2,7 @@
 \docType{class}
 \alias{plasma-class}
 \alias{plot,plasma,missing-method}
+\alias{barplot,plasma-method}
 \alias{summary,plasma-method}
 \alias{predict,plasma-method}
 \alias{plasma}
@@ -19,15 +20,20 @@ Objects should be defined using the \code{plasma} function.
 \usage{
 plasma(object, multi)
 \S4method{plot}{plasma,missing}(x, y, \dots)
+\S4method{barplot}{plasma}(height, source, n, \dots)
 \S4method{predict}{plasma}(object, newdata = NULL, type = c("components", "risk",
                  "split"), \dots)
 }
 \arguments{
   \item{multi}{an object of the \code{MultiplePLSCoxModels} class.}
   \item{object}{an object of the \code{plasma} class.}
+  \item{height}{an object of the \code{plasma} class for the \code{barplot} method.}
   \item{x}{an object of class \code{plasma} for plotting the Kaplan-Meier curves.}
   \item{y}{An ignored argrument for the plot method.}
-
+  \item{source}{A length-one character vector; the name of a data set in
+    a \code{plasma} object.}
+  \item{n}{A length-one integer vector; the number of high-weight
+    features to display.}
   \item{newdata}{A \code{MultiOmics} object with the same structure as
     the training data.}
   \item{type}{An enumerated character value.}
@@ -68,5 +74,6 @@ firstPass <- fitCoxModels(trainD, "Days", "vital_status", "dead")
 pl <- plasma(object = trainD, multi = firstPass)
 
 plot(pl, legloc = "topright", main = "Training Data")
+barplot(pl, "RPPA", 6)
 }
 \keyword{classes}
