@@ -1,14 +1,18 @@
 ---
-title: "plasma: Interpretation"
+title: 'plasma: Interpretation'
 author: "Kevin R. Coombes"
 data: "`r Sys.Date()`"
-bibliography: "`r system.file('bib', 'plasma.bib', package = 'plasma')`"
+output:
+  pdf_document:
+    toc: yes
+    highlight: kate
+  html_document:
+    toc: yes
+    highlight: kate
+    theme: readable
 link-citations: yes
 csl: "`r system.file( 'bib', 'bioinformatics.csl', package = 'plasma')`"
-output: 
-  pdf_document:
-    toc: true
-    highlight: kate
+bibliography: "`r system.file('bib', 'plasma.bib', package = 'plasma')`"
 ---
 
 ```{r opts, echo=FALSE}

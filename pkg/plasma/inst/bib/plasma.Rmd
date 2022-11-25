@@ -6,6 +6,10 @@ output:
   pdf_document:
     toc: yes
     highlight: kate
+  html_document:
+    toc: yes
+    highlight: kate
+    theme: readable
 link-citations: yes
 csl: "`r system.file( 'bib', 'bioinformatics.csl', package = 'plasma')`"
 bibliography: "`r system.file('bib', 'plasma.bib', package = 'plasma')`"
@@ -74,7 +78,7 @@ cancer Level 3 data set [@tcga2017] from the FireBrowse web site (http://firebro
 and presumably the most informative, features were retained. Here, we load this sample
 data set.
 ```{r data}
-loadESCAdata()
+loadESCAdata(.GlobalEnv)
 sapply(assemble, dim)
 ```
 
