@@ -89,9 +89,10 @@ if (inherits(fls, "try-error")) {
   stop("Unable to load data from remote server.")
 }
 # restrict data set size
-MO <- prepareMultiOmics(assemble[c("ClinicalBin", "ClinicalCont", "RPPA")], Outcome)
+MO <- with(plasma:::ENV, prepareMultiOmics(
+   assemble[c("ClinicalBin", "ClinicalCont", "RPPA")], Outcome))
 
-splitVec <- rbinom(nrow(Outcome), 1, 0.6)
+splitVec <- with(plasma:::ENV, rbinom(nrow(Outcome), 1, 0.6))
 trainD <- MO[, splitVec == 1]
 testD <- MO[, splitVec == 0]
 

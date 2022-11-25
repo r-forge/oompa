@@ -5,7 +5,7 @@ if (inherits(fls, "try-error")) {
   stop("Unable to load data from remote server.")
 }
 ls()
-MO <- prepareMultiOmics(assemble, Outcome)
+MO <- with(plasma:::ENV, prepareMultiOmics(assemble, Outcome))
 train <- rep(c(TRUE, FALSE), times = c(112, 185-112))
 MO2 <- MO[, train]
 ## Fit a survival model on a single data set on the MultiOmics object

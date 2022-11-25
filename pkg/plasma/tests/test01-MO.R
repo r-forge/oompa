@@ -6,7 +6,7 @@ if (inherits(fls, "try-error")) {
 }
 ls()
 ## make sure we can assemble MultiOmics objects
-MO <- prepareMultiOmics(assemble, Outcome)
+MO <- with(plasma:::ENV, prepareMultiOmics(assemble, Outcome))
 ## Test summary and plot methods
 summary(MO)
 opar <- par(mai = c(1.02, 1.82, 0.82, 0.42))
@@ -27,6 +27,6 @@ summary(MO3)
 
 ## Things expected to fail
 ## disorient one of the component datasets.
-badinput <- assemble
+badinput <- with(plasma:::ENV, assemble)
 badinput$mRNASeq <- t(badinput$mRNASeq)
-pmo <- try( prepareMultiOmics(badinput, Outcome) )
+pmo <- try( with(plasma:::ENV, prepareMultiOmics(badinput, Outcome) ))

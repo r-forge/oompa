@@ -6,7 +6,8 @@
 
 \title{Class \code{"plasmaPredictions"}}
 \description{
-  The \code{plasmaPredictions} object class is returned when running the \code{predict} method on an object of class \code{plasma}.
+  The \code{plasmaPredictions} object class is returned when running the
+  \code{predict} method on an object of class \code{plasma}.
 }
 \section{Objects from the Class}{
   Users shold not create objects of this class directly. They will be
@@ -32,29 +33,45 @@
 }
 \section{Slots}{
   \describe{
-      \item{\code{meanPredictions}:}{A matrix with samples as rows and factors as columns that is a result of taking the mean of the PLS component predictions from each dataset.}
+      \item{\code{meanPredictions}:}{A matrix with samples as rows and
+	factors as columns that is a result of taking the mean of the
+	PLS component predictions from each dataset.}
       \item{\code{riskDF}:}{Object of type \code{data.frame} containing
 	the original \code{outcome} dataframe and additional columns for
 	"Risk", and "Split", corresponding to the risk of the event
 	calculated by the model, and patient assignment to low versus
 	high-risk groups, respectively.}
-      \item{\code{riskModel}:}{Object of type \code{coxph} that uses predicted Risk (continuous) as the predictor variable and survival as the response variable. See documentation for \code{link{coxph}}.}
-      \item{\code{splitModel}:}{Object of type \code{coxph} that uses predicted Split (predicted Risk categorized into \dQuote{high} and \dQuote{low} risk by the median predicted Risk) as the predictor variable and survival as the response variable. See documentation for \code{link{coxph}}.}
-      \item{\code{SF}:}{Object of type \code{survfit} which is used by the \code{plot} method to plot Kaplan-Meier curves grouped by predicted Split. See documentation for \code{link{survfit}}.}      
+      \item{\code{riskModel}:}{Object of type \code{coxph} that uses
+	predicted Risk (continuous) as the predictor variable and
+	survival as the response variable. See documentation for
+	\code{link{coxph}}.} 
+      \item{\code{splitModel}:}{Object of type \code{coxph} that uses
+	predicted Split (predicted Risk categorized into \dQuote{high}
+	and \dQuote{low} risk by the median predicted Risk) as the
+	predictor variable and survival as the response variable. See
+	documentation for \code{link{coxph}}.} 
+      \item{\code{SF}:}{Object of type \code{survfit} which is used by
+	the \code{plot} method to plot Kaplan-Meier curves grouped by
+	predicted Split. See documentation for \code{link{survfit}}.} 
   }
 }
 \section{Methods}{
   \describe{
-      \item{\code{\link{plot}}:}{Produces Kaplan-Meier curves for the low risk and high risk groups.}
+      \item{\code{\link{plot}}:}{Produces Kaplan-Meier curves for the
+	low risk and high risk groups.}
   }
 }
 \value{
-  The \code{predict} method on an object of the \code{\link{plasma}} class returns an object of the \code{\link{plasmaPredictions}} class. The \code{plot} method invisibly returns the value on which it was invoked.
+  The \code{predict} method on an object of the \code{\link{plasma}}
+  class returns an object of the \code{\link{plasmaPredictions}}
+  class. The \code{plot} method invisibly returns the value on which it
+  was invoked.
 }
 \author{Kevin R. Coombes \email{krc@silicovore.com},
   Kyoko Yamaguchi \email{kyoko.yamaguchi@osumc.edu}}
 \note{
-  An object of \code{plasmaPredictions} class contains many models that are similar to an object of \code{\link{MultiplePLSCoxModels}} class.
+  An object of \code{plasmaPredictions} class contains many models that
+  are similar to an object of \code{\link{MultiplePLSCoxModels}} class.
 }
 \seealso{plasma}
 \examples{
@@ -63,9 +80,10 @@ if (inherits(fls, "try-error")) {
   stop("Unable to load data from remote server.")
 }
 # restrict data set size
-MO <- prepareMultiOmics(assemble[c("ClinicalBin", "ClinicalCont", "RPPA")], Outcome)
+MO <- with(plasma:::ENV, prepareMultiOmics(
+    assemble[c("ClinicalBin", "ClinicalCont", "RPPA")], Outcome))
 
-splitVec <- rbinom(nrow(Outcome), 1, 0.6)
+splitVec <- with(plasma:::ENV, rbinom(nrow(Outcome), 1, 0.6))
 trainD <- MO[, splitVec == 1]
 testD <- MO[, splitVec == 0]
 

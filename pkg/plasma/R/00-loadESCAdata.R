@@ -1,10 +1,12 @@
-loadESCAdata <- function() {
+ENV <- new.env()
+
+loadESCAdata <- function(env = plasma:::ENV) {
   U <- url("http://silicovore.com/data/TCGA-ESCA.RData")
   on.exit(close(U))
   if (!inherits(U, "connection")) {
     stop("Could not create connection.")
   }
-  created <- load(U, .GlobalEnv)
+  created <- load(U, env)
   expect <- c("assemble", "m450info", "Outcome")
   if (!(all(expect %in% created))) {
     stop("Could not load all objects.")
@@ -15,13 +17,13 @@ loadESCAdata <- function() {
   invisible(created)
 }
 
-loadLUSCdata <- function() {
+loadLUSCdata <- function(env = plasma:::ENV) {
   U <- url("http://silicovore.com/data/TCGA-LUSC1.RData")
   on.exit(close(U))
   if (!inherits(U, "connection")) {
     stop("Could not create connection.")
   }
-  created <- load(U, .GlobalEnv)
+  created <- load(U, ENV)
   expect <- c("assemble", "m450info", "Outcome")
   if (!(all(expect %in% created))) {
     stop("Could not load all objects.")

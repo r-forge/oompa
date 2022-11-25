@@ -5,7 +5,7 @@ if (inherits(fls, "try-error")) {
 }
 ls()
 ## prepare MultiOmics
-MO <- prepareMultiOmics(assemble, Outcome)
+MO <- with(plasma:::ENV, prepareMultiOmics(assemble, Outcome))
 MO <- MO[c("ClinicalBin", "ClinicalCont", "RPPA"),]
 summary(MO)
 ## test complete cox models

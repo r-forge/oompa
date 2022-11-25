@@ -23,8 +23,14 @@ squamous cell carcinoma (LUSC) data, whihc must be loaded using the
 \code{loadLUSCdata} function.
 }
 \usage{
-loadESCAdata()
-loadLUSCdata()
+loadESCAdata(env = plasma:::ENV)
+loadLUSCdata(env = plasma:::ENV)
+}
+\arguments{
+  \item{env}{an nevironmen tin which to load tbhe data. The default
+    value is a hidden environment in the package, accessible as
+    \code{plasma:::ENV}. To make access easier, you can use
+    \code{globalenv()} or \code{.GlobalEnv}.}
 }
 \format{
   The \dQuote{TCGA-ESCA} dataset contains the following:
