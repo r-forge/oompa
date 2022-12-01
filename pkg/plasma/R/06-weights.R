@@ -103,7 +103,9 @@ getFinalWeights <- function(object) {
 }
 
 setMethod("barplot", c("plasma"), function(height, source, n,
-                                           direction = c("both", "up","down"), ...) {
+                                           direction = c("both", "up","down"),
+                                           lhcol = c("cyan", "red"),
+                                           ...) {
   direction <- match.arg(direction)
   wws <- getFinalWeights(height) # default name from function, but a plasma object
 
@@ -126,13 +128,24 @@ setMethod("barplot", c("plasma"), function(height, source, n,
   wmut$Feature <- factor(as.character(wmut$Feature),
                          levels = unique(wmut$Feature))
 
-  ## Define variable mapping
-  map <- aes_string(x = "Weight", y = "Feature", fill = "Weight")
-
-  ## Make the ggplot
-  p <- ggplot(wmut, map) + geom_bar(stat = "identity") +  theme_bw() +
-    scale_fill_continuous(low = "red", high = "blue") +
-    guides(fill = guide_colorbar(title = source , reverse = TRUE))
-  ## return it
-  p
+  MX <- max(abs(wmut$Weight))
+  cr <- circlize::colorRamp2(c(-MX, MX), lhcol)
+  mycol <- cr(wmut$Weight)
+  spar <- par(mai = c(0.82, 2.02, 0.42, 0.42))
+  on.exit(par(spar))
+  pts <- barplot(wmut$Weight, horiz = TRUE, col = mycol, xlim = c(-MX, 2*MX))
+  mtext(rownames(wmut), side = 2, at = pts, las = 2, line = 1)
+  par(new = TRUE)
+  pin <- par("pin")
+  mai <- par("mai")
+  plt <- par("plt")
+  weird <- c(mai[1] + 1/8*pin[2],   # bottom
+             mai[2] + 13/16*pin[1], # left
+             mai[3] + 1/2*pin[2],   # top
+             mai[4] + 2/16*pin[1])  # right
+  opar <- par(mai = weird)
+  on.exit(par(opar))
+  mat <- matrix(S <- seq(-MX, MX, length = 64), nrow = 1)
+  image(1, S, mat, col = cr(mat),
+        xaxt = "n", xlab = "", ylab = "Weight", main = source)
 })

@@ -1,15 +1,15 @@
 Package: plasma
-Title: Partial LeAst Squares for Multi-omic Analysis
-Version: 0.9.15
-Date: 2022-11-25
+Title: Partial LeAst Squares for Multiomic Analysis
+Version: 0.9.18
+Date: 2022-12-01
 Authors@R: c(person("Kevin R.", "Coombes", role = c("cre", "aut"),
                     email = "krc@silicovore.com"),
              person("Kyoko", "Yamaguchi", role = "aut"),
              person("Salma", "Abdelbaky", role = "aut"))
 Description: Contains tools for supervised analyses of incomplete, overlapping
-  multi-omics datasets.
+  multiomics datasets.
 Depends: R (>= 3.5.0)
-Imports: methods, stats, graphics, survival, plsRcox, pls, ggplot2,
+Imports: methods, stats, graphics, survival, pls, plsRcox,
   Polychrome (>= 1.5.0), viridisLite, beanplot, oompaBase
 Suggests: R.rsp, tidyr, ClassDiscovery
 License: Apache License (== 2.0)

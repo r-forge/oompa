@@ -9,10 +9,6 @@ importFrom("stats",
            "aggregate", "qnorm", "sd", "terms")
 importFrom("graphics",
            "par", "legend", "text", "mtext", "title")
-importFrom("ggplot2", "aes_string", "geom_bar", "ggplot", "theme_bw",
-           "scale_fill_continuous", "guides", "guide_colorbar")
-importFrom("beanplot",
-           "beanplot")
 importFrom("survival",
            "coxph", "Surv", "survfit")
 importFrom("pls",
@@ -21,6 +17,8 @@ importFrom("plsRcox",
            "plsRcoxmodel")
 importFrom("Polychrome",
            "memberPlot")
+importFrom("beanplot",
+           "beanplot")
 importFrom("oompaBase",
            "blueyellow", "redgreen", "bluescale")
 importFrom("viridisLite",

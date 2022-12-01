@@ -23,7 +23,7 @@ loadLUSCdata <- function(env = plasma:::ENV) {
   if (!inherits(U, "connection")) {
     stop("Could not create connection.")
   }
-  created <- load(U, ENV)
+  created <- load(U, env)
   expect <- c("assemble", "m450info", "Outcome")
   if (!(all(expect %in% created))) {
     stop("Could not load all objects.")
