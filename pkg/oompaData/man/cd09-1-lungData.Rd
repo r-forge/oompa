@@ -35,7 +35,7 @@ data(lungData)
   BMC Genomics. 2018 Oct 11;19(1):738. doi: 10.1186/s12864-018-5093-z.
 
   Asiaee A, Abrams ZB, Nakayiza S, Sampath D, Coombes KR.\cr
-  \emphExplaining Gene Expression Using Twenty-One MicroRNAs.}\cr
+  \emph{Explaining Gene Expression Using Twenty-One MicroRNAs.}\cr
   J Comput Biol. 2020 Jul;27(7):1157-1170. doi: 10.1089/cmb.2019.0321.
 }
 \keyword{datasets}
