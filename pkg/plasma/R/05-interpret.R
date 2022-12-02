@@ -76,7 +76,13 @@ getAllWeights <- function(object, N) {
   whatever <- lapply(names(object@compModels), function(D) {
     getCompositeWeights(object, N, D)@contrib
   })
+  W <- which(sapply(whatever, ncol) == 1)
   names(whatever) <- names(object@compModels)
+  if (length(W) == 1) {
+    for (I in W) {
+      colnames(whatever[[I]]) <- paste(names(whatever)[I], 1, sep = "")
+    }
+  }
   cont <- do.call(cbind, whatever)
   new("Contribution",
       contrib = cont,
