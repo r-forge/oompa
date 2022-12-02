@@ -9,6 +9,8 @@ importFrom("stats",
            "aggregate", "qnorm", "sd", "terms")
 importFrom("graphics",
            "par", "legend", "text", "mtext", "title")
+importFrom("grDevices",
+           "colorRampPalette")
 importFrom("survival",
            "coxph", "Surv", "survfit")
 importFrom("pls",

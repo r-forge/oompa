@@ -127,10 +127,12 @@ setMethod("barplot", c("plasma"), function(height, source, n,
   wmut <- wmut[order(abs(wmut$Weight), decreasing = FALSE),]
   wmut$Feature <- factor(as.character(wmut$Feature),
                          levels = unique(wmut$Feature))
-
   MX <- max(abs(wmut$Weight))
-  cr <- circlize::colorRamp2(c(-MX, MX), lhcol)
-  mycol <- cr(wmut$Weight)
+  ptr <- switch(direction,
+                both = painter(c(-MX, MX), c(lhcol[1], "white", lhcol[2])),
+                up = painter(c(0, MX), c("white", lhcol[2])),
+                down = painter(c(-MX, 0), c(lhcol[1], "white")))
+  mycol <- ptr(wmut$Weight)
   spar <- par(mai = c(0.82, 2.02, 0.42, 0.42))
   on.exit(par(spar))
   pts <- barplot(wmut$Weight, horiz = TRUE, col = mycol, xlim = c(-MX, 2*MX))
@@ -145,7 +147,22 @@ setMethod("barplot", c("plasma"), function(height, source, n,
              mai[4] + 2/16*pin[1])  # right
   opar <- par(mai = weird)
   on.exit(par(opar))
-  mat <- matrix(S <- seq(-MX, MX, length = 64), nrow = 1)
-  image(1, S, mat, col = cr(mat),
+  S <- switch(direction,
+              both = seq(-MX, MX, length = 64),
+              up = seq(0, MX, length = 64),
+              down = seq(-MX, 0, length = 64))
+  mat <- matrix(S, nrow = 1)
+  image(1, S, mat, col = ptr(mat),
         xaxt = "n", xlab = "", ylab = "Weight", main = source)
 })
+
+painter <- function(range, colors, N = 64) {
+  crp <- colorRampPalette(colors)
+  pal <- crp(N)
+  bks <- seq(min(range), max(range), length = N)
+  function(X) {
+    idx <- cut(X, breaks = bks, labels = FALSE,
+               include.lowest = TRUE)
+    pal[idx]
+  }
+}
