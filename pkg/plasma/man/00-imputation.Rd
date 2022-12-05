@@ -51,7 +51,7 @@ samplingImputer(X)
   Kyoko Yamaguchi \email{kyoko.yamaguchi@osumc.edu}}
 \examples{
 loadESCAdata()
-imputed <- with(plasma:::ENV, lapply(assemble, samplingImputer) )
-imputed <- with(plasma:::ENV, lapply(assemble, meanModeImputer))
+imputed <- with(plasmaEnv, lapply(assemble, samplingImputer) )
+imputed <- with(plasmaEnv, lapply(assemble, meanModeImputer))
 }
 \keyword{array}

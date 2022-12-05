@@ -169,7 +169,7 @@ par(opar)
 
 ## Lists of Significant Genes by Component
 Here we combine the weight matrices for features from all data sets into all components
-ionto a single data frame.
+into a single data frame.
 ```{r contra}
 CW <- combineAllWeights(pl)
 contra <- CW@combined

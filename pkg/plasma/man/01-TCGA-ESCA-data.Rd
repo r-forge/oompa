@@ -3,6 +3,7 @@
 \alias{loadESCAdata}
 \alias{TCGA-LUSC}
 \alias{loadLUSCdata}
+\alias{plasmaEnv}
 \alias{assemble}
 \alias{Outcome}
 \alias{m450info}
@@ -23,13 +24,13 @@ squamous cell carcinoma (LUSC) data, whihc must be loaded using the
 \code{loadLUSCdata} function.
 }
 \usage{
-loadESCAdata(env = plasma:::ENV)
-loadLUSCdata(env = plasma:::ENV)
+loadESCAdata(env = plasmaEnv)
+loadLUSCdata(env = plasmaEnv)
 }
 \arguments{
-  \item{env}{an nevironmen tin which to load tbhe data. The default
-    value is a hidden environment in the package, accessible as
-    \code{plasma:::ENV}. To make access easier, you can use
+  \item{env}{an environment in which to load the data. The default
+    value is a private environment in the package, accessible as
+    \code{plasmaEnv}. To make access easier, you can use
     \code{globalenv()} or \code{.GlobalEnv}.}
 }
 \format{
@@ -45,15 +46,28 @@ loadLUSCdata(env = plasma:::ENV)
     \enumerate{
     \item{\code{ClinicalBin}}{a dataframe (53x185) of clinical binary values.}
     \item{\code{ClinicalCont}}{a dataframe (6x185) of clinical continuous values.}
-    \item{\code{MAF}}{a dataframe (566x184) of minor allele frequencies (MAF) that have been converted to binary based on whether they had a MAF greater than 0.03 (1) or not (0).}
-    \item{\code{Meth450}}{a dataframe (1454x185) of continuous beta values from the Illumina Infinium HumanMethylation450 arrays. The features in this dataframe have been filtered on mean greater than 0.15 and a standard deviation greater than 0.3.}
-    \item{\code{miRSeq}}{a dataframe (926x166) of continuous counts values from microRNA (miRNA) sequencing. The features in this dataframe have been filtered on a standard deviation of 0.05.}
-    \item{\code{mRNASeq}}{a dataframe (2520x157) of continuous counts values from mRNA sequencing data. The features in this dataframe have been filtered on a mean greater than 4 and a standard deviation greater than 0.7.}
-    \item{\code{RPPA}}{a dataframe (192x126) of continuous protein expression values from reverse phase protein array (RPPA) assays.}
+    \item{\code{MAF}}{a dataframe (566x184) of minor allele frequencies
+      (MAF) that have been converted to binary based on whether they had
+      a MAF greater than 0.03 (1) or not (0).}
+    \item{\code{Meth450}}{a dataframe (1454x185) of continuous beta
+      values from the Illumina Infinium HumanMethylation450 arrays. The
+      features in this dataframe have been filtered on mean greater than
+      0.15 and a standard deviation greater than 0.3.}
+    \item{\code{miRSeq}}{a dataframe (926x166) of continuous counts
+      values from microRNA (miRNA) sequencing. The features in this
+      dataframe have been filtered on a standard deviation of 0.05.}
+    \item{\code{mRNASeq}}{a dataframe (2520x157) of continuous counts
+      values from mRNA sequencing data. The features in this dataframe
+      have been filtered on a mean greater than 4 and a standard
+      deviation greater than 0.7.}
+    \item{\code{RPPA}}{a dataframe (192x126) of continuous protein
+      expression values from reverse phase protein array (RPPA) assays.}
     }
-    \item{\code{Outcome}}{a dataframe (185x5) containing the survival outcomes for the patients in \code{assemble}.}
-    
-    \item{\code{m450info}}{a dataframe (1454x3) containing gene symbol, chromosome number, and genomic coordinate IDs corresponding to the features (or \dQuote{probes}) in \code{Meth450}.}
+    \item{\code{Outcome}}{a dataframe (185x5) containing the survival
+      outcomes for the patients in \code{assemble}.}
+    \item{\code{m450info}}{a dataframe (1454x3) containing gene symbol,
+      chromosome number, and genomic coordinate IDs corresponding to the
+      features (or \dQuote{probes}) in \code{Meth450}.}
 }
 }
 

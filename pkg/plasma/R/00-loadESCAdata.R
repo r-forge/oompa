@@ -1,6 +1,6 @@
-ENV <- new.env()
+plasmaEnv <- new.env()
 
-loadESCAdata <- function(env = plasma:::ENV) {
+loadESCAdata <- function(env = plasmaEnv) {
   U <- url("http://silicovore.com/data/TCGA-ESCA.RData")
   on.exit(close(U))
   if (!inherits(U, "connection")) {
@@ -17,7 +17,7 @@ loadESCAdata <- function(env = plasma:::ENV) {
   invisible(created)
 }
 
-loadLUSCdata <- function(env = plasma:::ENV) {
+loadLUSCdata <- function(env = plasmaEnv) {
   U <- url("http://silicovore.com/data/TCGA-LUSC1.RData")
   on.exit(close(U))
   if (!inherits(U, "connection")) {

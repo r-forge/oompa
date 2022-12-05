@@ -52,7 +52,7 @@ fls <- try(loadESCAdata())
 if (inherits(fls, "try-error")) {
   stop("Unable to load data from remote server.")
 }
-MO <- with(plasma:::ENV,
+MO <- with(plasmaEnv,
            prepareMultiOmics(datalist = assemble, outcome = Outcome))
 plot(MO)
 summary(MO)

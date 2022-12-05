@@ -99,10 +99,10 @@ fls <- try(loadESCAdata())
 if (inherits(fls, "try-error")) {
   stop("Unable to load data from remote server.")
 }
-MO <- with(plasma:::ENV, prepareMultiOmics(assemble, Outcome) )
+MO <- with(plasmaEnv, prepareMultiOmics(assemble, Outcome) )
 MO <- MO[c("ClinicalBin", "ClinicalCont", "RPPA"),]
 set.seed(98765)
-splitVec <- with(plasma:::ENV, rbinom(nrow(Outcome), 1, 0.6))
+splitVec <- with(plasmaEnv, rbinom(nrow(Outcome), 1, 0.6))
 trainD <- MO[, splitVec == 1]
 testD <- MO[, splitVec == 0]
 
