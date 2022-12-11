@@ -1,7 +1,7 @@
 Package: plasma
 Title: Partial LeAst Squares for Multiomic Analysis
-Version: 0.9.23
-Date: 2022-12-10
+Version: 0.9.24
+Date: 2022-12-11
 Authors@R: c(person("Kevin R.", "Coombes", role = c("cre", "aut"),
                     email = "krc@silicovore.com"),
              person("Kyoko", "Yamaguchi", role = "aut"),
