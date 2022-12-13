@@ -129,7 +129,7 @@ setMethod("barplot", c("plasma"), function(height, source, n,
   wmut <- wmut[order(abs(wmut$Weight), decreasing = FALSE),]
   wmut$Feature <- factor(as.character(wmut$Feature),
                          levels = unique(wmut$Feature))
-  print(summary(wmut))
+##  print(summary(wmut))
   MX <- max(abs(wmut$Weight), na.rm = TRUE)
   ptr <- switch(direction,
                 both = painter(c(-MX, MX), c(lhcol[1], "white", lhcol[2])),
@@ -160,7 +160,7 @@ setMethod("barplot", c("plasma"), function(height, source, n,
 })
 
 painter <- function(range, colors, N = 64) {
-  cat("painter called with", range, "\n", file = stderr())
+##  cat("painter called with", range, "\n", file = stderr())
   crp <- colorRampPalette(colors)
   pal <- crp(N)
   bks <- seq(min(range), max(range), length = N)

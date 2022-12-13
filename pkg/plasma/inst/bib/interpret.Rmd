@@ -519,7 +519,7 @@ rownames(top1p) <- top1p[, 1]
 top1p <- as.matrix(top1p[, -1])
 top1p <- top1p[, mainterms]
 opar <- par(mai = c(1.02, 0.82,1.22, 0.22))
-image(1:7, 1:9, top1p, ylab = "Components", xlab = "Data Sets")
+image(1:nrow(top1p), 1:ncol(top1p), top1p, ylab = "Components", xlab = "Data Sets")
 mtext(levels(datasrc), side = 3, at = 1:7, line = 1, las=2)
 par(opar)
 ```

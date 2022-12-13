@@ -267,7 +267,11 @@ plot on the test data. The model yields a statistically significant (p = 0.0063)
 outcomes between the high and low risk patients.
 
 ```{r plasmaModel}
+set.seed(205649)
 pl <- plasma(MO, firstPass)
+if (FALSE) {
+  save(pl, file = "plESCA.Rda")
+}
 testpred <- predict(pl, testD)
 ```
 ```{r fig04, fig.width = 6, fig.height = 8, fig.cap = .tag(4, "Kaplan-Meier plot of overall survival on (A) the training set and (B) the test set using the unified `plasma` Cox model.")}

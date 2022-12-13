@@ -42,7 +42,7 @@ extendCoxModels <- function(object, firstPass, verbose = TRUE) {
       learn <- try(plsr(Y ~ X, 2))
       if (inherits(learn, "try-error")) {
         learn <- NA
-        extend <- array(NA, dim = c(nrow(Y), ncol(Y), 2))
+        extend <- array(0, dim = c(nrow(Y), ncol(Y), 2))
         dimnames(extend) <- list(rownames(Y),
                                  paste(M, 1:ncol(Y), sep = ""),
                                  1:2)
@@ -61,7 +61,7 @@ extendCoxModels <- function(object, firstPass, verbose = TRUE) {
   ## Extract predicted values from all component datasets
   componentPredictions <- sapply(componentModels, function(x) x$allPred)
   ## Combine all the predictions into a 3D array
-  myArray <- array(NA, dim = c(nrow(stores), ncol(stores), length(componentPredictions)))
+  myArray <- array(0, dim = c(nrow(stores), ncol(stores), length(componentPredictions)))
   dimnames(myArray) <- list(rownames(stores), colnames(stores),
                             names(object@data))
   for (I in 1:length(componentPredictions)) {
