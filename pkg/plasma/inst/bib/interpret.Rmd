@@ -70,7 +70,7 @@ mainterms
 ```
 We see that at least one component discovered from four of the five "true" omics data sets
 survived in the final model; only the miR components failed to make the cut. In addition, one
-component from the binary clinical data was retained in the final model.
+component from each the binary and continuous clinical data was retained in the final model.
 
 ## Final (Composite) Weights
 A key point to note is that the core of the `plasma` model consists of a composition
