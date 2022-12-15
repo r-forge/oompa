@@ -112,12 +112,14 @@ setMethod("barplot", c("plasma"), function(height, source, n,
   ## Get positive and negative weights. Start with negative.
   wmutDn <- wws[wws$Source  == source, ]
   wmutDn <- wmutDn[order(wmutDn$Weight),]
+  wmutDn <- wmutDn[wmutDn$Weight < 0,]
   m <- min(nrow(wmutDn), n)
   wmutDn <- wmutDn[1:m,]
 
   ## Then add positive weights.
   wmutUp <- wws[wws$Source  == source,]
   wmutUp <- wmutUp[order(wmutUp$Weight, decreasing = TRUE),]
+  wmutDn <- wmutDn[wmutDn$Weight > 0,]
   m <- min(nrow(wmutUp), n)
   wmutUp <- wmutUp[1:m,]
 
