@@ -32,6 +32,10 @@ my $s    = $toolhash{point};
 my $fullver = (defined($s) ? "$Ver.$s" : $Ver);
 my $arch = $toolhash{arch};
 
+if (defined($toolhash{HOME})) {
+    $ENV{HOME} = $toolhash{HOME};
+}
+
 my $profile =<<EOP
 r <- getOption("repos")
 r["CRAN"] <- "https://cran.mtu.edu"

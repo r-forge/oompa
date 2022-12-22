@@ -69,7 +69,6 @@ mypacks <- c("fortunes",
              "epiR",
              "scatterplot3d",
              "quantmod",
-             "DirchletReg",
              "gtools",
              "ggplot2",
              "scales",
@@ -78,7 +77,6 @@ mypacks <- c("fortunes",
              "Rtsne",
              "igraph",
              "dendextend",
-             "DirichletReg",
              "rjson",
              "kohonen",
              "umap",
@@ -88,7 +86,9 @@ mypacks <- c("fortunes",
              "pls",
              "plsRcox",
              "ape",
-             "corrplot"
+             "corrplot",
+             "R.rsp",
+             "DirichletReg"
              )
 for (p in mypacks) {
   if (!require(p, character.only = TRUE, quietly = TRUE)) {
