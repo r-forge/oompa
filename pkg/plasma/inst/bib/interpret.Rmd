@@ -3,13 +3,13 @@ title: 'plasma: Interpretation'
 author: "Kevin R. Coombes"
 data: "`r Sys.Date()`"
 output:
+  pdf_document:
+    toc: yes
+    highlight: kate
   html_document:
     toc: yes
     highlight: kate
     theme: readable
-  pdf_document:
-    toc: yes
-    highlight: kate
 link-citations: yes
 csl: "`r system.file( 'bib', 'bioinformatics.csl', package = 'plasma')`"
 bibliography: "`r system.file('bib', 'plasma.bib', package = 'plasma')`"
@@ -44,10 +44,17 @@ cancer Level 3 data set [@tcga2017] from the FireBrowse web site (http://firebro
 the most informative, features were retained. Here, we load the model produced in the
 previous vignette by analyzing this sample data set.
 ```{r data}
-U <- url("http://silicovore.com/data/plESCA.Rda")
-created <- load(U, .GlobalEnv)
-close(U)
-rm(U, created)
+# Loading from the URL may timeout, depending in the speed of your internet connection.
+# If this happens, you can obtain the Rda file manually, either by creating it from the
+# 'save' command in the plasma.Rmd code, or manually downloading from the URL.
+if (file.exists("plESCA.Rda")) {
+  load("plESCA.Rda")
+} else {
+  U <- url("http://silicovore.com/data/plESCA.Rda")
+  created <- load(U, .GlobalEnv)
+  close(U)
+  rm(U, created)
+}
 ```
 
 # Interpretation of the Model
@@ -96,7 +103,7 @@ abline(h=c(1.96, -1.96), col = "gray")
 ```
 
 Features from the individual omics data sets with the highest weight in the final model are shown in **Figure 2**.
-```{r fig.cap = .tag(2,"Highly weighted features in the final Cox model. Positive weights (red) indicate increased hazard ratio; negative weights (cyan) indicate decreased hazard ratio. Prefix M = MAF; prefix R = mRNASeq."), fig.width = 9, fig.height = 12}
+```{r fig.cap = .tag(2,"Highly weighted features in the final Cox model. Positive weights (red) indicate increased hazard ratio; negative weights (cyan) indicate decreased hazard ratio."), fig.width = 9, fig.height = 12}
 opar <- par(mfrow = c(3, 2))
 for (N in names(pl@traindata@data)[-2]) {
   barplot(pl, N, 5)
@@ -122,9 +129,15 @@ features2Genes <- function(df, translators) {
   genes
 }
 
-illumina <- read.csv(file.path("https://webdata.illumina.com/downloads/productfiles",
-                               "humanmethylation450/humanmethylation450_15017482_v1-2.csv"),
-                     skip=7) 
+# Loading from the URL may timeout, depending in the speed of your internet connection.
+# If this happens, you can obtain the CSV file locally by  manually downloading from the URL.
+if (file.exists("humanmethylation450_15017482_v1-2.csv")) {
+  illumina <- read.csv("humanmethylation450_15017482_v1-2.csv", skip = 7)
+} else {
+  illumina <- read.csv(file.path("https://webdata.illumina.com/downloads/productfiles",
+                                 "humanmethylation450/humanmethylation450_15017482_v1-2.csv"),
+                       skip=7) 
+}
 illumina <- illumina[, c("IlmnID", "UCSC_RefGene_Name")] # only care about two columns
 illumina2genes <- function(Y) {
   illuminaFeatures <- illumina[which(illumina$IlmnID %in% Y),] # which did we use?
@@ -436,7 +449,7 @@ data(palette36)
 foo <- computeDistances(palette36[3:36])
 colist <- as.list(palette36[names(foo)[1:7]])
 brute <- stdize(CW, "standard")
-opar <- par(mfrow = c(3,3), mai = c(0.2,0.2, 0.5, 0.2))
+opar <- par(mfrow = c(4,3), mai = c(0.2,0.2, 0.5, 0.2))
 for (i in which(colnames(contra) %in% mainterms)) {
   beanplot(brute[, i] ~ datasrc, what = c(1,1,1,0), col = colist,
            main = paste("Std Wts, Component", i))
@@ -448,7 +461,7 @@ rm(opar)
 We also include plots of the histograms of distributions by component (**Figure 12**). None of
 these really looks quite normal; almost all have some slightly odd shape.
 ```{r fig11, fig.cap = .tag(12, "Histogram of standardized weights by component."), fig.width = 10, fig.height = 10}
-opar <- par(mfrow = c(3, 3), mai = c(0.2,0.2, 0.5, 0.2))
+opar <- par(mfrow = c(4, 3), mai = c(0.2,0.2, 0.5, 0.2))
 for (i in which(colnames(contra) %in% mainterms)) {
   hist(brute[,i], breaks = 77, main = paste("Component", i))
 }
@@ -621,8 +634,8 @@ intraepithelial neoplasia, endometrial carcinoma, basal-like breast carcinoma, a
 
 # Conclusions
 
-As described in the previous document (`plasma.Rmd`), we have identified a supervised method called `plasma` that learns "components" that are composites of the original variables that are related to the survival outcome. In this document, we have computed the matrix that connects the features from the omics-level data sets to the survival outcome using a function `getFinalWeights()`. Examination of these feature weights (**Figure 2**) reveals that the `plasma` model is biologically sensible; for example, we see from the clinical binary features that tumor presence at the time of sample collection are associated with greater hazard ratio, as expected. The highest weighted miRNA corresponded to hsa-miR-205, which is consistent with existing literature indicating that miR-205 is upregulated in esophageal squamous cell carcinoma and may modulate the initial steps of the metastatic cascade [PMID: 21426561].
+As described in the previous document (`plasma.Rmd`), we have identified a supervised method called `plasma` that learns "components" that are composites of the original variables that are related to the survival outcome. In this document, we have computed the matrix that connects the features from the omics-level data sets to the survival outcome using a function `getFinalWeights()`. Examination of these feature weights (**Figure 2**) reveals that the `plasma` model is biologically sensible; for example, we see from the clinical binary features that tumor presence at the time of sample collection are associated with greater hazard ratio, as expected. The highest weighted miRNA corresponded to hsa-miR-205, which is consistent with existing literature indicating that miR-205 is upregulated in esophageal squamous cell carcinoma and may modulate the initial steps of the metastatic cascade [@matsushima2011].
 
-The pathway annotations from ToppGene (**Figure 3**) gives us insight into the biological characteristics of the PLS components that were found to be significantly related to OS. It is particularly striking that all components were associated to some degree with pathway annotation terms related to fibroblast activity (ex. "Burn wound healing", "Ensemble of genes encoding extracellular matrix and extracellular matrix-associated proteins", and "fibronectin matrix formation"). Taken together with ToppGene enrichments in GeneOntology terms such as cell adhesion, cell-cell junctions, and mTOR signaling and our observations from **Figure 2**, we can tentatively conclude that the `plasma` components are enriched with ontology terms that points to tumor permissiveness and metastasis [PMID: 2755082, PMID: 24202173]. In summary, we have identified several ways to dissect the components learned by `plasma`, and have found that these results appear to be congruous with each other.
+The pathway annotations from ToppGene (**Figure 3**) gives us insight into the biological characteristics of the PLS components that were found to be significantly related to OS. It is particularly striking that all components were associated to some degree with pathway annotation terms related to fibroblast activity (ex. "Burn wound healing", "Ensemble of genes encoding extracellular matrix and extracellular matrix-associated proteins", and "fibronectin matrix formation"). Taken together with ToppGene enrichments in GeneOntology terms such as cell adhesion, cell-cell junctions, and mTOR signaling and our observations from **Figure 2**, we can tentatively conclude that the `plasma` components are enriched with ontology terms that points to tumor permissiveness and metastasis [@nieto2013]. In summary, we have identified several ways to dissect the components learned by `plasma`, and have found that these results appear to be congruous with each other.
 
 # References

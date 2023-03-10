@@ -298,7 +298,7 @@ outcomes between the high and low risk patients.
 set.seed(205649)
 pl <- plasma(MO, firstPass)
 if (FALSE) {
-  save(pl, file = "plESCA.Rda")
+  save(pl, file = "plESCA.Rda") # then copy manually to silicovore web site
 }
 testpred <- predict(pl, testD)
 ```
