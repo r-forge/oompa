@@ -8,7 +8,8 @@ Authors@R: c(person("Kevin R.", "Coombes", role = c("cre", "aut"),
              person("Salma", "Abdelbaky", role = "aut"))
 Description: Contains tools for supervised analyses of incomplete, overlapping
   multiomics datasets. Applies partial least squares in multiple steps to find
-  models that predict survival outcomes.
+  models that predict survival outcomes. See Yamaguchi et al. (2023)
+  <doi:10.1101/2023.03.10.532096>.
 Depends: R (>= 3.5.0)
 Imports: methods, stats, graphics, survival, pls, plsRcox,
   Polychrome (>= 1.5.0), viridisLite, beanplot, oompaBase
