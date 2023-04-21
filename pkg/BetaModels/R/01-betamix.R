@@ -99,7 +99,7 @@ BetaMixture <- function(datavec, K = 2, forever = 100,
     count <- count + 1
     if(debug) print(c(count, abs(lastlike - currlike), mle))
   ### M-step
-    maxlike <- nlm(NegBetaLogLike, rep(1, 2*K), vec = datavec, z = Z,
+    maxlike <- nlm(NegBetaLogLike, mle, vec = datavec, z = Z,
                    stepmax = 10000, print.level = 0)
     mle <- maxlike$estimate
     lastlike <- currlike
