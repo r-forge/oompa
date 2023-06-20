@@ -89,7 +89,8 @@ mypacks <- c("fortunes",
              "corrplot",
              "DirichletReg",
              "R.rsp",
-             "beanplot"
+             "beanplot",
+             "TDA"
              )
 for (p in mypacks) {
   if (!require(p, character.only = TRUE, quietly = TRUE)) {
