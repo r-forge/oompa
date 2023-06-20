@@ -111,6 +111,7 @@ BetaMixture <- function(datavec, K = 2, forever = 100,
       phi[I] * dbeta(datavec, mle[2*I -1], mle[2*I])
     }) # should be a matrix with n rows and K columns
     Z <-  sweep(mix, 1, apply(mix, 1, sum), "/")
+    Z[is.na(Z)] <- 1/K
     delta <- abs(lastlike - currlike)
     reld <- abs(delta/currlike)
   }

@@ -35,6 +35,7 @@ C:/KRC/rforge/arraycube/pkg/MINiML
 C:/KRC/rforge/accuploidy/pkg/AccuPloidy
 C:/KRC/rforge/firstsign/pkg/FirstSign
 supercurve/pkg/SuperCurveSampleData
+#FAIL
 C:/KRC/rforge/HAPSEG
 C:/KRC/rforge/ABSOLUTE
 mop/pkg/MOP
@@ -42,7 +43,6 @@ mop/pkg/MOP
 ../GitProjects/drexplorer/pkg/drexplorer
 supercurve/pkg/tclish
 supercurve/pkg/SlideDesignerGUI
-#FAIL
 supercurve/pkg/SuperCurve
 supercurve/pkg/SuperCurveGUI
 # END

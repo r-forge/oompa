@@ -90,6 +90,7 @@ mypacks <- c("fortunes",
              "DirichletReg",
              "R.rsp",
              "beanplot",
+             "circlize",
              "TDA"
              )
 for (p in mypacks) {
