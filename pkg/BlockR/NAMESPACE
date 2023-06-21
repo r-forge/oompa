@@ -1,2 +1,7 @@
+importFrom("stats",
+           "cutree", "hclust", "lm", "quantile")
+importFrom("ClassDiscovery",
+           "distanceMatrix")
+
 export("truncscale",
        "blocker", "pivot", "n2loglik")

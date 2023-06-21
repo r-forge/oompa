@@ -107,6 +107,7 @@ my @paths = ($Rpath,
 	     "C:\\Rtools\\$pver\\bin",
 	     "C:\\Rtools\\$pver\\usr\\bin",
 	     "C:\\Rtools\\$pver\\MinGW64\\bin",
+	     "C:\\Rtools\\$pver\\x86_64-w64-mingw32.static.posix\\bin",
 	     "C:\\Rtools\\$pver\\gcc-4.6.3\\bin",
 	     $toolhash{miktex});
 push @paths, $toolhash{im} if defined($toolhash{im}); # ImageMagick for SuperCurve
