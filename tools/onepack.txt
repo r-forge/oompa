@@ -1,5 +1,6 @@
-clonefinder/pkg/SVAlignR
-#thresher/pkg/SillyPutty
+thresher/pkg/SillyPutty
+#cytangle/pkg/Mender
+#clonefinder/pkg/SVAlignR
 #oompa/pkg/plasma
 #cytangle/pkg/Mender
 #
