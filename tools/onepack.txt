@@ -1,17 +1,6 @@
-<<<<<<< .mine
 thresher/pkg/RCytoGPS
 cytangle/pkg/RPointCloud
 #thresher/pkg/SillyPutty
-#
-||||||| .r633
-thresher/pkg/SillyPutty
 #cytangle/pkg/Mender
-=======
-cytangle/pkg/RPointCloud
-#thresher/pkg/RCytoGPS
-#thresher/pkg/SillyPutty
-#cytangle/pkg/Mender
->>>>>>> .r634
-#clonefinder/pkg/SVAlignR
 #oompa/pkg/plasma
 #
