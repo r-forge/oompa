@@ -1,5 +1,5 @@
-thresher/pkg/RCytoGPS
 cytangle/pkg/RPointCloud
+#thresher/pkg/RCytoGPS
 #thresher/pkg/SillyPutty
 #cytangle/pkg/Mender
 #oompa/pkg/plasma
