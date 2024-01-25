@@ -94,6 +94,7 @@ getFinalWeights <- function(object) {
     data.frame(Weight = X, Source = N, Feature = rownames(X))
   })
   FW <- do.call(rbind, runthrough)
+  FW <- FW[order(FW$Source),]
   mu <- aggregate(FW$Weight, list(FW$Source), mean)
   mu2 <- rep(mu$x, times = as.vector(table(FW$Source)))
   sigma <- aggregate(FW$Weight, list(FW$Source), sd)
