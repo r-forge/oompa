@@ -21,7 +21,7 @@ lkrc <- function(nj, yj, alpha=1, beta=1) {
 # br is the object describing the posterior distribution
 #
 # get the expected values of the parameters in transformed x-y-space
-expext <- function(br) {
+expectation <- function(br) {
   res <- br@results/sum(br@results)
   sx <- apply(res, 1, sum)
   ex <- sum(br@x*sx)
@@ -69,7 +69,7 @@ BetaRates <- function(k, n, x=seq(-3,3, length=100), y=x) {
 ##############################
 # S4 methods
 setMethod('summary', 'BetaRates', function(object, ...) {
-  x <- xform(ee <- expext(object))
+  x <- xform(ee <- expectation(object))
   cat("A BetaRates object constructed on data from", length(object@n),
       "different groups\n",
       "Posterior estimates of the parameters are:\n")
@@ -160,10 +160,10 @@ setMethod("initialize", "Deltas", function(.Object, left = 1, right = NULL,
   if (length(inputs) != 4) { # only happens with 3 input values?
     stop("Incorrect number of delta values.")
   }
-  .Object$left   <- inputs[1]
-  .Object$right  <- inputs[2]
-  .Object$top    <- inputs[3]
-  .Object$bottom <- inputs[4]
+  .Object@left   <- inputs[1]
+  .Object@right  <- inputs[2]
+  .Object@top    <- inputs[3]
+  .Object@bottom <- inputs[4]
   .Object
 })
 Deltas <- function(phi) {

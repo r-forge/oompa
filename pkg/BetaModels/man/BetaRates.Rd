@@ -4,6 +4,7 @@
 \alias{summary,BetaRates-method}
 \alias{image,BetaRates-method}
 \alias{guessCenter}
+\alias{expectation}
 \alias{samplePosteriorRates}
 
 \title{Class "BetaRates"}
@@ -16,6 +17,7 @@ BetaRates(k, n, x=seq(-3,3, length=100), y=x)
 \S4method{summary}{BetaRates}(object, \dots)
 \S4method{image}{BetaRates}(x, col=greyscale(128), \dots)
 samplePosteriorRates(br, nsamp=2000)
+expectation(br)
 guessCenter(v)
 }
 \arguments{
@@ -81,8 +83,11 @@ guessCenter(v)
   experiment supplied to the constructor.
   
   The \code{guessCenter} function returns a list with both x-y and
-  alpha-beta coordinates of the naive (frequentist) estimate fo mthe
+  alpha-beta coordinates of the naive (frequentist) estimate of the
   overall Beta distribution parameters.
+
+  The \code{expectation} function returns the maximum posterior values
+  of x and y for the BetaRates object br.
 }
 \details{
   TBD

@@ -21,7 +21,7 @@ exportMethods("plot")
 ## Modeling rates
 exportClasses("BetaRates")
 export("BetaRates", "samplePosteriorRates")
-export("guessCenter")
+export("guessCenter", "expectation")
 
 ## Mixtures of beta distributions
 exportClasses("BetaMixture")
