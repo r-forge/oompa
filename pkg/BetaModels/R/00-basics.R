@@ -27,7 +27,9 @@ expectation <- function(br) {
   ex <- sum(br@x*sx)
   sy <- apply(res, 2, sum)
   ey <- sum(br@y*sy)
-  list(x=ex, y=ey)
+  intermediate <- list(x=ex, y=ey)
+  ab <- xform(intermediate)
+  c(intermediate, ab)
 }
 # transform the parameters into interpretable alpha-beta-space.
 xform <- function(xy) {
@@ -88,6 +90,20 @@ setMethod("image", "BetaRates", function(x, col=greyscale(128), ...) {
   invisible(list(x=x@x[ii], y=x@y[jj]))
 })
 
+if (!isGeneric("quantile"))
+  setGeneric("quantile",
+             function(x, ...) standardGeneric("quantile"))
+
+dox <- function(x) exp(x)/(1+exp(x))
+setMethod("quantile", "BetaRates", function(x, probs, ...) {
+  xx <- x@x
+  posterior <- x@results
+  pdf <- apply(posterior, 1, sum)
+  cdf <- cumsum(pdf)
+  sapply(probs, function(P) {
+    dox(xx[which(cdf > P)[1]])
+  })
+})
 
 ##############################
 # TODO: Convert the retun value into its own class with

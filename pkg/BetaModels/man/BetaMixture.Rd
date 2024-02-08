@@ -38,9 +38,9 @@ BetaMixture(datavec, K = 2, forever = 100, epsilon = 0.001,
   \describe{
     \item{\code{datavec}:}{input data vector of values between 0 and 1.}
     \item{\code{phi}:}{vector of non-negative component frequencies;  will sum to 1.}
-    \item{\code{mle}:}{\eqn{$2\times K$}{2xK} matrix of parameters of the $K$ beta
+    \item{\code{mle}:}{\eqn{2\times K}{2xK} matrix of parameters of the $K$ beta
       mixture components.}
-    \item{\code{Z}:}{\eqn{$N\times K$}{NxK} matrix of the probability for each of
+    \item{\code{Z}:}{\eqn{N\times K}{NxK} matrix of the probability for each of
       the $N$ observations to arise from beta mixture component $K$. Each
       row will sum to 1.}
     \item{\code{loglike}:}{The log likelihood of the fitted model.}
@@ -65,14 +65,14 @@ BetaMixture(datavec, K = 2, forever = 100, epsilon = 0.001,
 }
 \details{
   Given a data set consisting of values in the interval [0,1], we want to
-  model it as a mixture of \eqn{$K$}{K} beta distributions:
+  model it as a mixture of \eqn{K}{K} beta distributions:
   \deqn{f(x) = \sum_{i=1}^K \phi_i B(\nu_i, \omega_i)}
   {f(X) = sum phi[u] B(nu[i], omega[i])}
   where the non-negative frequencies or weights of the components sum to
   1 (that is, \eqn{\sum_{i=1}^K \phi_i = 1}{sum phi[i] = 1}).
 
   We fit such a model using en Expectation-Maximation (EM) algorithm.
-  To accomplish this goal, we must introduce a matrix \eqn{$Z$}{Z} of
+  To accomplish this goal, we must introduce a matrix \eqn{431Z}{Z} of
   latent assignments of each of the $N$ observation to the $K$
   components. In the current implementation, we intialize teh
   assignments by dividing the range of the observed data into $K$

@@ -3,6 +3,7 @@
 \alias{BetaRates}
 \alias{summary,BetaRates-method}
 \alias{image,BetaRates-method}
+\alias{quantile,BetaRates-method}
 \alias{guessCenter}
 \alias{expectation}
 \alias{samplePosteriorRates}
@@ -16,6 +17,7 @@
 BetaRates(k, n, x=seq(-3,3, length=100), y=x)
 \S4method{summary}{BetaRates}(object, \dots)
 \S4method{image}{BetaRates}(x, col=greyscale(128), \dots)
+\S4method{quantile}{BetaRates}(x, probs, \dots)
 samplePosteriorRates(br, nsamp=2000)
 expectation(br)
 guessCenter(v)
@@ -23,15 +25,16 @@ guessCenter(v)
 \arguments{
   \item{object}{object of class \code{BetaRates}}
   \item{br}{object of class \code{BetaRates}}
-  \item{x}{In the \code{image} method, an object of class
-    \code{BetaRates}. In the \code{BetaRates} constructor, a vector of
-    the x-axis grid points at which to compute the posterior
+  \item{x}{In the \code{image} and \code{quantile} methods, an object of
+    class \code{BetaRates}. In the \code{BetaRates} constructor, a
+    vector of the x-axis grid points at which to compute the posterior
     probability; see Details.}
   \item{y}{vector of the y-axis grid points at which to compute the
     posterior probability; see Details.}
   \item{k}{vector of "success" counts}
   \item{n}{vector of all counts}
   \item{col}{vector containing the color map to use for the image}
+  \item{probs}{vector of wuantiles to be returned}
   \item{nsamp}{Number of posterior samples to take}
   \item{v}{Vector of observed rates}
   \item{\dots}{extra arguments for generic routines}
@@ -60,16 +63,18 @@ guessCenter(v)
       object.  This includes (1) the maximum a posterior coordinates on
       x-y-space, (2) the usual alpha-beta parameters for the Beta
       distribution, and (3) the mean and variance.}
-    \item{image(x, col, \dots)}{Plots an ikmage of the posterior
-      probabilities using te specified color map.  The point with the
+    \item{image(x, col, \dots)}{Plots an image of the posterior
+      probabilities using the specified color map.  The point with the
       maximum posterior probability is marked in red.}
+    \item{quantile(x, probs, \dots)}{Returns the requested quantiles of
+      the posterior distibution of the binomial rate parameter.}
   }
 }
 \value{
   The \code{BetaRates} constructor returns an object of the indicated
   class.
 
-  The graphical method \code{image}) invisibly returns the object on
+  The graphical method \code{image} invisibly returns the object on
   which it was invoked.
 
   The \code{summary} method returns a vector with the maximum a
@@ -81,13 +86,15 @@ guessCenter(v)
   second component, \code{theta}, is an \code{nsamp}-by-\code{length(k)}
   matrix with posterior samples of the rates associated with each
   experiment supplied to the constructor.
-  
+
   The \code{guessCenter} function returns a list with both x-y and
   alpha-beta coordinates of the naive (frequentist) estimate of the
   overall Beta distribution parameters.
 
   The \code{expectation} function returns the maximum posterior values
-  of x and y for the BetaRates object br.
+  from the model. This includes the coordinates  (x, y), the transformed
+  coordinates (alpha, beta), the mean (alpha/beta) and the size (alpha +
+  beta).
 }
 \details{
   TBD

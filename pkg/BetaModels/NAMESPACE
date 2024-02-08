@@ -16,7 +16,7 @@ exportMethods("summary")
 exportMethods("image")
 exportMethods("hist")
 exportMethods("plot")
-
+exportMethods("quantile")
 
 ## Modeling rates
 exportClasses("BetaRates")
