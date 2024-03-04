@@ -147,7 +147,7 @@ foreach my $packname (@packList) {
     my $check = system(@cargs);
     last unless $check == 0;
     my @files = glob("$pack*tar.gz");
-    die("got the wrong number of files") if ($#files);
+    die("got the wrong number of files (", join(', ', @files), ")\n") if ($#files);
     my $tarball = $files[0];
 # build the binary version for the current architecture
     @cargs = ('R', 'CMD', 'INSTALL', '--build', '--no-multiarch',  $tarball);
