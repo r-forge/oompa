@@ -29,6 +29,7 @@ clonefinder/pkg/SVAlignR
 deepcnv/pkg/DeepCNV
 cytangle/pkg/Cytangle
 cytangle/pkg/RPointCloud
+cytangle/pkg/WayFindR
 C:/KRC/rforge/craac/pkg/CRAAC
 C:/KRC/rforge/arraycube/pkg/ArrayCube
 C:/KRC/rforge/arraycube/pkg/MINiML

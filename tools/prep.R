@@ -20,7 +20,9 @@ mybiocs <- c("edgeR",
              "RSQLite",
              "mixOmics",
              "msa",
-             "survcomp"
+             "survcomp",
+             "DescTools",
+             "org.Hs.eg.db"
              )
 for (p in mybiocs) {
   if (!require(p, character.only=TRUE)) {
@@ -91,7 +93,8 @@ mypacks <- c("fortunes",
              "R.rsp",
              "beanplot",
              "circlize",
-             "TDA"
+             "TDA",
+             "PubChemR"
              )
 for (p in mypacks) {
   if (!require(p, character.only = TRUE, quietly = TRUE)) {
