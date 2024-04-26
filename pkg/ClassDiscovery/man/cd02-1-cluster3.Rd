@@ -22,7 +22,7 @@ cluster3(data, eps=logb(1, 2), name="", labels=dimnames(data)[[2]])
   Invisibly returns the \code{data} object on which it was invoked.
 }
 \author{
-  Kevin R. Coombes email{krc@silicovore.com}
+  Kevin R. Coombes \email{krc@silicovore.com}
 }
 \seealso{
   \code{\link{hclust}}

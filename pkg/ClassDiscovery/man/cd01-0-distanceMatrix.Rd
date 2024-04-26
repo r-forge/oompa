@@ -33,7 +33,7 @@ distanceMatrix(dataset, metric, \dots)
   relations between the biological samples are more interesting than
   relationships between genes. Second, \code{distanceMatrix} adds
   additional distance metrics based on correlation.
-  \itemize{
+  \describe{
     \item{\code{pearson}}{The most common metric used in the microarray literature is
       the \code{pearson} distance, which can be computed in terms of the
       Pearson correlation coefficient as \code{(1-cor(dataset))/2}.}
