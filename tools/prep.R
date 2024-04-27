@@ -31,6 +31,7 @@ for (p in mybiocs) {
 }
 
 mypacks <- c("fortunes",
+             "V8",
              "knitr",
              "rmarkdown",
              "RColorBrewer",
