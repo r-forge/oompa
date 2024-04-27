@@ -66,8 +66,7 @@ BetaMixture(datavec, K = 2, forever = 100, epsilon = 0.001,
 \details{
   Given a data set consisting of values in the interval [0,1], we want to
   model it as a mixture of \eqn{K}{K} beta distributions:
-  \deqn{f(x) = \sum_{i=1}^K \phi_i B(\nu_i, \omega_i)}
-  {f(X) = sum phi[u] B(nu[i], omega[i])}
+  \deqn{f(x) = \sum_{i=1}^K \phi_i B(\nu_i, \omega_i)}{f(X) = sum phi[u] B(nu[i], omega[i])}
   where the non-negative frequencies or weights of the components sum to
   1 (that is, \eqn{\sum_{i=1}^K \phi_i = 1}{sum phi[i] = 1}).
 
