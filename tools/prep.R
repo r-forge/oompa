@@ -22,7 +22,9 @@ mybiocs <- c("edgeR",
              "msa",
              "survcomp",
              "DescTools",
-             "org.Hs.eg.db"
+             "org.Hs.eg.db",
+             "graph",
+             "Rgraphviz" 
              )
 for (p in mybiocs) {
   if (!require(p, character.only=TRUE)) {
