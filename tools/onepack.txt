@@ -1,6 +1,5 @@
-oompa/pkg/plasma
-#cytangle/pkg/RPointCloud
-#thresher/pkg/RCytoGPS
+cytangle/pkg/CyTangle
+clonefinder/pkg/SVAlignR
 #thresher/pkg/SillyPutty
 #cytangle/pkg/Mender
 #
