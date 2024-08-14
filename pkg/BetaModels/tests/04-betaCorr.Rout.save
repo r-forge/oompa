@@ -1,0 +1,58 @@
+
+R version 4.4.1 (2024-06-14 ucrt) -- "Race for Your Life"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(BetaModels)
+> 
+> set.seed(12345)
+> cc <- c(rbeta(4600, 24, 24), rbeta(400, 8, 8))
+> rr <- 2*cc-1
+> fit <- ebCorrelation(rr, 51)
+> hist(fit)
+> plot(fit, prior = 0.85)
+> countSignificant(fit, prior = 0.85, significance = 0.8)
+[1] 36
+> cutoffSignificant(fit, prior = 0.85, significance = 0.8)
+$low
+[1] -0.4393166
+
+$high
+[1] 0.4433287
+
+> summary(fit)
+Call: ebCorrelation(ss = rr, nObs = 51) 
+Row-by-row correlation analysis with 5000 rows
+
+Distribution of correlations:
+     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+-0.690334 -0.102380 -0.001521 -0.003403  0.097394  0.623933 
+With prior = 1 and alpha = 0.9 
+	the upper tail contains 4 values above 0.483448897795591 
+	the lower tail contains 14 values below -0.479436873747495 
+> summary(fit, prior = 0.85, significance = 0.8)
+Call: ebCorrelation(ss = rr, nObs = 51) 
+Row-by-row correlation analysis with 5000 rows
+
+Distribution of correlations:
+     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+-0.690334 -0.102380 -0.001521 -0.003403  0.097394  0.623933 
+With prior = 0.85 and alpha = 0.8 
+	the upper tail contains 10 values above 0.443328657314629 
+	the lower tail contains 26 values below -0.439316633266533 
+> 
+> proc.time()
+   user  system elapsed 
+   0.43    0.03    0.56 

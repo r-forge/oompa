@@ -1,0 +1,139 @@
+
+R version 4.4.1 (2024-06-14 ucrt) -- "Race for Your Life"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(BetaModels)
+> set.seed(75319)
+> 
+> # simulate some data
+> event <- c( 37,  4,  6,  1,  2, 10,  1, 13,   7,  1,  10)
+> total <- c(137, 18, 18, 26, 24, 45, 12, 43, 162, 78, 280)
+> bg <- total - event
+> 
+> # Use a chi-squared test for overall significance
+> chisq.test(data.frame(event, bg))
+
+	Pearson's Chi-squared test
+
+data:  data.frame(event, bg)
+X-squared = 102.39, df = 10, p-value < 2.2e-16
+
+Warning message:
+In chisq.test(data.frame(event, bg)) :
+  Chi-squared approximation may be incorrect
+> chisq.test(data.frame(event, bg), simulate.p.value=TRUE)
+
+	Pearson's Chi-squared test with simulated p-value (based on 2000
+	replicates)
+
+data:  data.frame(event, bg)
+X-squared = 102.39, df = NA, p-value = 0.0004998
+
+> 
+> # Haven't yet figured out to automate this step. But not weilling
+> # to commit to making this method part of the documented interface.
+> BetaModels:::guessCenter(event/total)
+$X
+[1] -1.736707
+
+$Y
+[1] 2.04168
+
+$a
+[1] 1.153464
+
+$b
+[1] 6.550074
+
+> 
+> # compute the posterior
+> br <- BetaRates(event, total, x=seq(-3, 0, length=100), y=seq(0, 3, length=100))
+> # view it
+> image(br)
+> # summarize it
+> summary(br)
+A BetaRates object constructed on data from 11 different groups
+ Posterior estimates of the parameters are:
+         x          y      alpha       beta       mean       size 
+-1.6271007  1.8559736  1.0507178  5.3472065  0.1642279  6.3979243 
+These are equivalent to:
+    alpha      beta      mean      size 
+1.0507178 5.3472065 0.1642279 6.3979243 
+> 
+> # sample from the posterior distribution
+> spr <- samplePosteriorRates(br, nsamp=2000)
+> theta <- spr$theta
+> 
+> # observed point estimate of rates
+> round(naive <- event/total, 4)
+ [1] 0.2701 0.2222 0.3333 0.0385 0.0833 0.2222 0.0833 0.3023 0.0432 0.0128
+[11] 0.0357
+> # bayesian mean rate
+> round(bayes <- apply(theta, 2, mean), 4)
+    X1     X2     X3     X4     X5     X6     X7     X8     X9    X10    X11 
+0.2639 0.2073 0.2832 0.0648 0.1010 0.2152 0.1120 0.2822 0.0479 0.0256 0.0388 
+> # visualize "shrinking toward the mean"
+> plot(naive, bayes, pch=16, xlim=c(0, 0.35), ylim=c(0, 0.35))
+> abline(0,1)
+> abline(h=sum(event)/sum(total), col='blue')
+> abline(h=mean(event/total), col='purple')
+> 
+> # visualize the posterior distribution
+> boxplot(theta)
+> 
+> if(require(vioplot)) {
++   vioplot::vioplot(theta[,1], theta[,2], theta[,3], theta[,4],
++           theta[,5], theta[,6], theta[,7], theta[,8],
++           theta[,9], theta[,10], theta[,11], col='skyblue'
++           )
++ }
+Loading required package: vioplot
+Loading required package: sm
+Package 'sm', version 2.2-6.0: type help(sm) for summary information
+Loading required package: zoo
+
+Attaching package: 'zoo'
+
+The following objects are masked from 'package:base':
+
+    as.Date, as.Date.numeric
+
+> 
+> # posterior probability that rate in group 3 is higher than other groups
+> j <- 3
+> sapply(1:11, function(i) mean(theta[,j] > theta[,i]))
+ [1] 0.5635 0.7425 0.0000 0.9850 0.9665 0.7375 0.9290 0.4755 0.9995 1.0000
+[11] 1.0000
+> 
+> # posterior probability that rate in group 3 is at least 5% higher than other groups
+> j <- 3
+> sapply(1:11, function(i) mean(theta[,j] > theta[,i] + 0.05))
+ [1] 0.3555 0.5835 0.0000 0.9530 0.9005 0.5485 0.8590 0.3210 0.9945 0.9980
+[11] 0.9955
+> 
+> # marginal posterior distributions
+> hist(spr$xy$x, breaks=55)
+> hist(spr$xy$y, breaks=55)
+> 
+> ab <- as.data.frame(BetaModels:::xform(spr$xy))
+> hist(ab$alpha, breaks=55)
+> hist(ab$beta, breaks=55)
+> hist(ab$mean, breaks=55)
+> hist(ab$size, breaks=55)
+> 
+> proc.time()
+   user  system elapsed 
+   0.71    0.09    0.82 

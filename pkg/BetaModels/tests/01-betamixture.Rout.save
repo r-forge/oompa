@@ -1,0 +1,70 @@
+
+R version 4.4.1 (2024-06-14 ucrt) -- "Race for Your Life"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(BetaModels)
+> 
+> set.seed(73892)
+> datavec <- c(rbeta(130, 1, 4),
++              rbeta(170, 7, 4))
+> 
+> # randomly initialize Z
+> temp <- sample(2, 200, replace = TRUE)
+> Z <- matrix(0, nrow = 100, ncol = 2)
+> for (I in 1:100) Z[I, temp[I]] <- 1
+> 
+> # initialize parameters (2 identical components)
+> initparam <- rep(1/2, 4)
+> NegBetaLogLike(initparam, datavec, Z)
+[1] 64.73269
+> 
+> # use true parameters
+> NegBetaLogLike(c(1, 4, 7, 4), datavec, Z)
+[1] 464.0346
+> 
+> 
+> model <- BetaMixture(datavec, debug = TRUE, forever = 10)
+[1] 1e+00 1e+10 1e+00 1e+00 1e+00 1e+00
+[1]   2.000000 230.995984   1.231193   4.992943  12.745483   6.571223
+[1]  3.000000 21.649898  1.127060  4.281419 10.743242  5.726738
+[1]  4.000000  8.016205  1.085177  4.023468 10.063929  5.457356
+[1] 5.000000 3.668083 1.066061 3.910349 9.756813 5.337500
+[1] 6.000000 1.797936 1.056777 3.857462 9.602790 5.277735
+[1] 7.0000000 0.8974911 1.0521827 3.8328531 9.5213049 5.2462778
+[1] 8.0000000 0.4411001 1.0499429 3.8223270 9.4763556 5.2290522
+[1] 9.0000000 0.2044604 1.0489178 3.8190098 9.4503723 5.2192085
+Warning messages:
+1: In nlm(NegBetaLogLike, mle, vec = datavec, z = Z, stepmax = 10000,  :
+  NA/Inf replaced by maximum positive value
+2: In nlm(NegBetaLogLike, mle, vec = datavec, z = Z, stepmax = 10000,  :
+  NA/Inf replaced by maximum positive value
+3: In nlm(NegBetaLogLike, mle, vec = datavec, z = Z, stepmax = 10000,  :
+  NA/Inf replaced by maximum positive value
+> summary(model)
+An object of the 'BetaMixture' class with 2 components using 300 observations.
+Mixing parameters (weights):
+[1] 0.4346497 0.5653503
+Beta component parameters:
+         [,1]     [,2]
+[1,] 1.048524 9.434421
+[2,] 3.819402 5.213266
+The model did converge and has a log-likelihood of 194.2401
+> hist(model, breaks=35)
+> 
+> 
+> proc.time()
+   user  system elapsed 
+   0.53    0.04    0.57 

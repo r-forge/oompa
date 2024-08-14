@@ -1,6 +1,6 @@
 Package: ClassComparison
-Version: 3.2.0
-Date: 2021-10-12
+Version: 3.3.0
+Date: 2024-08-14
 Title: Classes and Methods for "Class Comparison" Problems on Microarrays
 Author: Kevin R. Coombes
 Maintainer: Kevin R. Coombes <krc@silicovore.com>

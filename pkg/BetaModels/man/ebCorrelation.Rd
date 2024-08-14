@@ -17,11 +17,11 @@
 ebCorrelation(ss, nObs, nPoints = 500)
 \S4method{hist}{ebCorrelation}(x,
            xlab='Correlation', ylab='Prob(Different | Y)', main='',
-           highlight='purple', lowlight='blue', \dots)
+           \dots)
 \S4method{plot}{ebCorrelation,missing}(x,
                   prior=1, significance=0.9, ylim=c(-0.5, 1),
                   xlab='Correlation', ylab='Prob(Unusual | Rho)',
-                  highlight='purple', \dots)
+                  \dots)
 \S4method{summary}{ebCorrelation}(object, prior=1, significance=0.9, \dots)
 \S4method{cutoffSignificant}{ebCorrelation}(object, prior, significance, \dots)
 \S4method{selectSignificant}{ebCorrelation}(object, prior, significance, \dots)
@@ -46,8 +46,6 @@ ebCorrelation(ss, nObs, nPoints = 500)
   \item{significance}{A real number between 0 and 1; the posterior
     probability betyond which a correlation coefficinet will be called
     significant.}
-  \item{highlight}{Character string denoting a color.}
-  \item{lowlight}{Character string denoting a color.}
 }
 \section{Creating Objects}{
   Although objects can be created directly using \code{new}, the most

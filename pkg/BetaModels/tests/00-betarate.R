@@ -1,4 +1,5 @@
 library(BetaModels)
+set.seed(75319)
 
 # simulate some data
 event <- c( 37,  4,  6,  1,  2, 10,  1, 13,   7,  1,  10)
