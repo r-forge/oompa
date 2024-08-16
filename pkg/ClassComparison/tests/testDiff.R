@@ -12,7 +12,7 @@ classes <- factor(rep(c("A", "B"), each=nSamplesPerGroup))
 mtt <- MultiTtest(data, classes)
 summary(mtt)
 
-mw <- MultiWilcoxonTest(data, classes)
+suppressWarnings(mw <- MultiWilcoxonTest(data, classes))
 summary(mw)
 
 mlm <- MultiLinearModel(Y ~ classes, data.frame(classes=classes), data)
