@@ -1,5 +1,5 @@
-cytangle/pkg/CyTangle
-clonefinder/pkg/SVAlignR
+oompa/pkg/BetaModels
+#cytangle/pkg/RPointCloud
+#thresher/pkg/RCytoGPS
 #thresher/pkg/SillyPutty
-#cytangle/pkg/Mender
-#
+
