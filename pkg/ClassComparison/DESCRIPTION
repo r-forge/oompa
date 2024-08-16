@@ -1,9 +1,11 @@
 Package: ClassComparison
-Version: 3.3.0
+Version: 3.3.1
 Date: 2024-08-14
 Title: Classes and Methods for "Class Comparison" Problems on Microarrays
-Author: Kevin R. Coombes
-Maintainer: Kevin R. Coombes <krc@silicovore.com>
+Authors@R: person(given = c("Kevin", "R."),
+                  family = "Coombes",
+                  role = c("aut", "cre"),
+                  email = "krc@silicovore.com")
 Description: Defines the classes used for "class comparison" problems
   in the OOMPA project (<http://oompa.r-forge.r-project.org/>). Class
   comparison includes tests for differential expression; see Simon's
