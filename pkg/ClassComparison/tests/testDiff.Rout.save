@@ -1,7 +1,7 @@
 
-R version 4.3.1 (2023-06-16 ucrt) -- "Beagle Scouts"
-Copyright (C) 2023 The R Foundation for Statistical Computing
-Platform: x86_64-w64-mingw32/x64 (64-bit)
+R version 4.4.1 (2024-06-14 ucrt) -- "Race for Your Life"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -22,7 +22,6 @@ Loading required package: oompaBase
 > nSamplesPerGroup <- 10
 > nGroups <- 2
 > 
-> suppressWarnings( RNGversion("3.5.3") )
 > set.seed(944637)
 > data <- matrix(rnorm(nGenes*nSamplesPerGroup*nGroups),
 +                nrow=nGenes)
@@ -105,7 +104,7 @@ Call: TNoM(data = data, classes = classes)
 
 Number of genes with maximum number of misclassifications:
   0   1   2   3   4   5   6   7   8   9  10 
-  0   0   0   9  38 134 242 367 201   9   0 
+  0   0   0   9  38 134 242 366 202   9   0 
 > 
 > sam <- Sam(data, classes)
 1 . 2 . 3 . 4 . 5 . 6 . 7 . 8 . 9 . 10 . 11 . 12 . 13 . 14 . 15 . 16 . 17 . 18 . 19 . 20 . 21 . 22 . 23 . 24 . 25 . 26 . 27 . 28 . 29 . 30 . 31 . 32 . 33 . 34 . 35 . 36 . 37 . 38 . 39 . 40 . 41 . 42 . 43 . 44 . 45 . 46 . 47 . 48 . 49 . 50 . 51 . 52 . 53 . 54 . 55 . 56 . 57 . 58 . 59 . 60 . 61 . 62 . 63 . 64 . 65 . 66 . 67 . 68 . 69 . 70 . 71 . 72 . 73 . 74 . 75 . 76 . 77 . 78 . 79 . 80 . 81 . 82 . 83 . 84 . 85 . 86 . 87 . 88 . 89 . 90 . 91 . 92 . 93 . 94 . 95 . 96 . 97 . 98 . 99 . 100 . 
@@ -154,4 +153,4 @@ Smooth T test of Group One versus Group Two
 > 
 > proc.time()
    user  system elapsed 
-   1.81    0.06    1.90 
+   1.78    0.14    1.92 
