@@ -38,6 +38,7 @@ if (defined($toolhash{HOME})) {
 $ENV{_R_CHECK_RD_NOTE_LOST_BRACES_} = "true";
 $ENV{_R_CHECK_XREFS_PKGS_ARE_DECLARED_} = "true";
 $ENV{_R_CHECK_CRAN_INCOMING_REMOTE_} = "true";
+$ENV{_R_CHECK_CRAN_INCOMING_USE_ASPELL_} = "true";
 
 my $profile =<<EOP
 r <- getOption("repos")
