@@ -49,7 +49,7 @@ PCanova(data, classes, labels, colors, usecor=TRUE)
   The PCANOVA method was developed as part of the submission that won
   the award for best presentation at the 2001 conference on the Critical
   Assessment of Microarray Data Analysis (CAMDA;
-  \url{http://www.camda.info}). The idea is to perform the
+  \url{https://bipress.boku.ac.at/camda-play/}). The idea is to perform the
   equivalent of an analysis of variance (ANOVA) in principal component
   (PC) space. Let X(i,j) denote the jth column vector belonging to the
   ith group of samples. We can model this as X(i,j) = mu + tau(i) +

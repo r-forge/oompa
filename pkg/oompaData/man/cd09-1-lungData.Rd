@@ -20,9 +20,8 @@ data(lungData)
 \source{
   Supporting data for the Nature Medicine paper by Shedden et al. was
   downloaded from the (now defunct) caArray web site. The original data
-  are still available by FTP from 
-  \url{ftp://caftpd.nci.nih.gov/pub/caARRAY/experiments/caArray_beer-00153/}
-  and in the Gene Expression Omnibus at
+  used to be available by FTP from the NIH, but can now only be found
+  in the Gene Expression Omnibus at
   \url{https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE68571}.
   The data were log transformed by mapping the expression value x to
   log2(1+x). A subset of genes and of clinical annotation columns were
