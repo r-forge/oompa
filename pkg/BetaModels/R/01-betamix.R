@@ -38,7 +38,7 @@ setValidity("BetaMixture", function(object) {
   K = length(object@phi)
   all(dim(object@mle) == c(2, K)) &
     all(dim(object@Z) == c(N, K)) &
-    sum(object@phi) == 1 &
+    isTRUE(all.equal(sum(object@phi), 1.0)) &
     all(abs(1 -apply(object@Z, 1, sum)) < 1E-10) &
     length(object@converged) == 1
 })
