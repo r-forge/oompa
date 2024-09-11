@@ -30,6 +30,7 @@ deepcnv/pkg/DeepCNV
 cytangle/pkg/Cytangle
 cytangle/pkg/RPointCloud
 cytangle/pkg/WayFindR
+cytangle/pkg/EBGLIDE
 C:/KRC/rforge/craac/pkg/CRAAC
 C:/KRC/rforge/arraycube/pkg/ArrayCube
 C:/KRC/rforge/arraycube/pkg/MINiML
