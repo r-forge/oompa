@@ -1,5 +1,5 @@
 library(ClassComparison)
-
+sp <- options(scipen = 10)
 nGenes <- 1000
 nSamplesPerGroup <- 10
 nGroups <- 2
@@ -32,3 +32,4 @@ summary(tgs, digits = 4)
 smoo <- SmoothTtest(tgs)
 summary(smoo, digits = 4)
 
+options(sp)

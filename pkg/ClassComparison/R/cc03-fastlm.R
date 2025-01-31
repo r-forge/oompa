@@ -54,7 +54,7 @@ setMethod('summary', signature(object='MultiLinearModel'),
   cat(paste('Row-by-row linear models with',
             length(object@F.statistics), 'rows\n\n'))
   cat(paste('Call:', as.character(list(object@call)),'\n\nF-statistics:\n'))
-  print(summary(object@F.statistics, ...))
+  print(summary(object@F.statistics, ...), ...)
   cat('\nP-values:\n')
   summary(object@p.values, ...)
 })

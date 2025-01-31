@@ -17,7 +17,7 @@ Type 'q()' to quit R.
 
 > library(ClassComparison)
 Loading required package: oompaBase
-> 
+> sp <- options(scipen = 10)
 > nGenes <- 1000
 > nSamplesPerGroup <- 10
 > nGroups <- 2
@@ -145,7 +145,8 @@ Smooth T test of Group One versus Group Two
  3rd Qu.:1.1565  
  Max.   :1.7499  
 > 
+> options(sp)
 > 
 > proc.time()
    user  system elapsed 
-   1.73    0.15    1.84 
+   1.95    0.06    2.01 
