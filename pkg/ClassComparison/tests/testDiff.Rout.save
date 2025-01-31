@@ -28,7 +28,7 @@ Loading required package: oompaBase
 > classes <- factor(rep(c("A", "B"), each=nSamplesPerGroup))
 > 
 > mtt <- MultiTtest(data, classes)
-> summary(mtt)
+> summary(mtt, digits = 4)
 Row-by-row two-sample t-tests with 1000 rows
 Positive sign indicates an increase in class: A 
 
@@ -36,11 +36,11 @@ Call: MultiTtest(data = data, classes = classes)
 
 T-statistics:
     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
--3.25711 -0.72072 -0.01096 -0.02219  0.66601  3.30242 
+-3.25700 -0.72070 -0.01096 -0.02219  0.66600  3.30200 
 
 P-values:
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-0.00396 0.25717 0.50326 0.49595 0.71980 0.99873 
+0.00396 0.25720 0.50330 0.49600 0.71980 0.99870 
 > 
 > suppressWarnings(mw <- MultiWilcoxonTest(data, classes))
 > summary(mw)
@@ -58,21 +58,21 @@ With prior = 1 and alpha = 0.9
 	the lower tail contains 0 values below 58 
 > 
 > mlm <- MultiLinearModel(Y ~ classes, data.frame(classes=classes), data)
-> summary(mlm)
+> summary(mlm, digits = 4)
 Row-by-row linear models with 1000 rows
 
 Call: MultiLinearModel(form = Y ~ classes, clindata = data.frame(classes = classes), arraydata = data) 
 
 F-statistics:
      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
- 0.000003  0.132789  0.466590  1.059960  1.369473 10.905953 
+ 0.000003  0.132800  0.466600  1.060000  1.369000 10.910000 
 
 P-values:
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-0.00396 0.25717 0.50326 0.49595 0.71980 0.99873 
+0.00396 0.25720 0.50330 0.49600 0.71980 0.99870 
 > 
 > dud <- Dudoit(data, classes, nPerm=100, verbose=FALSE)
-> summary(dud)
+> summary(dud, digits = 4)
 Row-by-row two-sample t-tests with 1000 rows
 Positive sign indicates an increase in class: A 
 
@@ -80,11 +80,11 @@ Call: Dudoit(data = data, classes = classes, nPerm = 100, verbose = FALSE)
 
 T-statistics:
     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
--3.25711 -0.72072 -0.01096 -0.02219  0.66601  3.30242 
+-3.25700 -0.72070 -0.01096 -0.02219  0.66600  3.30200 
 
 P-values:
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-0.00396 0.25717 0.50326 0.49595 0.71980 0.99873 
+0.00396 0.25720 0.50330 0.49600 0.71980 0.99870 
 > 
 > tn <- TNoM(data, classes)
 [1] "ordering..."
@@ -93,7 +93,7 @@ P-values:
 [1] "cumsuming..."
 [1] "more matrifying..."
 [1] "another apply..."
-> summary(tn)
+> summary(tn, digits = 4)
 TNoM object with 1000 rows and 20 columns
 Call: TNoM(data = data, classes = classes) 
 
@@ -110,7 +110,7 @@ In min(object@observed[positive]) :
   no non-missing arguments to min; returning Inf
 > 
 > tgs <- TwoGroupStats(data, classes)
-> summary(tgs)
+> summary(tgs, digits = 4)
 first group:  10 second group: 10 
      mean1               mean2            overallMean             var1        
  Min.   :-1.066820   Min.   :-0.954547   Min.   :-0.794206   Min.   :0.09493  
@@ -127,7 +127,7 @@ first group:  10 second group: 10
  3rd Qu.:1.27840   3rd Qu.:1.1985   3rd Qu.:1.2096  
  Max.   :2.86346   Max.   :2.0843   Max.   :2.1399  
 > smoo <- SmoothTtest(tgs)
-> summary(smoo)
+> summary(smoo, digits = 4)
 Smooth T test of Group One versus Group Two 
 
  AverageLogIntensity    LogRatio         SmoothedTStatistic  FirstBadFlag   
@@ -144,8 +144,8 @@ Smooth T test of Group One versus Group Two
  Mean   :0.9989  
  3rd Qu.:1.1565  
  Max.   :1.7499  
-> #plot(smoo@smooth.t.statistics, mtt@t.statistics)
+> 
 > 
 > proc.time()
    user  system elapsed 
-   1.73    0.09    1.87 
+   1.73    0.15    1.84 

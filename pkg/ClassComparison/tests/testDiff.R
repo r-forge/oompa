@@ -10,25 +10,25 @@ data <- matrix(rnorm(nGenes*nSamplesPerGroup*nGroups),
 classes <- factor(rep(c("A", "B"), each=nSamplesPerGroup))
 
 mtt <- MultiTtest(data, classes)
-summary(mtt)
+summary(mtt, digits = 4)
 
 suppressWarnings(mw <- MultiWilcoxonTest(data, classes))
 summary(mw)
 
 mlm <- MultiLinearModel(Y ~ classes, data.frame(classes=classes), data)
-summary(mlm)
+summary(mlm, digits = 4)
 
 dud <- Dudoit(data, classes, nPerm=100, verbose=FALSE)
-summary(dud)
+summary(dud, digits = 4)
 
 tn <- TNoM(data, classes)
-summary(tn)
+summary(tn, digits = 4)
 
 sam <- Sam(data, classes)
 summary(sam)
 
 tgs <- TwoGroupStats(data, classes)
-summary(tgs)
+summary(tgs, digits = 4)
 smoo <- SmoothTtest(tgs)
-summary(smoo)
-#plot(smoo@smooth.t.statistics, mtt@t.statistics)
+summary(smoo, digits = 4)
+
