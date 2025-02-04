@@ -1,6 +1,6 @@
 Package: ClassComparison
-Version: 3.3.4
-Date: 2025-01-31
+Version: 3.3.5
+Date: 2025-02-04
 Title: Classes and Methods for "Class Comparison" Problems on Microarrays
 Authors@R: person(given = c("Kevin", "R."),
                   family = "Coombes",
