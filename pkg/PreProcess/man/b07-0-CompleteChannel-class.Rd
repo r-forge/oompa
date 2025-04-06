@@ -51,8 +51,8 @@ CompleteChannel(name, type, data)
     \code{CompleteChannel}}
   \item{parameter}{any object that makes sense as a parameter to the
     function represented by the \code{Processor} \code{action}}
-  \item{row.names}{See \code{\link{as.data.frame}}}
-  \item{optional}{See \code{\link{as.data.frame}}}
+  \item{row.names}{See \code{\link[base]{as.data.frame}}}
+  \item{optional}{See \code{\link[base]{as.data.frame}}}
   \item{\dots}{extra arguments for generic or plotting routines}
 }
 \details{
@@ -145,7 +145,7 @@ CompleteChannel(name, type, data)
   \code{\link{Processor}},
   \code{\link{Pipeline}},
   \code{\link{Channel}},
-  \code{\link{as.data.frame}}
+  \code{\link[base]{as.data.frame}}
 }
 \examples{
 showClass("CompleteChannel")

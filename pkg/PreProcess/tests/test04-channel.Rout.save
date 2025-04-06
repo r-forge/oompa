@@ -1,7 +1,7 @@
 
-R version 3.6.0 (2019-04-26) -- "Planting of a Tree"
-Copyright (C) 2019 The R Foundation for Statistical Computing
-Platform: x86_64-w64-mingw32/x64 (64-bit)
+R version 4.4.3 (2025-02-28 ucrt) -- "Trophy Case"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -44,7 +44,7 @@ History:
 
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
     1.0   199.5   594.9   910.9  1279.0  9550.0 
-> summary(raw)
+> summary(raw, digits = 2)
 fraud, a microarray channel object
 Parent object: NA 
 Microarray type: user random 
@@ -54,8 +54,8 @@ Design information object:
 History:
 	 Channel(parent = "", name = "fraud", type = ct, vec = v) 
 
-    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
-   0.244  280.014  675.734  987.643 1355.511 9630.592 
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   0.24  280.00  680.00  990.00 1400.00 9600.00 
 > 
 > par(mfrow=c(2,1))
 > plot(raw)
@@ -70,4 +70,4 @@ History:
 > 
 > proc.time()
    user  system elapsed 
-   0.76    0.26    1.06 
+   0.37    0.04    0.40 

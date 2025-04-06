@@ -15,7 +15,7 @@ subbed <- Channel(name='fraud', parent='', type=ct, vec=s)
 rm(nc, nr, v, b, s)		# clean some stuff
 
 summary(subbed)
-summary(raw)
+summary(raw, digits = 2)
 
 par(mfrow=c(2,1))
 plot(raw)
