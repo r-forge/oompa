@@ -33,7 +33,7 @@ wheel(N, sat = 1)
 }
 \details{
   The color maps that ship with R (see, for example,
-  \code{\link{terrain.colors}}) do not include the most common color
+  \code{\link[grDevices]{terrain.colors}}) do not include the most common color
   maps used in publications in the microarray literature. This
   collection of color maps expands the available options.  The functions
   \code{redscale}, \code{greenscale}, and \code{bluescale} each range
@@ -73,10 +73,10 @@ wheel(N, sat = 1)
   represents high values. It is too late to fix this.
 }
 \author{Kevin R. Coombes <krc@silicovore.com>}
-\seealso{\code{\link{rainbow}}, \code{\link{topo.colors}},
-  \code{\link{terrain.colors}}, \code{\link{heat.colors}},
-  \code{\link{rgb}}, \code{\link[graphics]{image}}, \code{\link{heatmap}},
-  \code{\link{palette}}.
+\seealso{\code{\link[grDevices]{rainbow}}, \code{\link[grDevices]{topo.colors}},
+  \code{\link[grDevices]{terrain.colors}}, \code{\link[grDevices]{heat.colors}},
+  \code{\link[grDevices]{rgb}}, \code{\link[graphics]{image}},
+  \code{\link[stats]{heatmap}}, \code{\link[grDevices]{palette}}.
 }
 \examples{
 data <- matrix(1:1024, nrow=1024)
