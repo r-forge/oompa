@@ -1,13 +1,14 @@
 Package: Polychrome
 Title: Qualitative Palettes with Many Colors
-Version: 1.5.1
-Date: 2022-04-29
-Author: Kevin R. Coombes, Guy Brock
+Version: 1.5.4
+Date: 2025-04-06
+Authors@R: c(person(given = "Guy", family = "Brock", role = "aut"),
+	    person(given = c("Kevin", "R."), family = "Coombes",
+                   role = c("aut", "cre"), email = "krc@silicovore.com"))
 Description: Tools for creating, viewing, and assessing qualitative
  palettes with many (20-30 or more) colors. See Coombes and colleagues
  (2019) <doi:10.18637/jss.v090.c01>.
-Maintainer: Kevin R. Coombes <krc@silicovore.com>
-Depends: R (>= 3.0)
+Depends: R (>= 4.4)
 Imports: colorspace, scatterplot3d, methods, graphics, grDevices, stats, utils
 Suggests: RColorBrewer, knitr, rmarkdown, ggplot2
 License: Apache License (== 2.0)
