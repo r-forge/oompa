@@ -15,7 +15,7 @@ fraud <- function(x) {
 }
 
 fake <- fraud(dd)
-summary(fake, digits = 7)
+summary(fake, digits = 3)
 
 hist(fake)
 

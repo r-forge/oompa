@@ -34,15 +34,15 @@ Loading required package: oompaBase
 + }
 > 
 > fake <- fraud(dd)
-> summary(fake, digits = 7)
+> summary(fake, digits = 3)
 A ClusterTest object.
 
 Call:
 	 fraud(x = dd) 
 
 Agreement levels:
-     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
-0.0000367 0.0643374 0.3528907 0.2975618 0.5153581 0.6697706 
+    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+3.67e-05 6.43e-02 3.53e-01 2.98e-01 5.15e-01 6.70e-01 
 > 
 > hist(fake)
 > 
@@ -57,4 +57,4 @@ Agreement levels:
 > 
 > proc.time()
    user  system elapsed 
-   0.28    0.07    0.35 
+   0.37    0.06    0.35 
