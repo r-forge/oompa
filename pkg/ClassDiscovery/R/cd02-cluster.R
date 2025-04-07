@@ -21,7 +21,7 @@ setMethod('summary', signature(object='ClusterTest'),
   cat(paste('A', as.character(class(object)), 'object.\n\n'))
   cat(paste('Call:\n\t', as.character(list(object@call))),'\n\n')
   cat('Agreement levels:\n')
-  summary(.getUpperTriValues(object@result))
+  summary(.getUpperTriValues(object@result), ...)
 })
 
 setMethod('hist', signature(x='ClusterTest'),

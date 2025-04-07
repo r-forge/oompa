@@ -8,8 +8,8 @@
 \title{Get the List of Classes From A Clustering Algorithm }
 \description{
   Unsupervised clustering algorithms, such as partitioning around medoids
-  (\code{\link[cluster]{pam}}), K-means (\code{\link{kmeans}}), or
-  hierarchical clustering (\code{\link{hclust}}) after cutting the tree,
+  (\code{\link[cluster]{pam}}), K-means (\code{\link[stats]{kmeans}}), or
+  hierarchical clustering (\code{\link[stats]{hclust}}) after cutting the tree,
   produce a list of class assignments along with other structure. To
   simplify the interface for the \code{\link{BootstrapClusterTest}}  and
   \code{\link{PerturbationClusterTest}}, we have written these routines
@@ -27,7 +27,7 @@ repeatedKmeans(data, k, nTimes)
   \item{data}{A numerical data matrix}
   \item{k}{The number of classes desired from the algorithm}
   \item{method}{Any valid linkage method that can be passed to the
-    \code{\link{hclust}} function}
+    \code{\link[stats]{hclust}} function}
   \item{metric}{Any valid distance metric that can be passed to the
     \code{\link{distanceMatrix}} function}
   \item{nTimes}{An integer; the number of times to repeat the K-means
@@ -35,11 +35,11 @@ repeatedKmeans(data, k, nTimes)
 }
 \details{
   Each of the clustering routines used here has a different
-  structure for storing cluster assignments. The \code{\link{kmeans}}
+  structure for storing cluster assignments. The \code{\link[stats]{kmeans}}
   function stores the assignments in a \sQuote{cluster} attribute.  The
   \code{\link[cluster]{pam}} function uses a \sQuote{clustering} attribute.  For
-  \code{\link{hclust}}, the assignments are produced by a call to the
-  \code{\link{cutree}} function.
+  \code{\link[stats]{hclust}}, the assignments are produced by a call to the
+  \code{\link[stats]{cutree}} function.
 
   It has been observed that the K-means algorithm can converge to
   different solutions depending on the starting values of the group
@@ -63,9 +63,9 @@ repeatedKmeans(data, k, nTimes)
   Kevin R. Coombes \email{krc@silicovore.com}
 }
 \seealso{
-  \code{\link{cutree}},
-  \code{\link{hclust}},
-  \code{\link{kmeans}},
+  \code{\link[stats]{cutree}},
+  \code{\link[stats]{hclust}},
+  \code{\link[stats]{kmeans}},
   \code{\link[cluster]{pam}}
 }
 \examples{

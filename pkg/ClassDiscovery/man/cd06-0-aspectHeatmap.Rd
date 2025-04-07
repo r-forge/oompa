@@ -40,29 +40,29 @@ aspectHeatmap(x,
               \dots)
 }
 \arguments{
-  \item{x}{ See documentation for \link{heatmap}.}
-  \item{Rowv}{ See documentation for \link{heatmap}.}
-  \item{Colv}{ See documentation for \link{heatmap}.}
-  \item{distfun}{ See documentation for \link{heatmap}.}
-  \item{hclustfun}{ See documentation for \link{heatmap}.}
-  \item{reorderfun}{ See documentation for \link{heatmap}.}
-  \item{add.expr}{ See documentation for \link{heatmap}.}
-  \item{symm}{ See documentation for \link{heatmap}.}
-  \item{revC}{ See documentation for \link{heatmap}.}
-  \item{scale}{ See documentation for \link{heatmap}.}
-  \item{na.rm}{ See documentation for \link{heatmap}.}
-  \item{margins}{ See documentation for \link{heatmap}.}
-  \item{ColSideColors}{ See documentation for \link{heatmap}.}
-  \item{RowSideColors}{ See documentation for \link{heatmap}.}
-  \item{cexRow}{ See documentation for \link{heatmap}.}
-  \item{cexCol}{ See documentation for \link{heatmap}.}
-  \item{labRow}{ See documentation for \link{heatmap}.}
-  \item{labCol}{ See documentation for \link{heatmap}.}
-  \item{main}{ See documentation for \link{heatmap}.}
-  \item{xlab}{ See documentation for \link{heatmap}.}
-  \item{ylab}{ See documentation for \link{heatmap}.}
-  \item{keep.dendro}{ See documentation for \link{heatmap}.}
-  \item{verbose}{ See documentation for \link{heatmap}.}
+  \item{x}{ See documentation for \link[stats]{heatmap}.}
+  \item{Rowv}{ See documentation for \link[stats]{heatmap}.}
+  \item{Colv}{ See documentation for \link[stats]{heatmap}.}
+  \item{distfun}{ See documentation for \link[stats]{heatmap}.}
+  \item{hclustfun}{ See documentation for \link[stats]{heatmap}.}
+  \item{reorderfun}{ See documentation for \link[stats]{heatmap}.}
+  \item{add.expr}{ See documentation for \link[stats]{heatmap}.}
+  \item{symm}{ See documentation for \link[stats]{heatmap}.}
+  \item{revC}{ See documentation for \link[stats]{heatmap}.}
+  \item{scale}{ See documentation for \link[stats]{heatmap}.}
+  \item{na.rm}{ See documentation for \link[stats]{heatmap}.}
+  \item{margins}{ See documentation for \link[stats]{heatmap}.}
+  \item{ColSideColors}{ See documentation for \link[stats]{heatmap}.}
+  \item{RowSideColors}{ See documentation for \link[stats]{heatmap}.}
+  \item{cexRow}{ See documentation for \link[stats]{heatmap}.}
+  \item{cexCol}{ See documentation for \link[stats]{heatmap}.}
+  \item{labRow}{ See documentation for \link[stats]{heatmap}.}
+  \item{labCol}{ See documentation for \link[stats]{heatmap}.}
+  \item{main}{ See documentation for \link[stats]{heatmap}.}
+  \item{xlab}{ See documentation for \link[stats]{heatmap}.}
+  \item{ylab}{ See documentation for \link[stats]{heatmap}.}
+  \item{keep.dendro}{ See documentation for \link[stats]{heatmap}.}
+  \item{verbose}{ See documentation for \link[stats]{heatmap}.}
   \item{hExp}{height expansion factor (default is \code{1})}
   \item{wExp}{width expansion factor (default is \code{1})}
   \item{vlines}{vector of positions at which to draw vertical lines} 
@@ -81,13 +81,13 @@ aspectHeatmap(x,
   overlaid on the image.
 }
 \value{
-  The same as the \link{heatmap} function.
+  The same as the \link[stats]{heatmap} function.
 }
 \author{
   Kevin R. Coombes \email{krc@silicovore.com}
 }
 \seealso{
-  \code{\link{heatmap}}
+  \code{\link[stats]{heatmap}}
 }
 \examples{
 nC <- 30

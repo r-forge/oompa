@@ -54,7 +54,7 @@ GenePCA(geneData)
 }
 \seealso{
   \code{\link{SamplePCA}},
-  \code{\link{princomp}}
+  \code{\link[stats]{princomp}}
 }
 \examples{
 showClass("GenePCA")

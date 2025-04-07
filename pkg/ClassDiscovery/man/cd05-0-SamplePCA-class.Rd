@@ -101,13 +101,13 @@ SamplePCA(data, splitter=0, usecor=FALSE, center=TRUE)
 }
 \details{
   The main reason for developing the \code{SamplePCA} class is that the
-  \code{\link{princomp}} function is very inefficient when the number of
+  \code{\link[stats]{princomp}} function is very inefficient when the number of
   variables (in the microarray setting, genes) far exceeds the number of
   observations (in the microarray setting, biological samples).  The
   \code{princomp} function begins by computing the full covariance
   matrix, which gets rather large in a study involving tens of thousands
   of genes.  The \code{SamplePCA} class, by contrast, uses singular
-  value decomposition (\code{\link{svd}}) on the original data matrix to
+  value decomposition (\code{\link[base]{svd}}) on the original data matrix to
   compute the principal components.
 
   The base functions \code{screeplot}, which produces  a barplot of the
@@ -131,7 +131,7 @@ SamplePCA(data, splitter=0, usecor=FALSE, center=TRUE)
   Kevin R. Coombes \email{krc@silicovore.com}
 }
 \seealso{
-  \code{\link{princomp}},
+  \code{\link[stats]{princomp}},
   \code{\link{GenePCA}}
 }
 \examples{

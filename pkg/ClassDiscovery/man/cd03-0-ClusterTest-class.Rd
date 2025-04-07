@@ -16,7 +16,7 @@
 \arguments{
   \item{x}{An object of the \code{ClusterTest} class.}
   \item{dendrogram}{An object with S3 class \code{hclust}, as returned
-    by the \code{\link{hclust}} function.}
+    by the \code{\link[stats]{hclust}} function.}
   \item{\dots}{Additional graphical parameters to be passed to the
     standard \code{heatmap} function that is used to implement the
     \code{image} method.}
@@ -72,7 +72,7 @@
 \seealso{
   \code{\link{BootstrapClusterTest}},
   \code{\link{PerturbationClusterTest}},
-  \code{\link{heatmap}}
+  \code{\link[stats]{heatmap}}
 }
 \examples{
 showClass("ClusterTest")

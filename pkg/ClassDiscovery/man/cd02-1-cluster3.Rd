@@ -25,7 +25,7 @@ cluster3(data, eps=logb(1, 2), name="", labels=dimnames(data)[[2]])
   Kevin R. Coombes \email{krc@silicovore.com}
 }
 \seealso{
-  \code{\link{hclust}}
+  \code{\link[stats]{hclust}}
 }
 \examples{
 ## simulate data from two different classes

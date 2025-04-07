@@ -15,16 +15,16 @@ distanceMatrix(dataset, metric, \dots)
     can be \code{pearson}, \code{sqrt pearson}, \code{spearman},
     \code{absolute pearson}, \code{uncentered correlation},
     \code{weird}, \code{cosine},
-    or any of the metrics accepted by the     \code{\link{dist}}
+    or any of the metrics accepted by the     \code{\link[stats]{dist}}
     function. At present, the latter function accepts
     \code{euclidean}, \code{maximum}, \code{manhattan}, \code{canberra},
     \code{binary}, or \code{minkowski}. Any initial substring that
     uniquely defines one of the metrics will work.}
   \item{\dots}{Additional parameters to be passed on to
-    \code{\link{dist}}. }
+    \code{\link[stats]{dist}}. }
 }
 \details{
-  This function differs from \code{\link{dist}} in two ways, both of
+  This function differs from \code{\link[stats]{dist}} in two ways, both of
   which are motivated by common practice in the analysis of microarray
   or proteomics data. First, it computes distances between column vectors
   instead of between row vectors. In a typical microarray experiment,
@@ -61,8 +61,8 @@ distanceMatrix(dataset, metric, \dots)
   Kevin R. Coombes \email{krc@silicovore.com}
 }
 \seealso{
-  \code{\link{dist}},
-  \code{\link{as.dist}}
+  \code{\link[stats]{dist}},
+  \code{\link[stats]{as.dist}}
 }
 \section{BUGS}{
   It would be good to have a better name for the \code{weird} metric.

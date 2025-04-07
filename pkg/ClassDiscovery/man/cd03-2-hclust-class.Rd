@@ -10,9 +10,9 @@
   Kevin R. Coombes \email{krc@silicovore.com}
 }
 \seealso{
-  \code{\link{cutree}},
-  \code{\link{hclust}},
-  \code{\link{heatmap}}
+  \code{\link[stats]{cutree}},
+  \code{\link[stats]{hclust}},
+  \code{\link[stats]{heatmap}}
 }
 \keyword{classes}
 

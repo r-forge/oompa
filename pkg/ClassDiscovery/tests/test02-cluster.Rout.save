@@ -1,7 +1,7 @@
 
-R version 3.6.0 (2019-04-26) -- "Planting of a Tree"
-Copyright (C) 2019 The R Foundation for Statistical Computing
-Platform: x86_64-w64-mingw32/x64 (64-bit)
+R version 4.4.3 (2025-02-28 ucrt) -- "Trophy Case"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -34,7 +34,7 @@ Loading required package: oompaBase
 + }
 > 
 > fake <- fraud(dd)
-> summary(fake)
+> summary(fake, digits = 7)
 A ClusterTest object.
 
 Call:
@@ -57,4 +57,4 @@ Agreement levels:
 > 
 > proc.time()
    user  system elapsed 
-   1.01    0.28    1.28 
+   0.28    0.07    0.35 

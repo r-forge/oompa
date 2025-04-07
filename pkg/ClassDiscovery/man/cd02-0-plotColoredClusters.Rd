@@ -4,7 +4,7 @@
 \title{Plot Dendrograms with Color-Coded Labels}
 \description{
   Provides an interface to the \code{plot} method for
-  \code{\link{hclust}} that makes it easier to plot dendrograms with
+  \code{\link[stats]{hclust}} that makes it easier to plot dendrograms with
   labels that are color-coded, usually to indicate the different levels
   of a factor.
 }
@@ -23,7 +23,7 @@ pcc(hd, colors=NULL, \dots)
     \code{par}.}
   \item{main}{ A character string; the plot title}
   \item{line}{ An integer determining how far away to plot the labels;
-    see \code{\link{mtext}} for details.}
+    see \code{\link[graphics]{mtext}} for details.}
   \item{colors}{ A list; see details.}
   \item{\dots}{Any additional graphical parameters that can be supplied
     when plotting an \code{hclust} object.}
@@ -49,8 +49,8 @@ pcc(hd, colors=NULL, \dots)
 \value{
   The function has no useful return value; it merely produces a plot.
 }
-\seealso{ \code{\link{hclust}},
-  \code{\link{Mosaic}}, \code{\link{PCanova}}, \code{\link{par}}
+\seealso{ \code{\link[stats]{hclust}},
+  \code{\link{Mosaic}}, \code{\link{PCanova}}, \code{\link[graphics]{par}}
 }
 \examples{
 # simulate data from three different groups

@@ -31,17 +31,17 @@ Mosaic(data,
   \item{sampleMetric}{Any valid distance metric that can be passed to the
     \code{\link{distanceMatrix}} function}
   \item{sampleLinkage}{Any valid linkage method that can be passed to the
-    \code{\link{hclust}} function}
+    \code{\link[stats]{hclust}} function}
   \item{geneMetric}{Any valid distance metric that can be passed to the
     \code{\link{distanceMatrix}} function}
   \item{geneLinkage}{Any valid linkage method that can be passed to the
-    \code{\link{hclust}} function}
+    \code{\link[stats]{hclust}} function}
   \item{center}{logical scalar. If \code{TRUE}, center the data rows.}
   \item{usecor}{logical scalar. If \code{TRUE}, scale the data rows to have
     standard deviation one.}
   \item{name}{character string specifying the name of this object}
   \item{x}{object of class \code{Mosaic}}
-  \item{scale}{Same as in \code{\link{heatmap}}.}
+  \item{scale}{Same as in \code{\link[stats]{heatmap}}.}
   \item{colors}{An optional vector of character strings containing color
     names to be used when labeling the trees in the dendrogram. If
     provided, then the length should equal the number of columns in the
@@ -73,11 +73,11 @@ Mosaic(data,
   produce dendrograms that were plotted along with a red-green heat map
   of the centered expression values. Since that time, literally thousand
   of additional papers have published variations on these red-green
-  images. R includes a function, \code{\link{heatmap}} that builds such
+  images. R includes a function, \code{\link[stats]{heatmap}} that builds such
   figures.  However, that function is general purpose and has numerous
   optional parameters to tweak the display. The purpose of the
   \code{Mosaic} class is to provide a simplified object-oriented wrapper
-  around \code{\link{heatmap}}, which as a side benefit allows us to
+  around \code{\link[stats]{heatmap}}, which as a side benefit allows us to
   keep track of the distance metrics and linkage rules that were used to
   produce the resulting figure.
 }
@@ -111,7 +111,7 @@ Mosaic(data,
 \section{Methods}{
   \describe{
     \item{plot}{\code{signature(x = Mosaic, y = missing)}: Produce the
-      \dQuote{Eisen} plot, using \code{\link{heatmap}}. }
+      \dQuote{Eisen} plot, using \code{\link[stats]{heatmap}}. }
     \item{pltree}{\code{signature(x = Mosaic)}: Plot the sample class
       dendrogram in the object. }
     \item{summary}{\code{signature(object = Mosaic)}: Write out a
@@ -128,9 +128,9 @@ Mosaic(data,
   P. Roebuck \email{proebuck@mdanderson.org}
 }
 \seealso{
-  \code{\link{cutree}},
-  \code{\link{hclust}},
-  \code{\link{heatmap}}
+  \code{\link[stats]{cutree}},
+  \code{\link[stats]{hclust}},
+  \code{\link[stats]{heatmap}}
 }
 \examples{
 showClass("Mosaic")
