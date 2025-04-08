@@ -37,14 +37,3 @@ C:/KRC/rforge/arraycube/pkg/MINiML
 C:/KRC/rforge/accuploidy/pkg/AccuPloidy
 C:/KRC/rforge/firstsign/pkg/FirstSign
 supercurve/pkg/SuperCurveSampleData
-C:/KRC/rforge/HAPSEG
-C:/KRC/rforge/ABSOLUTE
-../gitProjects/GitLab/DrugScreeningAML/pkg/FINS
-../GitProjects/drexplorer/pkg/drexplorer
-supercurve/pkg/tclish
-supercurve/pkg/SlideDesignerGUI
-#FAIL
-supercurve/pkg/SuperCurve
-supercurve/pkg/SuperCurveGUI
-mop/pkg/MOP
-# END

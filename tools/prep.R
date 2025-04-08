@@ -97,7 +97,8 @@ mypacks <- c("fortunes",
              "beanplot",
              "circlize",
              "TDA",
-             "PubChemR"
+             "PubChemR",
+             "fitdistrplus"
              )
 for (p in mypacks) {
   if (!require(p, character.only = TRUE, quietly = TRUE)) {
