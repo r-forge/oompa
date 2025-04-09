@@ -1,10 +1,10 @@
 Package: BlockR
-Version: 0.0.6
-Date: 2023-06-20
+Version: 0.0.7
+Date: 2025-04-09
 Title: Statistical Interpretation of Heatmaps
-Author: Kevin R. Coombes
-Maintainer: Kevin R. Coombes <krc@silicovore.com>
-Depends: R (>= 3.5)
+Authors@R: person(given = c("Kevin", "R."), family = "Coombes",
+                  role = c("aut", "cre"), email = "krc@silicovore.com")
+Depends: R (>= 4.4)
 Imports: stats, ClassDiscovery
 Description: Provides tools to test the statistical significance of structures
   within two-way clustered heatmaps. More details can be found at
