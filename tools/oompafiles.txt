@@ -5,8 +5,8 @@ oompa/pkg/PreProcess
 oompa/pkg/ClassComparison
 oompa/pkg/ClassDiscovery
 oompa/pkg/TailRank
-oompa/pkg/BetaModels
 oompa/pkg/plasma
+oompa/pkg/BetaModels
 oompa/pkg/BlockR
 classpred/pkg/BimodalIndex
 classpred/pkg/Modeler
