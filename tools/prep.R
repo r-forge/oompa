@@ -24,7 +24,8 @@ mybiocs <- c("edgeR",
              "DescTools",
              "org.Hs.eg.db",
              "graph",
-             "Rgraphviz" 
+             "Rgraphviz",
+             "logicFS"
              )
 for (p in mybiocs) {
   if (!require(p, character.only=TRUE)) {
@@ -100,7 +101,9 @@ mypacks <- c("fortunes",
              "circlize",
              "TDA",
              "PubChemR",
-             "fitdistrplus"
+             "fitdistrplus",
+             "apcluster",
+             "LogicReg"
              )
 for (p in mypacks) {
   if (!require(p, character.only = TRUE, quietly = TRUE)) {

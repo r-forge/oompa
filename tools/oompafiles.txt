@@ -13,6 +13,7 @@ classpred/pkg/Modeler
 classpred/pkg/CrossValidate
 classpred/pkg/GenAlgo
 classpred/pkg/ClassPrediction
+classpred/pkg/Condens8R
 umpire/pkg/Umpire
 thresher/pkg/PCDimension
 thresher/pkg/Thresher
@@ -30,10 +31,21 @@ deepcnv/pkg/DeepCNV
 cytangle/pkg/Cytangle
 cytangle/pkg/RPointCloud
 cytangle/pkg/WayFindR
-cytangle/pkg/EBGLIDE
-C:/KRC/rforge/craac/pkg/CRAAC
-C:/KRC/rforge/arraycube/pkg/ArrayCube
 C:/KRC/rforge/arraycube/pkg/MINiML
 C:/KRC/rforge/accuploidy/pkg/AccuPloidy
 C:/KRC/rforge/firstsign/pkg/FirstSign
 supercurve/pkg/SuperCurveSampleData
+cytangle/pkg/EBGLIDE
+C:/KRC/rforge/craac/pkg/CRAAC
+C:/KRC/rforge/arraycube/pkg/ArrayCube
+C:/KRC/rforge/HAPSEG
+C:/KRC/rforge/ABSOLUTE
+../gitProjects/GitLab/DrugScreeningAML/pkg/FINS
+../GitProjects/drexplorer/pkg/drexplorer
+supercurve/pkg/tclish
+supercurve/pkg/SlideDesignerGUI
+#FAIL
+supercurve/pkg/SuperCurve
+supercurve/pkg/SuperCurveGUI
+mop/pkg/MOP
+# END

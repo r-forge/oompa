@@ -115,6 +115,7 @@ my @paths = ($Rpath,
 	     "C:\\Rtools\\$pver\\gcc-4.6.3\\bin",
 	     $toolhash{miktex});
 push @paths, $toolhash{im} if defined($toolhash{im}); # ImageMagick for SuperCurve
+push @paths, $toolhash{spell} if defined($toolhash{spell}); # hunspell on Windows
 push(@paths,
      "C:\\Windows\\system32",
      "C:\\Windows",
