@@ -1,6 +1,6 @@
 Package: ClassDiscovery
-Version: 3.4.8
-Date: 2025-04-06
+Version: 3.4.9
+Date: 2025-09-03
 Title: Classes and Methods for "Class Discovery" with Microarrays or Proteomics
 Authors@R: person(given = c("Kevin", "R."), family = "Coombes",
                   role = c("aut", "cre"), email = "krc@silicovore.com")
