@@ -20,6 +20,7 @@ thresher/pkg/Thresher
 thresher/pkg/Mercator
 thresher/pkg/SillyPutty
 thresher/pkg/RCytoGPS
+classpred/pkg/Condens8R
 newmanomics/pkg/Newmanomics
 nameneedle/pkg/NameNeedle
 siber/pkg/siberg
