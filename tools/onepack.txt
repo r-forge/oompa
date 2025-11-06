@@ -1,5 +1,5 @@
 cytangle/pkg/WayFindR
-clonefinder/pkg/SVAlignR
+#clonefinder/pkg/SVAlignR
 #cytangle/pkg/RPointCloud
 #thresher/pkg/RCytoGPS
 #thresher/pkg/SillyPutty

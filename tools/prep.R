@@ -100,7 +100,6 @@ mypacks <- c("fortunes",
              "beanplot",
              "circlize",
              "TDA",
-             "PubChemR",
              "fitdistrplus",
              "apcluster",
              "LogicReg"
