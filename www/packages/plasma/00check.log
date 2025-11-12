@@ -1,14 +1,20 @@
 * using log directory 'C:/Users/KRC/Desktop/RForge/oompa/pkg/plasma.Rcheck'
-* using R version 4.2.1 (2022-06-23 ucrt)
-* using platform: x86_64-w64-mingw32 (64-bit)
+* using R version 4.5.0 (2025-04-11 ucrt)
+* using platform: x86_64-w64-mingw32
+* R was compiled by
+    gcc.exe (GCC) 14.2.0
+    GNU Fortran (GCC) 14.2.0
+* running under: Windows 11 x64 (build 26100)
 * using session charset: UTF-8
 * using option '--as-cran'
 * checking for file 'plasma/DESCRIPTION' ... OK
-* this is package 'plasma' version '0.5.12'
-* checking CRAN incoming feasibility ... NOTE
+* this is package 'plasma' version '1.1.4'
+* checking CRAN incoming feasibility ... [14s] WARNING
 Maintainer: 'Kevin R. Coombes <krc@silicovore.com>'
 
-New submission
+Insufficient package version (submitted: 1.1.4, existing: 1.1.4)
+
+No suitable spell-checker program found
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -16,7 +22,7 @@ New submission
 * checking for executable files ... OK
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
-* checking whether package 'plasma' can be installed ... OK
+* checking whether package 'plasma' can be installed ... [12s] OK
 * checking installed package size ... OK
 * checking package directory ... OK
 * checking for future file timestamps ... OK
@@ -26,7 +32,7 @@ New submission
 * checking for left-over files ... OK
 * checking index information ... OK
 * checking package subdirectories ... OK
-* checking R files for non-ASCII characters ... OK
+* checking code files for non-ASCII characters ... OK
 * checking R files for syntax errors ... OK
 * checking whether the package can be loaded ... OK
 * checking whether the package can be loaded with stated dependencies ... OK
@@ -38,7 +44,7 @@ New submission
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
-* checking R code for possible problems ... OK
+* checking R code for possible problems ... [12s] OK
 * checking Rd files ... OK
 * checking Rd metadata ... OK
 * checking Rd line widths ... OK
@@ -48,22 +54,26 @@ New submission
 * checking Rd \usage sections ... OK
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
+* checking contents of 'data' directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking sizes of PDF files under 'inst/doc' ... OK
 * checking installed files from 'inst/doc' ... OK
 * checking files in 'vignettes' ... OK
-* checking examples ... OK
+* checking examples ... [20s] OK
 * checking for unstated dependencies in 'tests' ... OK
-* checking tests ... OK
+* checking tests ... [26s] OK
   Running 'test01-MO.R'
   Running 'test02-fitCox.R'
   Running 'test03-multiplePLS.R'
   Running 'test04-plasma.R'
   Running 'test05-interpret.R'
 * checking for unstated dependencies in vignettes ... OK
-* checking package vignettes in 'inst/doc' ... OK
+* checking package vignettes ... OK
 * checking re-building of vignette outputs ... OK
 * checking PDF version of manual ... OK
-* skipping checking HTML version of manual: no command 'tidy' found
+* checking HTML version of manual ... OK
 * checking for non-standard things in the check directory ... OK
 * checking for detritus in the temp directory ... OK
 * DONE
-Status: 1 NOTE
+Status: 1 WARNING

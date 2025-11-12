@@ -1,16 +1,20 @@
 * using log directory 'C:/Users/KRC/Desktop/RForge/oompa/pkg/TailRank.Rcheck'
-* using R version 4.2.1 (2022-06-23 ucrt)
-* using platform: x86_64-w64-mingw32 (64-bit)
+* using R version 4.5.0 (2025-04-11 ucrt)
+* using platform: x86_64-w64-mingw32
+* R was compiled by
+    gcc.exe (GCC) 14.2.0
+    GNU Fortran (GCC) 14.2.0
+* running under: Windows 11 x64 (build 26100)
 * using session charset: UTF-8
 * using option '--as-cran'
 * checking for file 'TailRank/DESCRIPTION' ... OK
-* this is package 'TailRank' version '3.2.2'
-* checking CRAN incoming feasibility ... WARNING
+* this is package 'TailRank' version '3.2.4'
+* checking CRAN incoming feasibility ... [12s] WARNING
 Maintainer: 'Kevin R. Coombes <krc@silicovore.com>'
 
-Insufficient package version (submitted: 3.2.2, existing: 3.2.2)
+Insufficient package version (submitted: 3.2.4, existing: 3.2.4)
 
-The Date field is over a month old.
+No suitable spell-checker program found
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -22,14 +26,15 @@ The Date field is over a month old.
 * checking whether package 'TailRank' can be installed ... OK
 * checking installed package size ... OK
 * checking package directory ... OK
-* checking for future file timestamps ... OK
+* checking for future file timestamps ... NOTE
+unable to verify current time
 * checking 'build' directory ... OK
 * checking DESCRIPTION meta-information ... OK
 * checking top-level files ... OK
 * checking for left-over files ... OK
 * checking index information ... OK
 * checking package subdirectories ... OK
-* checking R files for non-ASCII characters ... OK
+* checking code files for non-ASCII characters ... OK
 * checking R files for syntax errors ... OK
 * checking whether the package can be loaded ... OK
 * checking whether the package can be loaded with stated dependencies ... OK
@@ -60,11 +65,11 @@ The Date field is over a month old.
   Running 'testBB.R'
   Comparing 'testBB.Rout' to 'testBB.Rout.save' ... OK
 * checking for unstated dependencies in vignettes ... OK
-* checking package vignettes in 'inst/doc' ... OK
+* checking package vignettes ... OK
 * checking re-building of vignette outputs ... OK
 * checking PDF version of manual ... OK
-* skipping checking HTML version of manual: no command 'tidy' found
+* checking HTML version of manual ... OK
 * checking for non-standard things in the check directory ... OK
 * checking for detritus in the temp directory ... OK
 * DONE
-Status: 1 WARNING
+Status: 1 WARNING, 1 NOTE

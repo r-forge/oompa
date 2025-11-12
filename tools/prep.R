@@ -25,7 +25,8 @@ mybiocs <- c("edgeR",
              "org.Hs.eg.db",
              "graph",
              "Rgraphviz",
-             "logicFS"
+             "logicFS",
+             "Seqinfo"
              )
 for (p in mybiocs) {
   if (!require(p, character.only=TRUE)) {
