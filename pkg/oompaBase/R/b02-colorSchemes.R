@@ -54,6 +54,7 @@ jetColors <- function(N){
   temp.blue <- c(1:k, rep(k,k-1), k:1, rep(0,2*k))
   temp.rgb <- cbind(temp.red, temp.green, temp.blue)
   delta <- 5*k-1 - N
+  if (delta == 0) delta <- 1 # weird edge case when N = 4
   delta <- ceiling(delta/2)
   temp.rgb <- temp.rgb[delta:(delta+N-1),]/k
 

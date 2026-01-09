@@ -1,6 +1,6 @@
 Package: oompaBase
-Version: 3.2.10
-Date: 2025-04-03
+Version: 3.2.11
+Date: 2026-01-09
 Title: Class Unions, Matrix Operations, and Color Schemes for OOMPA
 Authors@R: person(given = c("Kevin", "R."),
                   family = "Coombes",
