@@ -5,3 +5,5 @@
 ## Imported methods
 import(methods)
 importFrom("stats", "var", "dist")
+importFrom("DRquality", "SpearmansRho")
+importFrom("emdist", "emd")
