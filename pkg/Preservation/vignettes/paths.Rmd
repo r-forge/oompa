@@ -1,0 +1,21 @@
+---
+title: "Preservation: Pathss"
+author: "Kevin R. Coombes and Polina Bombina"
+data: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Path Preservation}
+  %\VignetteKeywords{DimensionReduction,Paths,Presevation}
+  %\VignetteDepends{Preservation}
+  %\VignettePackage{Preservation}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r opts, echo=FALSE}
+knitr::opts_chunk$set(fig.width=8, fig.height=5)
+```
+# Introduction
+
+```{r packs}
+library(Preservation)
+```

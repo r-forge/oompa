@@ -1,14 +1,15 @@
 Package: Preservation
-Title: Assessing Preservation by Dimenison Reduction Algorithms
+Title: Assessing Preservation For Dimension Reduction Algorithms
 Version: 0.0.1
-Date: 2026=-04=29
+Date: 2026-04-29
 Authors@R: c(person("Kevin R.", "Coombes", role = c("cre", "aut"),
                     email = "krc@silicovore.com"),
              person("Polina", "Bombina", role = "aut"))
 Description: Contains tools to compute metrics that can compare the
-  performance of dimension reduction algorithes for the preservation
-  of pairwise distance, heighborhoods, or oaths.
-Imports: methods
+  performance of dimension reduction algorithms for the preservation
+  of pairwise distances, neighborhoods, or paths.
+Imports: methods, stats
+Suggests: knitr, rmarkdown
 License: Apache License (== 2.0)
 LazyLoad: yes
 URL: http://oompa.r-forge.r-project.org/

@@ -4,3 +4,4 @@
 
 ## Imported methods
 import(methods)
+importFrom("stats", "var", "dist")
