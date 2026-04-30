@@ -94,9 +94,9 @@ compute_m1_distortion <- function(original_data, embedding_data) {
 ###
 calc_spearman_rho <- function(original_dist, embedding_dist) {
   original_dist_matrix <- as.matrix(original_dist)
-  method_dist_matrix <- as.matrix(method_dist)
+  embedding_dist_matrix <- as.matrix(embedding_dist)
   ## Calculate Spearman's Rho
-  spearman_rho <- SpearmansRho(original_dist_matrix, method_dist_matrix)
+  spearman_rho <- SpearmansRho(original_dist_matrix, embedding_dist_matrix)
   return(spearman_rho)
 }
 
@@ -109,8 +109,8 @@ calc_spearman_rho <- function(original_dist, embedding_dist) {
 calc_emd <- function(original_dist, embedding_dist) {
   ## Convert to matrices
   original_dist_matrix <- as.matrix(original_dist)
-  method_dist_matrix <- as.matrix(method_dist)
+  embedding_dist_matrix <- as.matrix(embedding_dist)
   ## Compute Earth Mover's Distance
-  emdist_value <- emd(original_dist_matrix, method_dist_matrix, dist = "euclidean")
+  emdist_value <- emd(original_dist_matrix, embedding_dist_matrix, dist = "euclidean")
   return(emdist_value)
 }

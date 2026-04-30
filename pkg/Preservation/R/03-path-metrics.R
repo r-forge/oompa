@@ -1,21 +1,27 @@
 ### (C) Copyright, 2026, Polina Bombina and Kevin R. Coombes
 ###
-### Functions to compute pat metrics
+### Functions to compute path metrics
 ### Simplified into its own "source-able" file by KRC
 
-# ==============================================
-# Path-preservation metrics
-# ==============================================
+###################################
+### Length Distortion
+###
 path_length <- function(coords) {
   if (nrow(coords) < 2) return(NA_real_)
   sum(sqrt(rowSums(diff(coords)^2)))
 }
 
+###################################
+### Segment Variance
+###
 segment_lengths <- function(coords) {
   if (nrow(coords) < 2) return(numeric(0))
   sqrt(rowSums(diff(coords)^2))
 }
 
+###################################
+### Curvature
+###
 compute_curvature <- function(coords) {
   n <- nrow(coords)
   if (n < 3) return(rep(NA_real_, n))
@@ -29,6 +35,9 @@ compute_curvature <- function(coords) {
   c(NA_real_, ang, NA_real_)
 }
 
+###################################
+### Spatial Similarity
+###
 compute_spatial_similarity <- function(coords) {
   if (nrow(coords) < 2) return(NA_real_)
   dist_mat <- as.matrix(dist(coords))

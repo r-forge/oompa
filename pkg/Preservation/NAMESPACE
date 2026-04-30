@@ -4,6 +4,7 @@
 
 ## Imported methods
 import(methods)
-importFrom("stats", "var", "dist")
+importFrom("stats", "var", "dist", "IQR", "median")
 importFrom("DRquality", "SpearmansRho")
 importFrom("emdist", "emd")
+importFrom("FNN", "get.knn")
