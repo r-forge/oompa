@@ -1,4 +1,4 @@
-### (C) Copyright, 2026, Polina Bombina and Kevin R. Coombes
+### (C) Copyright 2026 Polina Bombina and Kevin R. Coombes
 ###
 ### Functions to compute path metrics
 ### Simplified into its own "source-able" file by KRC
@@ -10,6 +10,9 @@ path_length <- function(coords) {
   if (nrow(coords) < 2) return(NA_real_)
   sum(sqrt(rowSums(diff(coords)^2)))
 }
+LengthDistortion <- function(M1, M2) {
+  log(path_length(M1) / path_length(M2))
+}
 
 ###################################
 ### Segment Variance
@@ -17,6 +20,9 @@ path_length <- function(coords) {
 segment_lengths <- function(coords) {
   if (nrow(coords) < 2) return(numeric(0))
   sqrt(rowSums(diff(coords)^2))
+}
+SegmentVariance <- function(M1, M2) {
+  log(segment_lengths(M1) / segment_lengths(M2))
 }
 
 ###################################
@@ -32,7 +38,11 @@ compute_curvature <- function(coords) {
   v2 <- p3 - p2
   cosang <- rowSums(v1 * v2) / (sqrt(rowSums(v1^2)) * sqrt(rowSums(v2^2)))
   ang    <- acos(pmin(pmax(cosang, -1), 1))
-  c(NA_real_, ang, NA_real_)
+### huh?  c(NA_real_, ang, NA_real_)
+  return(ang)
+}
+Curvature <- function(M1, M2) {
+  log(compute_curvature(M1) / compute_curvature(M2))
 }
 
 ###################################
@@ -44,7 +54,13 @@ compute_spatial_similarity <- function(coords) {
   sim_mat  <- 1 / (1 + dist_mat)
   mean(sim_mat[upper.tri(sim_mat)])
 }
+SpatialSimilarity <- function(M1, M2) {
+  log(compute_spatial_similarity(M1) / compute_spatial_similarity(M2))
+}
 
+###################################
+### do we need this?
+###
 compute_metrics_one_path <- function(path_obj) {
   Xp <- path_obj$hd_coords
   Yp <- path_obj$ld_coords

@@ -1,5 +1,3 @@
-#library(FNN)  # For k-nearest neighbors
-
 ###################################
 ### Average Jaccard Distance
 ###
@@ -12,7 +10,7 @@ jaccard_distance <- function(setA, setB) {
   return(jaccard_dist)
 }
 
-# Function to compute Average Jaccard Distance for a specific repetition and method
+# Function to compute Average Jaccard Distance
 compute_average_jaccard_distance <- function(original_data, embedding_data, k) {
   ## Get the number of points (cells)
   num_points <- ncol(original_data)
@@ -33,4 +31,30 @@ compute_average_jaccard_distance <- function(original_data, embedding_data, k) {
   ## Compute the average Jaccard distance
   average_jaccard_distance <- mean(jaccard_distances, na.rm = TRUE)
   return(average_jaccard_distance)
+}
+
+###################################
+### Continuity and Trustworthiness
+###
+compute_ct_list <- function(original_data, embedding_data, lastNeighbor = 300) {
+  ## Perform ContTrustMeasure
+  ct_pca_result <- ContTrustMeasure(datamat = original_data,
+                                    projmat = embedding_data,
+                                    lastNeighbor = lastNeighbor)
+    ## Return the result
+    return(ct_pca_result)
+}
+
+
+###################################
+### Co-Ranking Matrix
+###
+calc_q <- function(original_dist, embedding_dist) {
+  ## Convert to matrices
+  original_dist_matrix <- as.matrix(original_dist)
+  embedding_dist_matrix <- as.matrix(embedding_dist)
+  ## Compute the co-ranking matrix and Q_NX
+  q_value <- coranking(original_dist_matrix, embedding_dist_matrix)
+  qnx <- Q_NX(q_value)
+  return(qnx)
 }

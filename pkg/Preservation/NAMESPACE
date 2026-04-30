@@ -2,9 +2,16 @@
 ### NAMESPACE
 ###
 
-## Imported methods
+## Imported functions
 import(methods)
 importFrom("stats", "var", "dist", "IQR", "median")
 importFrom("DRquality", "SpearmansRho")
 importFrom("emdist", "emd")
 importFrom("FNN", "get.knn")
+importFrom("ProjectionBasedClustering", "ContTrustMeasure")
+importFrom("coRanking", "coranking", "Q_NX")
+
+## Exported functions
+### path metrics
+export("LengthDistortion", "SegmentVariance",
+       "Curvature", "SpatialSimilarity")
