@@ -28,3 +28,4 @@ SpatialSimilarity(M1, M2)
 \examples{
 }
 \keyword{htest}
+\keyword{models}
