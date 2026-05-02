@@ -12,6 +12,9 @@ importFrom("ProjectionBasedClustering", "ContTrustMeasure")
 importFrom("coRanking", "coranking", "Q_NX")
 
 ## Exported functions
+## pairwise distance metrics
+export("MilnorDistortion", "SigmaDistortion", "Stress", "M1Distortion",
+       "SpearmanRho", "EarthMover")
 ### path metrics
 export("LengthDistortion", "SegmentVariance",
        "Curvature", "SpatialSimilarity")

@@ -102,3 +102,10 @@ compute_metrics_one_path <- function(path_obj) {
     stringsAsFactors = FALSE
   )
 }
+
+## cheating shortcut
+PathBest <- function(tag) {
+  val <- rep(0, length(tag))
+  names(val) <- tag
+  val
+}

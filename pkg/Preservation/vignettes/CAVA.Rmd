@@ -1,0 +1,128 @@
+---
+title: "Preservation: Paths"
+author: "Kevin R. Coombes and Polina Bombina"
+data: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Path Preservation}
+  %\VignetteKeywords{DimensionReduction,Paths,Presevation}
+  %\VignetteDepends{Preservation}
+  %\VignettePackage{Preservation}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r opts, echo=FALSE}
+knitr::opts_chunk$set(fig.width=8, fig.height=5)
+```
+
+# Introduction
+**KRC: SAY SOMETHING**
+
+As a first step, we must load the library package.
+```{r packs}
+library(Preservation)
+```
+
+# Preparation
+## Sample Data
+We need some data in order to illustrate the preservation metrics. Here we use a subset of the 
+CAVA CD4 T-cell single-cell CITE-Seq data set [REF]. This data set was previously identified as
+a single coherent cluster in the much larger complete data set. It contains measurements of the
+expression of 51 proteins in 3096 indiciual cells. We also sub-clustered this subset into four 
+parts to help with visualization.
+```{r sampleData}
+data("prot5")
+dim(prot5)
+table(colvec)
+```
+
+Next, we applied four popular dimension reduction methods:
+
+1. Multi-Dimensional Scaling (MDS), which is equivalent to principal components analysis when
+   using Euclidean distance.
+2. t-Stochastic Neighbor Embedding (t-SNE).
+3. Uniform Manifold Approximation and Projection (UMAP).
+4. Diffusion Maps (DM).
+
+```{r drs}
+data("drs")
+sapply(drs, dim)
+```
+
+Here is an initial plot showing the dimension reductions
+```{r fig01, fig.width=9, fig.height=9, fig.cap="Four views of the CAVA subset after dimension reduction."}
+opar <- par(mfrow = c(2,2))
+for (tag in names(drs)) {
+  plot(drs[[tag]], col = colvec, pch = 16, main = tag, xlab = "X1", ylab = "X2")
+}
+par(opar)
+```
+
+# Preservation of Pairwise Distances
+
+```{r}
+hiD <- dist(prot5)
+loD <- lapply(drs, dist)
+scores <- sapply(c("MilnorDistortion", "SigmaDistortion", "Stress", "SpearmanRho"), function(metric) {
+  cat(metric, "\n", file = stderr())
+  FUN <- get(metric)
+  sapply(names(drs), function(tag) {
+    FUN(hiD, loD[[tag]])
+  })
+})
+m1d <- sapply(names(drs), function(tag) {
+  M1Distortion(prot5, drs[[tag]])
+})
+scores <- cbind(scores, M1Distortion = m1d)
+round(scores, 3)
+Preservation:::PWBest(colnames(scores))
+```
+
+## First Principal Component Path
+We then computed a path in high (51-)dimensional space that closely tracked the first principal
+component. So, in the original space, the path is a close approximation to a line segment that
+crosses the full data set. The path is represented by 301 individual cells (indicated by their
+indices as rows in the data set).
+```{r idex}
+data("path-idex")
+length(idex)
+highD <- prot5[idex,]
+dim(highD)
+```
+
+
+Here is a plot showing the dimension reductions with the overlaid image of the PC1 path.
+```{r fig02, fig.width=9, fig.height=9, fig.cap="Four views of the pth of the first principal components of the CAVA subset after dimension reduction."}
+opar <- par(mfrow = c(2,2))
+for (tag in names(drs)) {
+  lowD <- drs[[tag]][idex,]
+  plot(drs[[tag]], col = colvec, pch = 16, main = tag, xlab = "X1", ylab = "X2")
+  lines(lowD, lwd = 2)
+}
+par(opar)
+```
+
+# Path Preservation Metrics
+
+```{r LD}
+scores <- sapply(c("LengthDistortion", "SegmentVariance", "Curvature", "SpatialSimilarity"),
+                 function(metric) {
+  cat(metric, "\n", file = stderr())
+  FUN <- get(metric)
+  sapply(names(drs), function(tag) {
+    lowD <- drs[[tag]][idex,]
+    FUN(highD, lowD)
+  })
+})
+round(scores, 3)
+
+Preservation:::PathBest(colnames(scores))
+```
+
+
+
+# Appendix
+This computation was perfomed using the following software tools.
+```{r si}
+sessionInfo()
+```
