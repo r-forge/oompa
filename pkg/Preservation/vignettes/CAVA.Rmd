@@ -1,5 +1,5 @@
 ---
-title: "Preservation: Paths"
+title: "Metrics to Assess How Well Dimension Reduction Methods Preserve Data Set Properties"
 author: "Kevin R. Coombes and Polina Bombina"
 data: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -16,19 +16,26 @@ knitr::opts_chunk$set(fig.width=8, fig.height=5)
 ```
 
 # Introduction
-**KRC: SAY SOMETHING**
+The introduction of high dimensional technologies in molecular biology, which perform
+genome-scale measurements on DNA, RNA, or protein, has been accompanied by more extensive
+use of "dimension reduction" (R) algorithms that promote visualization of important aspects
+of the data in just two dimensions. It is, however, critical to understand the extent to
+which different DR algorithms distort the properties of the data set that are present in
+the original high dimensional space. The `Preservation` R package collects together some
+metrics to aid our understanding.
 
-As a first step, we must load the library package.
+# Preparation
+## Packages
+As a first step, we must load the `Preservation` library package.
 ```{r packs}
 library(Preservation)
 ```
 
-# Preparation
 ## Sample Data
 We need some data in order to illustrate the preservation metrics. Here we use a subset of the 
-CAVA CD4 T-cell single-cell CITE-Seq data set [REF]. This data set was previously identified as
+CAVA CD4 T-cell single-cell CITE-Seq data set [1]. This data set was previously identified as
 a single coherent cluster in the much larger complete data set. It contains measurements of the
-expression of 51 proteins in 3096 indiciual cells. We also sub-clustered this subset into four 
+expression of 51 proteins in 3096 individual cells. We also sub-clustered this subset into four 
 parts to help with visualization.
 ```{r sampleData}
 data("prot5")
@@ -40,9 +47,12 @@ Next, we applied four popular dimension reduction methods:
 
 1. Multi-Dimensional Scaling (MDS), which is equivalent to principal components analysis when
    using Euclidean distance.
-2. t-Stochastic Neighbor Embedding (t-SNE).
+2. t-Stochastic Neighbor Embedding (t-SNE or TSNE).
 3. Uniform Manifold Approximation and Projection (UMAP).
 4. Diffusion Maps (DM).
+
+The first two DR algorithms (MDS and TSNE) were computed using the `Rdimtools` package; 
+UMAP, using the `umap` package; and DM, using the `diffusionMap` package.
 
 ```{r drs}
 data("drs")
@@ -58,7 +68,19 @@ for (tag in names(drs)) {
 par(opar)
 ```
 
+We first note that MDS and DM produce essentially the same plot, after recognizing that DM has
+switched the (arbitrary) signs of both components. By contrast, both UMAP and TSNE have tried 
+to place the purple group and half of the blue group in a separate cluster. The TSNE algorithm
+is slightly more extreme, since it also seems to have "flipped" that new cluster so that the two
+halves of the blue group are further apart.
+
 # Preservation of Pairwise Distances
+Some DR algorithms are designed to try to preserve the pairwise distances between points in the
+data set. MDS is the most explicit example of such an algorithm, since its defined goal is to 
+preserve the average of these distances as well as possible.
+
+The `Preservation` package includes five(*) metrics to assess how well pairwise distances are
+preserved.  Here we aply all five metrics to the four different DR views of the CAVA dataset.
 
 ```{r}
 hiD <- dist(prot5)
@@ -78,18 +100,38 @@ round(scores, 3)
 Preservation:::PWBest(colnames(scores))
 ```
 
-## First Principal Component Path
-We then computed a path in high (51-)dimensional space that closely tracked the first principal
-component. So, in the original space, the path is a close approximation to a line segment that
-crosses the full data set. The path is represented by 301 individual cells (indicated by their
-indices as rows in the data set).
+DM is the best DR emthod based on the Milnor distortion; MDS is best based on the Sigma distortion
+or M1 distortion; UMAP is best by stress or Spearman's Rho. These findings probably tells us more about
+how well the metrics assess their desired goal than about how well the DR algorithms perform.
+
+# Neighborhood Preservation
+Method like TSNE and UMAP are inherently non-linear, and their heuristic is to try to preserve local 
+neighborhoods of points rather than all pairwise distances. The `Preservation` package includes several
+metrics to assess how well neighborhoods are preserved. These metrics are naturally functions of the
+number, $k$, of nearest neighbors defining a neighborhood.
+
+```{r}
+ajd <- AverageJaccardDistance(prot5, drs[["MDS"]], k = 50)
+plot(ajd, type = "b", pch = 16, lwd = 2)
+abline(h = mean(ajd))
+qnx <- QNX(hiD, loD[["MDS"]])
+ct <- Preservation:::compute_ct_list(prot5, drs[["MDS"]])
+plot(ct[, 3], main = "Average Trustworthiness")
+plot(ct[, 6], main = "Average Continuity")
+```
+
+# Path Preservation
+We now want to see how well DR algorithms preserve paths. We define a path to be an ordered set
+of points in a data set. As an example, we computed a path in the original high (51-)dimensional
+space that closely tracked the first principal component. So, in the original space, the path is 
+a close approximation to a line segment that crosses the full data set. The path is represented
+by 301 individual cells (indicated by their indices as rows in the data set).
 ```{r idex}
 data("path-idex")
 length(idex)
 highD <- prot5[idex,]
 dim(highD)
 ```
-
 
 Here is a plot showing the dimension reductions with the overlaid image of the PC1 path.
 ```{r fig02, fig.width=9, fig.height=9, fig.cap="Four views of the pth of the first principal components of the CAVA subset after dimension reduction."}
@@ -102,7 +144,9 @@ for (tag in names(drs)) {
 par(opar)
 ```
 
-# Path Preservation Metrics
+Again, the paths in the MDS and DM reductions jitter about the first component axis. In the
+UMAP and TSNE reductiosn, the path seems to do a lot of jumping between the two pseudo-clusters
+in the plot.
 
 ```{r LD}
 scores <- sapply(c("LengthDistortion", "SegmentVariance", "Curvature", "SpatialSimilarity"),

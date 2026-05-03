@@ -11,15 +11,15 @@ jaccard_distance <- function(setA, setB) {
 }
 
 # Function to compute Average Jaccard Distance
-compute_average_jaccard_distance <- function(original_data, embedding_data, k) {
+AverageJaccardDistance <- function(M1, M2, k) {
   ## Get the number of points (cells)
-  num_points <- ncol(original_data)
+  num_points <- ncol(M1)
   ## Ensure k is not greater than the number of points
   k <- min(k, num_points - 1)
   ## Compute k-nearest neighbors in the original space
-  original_neighbors <- get.knn(original_data,  k = k + 1)$nn.index
+  original_neighbors <- get.knn(M1,  k = k + 1)$nn.index
   ## Compute k-nearest neighbors in the embedding space
-  embedding_neighbors <- get.knn(embedding_data,  k = k + 1)$nn.index
+  embedding_neighbors <- get.knn(M2,  k = k + 1)$nn.index
   ## Initialize vector to store Jaccard distances
   jaccard_distances <- numeric(num_points)
   ## Calculate Jaccard distance for each point
@@ -30,16 +30,16 @@ compute_average_jaccard_distance <- function(original_data, embedding_data, k) {
   }
   ## Compute the average Jaccard distance
   average_jaccard_distance <- mean(jaccard_distances, na.rm = TRUE)
-  return(average_jaccard_distance)
+  return(jaccard_distances)
 }
 
 ###################################
 ### Continuity and Trustworthiness
 ###
-compute_ct_list <- function(original_data, embedding_data, lastNeighbor = 300) {
+compute_ct_list <- function(M1, M2, lastNeighbor = 300) {
   ## Perform ContTrustMeasure
-  ct_pca_result <- ContTrustMeasure(datamat = original_data,
-                                    projmat = embedding_data,
+  ct_pca_result <- ContTrustMeasure(datamat = M1,
+                                    projmat = M2,
                                     lastNeighbor = lastNeighbor)
     ## Return the result
     return(ct_pca_result)
@@ -49,12 +49,12 @@ compute_ct_list <- function(original_data, embedding_data, lastNeighbor = 300) {
 ###################################
 ### Co-Ranking Matrix
 ###
-calc_q <- function(original_dist, embedding_dist) {
+QNX <- function(D1, D2) {
   ## Convert to matrices
-  original_dist_matrix <- as.matrix(original_dist)
-  embedding_dist_matrix <- as.matrix(embedding_dist)
+  D1_matrix <- .matrify(D1)
+  D2_matrix <- .matrify(D2)
   ## Compute the co-ranking matrix and Q_NX
-  q_value <- coranking(original_dist_matrix, embedding_dist_matrix)
+  q_value <- coranking(D1_matrix, D2_matrix)
   qnx <- Q_NX(q_value)
   return(qnx)
 }
