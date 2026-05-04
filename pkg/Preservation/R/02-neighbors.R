@@ -30,7 +30,7 @@ AverageJaccardDistance <- function(M1, M2, k) {
   }
   ## Compute the average Jaccard distance
   average_jaccard_distance <- mean(jaccard_distances, na.rm = TRUE)
-  return(jaccard_distances)
+  return(average_jaccard_distance)
 }
 
 ###################################

@@ -118,13 +118,31 @@ are preserved. These metrics are naturally functions of the number, $k$, of near
 neighbors defining a neighborhood.
 
 ```{r neigh}
-ajd <- AverageJaccardDistance(prot5, drs[["MDS"]], k = 50)
-plot(ajd, type = "b", pch = 16, lwd = 2)
-abline(h = mean(ajd))
+ajd <-sapply(names(drs), function(tag) {
+  AverageJaccardDistance(prot5, drs[[tag]], k = 50)
+})
 # too slow: qnx <- QNX(hiD, loD[["MDS"]])
-ct <- Preservation:::compute_ct_list(prot5, drs[["MDS"]])
-plot(ct[, 3], main = "Average Trustworthiness")
-plot(ct[, 6], main = "Average Continuity")
+quad <- c(MDS = "#B00068", TSNE = "#1C8356", UMAP = "#325A9B", DM = "#FEAF16" )
+ct <- lapply(names(drs), function(tag) {
+  Preservation:::compute_ct_list(prot5, drs[[tag]])
+})
+avtrust <- sapply(ct, function(X) X[,3])
+colnames(avtrust) <- names(drs)
+
+avcont <- sapply(ct, function(X) X[,6])
+colnames(avcont) <- names(drs)
+```
+
+```{r fig.width = 9, fig.height=5}
+opar <- par(mfrow = c(1,2))
+plot(avtrust[,1], type = "n", ylim = c(0.1, 0.3), xlab = "Neighbors", ylab = "Trustworthiness")
+for (tag in names(drs)) lines(avtrust[, tag], lwd = 2, col = quad[tag])
+legend("topright", names(drs), col = quad, lwd = 2)
+
+plot(avcont[,1], type = "n", ylim = c(0, 0.25), xlab = "Neighbors", ylab = "Continuity")
+for (tag in names(drs)) lines(avcont[, tag], lwd = 2, col = quad[tag])
+legend("topleft", names(drs), col = quad, lwd = 2)
+par(opar)
 ```
 
 # Path Preservation
