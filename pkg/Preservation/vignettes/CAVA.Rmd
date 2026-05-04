@@ -4,22 +4,22 @@ author: "Kevin R. Coombes and Polina Bombina"
 data: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Path Preservation}
-  %\VignetteKeywords{DimensionReduction,Paths,Presevation}
+  %\VignetteIndexEntry{Preservation Metrics}
+  %\VignetteKeywords{DimensionReduction,Presevation,Pairwise Distances,Neighborhoods,Paths}
   %\VignetteDepends{Preservation}
   %\VignettePackage{Preservation}
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
 ```{r opts, echo=FALSE}
-knitr::opts_chunk$set(fig.width=8, fig.height=5)
+knitr::opts_chunk$set(fig.width=7, fig.height=5)
 ```
 
 # Introduction
 The introduction of high dimensional technologies in molecular biology, which perform
 genome-scale measurements on DNA, RNA, or protein, has been accompanied by more extensive
-use of "dimension reduction" (R) algorithms that promote visualization of important aspects
-of the data in just two dimensions. It is, however, critical to understand the extent to
+use of "dimension reduction" (DR) algorithms that promote visualization of important aspects
+of the data in just two dimensions. However, it is critical to understand the extent to
 which different DR algorithms distort the properties of the data set that are present in
 the original high dimensional space. The `Preservation` R package collects together some
 metrics to aid our understanding.
@@ -45,8 +45,8 @@ table(colvec)
 
 Next, we applied four popular dimension reduction methods:
 
-1. Multi-Dimensional Scaling (MDS), which is equivalent to principal components analysis when
-   using Euclidean distance.
+1. Multi-Dimensional Scaling (MDS), which is equivalent to principal components analysis (OCA)
+   when using Euclidean distance.
 2. t-Stochastic Neighbor Embedding (t-SNE or TSNE).
 3. Uniform Manifold Approximation and Projection (UMAP).
 4. Diffusion Maps (DM).
@@ -59,8 +59,8 @@ data("drs")
 sapply(drs, dim)
 ```
 
-Here is an initial plot showing the dimension reductions
-```{r fig01, fig.width=9, fig.height=9, fig.cap="Four views of the CAVA subset after dimension reduction."}
+Here is an initial plot showing the dimension reduction results.
+```{r fig01, fig.width=8, fig.height=8, fig.cap="Four views of the CAVA subset after dimension reduction."}
 opar <- par(mfrow = c(2,2))
 for (tag in names(drs)) {
   plot(drs[[tag]], col = colvec, pch = 16, main = tag, xlab = "X1", ylab = "X2")
@@ -79,19 +79,23 @@ Some DR algorithms are designed to try to preserve the pairwise distances betwee
 data set. MDS is the most explicit example of such an algorithm, since its defined goal is to 
 preserve the average of these distances as well as possible.
 
-The `Preservation` package includes five(*) metrics to assess how well pairwise distances are
-preserved.  Here we aply all five metrics to the four different DR views of the CAVA dataset.
+The `Preservation` package includes six metrics to assess how well pairwise distances are
+preserved.  Here we apply five of these metrics to the four different DR views of the CAVA
+dataset. (We omit Spearman's Rho, since it is somewhat slower than the others.)
 
-```{r}
+```{r PWmetrics}
 hiD <- dist(prot5)
 loD <- lapply(drs, dist)
-scores <- sapply(c("MilnorDistortion", "SigmaDistortion", "Stress", "SpearmanRho"), function(metric) {
-  cat(metric, "\n", file = stderr())
-  FUN <- get(metric)
-  sapply(names(drs), function(tag) {
-    FUN(hiD, loD[[tag]])
+suppressWarnings(
+  scores <- sapply(c("MilnorDistortion", "SigmaDistortion", "Stress", 
+                     "EarthMover"), function(metric) {
+    cat(metric, "\n", file = stderr())
+    FUN <- get(metric)
+    sapply(names(drs), function(tag) {
+      FUN(hiD, loD[[tag]])
+    })
   })
-})
+)
 m1d <- sapply(names(drs), function(tag) {
   M1Distortion(prot5, drs[[tag]])
 })
@@ -100,21 +104,24 @@ round(scores, 3)
 Preservation:::PWBest(colnames(scores))
 ```
 
-DM is the best DR emthod based on the Milnor distortion; MDS is best based on the Sigma distortion
-or M1 distortion; UMAP is best by stress or Spearman's Rho. These findings probably tells us more about
-how well the metrics assess their desired goal than about how well the DR algorithms perform.
+DM is the best DR method based on the Milnor distortion; UMAP is best by Stress 
+or Spearman's Rho (not shown); MDS is best based on the Sigma distortion, M1 
+distortion, or Earth Mover's Distance. These findings probably tells us more
+about how well the metrics assess their desired goal than about how well the DR
+algorithms perform.
 
 # Neighborhood Preservation
-Method like TSNE and UMAP are inherently non-linear, and their heuristic is to try to preserve local 
-neighborhoods of points rather than all pairwise distances. The `Preservation` package includes several
-metrics to assess how well neighborhoods are preserved. These metrics are naturally functions of the
-number, $k$, of nearest neighbors defining a neighborhood.
+Method like TSNE and UMAP are inherently non-linear, and their heuristic is to try
+to preserve local neighborhoods of points rather than all pairwise distances. The 
+`Preservation` package includes several metrics to assess how well neighborhoods 
+are preserved. These metrics are naturally functions of the number, $k$, of nearest
+neighbors defining a neighborhood.
 
-```{r}
+```{r neigh}
 ajd <- AverageJaccardDistance(prot5, drs[["MDS"]], k = 50)
 plot(ajd, type = "b", pch = 16, lwd = 2)
 abline(h = mean(ajd))
-qnx <- QNX(hiD, loD[["MDS"]])
+# too slow: qnx <- QNX(hiD, loD[["MDS"]])
 ct <- Preservation:::compute_ct_list(prot5, drs[["MDS"]])
 plot(ct[, 3], main = "Average Trustworthiness")
 plot(ct[, 6], main = "Average Continuity")
@@ -134,7 +141,7 @@ dim(highD)
 ```
 
 Here is a plot showing the dimension reductions with the overlaid image of the PC1 path.
-```{r fig02, fig.width=9, fig.height=9, fig.cap="Four views of the pth of the first principal components of the CAVA subset after dimension reduction."}
+```{r fig02, fig.width=8, fig.height=8, fig.cap="Four views of the path of the first principal components of the CAVA subset after dimension reduction."}
 opar <- par(mfrow = c(2,2))
 for (tag in names(drs)) {
   lowD <- drs[[tag]][idex,]
@@ -145,8 +152,9 @@ par(opar)
 ```
 
 Again, the paths in the MDS and DM reductions jitter about the first component axis. In the
-UMAP and TSNE reductiosn, the path seems to do a lot of jumping between the two pseudo-clusters
-in the plot.
+UMAP and TSNE reductions, the path seems to do a lot of jumping between the two pseudo-clusters
+in the plot. In the TSNE plot, there are also numerous jumps between the two halves of the
+blue group.
 
 ```{r LD}
 scores <- sapply(c("LengthDistortion", "SegmentVariance", "Curvature", "SpatialSimilarity"),
@@ -166,7 +174,7 @@ Preservation:::PathBest(colnames(scores))
 
 
 # Appendix
-This computation was perfomed using the following software tools.
+This computation was performed using the following software tools.
 ```{r si}
 sessionInfo()
 ```

@@ -128,17 +128,25 @@ SpearmanRho <- function(D1, D2) {
 ###
 ### Uses the emdist package
 ###
+.process <- function(D1, res = 500) {
+  R1 <- range(D1)
+  delta1 <- diff(R1)/res/2
+  breaks <- seq(min(D1) - delta1, max(D1) + delta1,length = res)
+  H1 <- hist(D1, breaks = breaks, plot = FALSE)
+  as.matrix(data.frame(H1$mids, H1$density))
+}
+
 EarthMover <- function(D1, D2) {
-  ## Convert to matrices
-  D1 <- .matrify(D1)
-  D2 <- .matrify(D2)
+  ## Convert to distributions of distances
+  H1 <- .process(D1)
+  H2 <- .process(D2)
   ## Compute Earth Mover's Distance
-  emdist_value <- emd(D1, D2, dist = "euclidean")
+  emdist_value <- emd(H1, H2, dist = "euclidean")
   return(emdist_value)
 }
 
 .target <- list(Stress = 0, MilnorDistortion = 0, M1Distortion = 0,
-               SigmaDistortion = 0, SpearmanRho = 1)
+               SigmaDistortion = 0, SpearmanRho = 1, EarthMover = 0)
 PWBest <- function(tag) {
   if (length(tag) > 1 ) {
     val <- unlist(.target[tag])
