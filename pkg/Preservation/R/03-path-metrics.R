@@ -8,10 +8,13 @@
 ###
 path_length <- function(coords) {
   if (nrow(coords) < 2) return(NA_real_)
-  sum(sqrt(rowSums(diff(coords)^2)))
+  sqrt(rowSums(diff(coords)^2))
 }
 LengthDistortion <- function(M1, M2) {
-  log(path_length(M1) / path_length(M2))
+  log(sum(path_length(M1)) / sum(path_length(M2)))
+}
+RankLengthDistortion <- function(M1, M2) {
+  cor(path_length(M1), path_length(M2), method = "spearman")
 }
 
 ###################################
@@ -39,10 +42,13 @@ compute_curvature <- function(coords) {
   cosang <- rowSums(v1 * v2) / (sqrt(rowSums(v1^2)) * sqrt(rowSums(v2^2)))
   ang    <- acos(pmin(pmax(cosang, -1), 1))
 ### huh?  c(NA_real_, ang, NA_real_)
-  return(mean(ang))
+  return(ang)
 }
 Curvature <- function(M1, M2) {
-  log(compute_curvature(M1) / compute_curvature(M2))
+  log(mean(compute_curvature(M1)) / mean(compute_curvature(M2)))
+}
+RankCurvature <- function(M1, M2) {
+  cor(compute_curvature(M1), compute_curvature(M2), method = "spearman")
 }
 
 ###################################
@@ -52,10 +58,15 @@ compute_spatial_similarity <- function(coords) {
   if (nrow(coords) < 2) return(NA_real_)
   dist_mat <- as.matrix(dist(coords))
   sim_mat  <- 1 / (1 + dist_mat)
-  mean(sim_mat[upper.tri(sim_mat)])
+  sim_mat[upper.tri(sim_mat)]
 }
 SpatialSimilarity <- function(M1, M2) {
-  log(compute_spatial_similarity(M1) / compute_spatial_similarity(M2))
+  log(mean(compute_spatial_similarity(M1)) /
+      mean(compute_spatial_similarity(M2)))
+}
+RankSpatialSimilarity <- function(M1, M2) {
+  cor(compute_spatial_similarity(M1), compute_spatial_similarity(M2),
+      method = "spearman")
 }
 
 ###################################

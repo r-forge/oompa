@@ -6,8 +6,8 @@
 
 \title{ Metrics for Path Preservation }
 \description{
-  Utility functions for computing vectors of row-by-row means,
-  variances, and t-statistics.
+  Metrics to estimate how well or poorly a dimension reduction algorithm
+  preserves paths.
 }
 \usage{
 LengthDistortion(M1, M2)
@@ -21,11 +21,14 @@ SpatialSimilarity(M1, M2)
 }
 \value{
   Each of the four functions returns a real number representing the log
-  ratio of the scores betweent he two path representation.
+  ratio of the scores between the two path representation.
 }
 
 \author{Kevin R. Coombes <krc@silicovore.com>}
 \examples{
+data(prot5) # original space
+data(drs) # spaces after diomwnion reduction
+LengthDistortion(prot5, drs[["TSNE"]])
 }
 \keyword{htest}
 \keyword{models}

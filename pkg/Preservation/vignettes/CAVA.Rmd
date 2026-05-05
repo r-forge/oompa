@@ -121,6 +121,7 @@ neighbors defining a neighborhood.
 ajd <-sapply(names(drs), function(tag) {
   AverageJaccardDistance(prot5, drs[[tag]], k = 50)
 })
+scores <- cbind(scores, ajd)
 # too slow: qnx <- QNX(hiD, loD[["MDS"]])
 quad <- c(MDS = "#B00068", TSNE = "#1C8356", UMAP = "#325A9B", DM = "#FEAF16" )
 ct <- lapply(names(drs), function(tag) {
@@ -177,7 +178,6 @@ blue group.
 ```{r LD}
 scores <- sapply(c("LengthDistortion", "SegmentVariance", "Curvature", "SpatialSimilarity"),
                  function(metric) {
-  cat(metric, "\n", file = stderr())
   FUN <- get(metric)
   sapply(names(drs), function(tag) {
     lowD <- drs[[tag]][idex,]
@@ -189,7 +189,76 @@ round(scores, 3)
 Preservation:::PathBest(colnames(scores))
 ```
 
+Each of the four metrics we have looked at compares the measurements on original and reduced
+data sets by computing their log ratio (which is why the best score is the one nearest zero).
+Here are variants that use Spearman's rank correlation instead, where te best score would be
+the score closest to one. here length and curvature are topped by the UMAP and TSNE methods,
+while spatial imilarity is better with the DM and MDS algorithms.
 
+```{r rk}
+rscores <- sapply(c("RankLengthDistortion", "RankCurvature", "RankSpatialSimilarity"),
+                 function(metric) {
+  FUN <- get(metric)
+  sapply(names(drs), function(tag) {
+    lowD <- drs[[tag]][idex,]
+    FUN(highD, lowD)
+  })
+})
+round(rscores, 3)
+scores <- cbind(scores, rscores)
+```
+
+We find it surprising that UMAP and TSNE rank so highly under many of these metrics. Perhaps we
+need to look more broadly to find metrics that give results that match our expectations?
+
+One idea is to look at a smooth version of the path in the reduced spaces.
+Here is a plot showing the dimension reductions with the overlaid image of smoothed PC1 path.
+```{r fig03, fig.width=8, fig.height=8, fig.cap="Four views of the smoothed PC1 path of the CAVA subset after dimension reduction."}
+smoosh <- function( coords) {
+  ticks <- 1:nrow(coords) # arbitrary parametrization
+  ## fit smooth curve to each coordinate as a function of the parameter
+  fitted <- apply(coords, 2, function(X) predict(loess(X ~ ticks, span = 0.1)))
+  delta <- fitted - coords # difference between actual path and smooth fitted curve
+  val <- list(coords = coords, fitted = fitted, delta = delta)
+  class(val) <- "smoosh"
+  val
+}
+fits <- lapply(names(drs), function(tag) smoosh(drs[[tag]][idex,]))
+names(fits) <- names(drs)
+plot.smoosh <- function(obj, main = "", col = "purple", ...) {
+  plot(obj$coords, main = main, type = "b", col = "grey80", ...)
+  lines(obj$fitted, col = col, lwd = 2)
+  invisible(main)
+}
+lines.smoosh <- function(obj, col = "purple") {
+  lines(obj$fitted, col = col, lwd = 2)
+}
+opar <- par(mfrow = c(2, 2))
+for (tag in names(fits)) {
+  plot(fits[[tag]], main=tag, col = "black", xlab = "X1", ylab = "X2")
+  points(drs[[tag]], col = colvec, pch = ".", cex=3)
+  lines(fits[[tag]], col = "black")
+}
+par(opar)
+```
+
+```{r morePathhMetrics}
+mscores <- sapply(c("Smoothness", "Coil", "Contact", "EndpointDisplacement"),
+                 function(metric) {
+  cat(metric, "\n", file = stderr())
+  FUN <- get(metric)
+  sapply(names(drs), function(tag) {
+    lowD <- drs[[tag]][idex,]
+    FUN(highD, lowD)
+  })
+})
+round(mscores, 3)
+scores <- cbind(scores, mscores)
+```
+
+```{r twist}
+round(t(scores), 3)
+```
 
 # Appendix
 This computation was performed using the following software tools.

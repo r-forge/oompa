@@ -11,7 +11,7 @@ jaccard_distance <- function(setA, setB) {
 }
 
 # Function to compute Average Jaccard Distance
-AverageJaccardDistance <- function(M1, M2, k) {
+AverageJaccardDistance <- function(M1, M2, k = 50) {
   ## Get the number of points (cells)
   num_points <- ncol(M1)
   ## Ensure k is not greater than the number of points
@@ -43,6 +43,14 @@ compute_ct_list <- function(M1, M2, lastNeighbor = 300) {
                                     lastNeighbor = lastNeighbor)
     ## Return the result
     return(ct_pca_result)
+}
+AvgContinuity <- function(M1, M2, k = 300) {
+  ct <- compute_ct_list(M1, M2, lastNeighbor = k)
+  return(ct[,6])
+}
+AvgTrustworthiness <- function(M1, M2, k = 300) {
+  ct <- compute_ct_list(M1, M2, lastNeighbor = k)
+  return(ct[,3])
 }
 
 
