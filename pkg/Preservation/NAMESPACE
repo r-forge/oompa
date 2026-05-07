@@ -28,4 +28,5 @@ export("RankLengthDistortion",
        "RankSpatialSimilarity")
 ## more emtrics
 export("Smoothness", "RankSmoothness", "Coil",
-       "Contact", "EndpointDisplacement")
+       "Contact",
+       "EndpointDisplacement", "CrossingNumber")

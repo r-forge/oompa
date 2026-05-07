@@ -252,6 +252,12 @@ mscores <- sapply(c("Smoothness", "Coil", "Contact", "EndpointDisplacement"),
     FUN(highD, lowD)
   })
 })
+FUN = CrossingNumber
+cnscores <-  sapply(names(drs), function(tag) {
+  lowD <- drs[[tag]][idex,]
+  FUN(lowD)
+})
+mscores <- cbind(mscores, cnscores)
 round(mscores, 3)
 scores <- cbind(scores, mscores)
 ```

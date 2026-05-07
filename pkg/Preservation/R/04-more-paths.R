@@ -63,3 +63,39 @@ endpt_disp <- function(coords, k) {
 EndpointDisplacement <- function(M1, M2, k=5) {
   log(endpt_disp(M1, k) / endpt_disp(M2, k))
 }
+
+###################################
+### CrossingNumber
+###
+segments_intersect <- function(p1, p2, p3, p4, eps = 1e-12) {
+  orient <- function(a, b, c) {
+    (b[1] - a[1]) * (c[2] - a[2]) - (b[2] - a[2]) * (c[1] - a[1])
+  }
+  o1 <- orient(p1, p2, p3)
+  o2 <- orient(p1, p2, p4)
+  o3 <- orient(p3, p4, p1)
+  o4 <- orient(p3, p4, p2)
+  (o1 * o2 < -eps) && (o3 * o4 < -eps)
+}
+
+crossing_number_raw <- function(coords) {
+  n <- nrow(coords)
+  if (n < 4) return(0)
+  count <- 0
+  for (i in 1:(n - 3)) {
+    for (j in (i + 2):(n - 1)) {
+      if (j == i + 1) next
+      if (segments_intersect(coords[i,], coords[i+1,],
+                             coords[j,], coords[j+1,])) {
+        count <- count + 1
+      }
+    }
+  }
+  count
+}
+
+CrossingNumber <- function(M2, eps = 1e-8) {
+  cn <- crossing_number_raw(M2)
+  n <- nrow(M2)
+  cn / ((n-2)*(n-1)/2 + eps)
+}
