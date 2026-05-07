@@ -7,7 +7,8 @@ oompa/pkg/ClassDiscovery
 oompa/pkg/TailRank
 oompa/pkg/plasma
 oompa/pkg/BetaModels
-oompa/pkg/BlockR
+oompa/pkg/BlockMaker
+oompa/pkg/Preservation
 classpred/pkg/BimodalIndex
 classpred/pkg/Modeler
 classpred/pkg/CrossValidate
@@ -41,10 +42,10 @@ E:/KRC/rforge/craac/pkg/CRAAC
 E:/KRC/rforge/HAPSEG
 E:/KRC/rforge/ABSOLUTE
 ../gitProjects/GitLab/DrugScreeningAML/pkg/FINS
+#FAIL
 ../GitProjects/drexplorer/pkg/drexplorer
 supercurve/pkg/tclish
 supercurve/pkg/SlideDesignerGUI
-#FAIL
 supercurve/pkg/SuperCurve
 supercurve/pkg/SuperCurveGUI
 mop/pkg/MOP

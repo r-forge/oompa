@@ -103,7 +103,12 @@ mypacks <- c("fortunes",
              "TDA",
              "fitdistrplus",
              "apcluster",
-             "LogicReg"
+             "LogicReg",
+             "emdist",
+             "DRquality",
+             "FNN",
+             "ProjectionBasedClustering",
+             "coRanking"
              )
 for (p in mypacks) {
   if (!require(p, character.only = TRUE, quietly = TRUE)) {

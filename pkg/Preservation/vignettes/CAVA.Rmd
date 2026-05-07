@@ -176,7 +176,7 @@ in the plot. In the TSNE plot, there are also numerous jumps between the two hal
 blue group.
 
 ```{r LD}
-scores <- sapply(c("LengthDistortion", "SegmentVariance", "Curvature", "SpatialSimilarity"),
+pscores <- sapply(c("LengthDistortion", "SegmentVariance", "Curvature", "SpatialSimilarity"),
                  function(metric) {
   FUN <- get(metric)
   sapply(names(drs), function(tag) {
@@ -184,9 +184,9 @@ scores <- sapply(c("LengthDistortion", "SegmentVariance", "Curvature", "SpatialS
     FUN(highD, lowD)
   })
 })
-round(scores, 3)
-
+round(pscores, 3)
 Preservation:::PathBest(colnames(scores))
+scores <- cbind(scores, pscores)
 ```
 
 Each of the four metrics we have looked at compares the measurements on original and reduced
