@@ -35,6 +35,21 @@ isccNames <- function(colorset) {
   iscc$longName[m]
 }
 
+xkcdNames <- function(colorset) {
+  colorset <- xform(colorset)
+  data("xkcd", package="Polychrome", envir=environment())
+  xkcd <- get("xkcd", envir=environment())
+  munsell <- as(hex2RGB(xkcd$Hex), "LUV")
+  d3 <- function(y0) {
+    temp <- sweep(munsell@coords, 2, y0, "-")
+    dist <- apply(temp^2, 1, sum)
+    which(dist==min(dist))
+  }
+  alpha <- as(hex2RGB(colorset), "LUV")
+  m <- apply(alpha@coords, 1, d3)
+  xkcd$Name[m]
+}
+
 makePalette <- function(n, colorset) {
   if (n < 3) {
     warning("minimal value for n is 3, returning requested palette with 3 levels\n")

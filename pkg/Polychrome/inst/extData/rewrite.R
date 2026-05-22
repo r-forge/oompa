@@ -26,3 +26,11 @@ longName <- unlist(lapply(ln, function(x) x[1]))
 iscc <- data.frame(shortName, longName, Hex=temp$V2)
 write.table(iscc, file="iscc.txt", sep="\t", row.names=FALSE, quote=FALSE)
 save(iscc, file="iscc.rda")
+
+xkcd <- read.table("xkcdColors.txt", sep = "\t", skip = 1,
+                   comment.char = "", quote = "", fill = TRUE)
+xkcd <- xkcd[, 1:2]
+colnames(xkcd) <- c("Name", "Hex")
+ul <- gsub(" ", "_", xkcd$Name)
+xkcd$Name <- ul
+save(xkcd, file = "../../data/xkcd.rda")

@@ -17,7 +17,7 @@ export(rancurves, ranpoints, uvscatter, luminance,
        plothc, plotpc, p3d, swatch, swatchHue, swatchLuminance, ranswatch,
        computeDistances, plotDistances, invertColors,
        createPalette,
-       colorNames, isccNames)
+       colorNames, isccNames, xkcdNames)
 export(getLUV)
 
 export(sortByHue, sortByLuminance)

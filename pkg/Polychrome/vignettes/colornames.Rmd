@@ -1,0 +1,83 @@
+---
+title: "Color Names"
+author: "Kevin R. Coombes"
+data: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{color names}
+  %\VignetteKeywords{OOMPA,Polychrome,Color Palettes,Color names}
+  %\VignetteDepends{Polychrome}
+  %\VignettePackage{Polychrome}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+In this vignette, we describe various tools for assigning color names to the
+hexadecimal representations of RGB colors.
+
+## Getting Started
+
+As usual, we start by loading the package:
+
+```{r}
+library(Polychrome)
+```
+
+Next, we can look at one of the color palettes it provides.
+
+```{r}
+data(alphabet)
+```
+
+```{r fig.width=7, fig.height=5}
+swatch(alphabet)
+```
+
+As you can see, the `alphabet` palette has assigned names to colors 
+that begin with different letters of the English alphabet. Since the
+`Polychrome` pacakge includes three differnt sets of (more or less) 
+standard color names, we can see what they do for these colors:
+
+```{r manycolors}
+cn <- colorNames(alphabet) # from UNIX rgb.txt file
+cc <- isccNames(alphabet) # standards from the Inter-Society Color Council
+xk <- xkcdNames(alphabet) # from the  xkCd online color survey
+df <- data.frame(UNIX = cn, ISCC = cc, XKCD = xk)
+rownames(df) <- names(alphabet)
+df
+```
+Careful examination of this table shows that several ISCC names are duplicated:
+```{r dups}
+apply(df, 2, function(X) length(unique(X)))
+dupn <- df$ISCC[duplicated(df$ISCC)]
+tmp <- df[df$ISCC %in% dupn,]
+tmp[order(tmp[,2]),]
+```
+
+## Scatter Plots
+Our standard way to think about colors is in the L\*u\*v\* color space
+model defined by the CIE.  The next plot shows how the points in various 
+"color name spaces" are distributed in the u-v subspace.
+
+```{r fig.width=12, fig.height=12}
+data(xkcd)
+data(iscc)
+colMat <- col2rgb(colors())
+opar <- par(mfrow = c(2,2))
+unix <- rgb(red = colMat[1, ]/255, green = colMat[2, ]/255, blue = colMat[3, ]/255)
+uvscatter(alphabet, xlim = c(-80, 160), ylim =c (-130, 125))
+uvscatter(iscc$Hex, xlim = c(-80, 160), ylim =c (-130, 125), main = "ISCC")
+uvscatter(unix, xlim = c(-80, 160), ylim =c (-130, 125), main = "UNIX")
+uvscatter(xkcd$Hex, xlim = c(-80, 160), ylim =c (-130, 125), main = "XKCD")
+par(opar)
+```
+
+As you can see, the `alphabet` colors are widely dispersed across the color
+spectrum, making them somewhat easier to distinguish. The 247 standard colors
+from the ISCC are clumped twoard the middle of the space, making it harder to
+name colors out on the fringes. The UNIX rgb.txt color names consist of 697 
+names, but some of these are duplicate names for the same 502 distinct 
+hexadecimal color representations. Even so, there are clear gaps in the color 
+space that are not given distinct names. The results fo teh XKCD survey have 
+a much denser coverage of more of the available color space.
+
+
