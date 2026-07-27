@@ -243,7 +243,7 @@ par(opar)
 ```
 
 ```{r morePathhMetrics}
-mscores <- sapply(c("Smoothness", "Coil", "Contact", "EndpointDisplacement"),
+mscores <- sapply(c("Smoothness", "Coil", "EndpointDisplacement", "Contact"),
                  function(metric) {
   cat(metric, "\n", file = stderr())
   FUN <- get(metric)
@@ -252,12 +252,20 @@ mscores <- sapply(c("Smoothness", "Coil", "Contact", "EndpointDisplacement"),
     FUN(highD, lowD)
   })
 })
-FUN = CrossingNumber
+tyscores <- sapply(c("max", "count"),
+                 function(type) {
+  cat(type, "\n", file = stderr())
+  FUN <- Contact
+  sapply(names(drs), function(tag) {
+    lowD <- drs[[tag]][idex,]
+    FUN(highD, lowD, type = type)
+  })
+})
 cnscores <-  sapply(names(drs), function(tag) {
   lowD <- drs[[tag]][idex,]
-  FUN(lowD)
+  CrossingNumber(lowD)
 })
-mscores <- cbind(mscores, cnscores)
+mscores <- cbind(mscores, tyscores, cnscores)
 round(mscores, 3)
 scores <- cbind(scores, mscores)
 ```

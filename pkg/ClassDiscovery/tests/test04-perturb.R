@@ -1,5 +1,7 @@
 library(ClassDiscovery)
 suppressWarnings( RNGversion("3.5.3") )
+RV <- paste(R.version$major, R.version$minor, sep = ".")
+if (compareVersion(RV, "4.6.1") > 0) options(warn = -1)
 set.seed(147676)
 # simulate data from two different groups
 d1 <- matrix(rnorm(100*30, rnorm(100, 0.5)), nrow=100, ncol=30, byrow=FALSE)

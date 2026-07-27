@@ -14,7 +14,7 @@
 Smoothness(M1, M2)
 RankSmoothness(M1, M2)
 Coil(M1, M2)
-Contact(M1, M2, q = 0.1)
+Contact(M1, M2, q = 0.1, type = c("mean", "max", "count"))
 EndpointDisplacement(M1, M2, k = 5)
 CrossingNumber(M2, eps = 1e-8)
 }
@@ -22,7 +22,13 @@ CrossingNumber(M2, eps = 1e-8)
   \item{M1}{ a data matrix whose rows are the pointsin the original space.}
   \item{M2}{ a data matrix whose rows are the same points after
     dimension reduction.}
-  \item{q}{a real number; the quantile of pairwise diatances used to define "close".}
+  \item{q}{a real number; the quantile of pairwise diatances used to
+    define "close".}
+  \item{type}{a character based enumeration. If \code{type = mean}, we
+    report the average number of steps between two points of contact. If
+    \code{type = max}, we report the maximum number of steps. If
+    \code{type = count}, we report the number of pairs whose separation
+    is greater than 12 percent of all distances.}
   \item{k}{an intefger; the number of points to average at each end of
     the path.}
   \item{eps}{A real fudge factor (defauly 1E-8) used when normalizing

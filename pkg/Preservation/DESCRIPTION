@@ -1,6 +1,6 @@
 Package: Preservation
 Title: Assessing Preservation for Dimension Reduction Algorithms
-Version: 0.1.1
+Version: 0.2.0
 Date: 2026-05-07
 Authors@R: c(person("Kevin R.", "Coombes", role = c("cre", "aut"),
                     email = "krc@silicovore.com"),

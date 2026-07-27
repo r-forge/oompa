@@ -39,15 +39,21 @@ Coil <- function(M1, M2) {
 ###################################
 ### Contact
 ###
-comp_contact <- function(coords, q) {
+comp_contact <- function(coords, q, type = c("mean", "max", "count")) {
+  type <- match.arg(type)
   ed <- as.matrix(dist(coords)) # small values here mean close contact
   q10 <- quantile(ed, q)        # use a quantile to decide what small means
   ai <- which(ed < q10, arr.ind = TRUE) # get matrix coordinates of close cells
   spread <- abs(apply(ai, 1, diff)) # number of steps apart in the sequence
-  mean(spread) # not sure if this is the best statistical summary
+  val <- switch(type,
+                mean = mean(spread),
+                max = max(spread),
+                count = sum(spread > 0.12*nrow(coords))) # MAGIC
+  val
 }
-Contact <- function(M1, M2, q = 0.1) {
-  log(comp_contact(M1, q) / comp_contact(M2, q))
+Contact <- function(M1, M2, q = 0.1, type = c("mean", "max", "count")) {
+  type <- match.arg(type)
+  log(comp_contact(M1, q, type) / comp_contact(M2, q, type))
 }
 
 

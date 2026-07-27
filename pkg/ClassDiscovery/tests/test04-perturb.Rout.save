@@ -1,7 +1,7 @@
 
-R version 3.6.0 (2019-04-26) -- "Planting of a Tree"
-Copyright (C) 2019 The R Foundation for Statistical Computing
-Platform: x86_64-w64-mingw32/x64 (64-bit)
+R version 4.6.0 (2026-04-24 ucrt) -- "Because it was There"
+Copyright (C) 2026 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -19,6 +19,8 @@ Type 'q()' to quit R.
 Loading required package: cluster
 Loading required package: oompaBase
 > suppressWarnings( RNGversion("3.5.3") )
+> RV <- paste(R.version$major, R.version$minor, sep = ".")
+> if (compareVersion(RV, "4.6.1") > 0) options(warn = -1)
 > set.seed(147676)
 > # simulate data from two different groups
 > d1 <- matrix(rnorm(100*30, rnorm(100, 0.5)), nrow=100, ncol=30, byrow=FALSE)
@@ -140,4 +142,4 @@ Agreement levels:
 > 
 > proc.time()
    user  system elapsed 
-   2.26    0.40    2.65 
+   0.90    0.12    1.03 
